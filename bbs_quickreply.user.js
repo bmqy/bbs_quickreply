@@ -15,13 +15,14 @@
 (function() {
     'use strict';
 
-    // 预定义回复内容
-    var aReplys = GM_getValue('replysCustom').toString().trim() === '' ? [
+    var defaultArr = [
         '感谢楼主分享，支持一下！',
         '支持一下，希望楼主做的更好，加油！',
         '做的不错哦，楼主加油，期待更好的作品！',
-        '标记一下，先看看好不好，谢谢楼主咯！',
-    ] : GM_getValue('replysCustom');
+        '标记一下，先看看好不好，谢谢楼主咯！'
+    ];
+    // 预定义回复内容
+    var aReplys = GM_getValue('replysCustom').toString().trim() === '' ? defaultArr : GM_getValue('replysCustom');
 
     // 更新快捷回帖列表
     function quickReplysUpdate(obj, arrReplys){
@@ -71,12 +72,7 @@
                 }
             }
             if(_tempArr.length === 0){
-                _tempArr = [
-                    '感谢楼主分享，支持一下！',
-                    '支持一下，希望楼主做的更好，加油！',
-                    '做的不错哦，楼主加油，期待更好的作品！',
-                    '标记一下，先看看好不好，谢谢楼主咯！',
-                ];
+                _tempArr = defaultArr;
             }
             oCustomPanel.style.display = 'none';
             quickReplysCustomUpdate(oCustomTextarea, _tempArr);
