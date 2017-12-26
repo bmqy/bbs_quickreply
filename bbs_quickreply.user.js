@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         bbs_quickreply
+// @name         论坛快捷回帖
 // @namespace    http://bmqy.net/
 // @version      0.1.1
 // @description  使用本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
