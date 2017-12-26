@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    http://bmqy.net/
-// @version      0.1.1
+// @version      0.1.2
 // @description  使用本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @author       bmqy
 // @match        *://bbs.*/*
@@ -114,6 +114,9 @@
         oQuikReplyWarp.appendChild(oQuikReplyLabel);
         oQuikReplyWarp.appendChild(oQuickReplyBtnCustom);
         oReplyEdit.insertBefore(oQuikReplyWarp, oReplyEdit.childNodes[0]);
+
+        oReplyEditContent.value = aReplys[0];
+        oReplyEditContent.style.background = 'none';
 
         oQuikReplyList.addEventListener('change', function(){
             oReplyEditContent.value = this.options[this.selectedIndex].text;
