@@ -6,7 +6,7 @@
    },
    "content_scripts": [ {
       "js": ["js/bbs_quickreply.user.js" ],
-      "matches": [ "http://*/*", "https://*/*" ]
+      "matches": [ "*://*/thread*.*", "*://*/*/forum.php?mod==viewthread*" ]
    } ],
    "description": "使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！",
    "icons": {
@@ -20,5 +20,5 @@
    "permissions": [ "tabs", "http://*/*", "https://*/*" ],
    "short_name": "快捷回帖",
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.1.6"
+   "version": "0.1.7"
 }

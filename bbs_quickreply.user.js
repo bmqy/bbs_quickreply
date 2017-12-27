@@ -1,13 +1,11 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    http://bmqy.net/
-// @version      0.1.6
+// @version      0.1.7
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @author       bmqy
-// @match        *://bbs.*/*
-// @match        *://www.52pojie.cn/*
-// @match        *://www.miui.com/*
-// @match        *://club.huawei.com/*
+// @match        */thread*.*
+// @match        */forum.php?mod==viewthread*
 // @grant        GM_getValue
 // @grant        GM_setValue
 // ==/UserScript==
@@ -21,7 +19,7 @@
         '做的不错哦，楼主加油，期待更好的作品！',
         '标记一下，先看看好不好，谢谢楼主咯！'
     ];
-    // 预定义回复内容    
+    // 预定义回复内容
     var aReplys = defaultArr;
     if(GM_getValue('replysCustom') && GM_getValue('replysCustom').toString().trim() !== ''){
         aReplys = GM_getValue('replysCustom');
@@ -44,7 +42,7 @@
         obj.value = _tempAReplys;
     }
 
-    // 理论上支持任意Discuz类论坛
+    // 理论上支持大部分Discuz类论坛
     if(document.querySelector('#fastposteditor')){
 
         // 自定义回复
