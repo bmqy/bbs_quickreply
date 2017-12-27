@@ -10,7 +10,7 @@
     // 预定义回复内容
     var aReplys = defaultArr;
     if(localStorage.getItem('replysCustom') && localStorage.getItem('replysCustom').toString().trim() !== ''){
-		aReplys = localStorage.getItem('replysCustom');
+		aReplys = new Array(localStorage.getItem('replysCustom'));
     }
 
     // 更新快捷回帖列表
@@ -63,6 +63,7 @@
             if(_tempArr.length === 0){
                 _tempArr = defaultArr;
             }
+
             oCustomPanel.style.display = 'none';
             quickReplysCustomUpdate(oCustomTextarea, _tempArr);
             quickReplysUpdate(oQuikReplyList, _tempArr);
