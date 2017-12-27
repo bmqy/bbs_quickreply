@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    http://bmqy.net/
-// @version      0.1.3
+// @version      0.1.4
 // @description  使用本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @author       bmqy
 // @match        *://bbs.*/*
@@ -46,7 +46,7 @@
 
         // 自定义回复
         var oCustomPanel = document.createElement('div');
-        oCustomPanel.style = 'width:280px;height:180px;text-align:center;background-color: #fff;padding:10px;box-shadow:0 0 3px 5px #ddd;position:fixed;left:50%;top:13%;display:none;';
+        oCustomPanel.style = 'width:280px;height:190px;text-align:center;background-color: #fff;padding:10px;box-shadow:0 0 3px 5px #ddd;position:fixed;left:50%;top:13%;display:none;';
 
         var oCustomTips = document.createElement('p');
         oCustomTips.style = 'text-align:left;';
@@ -123,7 +123,7 @@
             var _posX = e.clientX;
             var _posY = e.clientY;
 
-            oCustomPanel.style.top = _posY - 220 +'px';
+            oCustomPanel.style.top = _posY - 230 +'px';
             oCustomPanel.style.left = _posX - 150 +'px';
             oCustomPanel.style.display = 'block';
         });
