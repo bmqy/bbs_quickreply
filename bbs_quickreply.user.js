@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    http://bmqy.net/
-// @version      0.1.4
+// @version      0.1.5
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @author       bmqy
 // @match        *://bbs.*/*
@@ -21,8 +21,11 @@
         '做的不错哦，楼主加油，期待更好的作品！',
         '标记一下，先看看好不好，谢谢楼主咯！'
     ];
-    // 预定义回复内容
-    var aReplys = GM_getValue('replysCustom').toString().trim() === '' ? defaultArr : GM_getValue('replysCustom');
+    // 预定义回复内容    
+    var aReplys = defaultArr;
+    if(localStorage.getItem('replysCustom') && localStorage.getItem('replysCustom').toString().trim() !== ''){
+        aReplys = localStorage.getItem('replysCustom');
+    }
 
     // 更新快捷回帖列表
     function quickReplysUpdate(obj, arrReplys){
