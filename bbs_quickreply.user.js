@@ -23,8 +23,8 @@
     ];
     // 预定义回复内容    
     var aReplys = defaultArr;
-    if(localStorage.getItem('replysCustom') && localStorage.getItem('replysCustom').toString().trim() !== ''){
-        aReplys = localStorage.getItem('replysCustom');
+    if(GM_getValue('replysCustom') && GM_getValue('replysCustom').toString().trim() !== ''){
+        aReplys = GM_getValue('replysCustom');
     }
 
     // 更新快捷回帖列表
