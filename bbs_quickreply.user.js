@@ -2,7 +2,7 @@
 // @name         论坛快捷回帖
 // @namespace    http://bmqy.net/
 // @version      0.1.4
-// @description  使用本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
+// @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @author       bmqy
 // @match        *://bbs.*/*
 // @match        *://www.52pojie.cn/*
