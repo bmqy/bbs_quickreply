@@ -17,8 +17,9 @@
    },
    "manifest_version": 2,
    "name": "论坛快捷回帖",
-   "permissions": [ "tabs", "http://*/*", "https://*/*" ],
    "short_name": "快捷回帖",
+   "permissions": [ "storage" ],
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnAiR3E1qmS1z4+aXGvrOe4V9KjHBmsuOWAzQ7WwqkSBlk9UqfEflkHrYMsm0rRSpOm1ym/uKQDHa4GWdD3lnUj55z1CdqHpkG6G/p5GxqGcGuMoGK+liFdVKtJ8BcUO4PoLZV9j2KyhJpyhcsDkDfP44o8guKOpqDp0UanNStKq43bFzgImfFJh9f3limqM3DjG8T0/uFMHeWJ57aGM+cIZocsAguAn9rFsdrTQmrF6cuxWcBY5M8aoZ1XiAvKJir0OcbozazKvTKIOJxA7nGqyoWNk2UdTrAlu6QLpyoC+TAGkWVAU5H/Zq0JY7sAUsFZkYV96yge+UrDj4bMQIIwIDAQAB",
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.1.8"
+   "version": "0.1.9"
 }

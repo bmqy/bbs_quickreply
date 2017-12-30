@@ -1,7 +1,6 @@
 (function() {
     'use strict';
     function QuickReply(){
-
         // 预定义回复内容
         this.replysDefault = [
             '感谢楼主分享，支持一下！',
@@ -11,7 +10,7 @@
         ];
 
         // 自定义回复内容
-        this.replysCustom = (localStorage.getItem('replysCustom') && localStorage.getItem('replysCustom').toString().trim() !== '') ? (localStorage.getItem('replysCustom')).split(',') : this.replysDefault;
+        this.replysCustom = this.replysDefault;
 
         // 源回复框
         this.targetReplyEditWarp = document.querySelector('#fastposteditor');
@@ -91,7 +90,7 @@
             QuickReply.updateReplysCustom(oCustomTextarea, _tempArr);
             QuickReply.updateReplysSelect(oQuickReplySelect, _tempArr);
             QuickReply.targetReplyEditContent.value = _tempArr[0];
-            localStorage.setItem('replysCustom', _tempArr);
+            QuickReply.setItem({'replysCustom': _tempArr});
         });
 
         oCustomPanel.appendChild(oCustomTextarea);
@@ -115,7 +114,20 @@
         obj.value = _tempAReplys;
     };
 
-    QuickReply.prototype.init = function(){
+    QuickReply.prototype.setItem = function(data){
+        chrome.storage.sync.set(data);
+    };
+
+    QuickReply.prototype.initBefore = function(callback){
+        chrome.storage.sync.get('replysCustom', function (item) {
+            callback && callback(item);
+        });
+    };
+
+    QuickReply.prototype.init = function(res){
+        if(res){
+            QuickReply.replysCustom = res.replysCustom;
+        }
         // 理论上支持大部分Discuz类论坛
         if(document.querySelector('#fastposteditor')){
             QuickReply.getQuickReply();
@@ -126,5 +138,7 @@
     };
 
     var QuickReply = new QuickReply();
-    QuickReply.init();
+    QuickReply.initBefore(function(res){
+        QuickReply.init(res);
+    });
 })();
