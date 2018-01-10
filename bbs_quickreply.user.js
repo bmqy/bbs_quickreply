@@ -159,7 +159,6 @@
         addListenConfig: function(){
             var _this = this;
             GM_addValueChangeListener(_this.options.sCustomKey, function(name, old_value, new_value, remote){
-                console.log(_this.options.sTarget, _this.options.sTargetFloat);
                 var aNewReplyCustom = new_value;
                 var oQuickReplySelect = null;
                 console.log(aNewReplyCustom);

@@ -1,160 +1,222 @@
 (function() {
     'use strict';
-    function QuickReply(){
-        // 预定义回复内容
-        this.replysDefault = [
-            '感谢楼主分享，支持一下！',
-            '支持一下，希望楼主做的更好，加油！',
-            '做的不错哦，楼主加油，期待更好的作品！',
-            '标记一下，先看看好不好，谢谢楼主咯！'
-        ];
+    var QuickReply = {
+        options: {
+            bEnabled: true,
+            sTarget: '#fastposteditor',
+            sTargetMessage: '#fastpostmessage',
+            sTargetFloat: '#floatlayout_reply',
+            sTargetFloatMessage: '#postmessage',
+            sTargetReplyfastBtn: '.replyfast',
+            sQuickReplyWarp: 'quickReplyWarp',
+            sQuickReplySelect: 'quickReplySelect',
+            sQuickReplyCustom: 'quickReplyCustom',
+            sCustomKey: 'replysCustom',
+            aReplysDefault: [
+                '感谢楼主分享，支持一下！',
+                '支持一下，希望楼主做的更好，加油！',
+                '做的不错哦，楼主加油，期待更好的作品！',
+                '标记一下，先看看好不好，谢谢楼主咯！'
+            ]
+        },
 
-        // 自定义回复内容
-<<<<<<< HEAD
-        this.replysCustom = '';
-=======
-        this.replysCustom = this.replysDefault;
->>>>>>> origin/master
+        setItem: function(key, value){
+            chrome.storage.sync.set({key: value});
+        },
 
-        // 源回复框
-        this.targetReplyEditWarp = document.querySelector('#fastposteditor');
-        this.targetReplyEditContent = document.querySelector('#fastpostmessage');
-    }
-
-    QuickReply.prototype.getQuickReply = function(){
-        var oQuikReplyWarp = document.createElement('div');
-
-        var oQuikReplyLabel = document.createElement('label');
-        oQuikReplyLabel.style = 'color:red;font-weight:bolder';
-        oQuikReplyLabel.innerHTML = '快捷回帖：';
-
-        var oQuikReplySelect = document.createElement('select');
-        oQuikReplySelect.id = 'quickReplyList';
-        QuickReply.updateReplysSelect(oQuikReplySelect, QuickReply.replysCustom);
-
-        oQuikReplySelect.addEventListener('change', function(e){
-            QuickReply.targetReplyEditContent.value = this.options[this.selectedIndex].text;
-            QuickReply.targetReplyEditContent.style.background = 'none';
-        });
-
-        var oQuickReplyBtnCustom = document.createElement('a');
-        oQuickReplyBtnCustom.innerHTML = '自定义回帖';
-        oQuickReplyBtnCustom.href = 'javascript:;';
-        oQuickReplyBtnCustom.style = "margin-left:10px;color:#999;font-size:12px;";
-
-        oQuickReplyBtnCustom.addEventListener('click', function(e){
-            var _posX = e.clientX;
-            var _posY = e.clientY;
-            var oQuickReplyCustom = document.querySelector('#quickReplyCustom');
-
-            oQuickReplyCustom.style.top = _posY - 230 +'px';
-            oQuickReplyCustom.style.left = _posX - 150 +'px';
-            oQuickReplyCustom.style.display = 'block';
-        });
-
-        oQuikReplyLabel.appendChild(oQuikReplySelect);
-        oQuikReplyWarp.appendChild(oQuikReplyLabel);
-        oQuikReplyWarp.appendChild(oQuickReplyBtnCustom);
-
-        QuickReply.targetReplyEditWarp.insertBefore(oQuikReplyWarp, QuickReply.targetReplyEditWarp.childNodes[0]);
-    };
-
-    QuickReply.prototype.getReplysCustom = function(){
-        var oCustomPanel = document.createElement('div');
-        oCustomPanel.id = 'quickReplyCustom';
-        oCustomPanel.style = 'width:280px;height:190px;text-align:center;background-color: #fff;padding:10px;box-shadow:0 0 3px 5px #ddd;position:fixed;left:50%;top:13%;display:none;';
-
-        var oCustomTips = document.createElement('p');
-        oCustomTips.style = 'text-align:left;';
-        oCustomTips.innerHTML = '<font color="red">* 一行一条，请注意回车换行</font>';
-
-        var oCustomTextarea = document.createElement('textarea');
-        oCustomTextarea.style = 'width:96%;padding:5px;';
-        oCustomTextarea.rows = '7';
-        QuickReply.updateReplysCustom(oCustomTextarea, QuickReply.replysCustom);
-
-        var oCustomSaveBtn = document.createElement('button');
-        oCustomSaveBtn.style = 'width: 100%;';
-        oCustomSaveBtn.innerHTML = '保存';
-
-        oCustomSaveBtn.addEventListener('click', function(){
-            var oQuickReplySelect = document.querySelector('#quickReplyList');
-            var _customReply = oCustomTextarea.value.split('\n');
-            var _tempArr = [];
-
-            for(var i=0; i<_customReply.length; i++){
-                if(_customReply[i] !== ''){
-                    _tempArr.push(_customReply[i]);
+        getItem: function(key){
+            var _this = this;
+            var arr = [];
+            chrome.storage.sync.get(key, function(item){
+                console.log(item);
+                if(item.length > 0){
+                    arr = item;
                 }
+                else{
+                    arr = _this.options.aReplysDefault;
+                }
+                return arr;
+            });
+            return arr;
+        },
+
+        updateReplysSelect: function (obj, arrReplys){
+            obj.options.length = 0;
+            for(var i=0;i<arrReplys.length;i++){
+                obj.options.add(new Option(arrReplys[i], i));
             }
-            if(_tempArr.length === 0){
-                _tempArr = QuickReply.replysDefault;
+        },
+
+        updateReplysCustom: function(obj, arrReplys){
+            var _tempAReplys = '';
+            for(var i=0;i<arrReplys.length; i++){
+                _tempAReplys += arrReplys[i] +'\n';
             }
-            oCustomPanel.style.display = 'none';
-            QuickReply.updateReplysCustom(oCustomTextarea, _tempArr);
-            QuickReply.updateReplysSelect(oQuickReplySelect, _tempArr);
-            QuickReply.targetReplyEditContent.value = _tempArr[0];
-            QuickReply.setItem({'replysCustom': _tempArr});
-        });
+            obj.value = _tempAReplys;
+        },
 
-        oCustomPanel.appendChild(oCustomTextarea);
-        oCustomPanel.appendChild(oCustomTips);
-        oCustomPanel.appendChild(oCustomSaveBtn);
-        document.body.appendChild(oCustomPanel);
-    };
+        getQuickReply: function(sTarget, sTargetMessage){
+            var _this = this;
+            var oTarget = (typeof sTarget === 'undefined') ? document.querySelector(_this.options.sTarget) : document.querySelector(sTarget);
+            var oTargetMessage = (typeof sTargetMessage === 'undefined') ? document.querySelector(_this.options.sTargetMessage) : document.querySelector(sTargetMessage);
 
-    QuickReply.prototype.updateReplysSelect = function (obj, arrReplys){
-        obj.options.length = 0;
-        for(var i=0;i<arrReplys.length;i++){
-            obj.options.add(new Option(arrReplys[i], i));
+            var oQuikReplyWarp = document.createElement('div');
+            oQuikReplyWarp.id = _this.options.sQuickReplyWarp;
+
+            var oQuikReplyLabel = document.createElement('label');
+            oQuikReplyLabel.style = 'color:red;font-weight:bolder';
+            oQuikReplyLabel.innerHTML = '快捷回帖：';
+            var oQuikReplySelect = document.createElement('select');
+            oQuikReplySelect.id =  _this.options.sQuickReplySelect;
+            _this.updateReplysSelect(oQuikReplySelect, _this.getItem(_this.options.sCustomKey));
+
+            oQuikReplySelect.addEventListener('change', function(e){
+                oTargetMessage.value = this.options[this.selectedIndex].text;
+                oTargetMessage.style.background = 'none';
+            });
+
+            var oQuickReplyBtnCustom = document.createElement('a');
+            oQuickReplyBtnCustom.innerHTML = '自定义回帖';
+            oQuickReplyBtnCustom.href = 'javascript:;';
+            oQuickReplyBtnCustom.style = "margin-left:10px;color:#999;font-size:12px;";
+
+            oQuickReplyBtnCustom.addEventListener('click', function(e){
+                var _posX = e.clientX;
+                var _posY = e.clientY;
+                var oQuickReplyCustom = document.querySelector('#'+ _this.options.sQuickReplyCustom);
+
+                oQuickReplyCustom.style.top = _posY - 280 +'px';
+                oQuickReplyCustom.style.left = _posX - 150 +'px';
+                oQuickReplyCustom.style.display = 'block';
+            });
+
+            oQuikReplyLabel.appendChild(oQuikReplySelect);
+            oQuikReplyWarp.appendChild(oQuikReplyLabel);
+            oQuikReplyWarp.appendChild(oQuickReplyBtnCustom);
+
+            if(!oTarget.querySelector('#'+ _this.options.sQuickReplyWarp)){
+                oTarget.insertBefore(oQuikReplyWarp, oTarget.childNodes[0]);
+            }
+        },
+
+        getReplysCustom: function(sTarget, sTargetMessage){
+            var _this = this;
+            var oTarget = (typeof sTarget === 'undefined') ? document.querySelector(_this.options.sTarget) : document.querySelector(sTarget);
+            var oTargetMessage = (typeof sTargetMessage === 'undefined') ? document.querySelector(_this.options.sTargetMessage) : document.querySelector(sTargetMessage);
+
+            if(document.querySelector('#'+ _this.options.sQuickReplyCustom)){
+                return false;
+            }
+
+            var oCustomPanel = document.createElement('div');
+            oCustomPanel.id = _this.options.sQuickReplyCustom;
+            oCustomPanel.style = 'width:280px;height:190px;text-align:center;background-color: #fff;padding:10px;box-shadow:0 0 3px 5px #ddd;position:fixed;left:50%;top:13%;display:none;';
+
+            var oCustomTips = document.createElement('p');
+            oCustomTips.style = 'text-align:left;';
+            oCustomTips.innerHTML = '<font color="red">* 一行一条，请注意回车换行</font>';
+
+            var oCustomTextarea = document.createElement('textarea');
+            oCustomTextarea.style = 'width:96%;padding:5px;';
+            oCustomTextarea.rows = '7';
+            _this.updateReplysCustom(oCustomTextarea, _this.getItem(_this.options.sCustomKey));
+
+            var oCustomSaveBtn = document.createElement('button');
+            oCustomSaveBtn.style = 'width: 100%;';
+            oCustomSaveBtn.innerHTML = '保存';
+
+            oCustomSaveBtn.addEventListener('click', function(){
+                var oQuickReplySelect = document.querySelector('#'+ _this.options.sQuickReplySelect);
+                var _customReply = oCustomTextarea.value.split('\n');
+                var _tempArr = [];
+
+                for(var i=0; i<_customReply.length; i++){
+                    if(_customReply[i] !== ''){
+                        _tempArr.push(_customReply[i]);
+                    }
+                }
+                if(_tempArr.length === 0){
+                    _tempArr = _this.options.aReplysDefault;
+                }
+                oCustomPanel.style.display = 'none';
+                _this.setItem(_this.options.sCustomKey, _tempArr);
+            });
+
+            oCustomPanel.appendChild(oCustomTextarea);
+            oCustomPanel.appendChild(oCustomTips);
+            oCustomPanel.appendChild(oCustomSaveBtn);
+            document.body.appendChild(oCustomPanel);
+        },
+
+        addListenConfig: function(){
+            var _this = this;
+            chrome.storage.onChanged.addListener(function(changes) {
+                for (var name in changes) {
+                    var change = changes[name];
+                    options[name] = change.newValue;
+                }
+            });
+            /*GM_addValueChangeListener(_this.options.sCustomKey, function(name, old_value, new_value, remote){
+                console.log(_this.options.sTarget, _this.options.sTargetFloat);
+                var aNewReplyCustom = new_value;
+                var oQuickReplySelect = null;
+                console.log(aNewReplyCustom);
+                if(document.querySelector(_this.options.sTarget)){
+                    oQuickReplySelect = document.querySelector(_this.options.sTarget +' #'+ _this.options.sQuickReplySelect);
+                    _this.updateReplysSelect(oQuickReplySelect, aNewReplyCustom);
+                    document.querySelector(_this.options.sTargetMessage).value = aNewReplyCustom[0];
+                }
+                if(document.querySelector(_this.options.sTargetFloat)){
+                    oQuickReplySelect = document.querySelector(_this.options.sTargetFloat +' #'+ _this.options.sQuickReplySelect);
+                    _this.updateReplysSelect(oQuickReplySelect, aNewReplyCustom);
+                    document.querySelector(_this.options.sTargetFloatMessage).value = aNewReplyCustom[0];
+                }
+            });*/
+        },
+
+        bindReplyfast: function(){
+            var _this = this;
+            var oBtnReplyFast = document.querySelector(_this.options.sTargetReplyfastBtn);
+            oBtnReplyFast.addEventListener('click', function(e){
+                document.addEventListener('DOMNodeInserted', function(){
+                    if(document.querySelector(_this.options.sTargetFloat)){
+                        var sTargetFloat = _this.options.sTargetFloat;
+                        var sTargetFloatMessage = _this.options.sTargetFloatMessage;
+                        _this.initAfter(sTargetFloat, sTargetFloatMessage);
+                        _this.getQuickReply(sTargetFloat, sTargetFloatMessage);
+                        _this.getReplysCustom(sTargetFloat, sTargetFloatMessage);
+                    }
+                });
+            });
+        },
+
+
+        initAfter: function(sTarget, sTargetMessage){
+            var _this = this;
+            var oTarget = (typeof sTarget === 'undefined') ? document.querySelector(_this.options.sTarget) : document.querySelector(sTarget);
+            var oTargetMessage = (typeof sTargetMessage === 'undefined') ? document.querySelector(_this.options.sTargetMessage) : document.querySelector(sTargetMessage);
+
+            oTargetMessage.value = this.getItem(this.options.sCustomKey)[0];
+            oTargetMessage.style.background = 'none';
+        },
+
+        init: function(opt){
+            for(var k in opt){
+                this.options[k] = opt[k];
+            }
+            if(!this.options.bEnabled){
+                return false;
+            }
+
+            if(document.querySelector(this.options.sTarget)){
+                this.initAfter();
+                this.getQuickReply();
+                this.getReplysCustom();
+            }
+            this.bindReplyfast();
+            this.addListenConfig();
         }
     };
 
-    QuickReply.prototype.updateReplysCustom = function(obj, arrReplys){
-        var _tempAReplys = '';
-        for(var i=0;i<arrReplys.length; i++){
-            _tempAReplys += arrReplys[i] +'\n';
-        }
-        obj.value = _tempAReplys;
-    };
-
-    QuickReply.prototype.setItem = function(data){
-        chrome.storage.sync.set(data);
-    };
-
-<<<<<<< HEAD
-    QuickReply.prototype.getItem = function(name){
-        chrome.storage.sync.get(name, function(item){
-            console.log(item);
-            QuickReply.replysCustom = item;
-            return item;
-        });
-    };
-
-    QuickReply.prototype.init = function(){
-=======
-    QuickReply.prototype.initBefore = function(callback){
-        chrome.storage.sync.get('replysCustom', function (item) {
-            callback && callback(item);
-        });
-    };
-
-    QuickReply.prototype.init = function(res){
-        if(res){
-            QuickReply.replysCustom = res.replysCustom;
-        }
->>>>>>> origin/master
-        // 理论上支持大部分Discuz类论坛
-        if(document.querySelector('#fastposteditor')){
-            QuickReply.getQuickReply();
-            QuickReply.getReplysCustom();
-            QuickReply.targetReplyEditContent.value = QuickReply.replysCustom[0];
-            QuickReply.targetReplyEditContent.style.background = 'none';
-        }
-    };
-
-    var QuickReply = new QuickReply();
-    QuickReply.initBefore(function(res){
-        QuickReply.init(res);
-    });
+    QuickReply.init();
 })();
