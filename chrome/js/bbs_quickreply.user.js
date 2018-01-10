@@ -11,7 +11,7 @@
         ];
 
         // 自定义回复内容
-        this.replysCustom = (localStorage.getItem('replysCustom') && localStorage.getItem('replysCustom').toString().trim() !== '') ? (localStorage.getItem('replysCustom')).split(',') : this.replysDefault;
+        this.replysCustom = '';
 
         // 源回复框
         this.targetReplyEditWarp = document.querySelector('#fastposteditor');
@@ -68,7 +68,7 @@
         var oCustomTextarea = document.createElement('textarea');
         oCustomTextarea.style = 'width:96%;padding:5px;';
         oCustomTextarea.rows = '7';
-        QuickReply.updateReplysCustom(oCustomTextarea, this.replysCustom);
+        QuickReply.updateReplysCustom(oCustomTextarea, QuickReply.replysCustom);
 
         var oCustomSaveBtn = document.createElement('button');
         oCustomSaveBtn.style = 'width: 100%;';
@@ -91,7 +91,7 @@
             QuickReply.updateReplysCustom(oCustomTextarea, _tempArr);
             QuickReply.updateReplysSelect(oQuickReplySelect, _tempArr);
             QuickReply.targetReplyEditContent.value = _tempArr[0];
-            localStorage.setItem('replysCustom', _tempArr);
+            QuickReply.setItem({'replysCustom': _tempArr});
         });
 
         oCustomPanel.appendChild(oCustomTextarea);
@@ -113,6 +113,18 @@
             _tempAReplys += arrReplys[i] +'\n';
         }
         obj.value = _tempAReplys;
+    };
+
+    QuickReply.prototype.setItem = function(data){
+        chrome.storage.sync.set(data);
+    };
+
+    QuickReply.prototype.getItem = function(name){
+        chrome.storage.sync.get(name, function(item){
+            console.log(item);
+            QuickReply.replysCustom = item;
+            return item;
+        });
     };
 
     QuickReply.prototype.init = function(){
