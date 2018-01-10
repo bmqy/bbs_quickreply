@@ -1,7 +1,6 @@
 (function() {
     'use strict';
     function QuickReply(){
-
         // 预定义回复内容
         this.replysDefault = [
             '感谢楼主分享，支持一下！',
@@ -11,7 +10,11 @@
         ];
 
         // 自定义回复内容
+<<<<<<< HEAD
         this.replysCustom = '';
+=======
+        this.replysCustom = this.replysDefault;
+>>>>>>> origin/master
 
         // 源回复框
         this.targetReplyEditWarp = document.querySelector('#fastposteditor');
@@ -119,6 +122,7 @@
         chrome.storage.sync.set(data);
     };
 
+<<<<<<< HEAD
     QuickReply.prototype.getItem = function(name){
         chrome.storage.sync.get(name, function(item){
             console.log(item);
@@ -128,6 +132,18 @@
     };
 
     QuickReply.prototype.init = function(){
+=======
+    QuickReply.prototype.initBefore = function(callback){
+        chrome.storage.sync.get('replysCustom', function (item) {
+            callback && callback(item);
+        });
+    };
+
+    QuickReply.prototype.init = function(res){
+        if(res){
+            QuickReply.replysCustom = res.replysCustom;
+        }
+>>>>>>> origin/master
         // 理论上支持大部分Discuz类论坛
         if(document.querySelector('#fastposteditor')){
             QuickReply.getQuickReply();
@@ -138,5 +154,7 @@
     };
 
     var QuickReply = new QuickReply();
-    QuickReply.init();
+    QuickReply.initBefore(function(res){
+        QuickReply.init(res);
+    });
 })();
