@@ -12,6 +12,7 @@
             sQuickReplySelect: 'quickReplySelect',
             sQuickReplyCustom: 'quickReplyCustom',
             sCustomKey: 'replysCustom',
+            aReplysCustom: [],
             aReplysDefault: [
                 '感谢楼主分享，支持一下！',
                 '支持一下，希望楼主做的更好，加油！',
@@ -21,23 +22,21 @@
         },
 
         setItem: function(key, value){
-            chrome.storage.sync.set({key: value});
+            chrome.storage.sync.set({'replysCustom': value});
         },
 
-        getItem: function(key){
+        getItem: function(key, callback){
             var _this = this;
-            var arr = [];
+            var arr = _this.options.aReplysDefault;
             chrome.storage.sync.get(key, function(item){
-                console.log(item);
-                if(item.length > 0){
-                    arr = item;
+                if(item[_this.options.sCustomKey].length > 0){
+                    arr = item[_this.options.sCustomKey];
                 }
-                else{
-                    arr = _this.options.aReplysDefault;
+
+                if(arr && callback){
+                    callback(arr);
                 }
-                return arr;
             });
-            return arr;
         },
 
         updateReplysSelect: function (obj, arrReplys){
@@ -68,7 +67,7 @@
             oQuikReplyLabel.innerHTML = '快捷回帖：';
             var oQuikReplySelect = document.createElement('select');
             oQuikReplySelect.id =  _this.options.sQuickReplySelect;
-            _this.updateReplysSelect(oQuikReplySelect, _this.getItem(_this.options.sCustomKey));
+            _this.updateReplysSelect(oQuikReplySelect, _this.options.aReplysCustom);
 
             oQuikReplySelect.addEventListener('change', function(e){
                 oTargetMessage.value = this.options[this.selectedIndex].text;
@@ -119,7 +118,7 @@
             var oCustomTextarea = document.createElement('textarea');
             oCustomTextarea.style = 'width:96%;padding:5px;';
             oCustomTextarea.rows = '7';
-            _this.updateReplysCustom(oCustomTextarea, _this.getItem(_this.options.sCustomKey));
+            _this.updateReplysCustom(oCustomTextarea, _this.options.aReplysCustom);
 
             var oCustomSaveBtn = document.createElement('button');
             oCustomSaveBtn.style = 'width: 100%;';
@@ -150,17 +149,16 @@
 
         addListenConfig: function(){
             var _this = this;
-            chrome.storage.onChanged.addListener(function(changes) {
+            chrome.storage.onChanged.addListener(function(changes){
+                var _arr = [];
                 for (var name in changes) {
-                    var change = changes[name];
-                    options[name] = change.newValue;
+                    _arr = changes[name].newValue;
                 }
-            });
-            /*GM_addValueChangeListener(_this.options.sCustomKey, function(name, old_value, new_value, remote){
-                console.log(_this.options.sTarget, _this.options.sTargetFloat);
-                var aNewReplyCustom = new_value;
+
+                _this.options.aReplysDefault = _arr;
+
+                var aNewReplyCustom = _arr;
                 var oQuickReplySelect = null;
-                console.log(aNewReplyCustom);
                 if(document.querySelector(_this.options.sTarget)){
                     oQuickReplySelect = document.querySelector(_this.options.sTarget +' #'+ _this.options.sQuickReplySelect);
                     _this.updateReplysSelect(oQuickReplySelect, aNewReplyCustom);
@@ -171,7 +169,7 @@
                     _this.updateReplysSelect(oQuickReplySelect, aNewReplyCustom);
                     document.querySelector(_this.options.sTargetFloatMessage).value = aNewReplyCustom[0];
                 }
-            });*/
+            });
         },
 
         bindReplyfast: function(){
@@ -190,13 +188,16 @@
             });
         },
 
+        initBefore: function (key, callback) {
+            this.getItem(key, callback);
+        },
 
         initAfter: function(sTarget, sTargetMessage){
             var _this = this;
             var oTarget = (typeof sTarget === 'undefined') ? document.querySelector(_this.options.sTarget) : document.querySelector(sTarget);
             var oTargetMessage = (typeof sTargetMessage === 'undefined') ? document.querySelector(_this.options.sTargetMessage) : document.querySelector(sTargetMessage);
 
-            oTargetMessage.value = this.getItem(this.options.sCustomKey)[0];
+            oTargetMessage.value = _this.options.aReplysCustom[0];
             oTargetMessage.style.background = 'none';
         },
 
@@ -218,5 +219,7 @@
         }
     };
 
-    QuickReply.init();
+    QuickReply.initBefore('replysCustom', function (res) {
+        QuickReply.init({'aReplysCustom': res});
+    });
 })();

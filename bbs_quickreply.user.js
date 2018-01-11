@@ -161,7 +161,6 @@
             GM_addValueChangeListener(_this.options.sCustomKey, function(name, old_value, new_value, remote){
                 var aNewReplyCustom = new_value;
                 var oQuickReplySelect = null;
-                console.log(aNewReplyCustom);
                 if(document.querySelector(_this.options.sTarget)){
                     oQuickReplySelect = document.querySelector(_this.options.sTarget +' #'+ _this.options.sQuickReplySelect);
                     _this.updateReplysSelect(oQuickReplySelect, aNewReplyCustom);
@@ -197,7 +196,7 @@
             var oTarget = (typeof sTarget === 'undefined') ? document.querySelector(_this.options.sTarget) : document.querySelector(sTarget);
             var oTargetMessage = (typeof sTargetMessage === 'undefined') ? document.querySelector(_this.options.sTargetMessage) : document.querySelector(sTargetMessage);
 
-            oTargetMessage.value = this.getItem(this.options.sCustomKey)[0];
+            oTargetMessage.value = _this.getItem(_this.options.sCustomKey)[0];
             oTargetMessage.style.background = 'none';
         },
 
