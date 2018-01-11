@@ -29,8 +29,10 @@
             var _this = this;
             var arr = _this.options.aReplysDefault;
             chrome.storage.sync.get(key, function(item){
-                if(item[_this.options.sCustomKey].length > 0){
-                    arr = item[_this.options.sCustomKey];
+                for(var key in item){
+                    if(item[_this.options.sCustomKey].length > 0){
+                        arr = item[_this.options.sCustomKey];
+                    }
                 }
 
                 if(arr && callback){
@@ -219,7 +221,7 @@
         }
     };
 
-    QuickReply.initBefore('replysCustom', function (res) {
+    QuickReply.initBefore(QuickReply.options.sCustomKey, function (res) {
         QuickReply.init({'aReplysCustom': res});
     });
 })();
