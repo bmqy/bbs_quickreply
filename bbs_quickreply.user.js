@@ -1,11 +1,16 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    http://bmqy.net/
-// @version      0.2.0.1
+// @version      0.2.0.3
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @author       bmqy
 // @match        */thread*.*
-// @match        */forum.php?mod==viewthread*
+// @match        */forum.php?mod==viewthread
+// @match        */forum.php?mod=viewthread
+// @match        */forum/forum.php?mod=viewthread
+// @match        */forum/thread*.*
+// @match        */bbs/forum.php?mod=viewthread
+// @match        */forum.php?mod=post
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_addValueChangeListener
@@ -113,7 +118,7 @@
             var oTargetMessage = (typeof sTargetMessage === 'undefined') ? document.querySelector(_this.options.sTargetMessage) : document.querySelector(sTargetMessage);
 
             if(document.querySelector('#'+ _this.options.sQuickReplyCustom)){
-               return false;
+                return false;
             }
 
             var oCustomPanel = document.createElement('div');
