@@ -3,11 +3,18 @@
     var QuickReply = {
         options: {
             bEnabled: true,
+            bEnabledReplyFast: true,
+            bEnabledReplyFloat: true,
+            bEnabledReplyPage: true,
             sTarget: '#fastposteditor',
             sTargetMessage: '#fastpostmessage',
             sTargetFloat: '#floatlayout_reply',
             sTargetFloatMessage: '#postmessage',
             sTargetReplyfastBtn: '.replyfast',
+            sTargetReplyAnswerBtn: 'button[name="answer"]',
+            sTargetFavoriteBtn: '#k_favorite',
+            sTargetReplyPage: '#editorbox',
+            sTargetReplyPageMessage: '#e_iframe',
             sQuickReplyWarp: 'quickReplyWarp',
             sQuickReplySelect: 'quickReplySelect',
             sQuickReplyCustom: 'quickReplyCustom',
@@ -56,7 +63,7 @@
             obj.value = _tempAReplys;
         },
 
-        getQuickReply: function(sTarget, sTargetMessage){
+        getQuickReply: function(sTarget, sTargetMessage, isHtml){
             var _this = this;
             var oTarget = (typeof sTarget === 'undefined') ? document.querySelector(_this.options.sTarget) : document.querySelector(sTarget);
             var oTargetMessage = (typeof sTargetMessage === 'undefined') ? document.querySelector(_this.options.sTargetMessage) : document.querySelector(sTargetMessage);
@@ -174,20 +181,31 @@
             });
         },
 
-        bindReplyfast: function(){
+        bindReplyfloat: function(){
             var _this = this;
-            var oBtnReplyFast = document.querySelector(_this.options.sTargetReplyfastBtn);
-            oBtnReplyFast.addEventListener('click', function(e){
-                document.addEventListener('DOMNodeInserted', function(){
-                    if(document.querySelector(_this.options.sTargetFloat)){
-                        var sTargetFloat = _this.options.sTargetFloat;
-                        var sTargetFloatMessage = _this.options.sTargetFloatMessage;
-                        _this.initAfter(sTargetFloat, sTargetFloatMessage);
-                        _this.getQuickReply(sTargetFloat, sTargetFloatMessage);
-                        _this.getReplysCustom(sTargetFloat, sTargetFloatMessage);
-                    }
+            var oBtnReplyFast = document.querySelector(_this.options.sTargetReplyfastBtn, _this.options.sTargetReplyAnswerBtn);
+            if(oBtnReplyFast){
+                oBtnReplyFast.addEventListener('click', function(e){
+                    document.addEventListener('DOMNodeInserted', function(){
+                        if(document.querySelector(_this.options.sTargetFloat)){
+                            var sTargetFloat = _this.options.sTargetFloat;
+                            var sTargetFloatMessage = _this.options.sTargetFloatMessage;
+                            _this.initAfter(sTargetFloat, sTargetFloatMessage);
+                            _this.getQuickReply(sTargetFloat, sTargetFloatMessage, false);
+                            _this.getReplysCustom(sTargetFloat, sTargetFloatMessage);
+                        }
+                    });
                 });
-            });
+            }
+        },
+
+        bindReplyPage: function(){
+            var _this = this;
+            if(document.querySelector(_this.options.sTargetReplyPage)){
+                var oReplyPage = document.querySelector(_this.options.sTargetReplyPage);
+                var oReplyPageMessage = document.querySelector(_this.options.sTargetReplyPageMessage).contentWindow.document.body;
+                oReplyPageMessage.innerHTML = _this.options.aReplysCustom[0];
+            }
         },
 
         initBefore: function (key, callback) {
@@ -211,12 +229,19 @@
                 return false;
             }
 
-            if(document.querySelector(this.options.sTarget)){
-                this.initAfter();
-                this.getQuickReply();
-                this.getReplysCustom();
+            if(this.options.bEnabledReplyFast){
+                if(document.querySelector(this.options.sTarget)){
+                    this.initAfter();
+                    this.getQuickReply();
+                    this.getReplysCustom();
+                }
             }
-            this.bindReplyfast();
+            if(this.options.bEnabledReplyFloat){
+                this.bindReplyfloat();
+            }
+            if(this.options.bEnabledReplyPage){
+                this.bindReplyPage();
+            }
             this.addListenConfig();
         }
     };
