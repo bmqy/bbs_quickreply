@@ -1,7 +1,6 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    http://bmqy.net/
-<<<<<<< HEAD
 // @version      0.2.0.3
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @author       bmqy
@@ -12,14 +11,6 @@
 // @match        */forum/thread*.*
 // @match        */bbs/forum.php?mod=viewthread
 // @match        */forum.php?mod=post
-=======
-// @version      0.2.0.2
-// @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
-// @author       bmqy
-// @match        */thread*.*
-// @match        */forum.php?mod==viewthread*
-// @match        */bbs/forum.php?mod=viewthread*
->>>>>>> b2ef3fceb625f2af09bf6fad63cad93b55c845f5
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_addValueChangeListener
