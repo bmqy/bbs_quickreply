@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    http://bmqy.net/
-// @version      0.2.0.3
+// @version      0.2.0.4
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @author       bmqy
 // @match        */thread*.*
@@ -182,9 +182,9 @@
         bindReplyfast: function(){
             var _this = this;
             var oBtnReplyFast = document.querySelector(_this.options.sTargetReplyfastBtn);
-            oBtnReplyFast.addEventListener('click', function(e){
-                document.addEventListener('DOMNodeInserted', function(){
-                    if(document.querySelector(_this.options.sTargetFloat)){
+            oBtnReplyFast.addEventListener('click', function(){
+                document.addEventListener('DOMNodeInserted', function(e){
+                    if(e.target.id === 'postform'){
                         var sTargetFloat = _this.options.sTargetFloat;
                         var sTargetFloatMessage = _this.options.sTargetFloatMessage;
                         _this.initAfter(sTargetFloat, sTargetFloatMessage);
