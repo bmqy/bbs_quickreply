@@ -1,16 +1,16 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    http://bmqy.net/
-// @version      0.2.0.5
+// @version      1.0.0
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @author       bmqy
 // @match        */thread*.*
-// @match        /forum.php?mod==viewthread*
-// @match        /forum.php?mod=viewthread*
-// @match        /forum/forum.php?mod=viewthread*
-// @match        /forum/thread*
-// @match        /bbs/forum.php?mod=viewthread*
-// @match        /forum.php?mod=post
+// @match        */forum.php?mod==viewthread*
+// @match        */forum.php?mod=viewthread*
+// @match        */forum/forum.php?mod=viewthread*
+// @match        */forum/thread*
+// @match        */bbs/forum.php?mod=viewthread*
+// @match        */forum.php?mod=post*
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_addValueChangeListener
@@ -25,7 +25,10 @@
             sTargetMessage: '#fastpostmessage',
             sTargetFloat: '#floatlayout_reply',
             sTargetFloatMessage: '#postmessage',
-            sTargetReplyfastBtn: '.replyfast',
+            aTargetReplyfastBtn: ['.replyfast', '#post_replytmp', '.fastre'],
+            sTargetEditorBox: '#postbox',
+            sTargetEditor: '#e_body',
+            sTargetEditorMessage: '#e_iframe',
             sQuickReplyWarp: 'quickReplyWarp',
             sQuickReplySelect: 'quickReplySelect',
             sQuickReplyCustom: 'quickReplyCustom',
@@ -71,6 +74,9 @@
         getQuickReply: function(sTarget, sTargetMessage){
             var _this = this;
             var oTarget = (typeof sTarget === 'undefined') ? document.querySelector(_this.options.sTarget) : document.querySelector(sTarget);
+            if(document.querySelector(_this.options.sTargetEditorBox)){
+                oTarget = document.querySelector(_this.options.sTargetEditorBox);
+            }
             var oTargetMessage = (typeof sTargetMessage === 'undefined') ? document.querySelector(_this.options.sTargetMessage) : document.querySelector(sTargetMessage);
 
             var oQuikReplyWarp = document.createElement('div');
@@ -84,8 +90,13 @@
             _this.updateReplysSelect(oQuikReplySelect, _this.getItem(_this.options.sCustomKey));
 
             oQuikReplySelect.addEventListener('change', function(e){
-                oTargetMessage.value = this.options[this.selectedIndex].text;
-                oTargetMessage.style.background = 'none';
+                if(document.querySelector(_this.options.sTargetEditor)){
+                    var oTargetEditorMessage = document.querySelector(_this.options.sTargetEditorMessage).contentWindow.document.body;
+                    oTargetEditorMessage.innerHTML = this.options[this.selectedIndex].text;
+                } else if(document.querySelector(_this.options.sTargetMessage)){
+                    oTargetMessage.value = this.options[this.selectedIndex].text;
+                    oTargetMessage.style.background = 'none';
+                }
             });
 
             var oQuickReplyBtnCustom = document.createElement('a');
@@ -108,7 +119,12 @@
             oQuikReplyWarp.appendChild(oQuickReplyBtnCustom);
 
             if(!oTarget.querySelector('#'+ _this.options.sQuickReplyWarp)){
-                oTarget.insertBefore(oQuikReplyWarp, oTarget.childNodes[0]);
+                if(document.querySelector(_this.options.sTargetEditorBox)){
+                    var oTargetEditor = document.querySelector(_this.options.sTargetEditor);
+                    oTarget.insertBefore(oQuikReplyWarp, oTargetEditor);
+                } else {
+                    oTarget.insertBefore(oQuikReplyWarp, oTarget.childNodes[0]);
+                }
             }
         },
 
@@ -179,20 +195,35 @@
             });
         },
 
-        bindReplyfast: function(){
+        bindReplyBtn: function(){
             var _this = this;
-            var oBtnReplyFast = document.querySelector(_this.options.sTargetReplyfastBtn);
-            oBtnReplyFast.addEventListener('click', function(){
-                document.addEventListener('DOMNodeInserted', function(e){
-                    if(e.target.id === 'postform'){
-                        var sTargetFloat = _this.options.sTargetFloat;
-                        var sTargetFloatMessage = _this.options.sTargetFloatMessage;
-                        _this.initAfter(sTargetFloat, sTargetFloatMessage);
-                        _this.getQuickReply(sTargetFloat, sTargetFloatMessage);
-                        _this.getReplysCustom(sTargetFloat, sTargetFloatMessage);
-                    }
-                });
+            _this.options.aTargetReplyfastBtn.forEach(function(e, i){
+                var aBtn = document.querySelectorAll(e);
+                for(let i=0; i<aBtn.length; i++){
+                    let btn = aBtn[i];
+                    btn.addEventListener('click', function(){
+                        document.addEventListener('DOMNodeInserted', function(e){
+                            if(e.target.id === 'postform'){
+                                var sTF = _this.options.sTargetFloat;
+                                var sTFM = _this.options.sTargetFloatMessage;
+                                _this.initAfter(sTF, sTFM);
+                                _this.getQuickReply(sTF, sTFM);
+                            }
+                        });
+                    });
+                }
             });
+        },
+
+        bindEditor: function(){
+            var _this = this;
+            if(document.querySelector(_this.options.sTargetEditor)){
+                var sE = _this.options.sTargetEditor;
+                var sER = _this.options.sTargetEditorMessage;
+                _this.initAfter(sE, sER);
+                _this.getQuickReply(sE, sER);
+                _this.getReplysCustom(sE, sER);
+            }
         },
 
 
@@ -201,8 +232,13 @@
             var oTarget = (typeof sTarget === 'undefined') ? document.querySelector(_this.options.sTarget) : document.querySelector(sTarget);
             var oTargetMessage = (typeof sTargetMessage === 'undefined') ? document.querySelector(_this.options.sTargetMessage) : document.querySelector(sTargetMessage);
 
-            oTargetMessage.value = _this.getItem(_this.options.sCustomKey)[0];
-            oTargetMessage.style.background = 'none';
+            if(document.querySelector(_this.options.sTargetEditor)){
+                var oTargetEditorMessage = document.querySelector(_this.options.sTargetEditorMessage).contentWindow.document.body;
+                oTargetEditorMessage.innerHTML = _this.getItem(_this.options.sCustomKey)[0];
+            } else if(document.querySelector(_this.options.sTargetMessage)){
+                oTargetMessage.value = _this.getItem(_this.options.sCustomKey)[0];
+                oTargetMessage.style.background = 'none';
+            }
         },
 
         init: function(opt){
@@ -218,7 +254,8 @@
                 this.getQuickReply();
                 this.getReplysCustom();
             }
-            this.bindReplyfast();
+            this.bindReplyBtn();
+            this.bindEditor();
             this.addListenConfig();
         }
     };

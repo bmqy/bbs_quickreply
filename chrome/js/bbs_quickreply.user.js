@@ -3,18 +3,14 @@
     var QuickReply = {
         options: {
             bEnabled: true,
-            bEnabledReplyFast: true,
-            bEnabledReplyFloat: true,
-            bEnabledReplyPage: true,
             sTarget: '#fastposteditor',
             sTargetMessage: '#fastpostmessage',
             sTargetFloat: '#floatlayout_reply',
             sTargetFloatMessage: '#postmessage',
-            sTargetReplyfastBtn: '.replyfast',
-            sTargetReplyAnswerBtn: 'button[name="answer"]',
-            sTargetFavoriteBtn: '#k_favorite',
-            sTargetReplyPage: '#editorbox',
-            sTargetReplyPageMessage: '#e_iframe',
+            aTargetReplyfastBtn: ['.replyfast', '#post_replytmp', '.fastre'],
+            sTargetEditorBox: '#postbox',
+            sTargetEditor: '#e_body',
+            sTargetEditorMessage: '#e_iframe',
             sQuickReplyWarp: 'quickReplyWarp',
             sQuickReplySelect: 'quickReplySelect',
             sQuickReplyCustom: 'quickReplyCustom',
@@ -66,6 +62,9 @@
         getQuickReply: function(sTarget, sTargetMessage, isHtml){
             var _this = this;
             var oTarget = (typeof sTarget === 'undefined') ? document.querySelector(_this.options.sTarget) : document.querySelector(sTarget);
+            if(document.querySelector(_this.options.sTargetEditorBox)){
+                oTarget = document.querySelector(_this.options.sTargetEditorBox);
+            }
             var oTargetMessage = (typeof sTargetMessage === 'undefined') ? document.querySelector(_this.options.sTargetMessage) : document.querySelector(sTargetMessage);
 
             var oQuikReplyWarp = document.createElement('div');
@@ -79,8 +78,13 @@
             _this.updateReplysSelect(oQuikReplySelect, _this.options.aReplysCustom);
 
             oQuikReplySelect.addEventListener('change', function(e){
-                oTargetMessage.value = this.options[this.selectedIndex].text;
-                oTargetMessage.style.background = 'none';
+                if(document.querySelector(_this.options.sTargetEditor)){
+                    var oTargetEditorMessage = document.querySelector(_this.options.sTargetEditorMessage).contentWindow.document.body;
+                    oTargetEditorMessage.innerHTML = this.options[this.selectedIndex].text;
+                } else if(document.querySelector(_this.options.sTargetMessage)){
+                    oTargetMessage.value = this.options[this.selectedIndex].text;
+                    oTargetMessage.style.background = 'none';
+                }
             });
 
             var oQuickReplyBtnCustom = document.createElement('a');
@@ -101,9 +105,14 @@
             oQuikReplyLabel.appendChild(oQuikReplySelect);
             oQuikReplyWarp.appendChild(oQuikReplyLabel);
             oQuikReplyWarp.appendChild(oQuickReplyBtnCustom);
-
+            
             if(!oTarget.querySelector('#'+ _this.options.sQuickReplyWarp)){
-                oTarget.insertBefore(oQuikReplyWarp, oTarget.childNodes[0]);
+                if(document.querySelector(_this.options.sTargetEditorBox)){
+                    var oTargetEditor = document.querySelector(_this.options.sTargetEditor);
+                    oTarget.insertBefore(oQuikReplyWarp, oTargetEditor);
+                } else {
+                    oTarget.insertBefore(oQuikReplyWarp, oTarget.childNodes[0]);
+                }
             }
         },
 
@@ -181,30 +190,34 @@
             });
         },
 
-        bindReplyfloat: function(){
+        bindReplyBtn: function(){
             var _this = this;
-            var oBtnReplyFast = document.querySelector(_this.options.sTargetReplyfastBtn, _this.options.sTargetReplyAnswerBtn);
-            if(oBtnReplyFast){
-                oBtnReplyFast.addEventListener('click', function(e){
-                    document.addEventListener('DOMNodeInserted', function(){
-                        if(document.querySelector(_this.options.sTargetFloat)){
-                            var sTargetFloat = _this.options.sTargetFloat;
-                            var sTargetFloatMessage = _this.options.sTargetFloatMessage;
-                            _this.initAfter(sTargetFloat, sTargetFloatMessage);
-                            _this.getQuickReply(sTargetFloat, sTargetFloatMessage, false);
-                            _this.getReplysCustom(sTargetFloat, sTargetFloatMessage);
-                        }
+            _this.options.aTargetReplyfastBtn.forEach(function(e, i){
+                var aBtn = document.querySelectorAll(e);
+                for(let i=0; i<aBtn.length; i++){
+                    let btn = aBtn[i];
+                    btn.addEventListener('click', function(){
+                        document.addEventListener('DOMNodeInserted', function(e){
+                            if(e.target.id === 'postform'){
+                                var sTF = _this.options.sTargetFloat;
+                                var sTFM = _this.options.sTargetFloatMessage;
+                                _this.initAfter(sTF, sTFM);
+                                _this.getQuickReply(sTF, sTFM);
+                            }
+                        });
                     });
-                });
-            }
+                }
+            });
         },
 
-        bindReplyPage: function(){
+        bindEditor: function(){
             var _this = this;
-            if(document.querySelector(_this.options.sTargetReplyPage)){
-                var oReplyPage = document.querySelector(_this.options.sTargetReplyPage);
-                var oReplyPageMessage = document.querySelector(_this.options.sTargetReplyPageMessage).contentWindow.document.body;
-                oReplyPageMessage.innerHTML = _this.options.aReplysCustom[0];
+            if(document.querySelector(_this.options.sTargetEditor)){
+                var sE = _this.options.sTargetEditor;
+                var sER = _this.options.sTargetEditorMessage;
+                _this.initAfter(sE, sER);
+                _this.getQuickReply(sE, sER);
+                _this.getReplysCustom(sE, sER);
             }
         },
 
@@ -217,8 +230,13 @@
             var oTarget = (typeof sTarget === 'undefined') ? document.querySelector(_this.options.sTarget) : document.querySelector(sTarget);
             var oTargetMessage = (typeof sTargetMessage === 'undefined') ? document.querySelector(_this.options.sTargetMessage) : document.querySelector(sTargetMessage);
 
-            oTargetMessage.value = _this.options.aReplysCustom[0];
-            oTargetMessage.style.background = 'none';
+            if(document.querySelector(_this.options.sTargetEditor)){
+                var oTargetEditorMessage = document.querySelector(_this.options.sTargetEditorMessage).contentWindow.document.body;
+                oTargetEditorMessage.innerHTML = _this.options.aReplysCustom[0];
+            } else if(document.querySelector(_this.options.sTargetMessage)){
+                oTargetMessage.value = _this.options.aReplysCustom[0];
+                oTargetMessage.style.background = 'none';
+            }
         },
 
         init: function(opt){
@@ -229,19 +247,13 @@
                 return false;
             }
 
-            if(this.options.bEnabledReplyFast){
-                if(document.querySelector(this.options.sTarget)){
-                    this.initAfter();
-                    this.getQuickReply();
-                    this.getReplysCustom();
-                }
-            }
-            if(this.options.bEnabledReplyFloat){
-                this.bindReplyfloat();
-            }
-            if(this.options.bEnabledReplyPage){
-                this.bindReplyPage();
-            }
+            if(document.querySelector(this.options.sTarget)){
+                this.initAfter();
+                this.getQuickReply();
+                this.getReplysCustom();
+            } 
+            this.bindReplyBtn();
+            this.bindEditor();
             this.addListenConfig();
         }
     };

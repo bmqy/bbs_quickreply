@@ -21,5 +21,5 @@
    "permissions": [ "storage" ],
    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqGXLztub8CZvCJTKCJ9s7BStv25GjT7f8DxNUVOJNBkiukjckSuJVggVABaxU7vy+PlPPwlAzSXGY+PhsEUArnsRsCZo3G+oDrEgnep9O9ruj569w7kTg2ryjmAgTPjZ8Vqh2Afpdkl6JY0J69JMcIatc3u9WbbKRrMgED/t2Jqld+Sd/IfneGclF1k+SGHYiPAPxhKJ3d6OQ037SOQbAKTANFLbcLlwHioT7GKA3l/1AZTn6K3fvnSbgY5zRls4hywbR/Ieldv1VzR9stKlrLNa9Lbt8gHctMPq0UxqTnAz7JXzehNYkg5idNGpdLja5U8W9k0BWOxj2WxTWQ50XQIDAQAB",
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.2.1"
+   "version": "1.0.0"
 }
