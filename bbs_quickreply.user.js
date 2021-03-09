@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    http://bmqy.net/
-// @version      1.0.0
+// @version      1.0.1
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @author       bmqy
 // @match        */thread*.*
@@ -234,7 +234,7 @@
 
             if(document.querySelector(_this.options.sTargetEditor)){
                 var oTargetEditorMessage = document.querySelector(_this.options.sTargetEditorMessage).contentWindow.document.body;
-                oTargetEditorMessage.innerHTML = _this.getItem(_this.options.sCustomKey)[0];
+                oTargetEditorMessage.innerHTML = location.href.indexOf('action=edit')==-1 ? _this.getItem(_this.options.sCustomKey)[0] : oTargetEditorMessage.innerHTML;
             } else if(document.querySelector(_this.options.sTargetMessage)){
                 oTargetMessage.value = _this.getItem(_this.options.sCustomKey)[0];
                 oTargetMessage.style.background = 'none';

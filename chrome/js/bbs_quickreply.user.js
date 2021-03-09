@@ -232,7 +232,7 @@
 
             if(document.querySelector(_this.options.sTargetEditor)){
                 var oTargetEditorMessage = document.querySelector(_this.options.sTargetEditorMessage).contentWindow.document.body;
-                oTargetEditorMessage.innerHTML = _this.options.aReplysCustom[0];
+                oTargetEditorMessage.innerHTML = location.href.indexOf('action=edit')==-1 ? _this.options.aReplysCustom[0] : oTargetEditorMessage.innerHTML;
             } else if(document.querySelector(_this.options.sTargetMessage)){
                 oTargetMessage.value = _this.options.aReplysCustom[0];
                 oTargetMessage.style.background = 'none';
