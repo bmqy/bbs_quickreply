@@ -3,10 +3,12 @@
 
 v1.0.1更新：  
 1. 修复编辑帖子时内容被覆盖的bug；
+感谢[dnknn](https://greasyfork.org/zh-CN/users/35765-dnknn)的热心反馈！
 
 v1.0.0更新：  
 1. 更新支持高级回复模式；
 2. 重置版本号为：1.0.0；
+感谢[dnknn](https://greasyfork.org/zh-CN/users/35765-dnknn)的热心反馈！
 
 v0.2.0.3更新：  
 1. 支持更多discuz论坛页；  
