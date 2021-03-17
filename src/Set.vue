@@ -36,9 +36,20 @@ export default {
   },
   watch: {
     showSet(newVal, oldVal){
-      if(newVal == false && this.list.length == 0){
-        this.$message.error('未设置快速回帖内容');
-        this.showSet = true;
+      let vm = this;
+      if(newVal == false && vm.list.length == 0){
+        vm.$confirm('未设置快速回帖内容', '是否重置设置', {
+          confirmButtonText: '是',
+          cancelButtonText: '否',
+          type: 'success',
+        }).then(action => {
+          vm.list = vm.$app.defaultReply;
+        }).catch(() => {
+          vm.$message.info('请输入自定义回复内容');
+        });
+        
+        vm.$emit('update:showSet', true);
+        vm.showSet = true;
         return false;
       }
     }
@@ -48,10 +59,9 @@ export default {
   },
   methods: {
     getList(){
-      this.list = this.TJs.getStorage();
+      this.list = this.$app.getStorage();
     },
     delReply(index){
-      console.log(index);
       this.list.splice(index, 1);
     },
     addReply(){

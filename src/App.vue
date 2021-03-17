@@ -13,7 +13,7 @@
           <el-button type="primary" class="btnQuickReplySet" icon="el-icon-s-tools" @click="openSet" :title="tips1"></el-button>
       </el-form-item>
     </el-form>
-    <set :showSet="showSet" />
+    <set v-bind:showSet.sync="showSet" />
   </div>
 </template>
 <script>
@@ -26,22 +26,22 @@
       }
     },
     created() {
-      this.getList()
+      this.getList();
     },
     computed: {
       title(){
-        return this.TJs.getNameSpace();
+        return this.$app.getNameSpace();
       },
       tips(){
-        return `名称: ${this.TJs.getName()} \n版本: ${this.TJs.getVersion()}`;
+        return `名称: ${this.$app.getName()} \n版本: ${this.$app.getVersion()}`;
       },
       tips1(){
-        return `${this.TJs.getNameSpace()}设置`;
+        return `${this.$app.getNameSpace()}设置`;
       }
     },
     methods: {
       getList(){
-        this.list = this.TJs.getStorage();
+        this.list = this.$app.getStorage();
         this.currentReply = this.list[0];
       },
       openSet() {
