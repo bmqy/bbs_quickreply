@@ -5,9 +5,9 @@ import App from './App.vue';
 import Set from './Set.vue';
 
 const $fastposteditor = document.querySelector('#fastposteditor');
-const $app = document.createElement('div');
-$app.id = 'app';
-$fastposteditor.insertBefore($app, $fastposteditor.childNodes[0]);
+const $appRoot = document.createElement('div');
+$appRoot.id = 'app';
+$fastposteditor.insertBefore($appRoot, $fastposteditor.childNodes[0]);
 
 Vue.prototype.$app = {
   storageKey: 'QuickReply',
