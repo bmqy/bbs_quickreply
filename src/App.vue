@@ -2,7 +2,7 @@
   <div class="quickReplyBox">
     <el-form :inline="true" :model="list" size="small" class="demo-form-inline">
       <el-form-item>
-          <div slot="label" :title="tips">            
+          <div slot="label">            
               {{`${title}: `}}
           </div>
         <el-select v-model="currentReply" placeholder="请选择">
@@ -10,7 +10,7 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-          <el-button type="primary" class="btnQuickReplySet" icon="el-icon-s-tools" @click="openSet" :title="tips1"></el-button>
+          <el-button type="primary" class="btnQuickReplySet" icon="el-icon-s-tools" @click="openSet" :title="tips"></el-button>
       </el-form-item>
     </el-form>
     <set v-bind:showSet.sync="showSet" />
@@ -33,9 +33,6 @@
         return this.$app.getNameSpace();
       },
       tips(){
-        return `名称: ${this.$app.getName()} \n版本: ${this.$app.getVersion()}`;
-      },
-      tips1(){
         return `${this.$app.getNameSpace()}设置`;
       }
     },

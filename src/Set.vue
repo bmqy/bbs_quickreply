@@ -2,7 +2,8 @@
   <div class="setBox" v-show="showSet">   
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>自定义设置</span>
+        <span>{{$app.getName()}}</span>
+        <el-button style="float: right; padding: 3px 0" type="text" @click="closeSetBox"><i class="el-icon-circle-close"></i></el-button>        
       </div>
       <ul class="list" v-if="list.length > 0">
         <li v-for="(item, index) in list" :key="index">
@@ -11,9 +12,12 @@
       </ul>
       <p v-if="list.length == 0" class="tips">未设置快速回帖内容!</p>
       <div class="addReplyBox">          
-        <el-input placeholder="请输入回复内容" v-model="newReply" clearable class="input-with-select">
+        <el-input placeholder="请输入新的回复内容" v-model="newReply" clearable class="input-with-select">
           <el-button slot="append" icon="el-icon-s-promotion" @click="addReply"></el-button>
         </el-input>
+      </div>
+      <div>
+        <span class="demo-card-foot">{{`ver: ${$app.getVersion()}`}}</span>
       </div>
     </el-card>
   </div>
@@ -60,6 +64,9 @@ export default {
   methods: {
     getList(){
       this.list = this.$app.getStorage();
+    },
+    closeSetBox(){
+      this.$emit('update:showSet', false);
     },
     delReply(index){
       this.list.splice(index, 1);
@@ -132,6 +139,11 @@ export default {
         font-size: 14px;
       }
     }
+  }
+  .demo-card-foot{
+    padding: 10px 0;
+    float: right;
+    color: #909399;
   }
   .clearfix:before,
   .clearfix:after {
