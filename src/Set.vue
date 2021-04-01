@@ -42,7 +42,7 @@ export default {
     showSet(newVal, oldVal){
       let vm = this;
       if(newVal == false && vm.list.length == 0){
-        vm.$confirm('未设置快速回帖内容', '是否重置设置', {
+        vm.$confirm('未设置快速回帖内容，是否重置为默认设置？', '提示', {
           confirmButtonText: '是',
           cancelButtonText: '否',
           type: 'success',
