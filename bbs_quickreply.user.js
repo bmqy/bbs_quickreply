@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         论坛快捷回帖.dev
+// @name         论坛快捷回帖
 // @namespace    快捷回帖
 // @homepage     http://bmqy.net/
 // @version      1.1.0
