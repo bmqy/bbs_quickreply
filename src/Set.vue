@@ -1,6 +1,6 @@
 <template>
-  <div class="setBox" v-show="showSet">   
-    <el-card class="box-card">
+  <div class="setBox">   
+    <el-card class="box-card" shadow="never">
       <div slot="header" class="clearfix">
         <span>{{$app.getName()}}</span>
         <el-button style="float: right; padding: 3px 0" type="text" @click="closeSetBox"><i class="el-icon-circle-close"></i></el-button>        
@@ -34,7 +34,7 @@ export default {
   },
   props: {
     showSet: {
-      type: 'Boolean',
+      type: Boolean,
       default: false
     },
   },
@@ -89,24 +89,6 @@ export default {
 
 <style scoped lang="less">
   .setBox{
-    position: absolute;
-    bottom: 52px;
-    left: 0;
-    z-index: 999;
-    &::after{
-      content: "";
-      display: block;
-      position: absolute;
-      bottom: -4px;
-      right: 70px;
-      width: 6px;
-      height: 6px;
-      background-color: #fff;
-      border: 0 solid transparent;
-      border-right: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
-      transform: rotate(45deg);
-    }
   }
   .list {
     li{
@@ -132,7 +114,6 @@ export default {
     border-top:1px dashed #ccc;
   }
   .box-card {
-    width: 480px;
     .el-card__header {
       padding: 10px 20px;
       span{

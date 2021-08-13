@@ -7,6 +7,10 @@ module.exports = {
   entry: {
     app: './src/index.js'
   },
+  externals:{
+    'vue': 'Vue',
+    'element-ui': 'ElementUI',
+  },
   output: {
     filename: '[name].js',
     path: __dirname +'/dist/'
@@ -35,5 +39,8 @@ module.exports = {
     new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin(),
-  ]
+  ],
+  optimization:{
+    minimize: false, // 禁止压缩混淆源代码
+  }
 }

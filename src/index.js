@@ -1,6 +1,3 @@
-import Vue from 'vue';
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
 import App from './App.vue';
 import Set from './Set.vue';
 
@@ -51,7 +48,6 @@ Vue.prototype.$app = {
   },
 }
 
-Vue.use(ElementUI);
 Vue.component("set", Set);
 
 new Vue({
