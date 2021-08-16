@@ -5,7 +5,7 @@
           <div slot="label">            
               {{`${title}: `}}
           </div>
-        <el-select v-model="currentReply" placeholder="请选择">
+        <el-select v-model="currentReply" placeholder="请选择" @change="enterReply">
           <el-option v-for="(item, index) in list" :key="index" :label="item" :value="item"></el-option>
         </el-select>
       </el-form-item>
@@ -30,6 +30,8 @@
       return {
         list: [],
         currentReply: '',
+        hasFloatlayout: false, // 是否打开了弹层回复
+        hasEditor: false, // 是否打开了高级回复
         setShow: false,
       }
     },
@@ -54,14 +56,47 @@
       openSet() {
         this.setShow = !this.setShow;
       },
+      // 设置回复内容
+      enterReply(){
+        let vm = this;
+        if(vm.hasFloatlayout){
+          vm.enterPostReply();
+        } else if(vm.hasEditor) {
+          vm.enterEditorReply();
+        } else {
+          vm.enterFastPostReply();
+        }
+      },
+      // 设置回复框内容
+      enterPostReply(){
+        let vm = this;
+        let $postmessage = document.querySelector('#postmessage');
+        $postmessage.value = vm.currentReply;
+      },
+      // 设置快速回复框内容
+      enterFastPostReply(){
+        let vm = this;
+        let $fastpostmessage = document.querySelector('#fastpostmessage');
+        $fastpostmessage.style.background = '';
+        $fastpostmessage.value = vm.currentReply;
+      },
+      // 设置高级回复框内容
+      enterEditorReply(){
+        let vm = this;
+        let $editorIframe = document.querySelector('#e_iframe').contentWindow.document.body;
+        $editorIframe.style.background = '';
+        $editorIframe.innerHTML = vm.currentReply;
+      },
       // 绑定打开单独回帖面板事件
       bindFwinReplyOpen(){
         let vm = this;
         document.querySelector('body').addEventListener('click', (e)=>{
           if(e.target.className == 'fastre'){
+            vm.hasFloatlayout = false;
             setTimeout(() => {                
               let $floatlayout_reply = document.querySelector('#floatlayout_reply');
               $floatlayout_reply.insertBefore(vm.$el, $floatlayout_reply.childNodes[0]);
+              vm.hasFloatlayout = true;
             }, 2000);
           }
         }, true)
@@ -71,9 +106,11 @@
         let vm = this;
         document.querySelector('body').addEventListener('click', (e)=>{
           if(e.target.className == 'replyfast'){
+            vm.hasFloatlayout = false;
             setTimeout(() => {                
               let $floatlayout_reply = document.querySelector('#floatlayout_reply');
               $floatlayout_reply.insertBefore(vm.$el, $floatlayout_reply.childNodes[0]);
+              vm.hasFloatlayout = true;
             }, 2000);
           }
         }, true)
@@ -83,17 +120,30 @@
         let vm = this;
         document.querySelector('body').addEventListener('click', (e)=>{
           if(e.target.className == 'flbc'){
+            vm.hasFloatlayout = false;
             let $fastposteditor = document.querySelector('#fastposteditor');
             $fastposteditor.insertBefore(vm.$el, $fastposteditor.childNodes[0]);
           }            
         }, true)
+      },
+      // 检测是否是高级回复
+      checkEditor(){
+        this.hasEditor = document.querySelector('#e_iframe');
       }
     },
     mounted() {
+      this.checkEditor();
+      this.enterReply();
       this.bindFwinReplyOpen();
       this.bindFastReplyOpen();
       this.bindFwinReplyClose();
     },
+    watch: {
+      hasFloatlayout(n, o){
+        let vm = this;
+        if(n) vm.enterPostReply()
+      }
+    }
   }
 </script>
 

@@ -9,7 +9,7 @@ if($fastposteditor){
   $fastposteditor.insertBefore($appRoot, $fastposteditor.childNodes[0]);
 }
 if($postbox){  
-  $postbox.insertBefore($appRoot, $postbox.childNodes[0]);
+  $postbox.insertBefore($appRoot, $postbox.childNodes[4]);
 }
 
 Vue.prototype.$app = {
