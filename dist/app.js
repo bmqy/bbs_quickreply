@@ -678,9 +678,13 @@ render._withStripped = true
     // 设置快速回复框内容
     enterFastPostReply(){
       let vm = this;
-      let $fastpostmessage = document.querySelector('#fastpostmessage');
-      $fastpostmessage.style.background = '';
-      $fastpostmessage.value = vm.currentReply;
+      try{
+        let $fastpostmessage = document.querySelector('#fastpostmessage');
+        $fastpostmessage.style.background = '';
+        $fastpostmessage.value = vm.currentReply;
+      } catch(err){
+        console.log('请检查发帖权限！');
+      }
     },
     // 设置高级回复框内容
     enterEditorReply(){
@@ -693,7 +697,7 @@ render._withStripped = true
     fastreBindClick(){
       let vm = this;
       document.querySelector('body').addEventListener('click', (e)=>{
-        if(vm.fwin_replyLoading && e.target.className == 'fastre'){
+        if(e.target.className == 'fastre'){
           vm.fwin_replyLoaded = false;
         }
       }, true)
@@ -702,7 +706,7 @@ render._withStripped = true
     replyfastBindClick(){
       let vm = this;
       document.querySelector('body').addEventListener('click', (e)=>{
-        if(vm.fwin_replyLoading && e.target.className == 'replyfast'){
+        if(e.target.className == 'replyfast'){
           vm.fwin_replyLoaded = false;
         }
       }, true)
@@ -727,12 +731,13 @@ render._withStripped = true
         for (const mutation in mutations) {
           if (Object.hasOwnProperty.call(mutations, mutation)) {
             const element = mutations[mutation];
-            if(element.target.id=='fwin_content_reply' && element.type!='childList'){
-              console.log(element);
-              vm.fwin_replyLoading = true;
-              vm.fwin_replyLoaded = true;
-            } else {
-              vm.fwin_replyLoading = false;                
+            if(element.target.id=='fwin_content_reply' && element.type=='childList'){
+              //vm.fwin_replyLoaded = false;
+              //vm.$set(vm, 'fwin_replyLoaded', false);
+              if(element.addedNodes.length>0){
+                vm.fwin_replyLoaded = true;
+                //vm.$set(vm, 'fwin_replyLoaded', true);
+              }
             }
           }
         }
@@ -748,14 +753,16 @@ render._withStripped = true
     this.checkEditor();
     this.postReplyMutationObserver();
     this.enterReply();
-    this.fastreBindClick();
-    this.replyfastBindClick();
+    /* this.fastreBindClick();
+    this.replyfastBindClick(); */
     this.flbcBindClick();
   },
   watch: {
     // 监听楼层回复面板显示状态
     fwin_replyLoaded(n, o){
       let vm = this;
+      
+      console.log('jiazai wancheng', n);
       if(n){
         let $floatlayout_reply = document.querySelector('#floatlayout_reply');
         $floatlayout_reply.insertBefore(vm.$el, $floatlayout_reply.childNodes[0]);
