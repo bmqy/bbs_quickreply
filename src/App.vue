@@ -56,6 +56,12 @@
       openSet() {
         this.setShow = !this.setShow;
       },
+      // 移动快捷回复APP dom
+      moveApp(){
+        let vm = this;
+        let $floatlayout_reply = document.querySelector('#floatlayout_reply');
+        $floatlayout_reply.insertBefore(vm.$el, $floatlayout_reply.childNodes[0]);
+      },
       // 设置回复内容
       enterReply(){
         let vm = this;
@@ -93,11 +99,6 @@
         document.querySelector('body').addEventListener('click', (e)=>{
           if(e.target.className == 'fastre'){
             vm.hasFloatlayout = false;
-            setTimeout(() => {                
-              let $floatlayout_reply = document.querySelector('#floatlayout_reply');
-              $floatlayout_reply.insertBefore(vm.$el, $floatlayout_reply.childNodes[0]);
-              vm.hasFloatlayout = true;
-            }, 2000);
           }
         }, true)
       },
@@ -107,11 +108,6 @@
         document.querySelector('body').addEventListener('click', (e)=>{
           if(e.target.className == 'replyfast'){
             vm.hasFloatlayout = false;
-            setTimeout(() => {                
-              let $floatlayout_reply = document.querySelector('#floatlayout_reply');
-              $floatlayout_reply.insertBefore(vm.$el, $floatlayout_reply.childNodes[0]);
-              vm.hasFloatlayout = true;
-            }, 2000);
           }
         }, true)
       },
@@ -120,19 +116,39 @@
         let vm = this;
         document.querySelector('body').addEventListener('click', (e)=>{
           if(e.target.className == 'flbc'){
-            vm.hasFloatlayout = false;
-            let $fastposteditor = document.querySelector('#fastposteditor');
-            $fastposteditor.insertBefore(vm.$el, $fastposteditor.childNodes[0]);
+            vm.hasFloatlayout = false;            
           }            
         }, true)
       },
       // 检测是否是高级回复
       checkEditor(){
         this.hasEditor = document.querySelector('#e_iframe');
+      },
+      // 监听回复弹层加载完成
+      postReplyMutationObserver(){
+        let vm = this;
+        let mos =  new MutationObserver(function(mutations, observer){
+          let targetId = 'floatlayout_reply';
+          for (const mutation in mutations) {
+            if (Object.hasOwnProperty.call(mutations, mutation)) {
+              const element = mutations[mutation];
+              if(element.target.id == targetId){
+                console.log(mutations);
+                vm.hasFloatlayout = true;
+              }
+            }
+          }
+        });
+        mos.observe(document.querySelector('#append_parent'), { 
+          attributes: true,
+          childList: true,
+          subtree: true 
+        });
       }
     },
     mounted() {
       this.checkEditor();
+      this.postReplyMutationObserver();
       this.enterReply();
       this.bindFwinReplyOpen();
       this.bindFastReplyOpen();
@@ -141,7 +157,14 @@
     watch: {
       hasFloatlayout(n, o){
         let vm = this;
-        if(n) vm.enterPostReply()
+        if(n){
+          let $floatlayout_reply = document.querySelector('#floatlayout_reply');
+          $floatlayout_reply.insertBefore(vm.$el, $floatlayout_reply.childNodes[0]);
+          vm.enterPostReply();
+        } else {
+          let $fastposteditor = document.querySelector('#fastposteditor');
+          $fastposteditor.insertBefore(vm.$el, $fastposteditor.childNodes[0]);
+        }
       }
     }
   }
