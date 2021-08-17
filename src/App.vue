@@ -1,5 +1,6 @@
 <template>
   <div class="quickReplyBox">
+    <transition name="el-fade-in-linear">
     <el-form :inline="true" size="small" class="demo-form-inline">
       <el-form-item>
           <div slot="label">            
@@ -12,7 +13,7 @@
       <el-form-item>
           <el-button type="primary" class="btnQuickReplySet" icon="el-icon-s-tools" @click="openSet" :title="tips"></el-button>
       </el-form-item>
-    </el-form>
+    </el-form></transition>
 
     <el-dialog
       :visible.sync="setShow"
@@ -30,7 +31,8 @@
       return {
         list: [],
         currentReply: '',
-        hasFloatlayout: false, // 是否打开了弹层回复
+        fwin_replyLoaded: false, // 弹层回复面板打开状态
+        fwin_replyLoading: false, // 弹层回复面板加载状态
         hasEditor: false, // 是否打开了高级回复
         setShow: false,
       }
@@ -47,25 +49,19 @@
       }
     },
     methods: {
-      // 获取自定义回复
+      // 获取APP自定义回复
       getList(){
         this.list = this.$app.getStorage();
         this.currentReply = this.list[0];
       },
-      // 打开设置面板
+      // 打开APP设置面板
       openSet() {
         this.setShow = !this.setShow;
-      },
-      // 移动快捷回复APP dom
-      moveApp(){
-        let vm = this;
-        let $floatlayout_reply = document.querySelector('#floatlayout_reply');
-        $floatlayout_reply.insertBefore(vm.$el, $floatlayout_reply.childNodes[0]);
       },
       // 设置回复内容
       enterReply(){
         let vm = this;
-        if(vm.hasFloatlayout){
+        if(vm.fwin_replyLoaded){
           vm.enterPostReply();
         } else if(vm.hasEditor) {
           vm.enterEditorReply();
@@ -73,7 +69,7 @@
           vm.enterFastPostReply();
         }
       },
-      // 设置回复框内容
+      // 设置楼层/右下角快速回复框内容
       enterPostReply(){
         let vm = this;
         let $postmessage = document.querySelector('#postmessage');
@@ -93,30 +89,30 @@
         $editorIframe.style.background = '';
         $editorIframe.innerHTML = vm.currentReply;
       },
-      // 绑定打开单独回帖面板事件
-      bindFwinReplyOpen(){
+      // 点击楼层回复
+      fastreBindClick(){
         let vm = this;
         document.querySelector('body').addEventListener('click', (e)=>{
-          if(e.target.className == 'fastre'){
-            vm.hasFloatlayout = false;
+          if(vm.fwin_replyLoading && e.target.className == 'fastre'){
+            vm.fwin_replyLoaded = false;
           }
         }, true)
       },
-      // 绑定打开快速回帖面板事件
-      bindFastReplyOpen(){
+      // 点击右下角快速回复按钮
+      replyfastBindClick(){
         let vm = this;
         document.querySelector('body').addEventListener('click', (e)=>{
-          if(e.target.className == 'replyfast'){
-            vm.hasFloatlayout = false;
+          if(vm.fwin_replyLoading && e.target.className == 'replyfast'){
+            vm.fwin_replyLoaded = false;
           }
         }, true)
       },
-      // 绑定关闭单独回帖面板事件
-      bindFwinReplyClose(){        
+      // 点击楼层/右下角快速回复面板关闭按钮
+      flbcBindClick(){        
         let vm = this;
         document.querySelector('body').addEventListener('click', (e)=>{
           if(e.target.className == 'flbc'){
-            vm.hasFloatlayout = false;            
+            vm.fwin_replyLoaded = false;            
           }            
         }, true)
       },
@@ -124,17 +120,19 @@
       checkEditor(){
         this.hasEditor = document.querySelector('#e_iframe');
       },
-      // 监听回复弹层加载完成
+      // 监听楼层回复面板加载完成
       postReplyMutationObserver(){
         let vm = this;
         let mos =  new MutationObserver(function(mutations, observer){
-          let targetId = 'floatlayout_reply';
           for (const mutation in mutations) {
             if (Object.hasOwnProperty.call(mutations, mutation)) {
               const element = mutations[mutation];
-              if(element.target.id == targetId){
-                console.log(mutations);
-                vm.hasFloatlayout = true;
+              if(element.target.id=='fwin_content_reply' && element.type!='childList'){
+                console.log(element);
+                vm.fwin_replyLoading = true;
+                vm.fwin_replyLoaded = true;
+              } else {
+                vm.fwin_replyLoading = false;                
               }
             }
           }
@@ -150,12 +148,13 @@
       this.checkEditor();
       this.postReplyMutationObserver();
       this.enterReply();
-      this.bindFwinReplyOpen();
-      this.bindFastReplyOpen();
-      this.bindFwinReplyClose();
+      this.fastreBindClick();
+      this.replyfastBindClick();
+      this.flbcBindClick();
     },
     watch: {
-      hasFloatlayout(n, o){
+      // 监听楼层回复面板显示状态
+      fwin_replyLoaded(n, o){
         let vm = this;
         if(n){
           let $floatlayout_reply = document.querySelector('#floatlayout_reply');

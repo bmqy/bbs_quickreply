@@ -501,60 +501,67 @@ var render = function() {
     { staticClass: "quickReplyBox" },
     [
       _c(
-        "el-form",
-        {
-          staticClass: "demo-form-inline",
-          attrs: { inline: true, size: "small" }
-        },
+        "transition",
+        { attrs: { name: "el-fade-in-linear" } },
         [
           _c(
-            "el-form-item",
+            "el-form",
+            {
+              staticClass: "demo-form-inline",
+              attrs: { inline: true, size: "small" }
+            },
             [
-              _c("div", { attrs: { slot: "label" }, slot: "label" }, [
-                _vm._v(
-                  "            \n            " +
-                    _vm._s(_vm.title + ": ") +
-                    "\n        "
-                )
-              ]),
+              _c(
+                "el-form-item",
+                [
+                  _c("div", { attrs: { slot: "label" }, slot: "label" }, [
+                    _vm._v(
+                      "            \n            " +
+                        _vm._s(_vm.title + ": ") +
+                        "\n        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "el-select",
+                    {
+                      attrs: { placeholder: "请选择" },
+                      on: { change: _vm.enterReply },
+                      model: {
+                        value: _vm.currentReply,
+                        callback: function($$v) {
+                          _vm.currentReply = $$v
+                        },
+                        expression: "currentReply"
+                      }
+                    },
+                    _vm._l(_vm.list, function(item, index) {
+                      return _c("el-option", {
+                        key: index,
+                        attrs: { label: item, value: item }
+                      })
+                    }),
+                    1
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
-                "el-select",
-                {
-                  attrs: { placeholder: "请选择" },
-                  on: { change: _vm.enterReply },
-                  model: {
-                    value: _vm.currentReply,
-                    callback: function($$v) {
-                      _vm.currentReply = $$v
+                "el-form-item",
+                [
+                  _c("el-button", {
+                    staticClass: "btnQuickReplySet",
+                    attrs: {
+                      type: "primary",
+                      icon: "el-icon-s-tools",
+                      title: _vm.tips
                     },
-                    expression: "currentReply"
-                  }
-                },
-                _vm._l(_vm.list, function(item, index) {
-                  return _c("el-option", {
-                    key: index,
-                    attrs: { label: item, value: item }
+                    on: { click: _vm.openSet }
                   })
-                }),
+                ],
                 1
               )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            [
-              _c("el-button", {
-                staticClass: "btnQuickReplySet",
-                attrs: {
-                  type: "primary",
-                  icon: "el-icon-s-tools",
-                  title: _vm.tips
-                },
-                on: { click: _vm.openSet }
-              })
             ],
             1
           )
@@ -617,13 +624,15 @@ render._withStripped = true
 //
 //
 //
+//
 
 /* harmony default export */ const Appvue_type_script_lang_js_ = ({
   data() {
     return {
       list: [],
       currentReply: '',
-      hasFloatlayout: false, // 是否打开了弹层回复
+      fwin_replyLoaded: false, // 弹层回复面板打开状态
+      fwin_replyLoading: false, // 弹层回复面板加载状态
       hasEditor: false, // 是否打开了高级回复
       setShow: false,
     }
@@ -640,19 +649,19 @@ render._withStripped = true
     }
   },
   methods: {
-    // 获取自定义回复
+    // 获取APP自定义回复
     getList(){
       this.list = this.$app.getStorage();
       this.currentReply = this.list[0];
     },
-    // 打开设置面板
+    // 打开APP设置面板
     openSet() {
       this.setShow = !this.setShow;
     },
     // 设置回复内容
     enterReply(){
       let vm = this;
-      if(vm.hasFloatlayout){
+      if(vm.fwin_replyLoaded){
         vm.enterPostReply();
       } else if(vm.hasEditor) {
         vm.enterEditorReply();
@@ -660,7 +669,7 @@ render._withStripped = true
         vm.enterFastPostReply();
       }
     },
-    // 设置回复框内容
+    // 设置楼层/右下角快速回复框内容
     enterPostReply(){
       let vm = this;
       let $postmessage = document.querySelector('#postmessage');
@@ -680,61 +689,81 @@ render._withStripped = true
       $editorIframe.style.background = '';
       $editorIframe.innerHTML = vm.currentReply;
     },
-    // 绑定打开单独回帖面板事件
-    bindFwinReplyOpen(){
+    // 点击楼层回复
+    fastreBindClick(){
       let vm = this;
       document.querySelector('body').addEventListener('click', (e)=>{
-        if(e.target.className == 'fastre'){
-          vm.hasFloatlayout = false;
-          setTimeout(() => {                
-            let $floatlayout_reply = document.querySelector('#floatlayout_reply');
-            $floatlayout_reply.insertBefore(vm.$el, $floatlayout_reply.childNodes[0]);
-            vm.hasFloatlayout = true;
-          }, 2000);
+        if(vm.fwin_replyLoading && e.target.className == 'fastre'){
+          vm.fwin_replyLoaded = false;
         }
       }, true)
     },
-    // 绑定打开快速回帖面板事件
-    bindFastReplyOpen(){
+    // 点击右下角快速回复按钮
+    replyfastBindClick(){
       let vm = this;
       document.querySelector('body').addEventListener('click', (e)=>{
-        if(e.target.className == 'replyfast'){
-          vm.hasFloatlayout = false;
-          setTimeout(() => {                
-            let $floatlayout_reply = document.querySelector('#floatlayout_reply');
-            $floatlayout_reply.insertBefore(vm.$el, $floatlayout_reply.childNodes[0]);
-            vm.hasFloatlayout = true;
-          }, 2000);
+        if(vm.fwin_replyLoading && e.target.className == 'replyfast'){
+          vm.fwin_replyLoaded = false;
         }
       }, true)
     },
-    // 绑定关闭单独回帖面板事件
-    bindFwinReplyClose(){        
+    // 点击楼层/右下角快速回复面板关闭按钮
+    flbcBindClick(){        
       let vm = this;
       document.querySelector('body').addEventListener('click', (e)=>{
         if(e.target.className == 'flbc'){
-          vm.hasFloatlayout = false;
-          let $fastposteditor = document.querySelector('#fastposteditor');
-          $fastposteditor.insertBefore(vm.$el, $fastposteditor.childNodes[0]);
+          vm.fwin_replyLoaded = false;            
         }            
       }, true)
     },
     // 检测是否是高级回复
     checkEditor(){
       this.hasEditor = document.querySelector('#e_iframe');
+    },
+    // 监听楼层回复面板加载完成
+    postReplyMutationObserver(){
+      let vm = this;
+      let mos =  new MutationObserver(function(mutations, observer){
+        for (const mutation in mutations) {
+          if (Object.hasOwnProperty.call(mutations, mutation)) {
+            const element = mutations[mutation];
+            if(element.target.id=='fwin_content_reply' && element.type!='childList'){
+              console.log(element);
+              vm.fwin_replyLoading = true;
+              vm.fwin_replyLoaded = true;
+            } else {
+              vm.fwin_replyLoading = false;                
+            }
+          }
+        }
+      });
+      mos.observe(document.querySelector('#append_parent'), { 
+        attributes: true,
+        childList: true,
+        subtree: true 
+      });
     }
   },
   mounted() {
     this.checkEditor();
+    this.postReplyMutationObserver();
     this.enterReply();
-    this.bindFwinReplyOpen();
-    this.bindFastReplyOpen();
-    this.bindFwinReplyClose();
+    this.fastreBindClick();
+    this.replyfastBindClick();
+    this.flbcBindClick();
   },
   watch: {
-    hasFloatlayout(n, o){
+    // 监听楼层回复面板显示状态
+    fwin_replyLoaded(n, o){
       let vm = this;
-      if(n) vm.enterPostReply()
+      if(n){
+        let $floatlayout_reply = document.querySelector('#floatlayout_reply');
+        $floatlayout_reply.insertBefore(vm.$el, $floatlayout_reply.childNodes[0]);
+        vm.enterPostReply();
+      } else {
+        let $fastposteditor = document.querySelector('#fastposteditor');
+        $fastposteditor.insertBefore(vm.$el, $fastposteditor.childNodes[0]);
+      }
     }
   }
 });
