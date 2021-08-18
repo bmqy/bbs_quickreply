@@ -34,6 +34,7 @@
         fwin_replyLoaded: false, // 弹层回复面板打开状态
         fwin_replyLoading: false, // 弹层回复面板加载状态
         hasEditor: false, // 是否打开了高级回复
+        lastClickElemet: '', // 最后点击的元素
         setShow: false,
       }
     },
@@ -97,7 +98,9 @@
       fastreBindClick(){
         let vm = this;
         document.querySelector('body').addEventListener('click', (e)=>{
-          if(e.target.className == 'fastre'){
+          let theElement = `fastre&${e.target.href}`;
+          if(vm.lastClickElemet!=theElement && e.target.className == 'fastre'){
+            vm.lastClickElemet = theElement;
             vm.fwin_replyLoaded = false;
           }
         }, true)
@@ -106,7 +109,9 @@
       replyfastBindClick(){
         let vm = this;
         document.querySelector('body').addEventListener('click', (e)=>{
-          if(e.target.className == 'replyfast'){
+          let theElement = `replyfast&${e.target.href}`;
+          if(vm.lastClickElemet!=theElement && e.target.className == 'replyfast'){
+            vm.lastClickElemet = theElement;
             vm.fwin_replyLoaded = false;
           }
         }, true)
@@ -115,7 +120,9 @@
       flbcBindClick(){        
         let vm = this;
         document.querySelector('body').addEventListener('click', (e)=>{
-          if(e.target.className == 'flbc'){
+          let theElement = `flbc&${e.target.href}`;
+          if(vm.lastClickElemet!=theElement && e.target.className == 'flbc'){
+            vm.lastClickElemet = theElement;
             vm.fwin_replyLoaded = false;            
           }            
         }, true)
@@ -131,13 +138,9 @@
           for (const mutation in mutations) {
             if (Object.hasOwnProperty.call(mutations, mutation)) {
               const element = mutations[mutation];
-              if(element.target.id=='fwin_content_reply' && element.type=='childList'){
-                //vm.fwin_replyLoaded = false;
-                //vm.$set(vm, 'fwin_replyLoaded', false);
-                if(element.addedNodes.length>0){
-                  vm.fwin_replyLoaded = true;
-                  //vm.$set(vm, 'fwin_replyLoaded', true);
-                }
+              if(element.target.id=='subjecthide'){
+                console.log(element);
+                vm.fwin_replyLoaded = true;
               }
             }
           }
@@ -153,8 +156,8 @@
       this.checkEditor();
       this.postReplyMutationObserver();
       this.enterReply();
-      /* this.fastreBindClick();
-      this.replyfastBindClick(); */
+      this.fastreBindClick();
+      this.replyfastBindClick();
       this.flbcBindClick();
     },
     watch: {
