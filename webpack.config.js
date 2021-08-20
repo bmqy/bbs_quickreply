@@ -10,6 +10,7 @@ module.exports = {
   externals:{
     'vue': 'Vue',
     'element-ui': 'ElementUI',
+    'av': 'AV',
   },
   output: {
     filename: '[name].js',

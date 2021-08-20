@@ -1,15 +1,21 @@
 import App from './App.vue';
 import Set from './Set.vue';
+import {getSystemReply} from './api.js'
 
 const $fastposteditor = document.querySelector('#fastposteditor');
 const $postbox = document.querySelector('#postbox');
 const $appRoot = document.createElement('div');
+
 $appRoot.id = 'app';
 if($fastposteditor){  
   $fastposteditor.insertBefore($appRoot, $fastposteditor.childNodes[0]);
 }
 if($postbox){  
   $postbox.insertBefore($appRoot, $postbox.childNodes[4]);
+}
+
+Vue.prototype.$api = {
+  getSystemReply
 }
 
 Vue.prototype.$app = {
@@ -35,7 +41,7 @@ Vue.prototype.$app = {
       return GM_getValue('replysCustom');
     }
 
-    return this.defaultReply;
+    return [];
   },  
   getName: function() {
     return GM_info['script']['name'];

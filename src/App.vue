@@ -7,7 +7,7 @@
               {{`${title}: `}}
           </div>
         <el-select v-model="currentReply" placeholder="请选择" @change="enterReply">
-          <el-option v-for="(item, index) in list" :key="index" :label="item" :value="item"></el-option>
+          <el-option v-for="(item, index) in list" :key="index" :label="item.content" :value="item.content"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -51,8 +51,10 @@
     },
     methods: {
       // 获取APP自定义回复
-      getList(){
-        this.list = this.$app.getStorage();
+      async getList(){
+        let list = await this.$api.getSystemReply();
+        console.log(list[0].attributes);
+        this.list = this.$app.getStorage().length>0 ? this.$app.getStorage() : list;
         this.currentReply = this.list[0];
       },
       // 打开APP设置面板
@@ -139,7 +141,6 @@
             if (Object.hasOwnProperty.call(mutations, mutation)) {
               const element = mutations[mutation];
               if(element.target.id=='subjecthide'){
-                console.log(element);
                 vm.fwin_replyLoaded = true;
               }
             }
@@ -165,7 +166,6 @@
       fwin_replyLoaded(n, o){
         let vm = this;
         
-        console.log('jiazai wancheng', n);
         if(n){
           let $floatlayout_reply = document.querySelector('#floatlayout_reply');
           $floatlayout_reply.insertBefore(vm.$el, $floatlayout_reply.childNodes[0]);
