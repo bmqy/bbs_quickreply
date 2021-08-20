@@ -53,7 +53,6 @@
       // 获取APP自定义回复
       async getList(){
         let list = await this.$api.getSystemReply();
-        console.log(list[0].attributes);
         this.list = this.$app.getStorage().length>0 ? this.$app.getStorage() : list;
         this.currentReply = this.list[0];
       },

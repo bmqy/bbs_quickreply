@@ -5,12 +5,29 @@
         <span>{{$app.getName()}}</span>
         <el-button style="float: right; padding: 3px 0" type="text" @click="closeSetBox"><i class="el-icon-circle-close"></i></el-button>        
       </div>
-      <ul class="list" v-if="list.length > 0">
-        <li v-for="(item, index) in list" :key="index">
-          {{`${index+1}、${list[index]}`}} <el-button type="danger" size="mini" icon="el-icon-delete" circle @click="delReply(index)"></el-button>
-        </li>
-      </ul>
-      <p v-if="list.length == 0" class="tips">未设置快速回帖内容!</p>
+      <u-row gutter="16">
+        <u-col span="4">
+          <ul class="list" v-if="list.length > 0">
+            <li v-for="(item, index) in list" :key="index">
+              {{`${index+1}、${list[index]}`}} <el-button type="danger" size="mini" icon="el-icon-delete" circle @click="delReply(index)"></el-button>
+            </li>
+          </ul>
+          <p v-if="list.length == 0" class="tips">未设置快速回帖内容!</p>
+        </u-col>
+        <u-col span="8">
+          <ul class="list" v-if="list.length > 0">
+            <li v-for="(item, index) in list" :key="index">
+              {{`${index+1}、${list[index]}`}} <el-button type="danger" size="mini" icon="el-icon-delete" circle @click="delReply(index)"></el-button>
+            </li>
+          </ul>
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="10">
+          </el-pagination>
+        </u-col>
+      </u-row>
+      
       <div class="addReplyBox">          
         <el-input placeholder="请输入新的回复内容" v-model="newReply" clearable class="input-with-select">
           <el-button slot="append" icon="el-icon-s-promotion" @click="addReply"></el-button>
