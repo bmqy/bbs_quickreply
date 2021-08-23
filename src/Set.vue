@@ -1,32 +1,52 @@
 <template>
   <div class="setBox">   
-    <el-card class="box-card" shadow="never">
+    <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>{{$app.getName()}}</span>
         <el-button style="float: right; padding: 3px 0" type="text" @click="closeSetBox"><i class="el-icon-circle-close"></i></el-button>        
       </div>
-      <u-row gutter="16">
-        <u-col span="4">
-          <ul class="list" v-if="list.length > 0">
-            <li v-for="(item, index) in list" :key="index">
-              {{`${index+1}、${list[index]}`}} <el-button type="danger" size="mini" icon="el-icon-delete" circle @click="delReply(index)"></el-button>
-            </li>
-          </ul>
-          <p v-if="list.length == 0" class="tips">未设置快速回帖内容!</p>
-        </u-col>
-        <u-col span="8">
-          <ul class="list" v-if="list.length > 0">
-            <li v-for="(item, index) in list" :key="index">
-              {{`${index+1}、${list[index]}`}} <el-button type="danger" size="mini" icon="el-icon-delete" circle @click="delReply(index)"></el-button>
-            </li>
-          </ul>
-          <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="10">
-          </el-pagination>
-        </u-col>
-      </u-row>
+      <el-row gutter="30">
+        <el-col span="8">
+          <el-card class="box-card" shadow="never">
+            <div slot="header" class="clearfix">
+              <span>我添加的</span>
+            </div>
+            <ul class="list" v-if="list.length > 0">
+              <li v-for="(item, index) in list" :key="index">
+                {{`${index+1}、${item.content}`}}
+                <div class="list-right">                    
+                  <el-button type="success" size="mini" icon="el-icon-s-promotion" circle @click="delReply(index)"></el-button>
+                  <el-button type="danger" size="mini" icon="el-icon-minus" circle @click="delReply(index)"></el-button>
+                </div>
+              </li>
+            </ul>
+            <p v-if="list.length == 0" class="tips">未设置快速回帖内容!</p>
+          </el-card>
+          
+        </el-col>
+        <el-col span="16">
+          <el-card class="box-card" shadow="never">
+            <div slot="header" class="clearfix">
+              <span>网友分享</span>
+            </div>
+            <ul class="list" v-if="list.length > 0">
+              <li v-for="(item, index) in list" :key="index">
+                {{`${index+1}、${item.content}`}}
+                <div class="list-right">                    
+                  <el-button type="success" size="mini" icon="el-icon-thumb" circle @click="delReply(index)"></el-button>
+                  <el-button type="danger" size="mini" icon="el-icon-plus" circle @click="delReply(index)"></el-button>
+                </div>
+              </li>
+            </ul>
+            <el-pagination
+              background
+              layout="prev, pager, next"
+              :page-size=2
+              :total="4">
+            </el-pagination>
+          </el-card>
+        </el-col>
+      </el-row>
       
       <div class="addReplyBox">          
         <el-input placeholder="请输入新的回复内容" v-model="newReply" clearable class="input-with-select">
@@ -79,8 +99,10 @@ export default {
     this.getList()
   },
   methods: {
-    getList(){
-      this.list = this.$app.getStorage();
+    async getList(){
+      let list = await this.$api.getSystemReply();
+      this.list = this.$app.getStorage().length>0 ? this.$app.getStorage() : list;
+      this.currentReply = this.list[0];
     },
     closeSetBox(){
       this.$emit('update:showSet', false);
@@ -112,12 +134,12 @@ export default {
       margin-bottom: 10px;
       font-size: 14px;
       line-height: 30px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
       &:hover{
         background-color: #f5f5f5;
-      }
-      .el-button{
-        float: right;
-      }
+      }   
     }
   }
   .tips{

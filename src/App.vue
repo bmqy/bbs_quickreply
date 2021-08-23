@@ -18,6 +18,7 @@
     <el-dialog
       :visible.sync="setShow"
       width="90%"
+      :show-close=false
       append-to-body
       center> 
       <set />
@@ -181,6 +182,9 @@
 <style scoped lang="less">
   .quickReplyBox{    
     position: relative;
+  }
+  /deep/ .el-dialog__header{
+    display: none;
   }
   .el-form-item__label div{
     font-weight: bold;
