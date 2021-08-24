@@ -14,9 +14,13 @@
             <ul class="list" v-if="list.length > 0">
               <li v-for="(item, index) in list" :key="index">
                 {{`${index+1}、${item.content}`}}
-                <div class="list-right">                    
-                  <el-button type="success" size="mini" icon="el-icon-s-promotion" circle @click="delReply(index)"></el-button>
-                  <el-button type="danger" size="mini" icon="el-icon-minus" circle @click="delReply(index)"></el-button>
+                <div class="list-right">            
+                  <el-tooltip class="item" effect="dark" content="分享给大家用" placement="top-start">
+                    <el-button type="success" size="mini" icon="el-icon-s-promotion" circle @click="delReply(index)"></el-button>
+                  </el-tooltip>
+                  <el-tooltip class="item" effect="dark" content="从我的回帖中移除" placement="top-start">
+                    <el-button type="danger" size="mini" icon="el-icon-minus" circle @click="delReply(index)"></el-button>
+                  </el-tooltip>
                 </div>
               </li>
             </ul>
@@ -32,9 +36,13 @@
             <ul class="list" v-if="list.length > 0">
               <li v-for="(item, index) in list" :key="index">
                 {{`${index+1}、${item.content}`}}
-                <div class="list-right">                    
-                  <el-button type="success" size="mini" icon="el-icon-thumb" circle @click="delReply(index)"></el-button>
-                  <el-button type="danger" size="mini" icon="el-icon-plus" circle @click="delReply(index)"></el-button>
+                <div class="list-right">
+                  <el-tooltip class="item" effect="dark" content="这句不错，给个赞" placement="top-start">
+                    <el-button type="success" size="mini" icon="el-icon-thumb" circle @click="delReply(index)"></el-button>
+                  </el-tooltip>
+                  <el-tooltip class="item" effect="dark" content="收藏进我的回帖" placement="top-start">
+                    <el-button type="danger" size="mini" icon="el-icon-star-off" circle @click="delReply(index)"></el-button>
+                  </el-tooltip>
                 </div>
               </li>
             </ul>
@@ -50,7 +58,7 @@
       
       <div class="addReplyBox">          
         <el-input placeholder="请输入新的回复内容" v-model="newReply" clearable class="input-with-select">
-          <el-button slot="append" icon="el-icon-s-promotion" @click="addReply"></el-button>
+          <el-button slot="append" icon="el-icon-plus" @click="addReply"></el-button>
         </el-input>
       </div>
       <div>
