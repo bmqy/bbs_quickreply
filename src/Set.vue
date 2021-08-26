@@ -11,20 +11,20 @@
             <div slot="header" class="clearfix">
               <span>我添加的</span>
             </div>
-            <ul class="list" v-if="list.length > 0">
-              <li v-for="(item, index) in list" :key="index">
+            <ul class="list" v-if="mylist.length > 0">
+              <li v-for="(item, index) in mylist" :key="index">
                 {{`${index+1}、${item.content}`}}
                 <div class="list-right">            
-                  <el-tooltip class="item" effect="dark" content="分享给大家用" placement="top-start">
+                  <el-tooltip class="item" effect="dark" content="分享它" placement="top-start">
                     <el-button type="success" size="mini" icon="el-icon-s-promotion" circle @click="delReply(index)"></el-button>
                   </el-tooltip>
-                  <el-tooltip class="item" effect="dark" content="从我的回帖中移除" placement="top-start">
+                  <el-tooltip class="item" effect="dark" content="移除" placement="top-start">
                     <el-button type="danger" size="mini" icon="el-icon-minus" circle @click="delReply(index)"></el-button>
                   </el-tooltip>
                 </div>
               </li>
             </ul>
-            <p v-if="list.length == 0" class="tips">未设置快速回帖内容!</p>
+            <p v-if="mylist.length == 0" class="tips">未设置快速回帖内容!</p>
           </el-card>
           
         </el-col>
@@ -33,14 +33,14 @@
             <div slot="header" class="clearfix">
               <span>网友分享</span>
             </div>
-            <ul class="list" v-if="list.length > 0">
-              <li v-for="(item, index) in list" :key="index">
+            <ul class="list" v-if="systemlist.length > 0">
+              <li v-for="(item, index) in systemlist" :key="index">
                 {{`${index+1}、${item.content}`}}
                 <div class="list-right">
-                  <el-tooltip class="item" effect="dark" content="这句不错，给个赞" placement="top-start">
+                  <el-tooltip class="item" effect="dark" content="给个赞" placement="top-start">
                     <el-button type="success" size="mini" icon="el-icon-thumb" circle @click="delReply(index)"></el-button>
                   </el-tooltip>
-                  <el-tooltip class="item" effect="dark" content="收藏进我的回帖" placement="top-start">
+                  <el-tooltip class="item" effect="dark" content="收藏" placement="top-start">
                     <el-button type="danger" size="mini" icon="el-icon-star-off" circle @click="delReply(index)"></el-button>
                   </el-tooltip>
                 </div>
@@ -72,7 +72,8 @@
 export default {
   data(){
     return {
-      list: [],
+      mylist: [],
+      systemlist: [],
       showAddBox: false,
       newReply: '',
     }
@@ -86,13 +87,13 @@ export default {
   watch: {
     showSet(newVal, oldVal){
       let vm = this;
-      if(newVal == false && vm.list.length == 0){
+      if(newVal == false && vm.mylist.length == 0){
         vm.$confirm('未设置快速回帖内容，是否重置为默认设置？', '提示', {
           confirmButtonText: '是',
           cancelButtonText: '否',
           type: 'success',
         }).then(action => {
-          vm.list = vm.$app.defaultReply;
+          vm.mylist = vm.$app.defaultReply;
         }).catch(() => {
           vm.$message.info('请输入自定义回复内容');
         });
@@ -104,30 +105,33 @@ export default {
     }
   },
   created() {
-    this.getList()
+    this.getMyList()
+    this.getSystemList()
   },
   methods: {
-    async getList(){
+    getMyList(){
+      this.mylist = this.$app.getStorage().length>0 ? this.$app.getStorage() : [];
+    },
+    async getSystemList(){
       let list = await this.$api.getSystemReply();
-      this.list = this.$app.getStorage().length>0 ? this.$app.getStorage() : list;
-      this.currentReply = this.list[0];
+      this.systemlist = list.length>0 ? list : [];
     },
     closeSetBox(){
       this.$emit('update:showSet', false);
     },
     delReply(index){
-      this.list.splice(index, 1);
+      this.mylist.splice(index, 1);
     },
     addReply(){
       if(this.newReply == ''){
         this.$message.error('回复内容不能为空！');
         return false;
       }
-      if(this.list.indexOf(this.newReply) != -1){
+      if(this.mylist.indexOf(this.newReply) != -1){
         this.$message.error('已存在相同内容！');
         return false;
       }
-      this.list.push(this.newReply);
+      this.mylist.push(this.newReply);
       this.newReply = ''
     }
   },
