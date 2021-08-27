@@ -1,27 +1,32 @@
 <template>
   <div class="quickReplyBox">
     <transition name="el-fade-in-linear">
-    <el-form :inline="true" size="small" class="demo-form-inline">
-      <el-form-item>
-          <div slot="label">            
-              {{`${title}: `}}
-          </div>
-        <el-select v-model="currentReply" placeholder="请选择" @change="enterReply">
-          <el-option v-for="(item, index) in list" :key="index" :label="item.content" :value="item.content"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item>
-          <el-button type="primary" class="btnQuickReplySet" icon="el-icon-s-tools" @click="openSet" :title="tips"></el-button>
-      </el-form-item>
-    </el-form></transition>
+      <el-form :inline="true" size="small" class="demo-form-inline">
+        <el-form-item>
+            <div slot="label">            
+                {{`${title}: `}}
+            </div>
+          <el-select v-model="currentReply" placeholder="请选择" @change="enterReply">
+            <el-option v-for="(item, index) in list" :key="index" :label="item" :value="item.content"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" class="btnQuickReplySet" icon="el-icon-s-tools" @click="openSet" :title="tips"></el-button>
+        </el-form-item>
+      </el-form>
+    </transition>
 
     <el-dialog
       :visible.sync="setShow"
+      :title=$app.getName()
       width="90%"
-      :show-close=false
-      append-to-body
-      center> 
+      :show-close=true
+      append-to-body> 
       <set />
+      
+      <div slot="footer">
+        <span class="app-dialog-foot">{{`ver: ${$app.getVersion()}`}}</span>
+      </div>
     </el-dialog>
 
   </div>
@@ -42,20 +47,11 @@
     created() {
       this.getList();
     },
-    computed: {
-      title(){
-        return this.$app.getNameSpace();
-      },
-      tips(){
-        return `${this.$app.getNameSpace()}设置`;
-      }
-    },
     methods: {
       // 获取APP自定义回复
       async getList(){
-        let list = await this.$api.getSystemReply();
-        this.list = this.$app.getStorage().length>0 ? this.$app.getStorage() : list;
-        this.currentReply = this.list[0];
+        this.list = this.$app.getStorage().length>0 ? this.$app.getStorage() : [];
+        this.currentReply = this.list[0] || '';
       },
       // 打开APP设置面板
       openSet() {
@@ -153,6 +149,14 @@
         });
       }
     },
+    computed: {
+      title(){
+        return this.$app.getNameSpace();
+      },
+      tips(){
+        return `${this.$app.getNameSpace()}设置`;
+      }
+    },
     mounted() {
       this.checkEditor();
       this.postReplyMutationObserver();
@@ -183,8 +187,12 @@
   .quickReplyBox{    
     position: relative;
   }
-  /deep/ .el-dialog__header{
-    display: none;
+  /deep/ .el-dialog__body {
+    padding: 0;
+  }
+  .app-dialog-foot{
+    color: #909399;
+    font-size: 14px;
   }
   .el-form-item__label div{
     font-weight: bold;
@@ -196,4 +204,5 @@
   .el-select {
     width: 300px;
   }
+  
 </style>

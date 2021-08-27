@@ -1,6 +1,6 @@
 import App from './App.vue';
 import Set from './Set.vue';
-import {getSystemReply} from './api.js'
+import * as Api from './api.js'
 
 const $fastposteditor = document.querySelector('#fastposteditor');
 const $postbox = document.querySelector('#postbox');
@@ -14,9 +14,7 @@ if($postbox){
   $postbox.insertBefore($appRoot, $postbox.childNodes[4]);
 }
 
-Vue.prototype.$api = {
-  getSystemReply
-}
+Vue.prototype.$api = Api
 
 Vue.prototype.$app = {
   storageKey: 'QuickReply',

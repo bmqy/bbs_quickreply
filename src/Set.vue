@@ -1,22 +1,18 @@
 <template>
   <div class="setBox">   
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>{{$app.getName()}}</span>
-        <el-button style="float: right; padding: 3px 0" type="text" @click="closeSetBox"><i class="el-icon-circle-close"></i></el-button>        
-      </div>
-      <el-row gutter="30">
-        <el-col span="8">
+    <el-card class="box-card" shadow="never">
+      <el-row :gutter="30">
+        <el-col :span="8">
           <el-card class="box-card" shadow="never">
             <div slot="header" class="clearfix">
-              <span>我添加的</span>
+              <span>我在用的</span>
             </div>
-            <ul class="list" v-if="mylist.length > 0">
-              <li v-for="(item, index) in mylist" :key="index">
-                {{`${index+1}、${item.content}`}}
-                <div class="list-right">            
+            <ul class="list" v-if="myList.length > 0">
+              <li v-for="(item, index) in myList" :key="index">
+                {{`${index+1}、${item}`}}
+                <div class="list-right">                   
                   <el-tooltip class="item" effect="dark" content="分享它" placement="top-start">
-                    <el-button type="success" size="mini" icon="el-icon-s-promotion" circle @click="delReply(index)"></el-button>
+                    <el-button type="success" size="mini" icon="el-icon-s-promotion" circle @click="shareReply(index)"></el-button>
                   </el-tooltip>
                   <el-tooltip class="item" effect="dark" content="移除" placement="top-start">
                     <el-button type="danger" size="mini" icon="el-icon-minus" circle @click="delReply(index)"></el-button>
@@ -24,24 +20,26 @@
                 </div>
               </li>
             </ul>
-            <p v-if="mylist.length == 0" class="tips">未设置快速回帖内容!</p>
+            <p v-if="myList.length == 0" class="tips">未设置快速回帖内容!</p>
           </el-card>
           
         </el-col>
-        <el-col span="16">
+        <el-col :span="16">
           <el-card class="box-card" shadow="never">
             <div slot="header" class="clearfix">
-              <span>网友分享</span>
+              <span>网友分享的</span>
             </div>
-            <ul class="list" v-if="systemlist.length > 0">
-              <li v-for="(item, index) in systemlist" :key="index">
+            <ul class="list" v-if="systemList.length > 0">
+              <li v-for="(item, index) in systemList" :key="index">
                 {{`${index+1}、${item.content}`}}
                 <div class="list-right">
                   <el-tooltip class="item" effect="dark" content="给个赞" placement="top-start">
-                    <el-button type="success" size="mini" icon="el-icon-thumb" circle @click="delReply(index)"></el-button>
+                    <el-badge :value="item.likeCount" type="info" :max="99" class="item">
+                      <el-button type="success" size="mini" icon="el-icon-thumb" circle @click="likeReply(index)"></el-button>
+                    </el-badge>
                   </el-tooltip>
-                  <el-tooltip class="item" effect="dark" content="收藏" placement="top-start">
-                    <el-button type="danger" size="mini" icon="el-icon-star-off" circle @click="delReply(index)"></el-button>
+                  <el-tooltip class="item" effect="dark" content="收藏进我的" placement="top-start">
+                    <el-button type="danger" size="mini" icon="el-icon-star-off" circle @click="collectReply(index)"></el-button>
                   </el-tooltip>
                 </div>
               </li>
@@ -49,8 +47,9 @@
             <el-pagination
               background
               layout="prev, pager, next"
-              :page-size=2
-              :total="4">
+              :page-size=10
+              @current-change="currentPageChange"
+              :total="systemListCount">
             </el-pagination>
           </el-card>
         </el-col>
@@ -61,9 +60,6 @@
           <el-button slot="append" icon="el-icon-plus" @click="addReply"></el-button>
         </el-input>
       </div>
-      <div>
-        <span class="demo-card-foot">{{`ver: ${$app.getVersion()}`}}</span>
-      </div>
     </el-card>
   </div>
 </template>
@@ -72,36 +68,11 @@
 export default {
   data(){
     return {
-      mylist: [],
-      systemlist: [],
+      myList: [],
+      systemList: [],
+      systemListCount: 0,
       showAddBox: false,
       newReply: '',
-    }
-  },
-  props: {
-    showSet: {
-      type: Boolean,
-      default: false
-    },
-  },
-  watch: {
-    showSet(newVal, oldVal){
-      let vm = this;
-      if(newVal == false && vm.mylist.length == 0){
-        vm.$confirm('未设置快速回帖内容，是否重置为默认设置？', '提示', {
-          confirmButtonText: '是',
-          cancelButtonText: '否',
-          type: 'success',
-        }).then(action => {
-          vm.mylist = vm.$app.defaultReply;
-        }).catch(() => {
-          vm.$message.info('请输入自定义回复内容');
-        });
-        
-        vm.$emit('update:showSet', true);
-        vm.showSet = true;
-        return false;
-      }
     }
   },
   created() {
@@ -109,31 +80,80 @@ export default {
     this.getSystemList()
   },
   methods: {
+    // 获取我的自定义回复列表
     getMyList(){
-      this.mylist = this.$app.getStorage().length>0 ? this.$app.getStorage() : [];
+      this.myList = this.$app.getStorage().length>0 ? this.$app.getStorage() : [];
     },
-    async getSystemList(){
-      let list = await this.$api.getSystemReply();
-      this.systemlist = list.length>0 ? list : [];
+    // 获取网友分享的回复列表
+    async getSystemList(skip=0){
+      let vm = this;
+      let res = await vm.$api.selectList(skip);
+      vm.systemList = res.data.totalCount>0 ? res.data.list : [];
+      vm.systemListCount = res.data.totalCount;
     },
-    closeSetBox(){
-      this.$emit('update:showSet', false);
+    // 监听分页
+    currentPageChange(current){
+      let vm = this;
+      let skip = (current-1) * 10;
+      vm.getSystemList(skip);
     },
-    delReply(index){
-      this.mylist.splice(index, 1);
-    },
+    // 添加自定义回复
     addReply(){
-      if(this.newReply == ''){
-        this.$message.error('回复内容不能为空！');
+      let vm = this;
+      if(vm.newReply == ''){
+        vm.$message.error('回复内容不能为空！');
         return false;
       }
-      if(this.mylist.indexOf(this.newReply) != -1){
-        this.$message.error('已存在相同内容！');
+      if(vm.myList.indexOf(vm.newReply) != -1){
+        vm.$message.error('该回复已添加过！');
+        vm.newReply = ''
         return false;
       }
-      this.mylist.push(this.newReply);
-      this.newReply = ''
-    }
+      vm.myList.push(vm.newReply);
+      vm.updateMyList();
+      vm.newReply = ''
+      return true;
+    },
+    // 更新自定义回复
+    updateMyList(){
+      let vm = this;
+      vm.$app.setStorage(vm.myList);
+    },
+    // 删除自定义回复
+    delReply(index){
+      let vm = this;
+      vm.myList.splice(index, 1);
+      vm.updateMyList();
+    },
+    // 分享自定义回复
+    shareReply(index){
+      let vm = this;
+      vm.$api.replyInsert(vm.myList[index]).then(res=>{
+        vm.$message.success(res.memo);
+      }).catch(err=>{
+        vm.$message.error(err.memo);
+      });
+    },
+    // 点赞网友分享的回复
+    likeReply(index){
+      let vm = this;
+      vm.$api.likeCountUpdate(vm.systemList[index].id).then(res=>{
+        vm.$set(vm.systemList[index], 'likeCount', res.data.likeCount);
+        vm.$message.success(res.memo);
+      }).catch(err=>{
+        vm.$message.error(err.memo);
+      });
+    },
+    // 收藏网友分享的回复
+    collectReply(index){      
+      let vm = this;
+      vm.$api.collectCountUpdate(vm.systemList[index].id).then(res=>{
+        vm.newReply = vm.systemList[index].content;
+        vm.addReply() && vm.$message.success(res.memo);
+      }).catch(err=>{
+        vm.$message.error(err.memo);
+      });
+    },
   },
 }
 </script>
@@ -141,7 +161,15 @@ export default {
 <style scoped lang="less">
   .setBox{
   }
+  .app-margin-right-30{
+    margin-right: 30px;
+  }
   .list {
+    &-right{
+      .el-badge.item{
+        margin-right: 30px;
+      }
+    }
     li{
       margin-bottom: 10px;
       font-size: 14px;
@@ -151,7 +179,7 @@ export default {
       justify-content: space-between;
       &:hover{
         background-color: #f5f5f5;
-      }   
+      }
     }
   }
   .tips{
@@ -171,11 +199,6 @@ export default {
         font-size: 14px;
       }
     }
-  }
-  .demo-card-foot{
-    padding: 10px 0;
-    float: right;
-    color: #909399;
   }
   .clearfix:before,
   .clearfix:after {
