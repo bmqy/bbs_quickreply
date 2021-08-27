@@ -2,14 +2,17 @@
   <div class="setBox">   
     <el-card class="box-card" shadow="never">
       <el-row :gutter="30">
-        <el-col :span="8">
+        <el-col :span="9">
           <el-card class="box-card" shadow="never">
             <div slot="header" class="clearfix">
               <span>我在用的</span>
             </div>
             <ul class="list" v-if="myList.length > 0">
               <li v-for="(item, index) in myList" :key="index">
-                {{`${index+1}、${item}`}}
+                <div class="list-left">
+                  <div class="list-number">{{`${index+1}、`}}</div>
+                  <div class="list-title">{{`${item}`}}</div>
+                </div>                
                 <div class="list-right">                   
                   <el-tooltip class="item" effect="dark" content="分享它" placement="top-start">
                     <el-button type="success" size="mini" icon="el-icon-s-promotion" circle @click="shareReply(index)"></el-button>
@@ -24,14 +27,17 @@
           </el-card>
           
         </el-col>
-        <el-col :span="16">
+        <el-col :span="15">
           <el-card class="box-card" shadow="never">
             <div slot="header" class="clearfix">
               <span>网友分享的</span>
             </div>
             <ul class="list" v-if="systemList.length > 0">
               <li v-for="(item, index) in systemList" :key="index">
-                {{`${index+1}、${item.content}`}}
+                <div class="list-left">
+                  <div class="list-number">{{`[${item.replyId}] `}}</div>
+                  <div class="list-title">{{`${item.content}`}}</div>
+                </div>
                 <div class="list-right">
                   <el-tooltip class="item" effect="dark" content="给个赞" placement="top-start">
                     <el-badge :value="item.likeCount" type="info" :max="99" class="item">
@@ -165,7 +171,23 @@ export default {
     margin-right: 30px;
   }
   .list {
+    &-left{      
+      padding-right: 15px;
+      display: flex;
+      flex: 1;
+      align-items: stretch;
+      justify-content: start;
+    }
+    &-number{
+      margin-right: 5px;
+      color: #909399;
+    }
+    &-title{ 
+      flex: 1;
+      font-weight: normal;
+    }
     &-right{
+      min-width: 70px;
       .el-badge.item{
         margin-right: 30px;
       }
