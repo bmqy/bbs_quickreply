@@ -62,7 +62,7 @@
       </el-row>
       
       <div class="addReplyBox">          
-        <el-input placeholder="请输入新的回复内容" v-model="newReply" clearable class="input-with-select">
+        <el-input placeholder="请输入新的回复内容" v-model="newReply" :autosize="{minRows:1, maxRows:3}" maxlength="100" :show-word-limit="true" resize="none" clearable class="input-with-select">
           <el-button slot="append" icon="el-icon-plus" @click="addReply"></el-button>
         </el-input>
       </div>
@@ -115,6 +115,11 @@ export default {
         vm.newReply = ''
         return false;
       }
+      
+      if(vm.myList.length >= 10 ){
+        vm.$message.warning('自定义回复，超出条数上限！');
+        return false;
+      };
       vm.myList.push(vm.newReply);
       vm.updateMyList();
       vm.newReply = ''
@@ -124,6 +129,7 @@ export default {
     updateMyList(){
       let vm = this;
       vm.$app.setStorage(vm.myList);
+      vm.$emit('updateMyList');
     },
     // 删除自定义回复
     delReply(index){

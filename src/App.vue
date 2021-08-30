@@ -22,7 +22,7 @@
       width="90%"
       :show-close=true
       append-to-body> 
-      <set />
+      <set @updateMyList="updateMyList" />
       
       <div slot="footer">
         <span class="app-dialog-foot">{{`ver: ${$app.getVersion()}`}}</span>
@@ -56,6 +56,10 @@
       // 打开APP设置面板
       openSet() {
         this.setShow = !this.setShow;
+      },
+      // 监听更新自定义回复
+      updateMyList(){
+        this.list = this.$app.getStorage();
       },
       // 设置回复内容
       enterReply(){
@@ -151,10 +155,10 @@
     },
     computed: {
       title(){
-        return this.$app.getNameSpace();
+        return this.$app.getName();
       },
       tips(){
-        return `${this.$app.getNameSpace()}设置`;
+        return `${this.$app.getName()}设置`;
       }
     },
     mounted() {
