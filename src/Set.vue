@@ -159,8 +159,13 @@ export default {
     // 收藏网友分享的回复
     collectReply(index){      
       let vm = this;
+      let nStr = vm.systemList[index].content;
+      if(vm.myList.indexOf(nStr) != -1){
+        vm.$message.error('该回复已添加过！');
+        return false;
+      }
+      vm.newReply = nStr;
       vm.$api.collectCountUpdate(vm.systemList[index].id).then(res=>{
-        vm.newReply = vm.systemList[index].content;
         vm.addReply() && vm.$message.success(res.memo);
       }).catch(err=>{
         vm.$message.error(err.memo);
