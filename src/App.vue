@@ -184,6 +184,10 @@
           let $fastposteditor = document.querySelector('#fastposteditor');
           $fastposteditor.insertBefore(vm.$el, $fastposteditor.childNodes[0]);
         }
+      },
+      // 监听自定义回复变化
+      currentReply(n, o){
+        n && this.enterReply();
       }
     }
   }
