@@ -19,31 +19,43 @@ Vue.prototype.$api = Api
 Vue.prototype.$app = {
   storageKey: 'QuickReply',
   myList: [],  
+  
   setStorage(value){
-    GM_setValue(this.storageKey, value);
+    if(chrome){
+      let key = this.storageKey;
+      chrome.storage.sync.set({[key]: value}, function() {});
+    } else {
+      GM_setValue(key, value);
+    }    
   },
-  getStorage(){
+  async getStorage(){
     var key = this.storageKey;
 
-    if(GM_getValue(key) && GM_getValue(key).length > 0){
-      return GM_getValue(key);        
-    }
-    //TODO 兼容旧版本key名，待移除
-    if(GM_getValue('replysCustom') && GM_getValue('replysCustom').length > 0){
-      this.setStorage('');
-      return GM_getValue('replysCustom');
+    if(chrome){
+      return new Promise((resolve, reject)=>{
+        chrome.storage.sync.get([key], function(result) {
+          resolve(result[key]);
+        });
+      });
+      
+    } else {
+      if(GM_getValue(key) && GM_getValue(key).length > 0){
+        resolve(GM_getValue(key));        
+      }
+      //TODO 兼容旧版本key名，待移除
+      if(GM_getValue('replysCustom') && GM_getValue('replysCustom').length > 0){
+        this.setStorage('');
+        resolve(GM_getValue('replysCustom'));
+      }
     }
 
-    return [];
+    resolve([]);
   },  
   getName: function() {
-    return GM_info['script']['name'];
-  },
-  getNameSpace: function() {
-    return GM_info['script']['namespace'];
+    return (chrome) ? chrome.runtime.getManifest().name : GM_info['script']['name'];
   },
   getVersion: function() {
-    return GM_info['script']['version'];
+    return (chrome) ? chrome.runtime.getManifest().version : GM_info['script']['version'];
   },
 }
 

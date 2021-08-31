@@ -1,11 +1,10 @@
-
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: './src/index.js'
+    app: './src/index.js',
   },
   externals:{
     'vue': 'Vue',
@@ -14,6 +13,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
+    publicPath: '/',
     path: __dirname +'/dist/'
   },
   module: {
@@ -39,7 +39,14 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'public',
+          to: '[path][name][ext]'
+        }
+      ]      
+    }),
   ],
   optimization:{
     minimize: false, // 禁止压缩混淆源代码

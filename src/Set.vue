@@ -87,8 +87,9 @@ export default {
   },
   methods: {
     // 获取我的自定义回复列表
-    getMyList(){
-      this.myList = this.$app.getStorage().length>0 ? this.$app.getStorage() : [];
+    async getMyList(){
+      let myListStorage = await this.$app.getStorage();
+      this.myList = myListStorage.length>0 ? myListStorage : [];
     },
     // 获取网友分享的回复列表
     async getSystemList(skip=0){

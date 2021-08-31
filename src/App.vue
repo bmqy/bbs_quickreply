@@ -50,7 +50,8 @@
     methods: {
       // 获取APP自定义回复
       async getList(){
-        this.list = this.$app.getStorage().length>0 ? this.$app.getStorage() : [];
+        let myListStorage = await this.$app.getStorage();
+        this.list = myListStorage.length>0 ? myListStorage : [];
         this.currentReply = this.list[0] || '';
       },
       // 打开APP设置面板
@@ -58,8 +59,9 @@
         this.setShow = !this.setShow;
       },
       // 监听更新自定义回复
-      updateMyList(){
-        this.list = this.$app.getStorage();
+      async updateMyList(){
+        let myListStorage = await this.$app.getStorage();
+        this.list = myListStorage;
       },
       // 设置回复内容
       enterReply(){
