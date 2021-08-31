@@ -8,7 +8,7 @@ const $appRoot = document.createElement('div');
 
 // 加载elementUI字体图标
 let $elementIconFont = document.createElement('style');
-$elementIconFont.innerHTML = `@font-face{
+$elementIconFont.innerHTML = `@font-face {
   font-family:element-icons;
   font-weight:400;
   font-display:"auto";
@@ -24,15 +24,15 @@ if($postbox){
   $postbox.insertBefore($appRoot, $postbox.childNodes[4]);
 }
 
-Vue.prototype.$api = Api
+Vue.prototype.$api = Api;
 
 Vue.prototype.$app = {
   storageKey: 'QuickReply',
   myList: [],  
   
   setStorage(value){
-    if(chrome){
-      let key = this.storageKey;
+    let key = this.storageKey;
+    if(chrome && chrome.runtime){
       chrome.storage.sync.set({[key]: value}, function() {});
     } else {
       GM_setValue(key, value);
@@ -41,7 +41,7 @@ Vue.prototype.$app = {
   async getStorage(){
     var key = this.storageKey;
 
-    if(chrome){
+    if(chrome && chrome.runtime){
       return new Promise((resolve, reject)=>{
         chrome.storage.sync.get([key], function(result) {
           resolve(result[key]);
@@ -50,22 +50,21 @@ Vue.prototype.$app = {
       
     } else {
       if(GM_getValue(key) && GM_getValue(key).length > 0){
-        resolve(GM_getValue(key));        
+        return GM_getValue(key);        
       }
       //TODO 兼容旧版本key名，待移除
       if(GM_getValue('replysCustom') && GM_getValue('replysCustom').length > 0){
-        this.setStorage('');
-        resolve(GM_getValue('replysCustom'));
+        return GM_getValue('replysCustom');
       }
     }
 
-    resolve([]);
+    return [];
   },  
   getName: function() {
-    return (chrome) ? chrome.runtime.getManifest().name : GM_info['script']['name'];
+    return (chrome && chrome.runtime) ? chrome.runtime.getManifest().name : GM_info['script']['name'];
   },
   getVersion: function() {
-    return (chrome) ? chrome.runtime.getManifest().version : GM_info['script']['version'];
+    return (chrome && chrome.runtime) ? chrome.runtime.getManifest().version : GM_info['script']['version'];
   },
 }
 
