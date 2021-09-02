@@ -24,7 +24,6 @@
 // @require      https://unpkg.com/element-ui/lib/index.js
 // @resource     elementCSS  https://unpkg.com/element-ui/lib/theme-chalk/index.css
 // @require      https://code.bdstatic.com/npm/leancloud-storage@4.11.1/dist/av-min.js
-// @require      file://D:\workspace\bmqy\github\bbs_quickreply\dist\app.js
 // ==/UserScript==
 
 (function() {
@@ -973,8 +972,6 @@ var component = normalizeComponent(
   
 )
 
-/* hot reload */
-if (false) { var api; }
 component.options.__file = "src/App.vue"
 /* harmony default export */ const App = (component.exports);
 ;// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/Set.vue?vue&type=template&id=67d05af9&scoped=true&
@@ -1495,8 +1492,6 @@ var Set_component = normalizeComponent(
   
 )
 
-/* hot reload */
-if (false) { var Set_api; }
 Set_component.options.__file = "src/Set.vue"
 /* harmony default export */ const Set = (Set_component.exports);
 ;// CONCATENATED MODULE: ./src/api.js
