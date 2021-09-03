@@ -1,6 +1,6 @@
 import App from './App.vue';
 import Set from './Set.vue';
-import * as Api from './api.js'
+import * as Api from './api.js';
 
 const $fastposteditor = document.querySelector('#fastposteditor');
 const $postbox = document.querySelector('#postbox');
@@ -17,60 +17,70 @@ $elementIconFont.innerHTML = `@font-face {
 document.querySelector('head').appendChild($elementIconFont);
 
 $appRoot.id = 'app';
-if($fastposteditor){  
-  $fastposteditor.insertBefore($appRoot, $fastposteditor.childNodes[0]);
+if ($fastposteditor) {
+	$fastposteditor.insertBefore($appRoot, $fastposteditor.childNodes[0]);
 }
-if($postbox){  
-  $postbox.insertBefore($appRoot, $postbox.childNodes[4]);
+if ($postbox) {
+	$postbox.insertBefore($appRoot, $postbox.childNodes[4]);
 }
 
 Vue.prototype.$api = Api;
 
 Vue.prototype.$app = {
-  storageKey: 'QuickReply',
-  myList: [],  
-  
-  setStorage(value){
-    let key = this.storageKey;
-    if(chrome && chrome.runtime){
-      chrome.storage.sync.set({[key]: value}, function() {});
-    } else {
-      GM_setValue(key, value);
-    }    
-  },
-  async getStorage(){
-    var key = this.storageKey;
+	storageKey: 'QuickReply',
+	myList: [],
 
-    if(chrome && chrome.runtime){
-      return new Promise((resolve, reject)=>{
-        chrome.storage.sync.get([key], function(result) {
-          resolve(result[key]);
-        });
-      });
-      
-    } else {
-      if(GM_getValue(key) && GM_getValue(key).length > 0){
-        return GM_getValue(key);        
-      }
-      //TODO 兼容旧版本key名，待移除
-      if(GM_getValue('replysCustom') && GM_getValue('replysCustom').length > 0){
-        return GM_getValue('replysCustom');
-      }
-    }
+	setStorage(value) {
+		let key = this.storageKey;
+		try {
+			chrome.storage.sync.set({ [key]: value }, function() {});
+		} catch(err) {
+			GM_setValue(key, value);
+		}
+	},
+	async getStorage() {
+		var key = this.storageKey;
 
-    return [];
-  },  
-  getName: function() {
-    return (chrome && chrome.runtime) ? chrome.runtime.getManifest().name : GM_info['script']['name'];
-  },
-  getVersion: function() {
-    return (chrome && chrome.runtime) ? chrome.runtime.getManifest().version : GM_info['script']['version'];
-  },
-}
+		try {
+			return new Promise((resolve, reject) => {
+				chrome.storage.sync.get([key], function(result) {
+					resolve(result[key]);
+				});
+			});
+		} catch(err) {
+			if (GM_getValue(key) && GM_getValue(key).length > 0) {
+				return GM_getValue(key);
+			}
+			//TODO 兼容旧版本key名，待移除
+			if (
+				GM_getValue('replysCustom') &&
+				GM_getValue('replysCustom').length > 0
+			) {
+				return GM_getValue('replysCustom');
+			}
+		}
 
-Vue.component("set", Set);
+		return [];
+	},
+	getName: function() {
+        try{
+            return chrome.runtime.getManifest().name
+        } catch(err){
+            return GM_info['script']['name'];
+        }
+	},
+	getVersion: function() {
+        try{
+            return chrome.runtime.getManifest().version
+        } catch(err){
+            return GM_info['script']['version'];
+        }
+	},
+};
+
+Vue.component('set', Set);
 
 new Vue({
-  el: '#app',
-  render: h => h(App)
+	el: '#app',
+	render: (h) => h(App),
 });
