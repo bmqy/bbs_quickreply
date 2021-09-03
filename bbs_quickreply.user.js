@@ -1739,27 +1739,26 @@
         },
         async getStorage() {
             var key = this.storageKey;
-    
-            try {
-                return new Promise((resolve, reject) => {
+
+            return new Promise((resolve, reject) => {
+                try {
                     chrome.storage.sync.get([key], function(result) {
                         resolve(result[key]);
                     });
-                });
-            } catch(err) {
-                if (GM_getValue(key) && GM_getValue(key).length > 0) {
-                    return GM_getValue(key);
+                } catch(err) {
+                    if (GM_getValue(key) && GM_getValue(key).length > 0) {
+                        resolve(GM_getValue(key));
+                    }
+                    //TODO 兼容旧版本key名，待移除
+                    if (
+                        GM_getValue('replysCustom') &&
+                        GM_getValue('replysCustom').length > 0
+                    ) {
+                        resolve(GM_getValue('replysCustom'));
+                    }
+                    resolve([]);
                 }
-                //TODO 兼容旧版本key名，待移除
-                if (
-                    GM_getValue('replysCustom') &&
-                    GM_getValue('replysCustom').length > 0
-                ) {
-                    return GM_getValue('replysCustom');
-                }
-            }
-    
-            return [];
+            });
         },
         getName: function() {
             try{
