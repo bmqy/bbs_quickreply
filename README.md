@@ -28,4 +28,4 @@ v0.2.0.3更新：
 <img src="https://raw.githubusercontent.com/bmqy/bbs_quickreply/master/public/images/20171226172235.png" width="300" />
 
 如需反馈问题，请加Q群663099879，或扫描下面二维码快速加群  
-<img src="https://raw.githubusercontent.com/bmqy/taomi-tools/master/public/images/temp_qrcode_share_663099879.png" width="300" />
+<img src="https://raw.githubusercontent.com/bmqy/taomi-tools/master/images/temp_qrcode_share_663099879.png" width="300" />
