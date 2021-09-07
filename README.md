@@ -28,9 +28,7 @@ v0.2.0.3更新：
 1. 支持更多discuz论坛页；  
 感谢[mogoyu](https://greasyfork.org/zh-CN/forum/profile/mogoyu)的热心反馈！
 
-如需支持更多论坛，请通过以下方式联系作者。  
-<img src="https://raw.githubusercontent.com/bmqy/bbs_quickreply/master/public/images/20171226172205.png" width="300" />  
-<img src="https://raw.githubusercontent.com/bmqy/bbs_quickreply/master/public/images/20171226172235.png" width="300" />
+##  联系作者
+[@chanel](https://t.me/tgbmqy)
 
-如需反馈问题，请加Q群663099879，或扫描下面二维码快速加群  
-<img src="https://raw.githubusercontent.com/bmqy/taomi-tools/master/images/temp_qrcode_share_663099879.png" width="300" />
+[@group](https://t.me/joinchat/FkWz4qftg94RFCb7)
