@@ -68,7 +68,7 @@
 			// 获取APP自定义回复
 			async getList() {
 				let myListStorage = await this.$app.getStorage();
-				this.list = myListStorage.length > 0 ? myListStorage : [];
+				this.list = myListStorage && myListStorage.length > 0 ? myListStorage : [];
 				this.currentReply = this.list[0] || '';
 			},
 			// 打开APP设置面板

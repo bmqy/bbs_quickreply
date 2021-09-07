@@ -6,7 +6,6 @@
   },
   "content_scripts": [ {
     "js": ["libs/vue/vue.min.js", "libs/element-ui/lib/index.js", "libs/leancloud-storage/av-min.js", "app.js"],
-    "css": ["libs/element-ui/lib/theme-chalk/index.css"],
     "matches": ["*://*/thread*.*", "*://*/forum.php?mod=viewthread*", "*://*/forum.php?mod=post*"]
   } ],
   "description": "使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！",

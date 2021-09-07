@@ -6,8 +6,15 @@ const $fastposteditor = document.querySelector('#fastposteditor');
 const $postbox = document.querySelector('#postbox');
 const $appRoot = document.createElement('div');
 
+// 加载elementUI样式
+const $elementCSS = document.createElement('link');
+$elementCSS.rel = 'stylesheet';
+$elementCSS.text = 'text/css';
+$elementCSS.href = 'https://unpkg.com/element-ui/lib/theme-chalk/index.css';
+document.head.appendChild($elementCSS);
+
 // 加载elementUI字体图标
-let $elementIconFont = document.createElement('style');
+const $elementIconFont = document.createElement('style');
 $elementIconFont.innerHTML = `@font-face {
   font-family:element-icons;
   font-weight:400;
@@ -34,46 +41,46 @@ Vue.prototype.$app = {
 		let key = this.storageKey;
 		try {
 			chrome.storage.sync.set({ [key]: value }, function() {});
-		} catch(err) {
+		} catch (err) {
 			GM_setValue(key, value);
 		}
 	},
 	async getStorage() {
 		var key = this.storageKey;
 
-        return new Promise((resolve, reject) => {
-            try {
-                chrome.storage.sync.get([key], function(result) {
-                    resolve(result[key]);
-                });
-            } catch(err) {
-                if (GM_getValue(key) && GM_getValue(key).length > 0) {
-                    resolve(GM_getValue(key));
-                }
-                //TODO 兼容旧版本key名，待移除
-                if (
-                    GM_getValue('replysCustom') &&
-                    GM_getValue('replysCustom').length > 0
-                ) {
-                    resolve(GM_getValue('replysCustom'));
-                }
-		        resolve([]);
-            }
-        });
+		return new Promise((resolve, reject) => {
+			try {
+				chrome.storage.sync.get([key], function(result) {
+					resolve(result[key]);
+				});
+			} catch (err) {
+				if (GM_getValue(key) && GM_getValue(key).length > 0) {
+					resolve(GM_getValue(key));
+				}
+				//TODO 兼容旧版本key名，待移除
+				if (
+					GM_getValue('replysCustom') &&
+					GM_getValue('replysCustom').length > 0
+				) {
+					resolve(GM_getValue('replysCustom'));
+				}
+				resolve([]);
+			}
+		});
 	},
 	getName: function() {
-        try{
-            return chrome.runtime.getManifest().name
-        } catch(err){
-            return GM_info['script']['name'];
-        }
+		try {
+			return chrome.runtime.getManifest().name;
+		} catch (err) {
+			return GM_info['script']['name'];
+		}
 	},
 	getVersion: function() {
-        try{
-            return chrome.runtime.getManifest().version
-        } catch(err){
-            return GM_info['script']['version'];
-        }
+		try {
+			return chrome.runtime.getManifest().version;
+		} catch (err) {
+			return GM_info['script']['version'];
+		}
 	},
 };
 

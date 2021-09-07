@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @homepage     http://bmqy.net/
-// @version      2.0.2
+// @version      2.0.3
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @author       bmqy
 // @icon         data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1NjY1Njk3Ni1hNmQ2LWQ1NDAtYTBlZC0yOTc4MzRkMTk3N2EiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RUMzMzI0MjVFQUFBMTFFNzg2NzE4QUI1NzM0QThGNTciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RUMzMzI0MjRFQUFBMTFFNzg2NzE4QUI1NzM0QThGNTciIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M2NjNjZkNGUtYzdhMC0wNTQwLWFiODEtZjJmYzJiMmM5MTE3IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6YzNjZGU3YmUtZWFhYS0xMWU3LTllYTUt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
@@ -15,14 +15,8 @@
 // @grant        GM_info
 // @grant        GM_getValue
 // @grant        GM_setValue
-// @grant        GM_addStyle
-// @grant        GM_addElement
-// @grant        GM_deleteValue
-// @grant        GM_getResourceText
-// @grant        GM_addValueChangeListener
 // @require      https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js
 // @require      https://unpkg.com/element-ui/lib/index.js
-// @resource     elementCSS  https://unpkg.com/element-ui/lib/theme-chalk/index.css
 // @require      https://code.bdstatic.com/npm/leancloud-storage@4.11.1/dist/av-min.js
 // ==/UserScript==
 
@@ -30,9 +24,6 @@
   'use strict';
 
   // Your code here...
-  GM_addStyle(GM_getResourceText('elementCSS'));
-
-
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -71,7 +62,7 @@
     
     var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
     // Module
-    ___CSS_LOADER_EXPORT___.push([module.id, ".app-margin-right-30[data-v-67d05af9] {\n  margin-right: 30px;\n}\n.list-left[data-v-67d05af9] {\n  padding-right: 15px;\n  display: flex;\n  flex: 1;\n  align-items: stretch;\n  justify-content: start;\n}\n.list-number[data-v-67d05af9] {\n  margin-right: 5px;\n  color: #909399;\n}\n.list-title[data-v-67d05af9] {\n  flex: 1;\n  font-weight: normal;\n}\n.list-right[data-v-67d05af9] {\n  min-width: 70px;\n}\n.list-right .el-badge.item[data-v-67d05af9] {\n  margin-right: 30px;\n}\n.list li[data-v-67d05af9] {\n  margin-bottom: 10px;\n  font-size: 14px;\n  line-height: 30px;\n  display: flex;\n  align-items: flex-start;\n  justify-content: space-between;\n}\n.list li[data-v-67d05af9]:hover {\n  background-color: #f5f5f5;\n}\n.tips[data-v-67d05af9] {\n  color: #909399;\n  font-size: 14px;\n  text-align: center;\n}\n.addReplyBox[data-v-67d05af9] {\n  margin-top: 15px;\n  padding-top: 10px;\n  border-top: 1px dashed #ccc;\n}\n.box-card .el-card__header[data-v-67d05af9] {\n  padding: 10px 20px;\n}\n.box-card .el-card__header span[data-v-67d05af9] {\n  font-size: 14px;\n}\n.clearfix[data-v-67d05af9]:before,\n.clearfix[data-v-67d05af9]:after {\n  display: table;\n  content: \"\";\n}\n.clearfix[data-v-67d05af9]:after {\n  clear: both;\n}\n", ""]);
+    ___CSS_LOADER_EXPORT___.push([module.id, ".app-margin-right-30[data-v-67d05af9] {\n  margin-right: 30px;\n}\n.list-left[data-v-67d05af9] {\n  padding-right: 15px;\n  display: flex;\n  flex: 1;\n  align-items: stretch;\n  justify-content: start;\n}\n.list-number[data-v-67d05af9] {\n  margin-right: 5px;\n  color: #909399;\n}\n.list-title[data-v-67d05af9] {\n  flex: 1;\n  font-weight: normal;\n}\n.list-right[data-v-67d05af9] {\n  min-width: 70px;\n}\n.list-right .el-badge.item[data-v-67d05af9] {\n  margin-right: 30px;\n}\n.list li[data-v-67d05af9] {\n  margin-bottom: 10px;\n  font-size: 14px;\n  line-height: 30px;\n  display: flex;\n  align-items: flex-start;\n  justify-content: space-between;\n}\n.list li[data-v-67d05af9]:hover {\n  background-color: #f5f5f5;\n}\n.tips[data-v-67d05af9] {\n  color: #909399;\n  font-size: 14px;\n  text-align: center;\n}\n.addReplyBox[data-v-67d05af9] {\n  margin-top: 15px;\n  padding-top: 10px;\n  border-top: 1px dashed #ccc;\n}\n.box-card .el-card__header[data-v-67d05af9] {\n  padding: 10px 20px;\n}\n.box-card .el-card__header span[data-v-67d05af9] {\n  font-size: 14px;\n}\n.clearfix[data-v-67d05af9]:before,\n.clearfix[data-v-67d05af9]:after {\n  display: table;\n  content: '';\n}\n.clearfix[data-v-67d05af9]:after {\n  clear: both;\n}\n", ""]);
     // Exports
     /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
     
@@ -720,7 +711,7 @@
             // 获取APP自定义回复
             async getList() {
                 let myListStorage = await this.$app.getStorage();
-                this.list = myListStorage.length > 0 ? myListStorage : [];
+                this.list = myListStorage && myListStorage.length > 0 ? myListStorage : [];
                 this.currentReply = this.list[0] || '';
             },
             // 打开APP设置面板
@@ -1068,11 +1059,19 @@
                                   return _c("li", { key: index }, [
                                     _c("div", { staticClass: "list-left" }, [
                                       _c("div", { staticClass: "list-number" }, [
-                                        _vm._v(_vm._s(index + 1 + "、"))
+                                        _vm._v(
+                                          "\n\t\t\t\t\t\t\t\t\t" +
+                                            _vm._s(index + 1 + "、") +
+                                            "\n\t\t\t\t\t\t\t\t"
+                                        )
                                       ]),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "list-title" }, [
-                                        _vm._v(_vm._s("" + item))
+                                        _vm._v(
+                                          "\n\t\t\t\t\t\t\t\t\t" +
+                                            _vm._s("" + item) +
+                                            "\n\t\t\t\t\t\t\t\t"
+                                        )
                                       ])
                                     ]),
                                     _vm._v(" "),
@@ -1146,7 +1145,9 @@
                           _vm._v(" "),
                           _vm.myList.length == 0
                             ? _c("p", { staticClass: "tips" }, [
-                                _vm._v("未设置快速回帖内容!")
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t未设置快速回帖内容!\n\t\t\t\t\t"
+                                )
                               ])
                             : _vm._e()
                         ]
@@ -1181,11 +1182,19 @@
                                   return _c("li", { key: index }, [
                                     _c("div", { staticClass: "list-left" }, [
                                       _c("div", { staticClass: "list-number" }, [
-                                        _vm._v(_vm._s("[" + item.replyId + "] "))
+                                        _vm._v(
+                                          "\n\t\t\t\t\t\t\t\t\t" +
+                                            _vm._s("[" + item.replyId + "] ") +
+                                            "\n\t\t\t\t\t\t\t\t"
+                                        )
                                       ]),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "list-title" }, [
-                                        _vm._v(_vm._s("" + item.content))
+                                        _vm._v(
+                                          "\n\t\t\t\t\t\t\t\t\t" +
+                                            _vm._s("" + item.content) +
+                                            "\n\t\t\t\t\t\t\t\t"
+                                        )
                                       ])
                                     ]),
                                     _vm._v(" "),
@@ -1412,109 +1421,197 @@
     //
     //
     //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
     
     /* harmony default export */ const Setvue_type_script_lang_js_ = ({
-      data(){
-        return {
-          myList: [],
-          systemList: [],
-          systemListCount: 0,
-          showAddBox: false,
-          newReply: '',
-        }
-      },
-      created() {
-        this.getMyList()
-        this.getSystemList()
-      },
-      methods: {
-        // 获取我的自定义回复列表
-        async getMyList(){
-          let myListStorage = await this.$app.getStorage();
-          this.myList = myListStorage.length>0 ? myListStorage : [];
+        data() {
+            return {
+                myList: [],
+                systemList: [],
+                systemListCount: 0,
+                showAddBox: false,
+                newReply: '',
+            };
         },
-        // 获取网友分享的回复列表
-        async getSystemList(skip=0){
-          let vm = this;
-          let res = await vm.$api.selectList(skip);
-          vm.systemList = res.data.totalCount>0 ? res.data.list : [];
-          vm.systemListCount = res.data.totalCount;
+        created() {
+            this.getMyList();
+            this.getSystemList();
         },
-        // 监听分页
-        currentPageChange(current){
-          let vm = this;
-          let skip = (current-1) * 10;
-          vm.getSystemList(skip);
+        methods: {
+            // 获取我的自定义回复列表
+            async getMyList() {
+                let myListStorage = await this.$app.getStorage();
+                this.myList = myListStorage && myListStorage.length > 0 ? myListStorage : [];
+            },
+            // 获取网友分享的回复列表
+            async getSystemList(skip = 0) {
+                let vm = this;
+                let res = await vm.$api.selectList(skip);
+                vm.systemList = res.data.totalCount > 0 ? res.data.list : [];
+                vm.systemListCount = res.data.totalCount;
+            },
+            // 监听分页
+            currentPageChange(current) {
+                let vm = this;
+                let skip = (current - 1) * 10;
+                vm.getSystemList(skip);
+            },
+            // 添加自定义回复
+            addReply() {
+                let vm = this;
+                if (vm.newReply == '') {
+                    vm.$message.error('回复内容不能为空！');
+                    return false;
+                }
+                if (vm.myList.indexOf(vm.newReply) != -1) {
+                    vm.$message.error('该回复已添加过！');
+                    vm.newReply = '';
+                    return false;
+                }
+    
+                if (vm.myList.length >= 10) {
+                    vm.$message.warning('自定义回复，超出条数上限！');
+                    return false;
+                }
+                vm.myList.push(vm.newReply);
+                vm.updateMyList();
+                vm.newReply = '';
+                return true;
+            },
+            // 更新自定义回复
+            updateMyList() {
+                let vm = this;
+                vm.$app.setStorage(vm.myList);
+                vm.$emit('updateMyList');
+            },
+            // 删除自定义回复
+            delReply(index) {
+                let vm = this;
+                vm.myList.splice(index, 1);
+                vm.updateMyList();
+            },
+            // 分享自定义回复
+            shareReply(index) {
+                let vm = this;
+                vm.$api
+                    .replyInsert(vm.myList[index])
+                    .then((res) => {
+                        vm.$message.success(res.memo);
+                    })
+                    .catch((err) => {
+                        vm.$message.error(err.memo);
+                    });
+            },
+            // 点赞网友分享的回复
+            likeReply(index) {
+                let vm = this;
+                vm.$api
+                    .likeCountUpdate(vm.systemList[index].id)
+                    .then((res) => {
+                        vm.$set(
+                            vm.systemList[index],
+                            'likeCount',
+                            res.data.likeCount
+                        );
+                        vm.$message.success(res.memo);
+                    })
+                    .catch((err) => {
+                        vm.$message.error(err.memo);
+                    });
+            },
+            // 收藏网友分享的回复
+            collectReply(index) {
+                let vm = this;
+                let nStr = vm.systemList[index].content;
+                if (vm.myList.indexOf(nStr) != -1) {
+                    vm.$message.error('该回复已添加过！');
+                    return false;
+                }
+                vm.newReply = nStr;
+                vm.$api
+                    .collectCountUpdate(vm.systemList[index].id)
+                    .then((res) => {
+                        vm.addReply() && vm.$message.success(res.memo);
+                    })
+                    .catch((err) => {
+                        vm.$message.error(err.memo);
+                    });
+            },
         },
-        // 添加自定义回复
-        addReply(){
-          let vm = this;
-          if(vm.newReply == ''){
-            vm.$message.error('回复内容不能为空！');
-            return false;
-          }
-          if(vm.myList.indexOf(vm.newReply) != -1){
-            vm.$message.error('该回复已添加过！');
-            vm.newReply = ''
-            return false;
-          }
-          
-          if(vm.myList.length >= 10 ){
-            vm.$message.warning('自定义回复，超出条数上限！');
-            return false;
-          };
-          vm.myList.push(vm.newReply);
-          vm.updateMyList();
-          vm.newReply = ''
-          return true;
-        },
-        // 更新自定义回复
-        updateMyList(){
-          let vm = this;
-          vm.$app.setStorage(vm.myList);
-          vm.$emit('updateMyList');
-        },
-        // 删除自定义回复
-        delReply(index){
-          let vm = this;
-          vm.myList.splice(index, 1);
-          vm.updateMyList();
-        },
-        // 分享自定义回复
-        shareReply(index){
-          let vm = this;
-          vm.$api.replyInsert(vm.myList[index]).then(res=>{
-            vm.$message.success(res.memo);
-          }).catch(err=>{
-            vm.$message.error(err.memo);
-          });
-        },
-        // 点赞网友分享的回复
-        likeReply(index){
-          let vm = this;
-          vm.$api.likeCountUpdate(vm.systemList[index].id).then(res=>{
-            vm.$set(vm.systemList[index], 'likeCount', res.data.likeCount);
-            vm.$message.success(res.memo);
-          }).catch(err=>{
-            vm.$message.error(err.memo);
-          });
-        },
-        // 收藏网友分享的回复
-        collectReply(index){      
-          let vm = this;
-          let nStr = vm.systemList[index].content;
-          if(vm.myList.indexOf(nStr) != -1){
-            vm.$message.error('该回复已添加过！');
-            return false;
-          }
-          vm.newReply = nStr;
-          vm.$api.collectCountUpdate(vm.systemList[index].id).then(res=>{
-            vm.addReply() && vm.$message.success(res.memo);
-          }).catch(err=>{
-            vm.$message.error(err.memo);
-          });
-        },
-      },
     });
     
     ;// CONCATENATED MODULE: ./src/Set.vue?vue&type=script&lang=js&
@@ -1548,11 +1645,28 @@
     Set_component.options.__file = "src/Set.vue"
     /* harmony default export */ const Set = (Set_component.exports);
     ;// CONCATENATED MODULE: ./src/api.js
+    function sendMessage(message) {
+        let sk = 'SCT72554TTYH53u4Yx2KPf6UtqjNjIK5f';
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {}
+        };
+        xhr.open(
+            'post',
+            `https://sctapi.ftqq.com/${sk}.send`
+        );
+        xhr.setRequestHeader(
+            'content-type',
+            'application/x-www-form-urlencoded'
+        );
+        xhr.send(`title=库里又有新回复了&desp=${message}`);
+    }
+    
     // 初始化AV
     AV.init({
-      appId: "JLqezdmWrYQOatywxVKmB9pX-gzGzoHsz",
-      appKey: "hemx77fyB2Usg317i2crcuer",
-      serverURL: "https://jlqezdmw.lc-cn-n1-shared.com"
+        appId: 'JLqezdmWrYQOatywxVKmB9pX-gzGzoHsz',
+        appKey: 'hemx77fyB2Usg317i2crcuer',
+        serverURL: 'https://quickreply.lc.bmqy.net',
     });
     
     // 创建实例
@@ -1560,140 +1674,149 @@
     const user = AV.User;
     
     // 格式化时间显示
-    function formatDateTime(date){
-      return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    function formatDateTime(date) {
+        return `${date.getFullYear()}-${date.getMonth() +
+            1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
     }
     
     // 获取网友分享的回复
-    const selectList = function(skip=0){
-      return new Promise(async function(resolve, reject){
-        let list = [];
-        let totalCount = 0;
+    const selectList = function(skip = 0) {
+        return new Promise(async function(resolve, reject) {
+            let list = [];
+            let totalCount = 0;
     
-        await query.count().then((count) => {
-          totalCount = count;
+            await query.count().then((count) => {
+                totalCount = count;
+            });
+    
+            await query
+                .descending('replyId')
+                .skip(skip)
+                .limit(10)
+                .find()
+                .then((res) => {
+                    //console.log('res', res);
+                    res.forEach((item) => {
+                        let updateTime = formatDateTime(item.updatedAt);
+                        let data = item.attributes;
+                        let id = item.id;
+                        list.push({
+                            id: id,
+                            replyId: data.replyId,
+                            content: data.content,
+                            likeCount: data.likeCount,
+                            collectCount: data.collectCount,
+                            insertId: data.insertId,
+                            updateTime: updateTime,
+                        });
+                    });
+                    resolve({
+                        code: 0,
+                        memo: '获取成功',
+                        data: {
+                            list: list,
+                            totalCount: totalCount,
+                        },
+                    });
+                });
         });
-    
-        await query.descending('replyId')
-          .skip(skip)
-          .limit(10)
-          .find()
-          .then(res=>{
-            //console.log('res', res);
-            res.forEach(item => {
-              let updateTime = formatDateTime(item.updatedAt);
-              let data = item.attributes;
-              let id = item.id;
-              list.push({
-                id: id,
-                replyId: data.replyId,
-                content: data.content,
-                likeCount: data.likeCount,
-                collectCount: data.collectCount,
-                insertId: data.insertId,
-                updateTime: updateTime,
-              });
-            });
-            resolve({
-              code: 0,
-              memo: '获取成功',
-              data: {
-                list: list,
-                totalCount: totalCount,
-              },
-            });
-          });
-      });
-    }
+    };
     
     // 添加网友分享的回复
-    const replyInsert = function(content){
-      return new Promise(async function(resolve, reject){
-        let count = await query.startsWith('content', content)
-          .endsWith('content', content)
-          .count().then((count) => {
-            return count;
-        });
+    const replyInsert = function(content) {
+        return new Promise(async function(resolve, reject) {
+            let count = await query
+                .startsWith('content', content)
+                .endsWith('content', content)
+                .count()
+                .then((count) => {
+                    return count;
+                });
     
-        if(count > 0){
-          reject({
-            code: 10001,
-            memo: '已经有人分享了，换一个吧',
-          });
-          return false;
-        }
+            if (count > 0) {
+                reject({
+                    code: 10001,
+                    memo: '已经有人分享了，换一个吧',
+                });
+                return false;
+            }
     
-        let Reply = AV.Object.extend('cms_reply');
-        let reply = new Reply();
-        reply.set('content', content)
-        .set('insertId', '1')
-        .save()
-        .then(reply=>{      
-          resolve({
-            code: 0,
-            memo: '分享成功',
-            data: {
-              content: reply.attributes.content
-            },
-          });
-        })
-        .catch(err=>{
-          reject({
-            code: 100,
-            memo: err.message,
-          });
+            let Reply = AV.Object.extend('cms_reply');
+            let reply = new Reply();
+            reply
+                .set('content', content)
+                .set('insertId', '1')
+                .save()
+                .then((reply) => {                
+                    sendMessage(`【新增】${reply.attributes.content}`);
+                    resolve({
+                        code: 0,
+                        memo: '分享成功',
+                        data: {
+                            content: reply.attributes.content,
+                        },
+                    });
+                })
+                .catch((err) => {
+                    reject({
+                        code: 100,
+                        memo: err.message,
+                    });
+                });
         });
-      });
-    }
+    };
     
     // 更新收藏数量
-    const collectCountUpdate = function(replyId){
-      return new Promise(async function(resolve, reject){
-        let reply = AV.Object.createWithoutData('cms_reply', replyId);
-        reply.increment('collectCount', 1)
-        .set('updateId', '1')
-        .save()
-        .then(reply=>{      
-          resolve({
-            code: 0,
-            memo: '收藏成功',
-            data: reply,
-          });
-        })
-        .catch(err=>{
-          reject({
-            code: 100,
-            memo: err.message,
-          });
+    const collectCountUpdate = function(replyId) {
+        return new Promise(async function(resolve, reject) {
+            let reply = AV.Object.createWithoutData('cms_reply', replyId);
+            reply
+                .increment('collectCount', 1)
+                .set('updateId', '1')
+                .save()
+                .then((reply) => {
+                    resolve({
+                        code: 0,
+                        memo: '收藏成功',
+                        data: reply,
+                    });
+                })
+                .catch((err) => {
+                    reject({
+                        code: 100,
+                        memo: err.message,
+                    });
+                });
         });
-      });
-    }
+    };
     
     // 更新点赞数量
-    const likeCountUpdate = function(replyId){
-      return new Promise(async function(resolve, reject){
-        let reply = AV.Object.createWithoutData('cms_reply', replyId);
-        reply.increment('likeCount', 1)
-        .set('updateId', '1')
-        .save(null, {fetchWhenSave: true})
-        .then(reply=>{   
-          console.log('likeCountUpdate', reply);   
-          resolve({
-            code: 0,
-            memo: '点赞成功',
-            data: {
-              likeCount : reply.attributes.likeCount
-            },
-          });
-        })
-        .catch(err=>{
-          reject({
-            code: 100,
-            memo: err.message,
-          });
+    const likeCountUpdate = function(replyId) {
+        return new Promise(async function(resolve, reject) {
+            let reply = AV.Object.createWithoutData('cms_reply', replyId);
+            reply
+                .increment('likeCount', 1)
+                .set('updateId', '1')
+                .save(null, { fetchWhenSave: true })
+                .then((reply) => {
+                    //console.log('likeCountUpdate', reply);
+                    resolve({
+                        code: 0,
+                        memo: '点赞成功',
+                        data: {
+                            likeCount: reply.attributes.likeCount,
+                        },
+                    });
+                })
+                .catch((err) => {
+                    reject({
+                        code: 100,
+                        memo: err.message,
+                    });
+                });
         });
-      });
-    }
+    };
+    
     
     
     ;// CONCATENATED MODULE: ./src/index.js
@@ -1705,8 +1828,15 @@
     const $postbox = document.querySelector('#postbox');
     const $appRoot = document.createElement('div');
     
+    // 加载elementUI样式
+    const $elementCSS = document.createElement('link');
+    $elementCSS.rel = 'stylesheet';
+    $elementCSS.text = 'text/css';
+    $elementCSS.href = 'https://unpkg.com/element-ui/lib/theme-chalk/index.css';
+    document.head.appendChild($elementCSS);
+    
     // 加载elementUI字体图标
-    let $elementIconFont = document.createElement('style');
+    const $elementIconFont = document.createElement('style');
     $elementIconFont.innerHTML = `@font-face {
       font-family:element-icons;
       font-weight:400;
@@ -1733,19 +1863,19 @@
             let key = this.storageKey;
             try {
                 chrome.storage.sync.set({ [key]: value }, function() {});
-            } catch(err) {
+            } catch (err) {
                 GM_setValue(key, value);
             }
         },
         async getStorage() {
             var key = this.storageKey;
-
+    
             return new Promise((resolve, reject) => {
                 try {
                     chrome.storage.sync.get([key], function(result) {
                         resolve(result[key]);
                     });
-                } catch(err) {
+                } catch (err) {
                     if (GM_getValue(key) && GM_getValue(key).length > 0) {
                         resolve(GM_getValue(key));
                     }
@@ -1761,16 +1891,16 @@
             });
         },
         getName: function() {
-            try{
-                return chrome.runtime.getManifest().name
-            } catch(err){
+            try {
+                return chrome.runtime.getManifest().name;
+            } catch (err) {
                 return GM_info['script']['name'];
             }
         },
         getVersion: function() {
-            try{
-                return chrome.runtime.getManifest().version
-            } catch(err){
+            try {
+                return chrome.runtime.getManifest().version;
+            } catch (err) {
                 return GM_info['script']['version'];
             }
         },
