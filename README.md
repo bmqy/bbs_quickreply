@@ -29,6 +29,6 @@ v0.2.0.3更新：
 感谢[mogoyu](https://greasyfork.org/zh-CN/forum/profile/mogoyu)的热心反馈！
 
 ##  联系作者
-[@chanel](https://t.me/tgbmqy)
+[@chanel](https://t.me/tcbmqy)
 
-[@group](https://t.me/joinchat/FkWz4qftg94RFCb7)
+[@group](https://t.me/tgbmqy)
