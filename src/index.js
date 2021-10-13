@@ -7,11 +7,11 @@ const $postbox = document.querySelector('#postbox');
 const $appRoot = document.createElement('div');
 
 // 加载elementUI样式
-const $elementCSS = document.createElement('link');
-$elementCSS.rel = 'stylesheet';
-$elementCSS.text = 'text/css';
-$elementCSS.href = 'https://unpkg.com/element-ui/lib/theme-chalk/index.css';
-document.head.appendChild($elementCSS);
+try {
+    GM_addStyle(GM_getResourceText("element-ui"));
+} catch (error) {
+    console.log('No GM_addStyle');
+}
 
 // 加载elementUI字体图标
 const $elementIconFont = document.createElement('style');
