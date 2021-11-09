@@ -55,44 +55,50 @@
 					</el-card>
 				</el-col>
 				<el-col :span="15">
-					<el-card class="box-card" shadow="never">
+					<el-card class="box-card" shadow="never" :body-style="{padding: '0 20px 20px'}">
 						<div slot="header" class="clearfix">
 							<span>网友分享的</span>
 						</div>
-						<ul class="list" v-if="systemList.length > 0">
-							<li
-								v-for="(item, index) in systemList"
-								:key="index"
-							>
-								<div class="list-left">
-									<div class="list-number">
-										{{ `[${item.replyId}] ` }}
-									</div>
-									<div class="list-title">
-										{{ `${item.content}` }}
-									</div>
-								</div>
-								<div class="list-right">
-									<el-tooltip
+
+                        <el-table
+                            ref="filterTable"
+                            :data="systemList"
+                            style="width: 100%">
+                            <el-table-column
+                            prop="replyId"
+                            label="ID"
+                            width="80">
+                            </el-table-column>
+                            <el-table-column
+                            prop="content"
+                            label="内容">
+                            </el-table-column>
+                            <el-table-column
+                            prop="likeCount"
+                            sortable
+                            width="100"
+                            label="点赞">
+                            <template slot-scope="scope">
+                                <el-tag type="info" size="mini">{{scope.row.likeCount}}</el-tag>
+                            </template>
+                            </el-table-column>
+                            <el-table-column
+                            label="操作"
+                            width="100">
+                            <template slot-scope="scope">
+                                <el-tooltip
 										class="item"
 										effect="dark"
 										content="给个赞"
 										placement="top-start"
 									>
-										<el-badge
-											:value="item.likeCount"
-											type="info"
-											:max="99"
-											class="item"
-										>
-											<el-button
-												type="success"
-												size="mini"
-												icon="el-icon-thumb"
-												circle
-												@click="likeReply(index)"
-											></el-button>
-										</el-badge>
+                                        <el-button
+                                            type="success"
+                                            size="mini"
+                                            icon="el-icon-thumb"
+                                            circle
+                                            @click="likeReply(scope.$index)"
+                                        ></el-button>
 									</el-tooltip>
 									<el-tooltip
 										class="item"
@@ -105,12 +111,13 @@
 											size="mini"
 											icon="el-icon-star-off"
 											circle
-											@click="collectReply(index)"
+											@click="collectReply(scope.index)"
 										></el-button>
 									</el-tooltip>
-								</div>
-							</li>
-						</ul>
+                            </template>                            
+                            </el-table-column>
+                        </el-table>
+
 						<el-pagination
 							background
 							layout="prev, pager, next"
@@ -330,4 +337,7 @@
 	.clearfix:after {
 		clear: both;
 	}
+    .el-pagination {
+        padding: 15px 5px 0;
+    }
 </style>
