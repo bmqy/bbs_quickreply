@@ -64,7 +64,7 @@
     
     var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
     // Module
-    ___CSS_LOADER_EXPORT___.push([module.id, ".app-margin-right-30[data-v-67d05af9] {\n  margin-right: 30px;\n}\n.list-left[data-v-67d05af9] {\n  padding-right: 15px;\n  display: flex;\n  flex: 1;\n  align-items: stretch;\n  justify-content: start;\n}\n.list-number[data-v-67d05af9] {\n  margin-right: 5px;\n  color: #909399;\n}\n.list-title[data-v-67d05af9] {\n  flex: 1;\n  font-weight: normal;\n}\n.list-right[data-v-67d05af9] {\n  min-width: 70px;\n}\n.list-right .el-badge.item[data-v-67d05af9] {\n  margin-right: 30px;\n}\n.list li[data-v-67d05af9] {\n  margin-bottom: 10px;\n  font-size: 14px;\n  line-height: 30px;\n  display: flex;\n  align-items: flex-start;\n  justify-content: space-between;\n}\n.list li[data-v-67d05af9]:hover {\n  background-color: #f5f5f5;\n}\n.tips[data-v-67d05af9] {\n  color: #909399;\n  font-size: 14px;\n  text-align: center;\n}\n.addReplyBox[data-v-67d05af9] {\n  margin-top: 15px;\n  padding-top: 10px;\n  border-top: 1px dashed #ccc;\n}\n.box-card .el-card__header[data-v-67d05af9] {\n  padding: 10px 20px;\n}\n.box-card .el-card__header span[data-v-67d05af9] {\n  font-size: 14px;\n}\n.clearfix[data-v-67d05af9]:before,\n.clearfix[data-v-67d05af9]:after {\n  display: table;\n  content: '';\n}\n.clearfix[data-v-67d05af9]:after {\n  clear: both;\n}\n", ""]);
+    ___CSS_LOADER_EXPORT___.push([module.id, ".app-margin-right-30[data-v-67d05af9] {\n  margin-right: 30px;\n}\n.list-left[data-v-67d05af9] {\n  padding-right: 15px;\n  display: flex;\n  flex: 1;\n  align-items: stretch;\n  justify-content: start;\n}\n.list-number[data-v-67d05af9] {\n  margin-right: 5px;\n  color: #909399;\n}\n.list-title[data-v-67d05af9] {\n  flex: 1;\n  font-weight: normal;\n}\n.list-right[data-v-67d05af9] {\n  min-width: 70px;\n}\n.list-right .el-badge.item[data-v-67d05af9] {\n  margin-right: 30px;\n}\n.list li[data-v-67d05af9] {\n  margin-bottom: 10px;\n  font-size: 14px;\n  line-height: 30px;\n  display: flex;\n  align-items: flex-start;\n  justify-content: space-between;\n}\n.list li[data-v-67d05af9]:hover {\n  background-color: #f5f5f5;\n}\n.tips[data-v-67d05af9] {\n  color: #909399;\n  font-size: 14px;\n  text-align: center;\n}\n.addReplyBox[data-v-67d05af9] {\n  margin-top: 15px;\n  padding-top: 10px;\n  border-top: 1px dashed #ccc;\n}\n.box-card .el-card__header[data-v-67d05af9] {\n  padding: 10px 20px;\n}\n.box-card .el-card__header span[data-v-67d05af9] {\n  font-size: 14px;\n}\n.clearfix[data-v-67d05af9]:before,\n.clearfix[data-v-67d05af9]:after {\n  display: table;\n  content: '';\n}\n.clearfix[data-v-67d05af9]:after {\n  clear: both;\n}\n.el-pagination[data-v-67d05af9] {\n  padding: 15px 5px 0;\n}\n", ""]);
     // Exports
     /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
     
@@ -1062,17 +1062,17 @@
                                     _c("div", { staticClass: "list-left" }, [
                                       _c("div", { staticClass: "list-number" }, [
                                         _vm._v(
-                                          "\n\t\t\t\t\t\t\t\t\t" +
+                                          "\n\t\t\t\t\t\t\t\t\t\t" +
                                             _vm._s(index + 1 + "、") +
-                                            "\n\t\t\t\t\t\t\t\t"
+                                            "\n\t\t\t\t\t\t\t\t\t"
                                         )
                                       ]),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "list-title" }, [
                                         _vm._v(
-                                          "\n\t\t\t\t\t\t\t\t\t" +
+                                          "\n\t\t\t\t\t\t\t\t\t\t" +
                                             _vm._s("" + item) +
-                                            "\n\t\t\t\t\t\t\t\t"
+                                            "\n\t\t\t\t\t\t\t\t\t"
                                         )
                                       ])
                                     ]),
@@ -1148,7 +1148,7 @@
                           _vm.myList.length == 0
                             ? _c("p", { staticClass: "tips" }, [
                                 _vm._v(
-                                  "\n\t\t\t\t\t\t未设置快速回帖内容!\n\t\t\t\t\t"
+                                  "\n\t\t\t\t\t\t\t未设置快速回帖内容!\n\t\t\t\t\t\t"
                                 )
                               ])
                             : _vm._e()
@@ -1164,7 +1164,13 @@
                     [
                       _c(
                         "el-card",
-                        { staticClass: "box-card", attrs: { shadow: "never" } },
+                        {
+                          staticClass: "box-card",
+                          attrs: {
+                            shadow: "never",
+                            "body-style": { padding: "0 20px 20px" }
+                          }
+                        },
                         [
                           _c(
                             "div",
@@ -1176,34 +1182,52 @@
                             [_c("span", [_vm._v("网友分享的")])]
                           ),
                           _vm._v(" "),
-                          _vm.systemList.length > 0
-                            ? _c(
-                                "ul",
-                                { staticClass: "list" },
-                                _vm._l(_vm.systemList, function(item, index) {
-                                  return _c("li", { key: index }, [
-                                    _c("div", { staticClass: "list-left" }, [
-                                      _c("div", { staticClass: "list-number" }, [
-                                        _vm._v(
-                                          "\n\t\t\t\t\t\t\t\t\t" +
-                                            _vm._s("[" + item.replyId + "] ") +
-                                            "\n\t\t\t\t\t\t\t\t"
+                          _c(
+                            "el-table",
+                            {
+                              ref: "filterTable",
+                              staticStyle: { width: "100%" },
+                              attrs: { data: _vm.systemList }
+                            },
+                            [
+                              _c("el-table-column", {
+                                attrs: { prop: "replyId", label: "ID", width: "80" }
+                              }),
+                              _vm._v(" "),
+                              _c("el-table-column", {
+                                attrs: { prop: "content", label: "内容" }
+                              }),
+                              _vm._v(" "),
+                              _c("el-table-column", {
+                                attrs: {
+                                  prop: "likeCount",
+                                  sortable: "",
+                                  width: "100",
+                                  label: "点赞"
+                                },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "default",
+                                    fn: function(scope) {
+                                      return [
+                                        _c(
+                                          "el-tag",
+                                          { attrs: { type: "info", size: "mini" } },
+                                          [_vm._v(_vm._s(scope.row.likeCount))]
                                         )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("div", { staticClass: "list-title" }, [
-                                        _vm._v(
-                                          "\n\t\t\t\t\t\t\t\t\t" +
-                                            _vm._s("" + item.content) +
-                                            "\n\t\t\t\t\t\t\t\t"
-                                        )
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "list-right" },
-                                      [
+                                      ]
+                                    }
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("el-table-column", {
+                                attrs: { label: "操作", width: "100" },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "default",
+                                    fn: function(scope) {
+                                      return [
                                         _c(
                                           "el-tooltip",
                                           {
@@ -1215,33 +1239,19 @@
                                             }
                                           },
                                           [
-                                            _c(
-                                              "el-badge",
-                                              {
-                                                staticClass: "item",
-                                                attrs: {
-                                                  value: item.likeCount,
-                                                  type: "info",
-                                                  max: 99
-                                                }
+                                            _c("el-button", {
+                                              attrs: {
+                                                type: "success",
+                                                size: "mini",
+                                                icon: "el-icon-thumb",
+                                                circle: ""
                                               },
-                                              [
-                                                _c("el-button", {
-                                                  attrs: {
-                                                    type: "success",
-                                                    size: "mini",
-                                                    icon: "el-icon-thumb",
-                                                    circle: ""
-                                                  },
-                                                  on: {
-                                                    click: function($event) {
-                                                      return _vm.likeReply(index)
-                                                    }
-                                                  }
-                                                })
-                                              ],
-                                              1
-                                            )
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.likeReply(scope.$index)
+                                                }
+                                              }
+                                            })
                                           ],
                                           1
                                         ),
@@ -1266,21 +1276,23 @@
                                               },
                                               on: {
                                                 click: function($event) {
-                                                  return _vm.collectReply(index)
+                                                  return _vm.collectReply(
+                                                    scope.index
+                                                  )
                                                 }
                                               }
                                             })
                                           ],
                                           1
                                         )
-                                      ],
-                                      1
-                                    )
-                                  ])
-                                }),
-                                0
-                              )
-                            : _vm._e(),
+                                      ]
+                                    }
+                                  }
+                                ])
+                              })
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
                           _c("el-pagination", {
                             attrs: {
@@ -1351,6 +1363,13 @@
     ;// CONCATENATED MODULE: ./src/Set.vue?vue&type=template&id=67d05af9&scoped=true&
     
     ;// CONCATENATED MODULE: ./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/Set.vue?vue&type=script&lang=js&
+    //
+    //
+    //
+    //
+    //
+    //
+    //
     //
     //
     //
