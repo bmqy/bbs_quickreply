@@ -34,7 +34,7 @@
 		<el-dialog
 			:visible.sync="setShow"
 			:title="$app.getName()"
-			width="90%"
+            width="75%"
 			:show-close="true"
 			append-to-body
 		>
@@ -248,7 +248,21 @@
 	.quickReplyBox {
 		position: relative;
 	}
-	/deep/ .el-dialog__body {
+    /deep/ .el-dialog{
+        display: flex;
+        flex-direction: column;
+        margin:0 !important;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        max-height: calc(100% - 30px);
+        max-width: 1300px;
+        min-width: 1000px;
+    }
+    /deep/ .el-dialog__body{
+        flex: 1;
+        overflow: auto;
 		padding: 0;
 	}
 	.app-dialog-foot {

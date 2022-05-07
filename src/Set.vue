@@ -63,6 +63,8 @@
                         <el-table
                             ref="filterTable"
                             :data="systemList"
+                            size="small"
+                            stripe
                             style="width: 100%">
                             <el-table-column
                             prop="replyId"
@@ -111,7 +113,7 @@
 											size="mini"
 											icon="el-icon-star-off"
 											circle
-											@click="collectReply(scope.index)"
+											@click="collectReply(scope.$index)"
 										></el-button>
 									</el-tooltip>
                             </template>                            
@@ -122,6 +124,7 @@
 							background
 							layout="prev, pager, next"
 							:page-size="10"
+                            :pager-count="5"
 							@current-change="currentPageChange"
 							:total="systemListCount"
 						>
@@ -300,12 +303,14 @@
 			}
 		}
 		li {
-			margin-bottom: 10px;
-			font-size: 14px;
-			line-height: 30px;
-			display: flex;
-			align-items: flex-start;
-			justify-content: space-between;
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+            font-size: 13px;
+            line-height: 30px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            border-bottom: 1px solid #ebeef5;
 			&:hover {
 				background-color: #f5f5f5;
 			}
