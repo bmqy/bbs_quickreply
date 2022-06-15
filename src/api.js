@@ -6,9 +6,11 @@ AV.init({
 });
 
 // 获取网友分享的回复
-const selectList = function(skip = 0) {
+const selectList = function(skip = 0, prop='replyId', order='descending') {
 	return AV.Cloud.run('selectList', {
-        skip: skip
+        skip: skip,
+        prop: prop,
+        order: order
     }).then(
 		function(res) {
 			// 处理结果

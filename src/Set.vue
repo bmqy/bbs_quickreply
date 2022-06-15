@@ -1,158 +1,85 @@
 <template>
-	<div class="setBox">
-		<el-card class="box-card" shadow="never">
-			<el-row :gutter="30">
-				<el-col :span="9">
-					<el-card class="box-card" shadow="never">
-						<div slot="header" class="clearfix">
-							<span>我在用的</span>
-						</div>
-						<ul class="list" v-if="myList.length > 0">
-							<li v-for="(item, index) in myList" :key="index">
-								<div class="list-left">
-									<div class="list-number">
-										{{ `${index + 1}、` }}
-									</div>
-									<div class="list-title">
-										{{ `${item}` }}
-									</div>
-								</div>
-								<div class="list-right">
-									<el-tooltip
-										class="item"
-										effect="dark"
-										content="分享它"
-										placement="top-start"
-									>
-										<el-button
-											type="success"
-											size="mini"
-											icon="el-icon-s-promotion"
-											circle
-											@click="shareReply(index)"
-										></el-button>
-									</el-tooltip>
-									<el-tooltip
-										class="item"
-										effect="dark"
-										content="移除"
-										placement="top-start"
-									>
-										<el-button
-											type="danger"
-											size="mini"
-											icon="el-icon-minus"
-											circle
-											@click="delReply(index)"
-										></el-button>
-									</el-tooltip>
-								</div>
-							</li>
-						</ul>
-						<p v-if="myList.length == 0" class="tips">
-							未设置快速回帖内容!
-						</p>
-					</el-card>
-				</el-col>
-				<el-col :span="15">
-					<el-card class="box-card" shadow="never" :body-style="{padding: '0 20px 20px'}">
-						<div slot="header" class="clearfix">
-							<span>网友分享的</span>
-						</div>
+    <div class="setBox">
+        <el-card class="box-card" shadow="never">
+            <el-row :gutter="30">
+                <el-col :span="9">
+                    <el-card class="box-card" shadow="never">
+                        <div slot="header" class="clearfix">
+                            <span>我在用的</span>
+                        </div>
+                        <ul class="list" v-if="myList.length > 0">
+                            <li v-for="(item, index) in myList" :key="index">
+                                <div class="list-left">
+                                    <div class="list-number">
+                                        {{ `${index + 1}、` }}
+                                    </div>
+                                    <div class="list-title">
+                                        {{ `${item}` }}
+                                    </div>
+                                </div>
+                                <div class="list-right">
+                                    <el-tooltip class="item" effect="dark" content="分享它" placement="top-start">
+                                        <el-button type="success" size="mini" icon="el-icon-s-promotion" circle
+                                            @click="shareReply(index)"></el-button>
+                                    </el-tooltip>
+                                    <el-tooltip class="item" effect="dark" content="移除" placement="top-start">
+                                        <el-button type="danger" size="mini" icon="el-icon-minus" circle
+                                            @click="delReply(index)"></el-button>
+                                    </el-tooltip>
+                                </div>
+                            </li>
+                        </ul>
+                        <p v-if="myList.length == 0" class="tips">
+                            未设置快速回帖内容!
+                        </p>
+                    </el-card>
+                </el-col>
+                <el-col :span="15">
+                    <el-card class="box-card" shadow="never" :body-style="{padding: '0 20px 20px'}">
+                        <div slot="header" class="clearfix">
+                            <span>网友分享的</span>
+                        </div>
 
-                        <el-table
-                            ref="filterTable"
-                            :data="systemList"
-                            size="small"
-                            stripe
+                        <el-table ref="filterTable" :data="systemList" size="small" stripe v-loading="loading" @sort-change="sortChange">
                             style="width: 100%">
-                            <el-table-column
-                            prop="replyId"
-                            label="ID"
-                            width="80">
+                            <el-table-column prop="replyId" label="ID" width="80">
                             </el-table-column>
-                            <el-table-column
-                            prop="content"
-                            label="内容">
+                            <el-table-column prop="content" label="内容">
                             </el-table-column>
-                            <el-table-column
-                            prop="likeCount"
-                            sortable
-                            width="100"
-                            label="点赞">
-                            <template slot-scope="scope">
-                                <el-tag type="info" size="mini">{{scope.row.likeCount}}</el-tag>
-                            </template>
+                            <el-table-column prop="likeCount" sortable="custom" width="100" label="点赞">
+                                <template slot-scope="scope">
+                                    <el-tag type="info" size="mini">{{scope.row.likeCount}}</el-tag>
+                                </template>
                             </el-table-column>
-                            <el-table-column
-                            label="操作"
-                            width="100">
-                            <template slot-scope="scope">
-                                <el-tooltip
-										class="item"
-										effect="dark"
-										content="给个赞"
-										placement="top-start"
-									>
-                                        <el-button
-                                            type="success"
-                                            size="mini"
-                                            icon="el-icon-thumb"
-                                            circle
-                                            @click="likeReply(scope.$index)"
-                                        ></el-button>
-									</el-tooltip>
-									<el-tooltip
-										class="item"
-										effect="dark"
-										content="收藏进我的"
-										placement="top-start"
-									>
-										<el-button
-											type="danger"
-											size="mini"
-											icon="el-icon-star-off"
-											circle
-											@click="collectReply(scope.$index)"
-										></el-button>
-									</el-tooltip>
-                            </template>                            
+                            <el-table-column label="操作" width="100">
+                                <template slot-scope="scope">
+                                    <el-tooltip class="item" effect="dark" content="给个赞" placement="top-start">
+                                        <el-button type="success" size="mini" icon="el-icon-thumb" circle
+                                            @click="likeReply(scope.$index)"></el-button>
+                                    </el-tooltip>
+                                    <el-tooltip class="item" effect="dark" content="收藏进我的" placement="top-start">
+                                        <el-button type="danger" size="mini" icon="el-icon-star-off" circle
+                                            @click="collectReply(scope.$index)"></el-button>
+                                    </el-tooltip>
+                                </template>
                             </el-table-column>
                         </el-table>
 
-						<el-pagination
-							background
-							layout="prev, pager, next"
-							:page-size="10"
-                            :pager-count="5"
-							@current-change="currentPageChange"
-							:total="systemListCount"
-						>
-						</el-pagination>
-					</el-card>
-				</el-col>
-			</el-row>
+                        <el-pagination background layout="prev, pager, next" :page-size="10" :pager-count="5"
+                            @current-change="currentPageChange" :total="systemListCount">
+                        </el-pagination>
+                    </el-card>
+                </el-col>
+            </el-row>
 
-			<div class="addReplyBox">
-				<el-input
-					placeholder="请输入新的回复内容"
-					v-model="newReply"
-					:autosize="{ minRows: 1, maxRows: 3 }"
-					maxlength="100"
-					:show-word-limit="true"
-					resize="none"
-					clearable
-					class="input-with-select"
-				>
-					<el-button
-						slot="append"
-						icon="el-icon-plus"
-						@click="addReply"
-					></el-button>
-				</el-input>
-			</div>
-		</el-card>
-	</div>
+            <div class="addReplyBox">
+                <el-input placeholder="请输入新的回复内容" v-model="newReply" :autosize="{ minRows: 1, maxRows: 3 }"
+                    maxlength="100" :show-word-limit="true" resize="none" clearable class="input-with-select">
+                    <el-button slot="append" icon="el-icon-plus" @click="addReply"></el-button>
+                </el-input>
+            </div>
+        </el-card>
+    </div>
 </template>
 
 <script>
@@ -163,6 +90,7 @@
 				systemList: [],
 				systemListCount: 0,
 				showAddBox: false,
+                loading: false,
 				newReply: '',
 			};
 		},
@@ -177,11 +105,13 @@
 				this.myList = myListStorage && myListStorage.length > 0 ? myListStorage : [];
 			},
 			// 获取网友分享的回复列表
-			async getSystemList(skip = 0) {
+            async getSystemList(skip = 0, prop = 'replyId', order = 'descending') {
 				let vm = this;
-				let res = await vm.$api.selectList(skip);
+                vm.loading = true
+                let res = await vm.$api.selectList(skip, prop, order);
 				vm.systemList = res.data.totalCount > 0 ? res.data.list : [];
 				vm.systemListCount = res.data.totalCount;
+                vm.loading = false
 			},
 			// 监听分页
 			currentPageChange(current) {
@@ -189,6 +119,11 @@
 				let skip = (current - 1) * 10;
 				vm.getSystemList(skip);
 			},
+            // 变更排序
+            sortChange(e){
+                let vm = this;
+                vm.getSystemList(0, e.prop, e.order)
+            },
 			// 添加自定义回复
 			addReply() {
 				let vm = this;
