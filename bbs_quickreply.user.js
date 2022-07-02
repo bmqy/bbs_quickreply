@@ -25,7 +25,7 @@
 
 (function() {
   'use strict';
-/******/ (() => { // webpackBootstrap
+  /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 297:
@@ -1472,6 +1472,11 @@ Setvue_type_template_id_67d05af9_scoped_true_render._withStripped = true
 				showAddBox: false,
                 loading: false,
 				newReply: '',
+                queryData: {
+                    skip: 0,
+                    prop: 'replyId',
+                    order: 'descending',
+                }
 			};
 		},
 		created() {
@@ -1485,10 +1490,10 @@ Setvue_type_template_id_67d05af9_scoped_true_render._withStripped = true
 				this.myList = myListStorage && myListStorage.length > 0 ? myListStorage : [];
 			},
 			// 获取网友分享的回复列表
-            async getSystemList(skip = 0, prop = 'replyId', order = 'descending') {
+            async getSystemList() {
 				let vm = this;
                 vm.loading = true
-                let res = await vm.$api.selectList(skip, prop, order);
+                let res = await vm.$api.selectList(vm.queryData.skip, vm.queryData.prop, vm.queryData.order);
 				vm.systemList = res.data.totalCount > 0 ? res.data.list : [];
 				vm.systemListCount = res.data.totalCount;
                 vm.loading = false
@@ -1496,13 +1501,15 @@ Setvue_type_template_id_67d05af9_scoped_true_render._withStripped = true
 			// 监听分页
 			currentPageChange(current) {
 				let vm = this;
-				let skip = (current - 1) * 10;
-				vm.getSystemList(skip);
+                vm.queryData.skip = (current - 1) * 10;
+				vm.getSystemList();
 			},
             // 变更排序
             sortChange(e){
                 let vm = this;
-                vm.getSystemList(0, e.prop, e.order)
+                vm.queryData.prop = e.prop;
+                vm.queryData.order = e.order;
+                vm.getSystemList()
             },
 			// 添加自定义回复
 			addReply() {
