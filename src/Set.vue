@@ -127,8 +127,8 @@
             // 变更排序
             sortChange(e){
                 let vm = this;
-                vm.queryData.prop = e.prop;
-                vm.queryData.order = e.order;
+                vm.queryData.prop = e.order ? e.prop : 'replyId';
+                vm.queryData.order = e.order ? e.order : 'descending';
                 vm.getSystemList()
             },
 			// 添加自定义回复
