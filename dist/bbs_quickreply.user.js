@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         bbs_quickreply
+// @name         论坛快捷回帖
 // @namespace    bmqy.net
 // @version      3.0.0
 // @author       bmqy
