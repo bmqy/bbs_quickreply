@@ -1,14 +1,193 @@
+<script setup>
+const {proxy} = getCurrentInstance();
+const list = ref([]);
+const currentReply = ref('');
+const fwin_replyLoaded = ref(false);
+const hasEditor = ref(false);
+const lastClickElemet = ref(false);
+const setShow = ref(false);
+onBeforeMount(()=>{
+    getList();
+});
+
+// 获取APP自定义回复
+async function getList() {
+    let myListStorage = proxy.$storage.get();
+    list.value = myListStorage && myListStorage.length > 0 ? myListStorage : [];
+    currentReply.value = '';
+};
+// 打开APP设置面板
+function openSet() {
+    setShow.value = !setShow.value;
+};
+// 监听更新自定义回复
+function updateMyList() {
+    let myListStorage = proxy.$storage.get();
+    list.value = myListStorage;
+};
+// 设置回复内容
+function enterReply() {
+    if (fwin_replyLoaded) {
+        enterPostReply();
+    } else if (hasEditor) {
+        enterEditorReply();
+    } else {
+        enterFastPostReply();
+    }
+};
+// 设置楼层/右下角快速回复框内容
+function enterPostReply() {
+    // let $postmessage = document.querySelector('#postmessage');
+    // $postmessage.value = currentReply.value;
+};
+// 设置快速回复框内容
+function enterFastPostReply() {
+    try {
+        let $fastpostmessage = document.querySelector(
+            '#fastpostmessage'
+        );
+        $fastpostmessage.style.background = '';
+        $fastpostmessage.value = currentReply.value;
+    } catch (err) {
+        console.log('请检查发帖权限！');
+    }
+}
+// 设置高级回复框内容
+function enterEditorReply() {
+    let $editorIframe = document.querySelector('#e_iframe')
+        .contentWindow.document.body;
+    $editorIframe.style.background = '';
+    $editorIframe.innerHTML = currentReply.value;
+};
+// 点击楼层回复
+function fastreBindClick() {
+    document.querySelector('body').addEventListener(
+        'click',
+        (e) => {
+            let theElement = `fastre&${e.target.href}`;
+            if (
+                lastClickElemet.value != theElement &&
+                e.target.className == 'fastre'
+            ) {
+                lastClickElemet.value = theElement;
+                fwin_replyLoaded.value = false;
+            }
+        },
+        true
+    );
+};
+// 点击右下角快速回复按钮
+function replyfastBindClick() {
+    document.querySelector('body').addEventListener(
+        'click',
+        (e) => {
+            let theElement = `replyfast&${e.target.href}`;
+            if (
+                lastClickElemet.value != theElement &&
+                e.target.className == 'replyfast'
+            ) {
+                lastClickElemet.value = theElement;
+                fwin_replyLoaded.value = false;
+            }
+        },
+        true
+    );
+};
+// 点击楼层/右下角快速回复面板关闭按钮
+function flbcBindClick() {
+    document.querySelector('body').addEventListener(
+        'click',
+        (e) => {
+            let theElement = `flbc&${e.target.href}`;
+            if (
+                lastClickElemet.value != theElement &&
+                e.target.className == 'flbc'
+            ) {
+                lastClickElemet.value = theElement;
+                fwin_replyLoaded.value = false;
+            }
+        },
+        true
+    );
+};
+// 检测是否是高级回复
+function checkEditor() {
+    // hasEditor = document.querySelector('#e_iframe');
+}
+// 监听楼层回复面板加载完成
+function postReplyMutationObserver() {
+    let mos = new MutationObserver(function(mutations, observer) {
+        for (const mutation in mutations) {
+            if (Object.hasOwnProperty.call(mutations, mutation)) {
+                const element = mutations[mutation];
+                if (element.target.id == 'subjecthide') {
+                    fwin_replyLoaded.value = true;
+                }
+            }
+        }
+    });
+    mos.observe(document.querySelector('#append_parent'), {
+        attributes: true,
+        childList: true,
+        subtree: true,
+    });
+}
+
+const title = computed(()=> {
+    return `${proxy.$app.getName()}`;
+})
+const tips = computed(()=> {
+    return `${proxy.$app.getName()}设置`;
+})
+onMounted(()=> {
+    checkEditor();
+    postReplyMutationObserver();
+    enterReply();
+    fastreBindClick();
+    replyfastBindClick();
+    flbcBindClick();
+});
+watch(fwin_replyLoaded, (n)=>{
+    // 监听楼层回复面板显示状态
+    let vm = this;
+
+    if (n) {
+        let $floatlayout_reply = document.querySelector(
+            '#floatlayout_reply'
+        );
+        $floatlayout_reply.insertBefore(
+            vm.$el,
+            $floatlayout_reply.childNodes[0]
+        );
+        vm.enterPostReply();
+    } else {
+        let $fastposteditor = document.querySelector(
+            '#fastposteditor'
+        );
+        $fastposteditor.insertBefore(
+            vm.$el,
+            $fastposteditor.childNodes[0]
+        );
+    }
+});
+// 监听自定义回复变化
+watch(currentReply, (n)=> {
+    n && enterReply();
+})
+</script>
+
 <template>
 	<div class="quickReplyBox">
 		<transition name="el-fade-in-linear">
-			<el-form :inline="true" size="small" class="demo-form-inline">
+			<el-form :inline="true" class="demo-form-inline">
 				<el-form-item>
-					<div slot="label">
+					<div slot="label" class="quickReplyBoxTitle">
 						{{ `${title}: ` }}
 					</div>
 					<el-select
 						v-model="currentReply"
 						placeholder="请选择"
+                        no-data-text="这里啥都没有..."
 						@change="enterReply"
 					>
 						<el-option
@@ -23,7 +202,7 @@
 					<el-button
 						type="primary"
 						class="btnQuickReplySet"
-						icon="el-icon-s-tools"
+						icon="tools"
 						@click="openSet"
 						:title="tips"
 					></el-button>
@@ -32,252 +211,66 @@
 		</transition>
 
 		<el-dialog
-			:visible.sync="setShow"
+			v-model="setShow"
 			:title="$app.getName()"
             width="75%"
 			:show-close="true"
 			append-to-body
 		>
-			<set @updateMyList="updateMyList" />
+            <template #default>
+                <app-set @updateMyList="updateMyList" />
+            </template>
 
-			<div slot="footer">
-				<span class="app-dialog-foot">{{
-					`ver: ${$app.getVersion()}`
-				}}</span>
-			</div>
+			<template #footer>
+				<span class="app-dialog-foot">
+                    {{ `ver: ${$app.getVersion()}` }}
+				</span>
+			</template>
 		</el-dialog>
 	</div>
 </template>
-<script>
-	export default {
-		data() {
-			return {
-				list: [],
-				currentReply: '',
-				fwin_replyLoaded: false, // 弹层回复面板打开状态
-				fwin_replyLoading: false, // 弹层回复面板加载状态
-				hasEditor: false, // 是否打开了高级回复
-				lastClickElemet: '', // 最后点击的元素
-				setShow: false,
-			};
-		},
-		created() {
-			this.getList();
-		},
-		methods: {
-			// 获取APP自定义回复
-			async getList() {
-				let myListStorage = await this.$app.getStorage();
-				this.list = myListStorage && myListStorage.length > 0 ? myListStorage : [];
-				this.currentReply = this.list[0] || '';
-			},
-			// 打开APP设置面板
-			openSet() {
-				this.setShow = !this.setShow;
-			},
-			// 监听更新自定义回复
-			async updateMyList() {
-				let myListStorage = await this.$app.getStorage();
-				this.list = myListStorage;
-			},
-			// 设置回复内容
-			enterReply() {
-				let vm = this;
-				if (vm.fwin_replyLoaded) {
-					vm.enterPostReply();
-				} else if (vm.hasEditor) {
-					vm.enterEditorReply();
-				} else {
-					vm.enterFastPostReply();
-				}
-			},
-			// 设置楼层/右下角快速回复框内容
-			enterPostReply() {
-				let vm = this;
-				let $postmessage = document.querySelector('#postmessage');
-				$postmessage.value = vm.currentReply;
-			},
-			// 设置快速回复框内容
-			enterFastPostReply() {
-				let vm = this;
-				try {
-					let $fastpostmessage = document.querySelector(
-						'#fastpostmessage'
-					);
-					$fastpostmessage.style.background = '';
-					$fastpostmessage.value = vm.currentReply;
-				} catch (err) {
-					console.log('请检查发帖权限！');
-				}
-			},
-			// 设置高级回复框内容
-			enterEditorReply() {
-				let vm = this;
-				let $editorIframe = document.querySelector('#e_iframe')
-					.contentWindow.document.body;
-				$editorIframe.style.background = '';
-				$editorIframe.innerHTML = vm.currentReply;
-			},
-			// 点击楼层回复
-			fastreBindClick() {
-				let vm = this;
-				document.querySelector('body').addEventListener(
-					'click',
-					(e) => {
-						let theElement = `fastre&${e.target.href}`;
-						if (
-							vm.lastClickElemet != theElement &&
-							e.target.className == 'fastre'
-						) {
-							vm.lastClickElemet = theElement;
-							vm.fwin_replyLoaded = false;
-						}
-					},
-					true
-				);
-			},
-			// 点击右下角快速回复按钮
-			replyfastBindClick() {
-				let vm = this;
-				document.querySelector('body').addEventListener(
-					'click',
-					(e) => {
-						let theElement = `replyfast&${e.target.href}`;
-						if (
-							vm.lastClickElemet != theElement &&
-							e.target.className == 'replyfast'
-						) {
-							vm.lastClickElemet = theElement;
-							vm.fwin_replyLoaded = false;
-						}
-					},
-					true
-				);
-			},
-			// 点击楼层/右下角快速回复面板关闭按钮
-			flbcBindClick() {
-				let vm = this;
-				document.querySelector('body').addEventListener(
-					'click',
-					(e) => {
-						let theElement = `flbc&${e.target.href}`;
-						if (
-							vm.lastClickElemet != theElement &&
-							e.target.className == 'flbc'
-						) {
-							vm.lastClickElemet = theElement;
-							vm.fwin_replyLoaded = false;
-						}
-					},
-					true
-				);
-			},
-			// 检测是否是高级回复
-			checkEditor() {
-				this.hasEditor = document.querySelector('#e_iframe');
-			},
-			// 监听楼层回复面板加载完成
-			postReplyMutationObserver() {
-				let vm = this;
-				let mos = new MutationObserver(function(mutations, observer) {
-					for (const mutation in mutations) {
-						if (Object.hasOwnProperty.call(mutations, mutation)) {
-							const element = mutations[mutation];
-							if (element.target.id == 'subjecthide') {
-								vm.fwin_replyLoaded = true;
-							}
-						}
-					}
-				});
-				mos.observe(document.querySelector('#append_parent'), {
-					attributes: true,
-					childList: true,
-					subtree: true,
-				});
-			},
-		},
-		computed: {
-			title() {
-				return this.$app.getName();
-			},
-			tips() {
-				return `${this.$app.getName()}设置`;
-			},
-		},
-		mounted() {
-			this.checkEditor();
-			this.postReplyMutationObserver();
-			this.enterReply();
-			this.fastreBindClick();
-			this.replyfastBindClick();
-			this.flbcBindClick();
-		},
-		watch: {
-			// 监听楼层回复面板显示状态
-			fwin_replyLoaded(n, o) {
-				let vm = this;
 
-				if (n) {
-					let $floatlayout_reply = document.querySelector(
-						'#floatlayout_reply'
-					);
-					$floatlayout_reply.insertBefore(
-						vm.$el,
-						$floatlayout_reply.childNodes[0]
-					);
-					vm.enterPostReply();
-				} else {
-					let $fastposteditor = document.querySelector(
-						'#fastposteditor'
-					);
-					$fastposteditor.insertBefore(
-						vm.$el,
-						$fastposteditor.childNodes[0]
-					);
-				}
-			},
-			// 监听自定义回复变化
-			currentReply(n, o) {
-				n && this.enterReply();
-			},
-		},
-	};
-</script>
+<style scoped lang="scss">
+.quickReplyBox {
+    position: relative;
+}
 
-<style scoped lang="less">
-	.quickReplyBox {
-		position: relative;
-	}
-    /deep/ .el-dialog{
-        display: flex;
-        flex-direction: column;
-        margin:0 !important;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        max-height: calc(100% - 30px);
-        max-width: 1300px;
-        min-width: 1000px;
-    }
-    /deep/ .el-dialog__body{
-        flex: 1;
-        overflow: auto;
-		padding: 0;
-	}
-	.app-dialog-foot {
-		color: #909399;
-		font-size: 14px;
-	}
-	.el-form-item__label div {
-		font-weight: bold;
-		color: red;
-	}
-	.el-form-item--mini.el-form-item,
-	.el-form-item--small.el-form-item {
-		margin-bottom: 10px;
-	}
-	.el-select {
-		width: 300px;
-	}
+v-deep .el-dialog {
+    display: flex;
+    flex-direction: column;
+    margin: 0 !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: calc(100% - 30px);
+    max-width: 1300px;
+    min-width: 1000px;
+}
+
+v-deep .el-dialog__body {
+    flex: 1;
+    overflow: auto;
+    padding: 0;
+}
+
+.app-dialog-foot {
+    color: #909399;
+    font-size: 14px;
+}
+
+.quickReplyBoxTitle {
+    margin-right: 10px;
+    font-weight: bold;
+    color: red;
+}
+
+.el-form-item--mini.el-form-item,
+.el-form-item--small.el-form-item {
+    margin-bottom: 10px;
+}
+
+.el-select {
+    width: 300px;
+}
 </style>
