@@ -27,9 +27,9 @@ function updateMyList() {
 };
 // 设置回复内容
 function enterReply() {
-    if (fwin_replyLoaded) {
+    if (fwin_replyLoaded.value) {
         enterPostReply();
-    } else if (hasEditor) {
+    } else if (hasEditor.value) {
         enterEditorReply();
     } else {
         enterFastPostReply();
@@ -37,8 +37,8 @@ function enterReply() {
 };
 // 设置楼层/右下角快速回复框内容
 function enterPostReply() {
-    // let $postmessage = document.querySelector('#postmessage');
-    // $postmessage.value = currentReply.value;
+    let $postmessage = document.querySelector('#postmessage');
+    $postmessage.value = currentReply.value;
 };
 // 设置快速回复框内容
 function enterFastPostReply() {
@@ -112,7 +112,7 @@ function flbcBindClick() {
 };
 // 检测是否是高级回复
 function checkEditor() {
-    // hasEditor = document.querySelector('#e_iframe');
+    hasEditor.value = document.querySelector('#e_iframe');
 }
 // 监听楼层回复面板加载完成
 function postReplyMutationObserver() {
@@ -149,23 +149,21 @@ onMounted(()=> {
 });
 watch(fwin_replyLoaded, (n)=>{
     // 监听楼层回复面板显示状态
-    let vm = this;
-
     if (n) {
         let $floatlayout_reply = document.querySelector(
             '#floatlayout_reply'
         );
         $floatlayout_reply.insertBefore(
-            vm.$el,
+            proxy.$el,
             $floatlayout_reply.childNodes[0]
         );
-        vm.enterPostReply();
+        enterPostReply();
     } else {
         let $fastposteditor = document.querySelector(
             '#fastposteditor'
         );
         $fastposteditor.insertBefore(
-            vm.$el,
+            proxy.$el,
             $fastposteditor.childNodes[0]
         );
     }
