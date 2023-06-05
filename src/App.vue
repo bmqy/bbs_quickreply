@@ -54,10 +54,11 @@ function enterFastPostReply() {
 }
 // 设置高级回复框内容
 function enterEditorReply() {
+    let $editorTextarea = document.querySelector('#e_textarea');
     let $editorIframe = document.querySelector('#e_iframe')
         .contentWindow.document.body;
     $editorIframe.style.background = '';
-    $editorIframe.innerHTML = currentReply.value;
+    $editorIframe.innerHTML = currentReply.value || $editorTextarea.value;
 };
 // 点击楼层回复
 function fastreBindClick() {
