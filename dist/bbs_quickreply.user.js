@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.0.2
+// @version      3.0.3
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -30,7 +30,7 @@
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
-(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' .quickReplyBox[data-v-be1ec049]{position:relative}v-deep .el-dialog[data-v-be1ec049]{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}v-deep .el-dialog__body[data-v-be1ec049]{flex:1;overflow:auto;padding:0}.app-dialog-foot[data-v-be1ec049]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-be1ec049]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-be1ec049],.el-form-item--small.el-form-item[data-v-be1ec049]{margin-bottom:10px}.el-select[data-v-be1ec049]{width:300px}.app-margin-right-30[data-v-340d6dc3]{margin-right:30px}.list-left[data-v-340d6dc3]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-340d6dc3]{margin-right:5px;color:#909399}.list-title[data-v-340d6dc3]{flex:1;font-weight:400}.list-right[data-v-340d6dc3]{min-width:70px}.list-right .el-badge.item[data-v-340d6dc3]{margin-right:30px}.list li[data-v-340d6dc3]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-340d6dc3]:hover{background-color:#f5f5f5}.tips[data-v-340d6dc3]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-340d6dc3]{margin-left:20px;text-align:left}.addReplyBox[data-v-340d6dc3]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-340d6dc3]{padding:10px 20px}.box-card .el-card__header span[data-v-340d6dc3]{font-size:14px}.clearfix[data-v-340d6dc3]:before,.clearfix[data-v-340d6dc3]:after{display:table;content:""}.clearfix[data-v-340d6dc3]:after{clear:both}.el-pagination[data-v-340d6dc3]{padding:15px 5px 0} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-3bc25365]{position:relative}v-deep .el-dialog[data-v-3bc25365]{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}v-deep .el-dialog__body[data-v-3bc25365]{flex:1;overflow:auto;padding:0}.app-dialog-foot[data-v-3bc25365]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-3bc25365]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-3bc25365],.el-form-item--small.el-form-item[data-v-3bc25365]{margin-bottom:10px}.el-select[data-v-3bc25365]{width:300px}.app-margin-right-30[data-v-340d6dc3]{margin-right:30px}.list-left[data-v-340d6dc3]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-340d6dc3]{margin-right:5px;color:#909399}.list-title[data-v-340d6dc3]{flex:1;font-weight:400}.list-right[data-v-340d6dc3]{min-width:70px}.list-right .el-badge.item[data-v-340d6dc3]{margin-right:30px}.list li[data-v-340d6dc3]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-340d6dc3]:hover{background-color:#f5f5f5}.tips[data-v-340d6dc3]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-340d6dc3]{margin-left:20px;text-align:left}.addReplyBox[data-v-340d6dc3]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-340d6dc3]{padding:10px 20px}.box-card .el-card__header span[data-v-340d6dc3]{font-size:14px}.clearfix[data-v-340d6dc3]:before,.clearfix[data-v-340d6dc3]:after{display:table;content:""}.clearfix[data-v-340d6dc3]:after{clear:both}.el-pagination[data-v-340d6dc3]{padding:15px 5px 0} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -98,13 +98,17 @@
         list.value = myListStorage;
       }
       function enterReply() {
-        if (fwin_replyLoaded)
-          ;
-        else if (hasEditor) {
+        if (fwin_replyLoaded.value) {
+          enterPostReply();
+        } else if (hasEditor.value) {
           enterEditorReply();
         } else {
           enterFastPostReply();
         }
+      }
+      function enterPostReply() {
+        let $postmessage = document.querySelector("#postmessage");
+        $postmessage.value = currentReply.value;
       }
       function enterFastPostReply() {
         try {
@@ -161,6 +165,9 @@
           true
         );
       }
+      function checkEditor() {
+        hasEditor.value = document.querySelector("#e_iframe");
+      }
       function postReplyMutationObserver() {
         let mos = new MutationObserver(function(mutations, observer) {
           for (const mutation in mutations) {
@@ -185,6 +192,7 @@
         return `${proxy.$app.getName()}设置`;
       });
       vue.onMounted(() => {
+        checkEditor();
         postReplyMutationObserver();
         enterReply();
         fastreBindClick();
@@ -192,22 +200,21 @@
         flbcBindClick();
       });
       vue.watch(fwin_replyLoaded, (n) => {
-        let vm = this;
         if (n) {
           let $floatlayout_reply = document.querySelector(
             "#floatlayout_reply"
           );
           $floatlayout_reply.insertBefore(
-            vm.$el,
+            proxy.$el,
             $floatlayout_reply.childNodes[0]
           );
-          vm.enterPostReply();
+          enterPostReply();
         } else {
           let $fastposteditor = document.querySelector(
             "#fastposteditor"
           );
           $fastposteditor.insertBefore(
-            vm.$el,
+            proxy.$el,
             $fastposteditor.childNodes[0]
           );
         }
@@ -293,7 +300,7 @@
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-be1ec049"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-3bc25365"]]);
   const _withScopeId = (n) => (vue.pushScopeId("data-v-340d6dc3"), n = n(), vue.popScopeId(), n);
   const _hoisted_1 = { class: "setBox" };
   const _hoisted_2 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "我在用的", -1));
