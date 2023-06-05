@@ -15,7 +15,6 @@ export default defineConfig({
             util.unimportPreset
         ],
     }),
-
     monkey({
       entry: 'src/main.js',
       userscript: {
@@ -37,10 +36,14 @@ export default defineConfig({
       },
       build: {
         externalGlobals: {
-          vue: cdn.jsdelivr('Vue', 'dist/vue.global.prod.js'),
+          vue: cdn.jsdelivr('Vue', 'dist/vue.global.prod.js').concat(
+            'data:application/javascript,' +
+              encodeURIComponent(
+                `;window.Vue=Vue;`,
+              ),
+          ),
           'element-plus': cdn.jsdelivr('ElementPlus', 'dist/index.full.min.js'),
           '@element-plus/icons-vue': cdn.jsdelivr('ElementPlusIconsVue', 'dist/index.iife.min.js'),
-          'crypto-js': cdn.jsdelivr('cryptoJs', '/index.min.js'),
         },
         externalResource: {
           'element-plus/dist/index.css': cdn.jsdelivr(),
