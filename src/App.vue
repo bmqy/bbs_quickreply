@@ -58,7 +58,7 @@ function enterEditorReply() {
     let $editorIframe = document.querySelector('#e_iframe')
         .contentWindow.document.body;
     $editorIframe.style.background = '';
-    $editorIframe.innerHTML = currentReply.value || $editorTextarea.value;
+    $editorIframe.innerHTML = currentReply.value || window.bbcode2html(`${$editorTextarea.value}`);
 };
 // 点击楼层回复
 function fastreBindClick() {
