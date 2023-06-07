@@ -3,6 +3,7 @@ export default {
     // 全局storage方法
     app.config.globalProperties.$storage = {
         key: 'QuickReply',
+        userStorageKey: "QuickReplyUser",
         set(value){
             GM_setValue(this.key, value);
         },
@@ -11,6 +12,18 @@ export default {
                 return GM_getValue(this.key);
             } else {
                 return []
+            }
+        },
+        setUserInfo(key, value){
+            let fullKey = `${this.userStorageKey}.${key}`;
+            GM_setValue(fullKey, value);
+        },
+        getUserInfo(key){
+            let fullKey = `${this.userStorageKey}.${key}`;
+            if (GM_getValue(fullKey) !== '') {
+                return GM_getValue(fullKey);
+            } else {
+                return '';
             }
         },
     }

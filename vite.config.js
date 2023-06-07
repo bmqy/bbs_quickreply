@@ -31,7 +31,8 @@ export default defineConfig({
             '*://*/forum.php?mod=post*'
         ],
         connect: [
-            'quickreply.lc.bmqy.net'
+            'quickreply.lc.bmqy.net',
+            'localhost'
         ]
       },
       build: {

@@ -4,6 +4,9 @@ const myList = ref([]);
 const systemList = ref([]);
 const systemListCount = ref(0);
 const loading = ref(false);
+const isLogin = ref(false);
+const realtimeSync = ref(false);
+const showLoginForce = ref(false);
 const newReply = ref('');
 const queryData = ref({
     skip: 0,
@@ -12,6 +15,8 @@ const queryData = ref({
 });
 const emit = defineEmits(['updateMyList']);
 onBeforeMount(()=>{
+    isLogin.value = proxy.$storage.getUserInfo('userId');
+    realtimeSync.value = proxy.$storage.getUserInfo('realtimeSync');
     getMyList();
     getSystemList();
 });
@@ -70,6 +75,7 @@ function updateMyList() {
 function delReply(index) {
     myList.value.splice(index, 1);
     updateMyList();
+    realtimeSync.value && upload()
 }
 // 分享自定义回复
 function shareReply(index) {
@@ -106,29 +112,56 @@ function collectReply(index) {
         .collectCountUpdate(systemList.value[index].id)
         .then((res) => {
             addReply() && proxy.$message.success(res.memo);
+            realtimeSync.value && upload();
         })
         .catch((err) => {
             proxy.$message.error(err.memo);
         });
 }
 
-function upQuickReplyData(){
+function onLoginSuccess(){
+    showLoginForce.value = false;
+    isLogin.value = true;
+}
+function upload(){
     if(myList.length == 0){
         proxy.$message.error('无可同步数据');
         return false;
     }
-    console.log('upload');
-    proxy.$api.uploadBaiduFile();
+    proxy.$api.upQuickReplyList({
+        userId: proxy.$storage.getUserInfo('userId'),
+        list: myList.value
+    }).then(res=>{
+        proxy.$message.success(res.memo);
+    }).catch(err=>{
+        proxy.$message.error(err.memo);
+    });
 }
-function downQuickReplyData(){
-    console.log('donwn');
-    proxy.$api.selectBaiduFileList().then(res=>{
-        console.log('res', res);
-        if(res.errno != 0){
-            proxy.$message.error('未同步任何数据');
+function download(){
+    proxy.$api.downQuickReplyList({
+        userId: proxy.$storage.getUserInfo('userId')
+    }).then(res=>{
+        if(res.code != 0){
+            proxy.$message.error(res.memo);
             return false;
         }
-    })
+        myList.value = res.data;
+        updateMyList();
+    }).catch(err=>{
+        proxy.$message.error(err.memo);
+    });
+}
+function loginForce(){
+    showLoginForce.value = !showLoginForce.value;
+}
+function logout(){
+    proxy.$storage.setUserInfo('userId', '')
+    isLogin.value = false;
+}
+
+function changeRealtimeSync(e){
+    realtimeSync.value = e
+    proxy.$storage.setUserInfo('realtimeSync', e);
 }
 </script>
 
@@ -140,12 +173,40 @@ function downQuickReplyData(){
                     <el-card class="box-card" shadow="never">
                         <template #header class="clearfix">
                             <el-row :gutter="20" justify="space-between">
-                                <el-col :span="4" :offset="0"><span>我在用的</span></el-col>
-                                <el-col :span="5" :offset="0"></el-col>
+                                <el-col :span="12" :offset="0"><span>我在用的</span></el-col>
+                                <el-col :span="12" :offset="0"  v-if="isLogin" style="display: flex;justify-content: end;">
+                                    <el-tooltip class="item" effect="dark" content="注销登录" placement="top-start">
+                                        <el-button type="danger" icon="SwitchButton" size="small" circle @click="logout" />
+                                    </el-tooltip>
+                                    <el-tooltip class="item" effect="dark" content="上传列表，覆盖云端" placement="top-start">
+                                        <el-button type="primary" icon="Upload" size="small" circle @click="upload" />
+                                    </el-tooltip>
+                                    <el-tooltip class="item" effect="dark" content="下载列表，覆盖本地" placement="top-start">
+                                        <el-button type="warning" icon="Download" size="small" circle @click="download" />
+                                    </el-tooltip>
+                                    <el-tooltip class="item" effect="dark" content="开启实时同步，修改后立即上传" placement="top-start">
+                                        <div style="margin-left:10px;"><el-checkbox v-model="realtimeSync" label="实时" size="small" @change="changeRealtimeSync" /></div>
+                                    </el-tooltip>
+                                </el-col>
+                                <el-col :span="12" :offset="0"  v-if="!isLogin && myList.length>0" style="display: flex;justify-content: end;">
+                                    <el-tooltip class="item" effect="dark" content="登录账号，云端同步" placement="top-start">
+                                        <el-button type="success" icon="UserFilled" size="small" circle @click="loginForce" />
+                                    </el-tooltip>
+                                </el-col>
                             </el-row>
                         </template>
-                        <div>
-                            <ul class="list" v-if="myList.length > 0">
+                        <div v-if="(myList.length===0 && !isLogin) || showLoginForce" class="quickReplyLoginBox">
+                            <div style="margin-top: 15px;">
+                                <app-login @onSuccess="onLoginSuccess"></app-login>
+                                <p class="tips">
+                                    * 登录后，即可在任意设备同步你的配置；<br/>
+                                    * 云端只负责保存账号及其回复列表，不留存多余信息；<br/>
+                                    * 如不需登录，也可忽略登录界面，直接使用即可；<br/>
+                                </p>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <ul class="list" v-if="!showLoginForce || myList.length>0">
                                 <li v-for="(item, index) in myList" :key="index">
                                     <div class="list-left">
                                         <div class="list-number">
@@ -277,8 +338,9 @@ function downQuickReplyData(){
 }
 
 .quickReplyLoginBox .tips {
-    margin-left: 20px;
+    margin-left: 50px;
     text-align: left;
+    font-size: 12px;
 }
 
 .addReplyBox {
