@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.0.5
+// @version      3.1.0
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -23,6 +23,7 @@
 // @require      https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.1.0/dist/index.iife.min.js
 // @resource     element-plus/dist/index.css  https://cdn.jsdelivr.net/npm/element-plus@2.3.6/dist/index.css
 // @connect      quickreply.lc.bmqy.net
+// @connect      localhost
 // @grant        GM_getResourceText
 // @grant        GM_getValue
 // @grant        GM_info
@@ -30,7 +31,7 @@
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
-(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-15069efc]{position:relative}v-deep .el-dialog[data-v-15069efc]{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}v-deep .el-dialog__body[data-v-15069efc]{flex:1;overflow:auto;padding:0}.app-dialog-foot[data-v-15069efc]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-15069efc]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-15069efc],.el-form-item--small.el-form-item[data-v-15069efc]{margin-bottom:10px}.el-select[data-v-15069efc]{width:300px}.app-margin-right-30[data-v-340d6dc3]{margin-right:30px}.list-left[data-v-340d6dc3]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-340d6dc3]{margin-right:5px;color:#909399}.list-title[data-v-340d6dc3]{flex:1;font-weight:400}.list-right[data-v-340d6dc3]{min-width:70px}.list-right .el-badge.item[data-v-340d6dc3]{margin-right:30px}.list li[data-v-340d6dc3]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-340d6dc3]:hover{background-color:#f5f5f5}.tips[data-v-340d6dc3]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-340d6dc3]{margin-left:20px;text-align:left}.addReplyBox[data-v-340d6dc3]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-340d6dc3]{padding:10px 20px}.box-card .el-card__header span[data-v-340d6dc3]{font-size:14px}.clearfix[data-v-340d6dc3]:before,.clearfix[data-v-340d6dc3]:after{display:table;content:""}.clearfix[data-v-340d6dc3]:after{clear:both}.el-pagination[data-v-340d6dc3]{padding:15px 5px 0} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-15069efc]{position:relative}v-deep .el-dialog[data-v-15069efc]{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}v-deep .el-dialog__body[data-v-15069efc]{flex:1;overflow:auto;padding:0}.app-dialog-foot[data-v-15069efc]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-15069efc]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-15069efc],.el-form-item--small.el-form-item[data-v-15069efc]{margin-bottom:10px}.el-select[data-v-15069efc]{width:300px}.app-margin-right-30[data-v-d136f971]{margin-right:30px}.list-left[data-v-d136f971]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-d136f971]{margin-right:5px;color:#909399}.list-title[data-v-d136f971]{flex:1;font-weight:400}.list-right[data-v-d136f971]{min-width:70px}.list-right .el-badge.item[data-v-d136f971]{margin-right:30px}.list li[data-v-d136f971]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-d136f971]:hover{background-color:#f5f5f5}.tips[data-v-d136f971]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-d136f971]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-d136f971]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-d136f971]{padding:10px 20px}.box-card .el-card__header span[data-v-d136f971]{font-size:14px}.clearfix[data-v-d136f971]:before,.clearfix[data-v-d136f971]:after{display:table;content:""}.clearfix[data-v-d136f971]:after{clear:both}.el-pagination[data-v-d136f971]{padding:15px 5px 0}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -66,8 +67,8 @@
     }
     return target;
   };
-  const _hoisted_1$1 = { class: "quickReplyBox" };
-  const _hoisted_2$1 = {
+  const _hoisted_1$2 = { class: "quickReplyBox" };
+  const _hoisted_2$2 = {
     slot: "label",
     class: "quickReplyBoxTitle"
   };
@@ -231,7 +232,7 @@
         const _component_el_form = vue.resolveComponent("el-form");
         const _component_app_set = vue.resolveComponent("app-set");
         const _component_el_dialog = vue.resolveComponent("el-dialog");
-        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$1, [
+        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$2, [
           vue.createVNode(vue.Transition, { name: "el-fade-in-linear" }, {
             default: vue.withCtx(() => [
               vue.createVNode(_component_el_form, {
@@ -241,7 +242,7 @@
                 default: vue.withCtx(() => [
                   vue.createVNode(_component_el_form_item, null, {
                     default: vue.withCtx(() => [
-                      vue.createElementVNode("div", _hoisted_2$1, vue.toDisplayString(`${vue.unref(title)}: `), 1),
+                      vue.createElementVNode("div", _hoisted_2$2, vue.toDisplayString(`${vue.unref(title)}: `), 1),
                       vue.createVNode(_component_el_select, {
                         modelValue: vue.unref(currentReply),
                         "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(currentReply) ? currentReply.value = $event : null),
@@ -302,27 +303,42 @@
     }
   };
   const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-15069efc"]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-340d6dc3"), n = n(), vue.popScopeId(), n);
-  const _hoisted_1 = { class: "setBox" };
-  const _hoisted_2 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "我在用的", -1));
-  const _hoisted_3 = {
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-d136f971"), n = n(), vue.popScopeId(), n);
+  const _hoisted_1$1 = { class: "setBox" };
+  const _hoisted_2$1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "我在用的", -1));
+  const _hoisted_3 = { style: { "margin-left": "10px" } };
+  const _hoisted_4 = {
+    key: 0,
+    class: "quickReplyLoginBox"
+  };
+  const _hoisted_5 = { style: { "margin-top": "15px" } };
+  const _hoisted_6 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", { class: "tips" }, [
+    /* @__PURE__ */ vue.createTextVNode(" * 登录后，即可在任意设备同步你的配置；"),
+    /* @__PURE__ */ vue.createElementVNode("br"),
+    /* @__PURE__ */ vue.createTextVNode(" * 云端只负责保存账号及其回复列表，不留存多余信息；"),
+    /* @__PURE__ */ vue.createElementVNode("br"),
+    /* @__PURE__ */ vue.createTextVNode(" * 如不需登录，也可忽略登录界面，直接使用即可；"),
+    /* @__PURE__ */ vue.createElementVNode("br")
+  ], -1));
+  const _hoisted_7 = { key: 1 };
+  const _hoisted_8 = {
     key: 0,
     class: "list"
   };
-  const _hoisted_4 = { class: "list-left" };
-  const _hoisted_5 = { class: "list-number" };
-  const _hoisted_6 = { class: "list-title" };
-  const _hoisted_7 = { class: "list-right" };
-  const _hoisted_8 = {
+  const _hoisted_9 = { class: "list-left" };
+  const _hoisted_10 = { class: "list-number" };
+  const _hoisted_11 = { class: "list-title" };
+  const _hoisted_12 = { class: "list-right" };
+  const _hoisted_13 = {
     key: 1,
     class: "tips"
   };
-  const _hoisted_9 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", null, "未设置快速回帖内容!", -1));
-  const _hoisted_10 = [
-    _hoisted_9
+  const _hoisted_14 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", null, "未设置快速回帖内容!", -1));
+  const _hoisted_15 = [
+    _hoisted_14
   ];
-  const _hoisted_11 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
-  const _hoisted_12 = { class: "addReplyBox" };
+  const _hoisted_16 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
+  const _hoisted_17 = { class: "addReplyBox" };
   const _sfc_main$1 = {
     __name: "Set",
     emits: ["updateMyList"],
@@ -332,6 +348,9 @@
       const systemList = vue.ref([]);
       const systemListCount = vue.ref(0);
       const loading = vue.ref(false);
+      const isLogin = vue.ref(false);
+      const realtimeSync = vue.ref(false);
+      const showLoginForce = vue.ref(false);
       const newReply = vue.ref("");
       const queryData = vue.ref({
         skip: 0,
@@ -339,6 +358,8 @@
         order: "descending"
       });
       vue.onBeforeMount(() => {
+        isLogin.value = proxy.$storage.getUserInfo("userId");
+        realtimeSync.value = proxy.$storage.getUserInfo("realtimeSync");
         getMyList();
         getSystemList();
       });
@@ -388,6 +409,7 @@
       function delReply(index) {
         myList.value.splice(index, 1);
         updateMyList();
+        realtimeSync.value && upload();
       }
       function shareReply(index) {
         proxy.$api.replyInsert(myList.value[index]).then((res) => {
@@ -413,15 +435,61 @@
         newReply.value = nStr;
         proxy.$api.collectCountUpdate(systemList.value[index].id).then((res) => {
           addReply() && proxy.$message.success(res.memo);
+          realtimeSync.value && upload();
         }).catch((err) => {
           proxy.$message.error(err.memo);
         });
       }
+      function onLoginSuccess() {
+        showLoginForce.value = false;
+        isLogin.value = true;
+      }
+      function upload() {
+        if (myList.length == 0) {
+          proxy.$message.error("无可同步数据");
+          return false;
+        }
+        proxy.$api.upQuickReplyList({
+          userId: proxy.$storage.getUserInfo("userId"),
+          list: myList.value
+        }).then((res) => {
+          proxy.$message.success(res.memo);
+        }).catch((err) => {
+          proxy.$message.error(err.memo);
+        });
+      }
+      function download() {
+        proxy.$api.downQuickReplyList({
+          userId: proxy.$storage.getUserInfo("userId")
+        }).then((res) => {
+          if (res.code != 0) {
+            proxy.$message.error(res.memo);
+            return false;
+          }
+          myList.value = res.data;
+          updateMyList();
+        }).catch((err) => {
+          proxy.$message.error(err.memo);
+        });
+      }
+      function loginForce() {
+        showLoginForce.value = !showLoginForce.value;
+      }
+      function logout() {
+        proxy.$storage.setUserInfo("userId", "");
+        isLogin.value = false;
+      }
+      function changeRealtimeSync(e) {
+        realtimeSync.value = e;
+        proxy.$storage.setUserInfo("realtimeSync", e);
+      }
       return (_ctx, _cache) => {
         const _component_el_col = vue.resolveComponent("el-col");
-        const _component_el_row = vue.resolveComponent("el-row");
         const _component_el_button = vue.resolveComponent("el-button");
         const _component_el_tooltip = vue.resolveComponent("el-tooltip");
+        const _component_el_checkbox = vue.resolveComponent("el-checkbox");
+        const _component_el_row = vue.resolveComponent("el-row");
+        const _component_app_login = vue.resolveComponent("app-login");
         const _component_el_card = vue.resolveComponent("el-card");
         const _component_el_table_column = vue.resolveComponent("el-table-column");
         const _component_el_tag = vue.resolveComponent("el-tag");
@@ -429,7 +497,7 @@
         const _component_el_pagination = vue.resolveComponent("el-pagination");
         const _component_el_input = vue.resolveComponent("el-input");
         const _directive_loading = vue.resolveDirective("loading");
-        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1, [
+        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$1, [
           vue.createVNode(_component_el_card, {
             class: "box-card",
             shadow: "never"
@@ -450,32 +518,140 @@
                           }, {
                             default: vue.withCtx(() => [
                               vue.createVNode(_component_el_col, {
-                                span: 4,
+                                span: 12,
                                 offset: 0
                               }, {
                                 default: vue.withCtx(() => [
-                                  _hoisted_2
+                                  _hoisted_2$1
                                 ]),
                                 _: 1
                               }),
-                              vue.createVNode(_component_el_col, {
-                                span: 5,
-                                offset: 0
-                              })
+                              vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_col, {
+                                key: 0,
+                                span: 12,
+                                offset: 0,
+                                style: { "display": "flex", "justify-content": "end" }
+                              }, {
+                                default: vue.withCtx(() => [
+                                  vue.createVNode(_component_el_tooltip, {
+                                    class: "item",
+                                    effect: "dark",
+                                    content: "注销登录",
+                                    placement: "top-start"
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createVNode(_component_el_button, {
+                                        type: "danger",
+                                        icon: "SwitchButton",
+                                        size: "small",
+                                        circle: "",
+                                        onClick: logout
+                                      })
+                                    ]),
+                                    _: 1
+                                  }),
+                                  vue.createVNode(_component_el_tooltip, {
+                                    class: "item",
+                                    effect: "dark",
+                                    content: "上传列表，覆盖云端",
+                                    placement: "top-start"
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createVNode(_component_el_button, {
+                                        type: "primary",
+                                        icon: "Upload",
+                                        size: "small",
+                                        circle: "",
+                                        onClick: upload
+                                      })
+                                    ]),
+                                    _: 1
+                                  }),
+                                  vue.createVNode(_component_el_tooltip, {
+                                    class: "item",
+                                    effect: "dark",
+                                    content: "下载列表，覆盖本地",
+                                    placement: "top-start"
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createVNode(_component_el_button, {
+                                        type: "warning",
+                                        icon: "Download",
+                                        size: "small",
+                                        circle: "",
+                                        onClick: download
+                                      })
+                                    ]),
+                                    _: 1
+                                  }),
+                                  vue.createVNode(_component_el_tooltip, {
+                                    class: "item",
+                                    effect: "dark",
+                                    content: "开启实时同步，修改后立即上传",
+                                    placement: "top-start"
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createElementVNode("div", _hoisted_3, [
+                                        vue.createVNode(_component_el_checkbox, {
+                                          modelValue: vue.unref(realtimeSync),
+                                          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(realtimeSync) ? realtimeSync.value = $event : null),
+                                          label: "实时",
+                                          size: "small",
+                                          onChange: changeRealtimeSync
+                                        }, null, 8, ["modelValue"])
+                                      ])
+                                    ]),
+                                    _: 1
+                                  })
+                                ]),
+                                _: 1
+                              })) : vue.createCommentVNode("", true),
+                              !vue.unref(isLogin) && vue.unref(myList).length > 0 ? (vue.openBlock(), vue.createBlock(_component_el_col, {
+                                key: 1,
+                                span: 12,
+                                offset: 0,
+                                style: { "display": "flex", "justify-content": "end" }
+                              }, {
+                                default: vue.withCtx(() => [
+                                  vue.createVNode(_component_el_tooltip, {
+                                    class: "item",
+                                    effect: "dark",
+                                    content: "登录账号，云端同步",
+                                    placement: "top-start"
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createVNode(_component_el_button, {
+                                        type: "success",
+                                        icon: "UserFilled",
+                                        size: "small",
+                                        circle: "",
+                                        onClick: loginForce
+                                      })
+                                    ]),
+                                    _: 1
+                                  })
+                                ]),
+                                _: 1
+                              })) : vue.createCommentVNode("", true)
                             ]),
                             _: 1
                           })
                         ]),
                         default: vue.withCtx(() => [
-                          vue.createElementVNode("div", null, [
-                            vue.unref(myList).length > 0 ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_3, [
+                          vue.unref(myList).length === 0 && !vue.unref(isLogin) || vue.unref(showLoginForce) ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_4, [
+                            vue.createElementVNode("div", _hoisted_5, [
+                              vue.createVNode(_component_app_login, { onOnSuccess: onLoginSuccess }),
+                              _hoisted_6
+                            ])
+                          ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_7, [
+                            !vue.unref(showLoginForce) || vue.unref(myList).length > 0 ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_8, [
                               (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(myList), (item, index) => {
                                 return vue.openBlock(), vue.createElementBlock("li", { key: index }, [
-                                  vue.createElementVNode("div", _hoisted_4, [
-                                    vue.createElementVNode("div", _hoisted_5, vue.toDisplayString(`${index + 1}、`), 1),
-                                    vue.createElementVNode("div", _hoisted_6, vue.toDisplayString(`${item}`), 1)
+                                  vue.createElementVNode("div", _hoisted_9, [
+                                    vue.createElementVNode("div", _hoisted_10, vue.toDisplayString(`${index + 1}、`), 1),
+                                    vue.createElementVNode("div", _hoisted_11, vue.toDisplayString(`${item}`), 1)
                                   ]),
-                                  vue.createElementVNode("div", _hoisted_7, [
+                                  vue.createElementVNode("div", _hoisted_12, [
                                     vue.createVNode(_component_el_tooltip, {
                                       class: "item",
                                       effect: "dark",
@@ -514,8 +690,8 @@
                                 ]);
                               }), 128))
                             ])) : vue.createCommentVNode("", true),
-                            vue.unref(myList).length == 0 ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_8, _hoisted_10)) : vue.createCommentVNode("", true)
-                          ])
+                            vue.unref(myList).length == 0 ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_13, _hoisted_15)) : vue.createCommentVNode("", true)
+                          ]))
                         ]),
                         _: 1
                       })
@@ -530,7 +706,7 @@
                         "body-style": { padding: "0 20px 20px" }
                       }, {
                         header: vue.withCtx(() => [
-                          _hoisted_11
+                          _hoisted_16
                         ]),
                         default: vue.withCtx(() => [
                           vue.withDirectives((vue.openBlock(), vue.createBlock(_component_el_table, {
@@ -633,11 +809,11 @@
                 ]),
                 _: 1
               }),
-              vue.createElementVNode("div", _hoisted_12, [
+              vue.createElementVNode("div", _hoisted_17, [
                 vue.createVNode(_component_el_input, {
                   placeholder: "请输入新的回复内容",
                   modelValue: vue.unref(newReply),
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(newReply) ? newReply.value = $event : null),
+                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(newReply) ? newReply.value = $event : null),
                   autosize: { minRows: 1, maxRows: 3 },
                   maxlength: "100",
                   "show-word-limit": true,
@@ -661,34 +837,95 @@
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-340d6dc3"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-d136f971"]]);
+  const _hoisted_1 = { class: "margin-left" };
+  const _hoisted_2 = { class: "margin-left" };
   const _sfc_main = {
     __name: "Login",
-    setup(__props) {
+    emits: ["onSuccess"],
+    setup(__props, { emit }) {
       const { proxy } = vue.getCurrentInstance();
-      const formRef = vue.ref();
-      const form = vue.ref({
-        token: "123.75e16f652970fad2398af68c389cb2c4.YGYRkNk2oqS7LucCJ0QSSFFijEdFQnp7bglxtI5.l1mqWw"
-      });
-      const rules = vue.reactive({
-        token: [
-          { required: true, message: "token不能为空", trigger: "blur" }
+      const checkName = (rule, value, callback) => {
+        if (!/[0-9a-zA-Z@\.]{5,20}/.test(value)) {
+          callback("用户名5-20，只能包含字母、数字、“.”、“@”等");
+        }
+        callback();
+      };
+      const checkPassword = (rule, value, callback) => {
+        if (!/[0-9a-zA-Z\.\-_]{2,20}/.test(value)) {
+          callback("密码2-20，只能包含字母、数字、“.”、“-”、“_”等");
+        }
+        callback();
+      };
+      const checkRePassword = (rule, value, callback) => {
+        if (value !== loginForm.value.password) {
+          callback("两次密码不一致");
+        }
+        callback();
+      };
+      const registerFormRef = vue.ref();
+      const formMode = vue.ref(1);
+      const registerRules = vue.ref({
+        username: [
+          { required: true, message: "用户名不能为空", trigger: "blur" }
+          // { validator: checkName, trigger: 'blur'}
+        ],
+        password: [
+          { required: true, message: "密码不能为空", trigger: "blur" },
+          { validator: checkPassword, trigger: "blur" }
+        ],
+        rePassword: [
+          { required: true, message: "确认密码不能为空", trigger: "blur" },
+          { validator: checkRePassword, trigger: "blur" }
         ]
       });
-      const onSubmit = () => {
-        formRef.value.validate(async (valid, fields) => {
+      const loginFormRef = vue.ref();
+      const loginForm = vue.ref({
+        username: "",
+        password: "",
+        rePassword: ""
+      });
+      const loginRules = vue.ref({
+        username: [
+          { required: true, message: "用户名不能为空", trigger: "blur" },
+          { validator: checkName, trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "密码不能为空", trigger: "blur" },
+          { validator: checkPassword, trigger: "blur" }
+        ]
+      });
+      const loginSuccess = (res) => {
+        proxy.$storage.setUserInfo("userId", res.data.userId);
+        emit("onSuccess");
+      };
+      const loginOnSubmit = () => {
+        loginFormRef.value.validate(async (valid, fields) => {
           if (valid) {
-            let res = await proxy.$api.selectBaiduData({
-              "access_token": form.value.token
+            proxy.$api.login(loginForm.value).then((res) => {
+              if (res.code != 0) {
+                proxy.$message.error(res.memo);
+                return false;
+              }
+              loginSuccess(res);
+            }).catch((err) => {
+              console.log("登录失败：", err);
             });
-            if (res.errno != 0) {
-              proxy.$message.error(res.errmsg);
-              return false;
-            }
-            proxy.$storage.setBaiduInfo("token", form.value.token);
-            proxy.$storage.setBaiduInfo("netdisk_name", res.netdisk_name);
-            proxy.$storage.setBaiduInfo("avatar_url", res.avatar_url);
-            form.value.token = "";
+          }
+        });
+      };
+      const registerOnSubmit = () => {
+        registerFormRef.value.validate(async (valid, fields) => {
+          if (valid) {
+            proxy.$api.register(loginForm.value).then((res) => {
+              if (res.code != 0) {
+                proxy.$message.error(res.memo);
+                return false;
+              }
+              loginSuccess(res);
+            }).catch((err) => {
+              console.log("注册失败：", err);
+            });
           }
         });
       };
@@ -696,25 +933,40 @@
         const _component_el_input = vue.resolveComponent("el-input");
         const _component_el_form_item = vue.resolveComponent("el-form-item");
         const _component_el_button = vue.resolveComponent("el-button");
+        const _component_el_link = vue.resolveComponent("el-link");
         const _component_el_form = vue.resolveComponent("el-form");
         return vue.openBlock(), vue.createElementBlock("div", null, [
-          vue.createVNode(_component_el_form, {
-            ref_key: "formRef",
-            ref: formRef,
-            model: vue.unref(form),
-            rules: vue.unref(rules),
+          vue.unref(formMode) === 1 ? (vue.openBlock(), vue.createBlock(_component_el_form, {
+            key: 0,
+            ref_key: "loginFormRef",
+            ref: loginFormRef,
+            model: vue.unref(loginForm),
+            rules: vue.unref(loginRules),
             "label-width": "120px"
           }, {
             default: vue.withCtx(() => [
               vue.createVNode(_component_el_form_item, {
-                label: "Token：",
-                prop: "token",
+                label: "用户名：",
+                prop: "username",
                 required: ""
               }, {
                 default: vue.withCtx(() => [
                   vue.createVNode(_component_el_input, {
-                    modelValue: vue.unref(form).token,
-                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.unref(form).token = $event)
+                    modelValue: vue.unref(loginForm).username,
+                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.unref(loginForm).username = $event)
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, {
+                label: "密码：",
+                prop: "password",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: vue.unref(loginForm).password,
+                    "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.unref(loginForm).password = $event)
                   }, null, 8, ["modelValue"])
                 ]),
                 _: 1
@@ -723,19 +975,105 @@
                 default: vue.withCtx(() => [
                   vue.createVNode(_component_el_button, {
                     type: "primary",
-                    onClick: onSubmit
+                    onClick: loginOnSubmit
                   }, {
                     default: vue.withCtx(() => [
-                      vue.createTextVNode("确认")
+                      vue.createTextVNode("登录")
                     ]),
                     _: 1
-                  })
+                  }),
+                  vue.createElementVNode("div", _hoisted_1, [
+                    vue.createVNode(_component_el_link, {
+                      href: "javascript:;",
+                      onClick: _cache[2] || (_cache[2] = ($event) => formMode.value = 0)
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createTextVNode("注册")
+                      ]),
+                      _: 1
+                    })
+                  ])
                 ]),
                 _: 1
               })
             ]),
             _: 1
-          }, 8, ["model", "rules"])
+          }, 8, ["model", "rules"])) : (vue.openBlock(), vue.createBlock(_component_el_form, {
+            key: 1,
+            ref_key: "registerFormRef",
+            ref: registerFormRef,
+            model: vue.unref(loginForm),
+            rules: vue.unref(registerRules),
+            "label-width": "120px"
+          }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_el_form_item, {
+                label: "用户名：",
+                prop: "username",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: vue.unref(loginForm).username,
+                    "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => vue.unref(loginForm).username = $event)
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, {
+                label: "密码：",
+                prop: "password",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: vue.unref(loginForm).password,
+                    "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => vue.unref(loginForm).password = $event)
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, {
+                label: "确认密码：",
+                prop: "rePassword",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: vue.unref(loginForm).rePassword,
+                    "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => vue.unref(loginForm).rePassword = $event)
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, null, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_button, {
+                    type: "primary",
+                    onClick: registerOnSubmit
+                  }, {
+                    default: vue.withCtx(() => [
+                      vue.createTextVNode("注册")
+                    ]),
+                    _: 1
+                  }),
+                  vue.createElementVNode("div", _hoisted_2, [
+                    vue.createVNode(_component_el_link, {
+                      href: "javascript:;",
+                      onClick: _cache[6] || (_cache[6] = ($event) => formMode.value = 1)
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createTextVNode("登录")
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 8, ["model", "rules"]))
         ]);
       };
     }
@@ -748,6 +1086,7 @@
     install: (app2, options) => {
       app2.config.globalProperties.$storage = {
         key: "QuickReply",
+        userStorageKey: "QuickReplyUser",
         set(value) {
           _GM_setValue(this.key, value);
         },
@@ -756,6 +1095,18 @@
             return _GM_getValue(this.key);
           } else {
             return [];
+          }
+        },
+        setUserInfo(key, value) {
+          let fullKey = `${this.userStorageKey}.${key}`;
+          _GM_setValue(fullKey, value);
+        },
+        getUserInfo(key) {
+          let fullKey = `${this.userStorageKey}.${key}`;
+          if (_GM_getValue(fullKey) !== "") {
+            return _GM_getValue(fullKey);
+          } else {
+            return "";
           }
         }
       };
@@ -769,38 +1120,37 @@
       };
     }
   };
+  const http = function(api, data) {
+    return new Promise((resolve, reject) => {
+      _GM_xmlhttpRequest({
+        method: "POST",
+        url: `https://quickreply.lc.bmqy.net/1.1/functions${api}`,
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "X-LC-Id": `JLqezdmWrYQOatywxVKmB9pX-gzGzoHsz`,
+          "X-LC-Key": `hemx77fyB2Usg317i2crcuer`
+        },
+        data: `${JSON.stringify(data)}`,
+        responseType: "json",
+        onload: function(xhr) {
+          if (xhr.status == 200) {
+            resolve(xhr.response.result);
+          } else {
+            reject(xhr.response.result);
+          }
+        },
+        onerror: function(xhr) {
+          reject(xhr.response);
+        }
+      });
+    });
+  };
   const Api = {
     install: (app2, options) => {
       app2.config.globalProperties.$api = {
-        // http
-        http: function(api, data) {
-          return new Promise((resolve, reject) => {
-            _GM_xmlhttpRequest({
-              method: "POST",
-              url: `https://quickreply.lc.bmqy.net/1.1/functions${api}`,
-              headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "X-LC-Id": `JLqezdmWrYQOatywxVKmB9pX-gzGzoHsz`,
-                "X-LC-Key": `hemx77fyB2Usg317i2crcuer`
-              },
-              data: `${JSON.stringify(data)}`,
-              responseType: "json",
-              onload: function(xhr) {
-                if (xhr.status == 200) {
-                  resolve(xhr.response.result);
-                } else {
-                  reject(xhr.response.result);
-                }
-              },
-              onerror: function(xhr) {
-                reject(xhr.response);
-              }
-            });
-          });
-        },
         // 获取网友分享的回复
         selectList: async function(skip = 0, prop = "replyId", order = "descending") {
-          return await this.http("/selectList", {
+          return await http("/selectList", {
             skip,
             prop,
             order
@@ -808,21 +1158,37 @@
         },
         // 更新收藏数量
         collectCountUpdate: async function(replyId) {
-          return await this.http("/collectCountUpdate", {
+          return await http("/collectCountUpdate", {
             replyId
           });
         },
         // 更新点赞数量
         likeCountUpdate: async function(replyId) {
-          return await this.http("/likeCountUpdate", {
+          return await http("/likeCountUpdate", {
             replyId
           });
         },
         // 添加网友分享的回复
         replyInsert: async function(content) {
-          return await this.http("/replyInsert", {
+          return await http("/replyInsert", {
             content
           });
+        },
+        // 用户注册
+        register: async function(params) {
+          return await http("/register", params);
+        },
+        // 用户登录
+        login: async function(params) {
+          return await http("/login", params);
+        },
+        // 上传列表
+        upQuickReplyList: async function(params) {
+          return await http("/uploadList", params);
+        },
+        // 下载列表
+        downQuickReplyList: async function(params) {
+          return await http("/downloadList", params);
         }
       };
     }
