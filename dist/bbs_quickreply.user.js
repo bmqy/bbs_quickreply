@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.1.0
+// @version      3.1.1
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -23,7 +23,6 @@
 // @require      https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.1.0/dist/index.iife.min.js
 // @resource     element-plus/dist/index.css  https://cdn.jsdelivr.net/npm/element-plus@2.3.6/dist/index.css
 // @connect      quickreply.lc.bmqy.net
-// @connect      localhost
 // @grant        GM_getResourceText
 // @grant        GM_getValue
 // @grant        GM_info
