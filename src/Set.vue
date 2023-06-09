@@ -122,6 +122,7 @@ function collectReply(index) {
 function onLoginSuccess(){
     showLoginForce.value = false;
     isLogin.value = true;
+    myList.value.length===0 && download();
 }
 function upload(){
     if(myList.length == 0){
