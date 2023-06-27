@@ -28,6 +28,7 @@ export default defineConfig({
             '*://*/forum/forum.php?mod=viewthread*',
             '*://*/forum/thread*',
             '*://*/bbs/forum.php?mod=viewthread*',
+            '*://*/bbs/thread*.*',
             '*://*/forum.php?mod=post*'
         ],
         connect: [
