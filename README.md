@@ -2,6 +2,15 @@
 
 使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 
+支持站点:
+- [x] [吾爱破解](https://www.52pojie.cn/)
+- [x] [Discuz!官方交流社区](https://www.dismall.com/forum.php)
+- [x] [油猴中文网](https://bbs.tampermonkey.net.cn/)
+- [x] [全球主机交流论坛](https://hostloc.com/)
+- [ ] 不一一列举...
+
+> PS：理论支持所有```discuz```论坛，请自行尝试。
+
 v3.1.3 更新：
 - 增加支持站点；
 
