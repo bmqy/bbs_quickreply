@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.1.2
+// @version      3.1.3
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -16,6 +16,7 @@
 // @match        *://*/forum/forum.php?mod=viewthread*
 // @match        *://*/forum/thread*
 // @match        *://*/bbs/forum.php?mod=viewthread*
+// @match        *://*/bbs/thread*.*
 // @match        *://*/forum.php?mod=post*
 // @require      https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js
 // @require      data:application/javascript,%3Bwindow.Vue%3DVue%3B
