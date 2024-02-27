@@ -29,7 +29,8 @@ export default defineConfig({
             '*://*/forum/thread*',
             '*://*/bbs/forum.php?mod=viewthread*',
             '*://*/bbs/thread*.*',
-            '*://*/forum.php?mod=post*'
+            '*://*/forum.php?mod=post*',
+            '*://www.nodeseek.com/post*'
         ],
         connect: [
             'quickreply.lc.bmqy.net'

@@ -1,8 +1,9 @@
-## 论坛快捷回帖
+# 论坛快捷回帖
 
 使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 
-支持站点:
+## 支持站点:
+### Discuz
 - [x] [吾爱破解](https://www.52pojie.cn/)
 - [x] [Discuz!官方交流社区](https://www.dismall.com/forum.php)
 - [x] [油猴中文网](https://bbs.tampermonkey.net.cn/)
@@ -10,6 +11,14 @@
 - [ ] 不一一列举...
 
 > PS：理论支持所有```discuz```论坛，请自行尝试。
+
+### 其它
+- [x] [NodeSeek](https://www.nodeseek.com/)
+
+## 更新日志
+
+v3.2.0 更新：
+- 增加支持[NodeSeek](https://www.nodeseek.com/)；
 
 v3.1.3 更新：
 - 增加支持站点；

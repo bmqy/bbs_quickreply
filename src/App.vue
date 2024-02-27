@@ -2,14 +2,26 @@
 const {proxy} = getCurrentInstance();
 const list = ref([]);
 const currentReply = ref('');
+const currentPlatform = ref('discuz');
 const fwin_replyLoaded = ref(false);
 const hasEditor = ref(false);
 const lastClickElemet = ref(false);
 const setShow = ref(false);
 onBeforeMount(()=>{
+    checkPlatform();
     getList();
 });
 
+// 检测平台
+function checkPlatform() {
+    if(document.body.outerHTML.indexOf('Discuz') > -1){
+        currentPlatform.value = 'discuz'
+    } else {
+        if(location.host.indexOf('nodeseek') > -1){
+            currentPlatform.value = 'nodeseek'
+        }
+    }
+};
 // 获取APP自定义回复
 async function getList() {
     let myListStorage = proxy.$storage.get();
@@ -31,6 +43,8 @@ function enterReply() {
         enterPostReply();
     } else if (hasEditor.value) {
         enterEditorReply();
+    } else if(currentPlatform.value == 'nodeseek') {
+        enterMarkdownItReply();
     } else {
         enterFastPostReply();
     }
@@ -39,6 +53,10 @@ function enterReply() {
 function enterPostReply() {
     let $postmessage = document.querySelector('#postmessage');
     $postmessage.value = currentReply.value;
+};
+// 设置markdown-it编辑器内容
+function enterMarkdownItReply() {
+    unsafeWindow.editor && unsafeWindow.editor.setMarkdown && unsafeWindow.editor.setMarkdown(currentReply.value)
 };
 // 设置快速回复框内容
 function enterFastPostReply() {
@@ -127,11 +145,22 @@ function postReplyMutationObserver() {
             }
         }
     });
-    mos.observe(document.querySelector('#append_parent'), {
-        attributes: true,
-        childList: true,
-        subtree: true,
-    });
+    // discuz
+    if(document.querySelector('#append_parent')){
+        mos.observe(document.querySelector('#append_parent'), {
+            attributes: true,
+            childList: true,
+            subtree: true,
+        });
+    }
+    // nodeseek
+    if(document.querySelector('.md-editor')){
+        mos.observe(document.querySelector('.md-editor'), {
+            attributes: true,
+            childList: true,
+            subtree: true,
+        });
+    }
 }
 
 const title = computed(()=> {

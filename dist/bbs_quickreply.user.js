@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.1.3
+// @version      3.2.0
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -18,20 +18,22 @@
 // @match        *://*/bbs/forum.php?mod=viewthread*
 // @match        *://*/bbs/thread*.*
 // @match        *://*/forum.php?mod=post*
+// @match        *://www.nodeseek.com/post*
 // @require      https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js
 // @require      data:application/javascript,%3Bwindow.Vue%3DVue%3B
-// @require      https://cdn.jsdelivr.net/npm/element-plus@2.3.6/dist/index.full.min.js
+// @require      https://cdn.jsdelivr.net/npm/element-plus@2.3.5/dist/index.full.min.js
 // @require      https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.1.0/dist/index.iife.min.js
-// @resource     element-plus/dist/index.css  https://cdn.jsdelivr.net/npm/element-plus@2.3.6/dist/index.css
+// @resource     element-plus/dist/index.css  https://cdn.jsdelivr.net/npm/element-plus@2.3.5/dist/index.css
 // @connect      quickreply.lc.bmqy.net
 // @grant        GM_getResourceText
 // @grant        GM_getValue
 // @grant        GM_info
 // @grant        GM_setValue
 // @grant        GM_xmlhttpRequest
+// @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=t,document.head.append(a)})(' .quickReplyBox[data-v-15069efc]{position:relative}v-deep .el-dialog[data-v-15069efc]{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}v-deep .el-dialog__body[data-v-15069efc]{flex:1;overflow:auto;padding:0}.app-dialog-foot[data-v-15069efc]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-15069efc]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-15069efc],.el-form-item--small.el-form-item[data-v-15069efc]{margin-bottom:10px}.el-select[data-v-15069efc]{width:300px}.app-margin-right-30[data-v-977a0533]{margin-right:30px}.list-left[data-v-977a0533]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-977a0533]{margin-right:5px;color:#909399}.list-title[data-v-977a0533]{flex:1;font-weight:400}.list-right[data-v-977a0533]{min-width:70px}.list-right .el-badge.item[data-v-977a0533]{margin-right:30px}.list li[data-v-977a0533]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-977a0533]:hover{background-color:#f5f5f5}.tips[data-v-977a0533]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-977a0533]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-977a0533]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-977a0533]{padding:10px 20px}.box-card .el-card__header span[data-v-977a0533]{font-size:14px}.clearfix[data-v-977a0533]:before,.clearfix[data-v-977a0533]:after{display:table;content:""}.clearfix[data-v-977a0533]:after{clear:both}.el-pagination[data-v-977a0533]{padding:15px 5px 0}.margin-left{margin-left:15px} ');
+(t=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=t,document.head.append(a)})(' .quickReplyBox[data-v-b8cfbb77]{position:relative}v-deep .el-dialog[data-v-b8cfbb77]{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}v-deep .el-dialog__body[data-v-b8cfbb77]{flex:1;overflow:auto;padding:0}.app-dialog-foot[data-v-b8cfbb77]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-b8cfbb77]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-b8cfbb77],.el-form-item--small.el-form-item[data-v-b8cfbb77]{margin-bottom:10px}.el-select[data-v-b8cfbb77]{width:300px}.app-margin-right-30[data-v-58ea6b03]{margin-right:30px}.list-left[data-v-58ea6b03]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-58ea6b03]{margin-right:5px;color:#909399}.list-title[data-v-58ea6b03]{flex:1;font-weight:400}.list-right[data-v-58ea6b03]{min-width:70px}.list-right .el-badge.item[data-v-58ea6b03]{margin-right:30px}.list li[data-v-58ea6b03]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-58ea6b03]:hover{background-color:#f5f5f5}.tips[data-v-58ea6b03]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-58ea6b03]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-58ea6b03]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-58ea6b03]{padding:10px 20px}.box-card .el-card__header span[data-v-58ea6b03]{font-size:14px}.clearfix[data-v-58ea6b03]:before,.clearfix[data-v-58ea6b03]:after{display:table;content:""}.clearfix[data-v-58ea6b03]:after{clear:both}.el-pagination[data-v-58ea6b03]{padding:15px 5px 0}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -60,6 +62,11 @@
     return o.innerText = t, document.head.append(o), t;
   };
   cssLoader("element-plus/dist/index.css");
+  var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
+  var _GM_info = /* @__PURE__ */ (() => typeof GM_info != "undefined" ? GM_info : void 0)();
+  var _GM_setValue = /* @__PURE__ */ (() => typeof GM_setValue != "undefined" ? GM_setValue : void 0)();
+  var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
+  var _unsafeWindow = /* @__PURE__ */ (() => typeof unsafeWindow != "undefined" ? unsafeWindow : void 0)();
   const _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -79,13 +86,24 @@
       const { proxy } = vue.getCurrentInstance();
       const list = vue.ref([]);
       const currentReply = vue.ref("");
+      const currentPlatform = vue.ref("discuz");
       const fwin_replyLoaded = vue.ref(false);
       const hasEditor = vue.ref(false);
       const lastClickElemet = vue.ref(false);
       const setShow = vue.ref(false);
       vue.onBeforeMount(() => {
+        checkPlatform();
         getList();
       });
+      function checkPlatform() {
+        if (document.body.outerHTML.indexOf("Discuz") > -1) {
+          currentPlatform.value = "discuz";
+        } else {
+          if (location.host.indexOf("nodeseek") > -1) {
+            currentPlatform.value = "nodeseek";
+          }
+        }
+      }
       async function getList() {
         let myListStorage = proxy.$storage.get();
         list.value = myListStorage && myListStorage.length > 0 ? myListStorage : [];
@@ -103,6 +121,8 @@
           enterPostReply();
         } else if (hasEditor.value) {
           enterEditorReply();
+        } else if (currentPlatform.value == "nodeseek") {
+          enterMarkdownItReply();
         } else {
           enterFastPostReply();
         }
@@ -110,6 +130,9 @@
       function enterPostReply() {
         let $postmessage = document.querySelector("#postmessage");
         $postmessage.value = currentReply.value;
+      }
+      function enterMarkdownItReply() {
+        _unsafeWindow.editor && _unsafeWindow.editor.setMarkdown && _unsafeWindow.editor.setMarkdown(currentReply.value);
       }
       function enterFastPostReply() {
         try {
@@ -181,11 +204,20 @@
             }
           }
         });
-        mos.observe(document.querySelector("#append_parent"), {
-          attributes: true,
-          childList: true,
-          subtree: true
-        });
+        if (document.querySelector("#append_parent")) {
+          mos.observe(document.querySelector("#append_parent"), {
+            attributes: true,
+            childList: true,
+            subtree: true
+          });
+        }
+        if (document.querySelector(".md-editor")) {
+          mos.observe(document.querySelector(".md-editor"), {
+            attributes: true,
+            childList: true,
+            subtree: true
+          });
+        }
       }
       const title = vue.computed(() => {
         return `${proxy.$app.getName()}`;
@@ -302,8 +334,8 @@
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-15069efc"]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-977a0533"), n = n(), vue.popScopeId(), n);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-b8cfbb77"]]);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-58ea6b03"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$1 = { class: "setBox" };
   const _hoisted_2$1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "我在用的", -1));
   const _hoisted_3 = { style: { "margin-left": "10px" } };
@@ -838,7 +870,7 @@
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-977a0533"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-58ea6b03"]]);
   const _hoisted_1 = { class: "margin-left" };
   const _hoisted_2 = { class: "margin-left" };
   const _sfc_main = {
@@ -1079,10 +1111,6 @@
       };
     }
   };
-  var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
-  var _GM_info = /* @__PURE__ */ (() => typeof GM_info != "undefined" ? GM_info : void 0)();
-  var _GM_setValue = /* @__PURE__ */ (() => typeof GM_setValue != "undefined" ? GM_setValue : void 0)();
-  var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
   const Storage = {
     install: (app2, options) => {
       app2.config.globalProperties.$storage = {
@@ -1213,6 +1241,11 @@
       }
       if ($postbox) {
         $postbox.insertBefore($appRoot, $postbox.childNodes[4]);
+      }
+      const $editorBody = document.querySelector(".comment-container");
+      if ($editorBody) {
+        $appRoot.style.padding = "15px 15px 0";
+        $editorBody.appendChild($appRoot);
       }
       return $appRoot;
     })()

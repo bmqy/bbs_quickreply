@@ -19,6 +19,7 @@ app.use(Storage);
 app.use(Api);
 app.mount(
     (()=>{
+        // discuz
         const $fastposteditor = document.querySelector('#fastposteditor');
         const $postbox = document.querySelector('#postbox');
         const $appRoot = document.createElement('div');
@@ -27,6 +28,12 @@ app.mount(
         }
         if ($postbox) {
             $postbox.insertBefore($appRoot, $postbox.childNodes[4]);
+        }
+        // nodeseek
+        const $editorBody = document.querySelector('.comment-container');
+        if ($editorBody) {
+            $appRoot.style.padding = '15px 15px 0';
+            $editorBody.appendChild($appRoot);
         }
         return $appRoot;
     })()
