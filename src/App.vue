@@ -263,7 +263,7 @@ watch(currentReply, (n)=> {
     position: relative;
 }
 
-v-deep .el-dialog {
+:global(.el-dialog) {
     display: flex;
     flex-direction: column;
     margin: 0 !important;
@@ -276,7 +276,11 @@ v-deep .el-dialog {
     min-width: 1000px;
 }
 
-v-deep .el-dialog__body {
+:global(.el-dialog__header) {
+    margin-right: 0;
+}
+
+:global(.el-dialog__body) {
     flex: 1;
     overflow: auto;
     padding: 0;
