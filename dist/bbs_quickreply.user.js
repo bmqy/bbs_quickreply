@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.2.1
+// @version      3.3.0
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -28,12 +28,13 @@
 // @grant        GM_getResourceText
 // @grant        GM_getValue
 // @grant        GM_info
+// @grant        GM_registerMenuCommand
 // @grant        GM_setValue
 // @grant        GM_xmlhttpRequest
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=t,document.head.append(a)})(' .quickReplyBox[data-v-a2aac1da]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0}.el-dialog__body{flex:1;overflow:auto;padding:0}.app-dialog-foot[data-v-a2aac1da]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-a2aac1da]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-a2aac1da],.el-form-item--small.el-form-item[data-v-a2aac1da]{margin-bottom:10px}.el-select[data-v-a2aac1da]{width:300px}.app-margin-right-30[data-v-977a0533]{margin-right:30px}.list-left[data-v-977a0533]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-977a0533]{margin-right:5px;color:#909399}.list-title[data-v-977a0533]{flex:1;font-weight:400}.list-right[data-v-977a0533]{min-width:70px}.list-right .el-badge.item[data-v-977a0533]{margin-right:30px}.list li[data-v-977a0533]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-977a0533]:hover{background-color:#f5f5f5}.tips[data-v-977a0533]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-977a0533]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-977a0533]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-977a0533]{padding:10px 20px}.box-card .el-card__header span[data-v-977a0533]{font-size:14px}.clearfix[data-v-977a0533]:before,.clearfix[data-v-977a0533]:after{display:table;content:""}.clearfix[data-v-977a0533]:after{clear:both}.el-pagination[data-v-977a0533]{padding:15px 5px 0}.margin-left{margin-left:15px} ');
+(t=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=t,document.head.append(a)})(' .quickReplyBox[data-v-0922ef62]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0}.el-dialog__body{flex:1;overflow:auto;padding:0}.app-dialog-foot[data-v-0922ef62]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-0922ef62]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-0922ef62],.el-form-item--small.el-form-item[data-v-0922ef62]{margin-bottom:10px}.el-select[data-v-0922ef62]{width:300px}.app-margin-right-30[data-v-c7a83863]{margin-right:30px}.list-left[data-v-c7a83863]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-c7a83863]{margin-right:5px;color:#909399}.list-title[data-v-c7a83863]{flex:1;font-weight:400}.list-right[data-v-c7a83863]{min-width:70px}.list-right .el-badge.item[data-v-c7a83863]{margin-right:30px}.list li[data-v-c7a83863]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-c7a83863]:hover{background-color:#f5f5f5}.tips[data-v-c7a83863]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-c7a83863]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-c7a83863]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-c7a83863]{padding:10px 20px}.box-card .el-card__header span[data-v-c7a83863]{font-size:14px}.clearfix[data-v-c7a83863]:before,.clearfix[data-v-c7a83863]:after{display:table;content:""}.clearfix[data-v-c7a83863]:after{clear:both}.el-pagination[data-v-c7a83863]{padding:15px 5px 0}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -64,6 +65,7 @@
   cssLoader("element-plus/dist/index.css");
   var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
   var _GM_info = /* @__PURE__ */ (() => typeof GM_info != "undefined" ? GM_info : void 0)();
+  var _GM_registerMenuCommand = /* @__PURE__ */ (() => typeof GM_registerMenuCommand != "undefined" ? GM_registerMenuCommand : void 0)();
   var _GM_setValue = /* @__PURE__ */ (() => typeof GM_setValue != "undefined" ? GM_setValue : void 0)();
   var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
   var _unsafeWindow = /* @__PURE__ */ (() => typeof unsafeWindow != "undefined" ? unsafeWindow : void 0)();
@@ -88,12 +90,22 @@
       const currentReply = vue.ref("");
       const currentPlatform = vue.ref("discuz");
       const fwin_replyLoaded = vue.ref(false);
+      const submitNow = vue.ref(false);
       const hasEditor = vue.ref(false);
       const lastClickElemet = vue.ref(false);
       const setShow = vue.ref(false);
       vue.onBeforeMount(() => {
         checkPlatform();
         getList();
+        proxy.$gmMenus.init();
+        submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
+        changeSubmitNow(submitNow.value);
+        proxy.$gmMenus.changeDownloadListMenu(function(data) {
+          updateMyList(data);
+        });
+        proxy.$gmMenus.changeSettingMenuCommand(setShow.value, function() {
+          setShow.value ? closeSet() : openSet();
+        });
       });
       function checkPlatform() {
         if (document.body.outerHTML.indexOf("Discuz") > -1) {
@@ -104,16 +116,43 @@
           }
         }
       }
+      function changeSubmitNow(e) {
+        let checked = proxy.$storage.getUserInfo("submitNow") || false;
+        if (arguments.length == 1) {
+          checked = e;
+        } else {
+          submitNow.value = !checked;
+          checked = !checked;
+          proxy.$storage.setUserInfo("submitNow", checked);
+        }
+        proxy.$gmMenus.changeSubmitNowMenu(checked, () => {
+          changeSubmitNow();
+        });
+      }
       async function getList() {
         let myListStorage = proxy.$storage.get();
         list.value = myListStorage && myListStorage.length > 0 ? myListStorage : [];
         currentReply.value = "";
       }
       function openSet() {
-        setShow.value = !setShow.value;
+        setShow.value = true;
+        proxy.$gmMenus.changeSettingMenuCommand(true, function() {
+          closeSet();
+        });
       }
-      function updateMyList() {
-        let myListStorage = proxy.$storage.get();
+      function closeSet() {
+        setShow.value = false;
+        proxy.$gmMenus.changeSettingMenuCommand(false, function() {
+          openSet();
+        });
+      }
+      function onLoginSuccess() {
+        proxy.$gmMenus.changeSettingMenuCommand(true, function() {
+          closeSet();
+        });
+      }
+      function updateMyList(data) {
+        let myListStorage = data || [];
         list.value = myListStorage;
       }
       function enterReply() {
@@ -133,6 +172,9 @@
       }
       function enterMarkdownItReply() {
         _unsafeWindow.editor && _unsafeWindow.editor.setMarkdown && _unsafeWindow.editor.setMarkdown(currentReply.value);
+        if (submitNow.value && currentReply.value) {
+          document.querySelector(".md-editor button.submit").click();
+        }
       }
       function enterFastPostReply() {
         try {
@@ -141,7 +183,10 @@
           );
           $fastpostmessage.style.background = "";
           $fastpostmessage.value = currentReply.value;
-        } catch (err) {
+          if (submitNow.value && currentReply.value) {
+            document.querySelector("button#fastpostsubmit").click();
+          }
+        } catch (err2) {
           console.log("请检查发帖权限！");
         }
       }
@@ -253,9 +298,6 @@
           );
         }
       });
-      vue.watch(currentReply, (n) => {
-        n && enterReply();
-      });
       return (_ctx, _cache) => {
         const _component_el_option = vue.resolveComponent("el-option");
         const _component_el_select = vue.resolveComponent("el-select");
@@ -317,13 +359,19 @@
           vue.createVNode(_component_el_dialog, {
             modelValue: vue.unref(setShow),
             "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(setShow) ? setShow.value = $event : null),
+            onClose: closeSet,
             title: _ctx.$app.getName(),
             width: "75%",
             "show-close": true,
+            "destroy-on-close": "",
             "append-to-body": ""
           }, {
             default: vue.withCtx(() => [
-              vue.createVNode(_component_app_set, { onUpdateMyList: updateMyList })
+              vue.createVNode(_component_app_set, {
+                ref: "setPanel",
+                onUpdateMyList: updateMyList,
+                onOnSuccess: onLoginSuccess
+              }, null, 512)
             ]),
             footer: vue.withCtx(() => [
               vue.createElementVNode("span", _hoisted_3$1, vue.toDisplayString(`ver: ${_ctx.$app.getVersion()}`), 1)
@@ -334,17 +382,16 @@
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-a2aac1da"]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-977a0533"), n = n(), vue.popScopeId(), n);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-0922ef62"]]);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-c7a83863"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$1 = { class: "setBox" };
   const _hoisted_2$1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "我在用的", -1));
-  const _hoisted_3 = { style: { "margin-left": "10px" } };
-  const _hoisted_4 = {
+  const _hoisted_3 = {
     key: 0,
     class: "quickReplyLoginBox"
   };
-  const _hoisted_5 = { style: { "margin-top": "15px" } };
-  const _hoisted_6 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", { class: "tips" }, [
+  const _hoisted_4 = { style: { "margin-top": "15px" } };
+  const _hoisted_5 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", { class: "tips" }, [
     /* @__PURE__ */ vue.createTextVNode(" * 登录后，即可在任意设备同步你的配置；"),
     /* @__PURE__ */ vue.createElementVNode("br"),
     /* @__PURE__ */ vue.createTextVNode(" * 云端只负责保存账号及其回复列表，不留存多余信息；"),
@@ -352,25 +399,25 @@
     /* @__PURE__ */ vue.createTextVNode(" * 如不需登录，也可忽略登录界面，直接使用即可；"),
     /* @__PURE__ */ vue.createElementVNode("br")
   ], -1));
-  const _hoisted_7 = { key: 1 };
-  const _hoisted_8 = {
+  const _hoisted_6 = { key: 1 };
+  const _hoisted_7 = {
     key: 0,
     class: "list"
   };
-  const _hoisted_9 = { class: "list-left" };
-  const _hoisted_10 = { class: "list-number" };
-  const _hoisted_11 = { class: "list-title" };
-  const _hoisted_12 = { class: "list-right" };
-  const _hoisted_13 = {
+  const _hoisted_8 = { class: "list-left" };
+  const _hoisted_9 = { class: "list-number" };
+  const _hoisted_10 = { class: "list-title" };
+  const _hoisted_11 = { class: "list-right" };
+  const _hoisted_12 = {
     key: 1,
     class: "tips"
   };
-  const _hoisted_14 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", null, "未设置快速回帖内容!", -1));
-  const _hoisted_15 = [
-    _hoisted_14
+  const _hoisted_13 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", null, "未设置快速回帖内容!", -1));
+  const _hoisted_14 = [
+    _hoisted_13
   ];
-  const _hoisted_16 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
-  const _hoisted_17 = { class: "addReplyBox" };
+  const _hoisted_15 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
+  const _hoisted_16 = { class: "addReplyBox" };
   const _sfc_main$1 = {
     __name: "Set",
     emits: ["updateMyList"],
@@ -392,6 +439,7 @@
       vue.onBeforeMount(() => {
         isLogin.value = proxy.$storage.getUserInfo("userId");
         realtimeSync.value = proxy.$storage.getUserInfo("realtimeSync");
+        changeRealtimeSync(realtimeSync.value);
         getMyList();
         getSystemList();
       });
@@ -436,7 +484,7 @@
       }
       function updateMyList() {
         proxy.$storage.set(myList.value);
-        emit("updateMyList");
+        emit("updateMyList", myList.value);
       }
       function delReply(index) {
         myList.value.splice(index, 1);
@@ -446,16 +494,16 @@
       function shareReply(index) {
         proxy.$api.replyInsert(myList.value[index]).then((res) => {
           proxy.$message.success(res.memo);
-        }).catch((err) => {
-          proxy.$message.error(err.memo);
+        }).catch((err2) => {
+          proxy.$message.error(err2.memo);
         });
       }
       function likeReply(index) {
         proxy.$api.likeCountUpdate(systemList.value[index].id).then((res) => {
           systemList.value[index]["likeCount"] = res.data.likeCount;
           proxy.$message.success(res.memo);
-        }).catch((err) => {
-          proxy.$message.error(err.memo);
+        }).catch((err2) => {
+          proxy.$message.error(err2.memo);
         });
       }
       function collectReply(index) {
@@ -468,42 +516,23 @@
         proxy.$api.collectCountUpdate(systemList.value[index].id).then((res) => {
           addReply() && proxy.$message.success(res.memo);
           realtimeSync.value && upload();
-        }).catch((err) => {
-          proxy.$message.error(err.memo);
+        }).catch((err2) => {
+          proxy.$message.error(err2.memo);
         });
       }
       function onLoginSuccess() {
         showLoginForce.value = false;
         isLogin.value = true;
+        proxy.$gmMenus.changeSettingMenuCommand();
         myList.value.length === 0 && download();
       }
       function upload() {
-        if (myList.length == 0) {
-          proxy.$message.error("无可同步数据");
-          return false;
-        }
-        proxy.$api.upQuickReplyList({
-          userId: proxy.$storage.getUserInfo("userId"),
-          list: myList.value
-        }).then((res) => {
-          proxy.$message.success(res.memo);
-        }).catch((err) => {
-          proxy.$message.error(err.memo);
-        });
+        proxy.$storage.uploadList();
       }
-      function download() {
-        proxy.$api.downQuickReplyList({
-          userId: proxy.$storage.getUserInfo("userId")
-        }).then((res) => {
-          if (res.code != 0) {
-            proxy.$message.error(res.memo);
-            return false;
-          }
-          myList.value = res.data;
-          updateMyList();
-        }).catch((err) => {
-          proxy.$message.error(err.memo);
-        });
+      async function download() {
+        let list = await proxy.$storage.downloadList();
+        myList.value = list;
+        updateMyList();
       }
       function loginForce() {
         showLoginForce.value = !showLoginForce.value;
@@ -511,16 +540,25 @@
       function logout() {
         proxy.$storage.setUserInfo("userId", "");
         isLogin.value = false;
+        proxy.$gmMenus.changeSettingMenuCommand();
       }
       function changeRealtimeSync(e) {
-        realtimeSync.value = e;
-        proxy.$storage.setUserInfo("realtimeSync", e);
+        let checked = proxy.$storage.getUserInfo("realtimeSync") || false;
+        if (arguments.length == 1) {
+          checked = e;
+        } else {
+          realtimeSync.value = !checked;
+          checked = !checked;
+          proxy.$storage.setUserInfo("realtimeSync", checked);
+        }
+        proxy.$gmMenus.changeRealtimeMenu(checked, () => {
+          changeRealtimeSync();
+        });
       }
       return (_ctx, _cache) => {
         const _component_el_col = vue.resolveComponent("el-col");
         const _component_el_button = vue.resolveComponent("el-button");
         const _component_el_tooltip = vue.resolveComponent("el-tooltip");
-        const _component_el_checkbox = vue.resolveComponent("el-checkbox");
         const _component_el_row = vue.resolveComponent("el-row");
         const _component_app_login = vue.resolveComponent("app-login");
         const _component_el_card = vue.resolveComponent("el-card");
@@ -582,59 +620,6 @@
                                       })
                                     ]),
                                     _: 1
-                                  }),
-                                  vue.createVNode(_component_el_tooltip, {
-                                    class: "item",
-                                    effect: "dark",
-                                    content: "上传列表，覆盖云端",
-                                    placement: "top-start"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_button, {
-                                        type: "primary",
-                                        icon: "Upload",
-                                        size: "small",
-                                        circle: "",
-                                        onClick: upload
-                                      })
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_tooltip, {
-                                    class: "item",
-                                    effect: "dark",
-                                    content: "下载列表，覆盖本地",
-                                    placement: "top-start"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_button, {
-                                        type: "warning",
-                                        icon: "Download",
-                                        size: "small",
-                                        circle: "",
-                                        onClick: download
-                                      })
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_tooltip, {
-                                    class: "item",
-                                    effect: "dark",
-                                    content: "开启实时同步，修改后立即上传",
-                                    placement: "top-start"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createElementVNode("div", _hoisted_3, [
-                                        vue.createVNode(_component_el_checkbox, {
-                                          modelValue: vue.unref(realtimeSync),
-                                          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(realtimeSync) ? realtimeSync.value = $event : null),
-                                          label: "实时",
-                                          size: "small",
-                                          onChange: changeRealtimeSync
-                                        }, null, 8, ["modelValue"])
-                                      ])
-                                    ]),
-                                    _: 1
                                   })
                                 ]),
                                 _: 1
@@ -671,20 +656,20 @@
                           })
                         ]),
                         default: vue.withCtx(() => [
-                          vue.unref(myList).length === 0 && !vue.unref(isLogin) || vue.unref(showLoginForce) ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_4, [
-                            vue.createElementVNode("div", _hoisted_5, [
+                          vue.unref(myList).length === 0 && !vue.unref(isLogin) || vue.unref(showLoginForce) ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_3, [
+                            vue.createElementVNode("div", _hoisted_4, [
                               vue.createVNode(_component_app_login, { onOnSuccess: onLoginSuccess }),
-                              _hoisted_6
+                              _hoisted_5
                             ])
-                          ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_7, [
-                            !vue.unref(showLoginForce) || vue.unref(myList).length > 0 ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_8, [
+                          ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_6, [
+                            !vue.unref(showLoginForce) || vue.unref(myList).length > 0 ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_7, [
                               (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(myList), (item, index) => {
                                 return vue.openBlock(), vue.createElementBlock("li", { key: index }, [
-                                  vue.createElementVNode("div", _hoisted_9, [
-                                    vue.createElementVNode("div", _hoisted_10, vue.toDisplayString(`${index + 1}、`), 1),
-                                    vue.createElementVNode("div", _hoisted_11, vue.toDisplayString(`${item}`), 1)
+                                  vue.createElementVNode("div", _hoisted_8, [
+                                    vue.createElementVNode("div", _hoisted_9, vue.toDisplayString(`${index + 1}、`), 1),
+                                    vue.createElementVNode("div", _hoisted_10, vue.toDisplayString(`${item}`), 1)
                                   ]),
-                                  vue.createElementVNode("div", _hoisted_12, [
+                                  vue.createElementVNode("div", _hoisted_11, [
                                     vue.createVNode(_component_el_tooltip, {
                                       class: "item",
                                       effect: "dark",
@@ -694,7 +679,7 @@
                                       default: vue.withCtx(() => [
                                         vue.createVNode(_component_el_button, {
                                           type: "success",
-                                          size: "mini",
+                                          size: "small",
                                           icon: "Share",
                                           circle: "",
                                           onClick: ($event) => shareReply(index)
@@ -711,7 +696,7 @@
                                       default: vue.withCtx(() => [
                                         vue.createVNode(_component_el_button, {
                                           type: "danger",
-                                          size: "mini",
+                                          size: "small",
                                           icon: "DeleteFilled",
                                           circle: "",
                                           onClick: ($event) => delReply(index)
@@ -723,7 +708,7 @@
                                 ]);
                               }), 128))
                             ])) : vue.createCommentVNode("", true),
-                            vue.unref(myList).length == 0 ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_13, _hoisted_15)) : vue.createCommentVNode("", true)
+                            vue.unref(myList).length == 0 ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_12, _hoisted_14)) : vue.createCommentVNode("", true)
                           ]))
                         ]),
                         _: 1
@@ -739,7 +724,7 @@
                         "body-style": { padding: "0 20px 20px" }
                       }, {
                         header: vue.withCtx(() => [
-                          _hoisted_16
+                          _hoisted_15
                         ]),
                         default: vue.withCtx(() => [
                           vue.withDirectives((vue.openBlock(), vue.createBlock(_component_el_table, {
@@ -768,7 +753,7 @@
                                 default: vue.withCtx((scope) => [
                                   vue.createVNode(_component_el_tag, {
                                     type: "info",
-                                    size: "mini"
+                                    size: "small"
                                   }, {
                                     default: vue.withCtx(() => [
                                       vue.createTextVNode(vue.toDisplayString(scope.row.likeCount), 1)
@@ -792,7 +777,7 @@
                                     default: vue.withCtx(() => [
                                       vue.createVNode(_component_el_button, {
                                         type: "success",
-                                        size: "mini",
+                                        size: "small",
                                         icon: "Pointer",
                                         circle: "",
                                         onClick: ($event) => likeReply(scope.$index)
@@ -809,7 +794,7 @@
                                     default: vue.withCtx(() => [
                                       vue.createVNode(_component_el_button, {
                                         type: "danger",
-                                        size: "mini",
+                                        size: "small",
                                         icon: "StarFilled",
                                         circle: "",
                                         onClick: ($event) => collectReply(scope.$index)
@@ -842,11 +827,11 @@
                 ]),
                 _: 1
               }),
-              vue.createElementVNode("div", _hoisted_17, [
+              vue.createElementVNode("div", _hoisted_16, [
                 vue.createVNode(_component_el_input, {
                   placeholder: "请输入新的回复内容",
                   modelValue: vue.unref(newReply),
-                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(newReply) ? newReply.value = $event : null),
+                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(newReply) ? newReply.value = $event : null),
                   autosize: { minRows: 1, maxRows: 3 },
                   maxlength: "100",
                   "show-word-limit": true,
@@ -870,7 +855,7 @@
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-977a0533"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-c7a83863"]]);
   const _hoisted_1 = { class: "margin-left" };
   const _hoisted_2 = { class: "margin-left" };
   const _sfc_main = {
@@ -941,8 +926,8 @@
                 return false;
               }
               loginSuccess(res);
-            }).catch((err) => {
-              console.log("登录失败：", err);
+            }).catch((err2) => {
+              console.log("登录失败：", err2);
             });
           }
         });
@@ -956,8 +941,8 @@
                 return false;
               }
               loginSuccess(res);
-            }).catch((err) => {
-              console.log("注册失败：", err);
+            }).catch((err2) => {
+              console.log("注册失败：", err2);
             });
           }
         });
@@ -1111,7 +1096,7 @@
       };
     }
   };
-  const Storage = {
+  const Util = {
     install: (app2, options) => {
       app2.config.globalProperties.$storage = {
         key: "QuickReply",
@@ -1136,6 +1121,145 @@
             return _GM_getValue(fullKey);
           } else {
             return "";
+          }
+        },
+        uploadList() {
+          let proxy = app2.config.globalProperties;
+          let userId = proxy.$storage.getUserInfo("userId");
+          let myList = proxy.$storage.get() || [];
+          if (!userId) {
+            proxy.$message.error("请先登录");
+            return false;
+          }
+          if (myList.length == 0) {
+            proxy.$message.error("无可同步数据");
+            return false;
+          }
+          proxy.$api.upQuickReplyList({
+            userId,
+            list: myList
+          }).then((res) => {
+            proxy.$message.success(res.memo);
+          }).catch((err2) => {
+            proxy.$message.error(err2.memo);
+          });
+        },
+        async downloadList(callback) {
+          let proxy = app2.config.globalProperties;
+          let userId = proxy.$storage.getUserInfo("userId");
+          if (!userId) {
+            proxy.$message.error("请先登录");
+            return false;
+          }
+          let res = await proxy.$api.downQuickReplyList({
+            userId
+          });
+          if (res.code == 0) {
+            proxy.$storage.set(res.data);
+            proxy.$message.success("下载成功");
+            callback && callback(res.data);
+            return res.data;
+          } else {
+            proxy.$message.error(err.memo);
+          }
+        }
+      };
+      app2.config.globalProperties.$gmMenus = {
+        init() {
+          let proxy = app2.config.globalProperties;
+          _GM_registerMenuCommand("- 上传列表", function() {
+            proxy.$storage.uploadList();
+          }, {
+            id: "uploadList",
+            autoClose: true,
+            title: "点此上传将覆盖云端已存储数据"
+          });
+          _GM_registerMenuCommand("- 下载列表", function() {
+            proxy.$storage.downloadList();
+          }, {
+            id: "downloadList",
+            autoClose: true,
+            title: "点此下载将覆盖本地已存储数据"
+          });
+          proxy.$gmMenus.changeSubmitNowMenu(proxy.$storage.getUserInfo("submitNow"));
+          proxy.$gmMenus.changeRealtimeMenu(proxy.$storage.getUserInfo("realtimeSync"));
+          proxy.$gmMenus.changeSettingMenuCommand();
+        },
+        changeDownloadListMenu(callback) {
+          let proxy = app2.config.globalProperties;
+          if (arguments.length == 1) {
+            _GM_registerMenuCommand("- 下载列表", function() {
+              proxy.$storage.downloadList(callback);
+            }, {
+              id: "downloadList",
+              autoClose: true,
+              title: "点此下载将覆盖本地已存储数据"
+            });
+          } else {
+            _GM_registerMenuCommand("- 下载列表", function() {
+              proxy.$storage.downloadList();
+            }, {
+              id: "downloadList",
+              autoClose: true,
+              title: "点此下载将覆盖本地已存储数据"
+            });
+          }
+        },
+        changeSubmitNowMenu(status, callback) {
+          let proxy = app2.config.globalProperties;
+          if (arguments.length == 2) {
+            _GM_registerMenuCommand(`- 立即提交：${status ? "已启用" : "已停用"}`, callback, {
+              id: "submitNow",
+              autoClose: true,
+              title: "开启后，选择快捷回帖内容后立即提交回帖"
+            });
+          } else {
+            status = proxy.$storage.getUserInfo("submitNow") || false;
+            _GM_registerMenuCommand(`- 立即提交：${status ? "已启用" : "已停用"}`, function() {
+              proxy.$storage.setUserInfo("submitNow", !status);
+              proxy.$gmMenus.changeSubmitNowMenu(!status);
+            }, {
+              id: "submitNow",
+              autoClose: true,
+              title: "开启后，选择快捷回帖内容后立即提交回帖"
+            });
+          }
+        },
+        changeRealtimeMenu(status, callback) {
+          let proxy = app2.config.globalProperties;
+          if (arguments.length == 2) {
+            _GM_registerMenuCommand(`- 实时同步：${status ? "已启用" : "已停用"}`, callback, {
+              id: "realtimeSync",
+              autoClose: true,
+              title: "开启后，本地列表修改后立即同步到云端存储"
+            });
+          } else {
+            status = proxy.$storage.getUserInfo("realtimeSync") || false;
+            _GM_registerMenuCommand(`- 实时同步：${status ? "已启用" : "已停用"}`, function() {
+              proxy.$storage.setUserInfo("realtimeSync", !status);
+              proxy.$gmMenus.changeRealtimeMenu(!status);
+            }, {
+              id: "realtimeSync",
+              autoClose: true,
+              title: "开启后，本地列表修改后立即同步到云端存储"
+            });
+          }
+        },
+        changeSettingMenuCommand(status, callback) {
+          let proxy = app2.config.globalProperties;
+          let isUserId = proxy.$storage.getUserInfo("userId");
+          if (arguments.length == 2) {
+            _GM_registerMenuCommand(`- 设置面板：${isUserId ? "已登录" : "未登录"}`, callback, {
+              id: "setting",
+              autoClose: true,
+              title: "打开/关闭设置面板"
+            });
+          } else {
+            _GM_registerMenuCommand(`- 设置面板：${isUserId ? "已登录" : "未登录"}`, null, {
+              id: "setting",
+              autoClose: true,
+              title: "打开/关闭设置面板"
+            });
           }
         }
       };
@@ -1229,7 +1353,7 @@
   app.component("app-set", Set);
   app.component("app-login", _sfc_main);
   app.use(ElementPlus);
-  app.use(Storage);
+  app.use(Util);
   app.use(Api);
   app.mount(
     (() => {
