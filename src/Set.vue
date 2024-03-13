@@ -17,6 +17,7 @@ const emit = defineEmits(['updateMyList']);
 onBeforeMount(()=>{
     isLogin.value = proxy.$storage.getUserInfo('userId');
     realtimeSync.value = proxy.$storage.getUserInfo('realtimeSync');
+    changeRealtimeSync(realtimeSync.value);
     getMyList();
     getSystemList();
 });
@@ -69,7 +70,7 @@ function addReply() {
 // 更新自定义回复
 function updateMyList() {
     proxy.$storage.set(myList.value);
-    emit('updateMyList');
+    emit('updateMyList', myList.value);
 }
 // 删除自定义回复
 function delReply(index) {
@@ -122,35 +123,16 @@ function collectReply(index) {
 function onLoginSuccess(){
     showLoginForce.value = false;
     isLogin.value = true;
+    proxy.$gmMenus.changeSettingMenuCommand();
     myList.value.length===0 && download();
 }
 function upload(){
-    if(myList.length == 0){
-        proxy.$message.error('无可同步数据');
-        return false;
-    }
-    proxy.$api.upQuickReplyList({
-        userId: proxy.$storage.getUserInfo('userId'),
-        list: myList.value
-    }).then(res=>{
-        proxy.$message.success(res.memo);
-    }).catch(err=>{
-        proxy.$message.error(err.memo);
-    });
+    proxy.$storage.uploadList();
 }
-function download(){
-    proxy.$api.downQuickReplyList({
-        userId: proxy.$storage.getUserInfo('userId')
-    }).then(res=>{
-        if(res.code != 0){
-            proxy.$message.error(res.memo);
-            return false;
-        }
-        myList.value = res.data;
-        updateMyList();
-    }).catch(err=>{
-        proxy.$message.error(err.memo);
-    });
+async function download(){
+    let list = await proxy.$storage.downloadList();
+    myList.value = list;
+    updateMyList();
 }
 function loginForce(){
     showLoginForce.value = !showLoginForce.value;
@@ -158,11 +140,28 @@ function loginForce(){
 function logout(){
     proxy.$storage.setUserInfo('userId', '')
     isLogin.value = false;
+    proxy.$gmMenus.changeSettingMenuCommand();
 }
 
 function changeRealtimeSync(e){
+    let checked = proxy.$storage.getUserInfo('realtimeSync') || false
+    if(arguments.length == 1){
+        checked = e
+    } else {
+        realtimeSync.value = !checked
+        checked = !checked
+        proxy.$storage.setUserInfo('realtimeSync', checked)
+    }
+    proxy.$gmMenus.changeRealtimeMenu(checked, ()=>{
+        changeRealtimeSync()
+    });
+}
+function onRealtimeSyncChange(e){
     realtimeSync.value = e
-    proxy.$storage.setUserInfo('realtimeSync', e);
+    proxy.$storage.setUserInfo('realtimeSync', e)
+    proxy.$gmMenus.changeRealtimeMenu(e, function () {
+        changeRealtimeSync()
+    });
 }
 </script>
 
@@ -179,15 +178,15 @@ function changeRealtimeSync(e){
                                     <el-tooltip class="item" effect="dark" content="注销登录" placement="top-start">
                                         <el-button type="danger" icon="SwitchButton" size="small" circle @click="logout" />
                                     </el-tooltip>
-                                    <el-tooltip class="item" effect="dark" content="上传列表，覆盖云端" placement="top-start">
+                                    <!-- <el-tooltip class="item" effect="dark" content="上传列表，覆盖云端" placement="top-start">
                                         <el-button type="primary" icon="Upload" size="small" circle @click="upload" />
                                     </el-tooltip>
                                     <el-tooltip class="item" effect="dark" content="下载列表，覆盖本地" placement="top-start">
                                         <el-button type="warning" icon="Download" size="small" circle @click="download" />
                                     </el-tooltip>
                                     <el-tooltip class="item" effect="dark" content="开启实时同步，修改后立即上传" placement="top-start">
-                                        <div style="margin-left:10px;"><el-checkbox v-model="realtimeSync" label="实时" size="small" @change="changeRealtimeSync" /></div>
-                                    </el-tooltip>
+                                        <div style="margin-left:10px;"><el-checkbox v-model="realtimeSync" label="实时" size="small" :checked="realtimeSync" @change="onRealtimeSyncChange" /></div>
+                                    </el-tooltip> -->
                                 </el-col>
                                 <el-col :span="12" :offset="0"  v-if="!isLogin && myList.length>0" style="display: flex;justify-content: end;">
                                     <el-tooltip class="item" effect="dark" content="登录账号，云端同步" placement="top-start">
@@ -196,90 +195,94 @@ function changeRealtimeSync(e){
                                 </el-col>
                             </el-row>
                         </template>
-                        <div v-if="(myList.length===0 && !isLogin) || showLoginForce" class="quickReplyLoginBox">
-                            <div style="margin-top: 15px;">
-                                <app-login @onSuccess="onLoginSuccess"></app-login>
-                                <p class="tips">
-                                    * 登录后，即可在任意设备同步你的配置；<br/>
-                                    * 云端只负责保存账号及其回复列表，不留存多余信息；<br/>
-                                    * 如不需登录，也可忽略登录界面，直接使用即可；<br/>
-                                </p>
-                            </div>
-                        </div>
-                        <div v-else>
-                            <ul class="list" v-if="!showLoginForce || myList.length>0">
-                                <li v-for="(item, index) in myList" :key="index">
-                                    <div class="list-left">
-                                        <div class="list-number">
-                                            {{ `${index + 1}、` }}
-                                        </div>
-                                        <div class="list-title">
-                                            {{ `${item}` }}
-                                        </div>
-                                    </div>
-                                    <div class="list-right">
-                                        <el-tooltip class="item" effect="dark" content="分享它" placement="top-start">
-                                            <el-button type="success" size="mini" icon="Share" circle
-                                                @click="shareReply(index)"></el-button>
-                                        </el-tooltip>
-                                        <el-tooltip class="item" effect="dark" content="移除" placement="top-start">
-                                            <el-button type="danger" size="mini" icon="DeleteFilled" circle
-                                                @click="delReply(index)"></el-button>
-                                        </el-tooltip>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div v-if="myList.length == 0" class="tips">
-                                <p>未设置快速回帖内容!</p>
-                            </div>
-                        </div>
-                    </el-card>
-                </el-col>
-                <el-col :span="15">
-                    <el-card class="box-card" shadow="never" :body-style="{padding: '0 20px 20px'}">
-                        <template #header class="clearfix">
+<div v-if="(myList.length===0 && !isLogin) || showLoginForce" class="quickReplyLoginBox">
+    <div style="margin-top: 15px;">
+        <app-login @onSuccess="onLoginSuccess"></app-login>
+        <p class="tips">
+            * 登录后，即可在任意设备同步你的配置；<br />
+            * 云端只负责保存账号及其回复列表，不留存多余信息；<br />
+            * 如不需登录，也可忽略登录界面，直接使用即可；<br />
+        </p>
+    </div>
+</div>
+<div v-else>
+    <ul class="list" v-if="!showLoginForce || myList.length>0">
+        <li v-for="(item, index) in myList" :key="index">
+            <div class="list-left">
+                <div class="list-number">
+                    {{ `${index + 1}、` }}
+                </div>
+                <div class="list-title">
+                    {{ `${item}` }}
+                </div>
+            </div>
+            <div class="list-right">
+                <el-tooltip class="item" effect="dark" content="分享它" placement="top-start">
+                    <el-button type="success" size="small" icon="Share" circle @click="shareReply(index)"></el-button>
+                </el-tooltip>
+                <el-tooltip class="item" effect="dark" content="移除" placement="top-start">
+                    <el-button type="danger" size="small" icon="DeleteFilled" circle
+                        @click="delReply(index)"></el-button>
+                </el-tooltip>
+            </div>
+        </li>
+    </ul>
+    <div v-if="myList.length == 0" class="tips">
+        <p>未设置快速回帖内容!</p>
+    </div>
+</div>
+</el-card>
+</el-col>
+<el-col :span="15">
+    <el-card class="box-card" shadow="never" :body-style="{padding: '0 20px 20px'}">
+
+        <template #header class="clearfix">
                             <span>网友分享的</span>
                         </template>
 
-                        <el-table ref="filterTable" :data="systemList" size="small" stripe v-loading="loading" @sort-change="sortChange">
-                            <el-table-column prop="replyId" label="ID" width="80"></el-table-column>
-                            <el-table-column prop="content" label="内容"></el-table-column>
-                            <el-table-column prop="likeCount" sortable="custom" width="100" label="点赞">
-                                <template #default="scope">
-                                    <el-tag type="info" size="mini">{{scope.row.likeCount}}</el-tag>
+        <el-table ref="filterTable" :data="systemList" size="small" stripe v-loading="loading"
+            @sort-change="sortChange">
+            <el-table-column prop="replyId" label="ID" width="80"></el-table-column>
+            <el-table-column prop="content" label="内容"></el-table-column>
+            <el-table-column prop="likeCount" sortable="custom" width="100" label="点赞">
+
+                <template #default="scope">
+                                    <el-tag type="info" size="small">{{scope.row.likeCount}}</el-tag>
                                 </template>
-                            </el-table-column>
-                            <el-table-column label="操作" width="100">
-                                <template #default="scope">
+            </el-table-column>
+            <el-table-column label="操作" width="100">
+
+                <template #default="scope">
                                     <el-tooltip class="item" effect="dark" content="给个赞" placement="top-start">
-                                        <el-button type="success" size="mini" icon="Pointer" circle
+                                        <el-button type="success" size="small" icon="Pointer" circle
                                             @click="likeReply(scope.$index)"></el-button>
                                     </el-tooltip>
                                     <el-tooltip class="item" effect="dark" content="收藏进我的" placement="top-start">
-                                        <el-button type="danger" size="mini" icon="StarFilled" circle
+                                        <el-button type="danger" size="small" icon="StarFilled" circle
                                             @click="collectReply(scope.$index)"></el-button>
                                     </el-tooltip>
                                 </template>
-                            </el-table-column>
-                        </el-table>
+            </el-table-column>
+        </el-table>
 
-                        <el-pagination background layout="prev, pager, next" :page-size="10" :pager-count="5"
-                            @current-change="currentPageChange" :total="systemListCount">
-                        </el-pagination>
-                    </el-card>
-                </el-col>
-            </el-row>
+        <el-pagination background layout="prev, pager, next" :page-size="10" :pager-count="5"
+            @current-change="currentPageChange" :total="systemListCount">
+        </el-pagination>
+    </el-card>
+</el-col>
+</el-row>
 
-            <div class="addReplyBox">
-                <el-input placeholder="请输入新的回复内容" v-model="newReply" :autosize="{ minRows: 1, maxRows: 3 }"
-                    maxlength="100" :show-word-limit="true" resize="none" clearable class="input-with-select">
-                    <template #append>
+<div class="addReplyBox">
+    <el-input placeholder="请输入新的回复内容" v-model="newReply" :autosize="{ minRows: 1, maxRows: 3 }" maxlength="100"
+        :show-word-limit="true" resize="none" clearable class="input-with-select">
+
+        <template #append>
                         <el-button icon="Plus" @click="addReply"></el-button>
                     </template>
-                </el-input>
-            </div>
-        </el-card>
-    </div>
+    </el-input>
+</div>
+</el-card>
+</div>
 </template>
 
 <style scoped lang="scss">

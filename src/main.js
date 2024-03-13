@@ -5,7 +5,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import App from './App.vue';
 import Set from './Set.vue';
 import Login from './Login.vue';
-import Storage from './util'
+import Util from './util'
 import Api from './api'
 
 const app = createApp(App);
@@ -15,7 +15,7 @@ const app = createApp(App);
 app.component('app-set', Set);
 app.component('app-login', Login);
 app.use(ElementPlus)
-app.use(Storage);
+app.use(Util);
 app.use(Api);
 app.mount(
     (()=>{

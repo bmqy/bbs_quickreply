@@ -4,12 +4,22 @@ const list = ref([]);
 const currentReply = ref('');
 const currentPlatform = ref('discuz');
 const fwin_replyLoaded = ref(false);
+const submitNow = ref(false);
 const hasEditor = ref(false);
 const lastClickElemet = ref(false);
 const setShow = ref(false);
 onBeforeMount(()=>{
     checkPlatform();
     getList();
+    proxy.$gmMenus.init();
+    submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
+    changeSubmitNow(submitNow.value);
+    proxy.$gmMenus.changeDownloadListMenu(function(data){
+        updateMyList(data);
+    });
+    proxy.$gmMenus.changeSettingMenuCommand(setShow.value, function(){
+        setShow.value ? closeSet() : openSet();
+    });
 });
 
 // 检测平台
@@ -22,6 +32,20 @@ function checkPlatform() {
         }
     }
 };
+// 获取立即回帖配置
+function changeSubmitNow(e) {
+    let checked = proxy.$storage.getUserInfo('submitNow') || false
+    if(arguments.length == 1){
+        checked = e
+    } else {
+        submitNow.value = !checked
+        checked = !checked
+        proxy.$storage.setUserInfo('submitNow', checked)
+    }
+    proxy.$gmMenus.changeSubmitNowMenu(checked, ()=>{
+        changeSubmitNow()
+    });
+};
 // 获取APP自定义回复
 async function getList() {
     let myListStorage = proxy.$storage.get();
@@ -30,11 +54,29 @@ async function getList() {
 };
 // 打开APP设置面板
 function openSet() {
-    setShow.value = !setShow.value;
+    setShow.value = true;
+    // 更新设置菜单
+    proxy.$gmMenus.changeSettingMenuCommand(true, function(){
+        closeSet();
+    });
 };
+// 关闭APP设置面板
+function closeSet() {
+    setShow.value = false;
+    // 更新设置菜单
+    proxy.$gmMenus.changeSettingMenuCommand(false, function(){
+        openSet();
+    });
+};
+
+function onLoginSuccess(){
+    proxy.$gmMenus.changeSettingMenuCommand(true, function(){
+        closeSet();
+    });
+}
 // 监听更新自定义回复
-function updateMyList() {
-    let myListStorage = proxy.$storage.get();
+function updateMyList(data) {
+    let myListStorage = data || [];
     list.value = myListStorage;
 };
 // 设置回复内容
@@ -57,6 +99,9 @@ function enterPostReply() {
 // 设置markdown-it编辑器内容
 function enterMarkdownItReply() {
     unsafeWindow.editor && unsafeWindow.editor.setMarkdown && unsafeWindow.editor.setMarkdown(currentReply.value)
+    if(submitNow.value && currentReply.value){
+        document.querySelector('.md-editor button.submit').click()
+    }
 };
 // 设置快速回复框内容
 function enterFastPostReply() {
@@ -66,6 +111,10 @@ function enterFastPostReply() {
         );
         $fastpostmessage.style.background = '';
         $fastpostmessage.value = currentReply.value;
+
+        if(submitNow.value && currentReply.value){
+            document.querySelector('button#fastpostsubmit').click()
+        }
     } catch (err) {
         console.log('请检查发帖权限！');
     }
@@ -198,10 +247,6 @@ watch(fwin_replyLoaded, (n)=>{
         );
     }
 });
-// 监听自定义回复变化
-watch(currentReply, (n)=> {
-    n && enterReply();
-})
 </script>
 
 <template>
@@ -240,22 +285,24 @@ watch(currentReply, (n)=> {
 
 		<el-dialog
 			v-model="setShow"
+            @close="closeSet"
 			:title="$app.getName()"
             width="75%"
 			:show-close="true"
+            destroy-on-close
 			append-to-body
 		>
             <template #default>
-                <app-set @updateMyList="updateMyList" />
+                <app-set ref="setPanel" @updateMyList="updateMyList" @onSuccess="onLoginSuccess" />
             </template>
 
-			<template #footer>
+<template #footer>
 				<span class="app-dialog-foot">
                     {{ `ver: ${$app.getVersion()}` }}
 				</span>
 			</template>
-		</el-dialog>
-	</div>
+</el-dialog>
+</div>
 </template>
 
 <style scoped lang="scss">
