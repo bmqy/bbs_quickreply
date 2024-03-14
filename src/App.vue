@@ -324,7 +324,7 @@ watch(fwin_replyLoaded, (n)=>{
 }
 
 :global(.el-dialog__header) {
-    margin-right: 0;
+    margin-right: 0 !important;
 }
 
 :global(.el-dialog__body) {
