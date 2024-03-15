@@ -4,6 +4,7 @@ import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import App from './App.vue';
 import Set from './Set.vue';
+import AI from './Ai.vue';
 import Login from './Login.vue';
 import Util from './util'
 import Api from './api'
@@ -12,6 +13,7 @@ const app = createApp(App);
     for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
+app.component('app-set-ai', AI);
 app.component('app-set', Set);
 app.component('app-login', Login);
 app.use(ElementPlus)

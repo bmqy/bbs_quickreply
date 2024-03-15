@@ -94,8 +94,10 @@ export default {
             proxy.$gmMenus.changeSubmitNowMenu(proxy.$storage.getUserInfo('submitNow'));
             // 实时同步
             proxy.$gmMenus.changeRealtimeMenu(proxy.$storage.getUserInfo('realtimeSync'));
+            // 人工智能
+            proxy.$gmMenus.changeAIMenu(proxy.$storage.getUserInfo('AI'));
             // 设置
-            proxy.$gmMenus.changeSettingMenuCommand();
+            proxy.$gmMenus.changeSettingMenu();
         },
         changeDownloadListMenu(callback){
             let proxy = app.config.globalProperties;
@@ -157,7 +159,16 @@ export default {
                 })
             }
         },
-        changeSettingMenuCommand(status, callback){
+        changeAIMenu(callback){
+            let proxy = app.config.globalProperties;
+            let useAI = proxy.$storage.getUserInfo('useAI') || '';
+            GM_registerMenuCommand(`- 人工智能：${useAI ? '已启用' : '已停用'}`, callback, {
+                id: 'AI',
+                autoClose: true,
+                title: '开启后，使用人工智能(AI)生成回复内容'
+            })
+        },
+        changeSettingMenu(status, callback){
             let proxy = app.config.globalProperties;
             let isUserId = proxy.$storage.getUserInfo('userId');
             if(arguments.length == 2){

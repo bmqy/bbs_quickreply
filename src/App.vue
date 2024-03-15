@@ -8,17 +8,28 @@ const submitNow = ref(false);
 const hasEditor = ref(false);
 const lastClickElemet = ref(false);
 const setShow = ref(false);
+const setAIShow = ref(false);
+const useAI = ref('');
+const loadingAIReply = ref(false);
+const aiNameList = ref({
+    gemini: 'Gemini Pro',
+    qianwen: '通义千问-turbo'
+});
 onBeforeMount(()=>{
     checkPlatform();
     getList();
     proxy.$gmMenus.init();
     submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
+    useAI.value = proxy.$storage.getUserInfo('useAI') || '';
     changeSubmitNow(submitNow.value);
     proxy.$gmMenus.changeDownloadListMenu(function(data){
         updateMyList(data);
     });
-    proxy.$gmMenus.changeSettingMenuCommand(setShow.value, function(){
+    proxy.$gmMenus.changeSettingMenu(setShow.value, function(){
         setShow.value ? closeSet() : openSet();
+    });
+    proxy.$gmMenus.changeAIMenu(function(){
+        setAIShow.value ? closeSetAI() : openSetAI();
     });
 });
 
@@ -56,7 +67,7 @@ async function getList() {
 function openSet() {
     setShow.value = true;
     // 更新设置菜单
-    proxy.$gmMenus.changeSettingMenuCommand(true, function(){
+    proxy.$gmMenus.changeSettingMenu(true, function(){
         closeSet();
     });
 };
@@ -64,13 +75,36 @@ function openSet() {
 function closeSet() {
     setShow.value = false;
     // 更新设置菜单
-    proxy.$gmMenus.changeSettingMenuCommand(false, function(){
+    proxy.$gmMenus.changeSettingMenu(false, function(){
         openSet();
     });
 };
+// 打开AI设置面板
+function openSetAI() {
+    // 更新AI设置菜单
+    setAIShow.value = true;
+    proxy.$gmMenus.changeAIMenu(function(){
+        closeSetAI();
+    });
+};
+// 关闭AI设置面板
+function closeSetAI() {
+    setAIShow.value = false;
+    // 更新AI设置菜单
+    proxy.$gmMenus.changeAIMenu(function(){
+        openSetAI();
+    });
+};
+function updateAI() {
+    useAI.value = proxy.$storage.getUserInfo('useAI') || '';
+    // 更新AI设置菜单
+    proxy.$gmMenus.changeAIMenu(function(){
+        closeSetAI();
+    });
+}
 
 function onLoginSuccess(){
-    proxy.$gmMenus.changeSettingMenuCommand(true, function(){
+    proxy.$gmMenus.changeSettingMenu(true, function(){
         closeSet();
     });
 }
@@ -79,6 +113,29 @@ function updateMyList(data) {
     let myListStorage = data || [];
     list.value = myListStorage;
 };
+// 获取AI回复
+async function getAIReply(){
+    let title = ''
+    if(loadingAIReply.value) return false;
+    loadingAIReply.value = true;
+    if(currentPlatform.value == 'discuz'){
+        title = document.querySelector('#thread_subject').innerText
+    } else if(currentPlatform.value == 'nodeseek'){
+        title = document.querySelector('h1>a.post-title-link').innerText
+    }
+    if(!title){
+        proxy.$message.error('无法获取帖子标题，请检查脚本是否支持此论坛')
+        return false;
+    }
+    await proxy.$api.getAIReply(title).then((res) => {
+        currentReply.value = res;
+        enterReply()
+    }).catch(err=>{
+        proxy.$message.error(err)
+    }).finally(()=>{
+        loadingAIReply.value = false;
+    })
+}
 // 设置回复内容
 function enterReply() {
     if (fwin_replyLoaded.value) {
@@ -99,7 +156,7 @@ function enterPostReply() {
 // 设置markdown-it编辑器内容
 function enterMarkdownItReply() {
     unsafeWindow.editor && unsafeWindow.editor.setMarkdown && unsafeWindow.editor.setMarkdown(currentReply.value)
-    if(submitNow.value && currentReply.value){
+    if(submitNow.value && !useAI.value && currentReply.value){
         document.querySelector('.md-editor button.submit').click()
     }
 };
@@ -112,7 +169,7 @@ function enterFastPostReply() {
         $fastpostmessage.style.background = '';
         $fastpostmessage.value = currentReply.value;
 
-        if(submitNow.value && currentReply.value){
+        if(submitNow.value && !useAI.value && currentReply.value){
             document.querySelector('button#fastpostsubmit').click()
         }
     } catch (err) {
@@ -272,13 +329,24 @@ watch(fwin_replyLoaded, (n)=>{
 					</el-select>
 				</el-form-item>
 				<el-form-item>
-					<el-button
-						type="primary"
-						class="btnQuickReplySet"
-						icon="tools"
-						@click="openSet"
-						:title="tips"
-					></el-button>
+                    <el-button-group>
+                        <el-button
+                            type="primary"
+                            class="btnQuickReplySet"
+                            icon="tools"
+                            @click="openSet"
+                            :title="tips"
+                        ></el-button>
+                        <el-button
+                            v-if="useAI != ''"
+                            type="success"
+                            class="btnQuickReplySet"
+                            :loading="loadingAIReply"
+                            icon="magicStick"
+                            @click="getAIReply"
+                            :title="`正在由【${aiNameList[useAI]}】为你提供创意回帖\n\nTips：使用AI就像开盲盒，请准备好是否接受结果再提交`"
+                        ></el-button>
+                    </el-button-group>
 				</el-form-item>
 			</el-form>
 		</transition>
@@ -297,6 +365,19 @@ watch(fwin_replyLoaded, (n)=>{
             </template>
 
 <template #footer>
+                <span class="app-dialog-foot">
+                    {{ `ver: ${$app.getVersion()}` }}
+                </span>
+            </template>
+</el-dialog>
+
+<el-dialog v-model="setAIShow" @close="closeSetAI" :title="$app.getName() +' - AI设置'" width="150" :show-close="true"
+    destroy-on-close append-to-body>
+    <template #default>
+                <app-set-ai ref="setAIPanel" @updateAI="updateAI" />
+            </template>
+
+    <template #footer>
 				<span class="app-dialog-foot">
                     {{ `ver: ${$app.getVersion()}` }}
 				</span>

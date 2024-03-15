@@ -33,7 +33,9 @@ export default defineConfig({
             '*://www.nodeseek.com/post*'
         ],
         connect: [
-            'quickreply.lc.bmqy.net'
+            'quickreply.lc.bmqy.net',
+            'generativelanguage.googleapis.com',
+            'dashscope.aliyuncs.com'
         ]
       },
       build: {

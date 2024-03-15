@@ -123,7 +123,7 @@ function collectReply(index) {
 function onLoginSuccess(){
     showLoginForce.value = false;
     isLogin.value = true;
-    proxy.$gmMenus.changeSettingMenuCommand();
+    proxy.$gmMenus.changeSettingMenu();
     myList.value.length===0 && download();
 }
 function upload(){
@@ -140,7 +140,7 @@ function loginForce(){
 function logout(){
     proxy.$storage.setUserInfo('userId', '')
     isLogin.value = false;
-    proxy.$gmMenus.changeSettingMenuCommand();
+    proxy.$gmMenus.changeSettingMenu();
 }
 
 function changeRealtimeSync(e){
