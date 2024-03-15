@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.3.1
+// @version      3.4.0
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -25,6 +25,8 @@
 // @require      https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.1.0/dist/index.iife.min.js
 // @resource     element-plus/dist/index.css  https://cdn.jsdelivr.net/npm/element-plus@2.3.6/dist/index.css
 // @connect      quickreply.lc.bmqy.net
+// @connect      generativelanguage.googleapis.com
+// @connect      dashscope.aliyuncs.com
 // @grant        GM_getResourceText
 // @grant        GM_getValue
 // @grant        GM_info
@@ -34,7 +36,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-632ec08c]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.app-dialog-foot[data-v-632ec08c]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-632ec08c]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-632ec08c],.el-form-item--small.el-form-item[data-v-632ec08c]{margin-bottom:10px}.el-select[data-v-632ec08c]{width:300px}.app-margin-right-30[data-v-c7a83863]{margin-right:30px}.list-left[data-v-c7a83863]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-c7a83863]{margin-right:5px;color:#909399}.list-title[data-v-c7a83863]{flex:1;font-weight:400}.list-right[data-v-c7a83863]{min-width:70px}.list-right .el-badge.item[data-v-c7a83863]{margin-right:30px}.list li[data-v-c7a83863]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-c7a83863]:hover{background-color:#f5f5f5}.tips[data-v-c7a83863]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-c7a83863]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-c7a83863]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-c7a83863]{padding:10px 20px}.box-card .el-card__header span[data-v-c7a83863]{font-size:14px}.clearfix[data-v-c7a83863]:before,.clearfix[data-v-c7a83863]:after{display:table;content:""}.clearfix[data-v-c7a83863]:after{clear:both}.el-pagination[data-v-c7a83863]{padding:15px 5px 0}.margin-left{margin-left:15px} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-55463c66]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.app-dialog-foot[data-v-55463c66]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-55463c66]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-55463c66],.el-form-item--small.el-form-item[data-v-55463c66]{margin-bottom:10px}.el-select[data-v-55463c66]{width:300px}.app-margin-right-30[data-v-3f0b3557]{margin-right:30px}.list-left[data-v-3f0b3557]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-3f0b3557]{margin-right:5px;color:#909399}.list-title[data-v-3f0b3557]{flex:1;font-weight:400}.list-right[data-v-3f0b3557]{min-width:70px}.list-right .el-badge.item[data-v-3f0b3557]{margin-right:30px}.list li[data-v-3f0b3557]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-3f0b3557]:hover{background-color:#f5f5f5}.tips[data-v-3f0b3557]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-3f0b3557]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-3f0b3557]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-3f0b3557]{padding:10px 20px}.box-card .el-card__header span[data-v-3f0b3557]{font-size:14px}.clearfix[data-v-3f0b3557]:before,.clearfix[data-v-3f0b3557]:after{display:table;content:""}.clearfix[data-v-3f0b3557]:after{clear:both}.el-pagination[data-v-3f0b3557]{padding:15px 5px 0}.box-card .el-card__header[data-v-98fc33dd]{padding:10px 20px}.box-card .el-card__header span[data-v-98fc33dd]{font-size:14px}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -76,13 +78,14 @@
     }
     return target;
   };
-  const _hoisted_1$2 = { class: "quickReplyBox" };
+  const _hoisted_1$3 = { class: "quickReplyBox" };
   const _hoisted_2$2 = {
     slot: "label",
     class: "quickReplyBoxTitle"
   };
   const _hoisted_3$1 = { class: "app-dialog-foot" };
-  const _sfc_main$2 = {
+  const _hoisted_4$1 = { class: "app-dialog-foot" };
+  const _sfc_main$3 = {
     __name: "App",
     setup(__props) {
       const { proxy } = vue.getCurrentInstance();
@@ -94,17 +97,28 @@
       const hasEditor = vue.ref(false);
       const lastClickElemet = vue.ref(false);
       const setShow = vue.ref(false);
+      const setAIShow = vue.ref(false);
+      const useAI = vue.ref("");
+      const loadingAIReply = vue.ref(false);
+      const aiNameList = vue.ref({
+        gemini: "Gemini Pro",
+        qianwen: "通义千问-turbo"
+      });
       vue.onBeforeMount(() => {
         checkPlatform();
         getList();
         proxy.$gmMenus.init();
         submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
+        useAI.value = proxy.$storage.getUserInfo("useAI") || "";
         changeSubmitNow(submitNow.value);
         proxy.$gmMenus.changeDownloadListMenu(function(data) {
           updateMyList(data);
         });
-        proxy.$gmMenus.changeSettingMenuCommand(setShow.value, function() {
+        proxy.$gmMenus.changeSettingMenu(setShow.value, function() {
           setShow.value ? closeSet() : openSet();
+        });
+        proxy.$gmMenus.changeAIMenu(function() {
+          setAIShow.value ? closeSetAI() : openSetAI();
         });
       });
       function checkPlatform() {
@@ -136,24 +150,65 @@
       }
       function openSet() {
         setShow.value = true;
-        proxy.$gmMenus.changeSettingMenuCommand(true, function() {
+        proxy.$gmMenus.changeSettingMenu(true, function() {
           closeSet();
         });
       }
       function closeSet() {
         setShow.value = false;
-        proxy.$gmMenus.changeSettingMenuCommand(false, function() {
+        proxy.$gmMenus.changeSettingMenu(false, function() {
           openSet();
         });
       }
+      function openSetAI() {
+        setAIShow.value = true;
+        proxy.$gmMenus.changeAIMenu(function() {
+          closeSetAI();
+        });
+      }
+      function closeSetAI() {
+        setAIShow.value = false;
+        proxy.$gmMenus.changeAIMenu(function() {
+          openSetAI();
+        });
+      }
+      function updateAI() {
+        useAI.value = proxy.$storage.getUserInfo("useAI") || "";
+        proxy.$gmMenus.changeAIMenu(function() {
+          closeSetAI();
+        });
+      }
       function onLoginSuccess() {
-        proxy.$gmMenus.changeSettingMenuCommand(true, function() {
+        proxy.$gmMenus.changeSettingMenu(true, function() {
           closeSet();
         });
       }
       function updateMyList(data) {
         let myListStorage = data || [];
         list.value = myListStorage;
+      }
+      async function getAIReply() {
+        let title2 = "";
+        if (loadingAIReply.value)
+          return false;
+        loadingAIReply.value = true;
+        if (currentPlatform.value == "discuz") {
+          title2 = document.querySelector("#thread_subject").innerText;
+        } else if (currentPlatform.value == "nodeseek") {
+          title2 = document.querySelector("h1>a.post-title-link").innerText;
+        }
+        if (!title2) {
+          proxy.$message.error("无法获取帖子标题，请检查脚本是否支持此论坛");
+          return false;
+        }
+        await proxy.$api.getAIReply(title2).then((res) => {
+          currentReply.value = res;
+          enterReply();
+        }).catch((err2) => {
+          proxy.$message.error(err2);
+        }).finally(() => {
+          loadingAIReply.value = false;
+        });
       }
       function enterReply() {
         if (fwin_replyLoaded.value) {
@@ -172,7 +227,7 @@
       }
       function enterMarkdownItReply() {
         _unsafeWindow.editor && _unsafeWindow.editor.setMarkdown && _unsafeWindow.editor.setMarkdown(currentReply.value);
-        if (submitNow.value && currentReply.value) {
+        if (submitNow.value && !useAI.value && currentReply.value) {
           document.querySelector(".md-editor button.submit").click();
         }
       }
@@ -183,7 +238,7 @@
           );
           $fastpostmessage.style.background = "";
           $fastpostmessage.value = currentReply.value;
-          if (submitNow.value && currentReply.value) {
+          if (submitNow.value && !useAI.value && currentReply.value) {
             document.querySelector("button#fastpostsubmit").click();
           }
         } catch (err2) {
@@ -303,10 +358,12 @@
         const _component_el_select = vue.resolveComponent("el-select");
         const _component_el_form_item = vue.resolveComponent("el-form-item");
         const _component_el_button = vue.resolveComponent("el-button");
+        const _component_el_button_group = vue.resolveComponent("el-button-group");
         const _component_el_form = vue.resolveComponent("el-form");
         const _component_app_set = vue.resolveComponent("app-set");
         const _component_el_dialog = vue.resolveComponent("el-dialog");
-        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$2, [
+        const _component_app_set_ai = vue.resolveComponent("app-set-ai");
+        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$3, [
           vue.createVNode(vue.Transition, { name: "el-fade-in-linear" }, {
             default: vue.withCtx(() => [
               vue.createVNode(_component_el_form, {
@@ -340,13 +397,29 @@
                   }),
                   vue.createVNode(_component_el_form_item, null, {
                     default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_button, {
-                        type: "primary",
-                        class: "btnQuickReplySet",
-                        icon: "tools",
-                        onClick: openSet,
-                        title: vue.unref(tips)
-                      }, null, 8, ["title"])
+                      vue.createVNode(_component_el_button_group, null, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_button, {
+                            type: "primary",
+                            class: "btnQuickReplySet",
+                            icon: "tools",
+                            onClick: openSet,
+                            title: vue.unref(tips)
+                          }, null, 8, ["title"]),
+                          vue.unref(useAI) != "" ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                            key: 0,
+                            type: "success",
+                            class: "btnQuickReplySet",
+                            loading: vue.unref(loadingAIReply),
+                            icon: "magicStick",
+                            onClick: getAIReply,
+                            title: `正在由【${vue.unref(aiNameList)[vue.unref(useAI)]}】为你提供创意回帖
+
+Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
+                          }, null, 8, ["loading", "title"])) : vue.createCommentVNode("", true)
+                        ]),
+                        _: 1
+                      })
                     ]),
                     _: 1
                   })
@@ -377,14 +450,35 @@
               vue.createElementVNode("span", _hoisted_3$1, vue.toDisplayString(`ver: ${_ctx.$app.getVersion()}`), 1)
             ]),
             _: 1
+          }, 8, ["modelValue", "title"]),
+          vue.createVNode(_component_el_dialog, {
+            modelValue: vue.unref(setAIShow),
+            "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => vue.isRef(setAIShow) ? setAIShow.value = $event : null),
+            onClose: closeSetAI,
+            title: _ctx.$app.getName() + " - AI设置",
+            width: "150",
+            "show-close": true,
+            "destroy-on-close": "",
+            "append-to-body": ""
+          }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_app_set_ai, {
+                ref: "setAIPanel",
+                onUpdateAI: updateAI
+              }, null, 512)
+            ]),
+            footer: vue.withCtx(() => [
+              vue.createElementVNode("span", _hoisted_4$1, vue.toDisplayString(`ver: ${_ctx.$app.getVersion()}`), 1)
+            ]),
+            _: 1
           }, 8, ["modelValue", "title"])
         ]);
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-632ec08c"]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-c7a83863"), n = n(), vue.popScopeId(), n);
-  const _hoisted_1$1 = { class: "setBox" };
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-55463c66"]]);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-3f0b3557"), n = n(), vue.popScopeId(), n);
+  const _hoisted_1$2 = { class: "setBox" };
   const _hoisted_2$1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "我在用的", -1));
   const _hoisted_3 = {
     key: 0,
@@ -418,7 +512,7 @@
   ];
   const _hoisted_15 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
   const _hoisted_16 = { class: "addReplyBox" };
-  const _sfc_main$1 = {
+  const _sfc_main$2 = {
     __name: "Set",
     emits: ["updateMyList"],
     setup(__props, { emit }) {
@@ -523,7 +617,7 @@
       function onLoginSuccess() {
         showLoginForce.value = false;
         isLogin.value = true;
-        proxy.$gmMenus.changeSettingMenuCommand();
+        proxy.$gmMenus.changeSettingMenu();
         myList.value.length === 0 && download();
       }
       function upload() {
@@ -540,7 +634,7 @@
       function logout() {
         proxy.$storage.setUserInfo("userId", "");
         isLogin.value = false;
-        proxy.$gmMenus.changeSettingMenuCommand();
+        proxy.$gmMenus.changeSettingMenu();
       }
       function changeRealtimeSync(e) {
         let checked = proxy.$storage.getUserInfo("realtimeSync") || false;
@@ -568,7 +662,7 @@
         const _component_el_pagination = vue.resolveComponent("el-pagination");
         const _component_el_input = vue.resolveComponent("el-input");
         const _directive_loading = vue.resolveDirective("loading");
-        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$1, [
+        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$2, [
           vue.createVNode(_component_el_card, {
             class: "box-card",
             shadow: "never"
@@ -855,7 +949,145 @@
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-c7a83863"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-3f0b3557"]]);
+  const _hoisted_1$1 = { class: "setAIBox" };
+  const _sfc_main$1 = {
+    __name: "Ai",
+    emits: ["updateAI"],
+    setup(__props, { emit }) {
+      const { proxy } = vue.getCurrentInstance();
+      const geminiApiKey = vue.ref("");
+      const useGemini = vue.ref(false);
+      const qianwenApiKey = vue.ref("");
+      const useQianwen = vue.ref(false);
+      const useAI = vue.ref("");
+      vue.onBeforeMount(() => {
+        useAI.value = proxy.$storage.getUserInfo("useAI") || "";
+        geminiApiKey.value = proxy.$storage.getUserInfo("geminiApiKey") || "";
+        useGemini.value = useAI.value == "gemini";
+        qianwenApiKey.value = proxy.$storage.getUserInfo("qianwenApiKey") || "";
+        useQianwen.value = useAI.value == "qianwen";
+      });
+      function onGeminiApiKeyChange(e) {
+        proxy.$storage.setUserInfo("geminiApiKey", e);
+      }
+      function onGeminiChange(e) {
+        useAI.value = e ? "gemini" : "";
+        proxy.$storage.setUserInfo("useAI", useAI.value);
+        proxy.$storage.setUserInfo("geminiApiKey", geminiApiKey.value || "");
+        emit("updateAI");
+      }
+      function useGeminiBeforeChange() {
+        if (!useGemini.value && !geminiApiKey.value) {
+          proxy.$message.error("请先填写：gemini api key");
+          return false;
+        }
+        return true;
+      }
+      function onQianwenApiKeyChange(e) {
+        proxy.$storage.setUserInfo("qianwenApiKey", e);
+      }
+      function onQianwenChange(e) {
+        useAI.value = e ? "qianwen" : "";
+        proxy.$storage.setUserInfo("useAI", useAI.value);
+        proxy.$storage.setUserInfo("qianwenApiKey", qianwenApiKey.value || "");
+        emit("updateAI");
+      }
+      function useQianwenBeforeChange() {
+        if (!useQianwen.value && !qianwenApiKey.value) {
+          proxy.$message.error("请先填写：通义千问 api key");
+          return false;
+        }
+        return true;
+      }
+      vue.watch(useAI, (n, o) => {
+        useGemini.value = n == "gemini";
+        useQianwen.value = n == "qianwen";
+      });
+      return (_ctx, _cache) => {
+        const _component_el_input = vue.resolveComponent("el-input");
+        const _component_el_tooltip = vue.resolveComponent("el-tooltip");
+        const _component_el_form_item = vue.resolveComponent("el-form-item");
+        const _component_el_switch = vue.resolveComponent("el-switch");
+        const _component_el_form = vue.resolveComponent("el-form");
+        const _component_el_card = vue.resolveComponent("el-card");
+        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$1, [
+          vue.createVNode(_component_el_card, {
+            class: "box-card",
+            shadow: "never"
+          }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_el_form, { "label-width": "auto" }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_form_item, { label: "Gemini API Key" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "获取API Key：https://aistudio.google.com/app/apikey",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_input, {
+                            modelValue: vue.unref(geminiApiKey),
+                            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(geminiApiKey) ? geminiApiKey.value = $event : null),
+                            onChange: onGeminiApiKeyChange
+                          }, null, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_switch, {
+                        modelValue: vue.unref(useGemini),
+                        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(useGemini) ? useGemini.value = $event : null),
+                        onChange: onGeminiChange,
+                        "before-change": useGeminiBeforeChange
+                      }, null, 8, ["modelValue"])
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "通义千问 API Key" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "获取API Key：https://dashscope.console.aliyun.com/apiKey",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_input, {
+                            modelValue: vue.unref(qianwenApiKey),
+                            "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => vue.isRef(qianwenApiKey) ? qianwenApiKey.value = $event : null),
+                            onChange: onQianwenApiKeyChange
+                          }, null, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_switch, {
+                        modelValue: vue.unref(useQianwen),
+                        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => vue.isRef(useQianwen) ? useQianwen.value = $event : null),
+                        onChange: onQianwenChange,
+                        "before-change": useQianwenBeforeChange
+                      }, null, 8, ["modelValue"])
+                    ]),
+                    _: 1
+                  })
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })
+        ]);
+      };
+    }
+  };
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-98fc33dd"]]);
   const _hoisted_1 = { class: "margin-left" };
   const _hoisted_2 = { class: "margin-left" };
   const _sfc_main = {
@@ -1183,7 +1415,8 @@
           });
           proxy.$gmMenus.changeSubmitNowMenu(proxy.$storage.getUserInfo("submitNow"));
           proxy.$gmMenus.changeRealtimeMenu(proxy.$storage.getUserInfo("realtimeSync"));
-          proxy.$gmMenus.changeSettingMenuCommand();
+          proxy.$gmMenus.changeAIMenu(proxy.$storage.getUserInfo("AI"));
+          proxy.$gmMenus.changeSettingMenu();
         },
         changeDownloadListMenu(callback) {
           let proxy = app2.config.globalProperties;
@@ -1245,7 +1478,16 @@
             });
           }
         },
-        changeSettingMenuCommand(status, callback) {
+        changeAIMenu(callback) {
+          let proxy = app2.config.globalProperties;
+          let useAI = proxy.$storage.getUserInfo("useAI") || "";
+          _GM_registerMenuCommand(`- 人工智能：${useAI ? "已启用" : "已停用"}`, callback, {
+            id: "AI",
+            autoClose: true,
+            title: "开启后，使用人工智能(AI)生成回复内容"
+          });
+        },
+        changeSettingMenu(status, callback) {
           let proxy = app2.config.globalProperties;
           let isUserId = proxy.$storage.getUserInfo("userId");
           if (arguments.length == 2) {
@@ -1342,6 +1584,94 @@
         // 下载列表
         downQuickReplyList: async function(params) {
           return await http("/downloadList", params);
+        },
+        // 获取AI回复
+        getAIReply: function(title) {
+          return new Promise((resolve, reject) => {
+            let proxy = app2.config.globalProperties;
+            let useAI = proxy.$storage.getUserInfo("useAI") || "";
+            if (!title) {
+              reject("参数无效");
+            }
+            if (useAI == "gemini") {
+              let geminiApiKey = proxy.$storage.getUserInfo("geminiApiKey") || "";
+              if (!geminiApiKey) {
+                reject("无效api key");
+              }
+              let url = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${geminiApiKey}`;
+              let data = {
+                "contents": [
+                  {
+                    "parts": [
+                      {
+                        "text": `"请根据帖子标题：${title}，以回帖的语气生成一条15字左右的简短回复"`
+                      }
+                    ]
+                  }
+                ]
+              };
+              _GM_xmlhttpRequest({
+                method: "POST",
+                url,
+                headers: {
+                  "Content-Type": "application/json; charset=utf-8",
+                  "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`
+                },
+                data: `${JSON.stringify(data)}`,
+                responseType: "json",
+                onload: function(xhr) {
+                  let { error, candidates } = xhr.response;
+                  if (error) {
+                    reject(error.message);
+                  }
+                  resolve(candidates[0].content.parts[0].text);
+                },
+                onerror: function(xhr) {
+                  reject(xhr.response);
+                }
+              });
+            } else if (useAI == "qianwen") {
+              let qianwenApiKey = proxy.$storage.getUserInfo("qianwenApiKey") || "";
+              if (!qianwenApiKey) {
+                reject("无效api key");
+              }
+              let url = "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation";
+              let data = {
+                "model": "qwen-turbo",
+                "parameters": {
+                  "result_format": "text"
+                },
+                "input": {
+                  "prompt": `"请根据帖子标题：${title}，以回帖的语气生成一条15字左右的简短回复"`
+                }
+              };
+              _GM_xmlhttpRequest({
+                method: "POST",
+                url,
+                headers: {
+                  "Content-Type": "application/json; charset=utf-8",
+                  "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`,
+                  "Authorization": `Bearer ${qianwenApiKey}`
+                },
+                data: `${JSON.stringify(data)}`,
+                responseType: "json",
+                onload: function(xhr) {
+                  let { output, code, message } = xhr.response;
+                  if (code) {
+                    reject(message);
+                  }
+                  let result = output.text;
+                  result = result.replace(/[\\"]+/g, "");
+                  resolve(result);
+                },
+                onerror: function(xhr) {
+                  reject(xhr.response);
+                }
+              });
+            } else {
+              reject("暂未配置AI");
+            }
+          });
         }
       };
     }
@@ -1350,6 +1680,7 @@
   for (const [key, component] of Object.entries(ElementPlusIconsVue__namespace)) {
     app.component(key, component);
   }
+  app.component("app-set-ai", AI);
   app.component("app-set", Set);
   app.component("app-login", _sfc_main);
   app.use(ElementPlus);
