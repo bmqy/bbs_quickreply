@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.4.0
+// @version      3.4.1
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -19,6 +19,8 @@
 // @match        *://*/bbs/thread*.*
 // @match        *://*/forum.php?mod=post*
 // @match        *://www.nodeseek.com/post*
+// @match        *://linux.do/t/topic/*
+// @match        *://meta.appinn.net/t/topic/*
 // @require      https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js
 // @require      data:application/javascript,%3Bwindow.Vue%3DVue%3B
 // @require      https://cdn.jsdelivr.net/npm/element-plus@2.3.6/dist/index.full.min.js
@@ -36,7 +38,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-55463c66]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.app-dialog-foot[data-v-55463c66]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-55463c66]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-55463c66],.el-form-item--small.el-form-item[data-v-55463c66]{margin-bottom:10px}.el-select[data-v-55463c66]{width:300px}.app-margin-right-30[data-v-3f0b3557]{margin-right:30px}.list-left[data-v-3f0b3557]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-3f0b3557]{margin-right:5px;color:#909399}.list-title[data-v-3f0b3557]{flex:1;font-weight:400}.list-right[data-v-3f0b3557]{min-width:70px}.list-right .el-badge.item[data-v-3f0b3557]{margin-right:30px}.list li[data-v-3f0b3557]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-3f0b3557]:hover{background-color:#f5f5f5}.tips[data-v-3f0b3557]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-3f0b3557]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-3f0b3557]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-3f0b3557]{padding:10px 20px}.box-card .el-card__header span[data-v-3f0b3557]{font-size:14px}.clearfix[data-v-3f0b3557]:before,.clearfix[data-v-3f0b3557]:after{display:table;content:""}.clearfix[data-v-3f0b3557]:after{clear:both}.el-pagination[data-v-3f0b3557]{padding:15px 5px 0}.box-card .el-card__header[data-v-98fc33dd]{padding:10px 20px}.box-card .el-card__header span[data-v-98fc33dd]{font-size:14px}.margin-left{margin-left:15px} ');
+(t=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=t,document.head.append(a)})(' .quickReplyBox[data-v-ec4be09a]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.app-dialog-foot[data-v-ec4be09a]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-ec4be09a]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-ec4be09a],.el-form-item--small.el-form-item[data-v-ec4be09a]{margin-bottom:10px}.el-select[data-v-ec4be09a]{width:300px}.app-margin-right-30[data-v-d0017a57]{margin-right:30px}.list-left[data-v-d0017a57]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-d0017a57]{margin-right:5px;color:#909399}.list-title[data-v-d0017a57]{flex:1;font-weight:400}.list-right[data-v-d0017a57]{min-width:70px}.list-right .el-badge.item[data-v-d0017a57]{margin-right:30px}.list li[data-v-d0017a57]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-d0017a57]:hover{background-color:#f5f5f5}.tips[data-v-d0017a57]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-d0017a57]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-d0017a57]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-d0017a57]{padding:10px 20px}.box-card .el-card__header span[data-v-d0017a57]{font-size:14px}.clearfix[data-v-d0017a57]:before,.clearfix[data-v-d0017a57]:after{display:table;content:""}.clearfix[data-v-d0017a57]:after{clear:both}.el-pagination[data-v-d0017a57]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-51179c71]{padding:10px 20px}.box-card .el-card__header span[data-v-51179c71]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -122,8 +124,10 @@
         });
       });
       function checkPlatform() {
-        if (document.body.outerHTML.indexOf("Discuz") > -1) {
+        if (document.documentElement.innerHTML.indexOf("Discuz") > -1) {
           currentPlatform.value = "discuz";
+        } else if (document.documentElement.innerHTML.indexOf("Discourse") > -1) {
+          currentPlatform.value = "discourse";
         } else {
           if (location.host.indexOf("nodeseek") > -1) {
             currentPlatform.value = "nodeseek";
@@ -194,6 +198,8 @@
         loadingAIReply.value = true;
         if (currentPlatform.value == "discuz") {
           title2 = document.querySelector("#thread_subject").innerText;
+        } else if (currentPlatform.value == "discourse") {
+          title2 = document.querySelector("#topic-title h1>a>span").innerText;
         } else if (currentPlatform.value == "nodeseek") {
           title2 = document.querySelector("h1>a.post-title-link").innerText;
         }
@@ -217,6 +223,8 @@
           enterEditorReply();
         } else if (currentPlatform.value == "nodeseek") {
           enterMarkdownItReply();
+        } else if (currentPlatform.value == "discourse") {
+          enterDiscourseEmberReply();
         } else {
           enterFastPostReply();
         }
@@ -229,6 +237,17 @@
         _unsafeWindow.editor && _unsafeWindow.editor.setMarkdown && _unsafeWindow.editor.setMarkdown(currentReply.value);
         if (submitNow.value && !useAI.value && currentReply.value) {
           document.querySelector(".md-editor button.submit").click();
+        }
+      }
+      function enterDiscourseEmberReply() {
+        let $emberTextarea = document.querySelector("textarea.ember-text-area.d-editor-input");
+        if ($emberTextarea) {
+          $emberTextarea.value = currentReply.value;
+          $emberTextarea.dispatchEvent(new Event("change"));
+        }
+        if (submitNow.value && !useAI.value && currentReply.value) {
+          document.querySelector(".submit-panel button.btn.create").click();
+          currentReply.value = "";
         }
       }
       function enterFastPostReply() {
@@ -313,6 +332,13 @@
         }
         if (document.querySelector(".md-editor")) {
           mos.observe(document.querySelector(".md-editor"), {
+            attributes: true,
+            childList: true,
+            subtree: true
+          });
+        }
+        if (document.querySelector("#main-outlet")) {
+          mos.observe(document.querySelector("#main-outlet"), {
             attributes: true,
             childList: true,
             subtree: true
@@ -476,8 +502,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-55463c66"]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-3f0b3557"), n = n(), vue.popScopeId(), n);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-ec4be09a"]]);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-d0017a57"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$2 = { class: "setBox" };
   const _hoisted_2$1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "我在用的", -1));
   const _hoisted_3 = {
@@ -949,7 +975,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-3f0b3557"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-d0017a57"]]);
   const _hoisted_1$1 = { class: "setAIBox" };
   const _sfc_main$1 = {
     __name: "Ai",
@@ -1087,7 +1113,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-98fc33dd"]]);
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-51179c71"]]);
   const _hoisted_1 = { class: "margin-left" };
   const _hoisted_2 = { class: "margin-left" };
   const _sfc_main = {
@@ -1701,6 +1727,11 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       if ($editorBody) {
         $appRoot.style.padding = "15px 15px 0";
         $editorBody.appendChild($appRoot);
+      }
+      const $replyControl = document.querySelector("#reply-control");
+      if ($replyControl) {
+        $appRoot.style.padding = "15px 15px 0";
+        $replyControl.insertBefore($appRoot, $replyControl.childNodes[2]);
       }
       return $appRoot;
     })()
