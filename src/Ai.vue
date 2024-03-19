@@ -89,4 +89,11 @@ watch(useAI, (n, o) => {
         }
     }
 }
+
+:global(.setAIBox .el-input__inner) {
+    margin-bottom: 0;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+}
 </style>

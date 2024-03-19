@@ -37,6 +37,12 @@ app.mount(
             $appRoot.style.padding = '15px 15px 0';
             $editorBody.appendChild($appRoot);
         }
+        // linux.do
+        const $replyControl = document.querySelector('#reply-control');
+        if ($replyControl) {
+            $appRoot.style.padding = '15px 15px 0';
+            $replyControl.insertBefore($appRoot, $replyControl.childNodes[2]);
+        }
         return $appRoot;
     })()
 );

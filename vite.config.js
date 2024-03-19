@@ -30,7 +30,9 @@ export default defineConfig({
             '*://*/bbs/forum.php?mod=viewthread*',
             '*://*/bbs/thread*.*',
             '*://*/forum.php?mod=post*',
-            '*://www.nodeseek.com/post*'
+            '*://www.nodeseek.com/post*',
+            '*://linux.do/t/topic/*',
+            '*://meta.appinn.net/t/topic/*'
         ],
         connect: [
             'quickreply.lc.bmqy.net',

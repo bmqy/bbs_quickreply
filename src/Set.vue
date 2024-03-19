@@ -376,4 +376,11 @@ function onRealtimeSyncChange(e){
 .el-pagination {
     padding: 15px 5px 0;
 }
+
+:global(.setBox .el-input__inner) {
+    margin-bottom: 0;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+}
 </style>

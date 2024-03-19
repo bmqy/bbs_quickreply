@@ -35,8 +35,10 @@ onBeforeMount(()=>{
 
 // 检测平台
 function checkPlatform() {
-    if(document.body.outerHTML.indexOf('Discuz') > -1){
+    if(document.documentElement.innerHTML.indexOf('Discuz') > -1){
         currentPlatform.value = 'discuz'
+    } else if(document.documentElement.innerHTML.indexOf('Discourse') > -1){
+        currentPlatform.value = 'discourse'
     } else {
         if(location.host.indexOf('nodeseek') > -1){
             currentPlatform.value = 'nodeseek'
@@ -120,6 +122,8 @@ async function getAIReply(){
     loadingAIReply.value = true;
     if(currentPlatform.value == 'discuz'){
         title = document.querySelector('#thread_subject').innerText
+    } else if(currentPlatform.value == 'discourse'){
+        title = document.querySelector('#topic-title h1>a>span').innerText
     } else if(currentPlatform.value == 'nodeseek'){
         title = document.querySelector('h1>a.post-title-link').innerText
     }
@@ -144,6 +148,8 @@ function enterReply() {
         enterEditorReply();
     } else if(currentPlatform.value == 'nodeseek') {
         enterMarkdownItReply();
+    } else if(currentPlatform.value == 'discourse') {
+        enterDiscourseEmberReply();
     } else {
         enterFastPostReply();
     }
@@ -153,11 +159,23 @@ function enterPostReply() {
     let $postmessage = document.querySelector('#postmessage');
     $postmessage.value = currentReply.value;
 };
-// 设置markdown-it编辑器内容
+// NodeSeek：设置markdown-it编辑器内容
 function enterMarkdownItReply() {
     unsafeWindow.editor && unsafeWindow.editor.setMarkdown && unsafeWindow.editor.setMarkdown(currentReply.value)
     if(submitNow.value && !useAI.value && currentReply.value){
         document.querySelector('.md-editor button.submit').click()
+    }
+};
+// Discourse：设置Discourse编辑器内容
+function enterDiscourseEmberReply() {
+    let $emberTextarea = document.querySelector('textarea.ember-text-area.d-editor-input');
+    if($emberTextarea){
+        $emberTextarea.value = currentReply.value;
+        $emberTextarea.dispatchEvent(new Event('change'));
+    }
+    if(submitNow.value && !useAI.value && currentReply.value){
+        document.querySelector('.submit-panel button.btn.create').click();
+        currentReply.value = '';
     }
 };
 // 设置快速回复框内容
@@ -170,7 +188,7 @@ function enterFastPostReply() {
         $fastpostmessage.value = currentReply.value;
 
         if(submitNow.value && !useAI.value && currentReply.value){
-            document.querySelector('button#fastpostsubmit').click()
+            document.querySelector('button#fastpostsubmit').click();
         }
     } catch (err) {
         console.log('请检查发帖权限！');
@@ -262,6 +280,14 @@ function postReplyMutationObserver() {
     // nodeseek
     if(document.querySelector('.md-editor')){
         mos.observe(document.querySelector('.md-editor'), {
+            attributes: true,
+            childList: true,
+            subtree: true,
+        });
+    }
+    // linux.do
+    if(document.querySelector('#main-outlet')){
+        mos.observe(document.querySelector('#main-outlet'), {
             attributes: true,
             childList: true,
             subtree: true,
@@ -412,6 +438,13 @@ watch(fwin_replyLoaded, (n)=>{
     flex: 1;
     overflow: auto;
     padding: 0;
+}
+
+:global(.quickReplyBox .el-input__inner) {
+    margin-bottom: 0;
+    background-color: transparent;
+    border: 0;
+    outline: none;
 }
 
 .app-dialog-foot {

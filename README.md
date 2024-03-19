@@ -12,10 +12,19 @@
 
 > PS：理论支持所有```discuz```论坛，请自行尝试。
 
+### Discourse
+- [x] [linux.do](https://linux.do/)
+- [x] [小众软件官方论坛](https://meta.appinn.net/)
+
+> PS：理论支持所有```Discourse```论坛，请自行尝试。
+
 ### 其它
 - [x] [NodeSeek](https://www.nodeseek.com/)
 
 ## 更新日志
+
+v3.4.1 更新：
+- [新增] 支持Discourse平台论坛([#235263](https://greasyfork.org/zh-CN/scripts/36728-%E8%AE%BA%E5%9D%9B%E5%BF%AB%E6%8D%B7%E5%9B%9E%E5%B8%96/discussions/235263))；
 
 v3.4.0 重磅更新，是帖皆可回复：
 - [新增] 支持使用```AI```生成回帖内容，支持平台：```Gemini```、```通义千问```，由此开始：```是帖皆可回复！！！```；
