@@ -451,6 +451,10 @@ watch(fwin_replyLoaded, (n)=>{
     outline: none;
 }
 
+:global(#reply-control.open) {
+    height: calc(var(--composer-height) + 65px) !important;
+}
+
 .app-dialog-foot {
     color: #909399;
     font-size: 14px;
