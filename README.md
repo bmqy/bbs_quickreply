@@ -6,14 +6,14 @@
 ### Discuz
 - [x] [吾爱破解](https://www.52pojie.cn/)
 - [x] [Discuz!官方交流社区](https://www.dismall.com/forum.php)
-- [x] [油猴中文网](https://bbs.tampermonkey.net.cn/)
+- [x] [油猴中文网](https://bbs.tampermonkey.net.cn/)，[（邀请链接）](https://bbs.tampermonkey.net.cn/?fromuid=92227)
 - [x] [全球主机交流论坛](https://hostloc.com/)
 - [ ] 不一一列举...
 
 > PS：理论支持所有```discuz```论坛，请自行尝试。
 
 ### Discourse
-- [x] [linux.do](https://linux.do/)
+- [x] [linux.do](https://linux.do/)，[（邀请链接）](https://linux.do/invites/qsVnmYUDfG)
 - [x] [小众软件官方论坛](https://meta.appinn.net/)
 
 > PS：理论支持所有```Discourse```论坛，请自行尝试。
