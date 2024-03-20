@@ -23,6 +23,9 @@
 
 ## 更新日志
 
+v3.4.2 更新：
+- [优化] 更新Discourse论坛插件加载问题；
+
 v3.4.1 更新：
 - [新增] 支持Discourse平台论坛([#235263](https://greasyfork.org/zh-CN/scripts/36728-%E8%AE%BA%E5%9D%9B%E5%BF%AB%E6%8D%B7%E5%9B%9E%E5%B8%96/discussions/235263))；
 

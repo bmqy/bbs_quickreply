@@ -123,7 +123,7 @@ async function getAIReply(){
     if(currentPlatform.value == 'discuz'){
         title = document.querySelector('#thread_subject').innerText
     } else if(currentPlatform.value == 'discourse'){
-        title = document.querySelector('#topic-title h1>a>span').innerText
+        title = document.querySelector('#topic-title h1>a').innerText
     } else if(currentPlatform.value == 'nodeseek'){
         title = document.querySelector('h1>a.post-title-link').innerText
     }

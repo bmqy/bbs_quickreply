@@ -31,8 +31,8 @@ export default defineConfig({
             '*://*/bbs/thread*.*',
             '*://*/forum.php?mod=post*',
             '*://www.nodeseek.com/post*',
-            '*://linux.do/t/topic/*',
-            '*://meta.appinn.net/t/topic/*'
+            '*://linux.do/*',
+            '*://meta.appinn.net/*'
         ],
         connect: [
             'quickreply.lc.bmqy.net',
