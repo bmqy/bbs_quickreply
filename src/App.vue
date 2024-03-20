@@ -123,7 +123,11 @@ async function getAIReply(){
     if(currentPlatform.value == 'discuz'){
         title = document.querySelector('#thread_subject').innerText
     } else if(currentPlatform.value == 'discourse'){
-        title = document.querySelector('#topic-title h1>a').innerText
+        if(document.querySelector('#topic-title h1>a')){
+            title = document.querySelector('#topic-title h1>a').innerText
+        } else {
+            title = document.querySelector('h1.header-title a').innerText
+        }
     } else if(currentPlatform.value == 'nodeseek'){
         title = document.querySelector('h1>a.post-title-link').innerText
     }
