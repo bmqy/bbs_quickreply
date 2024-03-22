@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.4.2
+// @version      3.4.3
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -38,7 +38,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-94b12e20]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-94b12e20]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-94b12e20]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-94b12e20],.el-form-item--small.el-form-item[data-v-94b12e20]{margin-bottom:10px}.el-select[data-v-94b12e20]{width:300px}.app-margin-right-30[data-v-d0017a57]{margin-right:30px}.list-left[data-v-d0017a57]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-d0017a57]{margin-right:5px;color:#909399}.list-title[data-v-d0017a57]{flex:1;font-weight:400}.list-right[data-v-d0017a57]{min-width:70px}.list-right .el-badge.item[data-v-d0017a57]{margin-right:30px}.list li[data-v-d0017a57]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-d0017a57]:hover{background-color:#f5f5f5}.tips[data-v-d0017a57]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-d0017a57]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-d0017a57]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-d0017a57]{padding:10px 20px}.box-card .el-card__header span[data-v-d0017a57]{font-size:14px}.clearfix[data-v-d0017a57]:before,.clearfix[data-v-d0017a57]:after{display:table;content:""}.clearfix[data-v-d0017a57]:after{clear:both}.el-pagination[data-v-d0017a57]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-51179c71]{padding:10px 20px}.box-card .el-card__header span[data-v-51179c71]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-d5dcb926]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-d5dcb926]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-d5dcb926]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-d5dcb926],.el-form-item--small.el-form-item[data-v-d5dcb926]{margin-bottom:10px}.el-select[data-v-d5dcb926]{width:300px}.app-margin-right-30[data-v-06ead464]{margin-right:30px}.list-left[data-v-06ead464]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-06ead464]{margin-right:5px;color:#909399}.list-title[data-v-06ead464]{flex:1;font-weight:400}.list-right[data-v-06ead464]{min-width:70px}.list-right .el-badge.item[data-v-06ead464]{margin-right:30px}.list li[data-v-06ead464]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-06ead464]:hover{background-color:#f5f5f5}.tips[data-v-06ead464]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-06ead464]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-06ead464]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-06ead464]{padding:10px 20px}.box-card .el-card__header span[data-v-06ead464]{font-size:14px}.clearfix[data-v-06ead464]:before,.clearfix[data-v-06ead464]:after{display:table;content:""}.clearfix[data-v-06ead464]:after{clear:both}.el-pagination[data-v-06ead464]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-51179c71]{padding:10px 20px}.box-card .el-card__header span[data-v-51179c71]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -353,7 +353,10 @@
         return `${proxy.$app.getName()}`;
       });
       const tips = vue.computed(() => {
-        return `${proxy.$app.getName()}设置`;
+        return `${proxy.$app.getName()}，控制面板：
+- 分享、收藏更多精彩回帖；
+- 登录账号（登录后可打开脚本菜单同步你的回帖，在任何设备上恢复并使用）；
+- AI及更多功能，请点击油猴图标打开脚本菜单开启或关闭；`;
       });
       vue.onMounted(() => {
         checkEditor();
@@ -391,6 +394,7 @@
         const _component_el_button_group = vue.resolveComponent("el-button-group");
         const _component_el_form = vue.resolveComponent("el-form");
         const _component_app_set = vue.resolveComponent("app-set");
+        const _component_el_link = vue.resolveComponent("el-link");
         const _component_el_dialog = vue.resolveComponent("el-dialog");
         const _component_app_set_ai = vue.resolveComponent("app-set-ai");
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$3, [
@@ -477,7 +481,18 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               }, null, 512)
             ]),
             footer: vue.withCtx(() => [
-              vue.createElementVNode("span", _hoisted_3$1, vue.toDisplayString(`ver: ${_ctx.$app.getVersion()}`), 1)
+              vue.createElementVNode("span", _hoisted_3$1, [
+                vue.createVNode(_component_el_link, {
+                  href: "https://github.com/bmqy/bbs_quickreply?tab=readme-ov-file#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97",
+                  title: "更新日志",
+                  target: "_blank"
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createTextVNode(vue.toDisplayString(`ver: ${_ctx.$app.getVersion()}`), 1)
+                  ]),
+                  _: 1
+                })
+              ])
             ]),
             _: 1
           }, 8, ["modelValue", "title"]),
@@ -506,8 +521,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-94b12e20"]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-d0017a57"), n = n(), vue.popScopeId(), n);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-d5dcb926"]]);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-06ead464"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$2 = { class: "setBox" };
   const _hoisted_2$1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "我在用的", -1));
   const _hoisted_3 = {
@@ -731,7 +746,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                   vue.createVNode(_component_el_tooltip, {
                                     class: "item",
                                     effect: "dark",
-                                    content: "注销登录",
+                                    content: "注销登录（注销后将不能再同步列表）",
                                     placement: "top-start"
                                   }, {
                                     default: vue.withCtx(() => [
@@ -979,7 +994,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-d0017a57"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-06ead464"]]);
   const _hoisted_1$1 = { class: "setAIBox" };
   const _sfc_main$1 = {
     __name: "Ai",
