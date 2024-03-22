@@ -175,7 +175,7 @@ function onRealtimeSyncChange(e){
                             <el-row :gutter="20" justify="space-between">
                                 <el-col :span="12" :offset="0"><span>我在用的</span></el-col>
                                 <el-col :span="12" :offset="0"  v-if="isLogin" style="display: flex;justify-content: end;">
-                                    <el-tooltip class="item" effect="dark" content="注销登录" placement="top-start">
+                                    <el-tooltip class="item" effect="dark" content="注销登录（注销后将不能再同步列表）" placement="top-start">
                                         <el-button type="danger" icon="SwitchButton" size="small" circle @click="logout" />
                                     </el-tooltip>
                                     <!-- <el-tooltip class="item" effect="dark" content="上传列表，覆盖云端" placement="top-start">

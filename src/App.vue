@@ -303,7 +303,10 @@ const title = computed(()=> {
     return `${proxy.$app.getName()}`;
 })
 const tips = computed(()=> {
-    return `${proxy.$app.getName()}设置`;
+    return `${proxy.$app.getName()}，控制面板：
+- 分享、收藏更多精彩回帖；
+- 登录账号（登录后可打开脚本菜单同步你的回帖，在任何设备上恢复并使用）；
+- AI及更多功能，请点击油猴图标打开脚本菜单开启或关闭；`;
 })
 onMounted(()=> {
     checkEditor();
@@ -396,7 +399,7 @@ watch(fwin_replyLoaded, (n)=>{
 
 <template #footer>
                 <span class="app-dialog-foot">
-                    {{ `ver: ${$app.getVersion()}` }}
+                    <el-link href="https://github.com/bmqy/bbs_quickreply?tab=readme-ov-file#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97" title="更新日志" target="_blank">{{ `ver: ${$app.getVersion()}` }}</el-link>
                 </span>
             </template>
 </el-dialog>
