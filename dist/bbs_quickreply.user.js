@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.4.3
+// @version      3.4.4
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -38,7 +38,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-d5dcb926]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-d5dcb926]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-d5dcb926]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-d5dcb926],.el-form-item--small.el-form-item[data-v-d5dcb926]{margin-bottom:10px}.el-select[data-v-d5dcb926]{width:300px}.app-margin-right-30[data-v-06ead464]{margin-right:30px}.list-left[data-v-06ead464]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-06ead464]{margin-right:5px;color:#909399}.list-title[data-v-06ead464]{flex:1;font-weight:400}.list-right[data-v-06ead464]{min-width:70px}.list-right .el-badge.item[data-v-06ead464]{margin-right:30px}.list li[data-v-06ead464]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-06ead464]:hover{background-color:#f5f5f5}.tips[data-v-06ead464]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-06ead464]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-06ead464]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-06ead464]{padding:10px 20px}.box-card .el-card__header span[data-v-06ead464]{font-size:14px}.clearfix[data-v-06ead464]:before,.clearfix[data-v-06ead464]:after{display:table;content:""}.clearfix[data-v-06ead464]:after{clear:both}.el-pagination[data-v-06ead464]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-51179c71]{padding:10px 20px}.box-card .el-card__header span[data-v-51179c71]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-d5dcb926]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-d5dcb926]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-d5dcb926]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-d5dcb926],.el-form-item--small.el-form-item[data-v-d5dcb926]{margin-bottom:10px}.el-select[data-v-d5dcb926]{width:300px}.app-margin-right-30[data-v-2b34b75c]{margin-right:30px}.list-left[data-v-2b34b75c]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-2b34b75c]{margin-right:5px;color:#909399}.list-title[data-v-2b34b75c]{flex:1;font-weight:400}.list-right[data-v-2b34b75c]{min-width:70px}.list-right .el-badge.item[data-v-2b34b75c]{margin-right:30px}.list li[data-v-2b34b75c]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-2b34b75c]:hover{background-color:#f5f5f5}.tips[data-v-2b34b75c]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-2b34b75c]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-2b34b75c]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-2b34b75c]{padding:10px 20px}.box-card .el-card__header span[data-v-2b34b75c]{font-size:14px}.clearfix[data-v-2b34b75c]:before,.clearfix[data-v-2b34b75c]:after{display:table;content:""}.clearfix[data-v-2b34b75c]:after{clear:both}.el-pagination[data-v-2b34b75c]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-51179c71]{padding:10px 20px}.box-card .el-card__header span[data-v-51179c71]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -522,7 +522,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
     }
   };
   const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-d5dcb926"]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-06ead464"), n = n(), vue.popScopeId(), n);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-2b34b75c"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$2 = { class: "setBox" };
   const _hoisted_2$1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "我在用的", -1));
   const _hoisted_3 = {
@@ -534,6 +534,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
     /* @__PURE__ */ vue.createTextVNode(" * 登录后，即可在任意设备同步你的配置；"),
     /* @__PURE__ */ vue.createElementVNode("br"),
     /* @__PURE__ */ vue.createTextVNode(" * 云端只负责保存账号及其回复列表，不留存多余信息；"),
+    /* @__PURE__ */ vue.createElementVNode("br"),
+    /* @__PURE__ */ vue.createTextVNode(" * 忘记密码可重新注册，或联系作者提供可用邮箱重置密码；"),
     /* @__PURE__ */ vue.createElementVNode("br"),
     /* @__PURE__ */ vue.createTextVNode(" * 如不需登录，也可忽略登录界面，直接使用即可；"),
     /* @__PURE__ */ vue.createElementVNode("br")
@@ -994,7 +996,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-06ead464"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-2b34b75c"]]);
   const _hoisted_1$1 = { class: "setAIBox" };
   const _sfc_main$1 = {
     __name: "Ai",
