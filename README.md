@@ -23,15 +23,18 @@
 
 ## 更新日志
 
+v3.4.4 更新：
+- [优化] 更新注册页面找回密码提示文本；
+
 v3.4.3 更新：
 - [优化] 为设置图标加```title```提示文本；
 - [优化] 版本号可跳转```Github```查看更新日志；
 
 v3.4.2 更新：
-- [优化] 更新Discourse论坛插件加载问题；
+- [优化] 更新```Discourse```论坛插件加载问题；
 
 v3.4.1 更新：
-- [新增] 支持Discourse平台论坛([#235263](https://greasyfork.org/zh-CN/scripts/36728-%E8%AE%BA%E5%9D%9B%E5%BF%AB%E6%8D%B7%E5%9B%9E%E5%B8%96/discussions/235263))；
+- [新增] 支持```Discourse```平台论坛([#235263](https://greasyfork.org/zh-CN/scripts/36728-%E8%AE%BA%E5%9D%9B%E5%BF%AB%E6%8D%B7%E5%9B%9E%E5%B8%96/discussions/235263))；
 
 v3.4.0 重磅更新，是帖皆可回复：
 - [新增] 支持使用```AI```生成回帖内容，支持平台：```Gemini```、```通义千问```，由此开始：```是帖皆可回复！！！```；
