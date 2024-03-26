@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.4.4
+// @version      3.4.5
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -29,6 +29,7 @@
 // @connect      quickreply.lc.bmqy.net
 // @connect      generativelanguage.googleapis.com
 // @connect      dashscope.aliyuncs.com
+// @connect      api.moonshot.cn
 // @grant        GM_getResourceText
 // @grant        GM_getValue
 // @grant        GM_info
@@ -38,7 +39,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-d5dcb926]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-d5dcb926]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-d5dcb926]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-d5dcb926],.el-form-item--small.el-form-item[data-v-d5dcb926]{margin-bottom:10px}.el-select[data-v-d5dcb926]{width:300px}.app-margin-right-30[data-v-2b34b75c]{margin-right:30px}.list-left[data-v-2b34b75c]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-2b34b75c]{margin-right:5px;color:#909399}.list-title[data-v-2b34b75c]{flex:1;font-weight:400}.list-right[data-v-2b34b75c]{min-width:70px}.list-right .el-badge.item[data-v-2b34b75c]{margin-right:30px}.list li[data-v-2b34b75c]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-2b34b75c]:hover{background-color:#f5f5f5}.tips[data-v-2b34b75c]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-2b34b75c]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-2b34b75c]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-2b34b75c]{padding:10px 20px}.box-card .el-card__header span[data-v-2b34b75c]{font-size:14px}.clearfix[data-v-2b34b75c]:before,.clearfix[data-v-2b34b75c]:after{display:table;content:""}.clearfix[data-v-2b34b75c]:after{clear:both}.el-pagination[data-v-2b34b75c]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-51179c71]{padding:10px 20px}.box-card .el-card__header span[data-v-51179c71]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-37fdd8dd]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-37fdd8dd]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-37fdd8dd]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-37fdd8dd],.el-form-item--small.el-form-item[data-v-37fdd8dd]{margin-bottom:10px}.el-select[data-v-37fdd8dd]{width:300px}.app-margin-right-30[data-v-2b34b75c]{margin-right:30px}.list-left[data-v-2b34b75c]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-2b34b75c]{margin-right:5px;color:#909399}.list-title[data-v-2b34b75c]{flex:1;font-weight:400}.list-right[data-v-2b34b75c]{min-width:70px}.list-right .el-badge.item[data-v-2b34b75c]{margin-right:30px}.list li[data-v-2b34b75c]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-2b34b75c]:hover{background-color:#f5f5f5}.tips[data-v-2b34b75c]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-2b34b75c]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-2b34b75c]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-2b34b75c]{padding:10px 20px}.box-card .el-card__header span[data-v-2b34b75c]{font-size:14px}.clearfix[data-v-2b34b75c]:before,.clearfix[data-v-2b34b75c]:after{display:table;content:""}.clearfix[data-v-2b34b75c]:after{clear:both}.el-pagination[data-v-2b34b75c]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-2711a9dd]{padding:10px 20px}.box-card .el-card__header span[data-v-2711a9dd]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -104,7 +105,8 @@
       const loadingAIReply = vue.ref(false);
       const aiNameList = vue.ref({
         gemini: "Gemini Pro",
-        qianwen: "通义千问-turbo"
+        qianwen: "通义千问-turbo",
+        kimi: "Kimi"
       });
       vue.onBeforeMount(() => {
         checkPlatform();
@@ -521,7 +523,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-d5dcb926"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-37fdd8dd"]]);
   const _withScopeId = (n) => (vue.pushScopeId("data-v-2b34b75c"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$2 = { class: "setBox" };
   const _hoisted_2$1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "我在用的", -1));
@@ -1007,6 +1009,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       const useGemini = vue.ref(false);
       const qianwenApiKey = vue.ref("");
       const useQianwen = vue.ref(false);
+      const kimiApiKey = vue.ref("");
+      const useKimi = vue.ref(false);
       const useAI = vue.ref("");
       vue.onBeforeMount(() => {
         useAI.value = proxy.$storage.getUserInfo("useAI") || "";
@@ -1014,6 +1018,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         useGemini.value = useAI.value == "gemini";
         qianwenApiKey.value = proxy.$storage.getUserInfo("qianwenApiKey") || "";
         useQianwen.value = useAI.value == "qianwen";
+        kimiApiKey.value = proxy.$storage.getUserInfo("kimiApiKey") || "";
+        useKimi.value = useAI.value == "kimi";
       });
       function onGeminiApiKeyChange(e) {
         proxy.$storage.setUserInfo("geminiApiKey", e);
@@ -1047,9 +1053,26 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         }
         return true;
       }
+      function onKimiApiKeyChange(e) {
+        proxy.$storage.setUserInfo("kimiApiKey", e);
+      }
+      function onKimiChange(e) {
+        useAI.value = e ? "kimi" : "";
+        proxy.$storage.setUserInfo("useAI", useAI.value);
+        proxy.$storage.setUserInfo("kimiApiKey", kimiApiKey.value || "");
+        emit("updateAI");
+      }
+      function useKimiBeforeChange() {
+        if (!useKimi.value && !kimiApiKey.value) {
+          proxy.$message.error("请先填写：Kimi api key");
+          return false;
+        }
+        return true;
+      }
       vue.watch(useAI, (n, o) => {
         useGemini.value = n == "gemini";
         useQianwen.value = n == "qianwen";
+        useKimi.value = n == "kimi";
       });
       return (_ctx, _cache) => {
         const _component_el_input = vue.resolveComponent("el-input");
@@ -1123,6 +1146,35 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                       }, null, 8, ["modelValue"])
                     ]),
                     _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "Kimi API Key" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "获取API Key：https://platform.moonshot.cn/console/api-keys",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_input, {
+                            modelValue: vue.unref(kimiApiKey),
+                            "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => vue.isRef(kimiApiKey) ? kimiApiKey.value = $event : null),
+                            onChange: onKimiApiKeyChange
+                          }, null, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_switch, {
+                        modelValue: vue.unref(useKimi),
+                        "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => vue.isRef(useKimi) ? useKimi.value = $event : null),
+                        onChange: onKimiChange,
+                        "before-change": useKimiBeforeChange
+                      }, null, 8, ["modelValue"])
+                    ]),
+                    _: 1
                   })
                 ]),
                 _: 1
@@ -1134,7 +1186,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-51179c71"]]);
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-2711a9dd"]]);
   const _hoisted_1 = { class: "margin-left" };
   const _hoisted_2 = { class: "margin-left" };
   const _sfc_main = {
@@ -1709,6 +1761,44 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                   }
                   let result = output.text;
                   result = result.replace(/[\\"]+/g, "");
+                  resolve(result);
+                },
+                onerror: function(xhr) {
+                  reject(xhr.response);
+                }
+              });
+            } else if (useAI == "kimi") {
+              let kimiApiKey = proxy.$storage.getUserInfo("kimiApiKey") || "";
+              if (!kimiApiKey) {
+                reject("无效api key");
+              }
+              let url = "https://api.moonshot.cn/v1/chat/completions";
+              let data = {
+                "model": "moonshot-v1-8k",
+                "messages": [
+                  {
+                    "role": "user",
+                    "content": `"请根据帖子标题：${title}，以回帖的语气生成一条15字左右的简短回复"`
+                  }
+                ]
+              };
+              _GM_xmlhttpRequest({
+                method: "POST",
+                url,
+                headers: {
+                  "Content-Type": "application/json; charset=utf-8",
+                  "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`,
+                  "Authorization": `Bearer ${kimiApiKey}`
+                },
+                data: `${JSON.stringify(data)}`,
+                responseType: "json",
+                onload: function(xhr) {
+                  let { choices, error } = xhr.response;
+                  console.log("🚀 ~ returnnewPromise ~ xhr.response:", xhr.response);
+                  if (error) {
+                    reject(error.message);
+                  }
+                  let result = choices[0].message.content;
                   resolve(result);
                 },
                 onerror: function(xhr) {
