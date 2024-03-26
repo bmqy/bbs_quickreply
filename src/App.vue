@@ -13,7 +13,8 @@ const useAI = ref('');
 const loadingAIReply = ref(false);
 const aiNameList = ref({
     gemini: 'Gemini Pro',
-    qianwen: '通义千问-turbo'
+    qianwen: '通义千问-turbo',
+    kimi: 'Kimi'
 });
 onBeforeMount(()=>{
     checkPlatform();

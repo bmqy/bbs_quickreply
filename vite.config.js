@@ -37,7 +37,8 @@ export default defineConfig({
         connect: [
             'quickreply.lc.bmqy.net',
             'generativelanguage.googleapis.com',
-            'dashscope.aliyuncs.com'
+            'dashscope.aliyuncs.com',
+            'api.moonshot.cn'
         ]
       },
       build: {

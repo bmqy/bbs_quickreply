@@ -152,6 +152,44 @@ export default {
                                 reject(xhr.response);
                             }
                         });
+                    } else if(useAI == 'kimi'){
+                        let kimiApiKey = proxy.$storage.getUserInfo('kimiApiKey') || '';
+                        if(!kimiApiKey){
+                            reject('无效api key');
+                        };
+                        let url = 'https://api.moonshot.cn/v1/chat/completions'
+                        let data = {
+                            "model": "moonshot-v1-8k",
+                            "messages": [
+                                {
+                                    "role": "user",
+                                    "content": `"请根据帖子标题：${title}，以回帖的语气生成一条15字左右的简短回复"`
+                                }
+                            ]
+                        }
+                        GM_xmlhttpRequest({
+                            method: 'POST',
+                            url: url,
+                            headers: {
+                                "Content-Type": "application/json; charset=utf-8",
+                                "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`,
+                                "Authorization": `Bearer ${kimiApiKey}`,
+                            },
+                            data: `${JSON.stringify(data)}`,
+                            responseType: 'json',
+                            onload: function (xhr) {
+                                let {choices, error} = xhr.response;
+                                console.log("🚀 ~ returnnewPromise ~ xhr.response:", xhr.response)
+                                if(error){
+                                    reject(error.message);
+                                }
+                                let result = choices[0].message.content;
+                                resolve(result)
+                            },
+                            onerror: function(xhr){
+                                reject(xhr.response);
+                            }
+                        });
                     } else {
                         reject('暂未配置AI');
                     }
