@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.4.5
+// @version      3.4.6
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -39,7 +39,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-37fdd8dd]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-37fdd8dd]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-37fdd8dd]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-37fdd8dd],.el-form-item--small.el-form-item[data-v-37fdd8dd]{margin-bottom:10px}.el-select[data-v-37fdd8dd]{width:300px}.app-margin-right-30[data-v-2b34b75c]{margin-right:30px}.list-left[data-v-2b34b75c]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-2b34b75c]{margin-right:5px;color:#909399}.list-title[data-v-2b34b75c]{flex:1;font-weight:400}.list-right[data-v-2b34b75c]{min-width:70px}.list-right .el-badge.item[data-v-2b34b75c]{margin-right:30px}.list li[data-v-2b34b75c]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-2b34b75c]:hover{background-color:#f5f5f5}.tips[data-v-2b34b75c]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-2b34b75c]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-2b34b75c]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-2b34b75c]{padding:10px 20px}.box-card .el-card__header span[data-v-2b34b75c]{font-size:14px}.clearfix[data-v-2b34b75c]:before,.clearfix[data-v-2b34b75c]:after{display:table;content:""}.clearfix[data-v-2b34b75c]:after{clear:both}.el-pagination[data-v-2b34b75c]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-2711a9dd]{padding:10px 20px}.box-card .el-card__header span[data-v-2711a9dd]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-37fdd8dd]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-37fdd8dd]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-37fdd8dd]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-37fdd8dd],.el-form-item--small.el-form-item[data-v-37fdd8dd]{margin-bottom:10px}.el-select[data-v-37fdd8dd]{width:300px}.app-margin-right-30[data-v-45255847]{margin-right:30px}.list-left[data-v-45255847]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-45255847]{margin-right:5px;color:#909399}.list-title[data-v-45255847]{flex:1;font-weight:400}.list-right[data-v-45255847]{min-width:70px}.list-right .el-badge.item[data-v-45255847]{margin-right:30px}.list li[data-v-45255847]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-45255847]:hover{background-color:#f5f5f5}.tips[data-v-45255847]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-45255847]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-45255847]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-45255847]{padding:10px 20px}.box-card .el-card__header span[data-v-45255847]{font-size:14px}.clearfix[data-v-45255847]:before,.clearfix[data-v-45255847]:after{display:table;content:""}.clearfix[data-v-45255847]:after{clear:both}.el-pagination[data-v-45255847]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-2711a9dd]{padding:10px 20px}.box-card .el-card__header span[data-v-2711a9dd]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -524,7 +524,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
     }
   };
   const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-37fdd8dd"]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-2b34b75c"), n = n(), vue.popScopeId(), n);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-45255847"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$2 = { class: "setBox" };
   const _hoisted_2$1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "我在用的", -1));
   const _hoisted_3 = {
@@ -637,6 +637,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       function shareReply(index) {
         proxy.$api.replyInsert(myList.value[index]).then((res) => {
           proxy.$message.success(res.memo);
+          getSystemList();
         }).catch((err2) => {
           proxy.$message.error(err2.memo);
         });
@@ -998,7 +999,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-2b34b75c"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-45255847"]]);
   const _hoisted_1$1 = { class: "setAIBox" };
   const _sfc_main$1 = {
     __name: "Ai",
@@ -1498,14 +1499,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       app2.config.globalProperties.$gmMenus = {
         init() {
           let proxy = app2.config.globalProperties;
-          _GM_registerMenuCommand("- 上传列表", function() {
+          _GM_registerMenuCommand("- ⬆️上传列表", function() {
             proxy.$storage.uploadList();
           }, {
             id: "uploadList",
             autoClose: true,
             title: "点此上传将覆盖云端已存储数据"
           });
-          _GM_registerMenuCommand("- 下载列表", function() {
+          _GM_registerMenuCommand("- ⬇️下载列表", function() {
             proxy.$storage.downloadList();
           }, {
             id: "downloadList",
@@ -1520,7 +1521,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         changeDownloadListMenu(callback) {
           let proxy = app2.config.globalProperties;
           if (arguments.length == 1) {
-            _GM_registerMenuCommand("- 下载列表", function() {
+            _GM_registerMenuCommand("- ⬇️下载列表", function() {
               proxy.$storage.downloadList(callback);
             }, {
               id: "downloadList",
@@ -1528,7 +1529,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               title: "点此下载将覆盖本地已存储数据"
             });
           } else {
-            _GM_registerMenuCommand("- 下载列表", function() {
+            _GM_registerMenuCommand("- ⬇️下载列表", function() {
               proxy.$storage.downloadList();
             }, {
               id: "downloadList",
@@ -1540,14 +1541,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         changeSubmitNowMenu(status, callback) {
           let proxy = app2.config.globalProperties;
           if (arguments.length == 2) {
-            _GM_registerMenuCommand(`- 立即提交：${status ? "已启用" : "已停用"}`, callback, {
+            _GM_registerMenuCommand(`- 🎯立即提交：${status ? "已启用" : "已停用"}`, callback, {
               id: "submitNow",
               autoClose: true,
               title: "开启后，选择快捷回帖内容后立即提交回帖"
             });
           } else {
             status = proxy.$storage.getUserInfo("submitNow") || false;
-            _GM_registerMenuCommand(`- 立即提交：${status ? "已启用" : "已停用"}`, function() {
+            _GM_registerMenuCommand(`- 🎯立即提交：${status ? "已启用" : "已停用"}`, function() {
               proxy.$storage.setUserInfo("submitNow", !status);
               proxy.$gmMenus.changeSubmitNowMenu(!status);
             }, {
@@ -1560,14 +1561,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         changeRealtimeMenu(status, callback) {
           let proxy = app2.config.globalProperties;
           if (arguments.length == 2) {
-            _GM_registerMenuCommand(`- 实时同步：${status ? "已启用" : "已停用"}`, callback, {
+            _GM_registerMenuCommand(`- ⏱️实时同步：${status ? "已启用" : "已停用"}`, callback, {
               id: "realtimeSync",
               autoClose: true,
               title: "开启后，本地列表修改后立即同步到云端存储"
             });
           } else {
             status = proxy.$storage.getUserInfo("realtimeSync") || false;
-            _GM_registerMenuCommand(`- 实时同步：${status ? "已启用" : "已停用"}`, function() {
+            _GM_registerMenuCommand(`- ⏱️实时同步：${status ? "已启用" : "已停用"}`, function() {
               proxy.$storage.setUserInfo("realtimeSync", !status);
               proxy.$gmMenus.changeRealtimeMenu(!status);
             }, {
@@ -1580,7 +1581,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         changeAIMenu(callback) {
           let proxy = app2.config.globalProperties;
           let useAI = proxy.$storage.getUserInfo("useAI") || "";
-          _GM_registerMenuCommand(`- 人工智能：${useAI ? "已启用" : "已停用"}`, callback, {
+          _GM_registerMenuCommand(`- 🤖人工智能：${useAI ? "已启用" : "已停用"}`, callback, {
             id: "AI",
             autoClose: true,
             title: "开启后，使用人工智能(AI)生成回复内容"
@@ -1590,13 +1591,13 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           let proxy = app2.config.globalProperties;
           let isUserId = proxy.$storage.getUserInfo("userId");
           if (arguments.length == 2) {
-            _GM_registerMenuCommand(`- 设置面板：${isUserId ? "已登录" : "未登录"}`, callback, {
+            _GM_registerMenuCommand(`- ⚙️设置面板：${isUserId ? "已登录" : "未登录"}`, callback, {
               id: "setting",
               autoClose: true,
               title: "打开/关闭设置面板"
             });
           } else {
-            _GM_registerMenuCommand(`- 设置面板：${isUserId ? "已登录" : "未登录"}`, null, {
+            _GM_registerMenuCommand(`- ⚙️设置面板：${isUserId ? "已登录" : "未登录"}`, null, {
               id: "setting",
               autoClose: true,
               title: "打开/关闭设置面板"
