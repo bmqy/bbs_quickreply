@@ -13,7 +13,7 @@
 > PS：理论支持所有```discuz```论坛，请自行尝试。
 
 ### Discourse
-- [x] [linux.do](https://linux.do/)，[（邀请链接）](https://linux.do/invites/qsVnmYUDfG)
+- [x] [linux.do](https://linux.do/)，[（邀请链接）](https://linux.do/invites/YRFy6T4hja)
 - [x] [小众软件官方论坛](https://meta.appinn.net/)
 
 > PS：理论支持所有```Discourse```论坛，请自行尝试。
