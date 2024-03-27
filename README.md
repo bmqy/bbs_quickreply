@@ -22,9 +22,9 @@
 - [x] [NodeSeek](https://www.nodeseek.com/)
 
 ## 支持AI
-### Gemini
-### 通义千问
-### Kimi
+- [x] Gemini
+- [x] 通义千问
+- [x] Kimi
 
 ## 更新日志
 
