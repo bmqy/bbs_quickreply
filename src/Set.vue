@@ -84,6 +84,7 @@ function shareReply(index) {
         .replyInsert(myList.value[index])
         .then((res) => {
             proxy.$message.success(res.memo);
+            getSystemList();
         })
         .catch((err) => {
             proxy.$message.error(err.memo);

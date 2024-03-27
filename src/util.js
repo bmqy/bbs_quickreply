@@ -75,7 +75,7 @@ export default {
         init(){
             let proxy = app.config.globalProperties;
             // 上传本地列表
-            GM_registerMenuCommand("- 上传列表", function() {
+            GM_registerMenuCommand("- ⬆️上传列表", function() {
                 proxy.$storage.uploadList();
             }, {
                 id: 'uploadList',
@@ -83,7 +83,7 @@ export default {
                 title: '点此上传将覆盖云端已存储数据'
             });
             // 下载列表
-            GM_registerMenuCommand("- 下载列表", function() {
+            GM_registerMenuCommand("- ⬇️下载列表", function() {
                 proxy.$storage.downloadList();
             }, {
                 id: 'downloadList',
@@ -102,7 +102,7 @@ export default {
         changeDownloadListMenu(callback){
             let proxy = app.config.globalProperties;
             if(arguments.length == 1){
-                GM_registerMenuCommand("- 下载列表", function() {
+                GM_registerMenuCommand("- ⬇️下载列表", function() {
                     proxy.$storage.downloadList(callback);
                 }, {
                     id: 'downloadList',
@@ -110,7 +110,7 @@ export default {
                     title: '点此下载将覆盖本地已存储数据'
                 });
             } else {
-                GM_registerMenuCommand("- 下载列表", function() {
+                GM_registerMenuCommand("- ⬇️下载列表", function() {
                     proxy.$storage.downloadList();
                 }, {
                     id: 'downloadList',
@@ -122,14 +122,14 @@ export default {
         changeSubmitNowMenu(status, callback){
             let proxy = app.config.globalProperties;
             if(arguments.length == 2){
-                GM_registerMenuCommand(`- 立即提交：${status ? '已启用' : '已停用'}`, callback, {
+                GM_registerMenuCommand(`- 🎯立即提交：${status ? '已启用' : '已停用'}`, callback, {
                     id: 'submitNow',
                     autoClose: true,
                     title: '开启后，选择快捷回帖内容后立即提交回帖'
                 })
             } else {
                 status = proxy.$storage.getUserInfo('submitNow') || false;
-                GM_registerMenuCommand(`- 立即提交：${status ? '已启用' : '已停用'}`, function() {
+                GM_registerMenuCommand(`- 🎯立即提交：${status ? '已启用' : '已停用'}`, function() {
                     proxy.$storage.setUserInfo('submitNow', !status);
                     proxy.$gmMenus.changeSubmitNowMenu(!status);
                 }, {
@@ -142,14 +142,14 @@ export default {
         changeRealtimeMenu(status, callback){
             let proxy = app.config.globalProperties;
             if(arguments.length == 2){
-                GM_registerMenuCommand(`- 实时同步：${status ? '已启用' : '已停用'}`, callback, {
+                GM_registerMenuCommand(`- ⏱️实时同步：${status ? '已启用' : '已停用'}`, callback, {
                     id: 'realtimeSync',
                     autoClose: true,
                     title: '开启后，本地列表修改后立即同步到云端存储'
                 })
             } else {
                 status = proxy.$storage.getUserInfo('realtimeSync') || false;
-                GM_registerMenuCommand(`- 实时同步：${status ? '已启用' : '已停用'}`, function() {
+                GM_registerMenuCommand(`- ⏱️实时同步：${status ? '已启用' : '已停用'}`, function() {
                     proxy.$storage.setUserInfo('realtimeSync', !status);
                     proxy.$gmMenus.changeRealtimeMenu(!status);
                 }, {
@@ -162,7 +162,7 @@ export default {
         changeAIMenu(callback){
             let proxy = app.config.globalProperties;
             let useAI = proxy.$storage.getUserInfo('useAI') || '';
-            GM_registerMenuCommand(`- 人工智能：${useAI ? '已启用' : '已停用'}`, callback, {
+            GM_registerMenuCommand(`- 🤖人工智能：${useAI ? '已启用' : '已停用'}`, callback, {
                 id: 'AI',
                 autoClose: true,
                 title: '开启后，使用人工智能(AI)生成回复内容'
@@ -172,13 +172,13 @@ export default {
             let proxy = app.config.globalProperties;
             let isUserId = proxy.$storage.getUserInfo('userId');
             if(arguments.length == 2){
-                GM_registerMenuCommand(`- 设置面板：${isUserId ? '已登录' : '未登录'}`, callback, {
+                GM_registerMenuCommand(`- ⚙️设置面板：${isUserId ? '已登录' : '未登录'}`, callback, {
                     id: 'setting',
                     autoClose: true,
                     title: '打开/关闭设置面板'
                 });
             } else {
-                GM_registerMenuCommand(`- 设置面板：${isUserId ? '已登录' : '未登录'}`, null, {
+                GM_registerMenuCommand(`- ⚙️设置面板：${isUserId ? '已登录' : '未登录'}`, null, {
                     id: 'setting',
                     autoClose: true,
                     title: '打开/关闭设置面板'
