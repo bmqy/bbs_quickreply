@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.4.6
+// @version      3.4.7
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -39,7 +39,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-37fdd8dd]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-37fdd8dd]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-37fdd8dd]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-37fdd8dd],.el-form-item--small.el-form-item[data-v-37fdd8dd]{margin-bottom:10px}.el-select[data-v-37fdd8dd]{width:300px}.app-margin-right-30[data-v-45255847]{margin-right:30px}.list-left[data-v-45255847]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-45255847]{margin-right:5px;color:#909399}.list-title[data-v-45255847]{flex:1;font-weight:400}.list-right[data-v-45255847]{min-width:70px}.list-right .el-badge.item[data-v-45255847]{margin-right:30px}.list li[data-v-45255847]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-45255847]:hover{background-color:#f5f5f5}.tips[data-v-45255847]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-45255847]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-45255847]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-45255847]{padding:10px 20px}.box-card .el-card__header span[data-v-45255847]{font-size:14px}.clearfix[data-v-45255847]:before,.clearfix[data-v-45255847]:after{display:table;content:""}.clearfix[data-v-45255847]:after{clear:both}.el-pagination[data-v-45255847]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-2711a9dd]{padding:10px 20px}.box-card .el-card__header span[data-v-2711a9dd]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-37fdd8dd]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-37fdd8dd]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-37fdd8dd]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-37fdd8dd],.el-form-item--small.el-form-item[data-v-37fdd8dd]{margin-bottom:10px}.el-select[data-v-37fdd8dd]{width:300px}.app-margin-right-30[data-v-45255847]{margin-right:30px}.list-left[data-v-45255847]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-45255847]{margin-right:5px;color:#909399}.list-title[data-v-45255847]{flex:1;font-weight:400}.list-right[data-v-45255847]{min-width:70px}.list-right .el-badge.item[data-v-45255847]{margin-right:30px}.list li[data-v-45255847]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-45255847]:hover{background-color:#f5f5f5}.tips[data-v-45255847]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-45255847]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-45255847]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-45255847]{padding:10px 20px}.box-card .el-card__header span[data-v-45255847]{font-size:14px}.clearfix[data-v-45255847]:before,.clearfix[data-v-45255847]:after{display:table;content:""}.clearfix[data-v-45255847]:after{clear:both}.el-pagination[data-v-45255847]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-843db417]{padding:10px 20px}.box-card .el-card__header span[data-v-843db417]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -1013,6 +1013,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       const kimiApiKey = vue.ref("");
       const useKimi = vue.ref(false);
       const useAI = vue.ref("");
+      const promptCustom = vue.ref("");
+      const usePromptCustom = vue.ref(false);
       vue.onBeforeMount(() => {
         useAI.value = proxy.$storage.getUserInfo("useAI") || "";
         geminiApiKey.value = proxy.$storage.getUserInfo("geminiApiKey") || "";
@@ -1021,6 +1023,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         useQianwen.value = useAI.value == "qianwen";
         kimiApiKey.value = proxy.$storage.getUserInfo("kimiApiKey") || "";
         useKimi.value = useAI.value == "kimi";
+        promptCustom.value = proxy.$storage.getUserInfo("promptCustom") || "";
+        usePromptCustom.value = proxy.$storage.getUserInfo("usePromptCustom") || false;
       });
       function onGeminiApiKeyChange(e) {
         proxy.$storage.setUserInfo("geminiApiKey", e);
@@ -1070,6 +1074,25 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         }
         return true;
       }
+      function onPromptCustomChange(e) {
+        proxy.$storage.setUserInfo("promptCustom", e);
+      }
+      function onUsePromptCustomChange(e) {
+        proxy.$storage.setUserInfo("usePromptCustom", usePromptCustom.value);
+        proxy.$storage.setUserInfo("promptCustom", promptCustom.value);
+        emit("updateAI");
+      }
+      function usePromptCustomBeforeChange() {
+        if (!usePromptCustom.value && !promptCustom.value) {
+          proxy.$message.error("请先填写：自定义 Prompt");
+          return false;
+        }
+        if (promptCustom.value.indexOf("{{title}}") == -1) {
+          proxy.$message.error("请检查自定义 Prompt 中是否包含变量：{{title}}");
+          return false;
+        }
+        return true;
+      }
       vue.watch(useAI, (n, o) => {
         useGemini.value = n == "gemini";
         useQianwen.value = n == "qianwen";
@@ -1080,6 +1103,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         const _component_el_tooltip = vue.resolveComponent("el-tooltip");
         const _component_el_form_item = vue.resolveComponent("el-form-item");
         const _component_el_switch = vue.resolveComponent("el-switch");
+        const _component_el_text = vue.resolveComponent("el-text");
         const _component_el_form = vue.resolveComponent("el-form");
         const _component_el_card = vue.resolveComponent("el-card");
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$1, [
@@ -1176,6 +1200,45 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                       }, null, 8, ["modelValue"])
                     ]),
                     _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "自定义 Prompt" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "自定义提示问语，帮你获得更个性化的回帖内容。必须包含唯一变量：{{title}}",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_input, {
+                            type: "textarea",
+                            modelValue: vue.unref(promptCustom),
+                            "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => vue.isRef(promptCustom) ? promptCustom.value = $event : null),
+                            onChange: onPromptCustomChange
+                          }, null, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      }),
+                      vue.createVNode(_component_el_text, {
+                        class: "mx-1",
+                        type: "info"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createTextVNode("默认：" + vue.toDisplayString(vue.unref(proxy).$app.prompt), 1)
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_switch, {
+                        modelValue: vue.unref(usePromptCustom),
+                        "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => vue.isRef(usePromptCustom) ? usePromptCustom.value = $event : null),
+                        onChange: onUsePromptCustomChange,
+                        "before-change": usePromptCustomBeforeChange
+                      }, null, 8, ["modelValue"])
+                    ]),
+                    _: 1
                   })
                 ]),
                 _: 1
@@ -1187,7 +1250,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-2711a9dd"]]);
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-843db417"]]);
   const _hoisted_1 = { class: "margin-left" };
   const _hoisted_2 = { class: "margin-left" };
   const _sfc_main = {
@@ -1611,7 +1674,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         },
         getVersion: function() {
           return _GM_info["script"]["version"];
-        }
+        },
+        prompt: "请根据帖子标题：{{title}}，以回帖的语气生成一条15字左右的简短回复"
       };
     }
   };
@@ -1693,6 +1757,13 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
             if (!title) {
               reject("参数无效");
             }
+            let prompt = proxy.$app.prompt;
+            let promptCustom = proxy.$storage.getUserInfo("promptCustom") || "";
+            let usePromptCustom = proxy.$storage.getUserInfo("usePromptCustom") || false;
+            if (usePromptCustom && promptCustom) {
+              prompt = promptCustom;
+            }
+            prompt = prompt.replace("{{title}}", title);
             if (useAI == "gemini") {
               let geminiApiKey = proxy.$storage.getUserInfo("geminiApiKey") || "";
               if (!geminiApiKey) {
@@ -1704,7 +1775,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                   {
                     "parts": [
                       {
-                        "text": `"请根据帖子标题：${title}，以回帖的语气生成一条15字左右的简短回复"`
+                        "text": prompt
                       }
                     ]
                   }
@@ -1742,7 +1813,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                   "result_format": "text"
                 },
                 "input": {
-                  "prompt": `"请根据帖子标题：${title}，以回帖的语气生成一条15字左右的简短回复"`
+                  "prompt": prompt
                 }
               };
               _GM_xmlhttpRequest({
@@ -1779,7 +1850,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                 "messages": [
                   {
                     "role": "user",
-                    "content": `"请根据帖子标题：${title}，以回帖的语气生成一条15字左右的简短回复"`
+                    "content": prompt
                   }
                 ]
               };
@@ -1795,7 +1866,6 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                 responseType: "json",
                 onload: function(xhr) {
                   let { choices, error } = xhr.response;
-                  console.log("🚀 ~ returnnewPromise ~ xhr.response:", xhr.response);
                   if (error) {
                     reject(error.message);
                   }
