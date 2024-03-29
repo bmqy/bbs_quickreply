@@ -195,6 +195,7 @@ export default {
         getVersion: function() {
             return GM_info['script']['version'];
         },
+        prompt: '请根据帖子标题：{{title}}，以回帖的语气生成一条15字左右的简短回复'
     }
   }
 }

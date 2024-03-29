@@ -77,6 +77,13 @@ export default {
                     if(!title){
                         reject('参数无效');
                     };
+                    let prompt = proxy.$app.prompt;
+                    let promptCustom = proxy.$storage.getUserInfo('promptCustom') || '';
+                    let usePromptCustom = proxy.$storage.getUserInfo('usePromptCustom') || false;
+                    if(usePromptCustom && promptCustom){
+                        prompt = promptCustom;
+                    }
+                    prompt = prompt.replace('{{title}}', title);
                     if(useAI == 'gemini'){
                         let geminiApiKey = proxy.$storage.getUserInfo('geminiApiKey') || '';
                         if(!geminiApiKey){
@@ -88,7 +95,7 @@ export default {
                                 {
                                     "parts": [
                                         {
-                                        "text": `"请根据帖子标题：${title}，以回帖的语气生成一条15字左右的简短回复"`
+                                        "text": prompt
                                         }
                                     ]
                                 }
@@ -126,7 +133,7 @@ export default {
                                 "result_format": "text"
                             },
                             "input": {
-                                "prompt": `"请根据帖子标题：${title}，以回帖的语气生成一条15字左右的简短回复"`
+                                "prompt": prompt
                             }
                         }
                         GM_xmlhttpRequest({
@@ -163,7 +170,7 @@ export default {
                             "messages": [
                                 {
                                     "role": "user",
-                                    "content": `"请根据帖子标题：${title}，以回帖的语气生成一条15字左右的简短回复"`
+                                    "content": prompt
                                 }
                             ]
                         }
@@ -179,7 +186,6 @@ export default {
                             responseType: 'json',
                             onload: function (xhr) {
                                 let {choices, error} = xhr.response;
-                                console.log("🚀 ~ returnnewPromise ~ xhr.response:", xhr.response)
                                 if(error){
                                     reject(error.message);
                                 }

@@ -7,6 +7,8 @@ const useQianwen = ref(false);
 const kimiApiKey = ref('');
 const useKimi = ref(false);
 const useAI = ref('');
+const promptCustom = ref('');
+const usePromptCustom = ref(false);
 const emit = defineEmits(['updateAI']);
 onBeforeMount(()=>{
     useAI.value = proxy.$storage.getUserInfo('useAI') || '';
@@ -16,6 +18,8 @@ onBeforeMount(()=>{
     useQianwen.value = useAI.value=='qianwen';
     kimiApiKey.value = proxy.$storage.getUserInfo('kimiApiKey') || '';
     useKimi.value = useAI.value=='kimi';
+    promptCustom.value = proxy.$storage.getUserInfo('promptCustom') || '';
+    usePromptCustom.value = proxy.$storage.getUserInfo('usePromptCustom') || false;
 });
 
 function onGeminiApiKeyChange(e){
@@ -66,6 +70,25 @@ function useKimiBeforeChange(){
     }
     return true
 }
+function onPromptCustomChange(e){
+    proxy.$storage.setUserInfo('promptCustom', e)
+}
+function onUsePromptCustomChange(e){
+    proxy.$storage.setUserInfo('usePromptCustom', usePromptCustom.value)
+    proxy.$storage.setUserInfo('promptCustom', promptCustom.value)
+    emit('updateAI');
+}
+function usePromptCustomBeforeChange(){
+    if(!usePromptCustom.value && !promptCustom.value){
+        proxy.$message.error('请先填写：自定义 Prompt')
+        return false
+    }
+    if(promptCustom.value.indexOf('{{title}}') == -1){
+        proxy.$message.error('请检查自定义 Prompt 中是否包含变量：{{title}}')
+        return false
+    }
+    return true
+}
 watch(useAI, (n, o) => {
     useGemini.value = n == 'gemini';
     useQianwen.value = n == 'qianwen';
@@ -100,6 +123,15 @@ watch(useAI, (n, o) => {
                 </el-form-item>
                 <el-form-item label="启用">
                 <el-switch v-model="useKimi" @change="onKimiChange" :before-change="useKimiBeforeChange" />
+                </el-form-item>
+                <el-form-item label="自定义 Prompt">
+                    <el-tooltip content="自定义提示问语，帮你获得更个性化的回帖内容。必须包含唯一变量：{{title}}" placement="top">
+                        <el-input type="textarea" v-model="promptCustom" @change="onPromptCustomChange" />
+                    </el-tooltip>
+                    <el-text class="mx-1" type="info">默认：{{proxy.$app.prompt}}</el-text>
+                </el-form-item>
+                <el-form-item label="启用">
+                <el-switch v-model="usePromptCustom" @change="onUsePromptCustomChange" :before-change="usePromptCustomBeforeChange" />
                 </el-form-item>
             </el-form>
         </el-card>
