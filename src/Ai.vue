@@ -83,7 +83,7 @@ function usePromptCustomBeforeChange(){
         proxy.$message.error('请先填写：自定义 Prompt')
         return false
     }
-    if(promptCustom.value.indexOf('{{title}}') == -1){
+    if(!usePromptCustom.value && promptCustom.value.indexOf('{{title}}') == -1){
         proxy.$message.error('请检查自定义 Prompt 中是否包含变量：{{title}}')
         return false
     }
