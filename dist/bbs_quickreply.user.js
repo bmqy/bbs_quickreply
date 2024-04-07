@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.4.7
+// @version      3.4.8
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -30,6 +30,8 @@
 // @connect      generativelanguage.googleapis.com
 // @connect      dashscope.aliyuncs.com
 // @connect      api.moonshot.cn
+// @connect      api.openai.com
+// @connect      *
 // @grant        GM_getResourceText
 // @grant        GM_getValue
 // @grant        GM_info
@@ -39,7 +41,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-37fdd8dd]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-37fdd8dd]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-37fdd8dd]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-37fdd8dd],.el-form-item--small.el-form-item[data-v-37fdd8dd]{margin-bottom:10px}.el-select[data-v-37fdd8dd]{width:300px}.app-margin-right-30[data-v-45255847]{margin-right:30px}.list-left[data-v-45255847]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-45255847]{margin-right:5px;color:#909399}.list-title[data-v-45255847]{flex:1;font-weight:400}.list-right[data-v-45255847]{min-width:70px}.list-right .el-badge.item[data-v-45255847]{margin-right:30px}.list li[data-v-45255847]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-45255847]:hover{background-color:#f5f5f5}.tips[data-v-45255847]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-45255847]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-45255847]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-45255847]{padding:10px 20px}.box-card .el-card__header span[data-v-45255847]{font-size:14px}.clearfix[data-v-45255847]:before,.clearfix[data-v-45255847]:after{display:table;content:""}.clearfix[data-v-45255847]:after{clear:both}.el-pagination[data-v-45255847]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-04452d7c]{padding:10px 20px}.box-card .el-card__header span[data-v-04452d7c]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-1f002860]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-1f002860]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1f002860]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1f002860],.el-form-item--small.el-form-item[data-v-1f002860]{margin-bottom:10px}.el-select[data-v-1f002860]{width:300px}.app-margin-right-30[data-v-45255847]{margin-right:30px}.list-left[data-v-45255847]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-45255847]{margin-right:5px;color:#909399}.list-title[data-v-45255847]{flex:1;font-weight:400}.list-right[data-v-45255847]{min-width:70px}.list-right .el-badge.item[data-v-45255847]{margin-right:30px}.list li[data-v-45255847]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-45255847]:hover{background-color:#f5f5f5}.tips[data-v-45255847]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-45255847]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-45255847]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-45255847]{padding:10px 20px}.box-card .el-card__header span[data-v-45255847]{font-size:14px}.clearfix[data-v-45255847]:before,.clearfix[data-v-45255847]:after{display:table;content:""}.clearfix[data-v-45255847]:after{clear:both}.el-pagination[data-v-45255847]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-42e801e1]{padding:10px 20px}.box-card .el-card__header span[data-v-42e801e1]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -106,7 +108,8 @@
       const aiNameList = vue.ref({
         gemini: "Gemini Pro",
         qianwen: "通义千问-turbo",
-        kimi: "Kimi"
+        kimi: "Kimi",
+        chatgpt: "ChatGPT"
       });
       vue.onBeforeMount(() => {
         checkPlatform();
@@ -114,6 +117,7 @@
         proxy.$gmMenus.init();
         submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
         useAI.value = proxy.$storage.getUserInfo("useAI") || "";
+        updateAIModel();
         changeSubmitNow(submitNow.value);
         proxy.$gmMenus.changeDownloadListMenu(function(data) {
           updateMyList(data);
@@ -180,9 +184,16 @@
       }
       function updateAI() {
         useAI.value = proxy.$storage.getUserInfo("useAI") || "";
+        updateAIModel();
         proxy.$gmMenus.changeAIMenu(function() {
           closeSetAI();
         });
+      }
+      function updateAIModel() {
+        let chatgptModel = proxy.$storage.getUserInfo("chatgptModel") || "gpt-3.5-turbo";
+        if (useAI.value === "chatgpt") {
+          aiNameList.value["chatgpt"] = `ChatGPT (${chatgptModel})`;
+        }
       }
       function onLoginSuccess() {
         proxy.$gmMenus.changeSettingMenu(true, function() {
@@ -523,7 +534,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-37fdd8dd"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-1f002860"]]);
   const _withScopeId = (n) => (vue.pushScopeId("data-v-45255847"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$2 = { class: "setBox" };
   const _hoisted_2$1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "我在用的", -1));
@@ -1012,6 +1023,26 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       const useQianwen = vue.ref(false);
       const kimiApiKey = vue.ref("");
       const useKimi = vue.ref(false);
+      const chatgptDomain = vue.ref("");
+      const chatgptApiKey = vue.ref("");
+      const chatgptModel = vue.ref("gpt-3.5-turbo");
+      const chatgptModelList = vue.ref([
+        { value: "gpt-4", label: "gpt-4" },
+        { value: "gpt-4-0314", label: "gpt-4-0314" },
+        { value: "gpt-4-0613", label: "gpt-4-0613" },
+        { value: "gpt-4-32k", label: "gpt-4-32k" },
+        { value: "gpt-4-32k-0314", label: "gpt-4-32k-0314" },
+        { value: "gpt-4-32k-0613", label: "gpt-4-32k-0613" },
+        { value: "gpt-4-1106-preview", label: "gpt-4-1106-preview" },
+        { value: "gpt-4-vision-preview", label: "gpt-4-vision-preview" },
+        { value: "gpt-3.5-turbo", label: "gpt-3.5-turbo" },
+        { value: "gpt-3.5-turbo-0301", label: "gpt-3.5-turbo-0301" },
+        { value: "gpt-3.5-turbo-0613", label: "gpt-3.5-turbo-0613" },
+        { value: "gpt-3.5-turbo-1106", label: "gpt-3.5-turbo-1106" },
+        { value: "gpt-3.5-turbo-16k", label: "gpt-3.5-turbo-16k" },
+        { value: "gpt-3.5-turbo-16k-0613", label: "gpt-3.5-turbo-16k-0613" }
+      ]);
+      const useChatgpt = vue.ref(false);
       const useAI = vue.ref("");
       const promptCustom = vue.ref("");
       const usePromptCustom = vue.ref(false);
@@ -1023,6 +1054,10 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         useQianwen.value = useAI.value == "qianwen";
         kimiApiKey.value = proxy.$storage.getUserInfo("kimiApiKey") || "";
         useKimi.value = useAI.value == "kimi";
+        chatgptDomain.value = proxy.$storage.getUserInfo("chatgptDomain") || "";
+        chatgptApiKey.value = proxy.$storage.getUserInfo("chatgptApiKey") || "";
+        chatgptModel.value = proxy.$storage.getUserInfo("chatgptModel") || "";
+        useChatgpt.value = useAI.value == "chatgpt";
         promptCustom.value = proxy.$storage.getUserInfo("promptCustom") || "";
         usePromptCustom.value = proxy.$storage.getUserInfo("usePromptCustom") || false;
       });
@@ -1074,6 +1109,31 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         }
         return true;
       }
+      function onChatgptDomainChange(e) {
+        proxy.$storage.setUserInfo("chatgptDomain", e);
+      }
+      function onChatgptApiKeyChange(e) {
+        proxy.$storage.setUserInfo("chatgptApiKey", e);
+      }
+      function onChatgptModelChange(e) {
+        proxy.$storage.setUserInfo("chatgptModel", e);
+        emit("updateAI");
+      }
+      function onChatgptChange(e) {
+        useAI.value = e ? "chatgpt" : "";
+        proxy.$storage.setUserInfo("useAI", useAI.value);
+        proxy.$storage.setUserInfo("chatgptDomain", chatgptDomain.value || "");
+        proxy.$storage.setUserInfo("chatgptApiKey", chatgptApiKey.value || "");
+        proxy.$storage.setUserInfo("chatgptModel", chatgptModel.value || "");
+        emit("updateAI");
+      }
+      function useChatgptBeforeChange() {
+        if (!useChatgpt.value && !chatgptDomain.value) {
+          proxy.$message.error("请先填写：chatgpt api domain");
+          return false;
+        }
+        return true;
+      }
       function onPromptCustomChange(e) {
         proxy.$storage.setUserInfo("promptCustom", e);
       }
@@ -1097,12 +1157,15 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         useGemini.value = n == "gemini";
         useQianwen.value = n == "qianwen";
         useKimi.value = n == "kimi";
+        useChatgpt.value = n == "chatgpt";
       });
       return (_ctx, _cache) => {
         const _component_el_input = vue.resolveComponent("el-input");
         const _component_el_tooltip = vue.resolveComponent("el-tooltip");
         const _component_el_form_item = vue.resolveComponent("el-form-item");
         const _component_el_switch = vue.resolveComponent("el-switch");
+        const _component_el_option = vue.resolveComponent("el-option");
+        const _component_el_select = vue.resolveComponent("el-select");
         const _component_el_text = vue.resolveComponent("el-text");
         const _component_el_form = vue.resolveComponent("el-form");
         const _component_el_card = vue.resolveComponent("el-card");
@@ -1201,6 +1264,85 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                     ]),
                     _: 1
                   }),
+                  vue.createVNode(_component_el_form_item, { label: "Chatgpt Domain" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "请自行寻找可用域名，example: chat.customai.com",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_input, {
+                            modelValue: vue.unref(chatgptDomain),
+                            "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => vue.isRef(chatgptDomain) ? chatgptDomain.value = $event : null),
+                            onChange: onChatgptDomainChange
+                          }, null, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "Chatgpt API Key" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "按接口规则填写",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_input, {
+                            modelValue: vue.unref(chatgptApiKey),
+                            "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => vue.isRef(chatgptApiKey) ? chatgptApiKey.value = $event : null),
+                            onChange: onChatgptApiKeyChange
+                          }, null, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "Chatgpt Model" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "默认使用：gpt-3.5-turbo，需接口支持",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_select, {
+                            modelValue: vue.unref(chatgptModel),
+                            "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => vue.isRef(chatgptModel) ? chatgptModel.value = $event : null),
+                            placeholder: "Select",
+                            size: "large",
+                            style: { "width": "240px" },
+                            onChange: onChatgptModelChange
+                          }, {
+                            default: vue.withCtx(() => [
+                              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(chatgptModelList), (item) => {
+                                return vue.openBlock(), vue.createBlock(_component_el_option, {
+                                  key: item.value,
+                                  label: item.label,
+                                  value: item.value
+                                }, null, 8, ["label", "value"]);
+                              }), 128))
+                            ]),
+                            _: 1
+                          }, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_switch, {
+                        modelValue: vue.unref(useChatgpt),
+                        "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => vue.isRef(useChatgpt) ? useChatgpt.value = $event : null),
+                        onChange: onChatgptChange,
+                        "before-change": useChatgptBeforeChange
+                      }, null, 8, ["modelValue"])
+                    ]),
+                    _: 1
+                  }),
                   vue.createVNode(_component_el_form_item, { label: "自定义 Prompt" }, {
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_tooltip, {
@@ -1211,7 +1353,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                           vue.createVNode(_component_el_input, {
                             type: "textarea",
                             modelValue: vue.unref(promptCustom),
-                            "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => vue.isRef(promptCustom) ? promptCustom.value = $event : null),
+                            "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => vue.isRef(promptCustom) ? promptCustom.value = $event : null),
                             onChange: onPromptCustomChange
                           }, null, 8, ["modelValue"])
                         ]),
@@ -1233,7 +1375,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_switch, {
                         modelValue: vue.unref(usePromptCustom),
-                        "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => vue.isRef(usePromptCustom) ? usePromptCustom.value = $event : null),
+                        "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => vue.isRef(usePromptCustom) ? usePromptCustom.value = $event : null),
                         onChange: onUsePromptCustomChange,
                         "before-change": usePromptCustomBeforeChange
                       }, null, 8, ["modelValue"])
@@ -1250,7 +1392,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-04452d7c"]]);
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-42e801e1"]]);
   const _hoisted_1 = { class: "margin-left" };
   const _hoisted_2 = { class: "margin-left" };
   const _sfc_main = {
@@ -1862,6 +2004,49 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                   "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`,
                   "Authorization": `Bearer ${kimiApiKey}`
                 },
+                data: `${JSON.stringify(data)}`,
+                responseType: "json",
+                onload: function(xhr) {
+                  let { choices, error } = xhr.response;
+                  if (error) {
+                    reject(error.message);
+                  }
+                  let result = choices[0].message.content;
+                  resolve(result);
+                },
+                onerror: function(xhr) {
+                  reject(xhr.response);
+                }
+              });
+            } else if (useAI == "chatgpt") {
+              let chatgptDomain = proxy.$storage.getUserInfo("chatgptDomain") || "";
+              let chatgptModel = proxy.$storage.getUserInfo("chatgptModel") || "gpt-3.5-turbo";
+              let chatgptApiKey = proxy.$storage.getUserInfo("chatgptApiKey") || "";
+              if (!chatgptDomain) {
+                reject("无效地址");
+              }
+              let url = `https://${chatgptDomain}/v1/chat/completions`;
+              let data = {
+                "model": `${chatgptModel}`,
+                "messages": [
+                  {
+                    "role": "user",
+                    "content": prompt
+                  }
+                ],
+                "stream": false
+              };
+              let headers = {
+                "Content-Type": "application/json; charset=utf-8",
+                "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`
+              };
+              if (chatgptApiKey) {
+                headers["Authorization"] = `Bearer ${chatgptApiKey}`;
+              }
+              _GM_xmlhttpRequest({
+                method: "POST",
+                url,
+                headers,
                 data: `${JSON.stringify(data)}`,
                 responseType: "json",
                 onload: function(xhr) {
