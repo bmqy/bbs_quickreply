@@ -14,7 +14,8 @@ const loadingAIReply = ref(false);
 const aiNameList = ref({
     gemini: 'Gemini Pro',
     qianwen: '通义千问-turbo',
-    kimi: 'Kimi'
+    kimi: 'Kimi',
+    chatgpt: 'ChatGPT'
 });
 onBeforeMount(()=>{
     checkPlatform();
@@ -22,6 +23,7 @@ onBeforeMount(()=>{
     proxy.$gmMenus.init();
     submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
     useAI.value = proxy.$storage.getUserInfo('useAI') || '';
+    updateAIModel();
     changeSubmitNow(submitNow.value);
     proxy.$gmMenus.changeDownloadListMenu(function(data){
         updateMyList(data);
@@ -100,10 +102,18 @@ function closeSetAI() {
 };
 function updateAI() {
     useAI.value = proxy.$storage.getUserInfo('useAI') || '';
+    updateAIModel()
     // 更新AI设置菜单
     proxy.$gmMenus.changeAIMenu(function(){
         closeSetAI();
     });
+}
+// 更新AI模型
+function updateAIModel(){
+    let chatgptModel = proxy.$storage.getUserInfo('chatgptModel') || 'gpt-3.5-turbo';
+    if(useAI.value === 'chatgpt'){
+        aiNameList.value['chatgpt'] = `ChatGPT (${chatgptModel})`;
+    }
 }
 
 function onLoginSuccess(){

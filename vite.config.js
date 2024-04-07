@@ -1,3 +1,11 @@
+/*
+ * @Author: bmqy bmqy@qq.com
+ * @Date: 2023-05-23 13:46:23
+ * @LastEditors: bmqy bmqy@qq.com
+ * @LastEditTime: 2024-04-07 13:47:35
+ * @FilePath: \bbs_quickreply\vite.config.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import monkey, { util, cdn } from 'vite-plugin-monkey';
@@ -38,7 +46,9 @@ export default defineConfig({
             'quickreply.lc.bmqy.net',
             'generativelanguage.googleapis.com',
             'dashscope.aliyuncs.com',
-            'api.moonshot.cn'
+            'api.moonshot.cn',
+            'api.openai.com',
+            '*'
         ]
       },
       build: {

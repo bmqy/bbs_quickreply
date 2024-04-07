@@ -196,6 +196,49 @@ export default {
                                 reject(xhr.response);
                             }
                         });
+                    } else if(useAI == 'chatgpt'){
+                        let chatgptDomain = proxy.$storage.getUserInfo('chatgptDomain') || '';
+                        let chatgptModel = proxy.$storage.getUserInfo('chatgptModel') || 'gpt-3.5-turbo';
+                        let chatgptApiKey = proxy.$storage.getUserInfo('chatgptApiKey') || '';
+                        if(!chatgptDomain){
+                            reject('无效地址');
+                        };
+                        let url = `https://${chatgptDomain}/v1/chat/completions`
+                        let data = {
+                            "model": `${chatgptModel}`,
+                            "messages": [
+                                {
+                                    "role": "user",
+                                    "content": prompt
+                                }
+                            ],
+                            "stream": false
+                        }
+                        let headers = {
+                            "Content-Type": "application/json; charset=utf-8",
+                            "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`,
+                        }
+                        if(chatgptApiKey){
+                            headers['Authorization'] = `Bearer ${chatgptApiKey}`;
+                        }
+                        GM_xmlhttpRequest({
+                            method: 'POST',
+                            url: url,
+                            headers: headers,
+                            data: `${JSON.stringify(data)}`,
+                            responseType: 'json',
+                            onload: function (xhr) {
+                                let {choices, error} = xhr.response;
+                                if(error){
+                                    reject(error.message);
+                                }
+                                let result = choices[0].message.content;
+                                resolve(result)
+                            },
+                            onerror: function(xhr){
+                                reject(xhr.response);
+                            }
+                        });
                     } else {
                         reject('暂未配置AI');
                     }
