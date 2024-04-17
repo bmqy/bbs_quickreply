@@ -96,12 +96,12 @@ const loginOnSubmit = () => {
         if(valid){
             proxy.$api.login(loginForm.value).then(res=>{
                 if(res.code != 0){
-                    proxy.$message.error(res.memo)
+                    proxy.$message.error(res.message)
                     return false;
                 }
                 loginSuccess(res)
             }).catch(err=>{
-                console.log('登录失败：', err);
+                proxy.$message.error(err.message)
             })
         }
     })
@@ -111,12 +111,12 @@ const registerOnSubmit = () => {
         if(valid){
             proxy.$api.register(loginForm.value).then(res=>{
                 if(res.code != 0){
-                    proxy.$message.error(res.memo)
+                    proxy.$message.error(res.message)
                     return false;
                 }
                 loginSuccess(res)
             }).catch(err=>{
-                console.log('注册失败：', err);
+                proxy.$message.error(err.message)
             })
         }
     })

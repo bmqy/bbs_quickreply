@@ -43,9 +43,9 @@ export default {
                 userId: userId,
                 list: myList
             }).then(res=>{
-                proxy.$message.success(res.memo);
+                proxy.$message.success('上传成功');
             }).catch(err=>{
-                proxy.$message.error(err.memo);
+                proxy.$message.error(err.message);
             });
         },
         async downloadList(callback){
@@ -65,7 +65,7 @@ export default {
                 callback && callback(res.data);
                 return res.data
             } else {
-                proxy.$message.error(err.memo);
+                proxy.$message.error(err.message);
             };
         }
     }

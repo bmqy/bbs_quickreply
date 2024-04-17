@@ -1,21 +1,23 @@
 // http
-const http = function(api, data){
+const http = function(api, data, method){
     return new Promise((resolve, reject) => {
+        let url = `https://quickreply.bmqy.net/api${api}`;
+        if(method && method.toLowerCase() === 'get'){
+            url += `?${Object.keys(data).map(key => key + '=' + encodeURIComponent(data[key])).join('&')}`;
+        }
         GM_xmlhttpRequest({
-            method: 'POST',
-            url: `https://quickreply.lc.bmqy.net/1.1/functions${api}`,
+            method: method ? method : 'post',
+            url: url,
             headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "X-LC-Id": `JLqezdmWrYQOatywxVKmB9pX-gzGzoHsz`,
-                "X-LC-Key": `hemx77fyB2Usg317i2crcuer`
+                "Content-Type": "application/json; charset=utf-8"
             },
             data: `${JSON.stringify(data)}`,
             responseType: 'json',
             onload: function (xhr) {
                 if (xhr.status == 200) {
-                    resolve(xhr.response.result);
+                    resolve(xhr.response);
                 } else {
-                    reject(xhr.response.result);
+                    reject(xhr.response);
                 }
             },
             onerror: function(xhr){
@@ -28,12 +30,12 @@ export default {
     install: (app, options) => {
         app.config.globalProperties.$api = {
             // 获取网友分享的回复
-            selectList: async function(skip = 0, prop='replyId', order='descending') {
+            selectList: async function(page = 0, prop='replyId', order='descending') {
                 return await http('/selectList', {
-                    skip: skip,
+                    page: page,
                     prop: prop,
                     order: order
-                });
+                }, 'get');
             },
             // 更新收藏数量
             collectCountUpdate: async function(replyId) {

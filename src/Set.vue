@@ -9,9 +9,9 @@ const realtimeSync = ref(false);
 const showLoginForce = ref(false);
 const newReply = ref('');
 const queryData = ref({
-    skip: 0,
+    page: 1,
     prop: 'replyId',
-    order: 'descending',
+    order: 'desc',
 });
 const emit = defineEmits(['updateMyList']);
 onBeforeMount(()=>{
@@ -30,20 +30,20 @@ function getMyList() {
 // 获取网友分享的回复列表
 async function getSystemList() {
     loading.value = true
-    let res = await proxy.$api.selectList(queryData.value.skip, queryData.value.prop, queryData.value.order);
+    let res = await proxy.$api.selectList(queryData.value.page, queryData.value.prop, queryData.value.order);
     systemList.value = res.data.totalCount > 0 ? res.data.list : [];
     systemListCount.value = res.data.totalCount;
     loading.value = false
 }
 // 监听分页
 function currentPageChange(current) {
-    queryData.value.skip = (current - 1) * 10;
+    queryData.value.page = current;
     getSystemList();
 }
 // 变更排序
 function sortChange(e){
     queryData.value.prop = e.order ? e.prop : 'replyId';
-    queryData.value.order = e.order ? e.order : 'descending';
+    queryData.value.order = (e.order==='descending' || !e.order) ? 'desc' : 'asc';
     getSystemList()
 }
 // 添加自定义回复
@@ -83,23 +83,27 @@ function shareReply(index) {
     proxy.$api
         .replyInsert(myList.value[index])
         .then((res) => {
-            proxy.$message.success(res.memo);
+            proxy.$message.success(res.message);
             getSystemList();
         })
         .catch((err) => {
-            proxy.$message.error(err.memo);
+            proxy.$message.error(err.message);
         });
 }
 // 点赞网友分享的回复
 function likeReply(index) {
     proxy.$api
-        .likeCountUpdate(systemList.value[index].id)
+        .likeCountUpdate(systemList.value[index].replyId)
         .then((res) => {
-            systemList.value[index]['likeCount'] = res.data.likeCount
-            proxy.$message.success(res.memo);
+            if(res.code == 0){
+                systemList.value[index]['likeCount'] = res.data.likeCount
+                proxy.$message.success('点赞成功');
+            } else {
+                proxy.$message.error(res.message);
+            }
         })
         .catch((err) => {
-            proxy.$message.error(err.memo);
+            proxy.$message.error(err.message);
         });
 }
 // 收藏网友分享的回复
@@ -111,13 +115,17 @@ function collectReply(index) {
     }
     newReply.value = nStr;
     proxy.$api
-        .collectCountUpdate(systemList.value[index].id)
+        .collectCountUpdate(systemList.value[index].replyId)
         .then((res) => {
-            addReply() && proxy.$message.success(res.memo);
-            realtimeSync.value && upload();
+            if(res.code == 0){
+                addReply() && proxy.$message.success('收藏成功');
+                realtimeSync.value && upload();
+            } else {
+                proxy.$message.error(res.message);
+            }
         })
         .catch((err) => {
-            proxy.$message.error(err.memo);
+            proxy.$message.error(err.message);
         });
 }
 

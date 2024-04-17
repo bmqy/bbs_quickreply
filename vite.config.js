@@ -2,7 +2,7 @@
  * @Author: bmqy bmqy@qq.com
  * @Date: 2023-05-23 13:46:23
  * @LastEditors: bmqy bmqy@qq.com
- * @LastEditTime: 2024-04-07 13:47:35
+ * @LastEditTime: 2024-04-16 16:18:09
  * @FilePath: \bbs_quickreply\vite.config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -43,7 +43,7 @@ export default defineConfig({
             '*://meta.appinn.net/*'
         ],
         connect: [
-            'quickreply.lc.bmqy.net',
+            'quickreply.bmqy.net',
             'generativelanguage.googleapis.com',
             'dashscope.aliyuncs.com',
             'api.moonshot.cn',
