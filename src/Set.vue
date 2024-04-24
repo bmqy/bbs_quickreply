@@ -6,6 +6,8 @@ const systemListCount = ref(0);
 const loading = ref(false);
 const isLogin = ref(false);
 const realtimeSync = ref(false);
+const submitNow = ref(false);
+const currentTab = ref('mine');
 const showLoginForce = ref(false);
 const newReply = ref('');
 const queryData = ref({
@@ -13,11 +15,11 @@ const queryData = ref({
     prop: 'replyId',
     order: 'desc',
 });
-const emit = defineEmits(['updateMyList']);
+const emit = defineEmits(['updateMyList', 'updateAIModel']);
 onBeforeMount(()=>{
     isLogin.value = proxy.$storage.getUserInfo('userId');
     realtimeSync.value = proxy.$storage.getUserInfo('realtimeSync');
-    changeRealtimeSync(realtimeSync.value);
+    submitNow.value = proxy.$storage.getUserInfo('submitNow');
     getMyList();
     getSystemList();
 });
@@ -132,7 +134,6 @@ function collectReply(index) {
 function onLoginSuccess(){
     showLoginForce.value = false;
     isLogin.value = true;
-    proxy.$gmMenus.changeSettingMenu();
     myList.value.length===0 && download();
 }
 function upload(){
@@ -145,32 +146,29 @@ async function download(){
 }
 function loginForce(){
     showLoginForce.value = !showLoginForce.value;
+    currentTab.value = 'mine';
+}
+function loginCancel(){
+    showLoginForce.value = false;
+    currentTab.value = 'mine';
 }
 function logout(){
     proxy.$storage.setUserInfo('userId', '')
     isLogin.value = false;
-    proxy.$gmMenus.changeSettingMenu();
 }
 
-function changeRealtimeSync(e){
-    let checked = proxy.$storage.getUserInfo('realtimeSync') || false
-    if(arguments.length == 1){
-        checked = e
-    } else {
-        realtimeSync.value = !checked
-        checked = !checked
-        proxy.$storage.setUserInfo('realtimeSync', checked)
-    }
-    proxy.$gmMenus.changeRealtimeMenu(checked, ()=>{
-        changeRealtimeSync()
-    });
-}
 function onRealtimeSyncChange(e){
     realtimeSync.value = e
     proxy.$storage.setUserInfo('realtimeSync', e)
-    proxy.$gmMenus.changeRealtimeMenu(e, function () {
-        changeRealtimeSync()
-    });
+}
+
+function onSubmitNowChange(e){
+    submitNow.value = e
+    proxy.$storage.setUserInfo('submitNow', e)
+}
+
+function updateAI() {
+    emit('updateAIModel');
 }
 </script>
 
@@ -179,90 +177,80 @@ function onRealtimeSyncChange(e){
         <el-card class="box-card" shadow="never">
             <el-row :gutter="30">
                 <el-col :span="9">
-                    <el-card class="box-card" shadow="never">
+                    <el-tabs type="border-card" class="my-list-tabs" v-model="currentTab">
+                        <el-tab-pane name="mine" label="我在用的">
+                            <div v-if="(myList.length===0 && !isLogin) || showLoginForce" class="quickReplyLoginBox">
+                                <div style="margin-top: 15px;">
+                                    <app-login @onSuccess="onLoginSuccess" @onClose="loginCancel"></app-login>
+                                    <p class="tips">
+                                        * 登录后，即可在任意设备同步你的配置；<br />
+                                        * 云端只负责保存账号及其回复列表，不留存多余信息；<br />
+                                        * 忘记密码可重新注册，或联系作者提供可用邮箱重置密码；<br />
+                                        * 如不需登录，也可忽略登录界面，直接使用即可；<br />
+                                    </p>
+                                </div>
+                            </div>
+                            <div v-else>
+                                <ul class="list" v-if="!showLoginForce || myList.length>0">
+                                    <li v-for="(item, index) in myList" :key="index">
+                                        <div class="list-left">
+                                            <div class="list-number">
+                                                {{ `${index + 1}、` }}
+                                            </div>
+                                            <div class="list-title">
+                                                {{ `${item}` }}
+                                            </div>
+                                        </div>
+                                        <div class="list-right">
+                                            <el-tooltip class="item" effect="dark" content="分享它" placement="top-start">
+                                                <el-button type="success" size="small" icon="Share" circle @click="shareReply(index)"></el-button>
+                                            </el-tooltip>
+                                            <el-tooltip class="item" effect="dark" content="移除" placement="top-start">
+                                                <el-button type="danger" size="small" icon="DeleteFilled" circle
+                                                    @click="delReply(index)"></el-button>
+                                            </el-tooltip>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div v-if="myList.length == 0" class="tips">
+                                    <p>未设置快速回帖内容!</p>
+                                </div>
+                            </div>
+                        </el-tab-pane>
+                        <el-tab-pane v-if="isLogin" name="options" label="选项">
+                            <div style="margin-left:10px;"><el-checkbox v-model="realtimeSync" label="实时同步，本地回复列表修改后立即上传" size="small" :checked="realtimeSync" @change="onRealtimeSyncChange" /></div>
+                            <div style="margin-left:10px;"><el-checkbox v-model="submitNow" label="立即提交，选择快捷回帖内容后立即提交回帖" size="small" :checked="submitNow" @change="onSubmitNowChange" /></div>
+                        </el-tab-pane>
+                        <el-tab-pane name="ai" label="AI">
+                            <app-set-ai ref="setAIPanel" @updateAI="updateAI" />
+                        </el-tab-pane>
+                        <el-tab-pane name="actions" label="操作">
+                            <el-space wrap>
+                                <el-button v-if="!isLogin" type="success" icon="UserFilled" size="small" @click="loginForce">登录，登录后即可在任意设备同步你的配置</el-button>
+                                <el-button v-if="isLogin" type="danger" icon="SwitchButton" size="small" @click="logout">注销，注销登录后将不能再同步列表</el-button>
+                                <el-button v-if="isLogin" type="primary" icon="Upload" size="small" @click="upload">上传，上传本地列表会覆盖云端数据</el-button>
+                                <el-button v-if="isLogin" type="warning" icon="Download" size="small" @click="download">下载，下载云端列表会覆盖本地数据</el-button>
+                            </el-space>
+                        </el-tab-pane>
+                    </el-tabs>
+                </el-col>
+                <el-col :span="15">
+                    <el-card class="box-card" shadow="never" :body-style="{padding: '0 20px 20px'}">
                         <template #header class="clearfix">
-                            <el-row :gutter="20" justify="space-between">
-                                <el-col :span="12" :offset="0"><span>我在用的</span></el-col>
-                                <el-col :span="12" :offset="0"  v-if="isLogin" style="display: flex;justify-content: end;">
-                                    <el-tooltip class="item" effect="dark" content="注销登录（注销后将不能再同步列表）" placement="top-start">
-                                        <el-button type="danger" icon="SwitchButton" size="small" circle @click="logout" />
-                                    </el-tooltip>
-                                    <!-- <el-tooltip class="item" effect="dark" content="上传列表，覆盖云端" placement="top-start">
-                                        <el-button type="primary" icon="Upload" size="small" circle @click="upload" />
-                                    </el-tooltip>
-                                    <el-tooltip class="item" effect="dark" content="下载列表，覆盖本地" placement="top-start">
-                                        <el-button type="warning" icon="Download" size="small" circle @click="download" />
-                                    </el-tooltip>
-                                    <el-tooltip class="item" effect="dark" content="开启实时同步，修改后立即上传" placement="top-start">
-                                        <div style="margin-left:10px;"><el-checkbox v-model="realtimeSync" label="实时" size="small" :checked="realtimeSync" @change="onRealtimeSyncChange" /></div>
-                                    </el-tooltip> -->
-                                </el-col>
-                                <el-col :span="12" :offset="0"  v-if="!isLogin && myList.length>0" style="display: flex;justify-content: end;">
-                                    <el-tooltip class="item" effect="dark" content="登录账号，云端同步" placement="top-start">
-                                        <el-button type="success" icon="UserFilled" size="small" circle @click="loginForce" />
-                                    </el-tooltip>
-                                </el-col>
-                            </el-row>
-                        </template>
-<div v-if="(myList.length===0 && !isLogin) || showLoginForce" class="quickReplyLoginBox">
-    <div style="margin-top: 15px;">
-        <app-login @onSuccess="onLoginSuccess"></app-login>
-        <p class="tips">
-            * 登录后，即可在任意设备同步你的配置；<br />
-            * 云端只负责保存账号及其回复列表，不留存多余信息；<br />
-            * 忘记密码可重新注册，或联系作者提供可用邮箱重置密码；<br />
-            * 如不需登录，也可忽略登录界面，直接使用即可；<br />
-        </p>
-    </div>
-</div>
-<div v-else>
-    <ul class="list" v-if="!showLoginForce || myList.length>0">
-        <li v-for="(item, index) in myList" :key="index">
-            <div class="list-left">
-                <div class="list-number">
-                    {{ `${index + 1}、` }}
-                </div>
-                <div class="list-title">
-                    {{ `${item}` }}
-                </div>
-            </div>
-            <div class="list-right">
-                <el-tooltip class="item" effect="dark" content="分享它" placement="top-start">
-                    <el-button type="success" size="small" icon="Share" circle @click="shareReply(index)"></el-button>
-                </el-tooltip>
-                <el-tooltip class="item" effect="dark" content="移除" placement="top-start">
-                    <el-button type="danger" size="small" icon="DeleteFilled" circle
-                        @click="delReply(index)"></el-button>
-                </el-tooltip>
-            </div>
-        </li>
-    </ul>
-    <div v-if="myList.length == 0" class="tips">
-        <p>未设置快速回帖内容!</p>
-    </div>
-</div>
-</el-card>
-</el-col>
-<el-col :span="15">
-    <el-card class="box-card" shadow="never" :body-style="{padding: '0 20px 20px'}">
-
-        <template #header class="clearfix">
                             <span>网友分享的</span>
                         </template>
 
-        <el-table ref="filterTable" :data="systemList" size="small" stripe v-loading="loading"
-            @sort-change="sortChange">
-            <el-table-column prop="replyId" label="ID" width="80"></el-table-column>
-            <el-table-column prop="content" label="内容"></el-table-column>
-            <el-table-column prop="likeCount" sortable="custom" width="100" label="点赞">
-
-                <template #default="scope">
+                        <el-table ref="filterTable" :data="systemList" size="small" stripe v-loading="loading"
+                            @sort-change="sortChange">
+                            <el-table-column prop="replyId" label="ID" width="80"></el-table-column>
+                            <el-table-column prop="content" label="内容"></el-table-column>
+                            <el-table-column prop="likeCount" sortable="custom" width="100" label="点赞">
+                                <template #default="scope">
                                     <el-tag type="info" size="small">{{scope.row.likeCount}}</el-tag>
                                 </template>
-            </el-table-column>
-            <el-table-column label="操作" width="100">
-
-                <template #default="scope">
+                            </el-table-column>
+                            <el-table-column label="操作" width="100">
+                                <template #default="scope">
                                     <el-tooltip class="item" effect="dark" content="给个赞" placement="top-start">
                                         <el-button type="success" size="small" icon="Pointer" circle
                                             @click="likeReply(scope.$index)"></el-button>
@@ -272,27 +260,27 @@ function onRealtimeSyncChange(e){
                                             @click="collectReply(scope.$index)"></el-button>
                                     </el-tooltip>
                                 </template>
-            </el-table-column>
-        </el-table>
+                            </el-table-column>
+                        </el-table>
 
-        <el-pagination background layout="prev, pager, next" :page-size="10" :pager-count="5"
-            @current-change="currentPageChange" :total="systemListCount">
-        </el-pagination>
-    </el-card>
-</el-col>
-</el-row>
+                        <el-pagination background layout="prev, pager, next" :page-size="10" :pager-count="5"
+                            @current-change="currentPageChange" :total="systemListCount">
+                        </el-pagination>
+                    </el-card>
+                </el-col>
+            </el-row>
 
-<div class="addReplyBox">
-    <el-input placeholder="请输入新的回复内容" v-model="newReply" :autosize="{ minRows: 1, maxRows: 3 }" maxlength="100"
-        :show-word-limit="true" resize="none" clearable class="input-with-select">
+            <div class="addReplyBox">
+                <el-input placeholder="请输入新的回复内容" v-model="newReply" :autosize="{ minRows: 1, maxRows: 3 }" maxlength="100"
+                    :show-word-limit="true" resize="none" clearable class="input-with-select">
 
-        <template #append>
+                    <template #append>
                         <el-button icon="Plus" @click="addReply"></el-button>
                     </template>
-    </el-input>
-</div>
-</el-card>
-</div>
+                </el-input>
+            </div>
+        </el-card>
+    </div>
 </template>
 
 <style scoped lang="scss">
@@ -300,6 +288,11 @@ function onRealtimeSyncChange(e){
 
 .app-margin-right-30 {
     margin-right: 30px;
+}
+
+.my-list-tabs{
+    border-radius: var(--el-card-border-radius);
+    border: 1px solid var(--el-card-border-color);
 }
 
 .list {

@@ -10,7 +10,10 @@
             <el-form-item>
                 <el-button type="primary" @click="loginOnSubmit">登录</el-button>
                 <div class="margin-left">
-                    <el-link href="javascript:;" @click="formMode=0">注册</el-link>
+                    <el-space>
+                        <el-link href="javascript:;" @click="formMode=0">注册</el-link>
+                        <el-link href="javascript:;" @click="close">关闭</el-link>
+                    </el-space>
                 </div>
             </el-form-item>
         </el-form>
@@ -27,7 +30,10 @@
             <el-form-item>
                 <el-button type="primary" @click="registerOnSubmit">注册</el-button>
                 <div class="margin-left">
-                    <el-link href="javascript:;" @click="formMode=1">登录</el-link>
+                    <el-space>
+                        <el-link href="javascript:;" @click="formMode=1">登录</el-link>
+                        <el-link href="javascript:;" @click="close">关闭</el-link>
+                    </el-space>
                 </div>
             </el-form-item>
         </el-form>
@@ -85,9 +91,9 @@ const loginRules = ref({
         { validator: checkPassword, trigger: 'blur'}
     ],
 })
-const emit = defineEmits(['onSuccess'])
+const emit = defineEmits(['onSuccess', 'onClose'])
 
-const loginSuccess = (res)=>{
+const loginSuccess = (res) => {
     proxy.$storage.setUserInfo('userId', res.data.userId);
     emit('onSuccess')
 }
@@ -120,6 +126,9 @@ const registerOnSubmit = () => {
             })
         }
     })
+}
+const close = ()=>{
+    emit('onClose')
 }
 </script>
 <style lang="scss">

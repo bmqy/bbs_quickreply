@@ -149,7 +149,7 @@ watch(useAI, (n, o) => {
 <template>
     <div class="setAIBox">
         <el-card class="box-card" shadow="never">
-            <el-form label-width="auto">
+            <el-form label-width="110" label-position="left" size="small">
                 <el-form-item label="Gemini API Key">
                     <el-tooltip content="获取API Key：https://aistudio.google.com/app/apikey" placement="top">
                         <el-input v-model="geminiApiKey" @change="onGeminiApiKeyChange" />
@@ -207,9 +207,8 @@ watch(useAI, (n, o) => {
                 </el-form-item>
                 <el-form-item label="自定义 Prompt">
                     <el-tooltip content="自定义提示问语，帮你获得更个性化的回帖内容。必须包含唯一变量：{{title}}" placement="top">
-                        <el-input type="textarea" v-model="promptCustom" @change="onPromptCustomChange" />
+                        <el-input type="textarea" v-model="promptCustom" @change="onPromptCustomChange" :placeholder="`默认：${proxy.$app.prompt}`" />
                     </el-tooltip>
-                    <el-text class="mx-1" type="info">默认：{{proxy.$app.prompt}}</el-text>
                 </el-form-item>
                 <el-form-item label="启用">
                 <el-switch v-model="usePromptCustom" @change="onUsePromptCustomChange" :before-change="usePromptCustomBeforeChange" />

@@ -6,9 +6,8 @@ const currentPlatform = ref('discuz');
 const fwin_replyLoaded = ref(false);
 const submitNow = ref(false);
 const hasEditor = ref(false);
-const lastClickElemet = ref(false);
+const lastClickElement = ref(false);
 const setShow = ref(false);
-const setAIShow = ref(false);
 const useAI = ref('');
 const loadingAIReply = ref(false);
 const aiNameList = ref({
@@ -20,20 +19,9 @@ const aiNameList = ref({
 onBeforeMount(()=>{
     checkPlatform();
     getList();
-    proxy.$gmMenus.init();
     submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
     useAI.value = proxy.$storage.getUserInfo('useAI') || '';
     updateAIModel();
-    changeSubmitNow(submitNow.value);
-    proxy.$gmMenus.changeDownloadListMenu(function(data){
-        updateMyList(data);
-    });
-    proxy.$gmMenus.changeSettingMenu(setShow.value, function(){
-        setShow.value ? closeSet() : openSet();
-    });
-    proxy.$gmMenus.changeAIMenu(function(){
-        setAIShow.value ? closeSetAI() : openSetAI();
-    });
 });
 
 // 检测平台
@@ -48,20 +36,6 @@ function checkPlatform() {
         }
     }
 };
-// 获取立即回帖配置
-function changeSubmitNow(e) {
-    let checked = proxy.$storage.getUserInfo('submitNow') || false
-    if(arguments.length == 1){
-        checked = e
-    } else {
-        submitNow.value = !checked
-        checked = !checked
-        proxy.$storage.setUserInfo('submitNow', checked)
-    }
-    proxy.$gmMenus.changeSubmitNowMenu(checked, ()=>{
-        changeSubmitNow()
-    });
-};
 // 获取APP自定义回复
 async function getList() {
     let myListStorage = proxy.$storage.get();
@@ -71,55 +45,18 @@ async function getList() {
 // 打开APP设置面板
 function openSet() {
     setShow.value = true;
-    // 更新设置菜单
-    proxy.$gmMenus.changeSettingMenu(true, function(){
-        closeSet();
-    });
 };
 // 关闭APP设置面板
 function closeSet() {
     setShow.value = false;
-    // 更新设置菜单
-    proxy.$gmMenus.changeSettingMenu(false, function(){
-        openSet();
-    });
 };
-// 打开AI设置面板
-function openSetAI() {
-    // 更新AI设置菜单
-    setAIShow.value = true;
-    proxy.$gmMenus.changeAIMenu(function(){
-        closeSetAI();
-    });
-};
-// 关闭AI设置面板
-function closeSetAI() {
-    setAIShow.value = false;
-    // 更新AI设置菜单
-    proxy.$gmMenus.changeAIMenu(function(){
-        openSetAI();
-    });
-};
-function updateAI() {
-    useAI.value = proxy.$storage.getUserInfo('useAI') || '';
-    updateAIModel()
-    // 更新AI设置菜单
-    proxy.$gmMenus.changeAIMenu(function(){
-        closeSetAI();
-    });
-}
 // 更新AI模型
 function updateAIModel(){
+    useAI.value = proxy.$storage.getUserInfo('useAI') || '';
     let chatgptModel = proxy.$storage.getUserInfo('chatgptModel') || 'gpt-3.5-turbo';
     if(useAI.value === 'chatgpt'){
         aiNameList.value['chatgpt'] = `ChatGPT (${chatgptModel})`;
     }
-}
-
-function onLoginSuccess(){
-    proxy.$gmMenus.changeSettingMenu(true, function(){
-        closeSet();
-    });
 }
 // 监听更新自定义回复
 function updateMyList(data) {
@@ -224,10 +161,10 @@ function fastreBindClick() {
         (e) => {
             let theElement = `fastre&${e.target.href}`;
             if (
-                lastClickElemet.value != theElement &&
+                lastClickElement.value != theElement &&
                 e.target.className == 'fastre'
             ) {
-                lastClickElemet.value = theElement;
+                lastClickElement.value = theElement;
                 fwin_replyLoaded.value = false;
             }
         },
@@ -241,10 +178,10 @@ function replyfastBindClick() {
         (e) => {
             let theElement = `replyfast&${e.target.href}`;
             if (
-                lastClickElemet.value != theElement &&
+                lastClickElement.value != theElement &&
                 e.target.className == 'replyfast'
             ) {
-                lastClickElemet.value = theElement;
+                lastClickElement.value = theElement;
                 fwin_replyLoaded.value = false;
             }
         },
@@ -258,10 +195,10 @@ function flbcBindClick() {
         (e) => {
             let theElement = `flbc&${e.target.href}`;
             if (
-                lastClickElemet.value != theElement &&
+                lastClickElement.value != theElement &&
                 e.target.className == 'flbc'
             ) {
-                lastClickElemet.value = theElement;
+                lastClickElement.value = theElement;
                 fwin_replyLoaded.value = false;
             }
         },
@@ -405,29 +342,16 @@ watch(fwin_replyLoaded, (n)=>{
 			append-to-body
 		>
             <template #default>
-                <app-set ref="setPanel" @updateMyList="updateMyList" @onSuccess="onLoginSuccess" />
+                <app-set ref="setPanel" @updateMyList="updateMyList" @updateAIModel="updateAIModel" />
             </template>
 
-<template #footer>
+            <template #footer>
                 <span class="app-dialog-foot">
                     <el-link href="https://github.com/bmqy/bbs_quickreply?tab=readme-ov-file#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97" title="更新日志" target="_blank">{{ `ver: ${$app.getVersion()}` }}</el-link>
                 </span>
             </template>
-</el-dialog>
-
-<el-dialog v-model="setAIShow" @close="closeSetAI" :title="$app.getName() +' - AI设置'" width="150" :show-close="true"
-    destroy-on-close append-to-body>
-    <template #default>
-                <app-set-ai ref="setAIPanel" @updateAI="updateAI" />
-            </template>
-
-    <template #footer>
-				<span class="app-dialog-foot">
-                    {{ `ver: ${$app.getVersion()}` }}
-				</span>
-			</template>
-</el-dialog>
-</div>
+        </el-dialog>
+    </div>
 </template>
 
 <style scoped lang="scss">
