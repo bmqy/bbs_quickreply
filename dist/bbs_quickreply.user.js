@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.5.0
+// @version      3.5.1
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -35,13 +35,12 @@
 // @grant        GM_getResourceText
 // @grant        GM_getValue
 // @grant        GM_info
-// @grant        GM_registerMenuCommand
 // @grant        GM_setValue
 // @grant        GM_xmlhttpRequest
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' .quickReplyBox[data-v-1f002860]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-1f002860]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1f002860]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1f002860],.el-form-item--small.el-form-item[data-v-1f002860]{margin-bottom:10px}.el-select[data-v-1f002860]{width:300px}.app-margin-right-30[data-v-496ff6b5]{margin-right:30px}.list-left[data-v-496ff6b5]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-496ff6b5]{margin-right:5px;color:#909399}.list-title[data-v-496ff6b5]{flex:1;font-weight:400}.list-right[data-v-496ff6b5]{min-width:70px}.list-right .el-badge.item[data-v-496ff6b5]{margin-right:30px}.list li[data-v-496ff6b5]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-496ff6b5]:hover{background-color:#f5f5f5}.tips[data-v-496ff6b5]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-496ff6b5]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-496ff6b5]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-496ff6b5]{padding:10px 20px}.box-card .el-card__header span[data-v-496ff6b5]{font-size:14px}.clearfix[data-v-496ff6b5]:before,.clearfix[data-v-496ff6b5]:after{display:table;content:""}.clearfix[data-v-496ff6b5]:after{clear:both}.el-pagination[data-v-496ff6b5]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-42e801e1]{padding:10px 20px}.box-card .el-card__header span[data-v-42e801e1]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(t=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=t,document.head.append(a)})(' .quickReplyBox[data-v-ab231c14]{position:relative}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-ab231c14]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-ab231c14]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-ab231c14],.el-form-item--small.el-form-item[data-v-ab231c14]{margin-bottom:10px}.el-select[data-v-ab231c14]{width:300px}.app-margin-right-30[data-v-0a16a4da]{margin-right:30px}.my-list-tabs[data-v-0a16a4da]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-0a16a4da]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-0a16a4da]{margin-right:5px;color:#909399}.list-title[data-v-0a16a4da]{flex:1;font-weight:400}.list-right[data-v-0a16a4da]{min-width:70px}.list-right .el-badge.item[data-v-0a16a4da]{margin-right:30px}.list li[data-v-0a16a4da]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-0a16a4da]:hover{background-color:#f5f5f5}.tips[data-v-0a16a4da]{color:#909399;font-size:14px;text-align:center}.quickReplyLoginBox .tips[data-v-0a16a4da]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-0a16a4da]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-0a16a4da]{padding:10px 20px}.box-card .el-card__header span[data-v-0a16a4da]{font-size:14px}.clearfix[data-v-0a16a4da]:before,.clearfix[data-v-0a16a4da]:after{display:table;content:""}.clearfix[data-v-0a16a4da]:after{clear:both}.el-pagination[data-v-0a16a4da]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-a3b08b54]{padding:10px 20px}.box-card .el-card__header span[data-v-a3b08b54]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -72,7 +71,6 @@
   cssLoader("element-plus/dist/index.css");
   var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
   var _GM_info = /* @__PURE__ */ (() => typeof GM_info != "undefined" ? GM_info : void 0)();
-  var _GM_registerMenuCommand = /* @__PURE__ */ (() => typeof GM_registerMenuCommand != "undefined" ? GM_registerMenuCommand : void 0)();
   var _GM_setValue = /* @__PURE__ */ (() => typeof GM_setValue != "undefined" ? GM_setValue : void 0)();
   var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
   var _unsafeWindow = /* @__PURE__ */ (() => typeof unsafeWindow != "undefined" ? unsafeWindow : void 0)();
@@ -89,7 +87,6 @@
     class: "quickReplyBoxTitle"
   };
   const _hoisted_3$1 = { class: "app-dialog-foot" };
-  const _hoisted_4$1 = { class: "app-dialog-foot" };
   const _sfc_main$3 = {
     __name: "App",
     setup(__props) {
@@ -100,9 +97,8 @@
       const fwin_replyLoaded = vue.ref(false);
       const submitNow = vue.ref(false);
       const hasEditor = vue.ref(false);
-      const lastClickElemet = vue.ref(false);
+      const lastClickElement = vue.ref(false);
       const setShow = vue.ref(false);
-      const setAIShow = vue.ref(false);
       const useAI = vue.ref("");
       const loadingAIReply = vue.ref(false);
       const aiNameList = vue.ref({
@@ -114,20 +110,9 @@
       vue.onBeforeMount(() => {
         checkPlatform();
         getList();
-        proxy.$gmMenus.init();
         submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
         useAI.value = proxy.$storage.getUserInfo("useAI") || "";
         updateAIModel();
-        changeSubmitNow(submitNow.value);
-        proxy.$gmMenus.changeDownloadListMenu(function(data) {
-          updateMyList(data);
-        });
-        proxy.$gmMenus.changeSettingMenu(setShow.value, function() {
-          setShow.value ? closeSet() : openSet();
-        });
-        proxy.$gmMenus.changeAIMenu(function() {
-          setAIShow.value ? closeSetAI() : openSetAI();
-        });
       });
       function checkPlatform() {
         if (document.documentElement.innerHTML.indexOf("Discuz") > -1) {
@@ -140,19 +125,6 @@
           }
         }
       }
-      function changeSubmitNow(e) {
-        let checked = proxy.$storage.getUserInfo("submitNow") || false;
-        if (arguments.length == 1) {
-          checked = e;
-        } else {
-          submitNow.value = !checked;
-          checked = !checked;
-          proxy.$storage.setUserInfo("submitNow", checked);
-        }
-        proxy.$gmMenus.changeSubmitNowMenu(checked, () => {
-          changeSubmitNow();
-        });
-      }
       async function getList() {
         let myListStorage = proxy.$storage.get();
         list.value = myListStorage && myListStorage.length > 0 ? myListStorage : [];
@@ -160,45 +132,16 @@
       }
       function openSet() {
         setShow.value = true;
-        proxy.$gmMenus.changeSettingMenu(true, function() {
-          closeSet();
-        });
       }
       function closeSet() {
         setShow.value = false;
-        proxy.$gmMenus.changeSettingMenu(false, function() {
-          openSet();
-        });
-      }
-      function openSetAI() {
-        setAIShow.value = true;
-        proxy.$gmMenus.changeAIMenu(function() {
-          closeSetAI();
-        });
-      }
-      function closeSetAI() {
-        setAIShow.value = false;
-        proxy.$gmMenus.changeAIMenu(function() {
-          openSetAI();
-        });
-      }
-      function updateAI() {
-        useAI.value = proxy.$storage.getUserInfo("useAI") || "";
-        updateAIModel();
-        proxy.$gmMenus.changeAIMenu(function() {
-          closeSetAI();
-        });
       }
       function updateAIModel() {
+        useAI.value = proxy.$storage.getUserInfo("useAI") || "";
         let chatgptModel = proxy.$storage.getUserInfo("chatgptModel") || "gpt-3.5-turbo";
         if (useAI.value === "chatgpt") {
           aiNameList.value["chatgpt"] = `ChatGPT (${chatgptModel})`;
         }
-      }
-      function onLoginSuccess() {
-        proxy.$gmMenus.changeSettingMenu(true, function() {
-          closeSet();
-        });
       }
       function updateMyList(data) {
         let myListStorage = data || [];
@@ -227,8 +170,8 @@
         await proxy.$api.getAIReply(title2).then((res) => {
           currentReply.value = res;
           enterReply();
-        }).catch((err2) => {
-          proxy.$message.error(err2);
+        }).catch((err) => {
+          proxy.$message.error(err);
         }).finally(() => {
           loadingAIReply.value = false;
         });
@@ -277,7 +220,7 @@
           if (submitNow.value && !useAI.value && currentReply.value) {
             document.querySelector("button#fastpostsubmit").click();
           }
-        } catch (err2) {
+        } catch (err) {
           console.log("请检查发帖权限！");
         }
       }
@@ -292,8 +235,8 @@
           "click",
           (e) => {
             let theElement = `fastre&${e.target.href}`;
-            if (lastClickElemet.value != theElement && e.target.className == "fastre") {
-              lastClickElemet.value = theElement;
+            if (lastClickElement.value != theElement && e.target.className == "fastre") {
+              lastClickElement.value = theElement;
               fwin_replyLoaded.value = false;
             }
           },
@@ -305,8 +248,8 @@
           "click",
           (e) => {
             let theElement = `replyfast&${e.target.href}`;
-            if (lastClickElemet.value != theElement && e.target.className == "replyfast") {
-              lastClickElemet.value = theElement;
+            if (lastClickElement.value != theElement && e.target.className == "replyfast") {
+              lastClickElement.value = theElement;
               fwin_replyLoaded.value = false;
             }
           },
@@ -318,8 +261,8 @@
           "click",
           (e) => {
             let theElement = `flbc&${e.target.href}`;
-            if (lastClickElemet.value != theElement && e.target.className == "flbc") {
-              lastClickElemet.value = theElement;
+            if (lastClickElement.value != theElement && e.target.className == "flbc") {
+              lastClickElement.value = theElement;
               fwin_replyLoaded.value = false;
             }
           },
@@ -409,7 +352,6 @@
         const _component_app_set = vue.resolveComponent("app-set");
         const _component_el_link = vue.resolveComponent("el-link");
         const _component_el_dialog = vue.resolveComponent("el-dialog");
-        const _component_app_set_ai = vue.resolveComponent("app-set-ai");
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$3, [
           vue.createVNode(vue.Transition, { name: "el-fade-in-linear" }, {
             default: vue.withCtx(() => [
@@ -490,7 +432,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               vue.createVNode(_component_app_set, {
                 ref: "setPanel",
                 onUpdateMyList: updateMyList,
-                onOnSuccess: onLoginSuccess
+                onUpdateAIModel: updateAIModel
               }, null, 512)
             ]),
             footer: vue.withCtx(() => [
@@ -508,42 +450,20 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               ])
             ]),
             _: 1
-          }, 8, ["modelValue", "title"]),
-          vue.createVNode(_component_el_dialog, {
-            modelValue: vue.unref(setAIShow),
-            "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => vue.isRef(setAIShow) ? setAIShow.value = $event : null),
-            onClose: closeSetAI,
-            title: _ctx.$app.getName() + " - AI设置",
-            width: "150",
-            "show-close": true,
-            "destroy-on-close": "",
-            "append-to-body": ""
-          }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_app_set_ai, {
-                ref: "setAIPanel",
-                onUpdateAI: updateAI
-              }, null, 512)
-            ]),
-            footer: vue.withCtx(() => [
-              vue.createElementVNode("span", _hoisted_4$1, vue.toDisplayString(`ver: ${_ctx.$app.getVersion()}`), 1)
-            ]),
-            _: 1
           }, 8, ["modelValue", "title"])
         ]);
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-1f002860"]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-496ff6b5"), n = n(), vue.popScopeId(), n);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-ab231c14"]]);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-0a16a4da"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$2 = { class: "setBox" };
-  const _hoisted_2$1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "我在用的", -1));
-  const _hoisted_3 = {
+  const _hoisted_2$1 = {
     key: 0,
     class: "quickReplyLoginBox"
   };
-  const _hoisted_4 = { style: { "margin-top": "15px" } };
-  const _hoisted_5 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", { class: "tips" }, [
+  const _hoisted_3 = { style: { "margin-top": "15px" } };
+  const _hoisted_4 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", { class: "tips" }, [
     /* @__PURE__ */ vue.createTextVNode(" * 登录后，即可在任意设备同步你的配置；"),
     /* @__PURE__ */ vue.createElementVNode("br"),
     /* @__PURE__ */ vue.createTextVNode(" * 云端只负责保存账号及其回复列表，不留存多余信息；"),
@@ -553,28 +473,30 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
     /* @__PURE__ */ vue.createTextVNode(" * 如不需登录，也可忽略登录界面，直接使用即可；"),
     /* @__PURE__ */ vue.createElementVNode("br")
   ], -1));
-  const _hoisted_6 = { key: 1 };
-  const _hoisted_7 = {
+  const _hoisted_5 = { key: 1 };
+  const _hoisted_6 = {
     key: 0,
     class: "list"
   };
-  const _hoisted_8 = { class: "list-left" };
-  const _hoisted_9 = { class: "list-number" };
-  const _hoisted_10 = { class: "list-title" };
-  const _hoisted_11 = { class: "list-right" };
-  const _hoisted_12 = {
+  const _hoisted_7 = { class: "list-left" };
+  const _hoisted_8 = { class: "list-number" };
+  const _hoisted_9 = { class: "list-title" };
+  const _hoisted_10 = { class: "list-right" };
+  const _hoisted_11 = {
     key: 1,
     class: "tips"
   };
-  const _hoisted_13 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", null, "未设置快速回帖内容!", -1));
-  const _hoisted_14 = [
-    _hoisted_13
+  const _hoisted_12 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", null, "未设置快速回帖内容!", -1));
+  const _hoisted_13 = [
+    _hoisted_12
   ];
-  const _hoisted_15 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
-  const _hoisted_16 = { class: "addReplyBox" };
+  const _hoisted_14 = { style: { "margin-left": "10px" } };
+  const _hoisted_15 = { style: { "margin-left": "10px" } };
+  const _hoisted_16 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
+  const _hoisted_17 = { class: "addReplyBox" };
   const _sfc_main$2 = {
     __name: "Set",
-    emits: ["updateMyList"],
+    emits: ["updateMyList", "updateAIModel"],
     setup(__props, { emit }) {
       const { proxy } = vue.getCurrentInstance();
       const myList = vue.ref([]);
@@ -583,6 +505,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       const loading = vue.ref(false);
       const isLogin = vue.ref(false);
       const realtimeSync = vue.ref(false);
+      const submitNow = vue.ref(false);
+      const currentTab = vue.ref("mine");
       const showLoginForce = vue.ref(false);
       const newReply = vue.ref("");
       const queryData = vue.ref({
@@ -593,7 +517,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       vue.onBeforeMount(() => {
         isLogin.value = proxy.$storage.getUserInfo("userId");
         realtimeSync.value = proxy.$storage.getUserInfo("realtimeSync");
-        changeRealtimeSync(realtimeSync.value);
+        submitNow.value = proxy.$storage.getUserInfo("submitNow");
         getMyList();
         getSystemList();
       });
@@ -649,8 +573,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         proxy.$api.replyInsert(myList.value[index]).then((res) => {
           proxy.$message.success(res.message);
           getSystemList();
-        }).catch((err2) => {
-          proxy.$message.error(err2.message);
+        }).catch((err) => {
+          proxy.$message.error(err.message);
         });
       }
       function likeReply(index) {
@@ -661,8 +585,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           } else {
             proxy.$message.error(res.message);
           }
-        }).catch((err2) => {
-          proxy.$message.error(err2.message);
+        }).catch((err) => {
+          proxy.$message.error(err.message);
         });
       }
       function collectReply(index) {
@@ -679,14 +603,13 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           } else {
             proxy.$message.error(res.message);
           }
-        }).catch((err2) => {
-          proxy.$message.error(err2.message);
+        }).catch((err) => {
+          proxy.$message.error(err.message);
         });
       }
       function onLoginSuccess() {
         showLoginForce.value = false;
         isLogin.value = true;
-        proxy.$gmMenus.changeSettingMenu();
         myList.value.length === 0 && download();
       }
       function upload() {
@@ -699,36 +622,43 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       }
       function loginForce() {
         showLoginForce.value = !showLoginForce.value;
+        currentTab.value = "mine";
+      }
+      function loginCancel() {
+        showLoginForce.value = false;
+        currentTab.value = "mine";
       }
       function logout() {
         proxy.$storage.setUserInfo("userId", "");
         isLogin.value = false;
-        proxy.$gmMenus.changeSettingMenu();
       }
-      function changeRealtimeSync(e) {
-        let checked = proxy.$storage.getUserInfo("realtimeSync") || false;
-        if (arguments.length == 1) {
-          checked = e;
-        } else {
-          realtimeSync.value = !checked;
-          checked = !checked;
-          proxy.$storage.setUserInfo("realtimeSync", checked);
-        }
-        proxy.$gmMenus.changeRealtimeMenu(checked, () => {
-          changeRealtimeSync();
-        });
+      function onRealtimeSyncChange(e) {
+        realtimeSync.value = e;
+        proxy.$storage.setUserInfo("realtimeSync", e);
+      }
+      function onSubmitNowChange(e) {
+        submitNow.value = e;
+        proxy.$storage.setUserInfo("submitNow", e);
+      }
+      function updateAI() {
+        emit("updateAIModel");
       }
       return (_ctx, _cache) => {
-        const _component_el_col = vue.resolveComponent("el-col");
+        const _component_app_login = vue.resolveComponent("app-login");
         const _component_el_button = vue.resolveComponent("el-button");
         const _component_el_tooltip = vue.resolveComponent("el-tooltip");
-        const _component_el_row = vue.resolveComponent("el-row");
-        const _component_app_login = vue.resolveComponent("app-login");
-        const _component_el_card = vue.resolveComponent("el-card");
+        const _component_el_tab_pane = vue.resolveComponent("el-tab-pane");
+        const _component_el_checkbox = vue.resolveComponent("el-checkbox");
+        const _component_app_set_ai = vue.resolveComponent("app-set-ai");
+        const _component_el_space = vue.resolveComponent("el-space");
+        const _component_el_tabs = vue.resolveComponent("el-tabs");
+        const _component_el_col = vue.resolveComponent("el-col");
         const _component_el_table_column = vue.resolveComponent("el-table-column");
         const _component_el_tag = vue.resolveComponent("el-tag");
         const _component_el_table = vue.resolveComponent("el-table");
         const _component_el_pagination = vue.resolveComponent("el-pagination");
+        const _component_el_card = vue.resolveComponent("el-card");
+        const _component_el_row = vue.resolveComponent("el-row");
         const _component_el_input = vue.resolveComponent("el-input");
         const _directive_loading = vue.resolveDirective("loading");
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$2, [
@@ -741,141 +671,183 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                 default: vue.withCtx(() => [
                   vue.createVNode(_component_el_col, { span: 9 }, {
                     default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_card, {
-                        class: "box-card",
-                        shadow: "never"
+                      vue.createVNode(_component_el_tabs, {
+                        type: "border-card",
+                        class: "my-list-tabs",
+                        modelValue: vue.unref(currentTab),
+                        "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => vue.isRef(currentTab) ? currentTab.value = $event : null)
                       }, {
-                        header: vue.withCtx(() => [
-                          vue.createVNode(_component_el_row, {
-                            gutter: 20,
-                            justify: "space-between"
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_tab_pane, {
+                            name: "mine",
+                            label: "我在用的"
                           }, {
                             default: vue.withCtx(() => [
-                              vue.createVNode(_component_el_col, {
-                                span: 12,
-                                offset: 0
-                              }, {
+                              vue.unref(myList).length === 0 && !vue.unref(isLogin) || vue.unref(showLoginForce) ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_2$1, [
+                                vue.createElementVNode("div", _hoisted_3, [
+                                  vue.createVNode(_component_app_login, {
+                                    onOnSuccess: onLoginSuccess,
+                                    onOnClose: loginCancel
+                                  }),
+                                  _hoisted_4
+                                ])
+                              ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_5, [
+                                !vue.unref(showLoginForce) || vue.unref(myList).length > 0 ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_6, [
+                                  (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(myList), (item, index) => {
+                                    return vue.openBlock(), vue.createElementBlock("li", { key: index }, [
+                                      vue.createElementVNode("div", _hoisted_7, [
+                                        vue.createElementVNode("div", _hoisted_8, vue.toDisplayString(`${index + 1}、`), 1),
+                                        vue.createElementVNode("div", _hoisted_9, vue.toDisplayString(`${item}`), 1)
+                                      ]),
+                                      vue.createElementVNode("div", _hoisted_10, [
+                                        vue.createVNode(_component_el_tooltip, {
+                                          class: "item",
+                                          effect: "dark",
+                                          content: "分享它",
+                                          placement: "top-start"
+                                        }, {
+                                          default: vue.withCtx(() => [
+                                            vue.createVNode(_component_el_button, {
+                                              type: "success",
+                                              size: "small",
+                                              icon: "Share",
+                                              circle: "",
+                                              onClick: ($event) => shareReply(index)
+                                            }, null, 8, ["onClick"])
+                                          ]),
+                                          _: 2
+                                        }, 1024),
+                                        vue.createVNode(_component_el_tooltip, {
+                                          class: "item",
+                                          effect: "dark",
+                                          content: "移除",
+                                          placement: "top-start"
+                                        }, {
+                                          default: vue.withCtx(() => [
+                                            vue.createVNode(_component_el_button, {
+                                              type: "danger",
+                                              size: "small",
+                                              icon: "DeleteFilled",
+                                              circle: "",
+                                              onClick: ($event) => delReply(index)
+                                            }, null, 8, ["onClick"])
+                                          ]),
+                                          _: 2
+                                        }, 1024)
+                                      ])
+                                    ]);
+                                  }), 128))
+                                ])) : vue.createCommentVNode("", true),
+                                vue.unref(myList).length == 0 ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_11, _hoisted_13)) : vue.createCommentVNode("", true)
+                              ]))
+                            ]),
+                            _: 1
+                          }),
+                          vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_tab_pane, {
+                            key: 0,
+                            name: "options",
+                            label: "选项"
+                          }, {
+                            default: vue.withCtx(() => [
+                              vue.createElementVNode("div", _hoisted_14, [
+                                vue.createVNode(_component_el_checkbox, {
+                                  modelValue: vue.unref(realtimeSync),
+                                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(realtimeSync) ? realtimeSync.value = $event : null),
+                                  label: "实时同步，本地回复列表修改后立即上传",
+                                  size: "small",
+                                  checked: vue.unref(realtimeSync),
+                                  onChange: onRealtimeSyncChange
+                                }, null, 8, ["modelValue", "checked"])
+                              ]),
+                              vue.createElementVNode("div", _hoisted_15, [
+                                vue.createVNode(_component_el_checkbox, {
+                                  modelValue: vue.unref(submitNow),
+                                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(submitNow) ? submitNow.value = $event : null),
+                                  label: "立即提交，选择快捷回帖内容后立即提交回帖",
+                                  size: "small",
+                                  checked: vue.unref(submitNow),
+                                  onChange: onSubmitNowChange
+                                }, null, 8, ["modelValue", "checked"])
+                              ])
+                            ]),
+                            _: 1
+                          })) : vue.createCommentVNode("", true),
+                          vue.createVNode(_component_el_tab_pane, {
+                            name: "ai",
+                            label: "AI"
+                          }, {
+                            default: vue.withCtx(() => [
+                              vue.createVNode(_component_app_set_ai, {
+                                ref: "setAIPanel",
+                                onUpdateAI: updateAI
+                              }, null, 512)
+                            ]),
+                            _: 1
+                          }),
+                          vue.createVNode(_component_el_tab_pane, {
+                            name: "actions",
+                            label: "操作"
+                          }, {
+                            default: vue.withCtx(() => [
+                              vue.createVNode(_component_el_space, { wrap: "" }, {
                                 default: vue.withCtx(() => [
-                                  _hoisted_2$1
-                                ]),
-                                _: 1
-                              }),
-                              vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_col, {
-                                key: 0,
-                                span: 12,
-                                offset: 0,
-                                style: { "display": "flex", "justify-content": "end" }
-                              }, {
-                                default: vue.withCtx(() => [
-                                  vue.createVNode(_component_el_tooltip, {
-                                    class: "item",
-                                    effect: "dark",
-                                    content: "注销登录（注销后将不能再同步列表）",
-                                    placement: "top-start"
+                                  !vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                                    key: 0,
+                                    type: "success",
+                                    icon: "UserFilled",
+                                    size: "small",
+                                    onClick: loginForce
                                   }, {
                                     default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_button, {
-                                        type: "danger",
-                                        icon: "SwitchButton",
-                                        size: "small",
-                                        circle: "",
-                                        onClick: logout
-                                      })
+                                      vue.createTextVNode("登录，登录后即可在任意设备同步你的配置")
                                     ]),
                                     _: 1
-                                  })
-                                ]),
-                                _: 1
-                              })) : vue.createCommentVNode("", true),
-                              !vue.unref(isLogin) && vue.unref(myList).length > 0 ? (vue.openBlock(), vue.createBlock(_component_el_col, {
-                                key: 1,
-                                span: 12,
-                                offset: 0,
-                                style: { "display": "flex", "justify-content": "end" }
-                              }, {
-                                default: vue.withCtx(() => [
-                                  vue.createVNode(_component_el_tooltip, {
-                                    class: "item",
-                                    effect: "dark",
-                                    content: "登录账号，云端同步",
-                                    placement: "top-start"
+                                  })) : vue.createCommentVNode("", true),
+                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                                    key: 1,
+                                    type: "danger",
+                                    icon: "SwitchButton",
+                                    size: "small",
+                                    onClick: logout
                                   }, {
                                     default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_button, {
-                                        type: "success",
-                                        icon: "UserFilled",
-                                        size: "small",
-                                        circle: "",
-                                        onClick: loginForce
-                                      })
+                                      vue.createTextVNode("注销，注销登录后将不能再同步列表")
                                     ]),
                                     _: 1
-                                  })
+                                  })) : vue.createCommentVNode("", true),
+                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                                    key: 2,
+                                    type: "primary",
+                                    icon: "Upload",
+                                    size: "small",
+                                    onClick: upload
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createTextVNode("上传，上传本地列表会覆盖云端数据")
+                                    ]),
+                                    _: 1
+                                  })) : vue.createCommentVNode("", true),
+                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                                    key: 3,
+                                    type: "warning",
+                                    icon: "Download",
+                                    size: "small",
+                                    onClick: download
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createTextVNode("下载，下载云端列表会覆盖本地数据")
+                                    ]),
+                                    _: 1
+                                  })) : vue.createCommentVNode("", true)
                                 ]),
                                 _: 1
-                              })) : vue.createCommentVNode("", true)
+                              })
                             ]),
                             _: 1
                           })
                         ]),
-                        default: vue.withCtx(() => [
-                          vue.unref(myList).length === 0 && !vue.unref(isLogin) || vue.unref(showLoginForce) ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_3, [
-                            vue.createElementVNode("div", _hoisted_4, [
-                              vue.createVNode(_component_app_login, { onOnSuccess: onLoginSuccess }),
-                              _hoisted_5
-                            ])
-                          ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_6, [
-                            !vue.unref(showLoginForce) || vue.unref(myList).length > 0 ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_7, [
-                              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(myList), (item, index) => {
-                                return vue.openBlock(), vue.createElementBlock("li", { key: index }, [
-                                  vue.createElementVNode("div", _hoisted_8, [
-                                    vue.createElementVNode("div", _hoisted_9, vue.toDisplayString(`${index + 1}、`), 1),
-                                    vue.createElementVNode("div", _hoisted_10, vue.toDisplayString(`${item}`), 1)
-                                  ]),
-                                  vue.createElementVNode("div", _hoisted_11, [
-                                    vue.createVNode(_component_el_tooltip, {
-                                      class: "item",
-                                      effect: "dark",
-                                      content: "分享它",
-                                      placement: "top-start"
-                                    }, {
-                                      default: vue.withCtx(() => [
-                                        vue.createVNode(_component_el_button, {
-                                          type: "success",
-                                          size: "small",
-                                          icon: "Share",
-                                          circle: "",
-                                          onClick: ($event) => shareReply(index)
-                                        }, null, 8, ["onClick"])
-                                      ]),
-                                      _: 2
-                                    }, 1024),
-                                    vue.createVNode(_component_el_tooltip, {
-                                      class: "item",
-                                      effect: "dark",
-                                      content: "移除",
-                                      placement: "top-start"
-                                    }, {
-                                      default: vue.withCtx(() => [
-                                        vue.createVNode(_component_el_button, {
-                                          type: "danger",
-                                          size: "small",
-                                          icon: "DeleteFilled",
-                                          circle: "",
-                                          onClick: ($event) => delReply(index)
-                                        }, null, 8, ["onClick"])
-                                      ]),
-                                      _: 2
-                                    }, 1024)
-                                  ])
-                                ]);
-                              }), 128))
-                            ])) : vue.createCommentVNode("", true),
-                            vue.unref(myList).length == 0 ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_12, _hoisted_14)) : vue.createCommentVNode("", true)
-                          ]))
-                        ]),
                         _: 1
-                      })
+                      }, 8, ["modelValue"])
                     ]),
                     _: 1
                   }),
@@ -887,7 +859,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                         "body-style": { padding: "0 20px 20px" }
                       }, {
                         header: vue.withCtx(() => [
-                          _hoisted_15
+                          _hoisted_16
                         ]),
                         default: vue.withCtx(() => [
                           vue.withDirectives((vue.openBlock(), vue.createBlock(_component_el_table, {
@@ -990,11 +962,11 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                 ]),
                 _: 1
               }),
-              vue.createElementVNode("div", _hoisted_16, [
+              vue.createElementVNode("div", _hoisted_17, [
                 vue.createVNode(_component_el_input, {
                   placeholder: "请输入新的回复内容",
                   modelValue: vue.unref(newReply),
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(newReply) ? newReply.value = $event : null),
+                  "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => vue.isRef(newReply) ? newReply.value = $event : null),
                   autosize: { minRows: 1, maxRows: 3 },
                   maxlength: "100",
                   "show-word-limit": true,
@@ -1018,7 +990,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-496ff6b5"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-0a16a4da"]]);
   const _hoisted_1$1 = { class: "setAIBox" };
   const _sfc_main$1 = {
     __name: "Ai",
@@ -1174,7 +1146,6 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         const _component_el_switch = vue.resolveComponent("el-switch");
         const _component_el_option = vue.resolveComponent("el-option");
         const _component_el_select = vue.resolveComponent("el-select");
-        const _component_el_text = vue.resolveComponent("el-text");
         const _component_el_form = vue.resolveComponent("el-form");
         const _component_el_card = vue.resolveComponent("el-card");
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$1, [
@@ -1183,7 +1154,11 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
             shadow: "never"
           }, {
             default: vue.withCtx(() => [
-              vue.createVNode(_component_el_form, { "label-width": "auto" }, {
+              vue.createVNode(_component_el_form, {
+                "label-width": "110",
+                "label-position": "left",
+                size: "small"
+              }, {
                 default: vue.withCtx(() => [
                   vue.createVNode(_component_el_form_item, { label: "Gemini API Key" }, {
                     default: vue.withCtx(() => [
@@ -1362,17 +1337,9 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                             type: "textarea",
                             modelValue: vue.unref(promptCustom),
                             "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => vue.isRef(promptCustom) ? promptCustom.value = $event : null),
-                            onChange: onPromptCustomChange
-                          }, null, 8, ["modelValue"])
-                        ]),
-                        _: 1
-                      }),
-                      vue.createVNode(_component_el_text, {
-                        class: "mx-1",
-                        type: "info"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createTextVNode("默认：" + vue.toDisplayString(vue.unref(proxy).$app.prompt), 1)
+                            onChange: onPromptCustomChange,
+                            placeholder: `默认：${vue.unref(proxy).$app.prompt}`
+                          }, null, 8, ["modelValue", "placeholder"])
                         ]),
                         _: 1
                       })
@@ -1400,12 +1367,12 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-42e801e1"]]);
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-a3b08b54"]]);
   const _hoisted_1 = { class: "margin-left" };
   const _hoisted_2 = { class: "margin-left" };
   const _sfc_main = {
     __name: "Login",
-    emits: ["onSuccess"],
+    emits: ["onSuccess", "onClose"],
     setup(__props, { emit }) {
       const { proxy } = vue.getCurrentInstance();
       const checkName = (rule, value, callback) => {
@@ -1471,8 +1438,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                 return false;
               }
               loginSuccess(res);
-            }).catch((err2) => {
-              proxy.$message.error(err2.message);
+            }).catch((err) => {
+              proxy.$message.error(err.message);
             });
           }
         });
@@ -1486,17 +1453,21 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                 return false;
               }
               loginSuccess(res);
-            }).catch((err2) => {
-              proxy.$message.error(err2.message);
+            }).catch((err) => {
+              proxy.$message.error(err.message);
             });
           }
         });
+      };
+      const close = () => {
+        emit("onClose");
       };
       return (_ctx, _cache) => {
         const _component_el_input = vue.resolveComponent("el-input");
         const _component_el_form_item = vue.resolveComponent("el-form-item");
         const _component_el_button = vue.resolveComponent("el-button");
         const _component_el_link = vue.resolveComponent("el-link");
+        const _component_el_space = vue.resolveComponent("el-space");
         const _component_el_form = vue.resolveComponent("el-form");
         return vue.openBlock(), vue.createElementBlock("div", null, [
           vue.unref(formMode) === 1 ? (vue.openBlock(), vue.createBlock(_component_el_form, {
@@ -1546,12 +1517,26 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                     _: 1
                   }),
                   vue.createElementVNode("div", _hoisted_1, [
-                    vue.createVNode(_component_el_link, {
-                      href: "javascript:;",
-                      onClick: _cache[2] || (_cache[2] = ($event) => formMode.value = 0)
-                    }, {
+                    vue.createVNode(_component_el_space, null, {
                       default: vue.withCtx(() => [
-                        vue.createTextVNode("注册")
+                        vue.createVNode(_component_el_link, {
+                          href: "javascript:;",
+                          onClick: _cache[2] || (_cache[2] = ($event) => formMode.value = 0)
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("注册")
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_el_link, {
+                          href: "javascript:;",
+                          onClick: close
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("关闭")
+                          ]),
+                          _: 1
+                        })
                       ]),
                       _: 1
                     })
@@ -1621,12 +1606,26 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                     _: 1
                   }),
                   vue.createElementVNode("div", _hoisted_2, [
-                    vue.createVNode(_component_el_link, {
-                      href: "javascript:;",
-                      onClick: _cache[6] || (_cache[6] = ($event) => formMode.value = 1)
-                    }, {
+                    vue.createVNode(_component_el_space, null, {
                       default: vue.withCtx(() => [
-                        vue.createTextVNode("登录")
+                        vue.createVNode(_component_el_link, {
+                          href: "javascript:;",
+                          onClick: _cache[6] || (_cache[6] = ($event) => formMode.value = 1)
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("登录")
+                          ]),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_el_link, {
+                          href: "javascript:;",
+                          onClick: close
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("关闭")
+                          ]),
+                          _: 1
+                        })
                       ]),
                       _: 1
                     })
@@ -1685,11 +1684,11 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
             list: myList
           }).then((res) => {
             proxy.$message.success("上传成功");
-          }).catch((err2) => {
-            proxy.$message.error(err2.message);
+          }).catch((err) => {
+            proxy.$message.error(err.message);
           });
         },
-        async downloadList(callback) {
+        async downloadList() {
           let proxy = app2.config.globalProperties;
           let userId = proxy.$storage.getUserInfo("userId");
           if (!userId) {
@@ -1700,121 +1699,15 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
             userId
           });
           if (res.code == 0) {
-            proxy.$storage.set(res.data);
-            proxy.$message.success("下载成功");
-            callback && callback(res.data);
-            return res.data;
+            if (res.data.length == 0) {
+              proxy.$message.error("云端无数据");
+            } else {
+              proxy.$storage.set(res.data);
+              proxy.$message.success("下载成功");
+              return res.data;
+            }
           } else {
-            proxy.$message.error(err.message);
-          }
-        }
-      };
-      app2.config.globalProperties.$gmMenus = {
-        init() {
-          let proxy = app2.config.globalProperties;
-          _GM_registerMenuCommand("- ⬆️上传列表", function() {
-            proxy.$storage.uploadList();
-          }, {
-            id: "uploadList",
-            autoClose: true,
-            title: "点此上传将覆盖云端已存储数据"
-          });
-          _GM_registerMenuCommand("- ⬇️下载列表", function() {
-            proxy.$storage.downloadList();
-          }, {
-            id: "downloadList",
-            autoClose: true,
-            title: "点此下载将覆盖本地已存储数据"
-          });
-          proxy.$gmMenus.changeSubmitNowMenu(proxy.$storage.getUserInfo("submitNow"));
-          proxy.$gmMenus.changeRealtimeMenu(proxy.$storage.getUserInfo("realtimeSync"));
-          proxy.$gmMenus.changeAIMenu(proxy.$storage.getUserInfo("AI"));
-          proxy.$gmMenus.changeSettingMenu();
-        },
-        changeDownloadListMenu(callback) {
-          let proxy = app2.config.globalProperties;
-          if (arguments.length == 1) {
-            _GM_registerMenuCommand("- ⬇️下载列表", function() {
-              proxy.$storage.downloadList(callback);
-            }, {
-              id: "downloadList",
-              autoClose: true,
-              title: "点此下载将覆盖本地已存储数据"
-            });
-          } else {
-            _GM_registerMenuCommand("- ⬇️下载列表", function() {
-              proxy.$storage.downloadList();
-            }, {
-              id: "downloadList",
-              autoClose: true,
-              title: "点此下载将覆盖本地已存储数据"
-            });
-          }
-        },
-        changeSubmitNowMenu(status, callback) {
-          let proxy = app2.config.globalProperties;
-          if (arguments.length == 2) {
-            _GM_registerMenuCommand(`- 🎯立即提交：${status ? "已启用" : "已停用"}`, callback, {
-              id: "submitNow",
-              autoClose: true,
-              title: "开启后，选择快捷回帖内容后立即提交回帖"
-            });
-          } else {
-            status = proxy.$storage.getUserInfo("submitNow") || false;
-            _GM_registerMenuCommand(`- 🎯立即提交：${status ? "已启用" : "已停用"}`, function() {
-              proxy.$storage.setUserInfo("submitNow", !status);
-              proxy.$gmMenus.changeSubmitNowMenu(!status);
-            }, {
-              id: "submitNow",
-              autoClose: true,
-              title: "开启后，选择快捷回帖内容后立即提交回帖"
-            });
-          }
-        },
-        changeRealtimeMenu(status, callback) {
-          let proxy = app2.config.globalProperties;
-          if (arguments.length == 2) {
-            _GM_registerMenuCommand(`- ⏱️实时同步：${status ? "已启用" : "已停用"}`, callback, {
-              id: "realtimeSync",
-              autoClose: true,
-              title: "开启后，本地列表修改后立即同步到云端存储"
-            });
-          } else {
-            status = proxy.$storage.getUserInfo("realtimeSync") || false;
-            _GM_registerMenuCommand(`- ⏱️实时同步：${status ? "已启用" : "已停用"}`, function() {
-              proxy.$storage.setUserInfo("realtimeSync", !status);
-              proxy.$gmMenus.changeRealtimeMenu(!status);
-            }, {
-              id: "realtimeSync",
-              autoClose: true,
-              title: "开启后，本地列表修改后立即同步到云端存储"
-            });
-          }
-        },
-        changeAIMenu(callback) {
-          let proxy = app2.config.globalProperties;
-          let useAI = proxy.$storage.getUserInfo("useAI") || "";
-          _GM_registerMenuCommand(`- 🤖人工智能：${useAI ? "已启用" : "已停用"}`, callback, {
-            id: "AI",
-            autoClose: true,
-            title: "开启后，使用人工智能(AI)生成回复内容"
-          });
-        },
-        changeSettingMenu(status, callback) {
-          let proxy = app2.config.globalProperties;
-          let isUserId = proxy.$storage.getUserInfo("userId");
-          if (arguments.length == 2) {
-            _GM_registerMenuCommand(`- ⚙️设置面板：${isUserId ? "已登录" : "未登录"}`, callback, {
-              id: "setting",
-              autoClose: true,
-              title: "打开/关闭设置面板"
-            });
-          } else {
-            _GM_registerMenuCommand(`- ⚙️设置面板：${isUserId ? "已登录" : "未登录"}`, null, {
-              id: "setting",
-              autoClose: true,
-              title: "打开/关闭设置面板"
-            });
+            proxy.$message.error(res.message);
           }
         }
       };
