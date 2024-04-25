@@ -41,7 +41,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{const e=document.createElement("style");e.dataset.source="vite-plugin-monkey",e.textContent=t,document.head.append(e)})(' .quickReplyBox[data-v-300c94a4]{position:relative}.quickReplyBox .el-form[data-v-300c94a4]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-300c94a4]{margin-bottom:15px}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-300c94a4]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-300c94a4]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-300c94a4],.el-form-item--small.el-form-item[data-v-300c94a4]{margin-bottom:10px}.el-select[data-v-300c94a4]{width:300px}.app-margin-right-30[data-v-4e4d34b8]{margin-right:30px}.my-list-tabs[data-v-4e4d34b8]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-4e4d34b8]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-4e4d34b8]{margin-right:5px;color:#909399}.list-title[data-v-4e4d34b8]{flex:1;font-weight:400}.list-right[data-v-4e4d34b8]{min-width:70px}.list-right .el-badge.item[data-v-4e4d34b8]{margin-right:30px}.list li[data-v-4e4d34b8]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-4e4d34b8]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-4e4d34b8]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-4e4d34b8]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-4e4d34b8]{padding:10px 20px}.box-card .el-card__header span[data-v-4e4d34b8]{font-size:14px}.clearfix[data-v-4e4d34b8]:before,.clearfix[data-v-4e4d34b8]:after{display:table;content:""}.clearfix[data-v-4e4d34b8]:after{clear:both}.el-pagination[data-v-4e4d34b8]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-a3b08b54]{padding:10px 20px}.box-card .el-card__header span[data-v-a3b08b54]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' .quickReplyBox[data-v-0bb17c4b]{position:relative}.quickReplyBox .el-form[data-v-0bb17c4b]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-0bb17c4b]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-0bb17c4b]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-0bb17c4b]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-0bb17c4b],.el-form-item--small.el-form-item[data-v-0bb17c4b]{margin-bottom:10px}.el-select[data-v-0bb17c4b]{width:300px}.el-dialog__footer{background-color:#fff}.app-margin-right-30[data-v-9d8fdc5b]{margin-right:30px}.my-list-tabs[data-v-9d8fdc5b]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-9d8fdc5b]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-9d8fdc5b]{margin-right:5px;color:#909399}.list-title[data-v-9d8fdc5b]{flex:1;font-weight:400}.list-right[data-v-9d8fdc5b]{min-width:70px}.list-right .el-badge.item[data-v-9d8fdc5b]{margin-right:30px}.list li[data-v-9d8fdc5b]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-9d8fdc5b]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-9d8fdc5b]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-9d8fdc5b]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-9d8fdc5b]{padding:10px 20px}.box-card .el-card__header span[data-v-9d8fdc5b]{font-size:14px}.clearfix[data-v-9d8fdc5b]:before,.clearfix[data-v-9d8fdc5b]:after{display:table;content:""}.clearfix[data-v-9d8fdc5b]:after{clear:both}.el-pagination[data-v-9d8fdc5b]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-a3b08b54]{padding:10px 20px}.box-card .el-card__header span[data-v-a3b08b54]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -87,7 +87,6 @@
     slot: "label",
     class: "quickReplyBoxTitle"
   };
-  const _hoisted_3$1 = { class: "app-dialog-foot" };
   const _sfc_main$3 = {
     __name: "App",
     setup(__props) {
@@ -455,18 +454,17 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               }, null, 512)
             ]),
             footer: vue.withCtx(() => [
-              vue.createElementVNode("span", _hoisted_3$1, [
-                vue.createVNode(_component_el_link, {
-                  href: "https://github.com/bmqy/bbs_quickreply?tab=readme-ov-file#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97",
-                  title: "更新日志",
-                  target: "_blank"
-                }, {
-                  default: vue.withCtx(() => [
-                    vue.createTextVNode(vue.toDisplayString(`ver: ${_ctx.$app.getVersion()}`), 1)
-                  ]),
-                  _: 1
-                })
-              ])
+              vue.createVNode(_component_el_link, {
+                type: "info",
+                href: "https://github.com/bmqy/bbs_quickreply?tab=readme-ov-file#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97",
+                title: "更新日志",
+                target: "_blank"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createTextVNode(vue.toDisplayString(`ver: ${_ctx.$app.getVersion()}`), 1)
+                ]),
+                _: 1
+              })
             ]),
             _: 1
           }, 8, ["modelValue", "title"])
@@ -474,8 +472,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-300c94a4"]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-4e4d34b8"), n = n(), vue.popScopeId(), n);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-0bb17c4b"]]);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-9d8fdc5b"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$2 = { class: "setBox" };
   const _hoisted_2$1 = {
     key: 0,
@@ -1161,7 +1159,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-4e4d34b8"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-9d8fdc5b"]]);
   const _hoisted_1$1 = { class: "setAIBox" };
   const _sfc_main$1 = {
     __name: "Ai",
