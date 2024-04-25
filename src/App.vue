@@ -363,9 +363,7 @@ watch(fwin_replyLoaded, (n)=>{
             </template>
 
             <template #footer>
-                <span class="app-dialog-foot">
-                    <el-link href="https://github.com/bmqy/bbs_quickreply?tab=readme-ov-file#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97" title="更新日志" target="_blank">{{ `ver: ${$app.getVersion()}` }}</el-link>
-                </span>
+                <el-link type="info" href="https://github.com/bmqy/bbs_quickreply?tab=readme-ov-file#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97" title="更新日志" target="_blank">{{ `ver: ${$app.getVersion()}` }}</el-link>
             </template>
         </el-dialog>
     </div>
@@ -379,6 +377,16 @@ watch(fwin_replyLoaded, (n)=>{
     }
     .reply-form-inline .el-form-item{
         margin-bottom: 15px;
+    }
+    :global(.el-dialog__footer a){
+        text-decoration: none;
+    }
+    :global(.el-tabs__nav-next),
+    :global(.el-tabs__nav-prev) {
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 

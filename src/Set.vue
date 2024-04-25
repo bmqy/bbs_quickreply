@@ -341,7 +341,11 @@ function constVarChange(){
 </template>
 
 <style scoped lang="scss">
-.setBox {}
+.setBox {
+    :global(.el-dialog__footer) {
+        background-color: #fff;
+    }
+}
 
 .app-margin-right-30 {
     margin-right: 30px;
