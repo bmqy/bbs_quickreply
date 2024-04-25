@@ -15,11 +15,19 @@ const queryData = ref({
     prop: 'replyId',
     order: 'desc',
 });
-const emit = defineEmits(['updateMyList', 'updateAIModel']);
+const constVar = ref({
+    email: '',
+    qq: '',
+    wechat: '',
+    url: '',
+    base64: false,
+});
+const emit = defineEmits(['updateMyList', 'updateConstVar', 'updateAIModel']);
 onBeforeMount(()=>{
     isLogin.value = proxy.$storage.getUserInfo('userId');
     realtimeSync.value = proxy.$storage.getUserInfo('realtimeSync');
     submitNow.value = proxy.$storage.getUserInfo('submitNow');
+    constVar.value = proxy.$storage.getUserInfo('constVar') || constVar.value;
     getMyList();
     getSystemList();
 });
@@ -170,6 +178,11 @@ function onSubmitNowChange(e){
 function updateAI() {
     emit('updateAIModel');
 }
+
+function constVarChange(){
+    proxy.$storage.setUserInfo('constVar', constVar.value)
+    emit('updateConstVar');
+}
 </script>
 
 <template>
@@ -182,12 +195,20 @@ function updateAI() {
                             <div v-if="(myList.length===0 && !isLogin) || showLoginForce" class="quickReplyLoginBox">
                                 <div style="margin-top: 15px;">
                                     <app-login @onSuccess="onLoginSuccess" @onClose="loginCancel"></app-login>
-                                    <p class="tips">
-                                        * 登录后，即可在任意设备同步你的配置；<br />
-                                        * 云端只负责保存账号及其回复列表，不留存多余信息；<br />
-                                        * 忘记密码可重新注册，或联系作者提供可用邮箱重置密码；<br />
-                                        * 如不需登录，也可忽略登录界面，直接使用即可；<br />
-                                    </p>
+                                    <el-space direction="vertical" alignment="flex-start">
+                                        <div>
+                                            <el-text type="info">* 登录后，即可在任意设备同步你的配置；</el-text>
+                                        </div>
+                                        <div>
+                                            <el-text type="info">* 云端只负责保存账号及其回复列表，不留存多余信息；</el-text>
+                                        </div>
+                                        <div>
+                                            <el-text type="info">* 忘记密码无法恢复，可重新注册；</el-text>
+                                        </div>
+                                        <div>
+                                            <el-text type="info">* 如不需登录，也可忽略登录界面，直接使用即可；</el-text>
+                                        </div>
+                                    </el-space>
                                 </div>
                             </div>
                             <div v-else>
@@ -218,8 +239,44 @@ function updateAI() {
                             </div>
                         </el-tab-pane>
                         <el-tab-pane v-if="isLogin" name="options" label="选项">
-                            <div style="margin-left:10px;"><el-checkbox v-model="realtimeSync" label="实时同步，本地回复列表修改后立即上传" size="small" :checked="realtimeSync" @change="onRealtimeSyncChange" /></div>
-                            <div style="margin-left:10px;"><el-checkbox v-model="submitNow" label="立即提交，选择快捷回帖内容后立即提交回帖" size="small" :checked="submitNow" @change="onSubmitNowChange" /></div>
+                            <el-space direction="vertical" alignment="flex-start">
+                                <div>
+                                    <el-checkbox v-model="realtimeSync" label="实时同步，本地回复列表修改后立即上传" size="small" :checked="realtimeSync" @change="onRealtimeSyncChange" />
+                                </div>
+                                <div>
+                                    <el-checkbox v-model="submitNow" label="立即提交，选择快捷回帖内容后立即提交回帖" size="small" :checked="submitNow" @change="onSubmitNowChange" />
+                                </div>
+                                <div style="margin-top: 18px;">
+                                    <el-text type="info">* AI和常量只存在本地，不参与同步</el-text>
+                                </div>
+                            </el-space>
+                        </el-tab-pane>
+                        <el-tab-pane v-if="isLogin" name="constVar" label="常量">
+                            <el-form :model="constVar" label-width="60" style="max-width: 600px">
+                                <el-form-item label="邮箱">
+                                    <el-input v-model="constVar.email" @change="constVarChange" />
+                                </el-form-item>
+                                <el-form-item label="QQ">
+                                    <el-input v-model="constVar.qq" @change="constVarChange" />
+                                </el-form-item>
+                                <el-form-item label="微信">
+                                    <el-input v-model="constVar.wechat" @change="constVarChange" />
+                                </el-form-item>
+                                <el-form-item label="网址">
+                                    <el-input v-model="constVar.url" @change="constVarChange" />
+                                </el-form-item>
+                                <el-form-item label="加密">
+                                    <el-switch v-model="constVar.base64" @change="constVarChange" />
+                                </el-form-item>
+                            </el-form>
+                            <el-space direction="vertical" alignment="flex-start">
+                                <div>
+                                    <el-text type="info">* 可在快捷回帖中使用以上常量：{email}、{qq}、{wechat}、{url}，例：我的邮箱是{email}，我的QQ是{qq}；</el-text>
+                                </div>
+                                <div>
+                                    <el-text type="info">* 开启加密后，只在回帖时显示base64加密后的常量；</el-text>
+                                </div>
+                            </el-space>
                         </el-tab-pane>
                         <el-tab-pane name="ai" label="AI">
                             <app-set-ai ref="setAIPanel" @updateAI="updateAI" />
@@ -337,13 +394,6 @@ function updateAI() {
         }
     }
 }
-
-.tips {
-    color: #909399;
-    font-size: 14px;
-    text-align: center;
-}
-
 .quickReplyLoginBox .tips {
     margin-left: 50px;
     text-align: left;

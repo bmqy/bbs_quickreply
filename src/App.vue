@@ -16,11 +16,19 @@ const aiNameList = ref({
     kimi: 'Kimi',
     chatgpt: 'ChatGPT'
 });
+const constVar = ref({
+    email: '',
+    qq: '',
+    wechat: '',
+    url: '',
+    base64: false,
+});
 onBeforeMount(()=>{
     checkPlatform();
     getList();
     submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
     useAI.value = proxy.$storage.getUserInfo('useAI') || '';
+    updateConstVar();
     updateAIModel();
 });
 
@@ -33,6 +41,8 @@ function checkPlatform() {
     } else {
         if(location.host.indexOf('nodeseek') > -1){
             currentPlatform.value = 'nodeseek'
+        } else if(location.host.indexOf('v2ex') > -1){
+            currentPlatform.value = 'v2ex'
         }
     }
 };
@@ -58,6 +68,10 @@ function updateAIModel(){
         aiNameList.value['chatgpt'] = `ChatGPT (${chatgptModel})`;
     }
 }
+// 更新常量
+function updateConstVar(){
+    constVar.value = proxy.$storage.getUserInfo('constVar') || constVar.value;
+}
 // 监听更新自定义回复
 function updateMyList(data) {
     let myListStorage = data || [];
@@ -78,6 +92,8 @@ async function getAIReply(){
         }
     } else if(currentPlatform.value == 'nodeseek'){
         title = document.querySelector('h1>a.post-title-link').innerText
+    } else if(currentPlatform.value == 'v2ex'){
+        title = document.querySelector('#Main .header>h1').innerText
     }
     if(!title){
         proxy.$message.error('无法获取帖子标题，请检查脚本是否支持此论坛')
@@ -92,60 +108,11 @@ async function getAIReply(){
         loadingAIReply.value = false;
     })
 }
-// 设置回复内容
-function enterReply() {
-    if (fwin_replyLoaded.value) {
-        enterPostReply();
-    } else if (hasEditor.value) {
-        enterEditorReply();
-    } else if(currentPlatform.value == 'nodeseek') {
-        enterMarkdownItReply();
-    } else if(currentPlatform.value == 'discourse') {
-        enterDiscourseEmberReply();
-    } else {
-        enterFastPostReply();
-    }
-};
 // 设置楼层/右下角快速回复框内容
 function enterPostReply() {
     let $postmessage = document.querySelector('#postmessage');
     $postmessage.value = currentReply.value;
 };
-// NodeSeek：设置markdown-it编辑器内容
-function enterMarkdownItReply() {
-    unsafeWindow.editor && unsafeWindow.editor.setMarkdown && unsafeWindow.editor.setMarkdown(currentReply.value)
-    if(submitNow.value && !useAI.value && currentReply.value){
-        document.querySelector('.md-editor button.submit').click()
-    }
-};
-// Discourse：设置Discourse编辑器内容
-function enterDiscourseEmberReply() {
-    let $emberTextarea = document.querySelector('textarea.ember-text-area.d-editor-input');
-    if($emberTextarea){
-        $emberTextarea.value = currentReply.value;
-        $emberTextarea.dispatchEvent(new Event('change'));
-    }
-    if(submitNow.value && !useAI.value && currentReply.value){
-        document.querySelector('.submit-panel button.btn.create').click();
-        currentReply.value = '';
-    }
-};
-// 设置快速回复框内容
-function enterFastPostReply() {
-    try {
-        let $fastpostmessage = document.querySelector(
-            '#fastpostmessage'
-        );
-        $fastpostmessage.style.background = '';
-        $fastpostmessage.value = currentReply.value;
-
-        if(submitNow.value && !useAI.value && currentReply.value){
-            document.querySelector('button#fastpostsubmit').click();
-        }
-    } catch (err) {
-        console.log('请检查发帖权限！');
-    }
-}
 // 设置高级回复框内容
 function enterEditorReply() {
     let $editorTextarea = document.querySelector('#e_textarea');
@@ -209,7 +176,7 @@ function flbcBindClick() {
 function checkEditor() {
     hasEditor.value = document.querySelector('#e_iframe');
 }
-// 监听楼层回复面板加载完成
+// discuz：监听楼层回复面板加载完成
 function postReplyMutationObserver() {
     let mos = new MutationObserver(function(mutations, observer) {
         for (const mutation in mutations) {
@@ -221,7 +188,6 @@ function postReplyMutationObserver() {
             }
         }
     });
-    // discuz
     if(document.querySelector('#append_parent')){
         mos.observe(document.querySelector('#append_parent'), {
             attributes: true,
@@ -229,21 +195,72 @@ function postReplyMutationObserver() {
             subtree: true,
         });
     }
-    // nodeseek
-    if(document.querySelector('.md-editor')){
-        mos.observe(document.querySelector('.md-editor'), {
-            attributes: true,
-            childList: true,
-            subtree: true,
-        });
+}
+
+// 设置回复内容
+function enterReply() {
+    currentReply.value = currentReply.value.replace('{email}', constVar.value.base64 ? proxy.$tools.encodeStr(constVar.value.email) : constVar.value.email)
+    currentReply.value = currentReply.value.replace('{qq}', constVar.value.base64 ? proxy.$tools.encodeStr(constVar.value.qq) : constVar.value.qq)
+    currentReply.value = currentReply.value.replace('{wechat}', constVar.value.base64 ? proxy.$tools.encodeStr(constVar.value.wechat) : constVar.value.wechat)
+    currentReply.value = currentReply.value.replace('{url}', constVar.value.base64 ? proxy.$tools.encodeStr(constVar.value.url) : constVar.value.url)
+    if (fwin_replyLoaded.value) {
+        enterPostReply();
+    } else if (hasEditor.value) {
+        enterEditorReply();
+    } else if(currentPlatform.value == 'nodeseek') {
+        enterMarkdownItReply();
+    } else if(currentPlatform.value == 'discourse') {
+        enterDiscourseEmberReply();
+    } else if(currentPlatform.value == 'v2ex') {
+        enterReplyContentReply();
+    } else {
+        enterFastPostReply();
     }
-    // linux.do
-    if(document.querySelector('#main-outlet')){
-        mos.observe(document.querySelector('#main-outlet'), {
-            attributes: true,
-            childList: true,
-            subtree: true,
-        });
+};
+// NodeSeek：设置markdown-it编辑器内容
+function enterMarkdownItReply() {
+    unsafeWindow.editor && unsafeWindow.editor.setMarkdown && unsafeWindow.editor.setMarkdown(currentReply.value)
+    if(submitNow.value && !useAI.value && currentReply.value){
+        document.querySelector('.md-editor button.submit').click()
+    }
+};
+// Discourse：设置Discourse编辑器内容
+function enterDiscourseEmberReply() {
+    let $emberTextarea = document.querySelector('textarea.ember-text-area.d-editor-input');
+    if($emberTextarea){
+        $emberTextarea.value = currentReply.value;
+        $emberTextarea.dispatchEvent(new Event('change'));
+    }
+    if(submitNow.value && !useAI.value && currentReply.value){
+        document.querySelector('.submit-panel button.btn.create').click();
+        currentReply.value = '';
+    }
+};
+// v2ex：设置编辑器内容
+function enterReplyContentReply() {
+    let $replyContent = document.querySelector('textarea#reply_content');
+    if($replyContent){
+        $replyContent.value = currentReply.value;
+    }
+    if(submitNow.value && !useAI.value && currentReply.value){
+        document.querySelector('#reply-box input[type="submit"]').click();
+        currentReply.value = '';
+    }
+};
+// 设置快速回复框内容
+function enterFastPostReply() {
+    try {
+        let $fastpostmessage = document.querySelector(
+            '#fastpostmessage'
+        );
+        $fastpostmessage.style.background = '';
+        $fastpostmessage.value = currentReply.value;
+
+        if(submitNow.value && !useAI.value && currentReply.value){
+            document.querySelector('button#fastpostsubmit').click();
+        }
+    } catch (err) {
+        console.log('请检查发帖权限！');
     }
 }
 
@@ -290,7 +307,7 @@ watch(fwin_replyLoaded, (n)=>{
 <template>
 	<div class="quickReplyBox">
 		<transition name="el-fade-in-linear">
-			<el-form :inline="true" class="demo-form-inline">
+			<el-form :inline="true" class="reply-form-inline">
 				<el-form-item>
 					<div slot="label" class="quickReplyBoxTitle">
 						{{ `${title}: ` }}
@@ -342,7 +359,7 @@ watch(fwin_replyLoaded, (n)=>{
 			append-to-body
 		>
             <template #default>
-                <app-set ref="setPanel" @updateMyList="updateMyList" @updateAIModel="updateAIModel" />
+                <app-set ref="setPanel" @updateMyList="updateMyList" @updateConstVar="updateConstVar" @updateAIModel="updateAIModel" />
             </template>
 
             <template #footer>
@@ -357,7 +374,14 @@ watch(fwin_replyLoaded, (n)=>{
 <style scoped lang="scss">
 .quickReplyBox {
     position: relative;
+    .el-form{
+        text-align: left;
+    }
+    .reply-form-inline .el-form-item{
+        margin-bottom: 15px;
+    }
 }
+
 
 :global(.el-dialog) {
     display: flex;

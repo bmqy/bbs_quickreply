@@ -199,7 +199,7 @@ export default {
                             }
                         });
                     } else if(useAI == 'chatgpt'){
-                        let chatgptDomain = proxy.$storage.getUserInfo('chatgptDomain') || '';
+                        let chatgptDomain = proxy.$storage.getUserInfo('chatgptDomain') || 'api.openai.com';
                         let chatgptModel = proxy.$storage.getUserInfo('chatgptModel') || 'gpt-3.5-turbo';
                         let chatgptApiKey = proxy.$storage.getUserInfo('chatgptApiKey') || '';
                         if(!chatgptDomain){

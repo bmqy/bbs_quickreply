@@ -29,6 +29,7 @@ app.mount(
             $fastposteditor.insertBefore($appRoot, $fastposteditor.childNodes[0]);
         }
         if ($postbox) {
+            $appRoot.style.paddingTop = '15px';
             $postbox.insertBefore($appRoot, $postbox.childNodes[4]);
         }
         // nodeseek
@@ -37,11 +38,17 @@ app.mount(
             $appRoot.style.padding = '15px 15px 0';
             $editorBody.appendChild($appRoot);
         }
-        // linux.do
+        // Discourse
         const $replyControl = document.querySelector('#reply-control');
         if ($replyControl) {
             $appRoot.style.padding = '15px 15px 0';
             $replyControl.insertBefore($appRoot, $replyControl.childNodes[2]);
+        }
+        // v2ex.com
+        const $replyBox = document.querySelector('#reply-box');
+        if ($replyBox) {
+            $appRoot.style.padding = '15px 15px 0';
+            $replyBox.insertBefore($appRoot, $replyBox.childNodes[2]);
         }
         return $appRoot;
     })()
