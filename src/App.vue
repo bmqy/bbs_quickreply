@@ -34,15 +34,16 @@ onBeforeMount(()=>{
 
 // 检测平台
 function checkPlatform() {
-    if(document.documentElement.innerHTML.indexOf('Discuz') > -1){
-        currentPlatform.value = 'discuz'
-    } else if(document.documentElement.innerHTML.indexOf('Discourse') > -1){
-        currentPlatform.value = 'discourse'
+    if(location.host.indexOf('nodeseek') > -1){
+        currentPlatform.value = 'nodeseek'
+    } else if(location.host.indexOf('v2ex') > -1){
+        currentPlatform.value = 'v2ex'
     } else {
-        if(location.host.indexOf('nodeseek') > -1){
-            currentPlatform.value = 'nodeseek'
-        } else if(location.host.indexOf('v2ex') > -1){
-            currentPlatform.value = 'v2ex'
+        let $generator = document.head.querySelector("meta[name=generator]");
+        if($generator.content.indexOf('Discuz') > -1){
+            currentPlatform.value = 'discuz'
+        } else if($generator.content.indexOf('Discourse') > -1){
+            currentPlatform.value = 'discourse'
         }
     }
 };
