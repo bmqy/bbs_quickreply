@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.6.1
+// @version      3.6.2
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -41,7 +41,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' .quickReplyBox[data-v-ffb687e5]{position:relative}.quickReplyBox .el-form[data-v-ffb687e5]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-ffb687e5]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-ffb687e5]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-ffb687e5]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-ffb687e5],.el-form-item--small.el-form-item[data-v-ffb687e5]{margin-bottom:10px}.el-select[data-v-ffb687e5]{width:300px}.el-dialog__footer{background-color:#fff}.app-margin-right-30[data-v-9d8fdc5b]{margin-right:30px}.my-list-tabs[data-v-9d8fdc5b]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-9d8fdc5b]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-9d8fdc5b]{margin-right:5px;color:#909399}.list-title[data-v-9d8fdc5b]{flex:1;font-weight:400}.list-right[data-v-9d8fdc5b]{min-width:70px}.list-right .el-badge.item[data-v-9d8fdc5b]{margin-right:30px}.list li[data-v-9d8fdc5b]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-9d8fdc5b]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-9d8fdc5b]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-9d8fdc5b]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-9d8fdc5b]{padding:10px 20px}.box-card .el-card__header span[data-v-9d8fdc5b]{font-size:14px}.clearfix[data-v-9d8fdc5b]:before,.clearfix[data-v-9d8fdc5b]:after{display:table;content:""}.clearfix[data-v-9d8fdc5b]:after{clear:both}.el-pagination[data-v-9d8fdc5b]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-a3b08b54]{padding:10px 20px}.box-card .el-card__header span[data-v-a3b08b54]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(t=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=t,document.head.append(a)})(' .quickReplyBox[data-v-3ecb21aa]{position:relative}.quickReplyBox .el-form[data-v-3ecb21aa]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-3ecb21aa]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-3ecb21aa]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-3ecb21aa]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-3ecb21aa],.el-form-item--small.el-form-item[data-v-3ecb21aa]{margin-bottom:10px}.el-select[data-v-3ecb21aa]{width:300px}.el-dialog__footer{background-color:#fff}.app-margin-right-30[data-v-9d8fdc5b]{margin-right:30px}.my-list-tabs[data-v-9d8fdc5b]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-9d8fdc5b]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-9d8fdc5b]{margin-right:5px;color:#909399}.list-title[data-v-9d8fdc5b]{flex:1;font-weight:400}.list-right[data-v-9d8fdc5b]{min-width:70px}.list-right .el-badge.item[data-v-9d8fdc5b]{margin-right:30px}.list li[data-v-9d8fdc5b]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-9d8fdc5b]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-9d8fdc5b]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-9d8fdc5b]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-9d8fdc5b]{padding:10px 20px}.box-card .el-card__header span[data-v-9d8fdc5b]{font-size:14px}.clearfix[data-v-9d8fdc5b]:before,.clearfix[data-v-9d8fdc5b]:after{display:table;content:""}.clearfix[data-v-9d8fdc5b]:after{clear:both}.el-pagination[data-v-9d8fdc5b]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-a3b08b54]{padding:10px 20px}.box-card .el-card__header span[data-v-a3b08b54]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -129,10 +129,12 @@
           currentPlatform.value = "v2ex";
         } else {
           let $generator = document.head.querySelector("meta[name=generator]");
-          if ($generator.content.indexOf("Discuz") > -1) {
-            currentPlatform.value = "discuz";
-          } else if ($generator.content.indexOf("Discourse") > -1) {
-            currentPlatform.value = "discourse";
+          if ($generator) {
+            if ($generator.content.indexOf("Discuz") > -1) {
+              currentPlatform.value = "discuz";
+            } else if ($generator.content.indexOf("Discourse") > -1) {
+              currentPlatform.value = "discourse";
+            }
           }
         }
       }
@@ -473,7 +475,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-ffb687e5"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-3ecb21aa"]]);
   const _withScopeId = (n) => (vue.pushScopeId("data-v-9d8fdc5b"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$2 = { class: "setBox" };
   const _hoisted_2$1 = {
