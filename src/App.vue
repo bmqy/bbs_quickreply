@@ -40,10 +40,12 @@ function checkPlatform() {
         currentPlatform.value = 'v2ex'
     } else {
         let $generator = document.head.querySelector("meta[name=generator]");
-        if($generator.content.indexOf('Discuz') > -1){
-            currentPlatform.value = 'discuz'
-        } else if($generator.content.indexOf('Discourse') > -1){
-            currentPlatform.value = 'discourse'
+        if($generator){
+            if($generator.content.indexOf('Discuz') > -1){
+                currentPlatform.value = 'discuz'
+            } else if($generator.content.indexOf('Discourse') > -1){
+                currentPlatform.value = 'discourse'
+            }
         }
     }
 };
