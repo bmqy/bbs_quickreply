@@ -6,6 +6,7 @@ const systemListCount = ref(0);
 const loading = ref(false);
 const isLogin = ref(false);
 const realtimeSync = ref(false);
+const realtimeBackup = ref(false);
 const submitNow = ref(false);
 const currentTab = ref('mine');
 const showLoginForce = ref(false);
@@ -25,8 +26,9 @@ const constVar = ref({
 const emit = defineEmits(['updateMyList', 'updateConstVar', 'updateAIModel']);
 onBeforeMount(()=>{
     isLogin.value = proxy.$storage.getUserInfo('userId');
-    realtimeSync.value = proxy.$storage.getUserInfo('realtimeSync');
-    submitNow.value = proxy.$storage.getUserInfo('submitNow');
+    realtimeSync.value = proxy.$storage.getUserInfo('realtimeSync') || false;
+    realtimeBackup.value = proxy.$storage.getUserInfo('realtimeBackup') || false;
+    submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
     constVar.value = proxy.$storage.getUserInfo('constVar') || constVar.value;
     getMyList();
     getSystemList();
@@ -39,11 +41,11 @@ function getMyList() {
 }
 // 获取网友分享的回复列表
 async function getSystemList() {
-    loading.value = true
+    loading.value = true;
     let res = await proxy.$api.selectList(queryData.value.page, queryData.value.prop, queryData.value.order);
     systemList.value = res.data.totalCount > 0 ? res.data.list : [];
     systemListCount.value = res.data.totalCount;
-    loading.value = false
+    loading.value = false;
 }
 // 监听分页
 function currentPageChange(current) {
@@ -73,6 +75,8 @@ function addReply() {
         return false;
     }
     myList.value.push(newReply.value);
+    realtimeSync.value && upload();
+    realtimeBackup.value && uploadAll();
     updateMyList();
     newReply.value = '';
     return true;
@@ -86,7 +90,8 @@ function updateMyList() {
 function delReply(index) {
     myList.value.splice(index, 1);
     updateMyList();
-    realtimeSync.value && upload()
+    realtimeSync.value && upload();
+    realtimeBackup.value && uploadAll();
 }
 // 分享自定义回复
 function shareReply(index) {
@@ -130,6 +135,7 @@ function collectReply(index) {
             if(res.code == 0){
                 addReply() && proxy.$message.success('收藏成功');
                 realtimeSync.value && upload();
+                realtimeBackup.value && uploadAll();
             } else {
                 proxy.$message.error(res.message);
             }
@@ -152,6 +158,14 @@ async function download(){
     myList.value = list;
     updateMyList();
 }
+function uploadAll(){
+    proxy.$storage.uploadAll();
+}
+async function downloadAll(){
+    let all = await proxy.$storage.downloadAll();
+    myList.value = all.QuickReply || [];
+    updateMyList();
+}
 function loginForce(){
     showLoginForce.value = !showLoginForce.value;
     currentTab.value = 'mine';
@@ -166,22 +180,32 @@ function logout(){
 }
 
 function onRealtimeSyncChange(e){
-    realtimeSync.value = e
-    proxy.$storage.setUserInfo('realtimeSync', e)
+    realtimeSync.value = e;
+    proxy.$storage.setUserInfo('realtimeSync', e);
+    realtimeBackup.value && uploadAll();
+}
+
+function onRealtimeBackupChange(e){
+    realtimeBackup.value = e;
+    proxy.$storage.setUserInfo('realtimeBackup', e);
+    realtimeBackup.value && uploadAll();
 }
 
 function onSubmitNowChange(e){
-    submitNow.value = e
-    proxy.$storage.setUserInfo('submitNow', e)
+    submitNow.value = e;
+    proxy.$storage.setUserInfo('submitNow', e);
+    realtimeBackup.value && uploadAll();
 }
 
 function updateAI() {
     emit('updateAIModel');
+    realtimeBackup.value && uploadAll();
 }
 
 function constVarChange(){
-    proxy.$storage.setUserInfo('constVar', constVar.value)
+    proxy.$storage.setUserInfo('constVar', constVar.value);
     emit('updateConstVar');
+    realtimeBackup.value && uploadAll();
 }
 </script>
 
@@ -244,11 +268,22 @@ function constVarChange(){
                                     <el-checkbox v-model="realtimeSync" label="实时同步，本地回复列表修改后立即上传" size="small" :checked="realtimeSync" @change="onRealtimeSyncChange" />
                                 </div>
                                 <div>
+                                    <el-checkbox v-model="realtimeBackup" label="实时备份，本地回复列表及任一配置修改后立即备份至云端" size="small" :checked="realtimeBackup" @change="onRealtimeBackupChange" />
+                                </div>
+                                <div>
                                     <el-checkbox v-model="submitNow" label="立即提交，选择快捷回帖内容后立即提交回帖" size="small" :checked="submitNow" @change="onSubmitNowChange" />
                                 </div>
-                                <div style="margin-top: 18px;">
-                                    <el-text type="info">* AI和常量只存在本地，不参与同步</el-text>
-                                </div>
+                                <el-space direction="vertical" alignment="flex-start" style="margin-top: 18px;">
+                                    <div>
+                                        <el-text type="info">* AI和常量只存在本地，不参与同步</el-text>
+                                    </div>
+                                    <div>
+                                        <el-text type="info">* 如需备份所有配置请使用操作中的全量备份、全量恢复</el-text>
+                                    </div>
+                                    <div>
+                                        <el-text type="info">* 全量备份仅为方便多设备同步配置，使用base64存储，请知悉</el-text>
+                                    </div>
+                                </el-space>
                             </el-space>
                         </el-tab-pane>
                         <el-tab-pane v-if="isLogin" name="constVar" label="常量">
@@ -287,6 +322,8 @@ function constVarChange(){
                                 <el-button v-if="isLogin" type="danger" icon="SwitchButton" size="small" @click="logout">注销，注销登录后将不能再同步列表</el-button>
                                 <el-button v-if="isLogin" type="primary" icon="Upload" size="small" @click="upload">上传，上传本地列表会覆盖云端数据</el-button>
                                 <el-button v-if="isLogin" type="warning" icon="Download" size="small" @click="download">下载，下载云端列表会覆盖本地数据</el-button>
+                                <el-button v-if="isLogin" type="primary" icon="Upload" size="small" @click="uploadAll">全量备份，全量备份本地所有配置信息到云端</el-button>
+                                <el-button v-if="isLogin" type="warning" icon="Download" size="small" @click="downloadAll">全量恢复，全量恢复云端配置信息覆盖本地数据</el-button>
                             </el-space>
                         </el-tab-pane>
                     </el-tabs>

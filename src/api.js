@@ -71,6 +71,14 @@ export default {
             downQuickReplyList: async function(params) {
                 return await http('/downloadList', params);
             },
+            // 上传全量备份
+            upUserAll: async function(params) {
+                return await http('/uploadAll', params);
+            },
+            // 下载全量备份
+            downUserAll: async function(params) {
+                return await http('/downloadAll', params);
+            },
             // 获取AI回复
             getAIReply: function(title) {
                 return new Promise((resolve, reject) => {

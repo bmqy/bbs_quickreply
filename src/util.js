@@ -8,11 +8,20 @@ export default {
                 GM_setValue(this.key, value);
             },
             get(){
-                if (GM_getValue(this.key) && GM_getValue(this.key).length > 0) {
-                    return GM_getValue(this.key);
-                } else {
-                    return []
-                }
+                return GM_getValue(this.key, []);
+            },
+            getAll(){
+                let keyList = GM_listValues();
+                let all = {};
+                keyList.forEach(key => {
+                    all[key] = GM_getValue(key, '');
+                });
+                return all;
+            },
+            setAll(data){
+                for(let key in data){
+                    GM_setValue(key, data[key]);
+                };
             },
             setUserInfo(key, value){
                 let fullKey = `${this.userStorageKey}.${key}`;
@@ -20,11 +29,7 @@ export default {
             },
             getUserInfo(key){
                 let fullKey = `${this.userStorageKey}.${key}`;
-                if (GM_getValue(fullKey) !== '') {
-                    return GM_getValue(fullKey);
-                } else {
-                    return '';
-                }
+                return GM_getValue(fullKey, '');
             },
             uploadList(){
                 let proxy = app.config.globalProperties;
@@ -67,6 +72,50 @@ export default {
                         proxy.$message.success('下载成功');
                         return res.data
                     }
+                } else {
+                    proxy.$message.error(res.message);
+                };
+            },
+            uploadAll(){
+                let proxy = app.config.globalProperties;
+                let userId = proxy.$storage.getUserInfo('userId');
+                let options = proxy.$storage.getAll();
+                // 验证数据
+                if(options.QuickReply && options.QuickReply.length > 10){
+                    proxy.$message.error('回复列表超出数量限制：10 条');
+                    return false;
+                }
+                // 数据加密
+                options = JSON.stringify(options);
+                options = proxy.$tools.encodeStr(options);
+                if(!userId) {
+                    proxy.$message.error('请先登录');
+                    return false;
+                }
+                proxy.$api.upUserAll({
+                    userId: userId,
+                    options: options
+                }).then(res => {
+                    proxy.$message.success('备份成功');
+                }).catch(err => {
+                    proxy.$message.error(err.message);
+                });
+            },
+            async downloadAll(){
+                let proxy = app.config.globalProperties;
+                let userId = proxy.$storage.getUserInfo('userId');
+                if(!userId) {
+                    proxy.$message.error('请先登录');
+                    return false;
+                }
+
+                let res = await proxy.$api.downUserAll({
+                    userId: userId
+                })
+                if(res.code == 0){
+                    proxy.$storage.setAll(res.data);
+                    proxy.$message.success('恢复成功');
+                    return res.data
                 } else {
                     proxy.$message.error(res.message);
                 };

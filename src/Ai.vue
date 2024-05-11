@@ -47,96 +47,102 @@ onBeforeMount(()=>{
 });
 
 function onGeminiApiKeyChange(e){
-    proxy.$storage.setUserInfo('geminiApiKey', e)
+    proxy.$storage.setUserInfo('geminiApiKey', e);
+    emit('updateAI');
 }
 function onGeminiChange(e){
     useAI.value = e ? 'gemini' : ''
-    proxy.$storage.setUserInfo('useAI', useAI.value)
-    proxy.$storage.setUserInfo('geminiApiKey', geminiApiKey.value || '')
+    proxy.$storage.setUserInfo('useAI', useAI.value);
+    proxy.$storage.setUserInfo('geminiApiKey', geminiApiKey.value || '');
     emit('updateAI');
 }
 function useGeminiBeforeChange(){
     if(!useGemini.value && !geminiApiKey.value){
-        proxy.$message.error('请先填写：gemini api key')
-        return false
+        proxy.$message.error('请先填写：gemini api key');
+        return false;
     }
-    return true
+    return true;
 }
 function onQianwenApiKeyChange(e){
-    proxy.$storage.setUserInfo('qianwenApiKey', e)
+    proxy.$storage.setUserInfo('qianwenApiKey', e);
+    emit('updateAI');
 }
 function onQianwenChange(e){
-    useAI.value = e ? 'qianwen' : ''
-    proxy.$storage.setUserInfo('useAI', useAI.value)
-    proxy.$storage.setUserInfo('qianwenApiKey', qianwenApiKey.value || '')
+    useAI.value = e ? 'qianwen' : '';
+    proxy.$storage.setUserInfo('useAI', useAI.value);
+    proxy.$storage.setUserInfo('qianwenApiKey', qianwenApiKey.value || '');
     emit('updateAI');
 }
 function useQianwenBeforeChange(){
     if(!useQianwen.value && !qianwenApiKey.value){
-        proxy.$message.error('请先填写：通义千问 api key')
-        return false
+        proxy.$message.error('请先填写：通义千问 api key');
+        return false;
     }
-    return true
+    return true;
 }
 function onKimiApiKeyChange(e){
-    proxy.$storage.setUserInfo('kimiApiKey', e)
+    proxy.$storage.setUserInfo('kimiApiKey', e);
+    emit('updateAI');
 }
 function onKimiChange(e){
     useAI.value = e ? 'kimi' : ''
-    proxy.$storage.setUserInfo('useAI', useAI.value)
-    proxy.$storage.setUserInfo('kimiApiKey', kimiApiKey.value || '')
+    proxy.$storage.setUserInfo('useAI', useAI.value);
+    proxy.$storage.setUserInfo('kimiApiKey', kimiApiKey.value || '');
     emit('updateAI');
 }
 function useKimiBeforeChange(){
     if(!useKimi.value && !kimiApiKey.value){
-        proxy.$message.error('请先填写：Kimi api key')
-        return false
+        proxy.$message.error('请先填写：Kimi api key');
+        return false;
     }
-    return true
+    return true;
 }
 function onChatgptDomainChange(e){
-    proxy.$storage.setUserInfo('chatgptDomain', e)
+    proxy.$storage.setUserInfo('chatgptDomain', e);
+    emit('updateAI');
 }
 function onChatgptApiKeyChange(e){
-    proxy.$storage.setUserInfo('chatgptApiKey', e)
+    proxy.$storage.setUserInfo('chatgptApiKey', e);
+    emit('updateAI');
 }
 function onChatgptModelChange(e){
-    proxy.$storage.setUserInfo('chatgptModel', e)
+    proxy.$storage.setUserInfo('chatgptModel', e);
     emit('updateAI');
 }
 function onChatgptChange(e){
-    useAI.value = e ? 'chatgpt' : ''
-    proxy.$storage.setUserInfo('useAI', useAI.value)
-    proxy.$storage.setUserInfo('chatgptDomain', chatgptDomain.value || '')
-    proxy.$storage.setUserInfo('chatgptApiKey', chatgptApiKey.value || '')
-    proxy.$storage.setUserInfo('chatgptModel', chatgptModel.value || '')
+    useAI.value = e ? 'chatgpt' : '';
+    proxy.$storage.setUserInfo('useAI', useAI.value);
+    proxy.$storage.setUserInfo('chatgptDomain', chatgptDomain.value || '');
+    proxy.$storage.setUserInfo('chatgptApiKey', chatgptApiKey.value || '');
+    proxy.$storage.setUserInfo('chatgptModel', chatgptModel.value || '');
     emit('updateAI');
 }
 function useChatgptBeforeChange(){
     if(!useChatgpt.value && !chatgptDomain.value){
-        proxy.$message.error('请先填写：chatgpt api domain')
-        return false
+        proxy.$message.error('请先填写：chatgpt api domain');
+        return false;
     }
-    return true
+    return true;
 }
 function onPromptCustomChange(e){
-    proxy.$storage.setUserInfo('promptCustom', e)
+    proxy.$storage.setUserInfo('promptCustom', e);
+    emit('updateAI');
 }
 function onUsePromptCustomChange(e){
-    proxy.$storage.setUserInfo('usePromptCustom', usePromptCustom.value)
-    proxy.$storage.setUserInfo('promptCustom', promptCustom.value)
+    proxy.$storage.setUserInfo('usePromptCustom', usePromptCustom.value);
+    proxy.$storage.setUserInfo('promptCustom', promptCustom.value);
     emit('updateAI');
 }
 function usePromptCustomBeforeChange(){
     if(!usePromptCustom.value && !promptCustom.value){
-        proxy.$message.error('请先填写：自定义 Prompt')
-        return false
+        proxy.$message.error('请先填写：自定义 Prompt');
+        return false;
     }
     if(!usePromptCustom.value && promptCustom.value.indexOf('{{title}}') == -1){
-        proxy.$message.error('请检查自定义 Prompt 中是否包含变量：{{title}}')
-        return false
+        proxy.$message.error('请检查自定义 Prompt 中是否包含变量：{{title}}');
+        return false;
     }
-    return true
+    return true;
 }
 watch(useAI, (n, o) => {
     useGemini.value = n == 'gemini';

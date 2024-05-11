@@ -1,7 +1,7 @@
 {
   "name": "bbs_quickreply",
   "private": true,
-  "version": "3.6.2",
+  "version": "3.7.0",
   "author": "bmqy",
   "description": "使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！",
     "license": "ISC",
