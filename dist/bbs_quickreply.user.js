@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.6.2
+// @version      3.7.0
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -36,12 +36,13 @@
 // @grant        GM_getResourceText
 // @grant        GM_getValue
 // @grant        GM_info
+// @grant        GM_listValues
 // @grant        GM_setValue
 // @grant        GM_xmlhttpRequest
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=t,document.head.append(a)})(' .quickReplyBox[data-v-3ecb21aa]{position:relative}.quickReplyBox .el-form[data-v-3ecb21aa]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-3ecb21aa]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-3ecb21aa]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-3ecb21aa]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-3ecb21aa],.el-form-item--small.el-form-item[data-v-3ecb21aa]{margin-bottom:10px}.el-select[data-v-3ecb21aa]{width:300px}.el-dialog__footer{background-color:#fff}.app-margin-right-30[data-v-9d8fdc5b]{margin-right:30px}.my-list-tabs[data-v-9d8fdc5b]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-9d8fdc5b]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-9d8fdc5b]{margin-right:5px;color:#909399}.list-title[data-v-9d8fdc5b]{flex:1;font-weight:400}.list-right[data-v-9d8fdc5b]{min-width:70px}.list-right .el-badge.item[data-v-9d8fdc5b]{margin-right:30px}.list li[data-v-9d8fdc5b]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-9d8fdc5b]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-9d8fdc5b]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-9d8fdc5b]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-9d8fdc5b]{padding:10px 20px}.box-card .el-card__header span[data-v-9d8fdc5b]{font-size:14px}.clearfix[data-v-9d8fdc5b]:before,.clearfix[data-v-9d8fdc5b]:after{display:table;content:""}.clearfix[data-v-9d8fdc5b]:after{clear:both}.el-pagination[data-v-9d8fdc5b]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-a3b08b54]{padding:10px 20px}.box-card .el-card__header span[data-v-a3b08b54]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(a=>{const e=document.createElement("style");e.dataset.source="vite-plugin-monkey",e.textContent=a,document.head.append(e)})(' .quickReplyBox[data-v-3ecb21aa]{position:relative}.quickReplyBox .el-form[data-v-3ecb21aa]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-3ecb21aa]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}.app-dialog-foot[data-v-3ecb21aa]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-3ecb21aa]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-3ecb21aa],.el-form-item--small.el-form-item[data-v-3ecb21aa]{margin-bottom:10px}.el-select[data-v-3ecb21aa]{width:300px}.el-dialog__footer{background-color:#fff}.app-margin-right-30[data-v-d35ffe93]{margin-right:30px}.my-list-tabs[data-v-d35ffe93]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-d35ffe93]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-d35ffe93]{margin-right:5px;color:#909399}.list-title[data-v-d35ffe93]{flex:1;font-weight:400}.list-right[data-v-d35ffe93]{min-width:70px}.list-right .el-badge.item[data-v-d35ffe93]{margin-right:30px}.list li[data-v-d35ffe93]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-d35ffe93]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-d35ffe93]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-d35ffe93]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-d35ffe93]{padding:10px 20px}.box-card .el-card__header span[data-v-d35ffe93]{font-size:14px}.clearfix[data-v-d35ffe93]:before,.clearfix[data-v-d35ffe93]:after{display:table;content:""}.clearfix[data-v-d35ffe93]:after{clear:both}.el-pagination[data-v-d35ffe93]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-66d8ae03]{padding:10px 20px}.box-card .el-card__header span[data-v-66d8ae03]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -72,6 +73,7 @@
   cssLoader("element-plus/dist/index.css");
   var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
   var _GM_info = /* @__PURE__ */ (() => typeof GM_info != "undefined" ? GM_info : void 0)();
+  var _GM_listValues = /* @__PURE__ */ (() => typeof GM_listValues != "undefined" ? GM_listValues : void 0)();
   var _GM_setValue = /* @__PURE__ */ (() => typeof GM_setValue != "undefined" ? GM_setValue : void 0)();
   var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
   var _unsafeWindow = /* @__PURE__ */ (() => typeof unsafeWindow != "undefined" ? unsafeWindow : void 0)();
@@ -476,7 +478,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
     }
   };
   const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-3ecb21aa"]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-9d8fdc5b"), n = n(), vue.popScopeId(), n);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-d35ffe93"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$2 = { class: "setBox" };
   const _hoisted_2$1 = {
     key: 0,
@@ -500,9 +502,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
   const _hoisted_12 = [
     _hoisted_11
   ];
-  const _hoisted_13 = { style: { "margin-top": "18px" } };
-  const _hoisted_14 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
-  const _hoisted_15 = { class: "addReplyBox" };
+  const _hoisted_13 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
+  const _hoisted_14 = { class: "addReplyBox" };
   const _sfc_main$2 = {
     __name: "Set",
     emits: ["updateMyList", "updateConstVar", "updateAIModel"],
@@ -514,6 +515,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       const loading = vue.ref(false);
       const isLogin = vue.ref(false);
       const realtimeSync = vue.ref(false);
+      const realtimeBackup = vue.ref(false);
       const submitNow = vue.ref(false);
       const currentTab = vue.ref("mine");
       const showLoginForce = vue.ref(false);
@@ -532,8 +534,9 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       });
       vue.onBeforeMount(() => {
         isLogin.value = proxy.$storage.getUserInfo("userId");
-        realtimeSync.value = proxy.$storage.getUserInfo("realtimeSync");
-        submitNow.value = proxy.$storage.getUserInfo("submitNow");
+        realtimeSync.value = proxy.$storage.getUserInfo("realtimeSync") || false;
+        realtimeBackup.value = proxy.$storage.getUserInfo("realtimeBackup") || false;
+        submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
         constVar.value = proxy.$storage.getUserInfo("constVar") || constVar.value;
         getMyList();
         getSystemList();
@@ -573,6 +576,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           return false;
         }
         myList.value.push(newReply.value);
+        realtimeSync.value && upload();
+        realtimeBackup.value && uploadAll();
         updateMyList();
         newReply.value = "";
         return true;
@@ -585,6 +590,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         myList.value.splice(index, 1);
         updateMyList();
         realtimeSync.value && upload();
+        realtimeBackup.value && uploadAll();
       }
       function shareReply(index) {
         proxy.$api.replyInsert(myList.value[index]).then((res) => {
@@ -617,6 +623,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           if (res.code == 0) {
             addReply() && proxy.$message.success("收藏成功");
             realtimeSync.value && upload();
+            realtimeBackup.value && uploadAll();
           } else {
             proxy.$message.error(res.message);
           }
@@ -637,6 +644,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         myList.value = list;
         updateMyList();
       }
+      function uploadAll() {
+        proxy.$storage.uploadAll();
+      }
+      async function downloadAll() {
+        let all = await proxy.$storage.downloadAll();
+        myList.value = all.QuickReply || [];
+        updateMyList();
+      }
       function loginForce() {
         showLoginForce.value = !showLoginForce.value;
         currentTab.value = "mine";
@@ -652,17 +667,26 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       function onRealtimeSyncChange(e) {
         realtimeSync.value = e;
         proxy.$storage.setUserInfo("realtimeSync", e);
+        realtimeBackup.value && uploadAll();
+      }
+      function onRealtimeBackupChange(e) {
+        realtimeBackup.value = e;
+        proxy.$storage.setUserInfo("realtimeBackup", e);
+        realtimeBackup.value && uploadAll();
       }
       function onSubmitNowChange(e) {
         submitNow.value = e;
         proxy.$storage.setUserInfo("submitNow", e);
+        realtimeBackup.value && uploadAll();
       }
       function updateAI() {
         emit("updateAIModel");
+        realtimeBackup.value && uploadAll();
       }
       function constVarChange() {
         proxy.$storage.setUserInfo("constVar", constVar.value);
         emit("updateConstVar");
+        realtimeBackup.value && uploadAll();
       }
       return (_ctx, _cache) => {
         const _component_app_login = vue.resolveComponent("app-login");
@@ -700,7 +724,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                         type: "border-card",
                         class: "my-list-tabs",
                         modelValue: vue.unref(currentTab),
-                        "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => vue.isRef(currentTab) ? currentTab.value = $event : null)
+                        "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => vue.isRef(currentTab) ? currentTab.value = $event : null)
                       }, {
                         default: vue.withCtx(() => [
                           vue.createVNode(_component_el_tab_pane, {
@@ -830,22 +854,57 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                   ]),
                                   vue.createElementVNode("div", null, [
                                     vue.createVNode(_component_el_checkbox, {
+                                      modelValue: vue.unref(realtimeBackup),
+                                      "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(realtimeBackup) ? realtimeBackup.value = $event : null),
+                                      label: "实时备份，本地回复列表及任一配置修改后立即备份至云端",
+                                      size: "small",
+                                      checked: vue.unref(realtimeBackup),
+                                      onChange: onRealtimeBackupChange
+                                    }, null, 8, ["modelValue", "checked"])
+                                  ]),
+                                  vue.createElementVNode("div", null, [
+                                    vue.createVNode(_component_el_checkbox, {
                                       modelValue: vue.unref(submitNow),
-                                      "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(submitNow) ? submitNow.value = $event : null),
+                                      "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => vue.isRef(submitNow) ? submitNow.value = $event : null),
                                       label: "立即提交，选择快捷回帖内容后立即提交回帖",
                                       size: "small",
                                       checked: vue.unref(submitNow),
                                       onChange: onSubmitNowChange
                                     }, null, 8, ["modelValue", "checked"])
                                   ]),
-                                  vue.createElementVNode("div", _hoisted_13, [
-                                    vue.createVNode(_component_el_text, { type: "info" }, {
-                                      default: vue.withCtx(() => [
-                                        vue.createTextVNode("* AI和常量只存在本地，不参与同步")
+                                  vue.createVNode(_component_el_space, {
+                                    direction: "vertical",
+                                    alignment: "flex-start",
+                                    style: { "margin-top": "18px" }
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createElementVNode("div", null, [
+                                        vue.createVNode(_component_el_text, { type: "info" }, {
+                                          default: vue.withCtx(() => [
+                                            vue.createTextVNode("* AI和常量只存在本地，不参与同步")
+                                          ]),
+                                          _: 1
+                                        })
                                       ]),
-                                      _: 1
-                                    })
-                                  ])
+                                      vue.createElementVNode("div", null, [
+                                        vue.createVNode(_component_el_text, { type: "info" }, {
+                                          default: vue.withCtx(() => [
+                                            vue.createTextVNode("* 如需备份所有配置请使用操作中的全量备份、全量恢复")
+                                          ]),
+                                          _: 1
+                                        })
+                                      ]),
+                                      vue.createElementVNode("div", null, [
+                                        vue.createVNode(_component_el_text, { type: "info" }, {
+                                          default: vue.withCtx(() => [
+                                            vue.createTextVNode("* 全量备份仅为方便多设备同步配置，使用base64存储，请知悉")
+                                          ]),
+                                          _: 1
+                                        })
+                                      ])
+                                    ]),
+                                    _: 1
+                                  })
                                 ]),
                                 _: 1
                               })
@@ -868,7 +927,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                     default: vue.withCtx(() => [
                                       vue.createVNode(_component_el_input, {
                                         modelValue: vue.unref(constVar).email,
-                                        "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => vue.unref(constVar).email = $event),
+                                        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => vue.unref(constVar).email = $event),
                                         onChange: constVarChange
                                       }, null, 8, ["modelValue"])
                                     ]),
@@ -878,7 +937,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                     default: vue.withCtx(() => [
                                       vue.createVNode(_component_el_input, {
                                         modelValue: vue.unref(constVar).qq,
-                                        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => vue.unref(constVar).qq = $event),
+                                        "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => vue.unref(constVar).qq = $event),
                                         onChange: constVarChange
                                       }, null, 8, ["modelValue"])
                                     ]),
@@ -888,7 +947,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                     default: vue.withCtx(() => [
                                       vue.createVNode(_component_el_input, {
                                         modelValue: vue.unref(constVar).wechat,
-                                        "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => vue.unref(constVar).wechat = $event),
+                                        "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => vue.unref(constVar).wechat = $event),
                                         onChange: constVarChange
                                       }, null, 8, ["modelValue"])
                                     ]),
@@ -898,7 +957,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                     default: vue.withCtx(() => [
                                       vue.createVNode(_component_el_input, {
                                         modelValue: vue.unref(constVar).url,
-                                        "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => vue.unref(constVar).url = $event),
+                                        "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => vue.unref(constVar).url = $event),
                                         onChange: constVarChange
                                       }, null, 8, ["modelValue"])
                                     ]),
@@ -908,7 +967,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                     default: vue.withCtx(() => [
                                       vue.createVNode(_component_el_switch, {
                                         modelValue: vue.unref(constVar).base64,
-                                        "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => vue.unref(constVar).base64 = $event),
+                                        "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => vue.unref(constVar).base64 = $event),
                                         onChange: constVarChange
                                       }, null, 8, ["modelValue"])
                                     ]),
@@ -1010,6 +1069,30 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                       vue.createTextVNode("下载，下载云端列表会覆盖本地数据")
                                     ]),
                                     _: 1
+                                  })) : vue.createCommentVNode("", true),
+                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                                    key: 4,
+                                    type: "primary",
+                                    icon: "Upload",
+                                    size: "small",
+                                    onClick: uploadAll
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createTextVNode("全量备份，全量备份本地所有配置信息到云端")
+                                    ]),
+                                    _: 1
+                                  })) : vue.createCommentVNode("", true),
+                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                                    key: 5,
+                                    type: "warning",
+                                    icon: "Download",
+                                    size: "small",
+                                    onClick: downloadAll
+                                  }, {
+                                    default: vue.withCtx(() => [
+                                      vue.createTextVNode("全量恢复，全量恢复云端配置信息覆盖本地数据")
+                                    ]),
+                                    _: 1
                                   })) : vue.createCommentVNode("", true)
                                 ]),
                                 _: 1
@@ -1031,7 +1114,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                         "body-style": { padding: "0 20px 20px" }
                       }, {
                         header: vue.withCtx(() => [
-                          _hoisted_14
+                          _hoisted_13
                         ]),
                         default: vue.withCtx(() => [
                           vue.withDirectives((vue.openBlock(), vue.createBlock(_component_el_table, {
@@ -1134,11 +1217,11 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                 ]),
                 _: 1
               }),
-              vue.createElementVNode("div", _hoisted_15, [
+              vue.createElementVNode("div", _hoisted_14, [
                 vue.createVNode(_component_el_input, {
                   placeholder: "请输入新的回复内容",
                   modelValue: vue.unref(newReply),
-                  "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => vue.isRef(newReply) ? newReply.value = $event : null),
+                  "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => vue.isRef(newReply) ? newReply.value = $event : null),
                   autosize: { minRows: 1, maxRows: 3 },
                   maxlength: "100",
                   "show-word-limit": true,
@@ -1162,7 +1245,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-9d8fdc5b"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-d35ffe93"]]);
   const _hoisted_1$1 = { class: "setAIBox" };
   const _sfc_main$1 = {
     __name: "Ai",
@@ -1215,6 +1298,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       });
       function onGeminiApiKeyChange(e) {
         proxy.$storage.setUserInfo("geminiApiKey", e);
+        emit("updateAI");
       }
       function onGeminiChange(e) {
         useAI.value = e ? "gemini" : "";
@@ -1231,6 +1315,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       }
       function onQianwenApiKeyChange(e) {
         proxy.$storage.setUserInfo("qianwenApiKey", e);
+        emit("updateAI");
       }
       function onQianwenChange(e) {
         useAI.value = e ? "qianwen" : "";
@@ -1247,6 +1332,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       }
       function onKimiApiKeyChange(e) {
         proxy.$storage.setUserInfo("kimiApiKey", e);
+        emit("updateAI");
       }
       function onKimiChange(e) {
         useAI.value = e ? "kimi" : "";
@@ -1263,9 +1349,11 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       }
       function onChatgptDomainChange(e) {
         proxy.$storage.setUserInfo("chatgptDomain", e);
+        emit("updateAI");
       }
       function onChatgptApiKeyChange(e) {
         proxy.$storage.setUserInfo("chatgptApiKey", e);
+        emit("updateAI");
       }
       function onChatgptModelChange(e) {
         proxy.$storage.setUserInfo("chatgptModel", e);
@@ -1288,6 +1376,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       }
       function onPromptCustomChange(e) {
         proxy.$storage.setUserInfo("promptCustom", e);
+        emit("updateAI");
       }
       function onUsePromptCustomChange(e) {
         proxy.$storage.setUserInfo("usePromptCustom", usePromptCustom.value);
@@ -1539,7 +1628,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-a3b08b54"]]);
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-66d8ae03"]]);
   const _hoisted_1 = { class: "margin-left" };
   const _hoisted_2 = { class: "margin-left" };
   const _sfc_main = {
@@ -1821,10 +1910,19 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           _GM_setValue(this.key, value);
         },
         get() {
-          if (_GM_getValue(this.key) && _GM_getValue(this.key).length > 0) {
-            return _GM_getValue(this.key);
-          } else {
-            return [];
+          return _GM_getValue(this.key, []);
+        },
+        getAll() {
+          let keyList = _GM_listValues();
+          let all = {};
+          keyList.forEach((key) => {
+            all[key] = _GM_getValue(key, "");
+          });
+          return all;
+        },
+        setAll(data) {
+          for (let key in data) {
+            _GM_setValue(key, data[key]);
           }
         },
         setUserInfo(key, value) {
@@ -1833,11 +1931,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         },
         getUserInfo(key) {
           let fullKey = `${this.userStorageKey}.${key}`;
-          if (_GM_getValue(fullKey) !== "") {
-            return _GM_getValue(fullKey);
-          } else {
-            return "";
-          }
+          return _GM_getValue(fullKey, "");
         },
         uploadList() {
           let proxy = app2.config.globalProperties;
@@ -1878,6 +1972,47 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               proxy.$message.success("下载成功");
               return res.data;
             }
+          } else {
+            proxy.$message.error(res.message);
+          }
+        },
+        uploadAll() {
+          let proxy = app2.config.globalProperties;
+          let userId = proxy.$storage.getUserInfo("userId");
+          let options2 = proxy.$storage.getAll();
+          if (options2.QuickReply && options2.QuickReply.length > 10) {
+            proxy.$message.error("回复列表超出数量限制：10 条");
+            return false;
+          }
+          options2 = JSON.stringify(options2);
+          options2 = proxy.$tools.encodeStr(options2);
+          if (!userId) {
+            proxy.$message.error("请先登录");
+            return false;
+          }
+          proxy.$api.upUserAll({
+            userId,
+            options: options2
+          }).then((res) => {
+            proxy.$message.success("备份成功");
+          }).catch((err) => {
+            proxy.$message.error(err.message);
+          });
+        },
+        async downloadAll() {
+          let proxy = app2.config.globalProperties;
+          let userId = proxy.$storage.getUserInfo("userId");
+          if (!userId) {
+            proxy.$message.error("请先登录");
+            return false;
+          }
+          let res = await proxy.$api.downUserAll({
+            userId
+          });
+          if (res.code == 0) {
+            proxy.$storage.setAll(res.data);
+            proxy.$message.success("恢复成功");
+            return res.data;
           } else {
             proxy.$message.error(res.message);
           }
@@ -1981,6 +2116,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         // 下载列表
         downQuickReplyList: async function(params) {
           return await http("/downloadList", params);
+        },
+        // 上传全量备份
+        upUserAll: async function(params) {
+          return await http("/uploadAll", params);
+        },
+        // 下载全量备份
+        downUserAll: async function(params) {
+          return await http("/downloadAll", params);
         },
         // 获取AI回复
         getAIReply: function(title) {
