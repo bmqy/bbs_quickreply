@@ -427,6 +427,9 @@ watch(fwin_replyLoaded, (n)=>{
 :global(#reply-control.open) {
     height: calc(var(--composer-height) + 65px) !important;
 }
+:global(#reply-control .reply-area) {
+    height: calc(100% - 11px - 80px) !important;
+}
 
 .app-dialog-foot {
     color: #909399;
