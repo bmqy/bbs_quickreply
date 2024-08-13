@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.7.1
+// @version      3.7.2
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -42,7 +42,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(t=>{const e=document.createElement("style");e.dataset.source="vite-plugin-monkey",e.textContent=t,document.head.append(e)})(' .quickReplyBox[data-v-029dc477]{position:relative}.quickReplyBox .el-form[data-v-029dc477]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-029dc477]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-029dc477]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-029dc477]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-029dc477],.el-form-item--small.el-form-item[data-v-029dc477]{margin-bottom:10px}.el-select[data-v-029dc477]{width:300px}.el-dialog__footer{background-color:#fff}.app-margin-right-30[data-v-d35ffe93]{margin-right:30px}.my-list-tabs[data-v-d35ffe93]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-d35ffe93]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-d35ffe93]{margin-right:5px;color:#909399}.list-title[data-v-d35ffe93]{flex:1;font-weight:400}.list-right[data-v-d35ffe93]{min-width:70px}.list-right .el-badge.item[data-v-d35ffe93]{margin-right:30px}.list li[data-v-d35ffe93]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-d35ffe93]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-d35ffe93]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-d35ffe93]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-d35ffe93]{padding:10px 20px}.box-card .el-card__header span[data-v-d35ffe93]{font-size:14px}.clearfix[data-v-d35ffe93]:before,.clearfix[data-v-d35ffe93]:after{display:table;content:""}.clearfix[data-v-d35ffe93]:after{clear:both}.el-pagination[data-v-d35ffe93]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-66d8ae03]{padding:10px 20px}.box-card .el-card__header span[data-v-66d8ae03]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(a=>{const e=document.createElement("style");e.dataset.source="vite-plugin-monkey",e.textContent=a,document.head.append(e)})(' .quickReplyBox[data-v-029dc477]{position:relative}.quickReplyBox .el-form[data-v-029dc477]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-029dc477]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px;min-width:1000px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-029dc477]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-029dc477]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-029dc477],.el-form-item--small.el-form-item[data-v-029dc477]{margin-bottom:10px}.el-select[data-v-029dc477]{width:300px}.el-dialog__footer{background-color:#fff}.app-margin-right-30[data-v-3e5595ab]{margin-right:30px}.my-list-tabs[data-v-3e5595ab]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-3e5595ab]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-3e5595ab]{margin-right:5px;color:#909399}.list-title[data-v-3e5595ab]{flex:1;font-weight:400}.list-right[data-v-3e5595ab]{min-width:70px}.list-right .el-badge.item[data-v-3e5595ab]{margin-right:30px}.list li[data-v-3e5595ab]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-3e5595ab]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-3e5595ab]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-3e5595ab]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-3e5595ab]{padding:10px 20px}.box-card .el-card__header span[data-v-3e5595ab]{font-size:14px}.clearfix[data-v-3e5595ab]:before,.clearfix[data-v-3e5595ab]:after{display:table;content:""}.clearfix[data-v-3e5595ab]:after{clear:both}.el-pagination[data-v-3e5595ab]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.box-card .el-card__header[data-v-66d8ae03]{padding:10px 20px}.box-card .el-card__header span[data-v-66d8ae03]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -478,7 +478,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
     }
   };
   const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-029dc477"]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-d35ffe93"), n = n(), vue.popScopeId(), n);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-3e5595ab"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$2 = { class: "setBox" };
   const _hoisted_2$1 = {
     key: 0,
@@ -503,7 +503,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
     _hoisted_11
   ];
   const _hoisted_13 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
-  const _hoisted_14 = { class: "addReplyBox" };
+  const _hoisted_14 = { key: 0 };
+  const _hoisted_15 = { class: "addReplyBox" };
   const _sfc_main$2 = {
     __name: "Set",
     emits: ["updateMyList", "updateConstVar", "updateAIModel"],
@@ -1133,6 +1134,35 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                               vue.createVNode(_component_el_table_column, {
                                 prop: "content",
                                 label: "内容"
+                              }, {
+                                default: vue.withCtx((scope) => [
+                                  _ctx.$app.isNew(scope.row.created) ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_14, [
+                                    vue.createTextVNode(vue.toDisplayString(scope.row.content) + " ", 1),
+                                    vue.createVNode(_component_el_tooltip, {
+                                      class: "item",
+                                      effect: "dark",
+                                      content: "7天内新增",
+                                      placement: "top-start"
+                                    }, {
+                                      default: vue.withCtx(() => [
+                                        vue.createVNode(_component_el_tag, {
+                                          type: "primary",
+                                          effect: "dark",
+                                          size: "small",
+                                          round: "",
+                                          style: { "transform": "scale(0.7)" }
+                                        }, {
+                                          default: vue.withCtx(() => [
+                                            vue.createTextVNode(" NEW ")
+                                          ]),
+                                          _: 1
+                                        })
+                                      ]),
+                                      _: 1
+                                    })
+                                  ])) : vue.createCommentVNode("", true)
+                                ]),
+                                _: 1
                               }),
                               vue.createVNode(_component_el_table_column, {
                                 prop: "likeCount",
@@ -1217,7 +1247,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                 ]),
                 _: 1
               }),
-              vue.createElementVNode("div", _hoisted_14, [
+              vue.createElementVNode("div", _hoisted_15, [
                 vue.createVNode(_component_el_input, {
                   placeholder: "请输入新的回复内容",
                   modelValue: vue.unref(newReply),
@@ -1245,7 +1275,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-d35ffe93"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-3e5595ab"]]);
   const _hoisted_1$1 = { class: "setAIBox" };
   const _sfc_main$1 = {
     __name: "Ai",
@@ -2025,7 +2055,13 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         getVersion: function() {
           return _GM_info["script"]["version"];
         },
-        prompt: "请根据帖子标题：{{title}}，以回帖的语气生成一条15字左右的简短回复"
+        prompt: "请根据帖子标题：{{title}}，以回帖的语气生成一条15字左右的简短回复",
+        isNew: function(timestamp) {
+          if (!timestamp)
+            return false;
+          let number = 3600 * 24 * 7;
+          return parseInt((/* @__PURE__ */ new Date()).getTime() / 1e3) - timestamp <= number;
+        }
       };
       app2.config.globalProperties.$tools = {
         encodeStr: function(str) {
