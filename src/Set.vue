@@ -337,7 +337,24 @@ function constVarChange(){
                         <el-table ref="filterTable" :data="systemList" size="small" stripe v-loading="loading"
                             @sort-change="sortChange">
                             <el-table-column prop="replyId" label="ID" width="80"></el-table-column>
-                            <el-table-column prop="content" label="内容"></el-table-column>
+                            <el-table-column prop="content" label="内容">
+                                <template #default="scope">
+                                    <div v-if="$app.isNew(scope.row.created)">
+                                        {{ scope.row.content }}
+                                        <el-tooltip class="item" effect="dark" content="7天内新增" placement="top-start">
+                                            <el-tag
+                                                type="primary"
+                                                effect="dark"
+                                                size="small"
+                                                round
+                                                style="transform: scale(0.7);"
+                                                >
+                                            NEW
+                                            </el-tag>
+                                        </el-tooltip>
+                                    </div>
+                                </template>
+                            </el-table-column>
                             <el-table-column prop="likeCount" sortable="custom" width="100" label="点赞">
                                 <template #default="scope">
                                     <el-tag type="info" size="small">{{scope.row.likeCount}}</el-tag>
