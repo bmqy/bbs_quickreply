@@ -18,6 +18,12 @@
 
 > PS：理论支持所有```Discourse```论坛，请自行尝试。
 
+### Fluarm
+- [x] [Flarum Community](https://discuss.flarum.org/)
+- [x] [NodeLoc](https://www.nodeloc.com/)
+
+> PS：理论支持所有```Fluarm```论坛，请自行尝试。
+
 ### 其它
 - [x] [NodeSeek](https://www.nodeseek.com/)
 - [x] [v2ex](https://www.v2ex.com/)
@@ -44,8 +50,12 @@
 
 ## 更新日志
 
+v3.7.3 更新：
+- [新增] 支持`Fluarm`平台论坛：`NodeLoc`([#266496](https://greasyfork.org/zh-CN/scripts/36728-%E8%AE%BA%E5%9D%9B%E5%BF%AB%E6%8D%B7%E5%9B%9E%E5%B8%96/discussions/266496))；
+- [修复] 修复可能的网络请求`bug`；
+
 v3.7.2 更新：
-- 网友分享列表增加7日内新增标识；
+- [新增] 网友分享列表增加7日内新增标识；
 
 v3.7.1 更新：
 - [修复] 修复`linux.do`编辑话题回复时内容超长导致的界面被遮挡问题，感谢用户反馈([#246183](https://greasyfork.org/zh-CN/scripts/36728-%E8%AE%BA%E5%9D%9B%E5%BF%AB%E6%8D%B7%E5%9B%9E%E5%B8%96/discussions/246183))；

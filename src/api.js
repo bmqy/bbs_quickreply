@@ -1,17 +1,18 @@
 // http
 const http = function(api, data, method){
+    method = method ? method.toLowerCase() : 'post';
     return new Promise((resolve, reject) => {
         let url = `https://quickreply.bmqy.net/api${api}`;
-        if(method && method.toLowerCase() === 'get'){
+        if(method === 'get'){
             url += `?${Object.keys(data).map(key => key + '=' + encodeURIComponent(data[key])).join('&')}`;
         }
         GM_xmlhttpRequest({
-            method: method ? method : 'post',
+            method: method,
             url: url,
             headers: {
                 "Content-Type": "application/json; charset=utf-8"
             },
-            data: `${JSON.stringify(data)}`,
+            data: method==='post' ? `${JSON.stringify(data)}` : '',
             responseType: 'json',
             onload: function (xhr) {
                 if (xhr.status == 200) {
@@ -24,6 +25,8 @@ const http = function(api, data, method){
                 reject(xhr.response);
             }
         });
+
+
     })
 }
 export default {

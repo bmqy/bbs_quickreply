@@ -34,6 +34,8 @@ export default defineConfig({
             '*://linux.do/*',
             '*://meta.appinn.net/*',
             '*://www.v2ex.com/t/*',
+            '*://discuss.flarum.org/*',
+            '*://www.nodeloc.com/*',
         ],
         connect: [
             'quickreply.bmqy.net',

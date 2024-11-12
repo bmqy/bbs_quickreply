@@ -35,16 +35,21 @@ onBeforeMount(()=>{
 // 检测平台
 function checkPlatform() {
     if(location.host.indexOf('nodeseek') > -1){
-        currentPlatform.value = 'nodeseek'
+        currentPlatform.value = 'nodeseek';
     } else if(location.host.indexOf('v2ex') > -1){
-        currentPlatform.value = 'v2ex'
+        currentPlatform.value = 'v2ex';
     } else {
         let $generator = document.head.querySelector("meta[name=generator]");
         if($generator){
             if($generator.content.indexOf('Discuz') > -1){
-                currentPlatform.value = 'discuz'
+                currentPlatform.value = 'discuz';
             } else if($generator.content.indexOf('Discourse') > -1){
-                currentPlatform.value = 'discourse'
+                currentPlatform.value = 'discourse';
+            }
+        } else{
+            let $html = document.body.innerHTML;
+            if($html.indexOf('flarum-loading') > -1){
+                currentPlatform.value = 'flarum';
             }
         }
     }
@@ -216,7 +221,9 @@ function enterReply() {
         enterDiscourseEmberReply();
     } else if(currentPlatform.value == 'v2ex') {
         enterReplyContentReply();
-    } else {
+    } else if(currentPlatform.value == 'flarum') {
+        enterFlarumTextEditorReply();
+    }  else {
         enterFastPostReply();
     }
 };
@@ -247,6 +254,18 @@ function enterReplyContentReply() {
     }
     if(submitNow.value && !useAI.value && currentReply.value){
         document.querySelector('#reply-box input[type="submit"]').click();
+        currentReply.value = '';
+    }
+};
+// Flarum：设置Flarum编辑器内容
+function enterFlarumTextEditorReply() {
+    let $textEditor = document.querySelector('textarea.FormControl.TextEditor-editor');
+    if($textEditor){
+        $textEditor.value = currentReply.value;
+        $textEditor.dispatchEvent(new Event('change'));
+    }
+    if(submitNow.value && !useAI.value && currentReply.value){
+        document.querySelector('.item-submit button.Button').click();
         currentReply.value = '';
     }
 };

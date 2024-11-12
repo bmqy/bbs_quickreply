@@ -50,6 +50,13 @@ app.mount(
             $appRoot.style.padding = '15px 15px 0';
             $replyBox.insertBefore($appRoot, $replyBox.childNodes[2]);
         }
+        // Flarum
+        const $composerBox = document.querySelector('#composer');
+        if ($composerBox) {
+            const $composerInner = $composerBox.querySelector('.Composer');
+            $appRoot.style.padding = '15px 15px 0';
+            $composerInner.insertBefore($appRoot, $composerInner.childNodes[2]);
+        }
         return $appRoot;
     })()
 );
