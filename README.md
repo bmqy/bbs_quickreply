@@ -50,6 +50,10 @@
 
 ## 更新日志
 
+v3.7.4 更新：
+- [优化] 优化手机端界面展示，以更好的适配[Tampermonkey](https://apps.apple.com/app/id6738342400)移动应用；
+- [优化] 可忽略的其它优化；
+
 v3.7.3 更新：
 - [新增] 支持`Fluarm`平台论坛：`NodeLoc`([#266496](https://greasyfork.org/zh-CN/scripts/36728-%E8%AE%BA%E5%9D%9B%E5%BF%AB%E6%8D%B7%E5%9B%9E%E5%B8%96/discussions/266496))；
 - [修复] 修复可能的网络请求`bug`；

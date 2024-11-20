@@ -423,7 +423,6 @@ watch(fwin_replyLoaded, (n)=>{
     transform: translate(-50%, -50%);
     max-height: calc(100% - 30px);
     max-width: 1300px;
-    min-width: 1000px;
 }
 
 :global(.el-dialog__header) {

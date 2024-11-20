@@ -1,4 +1,6 @@
 <script setup name="quickReplySet">
+import { onMounted } from 'vue';
+
 const {proxy} = getCurrentInstance();
 const myList = ref([]);
 const systemList = ref([]);
@@ -11,6 +13,10 @@ const submitNow = ref(false);
 const currentTab = ref('mine');
 const showLoginForce = ref(false);
 const newReply = ref('');
+const windowSize = ref({
+    width: window.innerWidth,
+    height: window.innerHeight
+})
 const queryData = ref({
     page: 1,
     prop: 'replyId',
@@ -213,7 +219,7 @@ function constVarChange(){
     <div class="setBox">
         <el-card class="box-card" shadow="never">
             <el-row :gutter="30">
-                <el-col :span="9">
+                <el-col :span="9" :md="{span: 9}" :sm="{span: 24}" :xs="{span: 24}">
                     <el-tabs type="border-card" class="my-list-tabs" v-model="currentTab">
                         <el-tab-pane name="mine" label="我在用的">
                             <div v-if="(myList.length===0 && !isLogin) || showLoginForce" class="quickReplyLoginBox">
@@ -313,7 +319,7 @@ function constVarChange(){
                                 </div>
                             </el-space>
                         </el-tab-pane>
-                        <el-tab-pane name="ai" label="AI">
+                        <el-tab-pane v-if="isLogin" name="ai" label="AI">
                             <app-set-ai ref="setAIPanel" @updateAI="updateAI" />
                         </el-tab-pane>
                         <el-tab-pane name="actions" label="操作">
@@ -328,15 +334,15 @@ function constVarChange(){
                         </el-tab-pane>
                     </el-tabs>
                 </el-col>
-                <el-col :span="15">
+                <el-col :span="15" :md="{span: 15}" :sm="{span: 24}" :xs="{span: 24}" :style="{'margin-top': windowSize.width<992?'15px':0}">
                     <el-card class="box-card" shadow="never" :body-style="{padding: '0 20px 20px'}">
-                        <template #header class="clearfix">
+                        <template #header class="cle        arfix">
                             <span>网友分享的</span>
                         </template>
 
                         <el-table ref="filterTable" :data="systemList" size="small" stripe v-loading="loading"
                             @sort-change="sortChange">
-                            <el-table-column prop="replyId" label="ID" width="80"></el-table-column>
+                            <el-table-column prop="replyId" label="ID" width="50" align="center"></el-table-column>
                             <el-table-column prop="content" label="内容">
                                 <template #default="scope">
                                     <div v-if="$app.isNew(scope.row.created)">
@@ -355,12 +361,12 @@ function constVarChange(){
                                     </div>
                                 </template>
                             </el-table-column>
-                            <el-table-column prop="likeCount" sortable="custom" width="100" label="点赞">
+                            <el-table-column prop="likeCount" sortable="custom" width="70" align="center" label="点赞">
                                 <template #default="scope">
                                     <el-tag type="info" size="small">{{scope.row.likeCount}}</el-tag>
                                 </template>
                             </el-table-column>
-                            <el-table-column label="操作" width="100">
+                            <el-table-column label="操作" width="100" align="center">
                                 <template #default="scope">
                                     <el-tooltip class="item" effect="dark" content="给个赞" placement="top-start">
                                         <el-button type="success" size="small" icon="Pointer" circle
@@ -374,7 +380,7 @@ function constVarChange(){
                             </el-table-column>
                         </el-table>
 
-                        <el-pagination background layout="prev, pager, next" :page-size="10" :pager-count="5"
+                        <el-pagination background layout="prev, pager, next" :small="windowSize.width<=640" :page-size="10" :pager-count="windowSize.width>640?5:3"
                             @current-change="currentPageChange" :total="systemListCount">
                         </el-pagination>
                     </el-card>
@@ -493,5 +499,8 @@ function constVarChange(){
     background-color: transparent;
     border: 0;
     outline: none;
+}
+:global(.setBox .el-checkbox) {
+    white-space: wrap;
 }
 </style>
