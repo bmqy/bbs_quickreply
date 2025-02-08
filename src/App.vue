@@ -11,10 +11,11 @@ const setShow = ref(false);
 const useAI = ref('');
 const loadingAIReply = ref(false);
 const aiNameList = ref({
-    gemini: 'Gemini Pro',
+    gemini: 'Gemini 2.0 Flash',
     qianwen: '通义千问-turbo',
     kimi: 'Kimi',
-    chatgpt: 'ChatGPT'
+    chatgpt: 'ChatGPT',
+    deepseek: 'DeepSeek',
 });
 const constVar = ref({
     email: '',

@@ -26,7 +26,17 @@ const chatgptModelList = ref([
     {value: 'gpt-3.5-turbo-16k-0613', label: 'gpt-3.5-turbo-16k-0613'},
 ]);
 const useChatgpt = ref(false);
+const deepseekDomain = ref('');
+const deepseekApiKey = ref('');
+const deepseekModel = ref('deepseek-chat');
+const deepseekModelList = ref([
+    {value: 'deepseek-chat', label: 'deepseek-chat'},
+    {value: 'deepseek-reasoner', label: 'deepseek-reasoner'},
+]);
+const useDeepseek = ref(false);
 const useAI = ref('');
+const systemRoleCustom = ref('');
+const useSystemRoleCustom = ref(false);
 const promptCustom = ref('');
 const usePromptCustom = ref(false);
 const emit = defineEmits(['updateAI']);
@@ -42,6 +52,10 @@ onBeforeMount(()=>{
     chatgptApiKey.value = proxy.$storage.getUserInfo('chatgptApiKey') || '';
     chatgptModel.value = proxy.$storage.getUserInfo('chatgptModel') || '';
     useChatgpt.value = useAI.value=='chatgpt';
+    deepseekDomain.value = proxy.$storage.getUserInfo('deepseekDomain') || '';
+    deepseekApiKey.value = proxy.$storage.getUserInfo('deepseekApiKey') || '';
+    deepseekModel.value = proxy.$storage.getUserInfo('deepseekModel') || '';
+    useDeepseek.value = useAI.value=='deepseek';
     promptCustom.value = proxy.$storage.getUserInfo('promptCustom') || '';
     usePromptCustom.value = proxy.$storage.getUserInfo('usePromptCustom') || false;
 });
@@ -118,8 +132,51 @@ function onChatgptChange(e){
     emit('updateAI');
 }
 function useChatgptBeforeChange(){
-    if(!useChatgpt.value && !chatgptDomain.value){
-        proxy.$message.error('请先填写：chatgpt api domain');
+    if(!useChatgpt.value && !chatgptApiKey.value){
+        proxy.$message.error('请先填写：chatgpt apiKey');
+        return false;
+    }
+    return true;
+}
+function onDeepseekDomainChange(e){
+    proxy.$storage.setUserInfo('deepseekDomain', e);
+    emit('updateAI');
+}
+function onDeepseekApiKeyChange(e){
+    proxy.$storage.setUserInfo('deepseekApiKey', e);
+    emit('updateAI');
+}
+function onDeepseekModelChange(e){
+    proxy.$storage.setUserInfo('deepseekModel', e);
+    emit('updateAI');
+}
+function onDeepseekChange(e){
+    useAI.value = e ? 'deepseek' : '';
+    proxy.$storage.setUserInfo('useAI', useAI.value);
+    proxy.$storage.setUserInfo('deepseekDomain', deepseekDomain.value || '');
+    proxy.$storage.setUserInfo('deepseekApiKey', deepseekApiKey.value || '');
+    proxy.$storage.setUserInfo('deepseekModel', deepseekModel.value || '');
+    emit('updateAI');
+}
+function useDeepseekBeforeChange(){
+    if(!useChatgpt.value && !deepseekApiKey.value){
+        proxy.$message.error('请先填写：deepseek apiKey');
+        return false;
+    }
+    return true;
+}
+function onSystemRoleCustomChange(e){
+    proxy.$storage.setUserInfo('systemRoleCustom', e);
+    emit('updateAI');
+}
+function onUseSystemRoleCustomChange(e){
+    proxy.$storage.setUserInfo('useSystemRoleCustom', useSystemRoleCustom.value);
+    proxy.$storage.setUserInfo('systemRoleCustom', systemRoleCustom.value);
+    emit('updateAI');
+}
+function useSystemRoleCustomBeforeChange(){
+    if(!useSystemRoleCustom.value && !systemRoleCustom.value){
+        proxy.$message.error('请先填写：自定义 SystemRole');
         return false;
     }
     return true;
@@ -155,7 +212,7 @@ watch(useAI, (n, o) => {
 <template>
     <div class="setAIBox">
         <el-card class="box-card" shadow="never">
-            <el-form label-width="110" label-position="left" size="small">
+            <el-form label-width="120" label-position="left" size="small">
                 <el-form-item label="Gemini API Key">
                     <el-tooltip content="获取API Key：https://aistudio.google.com/app/apikey" placement="top">
                         <el-input v-model="geminiApiKey" @change="onGeminiApiKeyChange" />
@@ -211,8 +268,47 @@ watch(useAI, (n, o) => {
                 <el-form-item label="启用">
                 <el-switch v-model="useChatgpt" @change="onChatgptChange" :before-change="useChatgptBeforeChange" />
                 </el-form-item>
+                <el-form-item label="Deepseek Domain">
+                    <el-tooltip content="请自行寻找可用域名，example: chat.customai.com" placement="top">
+                        <el-input v-model="deepseekDomain" @change="onDeepseekDomainChange" />
+                    </el-tooltip>
+                </el-form-item>
+                <el-form-item label="Deepseek API Key">
+                    <el-tooltip content="按接口规则填写" placement="top">
+                        <el-input v-model="deepseekApiKey" @change="onDeepseekApiKeyChange" />
+                    </el-tooltip>
+                </el-form-item>
+                <el-form-item label="Deepseek Model">
+                    <el-tooltip content="默认使用：deepseek-chat，需接口支持" placement="top">
+                        <el-select
+                            v-model="deepseekModel"
+                            placeholder="Select"
+                            size="large"
+                            style="width: 240px"
+                            @change="onDeepseekModelChange"
+                            >
+                            <el-option
+                                v-for="item in deepseekModelList"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
+                            />
+                            </el-select>
+                    </el-tooltip>
+                </el-form-item>
+                <el-form-item label="启用">
+                <el-switch v-model="useDeepseek" @change="onDeepseekChange" :before-change="useDeepseekBeforeChange" />
+                </el-form-item>
+                <el-form-item label="自定义 SystemRole">
+                    <el-tooltip content="自定义系统角色，帮你获得更个性化的回帖内容。" placement="top">
+                        <el-input type="textarea" v-model="systemRoleCustom" @change="onSystemRoleCustomChange" :placeholder="`默认：${proxy.$app.systemRole}`" />
+                    </el-tooltip>
+                </el-form-item>
+                <el-form-item label="启用">
+                <el-switch v-model="useSystemRoleCustom" @change="onUseSystemRoleCustomChange" :before-change="useSystemRoleCustomBeforeChange" />
+                </el-form-item>
                 <el-form-item label="自定义 Prompt">
-                    <el-tooltip content="自定义提示问语，帮你获得更个性化的回帖内容。必须包含唯一变量：{{title}}" placement="top">
+                    <el-tooltip content="自定义提示词，帮你获得更个性化的回帖内容。必须包含唯一变量：{{title}}" placement="top">
                         <el-input type="textarea" v-model="promptCustom" @change="onPromptCustomChange" :placeholder="`默认：${proxy.$app.prompt}`" />
                     </el-tooltip>
                 </el-form-item>

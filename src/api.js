@@ -90,6 +90,12 @@ export default {
                     if(!title){
                         reject('参数无效');
                     };
+                    let systemRole = proxy.$app.systemRole;
+                    let systemRoleCustom = proxy.$storage.getUserInfo('systemRoleCustom') || '';
+                    let useSystemRoleCustom = proxy.$storage.getUserInfo('useSystemRoleCustom') || false;
+                    if(useSystemRoleCustom && systemRoleCustom){
+                        systemRole = systemRoleCustom;
+                    }
                     let prompt = proxy.$app.prompt;
                     let promptCustom = proxy.$storage.getUserInfo('promptCustom') || '';
                     let usePromptCustom = proxy.$storage.getUserInfo('usePromptCustom') || false;
@@ -102,8 +108,13 @@ export default {
                         if(!geminiApiKey){
                             reject('无效api key');
                         };
-                        let url = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${geminiApiKey}`
+                        let url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiApiKey}`
                         let data = {
+                            "system_instruction": {
+                                "parts": {
+                                    "text": systemRole
+                                }
+                            },
                             "contents": [
                                 {
                                     "parts": [
@@ -139,15 +150,19 @@ export default {
                         if(!qianwenApiKey){
                             reject('无效api key');
                         };
-                        let url = 'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation'
+                        let url = 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions'
                         let data = {
                             "model": "qwen-turbo",
-                            "parameters": {
-                                "result_format": "text"
-                            },
-                            "input": {
-                                "prompt": prompt
-                            }
+                            "messages": [
+                                {
+                                    "role": "system",
+                                    "content": systemRole
+                                },
+                                {
+                                    "role": "user",
+                                    "content": prompt
+                                }
+                            ]
                         }
                         GM_xmlhttpRequest({
                             method: 'POST',
@@ -160,12 +175,11 @@ export default {
                             data: `${JSON.stringify(data)}`,
                             responseType: 'json',
                             onload: function (xhr) {
-                                let {output, code, message} = xhr.response;
-                                if(code){
-                                    reject(message);
+                                let {choices, error} = xhr.response;
+                                if(error){
+                                    reject(error.message);
                                 }
-                                let result = output.text;
-                                result = result.replace(/[\\"]+/g, '');
+                                let result = choices[0].message.content;
                                 resolve(result)
                             },
                             onerror: function(xhr){
@@ -181,6 +195,10 @@ export default {
                         let data = {
                             "model": "moonshot-v1-8k",
                             "messages": [
+                                {
+                                    role: "system",
+                                    content: systemRole
+                                },
                                 {
                                     "role": "user",
                                     "content": prompt
@@ -221,6 +239,10 @@ export default {
                             "model": `${chatgptModel}`,
                             "messages": [
                                 {
+                                    role: "system",
+                                    content: systemRole
+                                },
+                                {
                                     "role": "user",
                                     "content": prompt
                                 }
@@ -233,6 +255,53 @@ export default {
                         }
                         if(chatgptApiKey){
                             headers['Authorization'] = `Bearer ${chatgptApiKey}`;
+                        }
+                        GM_xmlhttpRequest({
+                            method: 'POST',
+                            url: url,
+                            headers: headers,
+                            data: `${JSON.stringify(data)}`,
+                            responseType: 'json',
+                            onload: function (xhr) {
+                                let {choices, error} = xhr.response;
+                                if(error){
+                                    reject(error.message);
+                                }
+                                let result = choices[0].message.content;
+                                resolve(result)
+                            },
+                            onerror: function(xhr){
+                                reject(xhr.response);
+                            }
+                        });
+                    } else if(useAI == 'deepseek'){
+                        let deepseekDomain = proxy.$storage.getUserInfo('deepseekDomain') || 'api.deepseek.com';
+                        let deepseekModel = proxy.$storage.getUserInfo('deepseekModel') || 'deepseek-chat';
+                        let deepseekApiKey = proxy.$storage.getUserInfo('deepseekApiKey') || '';
+                        if(!deepseekDomain){
+                            reject('无效地址');
+                        };
+                        let url = `https://${deepseekDomain}/chat/completions`
+                        let data = {
+                            "model": `${deepseekModel}`,
+                            "messages": [
+                                {
+                                    role: "system",
+                                    content: systemRole
+                                },
+                                {
+                                    "role": "user",
+                                    "content": prompt
+                                }
+                            ],
+                            "stream": false
+                        }
+                        let headers = {
+                            "Content-Type": "application/json; charset=utf-8",
+                            "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`,
+                        }
+                        if(deepseekApiKey){
+                            headers['Authorization'] = `Bearer ${deepseekApiKey}`;
                         }
                         GM_xmlhttpRequest({
                             method: 'POST',

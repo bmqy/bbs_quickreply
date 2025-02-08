@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import monkey, { util, cdn } from 'vite-plugin-monkey';
 import AutoImport from 'unplugin-auto-import/vite';
+import { defineConfig } from 'vite';
+import monkey, { cdn, util } from 'vite-plugin-monkey';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -43,6 +43,7 @@ export default defineConfig({
             'dashscope.aliyuncs.com',
             'api.moonshot.cn',
             'api.openai.com',
+            'api.deepseek.com',
             '*'
         ]
       },

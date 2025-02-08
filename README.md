@@ -33,6 +33,7 @@
 - [x] 通义千问
 - [x] Kimi
 - [x] ChatGpt
+- [x] DeepSeek
 
 ## 支持常量
 - [x] email：```{email}```
@@ -49,6 +50,11 @@
 ```
 
 ## 更新日志
+
+v3.7.5 更新：
+- [新增] `AI`支持`DeepSeek`模型；
+- [优化] `AI`支持`系统角色`设定，并可`自定义`；
+- [优化] `gemini`升级成`Gemini 2.0 Flash`；
 
 v3.7.4 更新：
 - [优化] 优化手机端界面展示，以更好的适配[Tampermonkey](https://apps.apple.com/app/id6738342400)移动应用；
