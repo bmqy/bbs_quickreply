@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.7.4
+// @version      3.7.5
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -34,6 +34,7 @@
 // @connect      dashscope.aliyuncs.com
 // @connect      api.moonshot.cn
 // @connect      api.openai.com
+// @connect      api.deepseek.com
 // @connect      *
 // @grant        GM_getResourceText
 // @grant        GM_getValue
@@ -44,7 +45,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(e=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=e,document.head.append(a)})(' .quickReplyBox[data-v-904ce70d]{position:relative}.quickReplyBox .el-form[data-v-904ce70d]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-904ce70d]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-904ce70d]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-904ce70d]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-904ce70d],.el-form-item--small.el-form-item[data-v-904ce70d]{margin-bottom:10px}.el-select[data-v-904ce70d]{width:300px}.el-dialog__footer{background-color:#fff}.app-margin-right-30[data-v-54a1a6de]{margin-right:30px}.my-list-tabs[data-v-54a1a6de]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-54a1a6de]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-54a1a6de]{margin-right:5px;color:#909399}.list-title[data-v-54a1a6de]{flex:1;font-weight:400}.list-right[data-v-54a1a6de]{min-width:70px}.list-right .el-badge.item[data-v-54a1a6de]{margin-right:30px}.list li[data-v-54a1a6de]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-54a1a6de]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-54a1a6de]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-54a1a6de]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-54a1a6de]{padding:10px 20px}.box-card .el-card__header span[data-v-54a1a6de]{font-size:14px}.clearfix[data-v-54a1a6de]:before,.clearfix[data-v-54a1a6de]:after{display:table;content:""}.clearfix[data-v-54a1a6de]:after{clear:both}.el-pagination[data-v-54a1a6de]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.box-card .el-card__header[data-v-66d8ae03]{padding:10px 20px}.box-card .el-card__header span[data-v-66d8ae03]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(e=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=e,document.head.append(a)})(' .quickReplyBox[data-v-e612ea14]{position:relative}.quickReplyBox .el-form[data-v-e612ea14]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-e612ea14]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-e612ea14]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-e612ea14]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-e612ea14],.el-form-item--small.el-form-item[data-v-e612ea14]{margin-bottom:10px}.el-select[data-v-e612ea14]{width:300px}.el-dialog__footer{background-color:#fff}.app-margin-right-30[data-v-54a1a6de]{margin-right:30px}.my-list-tabs[data-v-54a1a6de]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-54a1a6de]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-54a1a6de]{margin-right:5px;color:#909399}.list-title[data-v-54a1a6de]{flex:1;font-weight:400}.list-right[data-v-54a1a6de]{min-width:70px}.list-right .el-badge.item[data-v-54a1a6de]{margin-right:30px}.list li[data-v-54a1a6de]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-54a1a6de]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-54a1a6de]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-54a1a6de]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-54a1a6de]{padding:10px 20px}.box-card .el-card__header span[data-v-54a1a6de]{font-size:14px}.clearfix[data-v-54a1a6de]:before,.clearfix[data-v-54a1a6de]:after{display:table;content:""}.clearfix[data-v-54a1a6de]:after{clear:both}.el-pagination[data-v-54a1a6de]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.box-card .el-card__header[data-v-5ce1b407]{padding:10px 20px}.box-card .el-card__header span[data-v-5ce1b407]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -106,10 +107,11 @@
       const useAI = vue.ref("");
       const loadingAIReply = vue.ref(false);
       const aiNameList = vue.ref({
-        gemini: "Gemini Pro",
+        gemini: "Gemini 2.0 Flash",
         qianwen: "通义千问-turbo",
         kimi: "Kimi",
-        chatgpt: "ChatGPT"
+        chatgpt: "ChatGPT",
+        deepseek: "DeepSeek"
       });
       const constVar = vue.ref({
         email: "",
@@ -497,7 +499,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-904ce70d"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-e612ea14"]]);
   const _withScopeId = (n) => (vue.pushScopeId("data-v-54a1a6de"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$2 = { class: "setBox" };
   const _hoisted_2$1 = {
@@ -1348,7 +1350,17 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         { value: "gpt-3.5-turbo-16k-0613", label: "gpt-3.5-turbo-16k-0613" }
       ]);
       const useChatgpt = vue.ref(false);
+      const deepseekDomain = vue.ref("");
+      const deepseekApiKey = vue.ref("");
+      const deepseekModel = vue.ref("deepseek-chat");
+      const deepseekModelList = vue.ref([
+        { value: "deepseek-chat", label: "deepseek-chat" },
+        { value: "deepseek-reasoner", label: "deepseek-reasoner" }
+      ]);
+      const useDeepseek = vue.ref(false);
       const useAI = vue.ref("");
+      const systemRoleCustom = vue.ref("");
+      const useSystemRoleCustom = vue.ref(false);
       const promptCustom = vue.ref("");
       const usePromptCustom = vue.ref(false);
       vue.onBeforeMount(() => {
@@ -1363,6 +1375,10 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         chatgptApiKey.value = proxy.$storage.getUserInfo("chatgptApiKey") || "";
         chatgptModel.value = proxy.$storage.getUserInfo("chatgptModel") || "";
         useChatgpt.value = useAI.value == "chatgpt";
+        deepseekDomain.value = proxy.$storage.getUserInfo("deepseekDomain") || "";
+        deepseekApiKey.value = proxy.$storage.getUserInfo("deepseekApiKey") || "";
+        deepseekModel.value = proxy.$storage.getUserInfo("deepseekModel") || "";
+        useDeepseek.value = useAI.value == "deepseek";
         promptCustom.value = proxy.$storage.getUserInfo("promptCustom") || "";
         usePromptCustom.value = proxy.$storage.getUserInfo("usePromptCustom") || false;
       });
@@ -1438,8 +1454,51 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         emit("updateAI");
       }
       function useChatgptBeforeChange() {
-        if (!useChatgpt.value && !chatgptDomain.value) {
-          proxy.$message.error("请先填写：chatgpt api domain");
+        if (!useChatgpt.value && !chatgptApiKey.value) {
+          proxy.$message.error("请先填写：chatgpt apiKey");
+          return false;
+        }
+        return true;
+      }
+      function onDeepseekDomainChange(e) {
+        proxy.$storage.setUserInfo("deepseekDomain", e);
+        emit("updateAI");
+      }
+      function onDeepseekApiKeyChange(e) {
+        proxy.$storage.setUserInfo("deepseekApiKey", e);
+        emit("updateAI");
+      }
+      function onDeepseekModelChange(e) {
+        proxy.$storage.setUserInfo("deepseekModel", e);
+        emit("updateAI");
+      }
+      function onDeepseekChange(e) {
+        useAI.value = e ? "deepseek" : "";
+        proxy.$storage.setUserInfo("useAI", useAI.value);
+        proxy.$storage.setUserInfo("deepseekDomain", deepseekDomain.value || "");
+        proxy.$storage.setUserInfo("deepseekApiKey", deepseekApiKey.value || "");
+        proxy.$storage.setUserInfo("deepseekModel", deepseekModel.value || "");
+        emit("updateAI");
+      }
+      function useDeepseekBeforeChange() {
+        if (!useChatgpt.value && !deepseekApiKey.value) {
+          proxy.$message.error("请先填写：deepseek apiKey");
+          return false;
+        }
+        return true;
+      }
+      function onSystemRoleCustomChange(e) {
+        proxy.$storage.setUserInfo("systemRoleCustom", e);
+        emit("updateAI");
+      }
+      function onUseSystemRoleCustomChange(e) {
+        proxy.$storage.setUserInfo("useSystemRoleCustom", useSystemRoleCustom.value);
+        proxy.$storage.setUserInfo("systemRoleCustom", systemRoleCustom.value);
+        emit("updateAI");
+      }
+      function useSystemRoleCustomBeforeChange() {
+        if (!useSystemRoleCustom.value && !systemRoleCustom.value) {
+          proxy.$message.error("请先填写：自定义 SystemRole");
           return false;
         }
         return true;
@@ -1486,7 +1545,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           }, {
             default: vue.withCtx(() => [
               vue.createVNode(_component_el_form, {
-                "label-width": "110",
+                "label-width": "120",
                 "label-position": "left",
                 size: "small"
               }, {
@@ -1657,17 +1716,127 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                     ]),
                     _: 1
                   }),
+                  vue.createVNode(_component_el_form_item, { label: "Deepseek Domain" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "请自行寻找可用域名，example: chat.customai.com",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_input, {
+                            modelValue: vue.unref(deepseekDomain),
+                            "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => vue.isRef(deepseekDomain) ? deepseekDomain.value = $event : null),
+                            onChange: onDeepseekDomainChange
+                          }, null, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "Deepseek API Key" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "按接口规则填写",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_input, {
+                            modelValue: vue.unref(deepseekApiKey),
+                            "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => vue.isRef(deepseekApiKey) ? deepseekApiKey.value = $event : null),
+                            onChange: onDeepseekApiKeyChange
+                          }, null, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "Deepseek Model" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "默认使用：deepseek-chat，需接口支持",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_select, {
+                            modelValue: vue.unref(deepseekModel),
+                            "onUpdate:modelValue": _cache[12] || (_cache[12] = ($event) => vue.isRef(deepseekModel) ? deepseekModel.value = $event : null),
+                            placeholder: "Select",
+                            size: "large",
+                            style: { "width": "240px" },
+                            onChange: onDeepseekModelChange
+                          }, {
+                            default: vue.withCtx(() => [
+                              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(deepseekModelList), (item) => {
+                                return vue.openBlock(), vue.createBlock(_component_el_option, {
+                                  key: item.value,
+                                  label: item.label,
+                                  value: item.value
+                                }, null, 8, ["label", "value"]);
+                              }), 128))
+                            ]),
+                            _: 1
+                          }, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_switch, {
+                        modelValue: vue.unref(useDeepseek),
+                        "onUpdate:modelValue": _cache[13] || (_cache[13] = ($event) => vue.isRef(useDeepseek) ? useDeepseek.value = $event : null),
+                        onChange: onDeepseekChange,
+                        "before-change": useDeepseekBeforeChange
+                      }, null, 8, ["modelValue"])
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "自定义 SystemRole" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "自定义系统角色，帮你获得更个性化的回帖内容。",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_input, {
+                            type: "textarea",
+                            modelValue: vue.unref(systemRoleCustom),
+                            "onUpdate:modelValue": _cache[14] || (_cache[14] = ($event) => vue.isRef(systemRoleCustom) ? systemRoleCustom.value = $event : null),
+                            onChange: onSystemRoleCustomChange,
+                            placeholder: `默认：${vue.unref(proxy).$app.systemRole}`
+                          }, null, 8, ["modelValue", "placeholder"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_switch, {
+                        modelValue: vue.unref(useSystemRoleCustom),
+                        "onUpdate:modelValue": _cache[15] || (_cache[15] = ($event) => vue.isRef(useSystemRoleCustom) ? useSystemRoleCustom.value = $event : null),
+                        onChange: onUseSystemRoleCustomChange,
+                        "before-change": useSystemRoleCustomBeforeChange
+                      }, null, 8, ["modelValue"])
+                    ]),
+                    _: 1
+                  }),
                   vue.createVNode(_component_el_form_item, { label: "自定义 Prompt" }, {
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_tooltip, {
-                        content: "自定义提示问语，帮你获得更个性化的回帖内容。必须包含唯一变量：{{title}}",
+                        content: "自定义提示词，帮你获得更个性化的回帖内容。必须包含唯一变量：{{title}}",
                         placement: "top"
                       }, {
                         default: vue.withCtx(() => [
                           vue.createVNode(_component_el_input, {
                             type: "textarea",
                             modelValue: vue.unref(promptCustom),
-                            "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => vue.isRef(promptCustom) ? promptCustom.value = $event : null),
+                            "onUpdate:modelValue": _cache[16] || (_cache[16] = ($event) => vue.isRef(promptCustom) ? promptCustom.value = $event : null),
                             onChange: onPromptCustomChange,
                             placeholder: `默认：${vue.unref(proxy).$app.prompt}`
                           }, null, 8, ["modelValue", "placeholder"])
@@ -1681,7 +1850,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_switch, {
                         modelValue: vue.unref(usePromptCustom),
-                        "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => vue.isRef(usePromptCustom) ? usePromptCustom.value = $event : null),
+                        "onUpdate:modelValue": _cache[17] || (_cache[17] = ($event) => vue.isRef(usePromptCustom) ? usePromptCustom.value = $event : null),
                         onChange: onUsePromptCustomChange,
                         "before-change": usePromptCustomBeforeChange
                       }, null, 8, ["modelValue"])
@@ -1698,7 +1867,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-66d8ae03"]]);
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-5ce1b407"]]);
   const _hoisted_1 = { class: "margin-left" };
   const _hoisted_2 = { class: "margin-left" };
   const _sfc_main = {
@@ -2095,7 +2264,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         getVersion: function() {
           return _GM_info["script"]["version"];
         },
-        prompt: "请根据帖子标题：{{title}}，以回帖的语气生成一条15字左右的简短回复",
+        systemRole: "你是一个互联网高手，常年混迹于各大论坛，对所有内容都感兴趣，并且热衷于回复每一篇帖子，回复风格：简短、睿智、一语中的，又不失俏皮诙谐",
+        prompt: "请根据帖子标题：{{title}}，进行回帖。务必直接给出回帖内容，不要包含其他无关内容",
         isNew: function(timestamp) {
           if (!timestamp)
             return false;
@@ -2210,6 +2380,12 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
             if (!title) {
               reject("参数无效");
             }
+            let systemRole = proxy.$app.systemRole;
+            let systemRoleCustom = proxy.$storage.getUserInfo("systemRoleCustom") || "";
+            let useSystemRoleCustom = proxy.$storage.getUserInfo("useSystemRoleCustom") || false;
+            if (useSystemRoleCustom && systemRoleCustom) {
+              systemRole = systemRoleCustom;
+            }
             let prompt = proxy.$app.prompt;
             let promptCustom = proxy.$storage.getUserInfo("promptCustom") || "";
             let usePromptCustom = proxy.$storage.getUserInfo("usePromptCustom") || false;
@@ -2222,8 +2398,13 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               if (!geminiApiKey) {
                 reject("无效api key");
               }
-              let url = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${geminiApiKey}`;
+              let url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiApiKey}`;
               let data = {
+                "system_instruction": {
+                  "parts": {
+                    "text": systemRole
+                  }
+                },
                 "contents": [
                   {
                     "parts": [
@@ -2259,15 +2440,19 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               if (!qianwenApiKey) {
                 reject("无效api key");
               }
-              let url = "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation";
+              let url = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions";
               let data = {
                 "model": "qwen-turbo",
-                "parameters": {
-                  "result_format": "text"
-                },
-                "input": {
-                  "prompt": prompt
-                }
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": systemRole
+                  },
+                  {
+                    "role": "user",
+                    "content": prompt
+                  }
+                ]
               };
               _GM_xmlhttpRequest({
                 method: "POST",
@@ -2280,12 +2465,11 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                 data: `${JSON.stringify(data)}`,
                 responseType: "json",
                 onload: function(xhr) {
-                  let { output, code, message } = xhr.response;
-                  if (code) {
-                    reject(message);
+                  let { choices, error } = xhr.response;
+                  if (error) {
+                    reject(error.message);
                   }
-                  let result = output.text;
-                  result = result.replace(/[\\"]+/g, "");
+                  let result = choices[0].message.content;
                   resolve(result);
                 },
                 onerror: function(xhr) {
@@ -2301,6 +2485,10 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               let data = {
                 "model": "moonshot-v1-8k",
                 "messages": [
+                  {
+                    role: "system",
+                    content: systemRole
+                  },
                   {
                     "role": "user",
                     "content": prompt
@@ -2341,6 +2529,10 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                 "model": `${chatgptModel}`,
                 "messages": [
                   {
+                    role: "system",
+                    content: systemRole
+                  },
+                  {
                     "role": "user",
                     "content": prompt
                   }
@@ -2353,6 +2545,53 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               };
               if (chatgptApiKey) {
                 headers["Authorization"] = `Bearer ${chatgptApiKey}`;
+              }
+              _GM_xmlhttpRequest({
+                method: "POST",
+                url,
+                headers,
+                data: `${JSON.stringify(data)}`,
+                responseType: "json",
+                onload: function(xhr) {
+                  let { choices, error } = xhr.response;
+                  if (error) {
+                    reject(error.message);
+                  }
+                  let result = choices[0].message.content;
+                  resolve(result);
+                },
+                onerror: function(xhr) {
+                  reject(xhr.response);
+                }
+              });
+            } else if (useAI == "deepseek") {
+              let deepseekDomain = proxy.$storage.getUserInfo("deepseekDomain") || "api.deepseek.com";
+              let deepseekModel = proxy.$storage.getUserInfo("deepseekModel") || "deepseek-chat";
+              let deepseekApiKey = proxy.$storage.getUserInfo("deepseekApiKey") || "";
+              if (!deepseekDomain) {
+                reject("无效地址");
+              }
+              let url = `https://${deepseekDomain}/chat/completions`;
+              let data = {
+                "model": `${deepseekModel}`,
+                "messages": [
+                  {
+                    role: "system",
+                    content: systemRole
+                  },
+                  {
+                    "role": "user",
+                    "content": prompt
+                  }
+                ],
+                "stream": false
+              };
+              let headers = {
+                "Content-Type": "application/json; charset=utf-8",
+                "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`
+              };
+              if (deepseekApiKey) {
+                headers["Authorization"] = `Bearer ${deepseekApiKey}`;
               }
               _GM_xmlhttpRequest({
                 method: "POST",
