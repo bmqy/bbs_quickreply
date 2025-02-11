@@ -159,7 +159,7 @@ function onDeepseekChange(e){
     emit('updateAI');
 }
 function useDeepseekBeforeChange(){
-    if(!useChatgpt.value && !deepseekApiKey.value){
+    if(!useDeepseek.value && !deepseekApiKey.value){
         proxy.$message.error('请先填写：deepseek apiKey');
         return false;
     }
@@ -206,6 +206,7 @@ watch(useAI, (n, o) => {
     useQianwen.value = n == 'qianwen';
     useKimi.value = n == 'kimi';
     useChatgpt.value = n == 'chatgpt';
+    useDeepseek.value = n == 'deepseek';
 })
 </script>
 
