@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.7.8
+// @version      3.7.9
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -45,7 +45,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-(e=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=e,document.head.append(a)})(' .quickReplyBox[data-v-ffb470e5]{position:relative}.quickReplyBox .el-form[data-v-ffb470e5]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-ffb470e5]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-ffb470e5]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-ffb470e5]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-ffb470e5],.el-form-item--small.el-form-item[data-v-ffb470e5]{margin-bottom:10px}.el-select[data-v-ffb470e5]{width:300px}.el-dialog__footer{background-color:#fff}.app-margin-right-30[data-v-54a1a6de]{margin-right:30px}.my-list-tabs[data-v-54a1a6de]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-54a1a6de]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-54a1a6de]{margin-right:5px;color:#909399}.list-title[data-v-54a1a6de]{flex:1;font-weight:400}.list-right[data-v-54a1a6de]{min-width:70px}.list-right .el-badge.item[data-v-54a1a6de]{margin-right:30px}.list li[data-v-54a1a6de]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-54a1a6de]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-54a1a6de]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-54a1a6de]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-54a1a6de]{padding:10px 20px}.box-card .el-card__header span[data-v-54a1a6de]{font-size:14px}.clearfix[data-v-54a1a6de]:before,.clearfix[data-v-54a1a6de]:after{display:table;content:""}.clearfix[data-v-54a1a6de]:after{clear:both}.el-pagination[data-v-54a1a6de]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.box-card .el-card__header[data-v-e87ab068]{padding:10px 20px}.box-card .el-card__header span[data-v-e87ab068]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(e=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=e,document.head.append(a)})(' .quickReplyBox[data-v-1b723407]{position:relative}.quickReplyBox .el-form[data-v-1b723407]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-1b723407]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-1b723407]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1b723407]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1b723407],.el-form-item--small.el-form-item[data-v-1b723407]{margin-bottom:10px}.el-select[data-v-1b723407]{width:300px}.el-dialog__footer{background-color:#fff}.app-margin-right-30[data-v-54a1a6de]{margin-right:30px}.my-list-tabs[data-v-54a1a6de]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-54a1a6de]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-54a1a6de]{margin-right:5px;color:#909399}.list-title[data-v-54a1a6de]{flex:1;font-weight:400}.list-right[data-v-54a1a6de]{min-width:70px}.list-right .el-badge.item[data-v-54a1a6de]{margin-right:30px}.list li[data-v-54a1a6de]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-54a1a6de]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-54a1a6de]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-54a1a6de]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-54a1a6de]{padding:10px 20px}.box-card .el-card__header span[data-v-54a1a6de]{font-size:14px}.clearfix[data-v-54a1a6de]:before,.clearfix[data-v-54a1a6de]:after{display:table;content:""}.clearfix[data-v-54a1a6de]:after{clear:both}.el-pagination[data-v-54a1a6de]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.box-card .el-card__header[data-v-e87ab068]{padding:10px 20px}.box-card .el-card__header span[data-v-e87ab068]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
 
 (function (vue, ElementPlus, ElementPlusIconsVue) {
   'use strict';
@@ -467,7 +467,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
             "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(setShow) ? setShow.value = $event : null),
             onClose: closeSet,
             title: _ctx.$app.getName(),
-            width: "75%",
+            width: "96%",
             "show-close": true,
             "destroy-on-close": "",
             "append-to-body": ""
@@ -499,7 +499,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-ffb470e5"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-1b723407"]]);
   const _withScopeId = (n) => (vue.pushScopeId("data-v-54a1a6de"), n = n(), vue.popScopeId(), n);
   const _hoisted_1$2 = { class: "setBox" };
   const _hoisted_2$1 = {
