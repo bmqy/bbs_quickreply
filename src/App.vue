@@ -376,7 +376,7 @@ watch(fwin_replyLoaded, (n)=>{
 			v-model="setShow"
             @close="closeSet"
 			:title="$app.getName()"
-            width="75%"
+            width="96%"
 			:show-close="true"
             destroy-on-close
 			append-to-body
