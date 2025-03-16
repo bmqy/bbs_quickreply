@@ -12,7 +12,7 @@ const http = function(api, data, method){
             headers: {
                 "Content-Type": "application/json; charset=utf-8"
             },
-            data: method==='post' ? `${JSON.stringify(data)}` : '',
+            data: method==='post' ? `${JSON.stringify(data)}` : null,
             responseType: 'json',
             onload: function (xhr) {
                 if (xhr.status == 200) {
