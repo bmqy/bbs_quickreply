@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.7.7
+// @version      3.7.8
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -2305,7 +2305,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         headers: {
           "Content-Type": "application/json; charset=utf-8"
         },
-        data: method === "post" ? `${JSON.stringify(data)}` : "",
+        data: method === "post" ? `${JSON.stringify(data)}` : null,
         responseType: "json",
         onload: function(xhr) {
           if (xhr.status == 200) {
