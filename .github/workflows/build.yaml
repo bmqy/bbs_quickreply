@@ -18,6 +18,8 @@ jobs:
         steps:
             - name: 检查分支
               uses: actions/checkout@master
+              with:
+                ref: ${{ github.ref }}
 
             - name: 安装node环境
               uses: actions/setup-node@master
@@ -37,9 +39,10 @@ jobs:
                 git config --global user.email "qq88268459@126.com"
                 git config --global user.name "bmqy"
                 git add .
-                git commit -m "打包更新" -a
+                git commit -m "打包更新: 来自 ${{ github.ref_name }} 分支" -a || echo "没有变更需要提交"
 
             - name: 推送更新到仓库
               uses: ad-m/github-push-action@master
               with:
                 github_token: ${{ secrets.GITHUB_TOKEN }}
+                branch: ${{ github.ref_name }}
