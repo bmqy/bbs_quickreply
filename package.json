@@ -4,15 +4,15 @@
   "version": "3.7.9",
   "author": "bmqy",
   "description": "使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！",
-    "license": "ISC",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/bmqy/bbs_quickreply.git"
-    },
-    "bugs": {
-        "url": "https://github.com/bmqy/bbs_quickreply/issues"
-    },
-    "homepage": "https://github.com/bmqy/bbs_quickreply#readme",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmqy/bbs_quickreply.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bmqy/bbs_quickreply/issues"
+  },
+  "homepage": "https://github.com/bmqy/bbs_quickreply#readme",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -26,11 +26,13 @@
     "leancloud-storage": "4.11.1",
     "sass": "^1.62.1",
     "sass-loader": "^13.3.0",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "webdav": "^5.8.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.1",
     "unplugin-auto-import": "^0.16.2",
+    "unplugin-element-plus": "^0.9.1",
     "unplugin-icons": "^0.16.1",
     "unplugin-vue-components": "^0.24.1",
     "vite": "^4.3.5",

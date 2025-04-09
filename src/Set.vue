@@ -1,5 +1,4 @@
 <script setup name="quickReplySet">
-import { onMounted } from 'vue';
 
 const {proxy} = getCurrentInstance();
 const myList = ref([]);
@@ -29,6 +28,12 @@ const constVar = ref({
     url: '',
     base64: false,
 });
+const webdavConfig = ref({
+    enabled: false,
+    url: '',
+    username: '',
+    password: ''
+});
 const emit = defineEmits(['updateMyList', 'updateConstVar', 'updateAIModel']);
 onBeforeMount(()=>{
     isLogin.value = proxy.$storage.getUserInfo('userId');
@@ -36,6 +41,7 @@ onBeforeMount(()=>{
     realtimeBackup.value = proxy.$storage.getUserInfo('realtimeBackup') || false;
     submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
     constVar.value = proxy.$storage.getUserInfo('constVar') || constVar.value;
+    webdavConfig.value = proxy.$storage.getUserInfo('webdavConfig') || webdavConfig.value;
     getMyList();
     getSystemList();
 });
@@ -213,6 +219,50 @@ function constVarChange(){
     emit('updateConstVar');
     realtimeBackup.value && uploadAll();
 }
+
+// 测试 WebDAV 连接
+async function testWebDAV() {
+    if (!webdavConfig.value.url || !webdavConfig.value.username || !webdavConfig.value.password) {
+        proxy.$message.error('请填写完整的 WebDAV 配置信息');
+        return;
+    }
+    
+    try {
+        await new Promise((resolve, reject) => {
+            GM_xmlhttpRequest({
+                method: 'PROPFIND',
+                url: webdavConfig.value.url,
+                headers: {
+                    'Authorization': 'Basic ' + btoa(webdavConfig.value.username + ':' + webdavConfig.value.password),
+                    'Depth': '0',
+                    'Content-Type': 'application/xml',
+                    'Accept': 'application/xml, text/xml'
+                },
+                data: '<?xml version="1.0" encoding="utf-8"?><propfind xmlns="DAV:"><prop><resourcetype/></prop></propfind>',
+                onload: function(response) {
+                    if (response.status === 207 || (response.status >= 200 && response.status < 300)) {
+                        resolve(true);
+                    } else {
+                        reject(new Error('连接失败: ' + response.statusText));
+                    }
+                },
+                onerror: function(error) {
+                    reject(new Error('连接失败: ' + error.message));
+                }
+            });
+        });
+        
+        proxy.$message.success('WebDAV 连接测试成功');
+    } catch (error) {
+        proxy.$message.error('WebDAV 连接测试失败: ' + error.message);
+    }
+}
+
+// 保存 WebDAV 配置
+function saveWebDAVConfig() {
+    proxy.$storage.setUserInfo('webdavConfig', webdavConfig.value);
+    proxy.$message.success('WebDAV 配置已保存');
+}
 </script>
 
 <template>
@@ -279,6 +329,9 @@ function constVarChange(){
                                 <div>
                                     <el-checkbox v-model="submitNow" label="立即提交，选择快捷回帖内容后立即提交回帖" size="small" :checked="submitNow" @change="onSubmitNowChange" />
                                 </div>
+                                <div>
+                                    <el-checkbox v-model="webdavConfig.enabled" label="启用 WebDAV 备份" size="small" @change="saveWebDAVConfig" />
+                                </div>
                                 <el-space direction="vertical" alignment="flex-start" style="margin-top: 18px;">
                                     <div>
                                         <el-text type="info">* AI和常量只存在本地，不参与同步</el-text>
@@ -291,6 +344,31 @@ function constVarChange(){
                                     </div>
                                 </el-space>
                             </el-space>
+                        </el-tab-pane>
+                        <el-tab-pane v-if="isLogin" name="webdav" label="WebDAV">
+                            <el-form :model="webdavConfig" label-width="80px">
+                                <el-form-item label="服务器">
+                                    <el-input v-model="webdavConfig.url" placeholder="请输入 WebDAV 服务器地址" />
+                                </el-form-item>
+                                <el-form-item label="用户名">
+                                    <el-input v-model="webdavConfig.username" placeholder="请输入用户名" />
+                                </el-form-item>
+                                <el-form-item label="密码">
+                                    <el-input v-model="webdavConfig.password" type="password" placeholder="请输入密码" show-password />
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="primary" @click="saveWebDAVConfig">保存配置</el-button>
+                                    <el-button type="success" @click="testWebDAV">测试连接</el-button>
+                                </el-form-item>
+                                <el-space direction="vertical" alignment="flex-start" style="margin-top: 18px;">
+                                    <div>
+                                        <el-text type="info">* WebDAV 配置仅存储在本地，不会上传至云端</el-text>
+                                    </div>
+                                    <div>
+                                        <el-text type="info">* 启用 WebDAV 后，所有的同步操作将通过 WebDAV 进行</el-text>
+                                    </div>
+                                </el-space>
+                            </el-form>
                         </el-tab-pane>
                         <el-tab-pane v-if="isLogin" name="constVar" label="常量">
                             <el-form :model="constVar" label-width="60" style="max-width: 600px">
@@ -336,7 +414,7 @@ function constVarChange(){
                 </el-col>
                 <el-col :span="15" :md="{span: 15}" :sm="{span: 24}" :xs="{span: 24}" :style="{'margin-top': windowSize.width<992?'15px':0}">
                     <el-card class="box-card" shadow="never" :body-style="{padding: '0 20px 20px'}">
-                        <template #header class="cle        arfix">
+                        <template #header class="clearfix">
                             <span>网友分享的</span>
                         </template>
 

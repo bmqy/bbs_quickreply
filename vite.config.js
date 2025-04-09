@@ -44,8 +44,17 @@ export default defineConfig({
             'api.moonshot.cn',
             'api.openai.com',
             'api.deepseek.com',
-            '*'
-        ]
+            'dav.jianguoyun.com'
+        ],
+        grant: [
+            'GM_xmlhttpRequest',
+            'GM_setValue',
+            'GM_getValue',
+            'GM_listValues',
+            'GM_info',
+            'GM_download'
+        ],
+        "run-at": "document-end"
       },
       build: {
         externalGlobals: {
