@@ -24,11 +24,11 @@
 // @match        *://www.v2ex.com/t/*
 // @match        *://discuss.flarum.org/*
 // @match        *://www.nodeloc.com/*
-// @require      https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js
+// @require      https://cdn.jsdelivr.net/npm/vue@3.5.13/dist/vue.global.prod.js
 // @require      data:application/javascript,%3Bwindow.Vue%3DVue%3B
-// @require      https://cdn.jsdelivr.net/npm/element-plus@2.3.6/dist/index.full.min.js
-// @require      https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.1.0/dist/index.iife.min.js
-// @resource     element-plus/dist/index.css  https://cdn.jsdelivr.net/npm/element-plus@2.3.6/dist/index.css
+// @require      https://cdn.jsdelivr.net/npm/element-plus@2.9.7/dist/index.full.min.js
+// @require      https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.3.1/dist/index.iife.min.js
+// @resource     element-plus/dist/index.css  https://cdn.jsdelivr.net/npm/element-plus@2.9.7/dist/index.css
 // @connect      quickreply.bmqy.net
 // @connect      generativelanguage.googleapis.com
 // @connect      dashscope.aliyuncs.com
@@ -48,7 +48,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(t=>{const e=document.createElement("style");e.dataset.source="vite-plugin-monkey",e.textContent=t,document.head.append(e)})(' .box-card .el-card__header[data-v-e87ab068]{padding:10px 20px}.box-card .el-card__header span[data-v-e87ab068]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.quickReplyBox[data-v-1b723407]{position:relative}.quickReplyBox .el-form[data-v-1b723407]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-1b723407]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-1b723407]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1b723407]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1b723407],.el-form-item--small.el-form-item[data-v-1b723407]{margin-bottom:10px}.el-select[data-v-1b723407]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-29a543ee]{display:flex;align-items:center;justify-content:space-between}.header-left[data-v-29a543ee]{display:flex;align-items:center}.header-left .login-type[data-v-29a543ee]{margin-left:10px;font-size:14px;color:#409eff}.login-container[data-v-29a543ee]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-29a543ee]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-29a543ee]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-29a543ee]{padding:10px 0}.settings-container .settings-footer[data-v-29a543ee]{margin-top:20px;text-align:right}.my-replies-card[data-v-29a543ee]{min-height:300px}.my-replies-card .card-title[data-v-29a543ee]{font-weight:700}.list-left[data-v-29a543ee]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-29a543ee]{margin-right:5px;color:#909399}.list-title[data-v-29a543ee]{flex:1;font-weight:400}.list-right[data-v-29a543ee]{min-width:70px}.list-right .el-badge.item[data-v-29a543ee]{margin-right:30px}.list li[data-v-29a543ee]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-29a543ee]:hover{background-color:#f5f5f5}.tips[data-v-29a543ee]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-29a543ee]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-29a543ee]{padding:10px 20px}.box-card .el-card__header span[data-v-29a543ee]{font-size:14px}.clearfix[data-v-29a543ee]:before,.clearfix[data-v-29a543ee]:after{display:table;content:""}.clearfix[data-v-29a543ee]:after{clear:both}.el-pagination[data-v-29a543ee]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap} ');
+(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.box-card .el-card__header[data-v-c229a9d9]{padding:10px 20px}.box-card .el-card__header span[data-v-c229a9d9]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.quickReplyBox[data-v-1b723407]{position:relative}.quickReplyBox .el-form[data-v-1b723407]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-1b723407]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-1b723407]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1b723407]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1b723407],.el-form-item--small.el-form-item[data-v-1b723407]{margin-bottom:10px}.el-select[data-v-1b723407]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-af3466cf]{width:100%}.header-left[data-v-af3466cf]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-af3466cf]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-af3466cf]{margin-bottom:0}}.header-right[data-v-af3466cf]{width:100%}.header-right .button-group[data-v-af3466cf]{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-af3466cf]{justify-content:flex-end}}.login-container[data-v-af3466cf]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-af3466cf]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-af3466cf]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-af3466cf]{padding:20px}.settings-header[data-v-af3466cf]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-af3466cf]{min-height:300px}.my-replies-card .card-title[data-v-af3466cf]{font-weight:700}.list-left[data-v-af3466cf]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-af3466cf]{margin-right:5px;color:#909399}.list-title[data-v-af3466cf]{flex:1;font-weight:400}.list-right[data-v-af3466cf]{min-width:70px}.list-right .el-badge.item[data-v-af3466cf]{margin-right:30px}.list li[data-v-af3466cf]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-af3466cf]:hover{background-color:#f5f5f5}.tips[data-v-af3466cf]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-af3466cf]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-af3466cf]{padding:10px 20px}.box-card .el-card__header span[data-v-af3466cf]{font-size:14px}.clearfix[data-v-af3466cf]:before,.clearfix[data-v-af3466cf]:after{display:table;content:""}.clearfix[data-v-af3466cf]:after{clear:both}.el-pagination[data-v-af3466cf]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%;margin:5vh auto!important}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important} ');
 
 (function (ElementPlusIconsVue, ElementPlus, vue) {
   'use strict';
@@ -77,6 +77,185 @@
     return o.innerText = t, document.head.append(o), t;
   };
   cssLoader("element-plus/dist/index.css");
+  /*! Element Plus v2.9.7 */
+  var zhCn = {
+    name: "zh-cn",
+    el: {
+      breadcrumb: {
+        label: "面包屑"
+      },
+      colorpicker: {
+        confirm: "确定",
+        clear: "清空",
+        defaultLabel: "颜色选择器",
+        description: "当前颜色 {color}，按 Enter 键选择新颜色",
+        alphaLabel: "选择透明度的值"
+      },
+      datepicker: {
+        now: "此刻",
+        today: "今天",
+        cancel: "取消",
+        clear: "清空",
+        confirm: "确定",
+        dateTablePrompt: "使用方向键与 Enter 键可选择日期",
+        monthTablePrompt: "使用方向键与 Enter 键可选择月份",
+        yearTablePrompt: "使用方向键与 Enter 键可选择年份",
+        selectedDate: "已选日期",
+        selectDate: "选择日期",
+        selectTime: "选择时间",
+        startDate: "开始日期",
+        startTime: "开始时间",
+        endDate: "结束日期",
+        endTime: "结束时间",
+        prevYear: "前一年",
+        nextYear: "后一年",
+        prevMonth: "上个月",
+        nextMonth: "下个月",
+        year: "年",
+        month1: "1 月",
+        month2: "2 月",
+        month3: "3 月",
+        month4: "4 月",
+        month5: "5 月",
+        month6: "6 月",
+        month7: "7 月",
+        month8: "8 月",
+        month9: "9 月",
+        month10: "10 月",
+        month11: "11 月",
+        month12: "12 月",
+        weeks: {
+          sun: "日",
+          mon: "一",
+          tue: "二",
+          wed: "三",
+          thu: "四",
+          fri: "五",
+          sat: "六"
+        },
+        weeksFull: {
+          sun: "星期日",
+          mon: "星期一",
+          tue: "星期二",
+          wed: "星期三",
+          thu: "星期四",
+          fri: "星期五",
+          sat: "星期六"
+        },
+        months: {
+          jan: "一月",
+          feb: "二月",
+          mar: "三月",
+          apr: "四月",
+          may: "五月",
+          jun: "六月",
+          jul: "七月",
+          aug: "八月",
+          sep: "九月",
+          oct: "十月",
+          nov: "十一月",
+          dec: "十二月"
+        }
+      },
+      inputNumber: {
+        decrease: "减少数值",
+        increase: "增加数值"
+      },
+      select: {
+        loading: "加载中",
+        noMatch: "无匹配数据",
+        noData: "无数据",
+        placeholder: "请选择"
+      },
+      dropdown: {
+        toggleDropdown: "切换下拉选项"
+      },
+      mention: {
+        loading: "加载中"
+      },
+      cascader: {
+        noMatch: "无匹配数据",
+        loading: "加载中",
+        placeholder: "请选择",
+        noData: "暂无数据"
+      },
+      pagination: {
+        goto: "前往",
+        pagesize: "条/页",
+        total: "共 {total} 条",
+        pageClassifier: "页",
+        page: "页",
+        prev: "上一页",
+        next: "下一页",
+        currentPage: "第 {pager} 页",
+        prevPages: "向前 {pager} 页",
+        nextPages: "向后 {pager} 页",
+        deprecationWarning: "你使用了一些已被废弃的用法，请参考 el-pagination 的官方文档"
+      },
+      dialog: {
+        close: "关闭此对话框"
+      },
+      drawer: {
+        close: "关闭此对话框"
+      },
+      messagebox: {
+        title: "提示",
+        confirm: "确定",
+        cancel: "取消",
+        error: "输入的数据不合法!",
+        close: "关闭此对话框"
+      },
+      upload: {
+        deleteTip: "按 delete 键可删除",
+        delete: "删除",
+        preview: "查看图片",
+        continue: "继续上传"
+      },
+      slider: {
+        defaultLabel: "滑块介于 {min} 至 {max}",
+        defaultRangeStartLabel: "选择起始值",
+        defaultRangeEndLabel: "选择结束值"
+      },
+      table: {
+        emptyText: "暂无数据",
+        confirmFilter: "筛选",
+        resetFilter: "重置",
+        clearFilter: "全部",
+        sumText: "合计"
+      },
+      tour: {
+        next: "下一步",
+        previous: "上一步",
+        finish: "结束导览"
+      },
+      tree: {
+        emptyText: "暂无数据"
+      },
+      transfer: {
+        noMatch: "无匹配数据",
+        noData: "无数据",
+        titles: ["列表 1", "列表 2"],
+        filterPlaceholder: "请输入搜索内容",
+        noCheckedFormat: "共 {total} 项",
+        hasCheckedFormat: "已选 {checked}/{total} 项"
+      },
+      image: {
+        error: "加载失败"
+      },
+      pageHeader: {
+        title: "返回"
+      },
+      popconfirm: {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消"
+      },
+      carousel: {
+        leftArrow: "上一张幻灯片",
+        rightArrow: "下一张幻灯片",
+        indicator: "幻灯片切换至索引 {index}"
+      }
+    }
+  };
   const _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -88,7 +267,7 @@
   const _sfc_main$3 = {
     __name: "Ai",
     emits: ["updateAI"],
-    setup(__props, { emit }) {
+    setup(__props, { emit: __emit }) {
       const { proxy } = vue.getCurrentInstance();
       const geminiApiKey = vue.ref("");
       const useGemini = vue.ref(false);
@@ -129,6 +308,7 @@
       const useSystemRoleCustom = vue.ref(false);
       const promptCustom = vue.ref("");
       const usePromptCustom = vue.ref(false);
+      const emit = __emit;
       vue.onBeforeMount(() => {
         useAI.value = proxy.$storage.getUserInfo("useAI") || "";
         geminiApiKey.value = proxy.$storage.getUserInfo("geminiApiKey") || "";
@@ -325,8 +505,8 @@
                       }, {
                         default: vue.withCtx(() => [
                           vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(geminiApiKey),
-                            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(geminiApiKey) ? geminiApiKey.value = $event : null),
+                            modelValue: geminiApiKey.value,
+                            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => geminiApiKey.value = $event),
                             onChange: onGeminiApiKeyChange
                           }, null, 8, ["modelValue"])
                         ]),
@@ -338,8 +518,8 @@
                   vue.createVNode(_component_el_form_item, { label: "启用" }, {
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(useGemini),
-                        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(useGemini) ? useGemini.value = $event : null),
+                        modelValue: useGemini.value,
+                        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => useGemini.value = $event),
                         onChange: onGeminiChange,
                         "before-change": useGeminiBeforeChange
                       }, null, 8, ["modelValue"])
@@ -354,8 +534,8 @@
                       }, {
                         default: vue.withCtx(() => [
                           vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(qianwenApiKey),
-                            "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => vue.isRef(qianwenApiKey) ? qianwenApiKey.value = $event : null),
+                            modelValue: qianwenApiKey.value,
+                            "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => qianwenApiKey.value = $event),
                             onChange: onQianwenApiKeyChange
                           }, null, 8, ["modelValue"])
                         ]),
@@ -367,8 +547,8 @@
                   vue.createVNode(_component_el_form_item, { label: "启用" }, {
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(useQianwen),
-                        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => vue.isRef(useQianwen) ? useQianwen.value = $event : null),
+                        modelValue: useQianwen.value,
+                        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => useQianwen.value = $event),
                         onChange: onQianwenChange,
                         "before-change": useQianwenBeforeChange
                       }, null, 8, ["modelValue"])
@@ -383,8 +563,8 @@
                       }, {
                         default: vue.withCtx(() => [
                           vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(kimiApiKey),
-                            "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => vue.isRef(kimiApiKey) ? kimiApiKey.value = $event : null),
+                            modelValue: kimiApiKey.value,
+                            "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => kimiApiKey.value = $event),
                             onChange: onKimiApiKeyChange
                           }, null, 8, ["modelValue"])
                         ]),
@@ -396,8 +576,8 @@
                   vue.createVNode(_component_el_form_item, { label: "启用" }, {
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(useKimi),
-                        "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => vue.isRef(useKimi) ? useKimi.value = $event : null),
+                        modelValue: useKimi.value,
+                        "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => useKimi.value = $event),
                         onChange: onKimiChange,
                         "before-change": useKimiBeforeChange
                       }, null, 8, ["modelValue"])
@@ -412,8 +592,8 @@
                       }, {
                         default: vue.withCtx(() => [
                           vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(chatgptDomain),
-                            "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => vue.isRef(chatgptDomain) ? chatgptDomain.value = $event : null),
+                            modelValue: chatgptDomain.value,
+                            "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => chatgptDomain.value = $event),
                             onChange: onChatgptDomainChange
                           }, null, 8, ["modelValue"])
                         ]),
@@ -430,8 +610,8 @@
                       }, {
                         default: vue.withCtx(() => [
                           vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(chatgptApiKey),
-                            "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => vue.isRef(chatgptApiKey) ? chatgptApiKey.value = $event : null),
+                            modelValue: chatgptApiKey.value,
+                            "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => chatgptApiKey.value = $event),
                             onChange: onChatgptApiKeyChange
                           }, null, 8, ["modelValue"])
                         ]),
@@ -448,15 +628,15 @@
                       }, {
                         default: vue.withCtx(() => [
                           vue.createVNode(_component_el_select, {
-                            modelValue: vue.unref(chatgptModel),
-                            "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => vue.isRef(chatgptModel) ? chatgptModel.value = $event : null),
+                            modelValue: chatgptModel.value,
+                            "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => chatgptModel.value = $event),
                             placeholder: "Select",
                             size: "large",
                             style: { "width": "240px" },
                             onChange: onChatgptModelChange
                           }, {
                             default: vue.withCtx(() => [
-                              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(chatgptModelList), (item) => {
+                              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(chatgptModelList.value, (item) => {
                                 return vue.openBlock(), vue.createBlock(_component_el_option, {
                                   key: item.value,
                                   label: item.label,
@@ -475,8 +655,8 @@
                   vue.createVNode(_component_el_form_item, { label: "启用" }, {
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(useChatgpt),
-                        "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => vue.isRef(useChatgpt) ? useChatgpt.value = $event : null),
+                        modelValue: useChatgpt.value,
+                        "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => useChatgpt.value = $event),
                         onChange: onChatgptChange,
                         "before-change": useChatgptBeforeChange
                       }, null, 8, ["modelValue"])
@@ -491,8 +671,8 @@
                       }, {
                         default: vue.withCtx(() => [
                           vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(deepseekDomain),
-                            "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => vue.isRef(deepseekDomain) ? deepseekDomain.value = $event : null),
+                            modelValue: deepseekDomain.value,
+                            "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => deepseekDomain.value = $event),
                             onChange: onDeepseekDomainChange
                           }, null, 8, ["modelValue"])
                         ]),
@@ -509,8 +689,8 @@
                       }, {
                         default: vue.withCtx(() => [
                           vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(deepseekApiKey),
-                            "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => vue.isRef(deepseekApiKey) ? deepseekApiKey.value = $event : null),
+                            modelValue: deepseekApiKey.value,
+                            "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => deepseekApiKey.value = $event),
                             onChange: onDeepseekApiKeyChange
                           }, null, 8, ["modelValue"])
                         ]),
@@ -527,15 +707,15 @@
                       }, {
                         default: vue.withCtx(() => [
                           vue.createVNode(_component_el_select, {
-                            modelValue: vue.unref(deepseekModel),
-                            "onUpdate:modelValue": _cache[12] || (_cache[12] = ($event) => vue.isRef(deepseekModel) ? deepseekModel.value = $event : null),
+                            modelValue: deepseekModel.value,
+                            "onUpdate:modelValue": _cache[12] || (_cache[12] = ($event) => deepseekModel.value = $event),
                             placeholder: "Select",
                             size: "large",
                             style: { "width": "240px" },
                             onChange: onDeepseekModelChange
                           }, {
                             default: vue.withCtx(() => [
-                              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(deepseekModelList), (item) => {
+                              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(deepseekModelList.value, (item) => {
                                 return vue.openBlock(), vue.createBlock(_component_el_option, {
                                   key: item.value,
                                   label: item.label,
@@ -554,8 +734,8 @@
                   vue.createVNode(_component_el_form_item, { label: "启用" }, {
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(useDeepseek),
-                        "onUpdate:modelValue": _cache[13] || (_cache[13] = ($event) => vue.isRef(useDeepseek) ? useDeepseek.value = $event : null),
+                        modelValue: useDeepseek.value,
+                        "onUpdate:modelValue": _cache[13] || (_cache[13] = ($event) => useDeepseek.value = $event),
                         onChange: onDeepseekChange,
                         "before-change": useDeepseekBeforeChange
                       }, null, 8, ["modelValue"])
@@ -571,8 +751,8 @@
                         default: vue.withCtx(() => [
                           vue.createVNode(_component_el_input, {
                             type: "textarea",
-                            modelValue: vue.unref(systemRoleCustom),
-                            "onUpdate:modelValue": _cache[14] || (_cache[14] = ($event) => vue.isRef(systemRoleCustom) ? systemRoleCustom.value = $event : null),
+                            modelValue: systemRoleCustom.value,
+                            "onUpdate:modelValue": _cache[14] || (_cache[14] = ($event) => systemRoleCustom.value = $event),
                             onChange: onSystemRoleCustomChange,
                             placeholder: `默认：${vue.unref(proxy).$app.systemRole}`
                           }, null, 8, ["modelValue", "placeholder"])
@@ -585,8 +765,8 @@
                   vue.createVNode(_component_el_form_item, { label: "启用" }, {
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(useSystemRoleCustom),
-                        "onUpdate:modelValue": _cache[15] || (_cache[15] = ($event) => vue.isRef(useSystemRoleCustom) ? useSystemRoleCustom.value = $event : null),
+                        modelValue: useSystemRoleCustom.value,
+                        "onUpdate:modelValue": _cache[15] || (_cache[15] = ($event) => useSystemRoleCustom.value = $event),
                         onChange: onUseSystemRoleCustomChange,
                         "before-change": useSystemRoleCustomBeforeChange
                       }, null, 8, ["modelValue"])
@@ -602,8 +782,8 @@
                         default: vue.withCtx(() => [
                           vue.createVNode(_component_el_input, {
                             type: "textarea",
-                            modelValue: vue.unref(promptCustom),
-                            "onUpdate:modelValue": _cache[16] || (_cache[16] = ($event) => vue.isRef(promptCustom) ? promptCustom.value = $event : null),
+                            modelValue: promptCustom.value,
+                            "onUpdate:modelValue": _cache[16] || (_cache[16] = ($event) => promptCustom.value = $event),
                             onChange: onPromptCustomChange,
                             placeholder: `默认：${vue.unref(proxy).$app.prompt}`
                           }, null, 8, ["modelValue", "placeholder"])
@@ -616,8 +796,8 @@
                   vue.createVNode(_component_el_form_item, { label: "启用" }, {
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(usePromptCustom),
-                        "onUpdate:modelValue": _cache[17] || (_cache[17] = ($event) => vue.isRef(usePromptCustom) ? usePromptCustom.value = $event : null),
+                        modelValue: usePromptCustom.value,
+                        "onUpdate:modelValue": _cache[17] || (_cache[17] = ($event) => usePromptCustom.value = $event),
                         onChange: onUsePromptCustomChange,
                         "before-change": usePromptCustomBeforeChange
                       }, null, 8, ["modelValue"])
@@ -634,7 +814,7 @@
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-e87ab068"]]);
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-c229a9d9"]]);
   var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
   var _GM_listValues = /* @__PURE__ */ (() => typeof GM_listValues != "undefined" ? GM_listValues : void 0)();
   var _GM_setValue = /* @__PURE__ */ (() => typeof GM_setValue != "undefined" ? GM_setValue : void 0)();
@@ -1389,7 +1569,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
   const _sfc_main$1 = {
     __name: "Login",
     emits: ["onSuccess", "onClose"],
-    setup(__props, { emit }) {
+    setup(__props, { emit: __emit }) {
       const { proxy } = vue.getCurrentInstance();
       const checkName = (rule, value, callback) => {
         if (!/[0-9a-zA-Z@\.]{5,20}/.test(value)) {
@@ -1472,6 +1652,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           { required: true, message: "密码不能为空", trigger: "blur" }
         ]
       });
+      const emit = __emit;
       const loginSuccess = (res) => {
         proxy.$storage.setUserInfo("userId", res.data.userId);
         emit("onSuccess");
@@ -1578,7 +1759,6 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         const _component_el_input = vue.resolveComponent("el-input");
         const _component_el_form_item = vue.resolveComponent("el-form-item");
         const _component_el_button = vue.resolveComponent("el-button");
-        const _component_el_link = vue.resolveComponent("el-link");
         const _component_el_space = vue.resolveComponent("el-space");
         const _component_el_form = vue.resolveComponent("el-form");
         const _component_el_text = vue.resolveComponent("el-text");
@@ -1643,30 +1823,32 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                     type: "primary",
                     onClick: loginOnSubmit
                   }, {
-                    default: vue.withCtx(() => [
+                    default: vue.withCtx(() => _cache[11] || (_cache[11] = [
                       vue.createTextVNode("登录")
-                    ]),
+                    ])),
                     _: 1
                   }),
                   vue.createElementVNode("div", _hoisted_1$1, [
                     vue.createVNode(_component_el_space, null, {
                       default: vue.withCtx(() => [
-                        vue.createVNode(_component_el_link, {
-                          href: "javascript:;",
+                        vue.createVNode(_component_el_button, {
+                          type: "primary",
+                          text: "",
                           onClick: _cache[3] || (_cache[3] = ($event) => formMode.value = 0)
                         }, {
-                          default: vue.withCtx(() => [
+                          default: vue.withCtx(() => _cache[12] || (_cache[12] = [
                             vue.createTextVNode("注册")
-                          ]),
+                          ])),
                           _: 1
                         }),
-                        vue.createVNode(_component_el_link, {
-                          href: "javascript:;",
+                        vue.createVNode(_component_el_button, {
+                          type: "primary",
+                          text: "",
                           onClick: close
                         }, {
-                          default: vue.withCtx(() => [
+                          default: vue.withCtx(() => _cache[13] || (_cache[13] = [
                             vue.createTextVNode("关闭")
-                          ]),
+                          ])),
                           _: 1
                         })
                       ]),
@@ -1737,30 +1919,32 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                     type: "primary",
                     onClick: registerOnSubmit
                   }, {
-                    default: vue.withCtx(() => [
+                    default: vue.withCtx(() => _cache[14] || (_cache[14] = [
                       vue.createTextVNode("注册")
-                    ]),
+                    ])),
                     _: 1
                   }),
                   vue.createElementVNode("div", _hoisted_2$1, [
                     vue.createVNode(_component_el_space, null, {
                       default: vue.withCtx(() => [
-                        vue.createVNode(_component_el_link, {
-                          href: "javascript:;",
+                        vue.createVNode(_component_el_button, {
+                          type: "primary",
+                          text: "",
                           onClick: _cache[7] || (_cache[7] = ($event) => formMode.value = 1)
                         }, {
-                          default: vue.withCtx(() => [
+                          default: vue.withCtx(() => _cache[15] || (_cache[15] = [
                             vue.createTextVNode("登录")
-                          ]),
+                          ])),
                           _: 1
                         }),
-                        vue.createVNode(_component_el_link, {
-                          href: "javascript:;",
+                        vue.createVNode(_component_el_button, {
+                          type: "primary",
+                          text: "",
                           onClick: close
                         }, {
-                          default: vue.withCtx(() => [
+                          default: vue.withCtx(() => _cache[16] || (_cache[16] = [
                             vue.createTextVNode("关闭")
-                          ]),
+                          ])),
                           _: 1
                         })
                       ]),
@@ -1794,10 +1978,13 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                     placeholder: "例如: https://dav.jianguoyun.com/dav/"
                   }, null, 8, ["modelValue"]),
                   vue.createElementVNode("div", _hoisted_3$1, [
-                    vue.createVNode(_component_el_text, { type: "info" }, {
-                      default: vue.withCtx(() => [
+                    vue.createVNode(_component_el_text, {
+                      type: "primary",
+                      class: "text-info"
+                    }, {
+                      default: vue.withCtx(() => _cache[17] || (_cache[17] = [
                         vue.createTextVNode("* 坚果云 WebDAV 地址格式：https://dav.jianguoyun.com/dav/")
-                      ]),
+                      ])),
                       _: 1
                     })
                   ])
@@ -1832,10 +2019,13 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                     "show-password": ""
                   }, null, 8, ["modelValue"]),
                   vue.createElementVNode("div", _hoisted_4$1, [
-                    vue.createVNode(_component_el_text, { type: "info" }, {
-                      default: vue.withCtx(() => [
+                    vue.createVNode(_component_el_text, {
+                      type: "primary",
+                      class: "text-info"
+                    }, {
+                      default: vue.withCtx(() => _cache[18] || (_cache[18] = [
                         vue.createTextVNode("* 坚果云需要使用应用密码而非登录密码")
-                      ]),
+                      ])),
                       _: 1
                     })
                   ])
@@ -1849,21 +2039,22 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                     onClick: webdavLoginOnSubmit,
                     loading: webdavLoading.value
                   }, {
-                    default: vue.withCtx(() => [
+                    default: vue.withCtx(() => _cache[19] || (_cache[19] = [
                       vue.createTextVNode("登录")
-                    ]),
+                    ])),
                     _: 1
                   }, 8, ["loading"]),
                   vue.createElementVNode("div", _hoisted_5$1, [
                     vue.createVNode(_component_el_space, null, {
                       default: vue.withCtx(() => [
-                        vue.createVNode(_component_el_link, {
-                          href: "javascript:;",
+                        vue.createVNode(_component_el_button, {
+                          type: "primary",
+                          text: "",
                           onClick: close
                         }, {
-                          default: vue.withCtx(() => [
+                          default: vue.withCtx(() => _cache[20] || (_cache[20] = [
                             vue.createTextVNode("关闭")
-                          ]),
+                          ])),
                           _: 1
                         })
                       ]),
@@ -1880,18 +2071,24 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               }, {
                 default: vue.withCtx(() => [
                   vue.createElementVNode("div", null, [
-                    vue.createVNode(_component_el_text, { type: "info" }, {
-                      default: vue.withCtx(() => [
+                    vue.createVNode(_component_el_text, {
+                      type: "primary",
+                      class: "text-info"
+                    }, {
+                      default: vue.withCtx(() => _cache[21] || (_cache[21] = [
                         vue.createTextVNode("* WebDAV 配置仅存储在本地，不会上传至云端")
-                      ]),
+                      ])),
                       _: 1
                     })
                   ]),
                   vue.createElementVNode("div", null, [
-                    vue.createVNode(_component_el_text, { type: "info" }, {
-                      default: vue.withCtx(() => [
+                    vue.createVNode(_component_el_text, {
+                      type: "primary",
+                      class: "text-info"
+                    }, {
+                      default: vue.withCtx(() => _cache[22] || (_cache[22] = [
                         vue.createTextVNode("* 启用 WebDAV 后，所有的同步操作将通过 WebDAV 进行")
-                      ]),
+                      ])),
                       _: 1
                     })
                   ])
@@ -1905,7 +2102,6 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-29a543ee"), n = n(), vue.popScopeId(), n);
   const _hoisted_1 = { class: "setBox" };
   const _hoisted_2 = { class: "card-header" };
   const _hoisted_3 = { class: "header-left" };
@@ -1918,48 +2114,52 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
     class: "login-type"
   };
   const _hoisted_6 = { class: "header-right" };
-  const _hoisted_7 = {
+  const _hoisted_7 = { class: "button-group" };
+  const _hoisted_8 = {
     key: 0,
     class: "login-container"
   };
-  const _hoisted_8 = { class: "login-header" };
-  const _hoisted_9 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("h3", null, "账号登录", -1));
+  const _hoisted_9 = { class: "login-header" };
   const _hoisted_10 = {
     key: 1,
     class: "settings-container"
   };
-  const _hoisted_11 = { key: 0 };
-  const _hoisted_12 = { key: 1 };
-  const _hoisted_13 = { key: 2 };
-  const _hoisted_14 = { class: "settings-footer" };
+  const _hoisted_11 = { class: "settings-header" };
+  const _hoisted_12 = { key: 0 };
+  const _hoisted_13 = { key: 1 };
+  const _hoisted_14 = { key: 2 };
   const _hoisted_15 = {
     key: 2,
+    class: "settings-container"
+  };
+  const _hoisted_16 = { class: "settings-header" };
+  const _hoisted_17 = {
+    key: 3,
+    class: "settings-container"
+  };
+  const _hoisted_18 = { class: "settings-header" };
+  const _hoisted_19 = {
+    key: 4,
     class: "main-content"
   };
-  const _hoisted_16 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("div", { class: "card-title" }, "我在用的", -1));
-  const _hoisted_17 = {
+  const _hoisted_20 = {
     key: 0,
     class: "list"
   };
-  const _hoisted_18 = { class: "list-left" };
-  const _hoisted_19 = { class: "list-number" };
-  const _hoisted_20 = { class: "list-title" };
-  const _hoisted_21 = { class: "list-right" };
-  const _hoisted_22 = {
+  const _hoisted_21 = { class: "list-left" };
+  const _hoisted_22 = { class: "list-number" };
+  const _hoisted_23 = { class: "list-title" };
+  const _hoisted_24 = { class: "list-right" };
+  const _hoisted_25 = {
     key: 1,
     class: "tips"
   };
-  const _hoisted_23 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", null, "未设置快速回帖内容!", -1));
-  const _hoisted_24 = [
-    _hoisted_23
-  ];
-  const _hoisted_25 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
   const _hoisted_26 = { key: 0 };
   const _hoisted_27 = { class: "addReplyBox" };
   const _sfc_main = {
     __name: "Set",
     emits: ["updateMyList", "updateConstVar", "updateAIModel"],
-    setup(__props, { emit }) {
+    setup(__props, { emit: __emit }) {
       const { proxy } = vue.getCurrentInstance();
       const myList = vue.ref([]);
       const systemList = vue.ref([]);
@@ -1970,7 +2170,9 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       const realtimeBackup = vue.ref(false);
       const submitNow = vue.ref(false);
       const showLogin = vue.ref(false);
-      const showSettings = vue.ref(false);
+      const showOptionsSettings = vue.ref(false);
+      const showConstSettings = vue.ref(false);
+      const showAISettings = vue.ref(false);
       const newReply = vue.ref("");
       const windowSize = vue.ref({
         width: window.innerWidth,
@@ -1988,6 +2190,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         url: "",
         base64: false
       });
+      const emit = __emit;
       vue.onBeforeMount(() => {
         const userId = proxy.$storage.getUserInfo("userId");
         isLogin.value = !!userId;
@@ -2096,6 +2299,15 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       function closeLogin() {
         showLogin.value = false;
       }
+      function closeOptionsSettings() {
+        showOptionsSettings.value = false;
+      }
+      function closeConstSettings() {
+        showConstSettings.value = false;
+      }
+      function closeAISettings() {
+        showAISettings.value = false;
+      }
       function upload() {
         proxy.$storage.uploadList();
       }
@@ -2145,28 +2357,46 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         const userId = proxy.$storage.getUserInfo("userId");
         return userId === "webdav_user";
       }
+      function openOptionsSettings() {
+        showOptionsSettings.value = true;
+        showConstSettings.value = false;
+        showAISettings.value = false;
+      }
+      function openConstSettings() {
+        showOptionsSettings.value = false;
+        showConstSettings.value = true;
+        showAISettings.value = false;
+      }
+      function openAISettings() {
+        showOptionsSettings.value = false;
+        showConstSettings.value = false;
+        showAISettings.value = true;
+      }
       return (_ctx, _cache) => {
         const _component_el_button = vue.resolveComponent("el-button");
-        const _component_el_space = vue.resolveComponent("el-space");
+        const _component_el_col = vue.resolveComponent("el-col");
+        const _component_ArrowDown = vue.resolveComponent("ArrowDown");
+        const _component_el_icon = vue.resolveComponent("el-icon");
+        const _component_el_dropdown_item = vue.resolveComponent("el-dropdown-item");
+        const _component_el_dropdown_menu = vue.resolveComponent("el-dropdown-menu");
+        const _component_el_dropdown = vue.resolveComponent("el-dropdown");
+        const _component_el_row = vue.resolveComponent("el-row");
         const _component_app_login = vue.resolveComponent("app-login");
         const _component_el_alert = vue.resolveComponent("el-alert");
         const _component_el_checkbox = vue.resolveComponent("el-checkbox");
-        const _component_el_tab_pane = vue.resolveComponent("el-tab-pane");
+        const _component_el_space = vue.resolveComponent("el-space");
+        const _component_el_text = vue.resolveComponent("el-text");
         const _component_el_input = vue.resolveComponent("el-input");
         const _component_el_form_item = vue.resolveComponent("el-form-item");
         const _component_el_switch = vue.resolveComponent("el-switch");
         const _component_el_form = vue.resolveComponent("el-form");
-        const _component_el_text = vue.resolveComponent("el-text");
         const _component_app_set_ai = vue.resolveComponent("app-set-ai");
-        const _component_el_tabs = vue.resolveComponent("el-tabs");
         const _component_el_tooltip = vue.resolveComponent("el-tooltip");
         const _component_el_card = vue.resolveComponent("el-card");
-        const _component_el_col = vue.resolveComponent("el-col");
         const _component_el_table_column = vue.resolveComponent("el-table-column");
         const _component_el_tag = vue.resolveComponent("el-tag");
         const _component_el_table = vue.resolveComponent("el-table");
         const _component_el_pagination = vue.resolveComponent("el-pagination");
-        const _component_el_row = vue.resolveComponent("el-row");
         const _directive_loading = vue.resolveDirective("loading");
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1, [
           vue.createVNode(_component_el_card, {
@@ -2175,88 +2405,177 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           }, {
             header: vue.withCtx(() => [
               vue.createElementVNode("div", _hoisted_2, [
-                vue.createElementVNode("div", _hoisted_3, [
-                  !isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                    key: 0,
-                    type: "primary",
-                    size: "small",
-                    onClick: _cache[0] || (_cache[0] = ($event) => showLogin.value = true)
-                  }, {
-                    default: vue.withCtx(() => [
-                      vue.createTextVNode("登录")
-                    ]),
-                    _: 1
-                  })) : (vue.openBlock(), vue.createBlock(_component_el_button, {
-                    key: 1,
-                    type: "danger",
-                    size: "small",
-                    onClick: logout
-                  }, {
-                    default: vue.withCtx(() => [
-                      vue.createTextVNode("注销")
-                    ]),
-                    _: 1
-                  })),
-                  isLogin.value && isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_4, "WebDAV 同步")) : vue.createCommentVNode("", true),
-                  isLogin.value && !isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_5, "账号同步")) : vue.createCommentVNode("", true)
-                ]),
-                vue.createElementVNode("div", _hoisted_6, [
-                  vue.createVNode(_component_el_space, null, {
-                    default: vue.withCtx(() => [
-                      isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                        key: 0,
-                        type: "primary",
-                        icon: "Upload",
-                        size: "small",
-                        onClick: uploadAll
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createTextVNode("全量备份")
-                        ]),
-                        _: 1
-                      })) : vue.createCommentVNode("", true),
-                      isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                        key: 1,
-                        type: "warning",
-                        icon: "Download",
-                        size: "small",
-                        onClick: downloadAll
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createTextVNode("全量恢复")
-                        ]),
-                        _: 1
-                      })) : vue.createCommentVNode("", true),
-                      isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                        key: 2,
-                        type: "success",
-                        icon: "Setting",
-                        size: "small",
-                        onClick: _cache[1] || (_cache[1] = ($event) => showSettings.value = !showSettings.value)
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createTextVNode("设置")
-                        ]),
-                        _: 1
-                      })) : vue.createCommentVNode("", true)
-                    ]),
-                    _: 1
-                  })
-                ])
+                vue.createVNode(_component_el_row, { gutter: 10 }, {
+                  default: vue.withCtx(() => [
+                    vue.createVNode(_component_el_col, {
+                      xs: 24,
+                      sm: 6,
+                      md: 6,
+                      lg: 6,
+                      xl: 6
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createElementVNode("div", _hoisted_3, [
+                          !isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                            key: 0,
+                            type: "primary",
+                            size: "small",
+                            onClick: _cache[0] || (_cache[0] = ($event) => showLogin.value = true)
+                          }, {
+                            default: vue.withCtx(() => _cache[10] || (_cache[10] = [
+                              vue.createTextVNode("登录")
+                            ])),
+                            _: 1
+                          })) : (vue.openBlock(), vue.createBlock(_component_el_button, {
+                            key: 1,
+                            type: "danger",
+                            size: "small",
+                            onClick: logout
+                          }, {
+                            default: vue.withCtx(() => _cache[11] || (_cache[11] = [
+                              vue.createTextVNode("注销")
+                            ])),
+                            _: 1
+                          })),
+                          isLogin.value && isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_4, "WebDAV 同步")) : vue.createCommentVNode("", true),
+                          isLogin.value && !isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_5, "账号同步")) : vue.createCommentVNode("", true)
+                        ])
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_el_col, {
+                      xs: 24,
+                      sm: 18,
+                      md: 18,
+                      lg: 18,
+                      xl: 18
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createElementVNode("div", _hoisted_6, [
+                          vue.createVNode(_component_el_row, { gutter: 5 }, {
+                            default: vue.withCtx(() => [
+                              vue.createVNode(_component_el_col, {
+                                xs: 24,
+                                sm: 24,
+                                md: 24,
+                                lg: 24,
+                                xl: 24
+                              }, {
+                                default: vue.withCtx(() => [
+                                  vue.createElementVNode("div", _hoisted_7, [
+                                    isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_dropdown, {
+                                      key: 0,
+                                      trigger: "click"
+                                    }, {
+                                      dropdown: vue.withCtx(() => [
+                                        vue.createVNode(_component_el_dropdown_menu, null, {
+                                          default: vue.withCtx(() => [
+                                            vue.createVNode(_component_el_dropdown_item, {
+                                              icon: "Upload",
+                                              onClick: uploadAll
+                                            }, {
+                                              default: vue.withCtx(() => _cache[13] || (_cache[13] = [
+                                                vue.createTextVNode(" 全量备份 ")
+                                              ])),
+                                              _: 1
+                                            }),
+                                            vue.createVNode(_component_el_dropdown_item, {
+                                              icon: "Download",
+                                              onClick: downloadAll
+                                            }, {
+                                              default: vue.withCtx(() => _cache[14] || (_cache[14] = [
+                                                vue.createTextVNode(" 全量恢复 ")
+                                              ])),
+                                              _: 1
+                                            })
+                                          ]),
+                                          _: 1
+                                        })
+                                      ]),
+                                      default: vue.withCtx(() => [
+                                        vue.createVNode(_component_el_button, {
+                                          type: "primary",
+                                          size: "small"
+                                        }, {
+                                          default: vue.withCtx(() => [
+                                            _cache[12] || (_cache[12] = vue.createTextVNode(" 全量同步 ")),
+                                            vue.createVNode(_component_el_icon, { class: "el-icon--right" }, {
+                                              default: vue.withCtx(() => [
+                                                vue.createVNode(_component_ArrowDown)
+                                              ]),
+                                              _: 1
+                                            })
+                                          ]),
+                                          _: 1
+                                        })
+                                      ]),
+                                      _: 1
+                                    })) : vue.createCommentVNode("", true),
+                                    isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                                      key: 1,
+                                      type: "success",
+                                      icon: "Setting",
+                                      size: "small",
+                                      onClick: openOptionsSettings
+                                    }, {
+                                      default: vue.withCtx(() => _cache[15] || (_cache[15] = [
+                                        vue.createTextVNode("选项")
+                                      ])),
+                                      _: 1
+                                    })) : vue.createCommentVNode("", true),
+                                    isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                                      key: 2,
+                                      type: "info",
+                                      icon: "Edit",
+                                      size: "small",
+                                      onClick: openConstSettings
+                                    }, {
+                                      default: vue.withCtx(() => _cache[16] || (_cache[16] = [
+                                        vue.createTextVNode("常量")
+                                      ])),
+                                      _: 1
+                                    })) : vue.createCommentVNode("", true),
+                                    isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                                      key: 3,
+                                      type: "primary",
+                                      icon: "MagicStick",
+                                      size: "small",
+                                      onClick: openAISettings
+                                    }, {
+                                      default: vue.withCtx(() => _cache[17] || (_cache[17] = [
+                                        vue.createTextVNode("AI")
+                                      ])),
+                                      _: 1
+                                    })) : vue.createCommentVNode("", true)
+                                  ])
+                                ]),
+                                _: 1
+                              })
+                            ]),
+                            _: 1
+                          })
+                        ])
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  _: 1
+                })
               ])
             ]),
             default: vue.withCtx(() => [
-              showLogin.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_7, [
-                vue.createElementVNode("div", _hoisted_8, [
-                  _hoisted_9,
+              showLogin.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_8, [
+                vue.createElementVNode("div", _hoisted_9, [
+                  _cache[19] || (_cache[19] = vue.createElementVNode("h3", null, "账号登录", -1)),
                   vue.createVNode(_component_el_button, {
-                    type: "link",
+                    type: "primary",
+                    text: "",
                     icon: "Back",
                     onClick: closeLogin
                   }, {
-                    default: vue.withCtx(() => [
+                    default: vue.withCtx(() => _cache[18] || (_cache[18] = [
                       vue.createTextVNode("返回")
-                    ]),
+                    ])),
                     _: 1
                   })
                 ]),
@@ -2264,181 +2583,237 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                   onOnSuccess: onLoginSuccess,
                   onOnClose: closeLogin
                 })
-              ])) : showSettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_10, [
-                vue.createVNode(_component_el_tabs, { type: "border-card" }, {
+              ])) : vue.createCommentVNode("", true),
+              showOptionsSettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_10, [
+                vue.createElementVNode("div", _hoisted_11, [
+                  _cache[21] || (_cache[21] = vue.createElementVNode("h3", null, "选项设置", -1)),
+                  vue.createVNode(_component_el_button, {
+                    type: "primary",
+                    text: "",
+                    icon: "Back",
+                    onClick: closeOptionsSettings
+                  }, {
+                    default: vue.withCtx(() => _cache[20] || (_cache[20] = [
+                      vue.createTextVNode("返回")
+                    ])),
+                    _: 1
+                  })
+                ]),
+                vue.createVNode(_component_el_space, {
+                  direction: "vertical",
+                  alignment: "flex-start"
+                }, {
                   default: vue.withCtx(() => [
-                    vue.createVNode(_component_el_tab_pane, {
-                      name: "options",
-                      label: "选项"
-                    }, {
+                    isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_12, [
+                      vue.createVNode(_component_el_alert, {
+                        title: "您当前使用的是 WebDAV 登录",
+                        type: "success",
+                        description: "所有数据将通过 WebDAV 同步,无需配置其他同步选项",
+                        "show-icon": "",
+                        closable: false
+                      })
+                    ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_13, [
+                      vue.createVNode(_component_el_checkbox, {
+                        modelValue: realtimeSync.value,
+                        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => realtimeSync.value = $event),
+                        label: "实时同步，本地回复列表修改后立即上传",
+                        size: "small",
+                        checked: realtimeSync.value,
+                        onChange: onRealtimeSyncChange
+                      }, null, 8, ["modelValue", "checked"])
+                    ])),
+                    !isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_14, [
+                      vue.createVNode(_component_el_checkbox, {
+                        modelValue: realtimeBackup.value,
+                        "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => realtimeBackup.value = $event),
+                        label: "实时备份，本地回复列表及任一配置修改后立即备份至云端",
+                        size: "small",
+                        checked: realtimeBackup.value,
+                        onChange: onRealtimeBackupChange
+                      }, null, 8, ["modelValue", "checked"])
+                    ])) : vue.createCommentVNode("", true),
+                    vue.createElementVNode("div", null, [
+                      vue.createVNode(_component_el_checkbox, {
+                        modelValue: submitNow.value,
+                        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => submitNow.value = $event),
+                        label: "立即提交，选择快捷回帖内容后立即提交回帖",
+                        size: "small",
+                        checked: submitNow.value,
+                        onChange: onSubmitNowChange
+                      }, null, 8, ["modelValue", "checked"])
+                    ])
+                  ]),
+                  _: 1
+                }),
+                vue.createVNode(_component_el_space, {
+                  direction: "vertical",
+                  alignment: "flex-start",
+                  style: { "margin-top": "18px" }
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createElementVNode("div", null, [
+                      vue.createVNode(_component_el_text, {
+                        type: "primary",
+                        class: "text-info"
+                      }, {
+                        default: vue.withCtx(() => _cache[22] || (_cache[22] = [
+                          vue.createTextVNode("* AI和常量只存在本地，不参与同步")
+                        ])),
+                        _: 1
+                      })
+                    ]),
+                    vue.createElementVNode("div", null, [
+                      vue.createVNode(_component_el_text, {
+                        type: "primary",
+                        class: "text-info"
+                      }, {
+                        default: vue.withCtx(() => _cache[23] || (_cache[23] = [
+                          vue.createTextVNode("* 如需备份所有配置请使用操全量同步操作中的全量备份、全量恢复功能")
+                        ])),
+                        _: 1
+                      })
+                    ]),
+                    vue.createElementVNode("div", null, [
+                      vue.createVNode(_component_el_text, {
+                        type: "primary",
+                        class: "text-info"
+                      }, {
+                        default: vue.withCtx(() => _cache[24] || (_cache[24] = [
+                          vue.createTextVNode("* 全量备份仅为方便多设备同步配置，使用base64存储，请知悉")
+                        ])),
+                        _: 1
+                      })
+                    ])
+                  ]),
+                  _: 1
+                })
+              ])) : vue.createCommentVNode("", true),
+              showConstSettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_15, [
+                vue.createElementVNode("div", _hoisted_16, [
+                  _cache[26] || (_cache[26] = vue.createElementVNode("h3", null, "常量设置", -1)),
+                  vue.createVNode(_component_el_button, {
+                    type: "primary",
+                    text: "",
+                    icon: "Back",
+                    onClick: closeConstSettings
+                  }, {
+                    default: vue.withCtx(() => _cache[25] || (_cache[25] = [
+                      vue.createTextVNode("返回")
+                    ])),
+                    _: 1
+                  })
+                ]),
+                vue.createVNode(_component_el_form, {
+                  model: constVar.value,
+                  "label-width": "60",
+                  style: { "max-width": "600px" }
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createVNode(_component_el_form_item, { label: "邮箱" }, {
                       default: vue.withCtx(() => [
-                        vue.createVNode(_component_el_space, {
-                          direction: "vertical",
-                          alignment: "flex-start"
-                        }, {
-                          default: vue.withCtx(() => [
-                            isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_11, [
-                              vue.createVNode(_component_el_alert, {
-                                title: "您当前使用的是 WebDAV 登录",
-                                type: "success",
-                                description: "所有数据将通过 WebDAV 同步,无需配置其他同步选项",
-                                "show-icon": "",
-                                closable: false
-                              })
-                            ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_12, [
-                              vue.createVNode(_component_el_checkbox, {
-                                modelValue: realtimeSync.value,
-                                "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => realtimeSync.value = $event),
-                                label: "实时同步，本地回复列表修改后立即上传",
-                                size: "small",
-                                checked: realtimeSync.value,
-                                onChange: onRealtimeSyncChange
-                              }, null, 8, ["modelValue", "checked"])
-                            ])),
-                            !isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_13, [
-                              vue.createVNode(_component_el_checkbox, {
-                                modelValue: realtimeBackup.value,
-                                "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => realtimeBackup.value = $event),
-                                label: "实时备份，本地回复列表及任一配置修改后立即备份至云端",
-                                size: "small",
-                                checked: realtimeBackup.value,
-                                onChange: onRealtimeBackupChange
-                              }, null, 8, ["modelValue", "checked"])
-                            ])) : vue.createCommentVNode("", true),
-                            vue.createElementVNode("div", null, [
-                              vue.createVNode(_component_el_checkbox, {
-                                modelValue: submitNow.value,
-                                "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => submitNow.value = $event),
-                                label: "立即提交，选择快捷回帖内容后立即提交回帖",
-                                size: "small",
-                                checked: submitNow.value,
-                                onChange: onSubmitNowChange
-                              }, null, 8, ["modelValue", "checked"])
-                            ])
-                          ]),
-                          _: 1
-                        })
+                        vue.createVNode(_component_el_input, {
+                          modelValue: constVar.value.email,
+                          "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => constVar.value.email = $event),
+                          onChange: constVarChange
+                        }, null, 8, ["modelValue"])
                       ]),
                       _: 1
                     }),
-                    vue.createVNode(_component_el_tab_pane, {
-                      name: "constVar",
-                      label: "常量"
-                    }, {
+                    vue.createVNode(_component_el_form_item, { label: "QQ" }, {
                       default: vue.withCtx(() => [
-                        vue.createVNode(_component_el_form, {
-                          model: constVar.value,
-                          "label-width": "60",
-                          style: { "max-width": "600px" }
-                        }, {
-                          default: vue.withCtx(() => [
-                            vue.createVNode(_component_el_form_item, { label: "邮箱" }, {
-                              default: vue.withCtx(() => [
-                                vue.createVNode(_component_el_input, {
-                                  modelValue: constVar.value.email,
-                                  "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => constVar.value.email = $event),
-                                  onChange: constVarChange
-                                }, null, 8, ["modelValue"])
-                              ]),
-                              _: 1
-                            }),
-                            vue.createVNode(_component_el_form_item, { label: "QQ" }, {
-                              default: vue.withCtx(() => [
-                                vue.createVNode(_component_el_input, {
-                                  modelValue: constVar.value.qq,
-                                  "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => constVar.value.qq = $event),
-                                  onChange: constVarChange
-                                }, null, 8, ["modelValue"])
-                              ]),
-                              _: 1
-                            }),
-                            vue.createVNode(_component_el_form_item, { label: "微信" }, {
-                              default: vue.withCtx(() => [
-                                vue.createVNode(_component_el_input, {
-                                  modelValue: constVar.value.wechat,
-                                  "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => constVar.value.wechat = $event),
-                                  onChange: constVarChange
-                                }, null, 8, ["modelValue"])
-                              ]),
-                              _: 1
-                            }),
-                            vue.createVNode(_component_el_form_item, { label: "网址" }, {
-                              default: vue.withCtx(() => [
-                                vue.createVNode(_component_el_input, {
-                                  modelValue: constVar.value.url,
-                                  "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => constVar.value.url = $event),
-                                  onChange: constVarChange
-                                }, null, 8, ["modelValue"])
-                              ]),
-                              _: 1
-                            }),
-                            vue.createVNode(_component_el_form_item, { label: "加密" }, {
-                              default: vue.withCtx(() => [
-                                vue.createVNode(_component_el_switch, {
-                                  modelValue: constVar.value.base64,
-                                  "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => constVar.value.base64 = $event),
-                                  onChange: constVarChange
-                                }, null, 8, ["modelValue"])
-                              ]),
-                              _: 1
-                            })
-                          ]),
-                          _: 1
-                        }, 8, ["model"]),
-                        vue.createVNode(_component_el_space, {
-                          direction: "vertical",
-                          alignment: "flex-start"
-                        }, {
-                          default: vue.withCtx(() => [
-                            vue.createElementVNode("div", null, [
-                              vue.createVNode(_component_el_text, { type: "info" }, {
-                                default: vue.withCtx(() => [
-                                  vue.createTextVNode("* 可在快捷回帖中使用以上常量：{email}、{qq}、{wechat}、{url}，例：我的邮箱是{email}，我的QQ是{qq}；")
-                                ]),
-                                _: 1
-                              })
-                            ]),
-                            vue.createElementVNode("div", null, [
-                              vue.createVNode(_component_el_text, { type: "info" }, {
-                                default: vue.withCtx(() => [
-                                  vue.createTextVNode("* 开启加密后，只在回帖时显示base64加密后的常量；")
-                                ]),
-                                _: 1
-                              })
-                            ])
-                          ]),
-                          _: 1
-                        })
+                        vue.createVNode(_component_el_input, {
+                          modelValue: constVar.value.qq,
+                          "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => constVar.value.qq = $event),
+                          onChange: constVarChange
+                        }, null, 8, ["modelValue"])
                       ]),
                       _: 1
                     }),
-                    vue.createVNode(_component_el_tab_pane, {
-                      name: "ai",
-                      label: "AI"
-                    }, {
+                    vue.createVNode(_component_el_form_item, { label: "微信" }, {
                       default: vue.withCtx(() => [
-                        vue.createVNode(_component_app_set_ai, {
-                          ref: "setAIPanel",
-                          onUpdateAI: updateAI
-                        }, null, 512)
+                        vue.createVNode(_component_el_input, {
+                          modelValue: constVar.value.wechat,
+                          "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => constVar.value.wechat = $event),
+                          onChange: constVarChange
+                        }, null, 8, ["modelValue"])
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_el_form_item, { label: "网址" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_input, {
+                          modelValue: constVar.value.url,
+                          "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => constVar.value.url = $event),
+                          onChange: constVarChange
+                        }, null, 8, ["modelValue"])
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_el_form_item, { label: "加密" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_switch, {
+                          modelValue: constVar.value.base64,
+                          "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => constVar.value.base64 = $event),
+                          onChange: constVarChange
+                        }, null, 8, ["modelValue"])
                       ]),
                       _: 1
                     })
                   ]),
                   _: 1
-                }),
-                vue.createElementVNode("div", _hoisted_14, [
+                }, 8, ["model"]),
+                vue.createVNode(_component_el_space, {
+                  direction: "vertical",
+                  alignment: "flex-start"
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createElementVNode("div", null, [
+                      vue.createVNode(_component_el_text, {
+                        type: "primary",
+                        class: "text-info"
+                      }, {
+                        default: vue.withCtx(() => _cache[27] || (_cache[27] = [
+                          vue.createTextVNode("* 可在快捷回帖中使用以上常量：{email}、{qq}、{wechat}、{url}，例：我的邮箱是{email}，我的QQ是{qq}；")
+                        ])),
+                        _: 1
+                      })
+                    ]),
+                    vue.createElementVNode("div", null, [
+                      vue.createVNode(_component_el_text, {
+                        type: "primary",
+                        class: "text-info"
+                      }, {
+                        default: vue.withCtx(() => _cache[28] || (_cache[28] = [
+                          vue.createTextVNode("* 开启加密后，只在回帖时显示base64加密后的常量；")
+                        ])),
+                        _: 1
+                      })
+                    ])
+                  ]),
+                  _: 1
+                })
+              ])) : vue.createCommentVNode("", true),
+              showAISettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_17, [
+                vue.createElementVNode("div", _hoisted_18, [
+                  _cache[30] || (_cache[30] = vue.createElementVNode("h3", null, "AI设置", -1)),
                   vue.createVNode(_component_el_button, {
                     type: "primary",
-                    onClick: _cache[10] || (_cache[10] = ($event) => showSettings.value = false)
+                    text: "",
+                    icon: "Back",
+                    onClick: closeAISettings
                   }, {
-                    default: vue.withCtx(() => [
+                    default: vue.withCtx(() => _cache[29] || (_cache[29] = [
                       vue.createTextVNode("返回")
-                    ]),
+                    ])),
                     _: 1
                   })
-                ])
-              ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_15, [
+                ]),
+                vue.createVNode(_component_app_set_ai, {
+                  ref: "setAIPanel",
+                  onUpdateAI: updateAI
+                }, null, 512)
+              ])) : vue.createCommentVNode("", true),
+              !showLogin.value && !showOptionsSettings.value && !showConstSettings.value && !showAISettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_19, [
                 vue.createVNode(_component_el_row, { gutter: 30 }, {
                   default: vue.withCtx(() => [
                     vue.createVNode(_component_el_col, {
@@ -2452,19 +2827,19 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                           class: "my-replies-card",
                           shadow: "never"
                         }, {
-                          header: vue.withCtx(() => [
-                            _hoisted_16
-                          ]),
+                          header: vue.withCtx(() => _cache[31] || (_cache[31] = [
+                            vue.createElementVNode("div", { class: "card-title" }, "我在用的", -1)
+                          ])),
                           default: vue.withCtx(() => [
                             vue.createElementVNode("div", null, [
-                              myList.value.length > 0 ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_17, [
+                              myList.value.length > 0 ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_20, [
                                 (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(myList.value, (item, index) => {
                                   return vue.openBlock(), vue.createElementBlock("li", { key: index }, [
-                                    vue.createElementVNode("div", _hoisted_18, [
-                                      vue.createElementVNode("div", _hoisted_19, vue.toDisplayString(`${index + 1}、`), 1),
-                                      vue.createElementVNode("div", _hoisted_20, vue.toDisplayString(`${item}`), 1)
-                                    ]),
                                     vue.createElementVNode("div", _hoisted_21, [
+                                      vue.createElementVNode("div", _hoisted_22, vue.toDisplayString(`${index + 1}、`), 1),
+                                      vue.createElementVNode("div", _hoisted_23, vue.toDisplayString(`${item}`), 1)
+                                    ]),
+                                    vue.createElementVNode("div", _hoisted_24, [
                                       vue.createVNode(_component_el_tooltip, {
                                         class: "item",
                                         effect: "dark",
@@ -2502,7 +2877,9 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                     ])
                                   ]);
                                 }), 128))
-                              ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_22, _hoisted_24))
+                              ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_25, _cache[32] || (_cache[32] = [
+                                vue.createElementVNode("p", null, "未设置快速回帖内容!", -1)
+                              ])))
                             ])
                           ]),
                           _: 1
@@ -2523,9 +2900,9 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                           shadow: "never",
                           "body-style": { padding: "0 20px 20px" }
                         }, {
-                          header: vue.withCtx(() => [
-                            _hoisted_25
-                          ]),
+                          header: vue.withCtx(() => _cache[33] || (_cache[33] = [
+                            vue.createElementVNode("span", null, "网友分享的", -1)
+                          ])),
                           default: vue.withCtx(() => [
                             vue.withDirectives((vue.openBlock(), vue.createBlock(_component_el_table, {
                               ref: "filterTable",
@@ -2557,14 +2934,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                         default: vue.withCtx(() => [
                                           vue.createVNode(_component_el_tag, {
                                             type: "primary",
-                                            effect: "dark",
+                                            effect: "plain",
                                             size: "small",
                                             round: "",
                                             style: { "transform": "scale(0.7)" }
                                           }, {
-                                            default: vue.withCtx(() => [
+                                            default: vue.withCtx(() => _cache[34] || (_cache[34] = [
                                               vue.createTextVNode(" NEW ")
-                                            ]),
+                                            ])),
                                             _: 1
                                           })
                                         ]),
@@ -2583,6 +2960,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                 }, {
                                   default: vue.withCtx((scope) => [
                                     vue.createVNode(_component_el_tag, {
+                                      effect: "light",
                                       type: "info",
                                       size: "small"
                                     }, {
@@ -2645,12 +3023,12 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                             vue.createVNode(_component_el_pagination, {
                               background: "",
                               layout: "prev, pager, next",
-                              small: windowSize.value.width <= 640,
+                              size: windowSize.value.width <= 640 ? "small" : "default",
                               "page-size": 10,
-                              "pager-count": windowSize.value.width > 640 ? 5 : 3,
+                              "pager-count": 5,
                               onCurrentChange: currentPageChange,
                               total: systemListCount.value
-                            }, null, 8, ["small", "pager-count", "total"])
+                            }, null, 8, ["size", "total"])
                           ]),
                           _: 1
                         })
@@ -2664,7 +3042,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                   vue.createVNode(_component_el_input, {
                     placeholder: "请输入新的回复内容",
                     modelValue: newReply.value,
-                    "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => newReply.value = $event),
+                    "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => newReply.value = $event),
                     autosize: { minRows: 1, maxRows: 3 },
                     maxlength: "100",
                     "show-word-limit": true,
@@ -2681,7 +3059,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                     _: 1
                   }, 8, ["modelValue"])
                 ])
-              ]))
+              ])) : vue.createCommentVNode("", true)
             ]),
             _: 1
           })
@@ -2689,7 +3067,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-29a543ee"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-af3466cf"]]);
   const Util = {
     install: (app2, options) => {
       app2.config.globalProperties.$storage = {
@@ -3091,7 +3469,10 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
   app.component("app-set-ai", AI);
   app.component("app-set", Set);
   app.component("app-login", _sfc_main$1);
-  app.use(ElementPlus);
+  app.use(ElementPlus, {
+    locale: zhCn,
+    size: "default"
+  });
   app.use(Util);
   app.use(Api);
   app.config.globalProperties.$app = {
