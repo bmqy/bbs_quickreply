@@ -340,18 +340,18 @@ function openAISettings() {
                     <div>
                         <el-checkbox v-model="submitNow" label="立即提交，选择快捷回帖内容后立即提交回帖" size="small" :checked="submitNow" @change="onSubmitNowChange" />
                     </div>
-                </el-space>
                 
-                <el-space direction="vertical" alignment="flex-start" style="margin-top: 18px;">
-                    <div>
-                        <el-text type="primary" class="text-info">* AI和常量只存在本地，不参与同步</el-text>
-                    </div>
-                    <div>
-                        <el-text type="primary" class="text-info">* 如需备份所有配置请使用操全量同步操作中的全量备份、全量恢复功能</el-text>
-                    </div>
-                    <div>
-                        <el-text type="primary" class="text-info">* 全量备份仅为方便多设备同步配置，使用base64存储，请知悉</el-text>
-                    </div>
+                    <el-space direction="vertical" alignment="flex-start" style="margin-top: 18px;">
+                        <div>
+                            <el-text type="primary" class="text-info">* AI和常量只存在本地，不参与同步</el-text>
+                        </div>
+                        <div>
+                            <el-text type="primary" class="text-info">* 如需备份所有配置请使用操全量同步操作中的全量备份、全量恢复功能</el-text>
+                        </div>
+                        <div>
+                            <el-text type="primary" class="text-info">* 全量备份仅为方便多设备同步配置，使用base64存储，请知悉</el-text>
+                        </div>
+                    </el-space>
                 </el-space>
             </div>
 
