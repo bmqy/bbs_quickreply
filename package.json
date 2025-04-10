@@ -20,9 +20,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.1.0",
+    "@element-plus/icons-vue": "^2.3.1",
+    "@vueuse/core": "^13.1.0",
     "crypto-js": "^4.1.1",
-    "element-plus": "^2.3.5",
+    "element-plus": "^2.9.7",
     "leancloud-storage": "4.11.1",
     "sass": "^1.62.1",
     "sass-loader": "^13.3.0",

@@ -18,8 +18,8 @@
                 <el-button type="primary" @click="loginOnSubmit">登录</el-button>
                 <div class="margin-left">
                     <el-space>
-                        <el-link href="javascript:;" @click="formMode=0">注册</el-link>
-                        <el-link href="javascript:;" @click="close">关闭</el-link>
+                        <el-button type="primary" text @click="formMode=0">注册</el-button>
+                        <el-button type="primary" text @click="close">关闭</el-button>
                     </el-space>
                 </div>
             </el-form-item>
@@ -40,8 +40,8 @@
                 <el-button type="primary" @click="registerOnSubmit">注册</el-button>
                 <div class="margin-left">
                     <el-space>
-                        <el-link href="javascript:;" @click="formMode=1">登录</el-link>
-                        <el-link href="javascript:;" @click="close">关闭</el-link>
+                        <el-button type="primary" text @click="formMode=1">登录</el-button>
+                        <el-button type="primary" text @click="close">关闭</el-button>
                     </el-space>
                 </div>
             </el-form-item>
@@ -52,7 +52,7 @@
             <el-form-item label="服务器：" prop="url" required>
                 <el-input v-model="webdavForm.url" placeholder="例如: https://dav.jianguoyun.com/dav/" />
                 <div class="form-tip">
-                    <el-text type="info">* 坚果云 WebDAV 地址格式：https://dav.jianguoyun.com/dav/</el-text>
+                    <el-text type="primary" class="text-info">* 坚果云 WebDAV 地址格式：https://dav.jianguoyun.com/dav/</el-text>
                 </div>
             </el-form-item>
             <el-form-item label="用户名：" prop="username" required>
@@ -61,23 +61,23 @@
             <el-form-item label="密码：" prop="password" required>
                 <el-input v-model="webdavForm.password" type="password" placeholder="请输入应用密码" show-password />
                 <div class="form-tip">
-                    <el-text type="info">* 坚果云需要使用应用密码而非登录密码</el-text>
+                    <el-text type="primary" class="text-info">* 坚果云需要使用应用密码而非登录密码</el-text>
                 </div>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="webdavLoginOnSubmit" :loading="webdavLoading">登录</el-button>
                 <div class="margin-left">
                     <el-space>
-                        <el-link href="javascript:;" @click="close">关闭</el-link>
+                        <el-button type="primary" text @click="close">关闭</el-button>
                     </el-space>
                 </div>
             </el-form-item>
             <el-space direction="vertical" alignment="flex-start" style="margin-top: 18px;">
                 <div>
-                    <el-text type="info">* WebDAV 配置仅存储在本地，不会上传至云端</el-text>
+                    <el-text type="primary" class="text-info">* WebDAV 配置仅存储在本地，不会上传至云端</el-text>
                 </div>
                 <div>
-                    <el-text type="info">* 启用 WebDAV 后，所有的同步操作将通过 WebDAV 进行</el-text>
+                    <el-text type="primary" class="text-info">* 启用 WebDAV 后，所有的同步操作将通过 WebDAV 进行</el-text>
                 </div>
             </el-space>
         </el-form>

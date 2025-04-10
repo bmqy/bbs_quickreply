@@ -1,4 +1,6 @@
 <script setup name="quickReplySetAI">
+import { getCurrentInstance, ref } from 'vue';
+
 const {proxy} = getCurrentInstance();
 const geminiApiKey = ref('');
 const useGemini = ref(false);

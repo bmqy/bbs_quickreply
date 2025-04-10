@@ -1,22 +1,29 @@
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 import { createApp } from 'vue';
 import AI from './Ai.vue';
 import Api from './api';
 import App from './App.vue';
 import Login from './Login.vue';
 import Set from './Set.vue';
+import './styles/element-plus-override.css';
 import Util from './util';
 
 const app = createApp(App);
-    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-    app.component(key, component)
+// 全局注册所有Element Plus图标组件
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component);
 }
+
 app.component('app-set-ai', AI);
 app.component('app-set', Set);
 app.component('app-login', Login);
-app.use(ElementPlus)
+app.use(ElementPlus, {
+    locale: zhCn,
+    size: 'default'
+});
 app.use(Util);
 app.use(Api);
 
