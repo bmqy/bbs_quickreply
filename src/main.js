@@ -19,6 +19,42 @@ app.component('app-login', Login);
 app.use(ElementPlus)
 app.use(Util);
 app.use(Api);
+
+// 添加$app全局变量
+app.config.globalProperties.$app = {
+    getName() {
+        return '论坛快捷回帖 by bmqy';
+    },
+    getVersion() {
+        return '2.3.4';
+    },
+    systemRole: "你是一个互联网高手，常年混迹于各大论坛，对所有内容都感兴趣，并且热衷于回复每一篇帖子，回复风格：简短、睿智、一语中的，又不失俏皮诙谐",
+    prompt: "请根据帖子标题：{{title}}，进行回帖。务必直接给出回帖内容，不要包含其他无关内容",
+    isNew(timestamp) {
+        if (!timestamp) return false;
+        let number = 3600 * 24 * 7;
+        return parseInt((new Date()).getTime() / 1000) - timestamp <= number;
+    }
+};
+
+// 添加$tools全局变量
+app.config.globalProperties.$tools = {
+    encodeStr(str) {
+        let encoder = new TextEncoder();
+        str = encoder.encode(str);
+        return btoa(String.fromCharCode.apply(null, str));
+    },
+    decodeStr(str) {
+        var byteCharacters = atob(str);
+        var byteArray = new Uint8Array(byteCharacters.length);
+        for (var i = 0; i < byteCharacters.length; i++) {
+            byteArray[i] = byteCharacters.charCodeAt(i);
+        }
+        var decoder = new TextDecoder();
+        return decoder.decode(byteArray);
+    }
+};
+
 app.mount(
     (()=>{
         // discuz

@@ -1,4 +1,5 @@
 <script setup name="quickReplySet">
+import { getCurrentInstance, ref } from 'vue';
 
 const {proxy} = getCurrentInstance();
 const myList = ref([]);
@@ -9,8 +10,8 @@ const isLogin = ref(false);
 const realtimeSync = ref(false);
 const realtimeBackup = ref(false);
 const submitNow = ref(false);
-const currentTab = ref('mine');
-const showLoginForce = ref(false);
+const showLogin = ref(false);
+const showSettings = ref(false);
 const newReply = ref('');
 const windowSize = ref({
     width: window.innerWidth,
@@ -28,20 +29,18 @@ const constVar = ref({
     url: '',
     base64: false,
 });
-const webdavConfig = ref({
-    enabled: false,
-    url: '',
-    username: '',
-    password: ''
-});
 const emit = defineEmits(['updateMyList', 'updateConstVar', 'updateAIModel']);
 onBeforeMount(()=>{
-    isLogin.value = proxy.$storage.getUserInfo('userId');
+    const userId = proxy.$storage.getUserInfo('userId');
+    isLogin.value = !!userId;
     realtimeSync.value = proxy.$storage.getUserInfo('realtimeSync') || false;
     realtimeBackup.value = proxy.$storage.getUserInfo('realtimeBackup') || false;
     submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
     constVar.value = proxy.$storage.getUserInfo('constVar') || constVar.value;
-    webdavConfig.value = proxy.$storage.getUserInfo('webdavConfig') || webdavConfig.value;
+    
+    // WebDAV 配置仅在登录界面中管理,这里不再需要加载
+    // webdavConfig.value = proxy.$storage.getUserInfo('webdavConfig') || webdavConfig.value;
+    
     getMyList();
     getSystemList();
 });
@@ -158,10 +157,15 @@ function collectReply(index) {
 }
 
 function onLoginSuccess(){
-    showLoginForce.value = false;
+    showLogin.value = false;
     isLogin.value = true;
     myList.value.length===0 && download();
 }
+
+function closeLogin(){
+    showLogin.value = false;
+}
+
 function upload(){
     proxy.$storage.uploadList();
 }
@@ -178,17 +182,10 @@ async function downloadAll(){
     myList.value = all.QuickReply || [];
     updateMyList();
 }
-function loginForce(){
-    showLoginForce.value = !showLoginForce.value;
-    currentTab.value = 'mine';
-}
-function loginCancel(){
-    showLoginForce.value = false;
-    currentTab.value = 'mine';
-}
 function logout(){
-    proxy.$storage.setUserInfo('userId', '')
+    proxy.$storage.setUserInfo('userId', '');
     isLogin.value = false;
+    proxy.$message.success('已注销登录');
 }
 
 function onRealtimeSyncChange(e){
@@ -220,79 +217,117 @@ function constVarChange(){
     realtimeBackup.value && uploadAll();
 }
 
-// 测试 WebDAV 连接
-async function testWebDAV() {
-    if (!webdavConfig.value.url || !webdavConfig.value.username || !webdavConfig.value.password) {
-        proxy.$message.error('请填写完整的 WebDAV 配置信息');
-        return;
-    }
-    
-    try {
-        await new Promise((resolve, reject) => {
-            GM_xmlhttpRequest({
-                method: 'PROPFIND',
-                url: webdavConfig.value.url,
-                headers: {
-                    'Authorization': 'Basic ' + btoa(webdavConfig.value.username + ':' + webdavConfig.value.password),
-                    'Depth': '0',
-                    'Content-Type': 'application/xml',
-                    'Accept': 'application/xml, text/xml'
-                },
-                data: '<?xml version="1.0" encoding="utf-8"?><propfind xmlns="DAV:"><prop><resourcetype/></prop></propfind>',
-                onload: function(response) {
-                    if (response.status === 207 || (response.status >= 200 && response.status < 300)) {
-                        resolve(true);
-                    } else {
-                        reject(new Error('连接失败: ' + response.statusText));
-                    }
-                },
-                onerror: function(error) {
-                    reject(new Error('连接失败: ' + error.message));
-                }
-            });
-        });
-        
-        proxy.$message.success('WebDAV 连接测试成功');
-    } catch (error) {
-        proxy.$message.error('WebDAV 连接测试失败: ' + error.message);
-    }
-}
-
-// 保存 WebDAV 配置
-function saveWebDAVConfig() {
-    proxy.$storage.setUserInfo('webdavConfig', webdavConfig.value);
-    proxy.$message.success('WebDAV 配置已保存');
+// 判断是否是 WebDAV 用户
+function isWebDAVUser() {
+    const userId = proxy.$storage.getUserInfo('userId');
+    return userId === 'webdav_user';
 }
 </script>
 
 <template>
     <div class="setBox">
         <el-card class="box-card" shadow="never">
-            <el-row :gutter="30">
-                <el-col :span="9" :md="{span: 9}" :sm="{span: 24}" :xs="{span: 24}">
-                    <el-tabs type="border-card" class="my-list-tabs" v-model="currentTab">
-                        <el-tab-pane name="mine" label="我在用的">
-                            <div v-if="(myList.length===0 && !isLogin) || showLoginForce" class="quickReplyLoginBox">
-                                <div style="margin-top: 15px;">
-                                    <app-login @onSuccess="onLoginSuccess" @onClose="loginCancel"></app-login>
-                                    <el-space direction="vertical" alignment="flex-start">
-                                        <div>
-                                            <el-text type="info">* 登录后，即可在任意设备同步你的配置；</el-text>
-                                        </div>
-                                        <div>
-                                            <el-text type="info">* 云端只负责保存账号及其回复列表，不留存多余信息；</el-text>
-                                        </div>
-                                        <div>
-                                            <el-text type="info">* 忘记密码无法恢复，可重新注册；</el-text>
-                                        </div>
-                                        <div>
-                                            <el-text type="info">* 如不需登录，也可忽略登录界面，直接使用即可；</el-text>
-                                        </div>
-                                    </el-space>
-                                </div>
+            <!-- 顶部添加登录按钮 -->
+            <template #header>
+                <div class="card-header">
+                    <div class="header-left">
+                        <el-button v-if="!isLogin" type="primary" size="small" @click="showLogin = true">登录</el-button>
+                        <el-button v-else type="danger" size="small" @click="logout">注销</el-button>
+                        <span v-if="isLogin && isWebDAVUser()" class="login-type">WebDAV 同步</span>
+                        <span v-if="isLogin && !isWebDAVUser()" class="login-type">账号同步</span>
+                    </div>
+                    <div class="header-right">
+                        <el-space>
+                            <el-button v-if="isLogin" type="primary" icon="Upload" size="small" @click="uploadAll">全量备份</el-button>
+                            <el-button v-if="isLogin" type="warning" icon="Download" size="small" @click="downloadAll">全量恢复</el-button>
+                            <el-button v-if="isLogin" type="success" icon="Setting" size="small" @click="showSettings = !showSettings">设置</el-button>
+                        </el-space>
+                    </div>
+                </div>
+            </template>
+
+            <!-- 登录界面 -->
+            <div v-if="showLogin" class="login-container">
+                <div class="login-header">
+                    <h3>账号登录</h3>
+                    <el-button type="link" icon="Back" @click="closeLogin">返回</el-button>
+                </div>
+                <app-login @onSuccess="onLoginSuccess" @onClose="closeLogin"></app-login>
+            </div>
+
+            <!-- 设置区域 -->
+            <div v-else-if="showSettings" class="settings-container">
+                <el-tabs type="border-card">
+                    <el-tab-pane name="options" label="选项">
+                        <el-space direction="vertical" alignment="flex-start">
+                            <!-- 显示当前登录类型 -->
+                            <div v-if="isWebDAVUser()">
+                                <el-alert
+                                    title="您当前使用的是 WebDAV 登录"
+                                    type="success"
+                                    description="所有数据将通过 WebDAV 同步,无需配置其他同步选项"
+                                    show-icon
+                                    :closable="false"
+                                />
                             </div>
                             <div v-else>
-                                <ul class="list" v-if="!showLoginForce || myList.length>0">
+                                <el-checkbox v-model="realtimeSync" label="实时同步，本地回复列表修改后立即上传" size="small" :checked="realtimeSync" @change="onRealtimeSyncChange" />
+                            </div>
+                            <div v-if="!isWebDAVUser()">
+                                <el-checkbox v-model="realtimeBackup" label="实时备份，本地回复列表及任一配置修改后立即备份至云端" size="small" :checked="realtimeBackup" @change="onRealtimeBackupChange" />
+                            </div>
+                            <div>
+                                <el-checkbox v-model="submitNow" label="立即提交，选择快捷回帖内容后立即提交回帖" size="small" :checked="submitNow" @change="onSubmitNowChange" />
+                            </div>
+                        </el-space>
+                    </el-tab-pane>
+                    <el-tab-pane name="constVar" label="常量">
+                        <el-form :model="constVar" label-width="60" style="max-width: 600px">
+                            <el-form-item label="邮箱">
+                                <el-input v-model="constVar.email" @change="constVarChange" />
+                            </el-form-item>
+                            <el-form-item label="QQ">
+                                <el-input v-model="constVar.qq" @change="constVarChange" />
+                            </el-form-item>
+                            <el-form-item label="微信">
+                                <el-input v-model="constVar.wechat" @change="constVarChange" />
+                            </el-form-item>
+                            <el-form-item label="网址">
+                                <el-input v-model="constVar.url" @change="constVarChange" />
+                            </el-form-item>
+                            <el-form-item label="加密">
+                                <el-switch v-model="constVar.base64" @change="constVarChange" />
+                            </el-form-item>
+                        </el-form>
+                        <el-space direction="vertical" alignment="flex-start">
+                            <div>
+                                <el-text type="info">* 可在快捷回帖中使用以上常量：{email}、{qq}、{wechat}、{url}，例：我的邮箱是{email}，我的QQ是{qq}；</el-text>
+                            </div>
+                            <div>
+                                <el-text type="info">* 开启加密后，只在回帖时显示base64加密后的常量；</el-text>
+                            </div>
+                        </el-space>
+                    </el-tab-pane>
+                    <el-tab-pane name="ai" label="AI">
+                        <app-set-ai ref="setAIPanel" @updateAI="updateAI" />
+                    </el-tab-pane>
+                </el-tabs>
+                <div class="settings-footer">
+                    <el-button type="primary" @click="showSettings = false">返回</el-button>
+                </div>
+            </div>
+
+            <!-- 主体内容区域 -->
+            <div v-else class="main-content">
+                <el-row :gutter="30">
+                    <!-- 左侧我在用的列表 -->
+                    <el-col :span="9" :md="{span: 9}" :sm="{span: 24}" :xs="{span: 24}">
+                        <el-card class="my-replies-card" shadow="never">
+                            <template #header>
+                                <div class="card-title">我在用的</div>
+                            </template>
+                            <div>
+                                <ul class="list" v-if="myList.length > 0">
                                     <li v-for="(item, index) in myList" :key="index">
                                         <div class="list-left">
                                             <div class="list-number">
@@ -313,166 +348,76 @@ function saveWebDAVConfig() {
                                         </div>
                                     </li>
                                 </ul>
-                                <div v-if="myList.length == 0" class="tips">
+                                <div v-else class="tips">
                                     <p>未设置快速回帖内容!</p>
                                 </div>
                             </div>
-                        </el-tab-pane>
-                        <el-tab-pane v-if="isLogin" name="options" label="选项">
-                            <el-space direction="vertical" alignment="flex-start">
-                                <div>
-                                    <el-checkbox v-model="realtimeSync" label="实时同步，本地回复列表修改后立即上传" size="small" :checked="realtimeSync" @change="onRealtimeSyncChange" />
-                                </div>
-                                <div>
-                                    <el-checkbox v-model="realtimeBackup" label="实时备份，本地回复列表及任一配置修改后立即备份至云端" size="small" :checked="realtimeBackup" @change="onRealtimeBackupChange" />
-                                </div>
-                                <div>
-                                    <el-checkbox v-model="submitNow" label="立即提交，选择快捷回帖内容后立即提交回帖" size="small" :checked="submitNow" @change="onSubmitNowChange" />
-                                </div>
-                                <div>
-                                    <el-checkbox v-model="webdavConfig.enabled" label="启用 WebDAV 备份" size="small" @change="saveWebDAVConfig" />
-                                </div>
-                                <el-space direction="vertical" alignment="flex-start" style="margin-top: 18px;">
-                                    <div>
-                                        <el-text type="info">* AI和常量只存在本地，不参与同步</el-text>
-                                    </div>
-                                    <div>
-                                        <el-text type="info">* 如需备份所有配置请使用操作中的全量备份、全量恢复</el-text>
-                                    </div>
-                                    <div>
-                                        <el-text type="info">* 全量备份仅为方便多设备同步配置，使用base64存储，请知悉</el-text>
-                                    </div>
-                                </el-space>
-                            </el-space>
-                        </el-tab-pane>
-                        <el-tab-pane v-if="isLogin" name="webdav" label="WebDAV">
-                            <el-form :model="webdavConfig" label-width="80px">
-                                <el-form-item label="服务器">
-                                    <el-input v-model="webdavConfig.url" placeholder="请输入 WebDAV 服务器地址" />
-                                </el-form-item>
-                                <el-form-item label="用户名">
-                                    <el-input v-model="webdavConfig.username" placeholder="请输入用户名" />
-                                </el-form-item>
-                                <el-form-item label="密码">
-                                    <el-input v-model="webdavConfig.password" type="password" placeholder="请输入密码" show-password />
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-button type="primary" @click="saveWebDAVConfig">保存配置</el-button>
-                                    <el-button type="success" @click="testWebDAV">测试连接</el-button>
-                                </el-form-item>
-                                <el-space direction="vertical" alignment="flex-start" style="margin-top: 18px;">
-                                    <div>
-                                        <el-text type="info">* WebDAV 配置仅存储在本地，不会上传至云端</el-text>
-                                    </div>
-                                    <div>
-                                        <el-text type="info">* 启用 WebDAV 后，所有的同步操作将通过 WebDAV 进行</el-text>
-                                    </div>
-                                </el-space>
-                            </el-form>
-                        </el-tab-pane>
-                        <el-tab-pane v-if="isLogin" name="constVar" label="常量">
-                            <el-form :model="constVar" label-width="60" style="max-width: 600px">
-                                <el-form-item label="邮箱">
-                                    <el-input v-model="constVar.email" @change="constVarChange" />
-                                </el-form-item>
-                                <el-form-item label="QQ">
-                                    <el-input v-model="constVar.qq" @change="constVarChange" />
-                                </el-form-item>
-                                <el-form-item label="微信">
-                                    <el-input v-model="constVar.wechat" @change="constVarChange" />
-                                </el-form-item>
-                                <el-form-item label="网址">
-                                    <el-input v-model="constVar.url" @change="constVarChange" />
-                                </el-form-item>
-                                <el-form-item label="加密">
-                                    <el-switch v-model="constVar.base64" @change="constVarChange" />
-                                </el-form-item>
-                            </el-form>
-                            <el-space direction="vertical" alignment="flex-start">
-                                <div>
-                                    <el-text type="info">* 可在快捷回帖中使用以上常量：{email}、{qq}、{wechat}、{url}，例：我的邮箱是{email}，我的QQ是{qq}；</el-text>
-                                </div>
-                                <div>
-                                    <el-text type="info">* 开启加密后，只在回帖时显示base64加密后的常量；</el-text>
-                                </div>
-                            </el-space>
-                        </el-tab-pane>
-                        <el-tab-pane v-if="isLogin" name="ai" label="AI">
-                            <app-set-ai ref="setAIPanel" @updateAI="updateAI" />
-                        </el-tab-pane>
-                        <el-tab-pane name="actions" label="操作">
-                            <el-space wrap>
-                                <el-button v-if="!isLogin" type="success" icon="UserFilled" size="small" @click="loginForce">登录，登录后即可在任意设备同步你的配置</el-button>
-                                <el-button v-if="isLogin" type="danger" icon="SwitchButton" size="small" @click="logout">注销，注销登录后将不能再同步列表</el-button>
-                                <el-button v-if="isLogin" type="primary" icon="Upload" size="small" @click="upload">上传，上传本地列表会覆盖云端数据</el-button>
-                                <el-button v-if="isLogin" type="warning" icon="Download" size="small" @click="download">下载，下载云端列表会覆盖本地数据</el-button>
-                                <el-button v-if="isLogin" type="primary" icon="Upload" size="small" @click="uploadAll">全量备份，全量备份本地所有配置信息到云端</el-button>
-                                <el-button v-if="isLogin" type="warning" icon="Download" size="small" @click="downloadAll">全量恢复，全量恢复云端配置信息覆盖本地数据</el-button>
-                            </el-space>
-                        </el-tab-pane>
-                    </el-tabs>
-                </el-col>
-                <el-col :span="15" :md="{span: 15}" :sm="{span: 24}" :xs="{span: 24}" :style="{'margin-top': windowSize.width<992?'15px':0}">
-                    <el-card class="box-card" shadow="never" :body-style="{padding: '0 20px 20px'}">
-                        <template #header class="clearfix">
-                            <span>网友分享的</span>
-                        </template>
+                        </el-card>
+                    </el-col>
 
-                        <el-table ref="filterTable" :data="systemList" size="small" stripe v-loading="loading"
-                            @sort-change="sortChange">
-                            <el-table-column prop="replyId" label="ID" width="50" align="center"></el-table-column>
-                            <el-table-column prop="content" label="内容">
-                                <template #default="scope">
-                                    <div v-if="$app.isNew(scope.row.created)">
-                                        {{ scope.row.content }}
-                                        <el-tooltip class="item" effect="dark" content="7天内新增" placement="top-start">
-                                            <el-tag
-                                                type="primary"
-                                                effect="dark"
-                                                size="small"
-                                                round
-                                                style="transform: scale(0.7);"
-                                                >
-                                            NEW
-                                            </el-tag>
+                    <!-- 右侧网友分享的列表 -->
+                    <el-col :span="15" :md="{span: 15}" :sm="{span: 24}" :xs="{span: 24}" :style="{'margin-top': windowSize.width<992?'15px':0}">
+                        <el-card class="box-card" shadow="never" :body-style="{padding: '0 20px 20px'}">
+                            <template #header class="clearfix">
+                                <span>网友分享的</span>
+                            </template>
+
+                            <el-table ref="filterTable" :data="systemList" size="small" stripe v-loading="loading"
+                                @sort-change="sortChange">
+                                <el-table-column prop="replyId" label="ID" width="50" align="center"></el-table-column>
+                                <el-table-column prop="content" label="内容">
+                                    <template #default="scope">
+                                        <div v-if="$app.isNew(scope.row.created)">
+                                            {{ scope.row.content }}
+                                            <el-tooltip class="item" effect="dark" content="7天内新增" placement="top-start">
+                                                <el-tag
+                                                    type="primary"
+                                                    effect="dark"
+                                                    size="small"
+                                                    round
+                                                    style="transform: scale(0.7);"
+                                                    >
+                                                NEW
+                                                </el-tag>
+                                            </el-tooltip>
+                                        </div>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column prop="likeCount" sortable="custom" width="70" align="center" label="点赞">
+                                    <template #default="scope">
+                                        <el-tag type="info" size="small">{{scope.row.likeCount}}</el-tag>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="操作" width="100" align="center">
+                                    <template #default="scope">
+                                        <el-tooltip class="item" effect="dark" content="给个赞" placement="top-start">
+                                            <el-button type="success" size="small" icon="Pointer" circle
+                                                @click="likeReply(scope.$index)"></el-button>
                                         </el-tooltip>
-                                    </div>
-                                </template>
-                            </el-table-column>
-                            <el-table-column prop="likeCount" sortable="custom" width="70" align="center" label="点赞">
-                                <template #default="scope">
-                                    <el-tag type="info" size="small">{{scope.row.likeCount}}</el-tag>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="操作" width="100" align="center">
-                                <template #default="scope">
-                                    <el-tooltip class="item" effect="dark" content="给个赞" placement="top-start">
-                                        <el-button type="success" size="small" icon="Pointer" circle
-                                            @click="likeReply(scope.$index)"></el-button>
-                                    </el-tooltip>
-                                    <el-tooltip class="item" effect="dark" content="收藏进我的" placement="top-start">
-                                        <el-button type="danger" size="small" icon="StarFilled" circle
-                                            @click="collectReply(scope.$index)"></el-button>
-                                    </el-tooltip>
-                                </template>
-                            </el-table-column>
-                        </el-table>
+                                        <el-tooltip class="item" effect="dark" content="收藏进我的" placement="top-start">
+                                            <el-button type="danger" size="small" icon="StarFilled" circle
+                                                @click="collectReply(scope.$index)"></el-button>
+                                        </el-tooltip>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
 
-                        <el-pagination background layout="prev, pager, next" :small="windowSize.width<=640" :page-size="10" :pager-count="windowSize.width>640?5:3"
-                            @current-change="currentPageChange" :total="systemListCount">
-                        </el-pagination>
-                    </el-card>
-                </el-col>
-            </el-row>
+                            <el-pagination background layout="prev, pager, next" :small="windowSize.width<=640" :page-size="10" :pager-count="windowSize.width>640?5:3"
+                                @current-change="currentPageChange" :total="systemListCount">
+                            </el-pagination>
+                        </el-card>
+                    </el-col>
+                </el-row>
 
-            <div class="addReplyBox">
-                <el-input placeholder="请输入新的回复内容" v-model="newReply" :autosize="{ minRows: 1, maxRows: 3 }" maxlength="100"
-                    :show-word-limit="true" resize="none" clearable class="input-with-select">
+                <div class="addReplyBox">
+                    <el-input placeholder="请输入新的回复内容" v-model="newReply" :autosize="{ minRows: 1, maxRows: 3 }" maxlength="100"
+                        :show-word-limit="true" resize="none" clearable class="input-with-select">
 
-                    <template #append>
-                        <el-button icon="Plus" @click="addReply"></el-button>
-                    </template>
-                </el-input>
+                        <template #append>
+                            <el-button icon="Plus" @click="addReply"></el-button>
+                        </template>
+                    </el-input>
+                </div>
             </div>
         </el-card>
     </div>
@@ -485,13 +430,60 @@ function saveWebDAVConfig() {
     }
 }
 
-.app-margin-right-30 {
-    margin-right: 30px;
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.my-list-tabs{
-    border-radius: var(--el-card-border-radius);
-    border: 1px solid var(--el-card-border-color);
+.header-left {
+    display: flex;
+    align-items: center;
+    
+    .login-type {
+        margin-left: 10px;
+        font-size: 14px;
+        color: #409eff;
+    }
+}
+
+.login-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    
+    .login-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ebeef5;
+        
+        h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #303133;
+        }
+    }
+}
+
+.settings-container {
+    padding: 10px 0;
+    
+    .settings-footer {
+        margin-top: 20px;
+        text-align: right;
+    }
+}
+
+.my-replies-card {
+    min-height: 300px;
+    
+    .card-title {
+        font-weight: bold;
+    }
 }
 
 .list {
@@ -536,7 +528,8 @@ function saveWebDAVConfig() {
         }
     }
 }
-.quickReplyLoginBox .tips {
+
+.tips {
     margin-left: 50px;
     text-align: left;
     font-size: 12px;
