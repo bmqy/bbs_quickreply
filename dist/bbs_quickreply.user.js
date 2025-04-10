@@ -36,6 +36,7 @@
 // @connect      api.openai.com
 // @connect      api.deepseek.com
 // @connect      dav.jianguoyun.com
+// @connect      *
 // @grant        GM_download
 // @grant        GM_getResourceText
 // @grant        GM_getValue
@@ -47,7 +48,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(a=>{const e=document.createElement("style");e.dataset.source="vite-plugin-monkey",e.textContent=a,document.head.append(e)})(' .box-card .el-card__header[data-v-e87ab068]{padding:10px 20px}.box-card .el-card__header span[data-v-e87ab068]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.quickReplyBox[data-v-1b723407]{position:relative}.quickReplyBox .el-form[data-v-1b723407]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-1b723407]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-1b723407]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1b723407]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1b723407],.el-form-item--small.el-form-item[data-v-1b723407]{margin-bottom:10px}.el-select[data-v-1b723407]{width:300px}.margin-left{margin-left:15px}.el-dialog__footer{background-color:#fff}.app-margin-right-30[data-v-3865a7e9]{margin-right:30px}.my-list-tabs[data-v-3865a7e9]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-3865a7e9]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-3865a7e9]{margin-right:5px;color:#909399}.list-title[data-v-3865a7e9]{flex:1;font-weight:400}.list-right[data-v-3865a7e9]{min-width:70px}.list-right .el-badge.item[data-v-3865a7e9]{margin-right:30px}.list li[data-v-3865a7e9]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-3865a7e9]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-3865a7e9]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-3865a7e9]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-3865a7e9]{padding:10px 20px}.box-card .el-card__header span[data-v-3865a7e9]{font-size:14px}.clearfix[data-v-3865a7e9]:before,.clearfix[data-v-3865a7e9]:after{display:table;content:""}.clearfix[data-v-3865a7e9]:after{clear:both}.el-pagination[data-v-3865a7e9]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap} ');
+(t=>{const e=document.createElement("style");e.dataset.source="vite-plugin-monkey",e.textContent=t,document.head.append(e)})(' .box-card .el-card__header[data-v-e87ab068]{padding:10px 20px}.box-card .el-card__header span[data-v-e87ab068]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.quickReplyBox[data-v-1b723407]{position:relative}.quickReplyBox .el-form[data-v-1b723407]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-1b723407]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-1b723407]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1b723407]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1b723407],.el-form-item--small.el-form-item[data-v-1b723407]{margin-bottom:10px}.el-select[data-v-1b723407]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-29a543ee]{display:flex;align-items:center;justify-content:space-between}.header-left[data-v-29a543ee]{display:flex;align-items:center}.header-left .login-type[data-v-29a543ee]{margin-left:10px;font-size:14px;color:#409eff}.login-container[data-v-29a543ee]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-29a543ee]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-29a543ee]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-29a543ee]{padding:10px 0}.settings-container .settings-footer[data-v-29a543ee]{margin-top:20px;text-align:right}.my-replies-card[data-v-29a543ee]{min-height:300px}.my-replies-card .card-title[data-v-29a543ee]{font-weight:700}.list-left[data-v-29a543ee]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-29a543ee]{margin-right:5px;color:#909399}.list-title[data-v-29a543ee]{flex:1;font-weight:400}.list-right[data-v-29a543ee]{min-width:70px}.list-right .el-badge.item[data-v-29a543ee]{margin-right:30px}.list li[data-v-29a543ee]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-29a543ee]:hover{background-color:#f5f5f5}.tips[data-v-29a543ee]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-29a543ee]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-29a543ee]{padding:10px 20px}.box-card .el-card__header span[data-v-29a543ee]{font-size:14px}.clearfix[data-v-29a543ee]:before,.clearfix[data-v-29a543ee]:after{display:table;content:""}.clearfix[data-v-29a543ee]:after{clear:both}.el-pagination[data-v-29a543ee]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap} ');
 
 (function (ElementPlusIconsVue, ElementPlus, vue) {
   'use strict';
@@ -635,7 +636,6 @@
   };
   const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-e87ab068"]]);
   var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
-  var _GM_info = /* @__PURE__ */ (() => typeof GM_info != "undefined" ? GM_info : void 0)();
   var _GM_listValues = /* @__PURE__ */ (() => typeof GM_listValues != "undefined" ? GM_listValues : void 0)();
   var _GM_setValue = /* @__PURE__ */ (() => typeof GM_setValue != "undefined" ? GM_setValue : void 0)();
   var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
@@ -1383,6 +1383,9 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
   const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-1b723407"]]);
   const _hoisted_1$1 = { class: "margin-left" };
   const _hoisted_2$1 = { class: "margin-left" };
+  const _hoisted_3$1 = { class: "form-tip" };
+  const _hoisted_4$1 = { class: "form-tip" };
+  const _hoisted_5$1 = { class: "margin-left" };
   const _sfc_main$1 = {
     __name: "Login",
     emits: ["onSuccess", "onClose"],
@@ -1390,13 +1393,13 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       const { proxy } = vue.getCurrentInstance();
       const checkName = (rule, value, callback) => {
         if (!/[0-9a-zA-Z@\.]{5,20}/.test(value)) {
-          callback("用户名5-20，只能包含字母、数字、“.”、“@”等");
+          callback('用户名5-20，只能包含字母、数字、"."、"@"等');
         }
         callback();
       };
       const checkPassword = (rule, value, callback) => {
         if (!/[0-9a-zA-Z\.\-_]{2,20}/.test(value)) {
-          callback("密码2-20，只能包含字母、数字、“.”、“-”、“_”等");
+          callback('密码2-20，只能包含字母、数字、"."、"-"、"_"等');
         }
         callback();
       };
@@ -1406,12 +1409,24 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         }
         callback();
       };
+      const checkWebDAVUrl = (rule, value, callback) => {
+        if (!value) {
+          callback("WebDAV 服务器地址不能为空");
+          return;
+        }
+        const urlPattern = /^https?:\/\/.+/i;
+        if (!urlPattern.test(value)) {
+          callback("请输入有效的 WebDAV 服务器地址，以 http:// 或 https:// 开头");
+        }
+        callback();
+      };
+      const loginType = vue.ref("account");
       const registerFormRef = vue.ref();
       const formMode = vue.ref(1);
       const registerRules = vue.ref({
         username: [
-          { required: true, message: "用户名不能为空", trigger: "blur" }
-          // { validator: checkName, trigger: 'blur'}
+          { required: true, message: "用户名不能为空", trigger: "blur" },
+          { validator: checkName, trigger: "blur" }
         ],
         password: [
           { required: true, message: "密码不能为空", trigger: "blur" },
@@ -1438,8 +1453,38 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           { validator: checkPassword, trigger: "blur" }
         ]
       });
+      const webdavFormRef = vue.ref();
+      const webdavForm = vue.ref({
+        url: "",
+        username: "",
+        password: ""
+      });
+      const webdavLoading = vue.ref(false);
+      const webdavRules = vue.ref({
+        url: [
+          { required: true, message: "WebDAV 服务器地址不能为空", trigger: "blur" },
+          { validator: checkWebDAVUrl, trigger: "blur" }
+        ],
+        username: [
+          { required: true, message: "用户名不能为空", trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "密码不能为空", trigger: "blur" }
+        ]
+      });
       const loginSuccess = (res) => {
         proxy.$storage.setUserInfo("userId", res.data.userId);
+        emit("onSuccess");
+      };
+      const webdavLoginSuccess = () => {
+        const webdavConfig = {
+          enabled: true,
+          url: webdavForm.value.url,
+          username: webdavForm.value.username,
+          password: webdavForm.value.password
+        };
+        proxy.$storage.setUserInfo("webdavConfig", webdavConfig);
+        proxy.$storage.setUserInfo("userId", "webdav_user");
         emit("onSuccess");
       };
       const loginOnSubmit = () => {
@@ -1472,23 +1517,95 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           }
         });
       };
+      const webdavLoginOnSubmit = () => {
+        webdavFormRef.value.validate(async (valid, fields) => {
+          if (valid) {
+            webdavLoading.value = true;
+            try {
+              await testWebDAVConnection();
+              webdavLoginSuccess();
+              proxy.$message.success("WebDAV 登录成功");
+            } catch (error) {
+              proxy.$message.error("WebDAV 登录失败: " + error.message);
+            } finally {
+              webdavLoading.value = false;
+            }
+          }
+        });
+      };
+      const testWebDAVConnection = () => {
+        return new Promise((resolve, reject) => {
+          _GM_xmlhttpRequest({
+            method: "PROPFIND",
+            // 使用 PROPFIND 更适合检测 WebDAV 服务器
+            url: webdavForm.value.url,
+            headers: {
+              "Authorization": "Basic " + btoa(webdavForm.value.username + ":" + webdavForm.value.password),
+              "Depth": "0",
+              "Content-Type": "application/xml"
+            },
+            data: '<?xml version="1.0" encoding="utf-8"?><propfind xmlns="DAV:"><prop><resourcetype/></prop></propfind>',
+            timeout: 15e3,
+            // 增加到15秒超时时间
+            onload: function(response) {
+              console.log("WebDAV 响应:", response.status, response);
+              if (response.status >= 200 && response.status < 300 || response.status === 207) {
+                resolve(true);
+              } else if (response.status === 401) {
+                reject(new Error("认证失败：用户名或密码错误"));
+              } else if (response.status === 404) {
+                reject(new Error("服务器地址错误：请确认输入了正确的WebDAV路径 (例如: https://dav.jianguoyun.com/dav/)"));
+              } else {
+                reject(new Error(`连接失败: 状态码 ${response.status}，请检查服务器地址和认证信息`));
+              }
+            },
+            onerror: function(error) {
+              console.error("WebDAV连接错误:", error);
+              reject(new Error("连接失败：无法连接到服务器，请检查URL是否正确或网络是否通畅"));
+            },
+            ontimeout: function() {
+              reject(new Error("连接超时：请检查网络或服务器地址"));
+            }
+          });
+        });
+      };
       const close = () => {
         emit("onClose");
       };
       return (_ctx, _cache) => {
+        const _component_el_tab_pane = vue.resolveComponent("el-tab-pane");
+        const _component_el_tabs = vue.resolveComponent("el-tabs");
         const _component_el_input = vue.resolveComponent("el-input");
         const _component_el_form_item = vue.resolveComponent("el-form-item");
         const _component_el_button = vue.resolveComponent("el-button");
         const _component_el_link = vue.resolveComponent("el-link");
         const _component_el_space = vue.resolveComponent("el-space");
         const _component_el_form = vue.resolveComponent("el-form");
+        const _component_el_text = vue.resolveComponent("el-text");
         return vue.openBlock(), vue.createElementBlock("div", null, [
-          vue.unref(formMode) === 1 ? (vue.openBlock(), vue.createBlock(_component_el_form, {
+          vue.createVNode(_component_el_tabs, {
+            modelValue: loginType.value,
+            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => loginType.value = $event),
+            class: "login-tabs"
+          }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_el_tab_pane, {
+                label: "账号登录",
+                name: "account"
+              }),
+              vue.createVNode(_component_el_tab_pane, {
+                label: "WebDAV",
+                name: "webdav"
+              })
+            ]),
+            _: 1
+          }, 8, ["modelValue"]),
+          loginType.value === "account" && formMode.value === 1 ? (vue.openBlock(), vue.createBlock(_component_el_form, {
             key: 0,
             ref_key: "loginFormRef",
             ref: loginFormRef,
-            model: vue.unref(loginForm),
-            rules: vue.unref(loginRules),
+            model: loginForm.value,
+            rules: loginRules.value,
             "label-width": "120px"
           }, {
             default: vue.withCtx(() => [
@@ -1499,8 +1616,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               }, {
                 default: vue.withCtx(() => [
                   vue.createVNode(_component_el_input, {
-                    modelValue: vue.unref(loginForm).username,
-                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.unref(loginForm).username = $event)
+                    modelValue: loginForm.value.username,
+                    "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => loginForm.value.username = $event)
                   }, null, 8, ["modelValue"])
                 ]),
                 _: 1
@@ -1512,8 +1629,10 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               }, {
                 default: vue.withCtx(() => [
                   vue.createVNode(_component_el_input, {
-                    modelValue: vue.unref(loginForm).password,
-                    "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.unref(loginForm).password = $event)
+                    modelValue: loginForm.value.password,
+                    "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => loginForm.value.password = $event),
+                    type: "password",
+                    "show-password": ""
                   }, null, 8, ["modelValue"])
                 ]),
                 _: 1
@@ -1534,7 +1653,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                       default: vue.withCtx(() => [
                         vue.createVNode(_component_el_link, {
                           href: "javascript:;",
-                          onClick: _cache[2] || (_cache[2] = ($event) => formMode.value = 0)
+                          onClick: _cache[3] || (_cache[3] = ($event) => formMode.value = 0)
                         }, {
                           default: vue.withCtx(() => [
                             vue.createTextVNode("注册")
@@ -1559,12 +1678,13 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               })
             ]),
             _: 1
-          }, 8, ["model", "rules"])) : (vue.openBlock(), vue.createBlock(_component_el_form, {
+          }, 8, ["model", "rules"])) : vue.createCommentVNode("", true),
+          loginType.value === "account" && formMode.value === 0 ? (vue.openBlock(), vue.createBlock(_component_el_form, {
             key: 1,
             ref_key: "registerFormRef",
             ref: registerFormRef,
-            model: vue.unref(loginForm),
-            rules: vue.unref(registerRules),
+            model: loginForm.value,
+            rules: registerRules.value,
             "label-width": "120px"
           }, {
             default: vue.withCtx(() => [
@@ -1575,8 +1695,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               }, {
                 default: vue.withCtx(() => [
                   vue.createVNode(_component_el_input, {
-                    modelValue: vue.unref(loginForm).username,
-                    "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => vue.unref(loginForm).username = $event)
+                    modelValue: loginForm.value.username,
+                    "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => loginForm.value.username = $event)
                   }, null, 8, ["modelValue"])
                 ]),
                 _: 1
@@ -1588,8 +1708,10 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               }, {
                 default: vue.withCtx(() => [
                   vue.createVNode(_component_el_input, {
-                    modelValue: vue.unref(loginForm).password,
-                    "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => vue.unref(loginForm).password = $event)
+                    modelValue: loginForm.value.password,
+                    "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => loginForm.value.password = $event),
+                    type: "password",
+                    "show-password": ""
                   }, null, 8, ["modelValue"])
                 ]),
                 _: 1
@@ -1601,8 +1723,10 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               }, {
                 default: vue.withCtx(() => [
                   vue.createVNode(_component_el_input, {
-                    modelValue: vue.unref(loginForm).rePassword,
-                    "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => vue.unref(loginForm).rePassword = $event)
+                    modelValue: loginForm.value.rePassword,
+                    "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => loginForm.value.rePassword = $event),
+                    type: "password",
+                    "show-password": ""
                   }, null, 8, ["modelValue"])
                 ]),
                 _: 1
@@ -1623,7 +1747,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                       default: vue.withCtx(() => [
                         vue.createVNode(_component_el_link, {
                           href: "javascript:;",
-                          onClick: _cache[6] || (_cache[6] = ($event) => formMode.value = 1)
+                          onClick: _cache[7] || (_cache[7] = ($event) => formMode.value = 1)
                         }, {
                           default: vue.withCtx(() => [
                             vue.createTextVNode("登录")
@@ -1648,38 +1772,190 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               })
             ]),
             _: 1
-          }, 8, ["model", "rules"]))
+          }, 8, ["model", "rules"])) : vue.createCommentVNode("", true),
+          loginType.value === "webdav" ? (vue.openBlock(), vue.createBlock(_component_el_form, {
+            key: 2,
+            ref_key: "webdavFormRef",
+            ref: webdavFormRef,
+            model: webdavForm.value,
+            rules: webdavRules.value,
+            "label-width": "120px"
+          }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_el_form_item, {
+                label: "服务器：",
+                prop: "url",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: webdavForm.value.url,
+                    "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => webdavForm.value.url = $event),
+                    placeholder: "例如: https://dav.jianguoyun.com/dav/"
+                  }, null, 8, ["modelValue"]),
+                  vue.createElementVNode("div", _hoisted_3$1, [
+                    vue.createVNode(_component_el_text, { type: "info" }, {
+                      default: vue.withCtx(() => [
+                        vue.createTextVNode("* 坚果云 WebDAV 地址格式：https://dav.jianguoyun.com/dav/")
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, {
+                label: "用户名：",
+                prop: "username",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: webdavForm.value.username,
+                    "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => webdavForm.value.username = $event),
+                    placeholder: "请输入邮箱地址"
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, {
+                label: "密码：",
+                prop: "password",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: webdavForm.value.password,
+                    "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => webdavForm.value.password = $event),
+                    type: "password",
+                    placeholder: "请输入应用密码",
+                    "show-password": ""
+                  }, null, 8, ["modelValue"]),
+                  vue.createElementVNode("div", _hoisted_4$1, [
+                    vue.createVNode(_component_el_text, { type: "info" }, {
+                      default: vue.withCtx(() => [
+                        vue.createTextVNode("* 坚果云需要使用应用密码而非登录密码")
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, null, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_button, {
+                    type: "primary",
+                    onClick: webdavLoginOnSubmit,
+                    loading: webdavLoading.value
+                  }, {
+                    default: vue.withCtx(() => [
+                      vue.createTextVNode("登录")
+                    ]),
+                    _: 1
+                  }, 8, ["loading"]),
+                  vue.createElementVNode("div", _hoisted_5$1, [
+                    vue.createVNode(_component_el_space, null, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_link, {
+                          href: "javascript:;",
+                          onClick: close
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode("关闭")
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_space, {
+                direction: "vertical",
+                alignment: "flex-start",
+                style: { "margin-top": "18px" }
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("div", null, [
+                    vue.createVNode(_component_el_text, { type: "info" }, {
+                      default: vue.withCtx(() => [
+                        vue.createTextVNode("* WebDAV 配置仅存储在本地，不会上传至云端")
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  vue.createElementVNode("div", null, [
+                    vue.createVNode(_component_el_text, { type: "info" }, {
+                      default: vue.withCtx(() => [
+                        vue.createTextVNode("* 启用 WebDAV 后，所有的同步操作将通过 WebDAV 进行")
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 8, ["model", "rules"])) : vue.createCommentVNode("", true)
         ]);
       };
     }
   };
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-3865a7e9"), n = n(), vue.popScopeId(), n);
+  const _withScopeId = (n) => (vue.pushScopeId("data-v-29a543ee"), n = n(), vue.popScopeId(), n);
   const _hoisted_1 = { class: "setBox" };
-  const _hoisted_2 = {
-    key: 0,
-    class: "quickReplyLoginBox"
+  const _hoisted_2 = { class: "card-header" };
+  const _hoisted_3 = { class: "header-left" };
+  const _hoisted_4 = {
+    key: 2,
+    class: "login-type"
   };
-  const _hoisted_3 = { style: { "margin-top": "15px" } };
-  const _hoisted_4 = { key: 1 };
   const _hoisted_5 = {
+    key: 3,
+    class: "login-type"
+  };
+  const _hoisted_6 = { class: "header-right" };
+  const _hoisted_7 = {
+    key: 0,
+    class: "login-container"
+  };
+  const _hoisted_8 = { class: "login-header" };
+  const _hoisted_9 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("h3", null, "账号登录", -1));
+  const _hoisted_10 = {
+    key: 1,
+    class: "settings-container"
+  };
+  const _hoisted_11 = { key: 0 };
+  const _hoisted_12 = { key: 1 };
+  const _hoisted_13 = { key: 2 };
+  const _hoisted_14 = { class: "settings-footer" };
+  const _hoisted_15 = {
+    key: 2,
+    class: "main-content"
+  };
+  const _hoisted_16 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("div", { class: "card-title" }, "我在用的", -1));
+  const _hoisted_17 = {
     key: 0,
     class: "list"
   };
-  const _hoisted_6 = { class: "list-left" };
-  const _hoisted_7 = { class: "list-number" };
-  const _hoisted_8 = { class: "list-title" };
-  const _hoisted_9 = { class: "list-right" };
-  const _hoisted_10 = {
+  const _hoisted_18 = { class: "list-left" };
+  const _hoisted_19 = { class: "list-number" };
+  const _hoisted_20 = { class: "list-title" };
+  const _hoisted_21 = { class: "list-right" };
+  const _hoisted_22 = {
     key: 1,
     class: "tips"
   };
-  const _hoisted_11 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", null, "未设置快速回帖内容!", -1));
-  const _hoisted_12 = [
-    _hoisted_11
+  const _hoisted_23 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", null, "未设置快速回帖内容!", -1));
+  const _hoisted_24 = [
+    _hoisted_23
   ];
-  const _hoisted_13 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
-  const _hoisted_14 = { key: 0 };
-  const _hoisted_15 = { class: "addReplyBox" };
+  const _hoisted_25 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
+  const _hoisted_26 = { key: 0 };
+  const _hoisted_27 = { class: "addReplyBox" };
   const _sfc_main = {
     __name: "Set",
     emits: ["updateMyList", "updateConstVar", "updateAIModel"],
@@ -1693,8 +1969,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       const realtimeSync = vue.ref(false);
       const realtimeBackup = vue.ref(false);
       const submitNow = vue.ref(false);
-      const currentTab = vue.ref("mine");
-      const showLoginForce = vue.ref(false);
+      const showLogin = vue.ref(false);
+      const showSettings = vue.ref(false);
       const newReply = vue.ref("");
       const windowSize = vue.ref({
         width: window.innerWidth,
@@ -1712,19 +1988,13 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         url: "",
         base64: false
       });
-      const webdavConfig = vue.ref({
-        enabled: false,
-        url: "",
-        username: "",
-        password: ""
-      });
       vue.onBeforeMount(() => {
-        isLogin.value = proxy.$storage.getUserInfo("userId");
+        const userId = proxy.$storage.getUserInfo("userId");
+        isLogin.value = !!userId;
         realtimeSync.value = proxy.$storage.getUserInfo("realtimeSync") || false;
         realtimeBackup.value = proxy.$storage.getUserInfo("realtimeBackup") || false;
         submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
         constVar.value = proxy.$storage.getUserInfo("constVar") || constVar.value;
-        webdavConfig.value = proxy.$storage.getUserInfo("webdavConfig") || webdavConfig.value;
         getMyList();
         getSystemList();
       });
@@ -1819,9 +2089,12 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         });
       }
       function onLoginSuccess() {
-        showLoginForce.value = false;
+        showLogin.value = false;
         isLogin.value = true;
         myList.value.length === 0 && download();
+      }
+      function closeLogin() {
+        showLogin.value = false;
       }
       function upload() {
         proxy.$storage.uploadList();
@@ -1839,17 +2112,10 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         myList.value = all.QuickReply || [];
         updateMyList();
       }
-      function loginForce() {
-        showLoginForce.value = !showLoginForce.value;
-        currentTab.value = "mine";
-      }
-      function loginCancel() {
-        showLoginForce.value = false;
-        currentTab.value = "mine";
-      }
       function logout() {
         proxy.$storage.setUserInfo("userId", "");
         isLogin.value = false;
+        proxy.$message.success("已注销登录");
       }
       function onRealtimeSyncChange(e) {
         realtimeSync.value = e;
@@ -1875,64 +2141,31 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         emit("updateConstVar");
         realtimeBackup.value && uploadAll();
       }
-      async function testWebDAV() {
-        if (!webdavConfig.value.url || !webdavConfig.value.username || !webdavConfig.value.password) {
-          proxy.$message.error("请填写完整的 WebDAV 配置信息");
-          return;
-        }
-        try {
-          await new Promise((resolve, reject) => {
-            _GM_xmlhttpRequest({
-              method: "PROPFIND",
-              url: webdavConfig.value.url,
-              headers: {
-                "Authorization": "Basic " + btoa(webdavConfig.value.username + ":" + webdavConfig.value.password),
-                "Depth": "0",
-                "Content-Type": "application/xml",
-                "Accept": "application/xml, text/xml"
-              },
-              data: '<?xml version="1.0" encoding="utf-8"?><propfind xmlns="DAV:"><prop><resourcetype/></prop></propfind>',
-              onload: function(response) {
-                if (response.status === 207 || response.status >= 200 && response.status < 300) {
-                  resolve(true);
-                } else {
-                  reject(new Error("连接失败: " + response.statusText));
-                }
-              },
-              onerror: function(error) {
-                reject(new Error("连接失败: " + error.message));
-              }
-            });
-          });
-          proxy.$message.success("WebDAV 连接测试成功");
-        } catch (error) {
-          proxy.$message.error("WebDAV 连接测试失败: " + error.message);
-        }
-      }
-      function saveWebDAVConfig() {
-        proxy.$storage.setUserInfo("webdavConfig", webdavConfig.value);
-        proxy.$message.success("WebDAV 配置已保存");
+      function isWebDAVUser() {
+        const userId = proxy.$storage.getUserInfo("userId");
+        return userId === "webdav_user";
       }
       return (_ctx, _cache) => {
-        const _component_app_login = vue.resolveComponent("app-login");
-        const _component_el_text = vue.resolveComponent("el-text");
-        const _component_el_space = vue.resolveComponent("el-space");
         const _component_el_button = vue.resolveComponent("el-button");
-        const _component_el_tooltip = vue.resolveComponent("el-tooltip");
-        const _component_el_tab_pane = vue.resolveComponent("el-tab-pane");
+        const _component_el_space = vue.resolveComponent("el-space");
+        const _component_app_login = vue.resolveComponent("app-login");
+        const _component_el_alert = vue.resolveComponent("el-alert");
         const _component_el_checkbox = vue.resolveComponent("el-checkbox");
+        const _component_el_tab_pane = vue.resolveComponent("el-tab-pane");
         const _component_el_input = vue.resolveComponent("el-input");
         const _component_el_form_item = vue.resolveComponent("el-form-item");
-        const _component_el_form = vue.resolveComponent("el-form");
         const _component_el_switch = vue.resolveComponent("el-switch");
+        const _component_el_form = vue.resolveComponent("el-form");
+        const _component_el_text = vue.resolveComponent("el-text");
         const _component_app_set_ai = vue.resolveComponent("app-set-ai");
         const _component_el_tabs = vue.resolveComponent("el-tabs");
+        const _component_el_tooltip = vue.resolveComponent("el-tooltip");
+        const _component_el_card = vue.resolveComponent("el-card");
         const _component_el_col = vue.resolveComponent("el-col");
         const _component_el_table_column = vue.resolveComponent("el-table-column");
         const _component_el_tag = vue.resolveComponent("el-tag");
         const _component_el_table = vue.resolveComponent("el-table");
         const _component_el_pagination = vue.resolveComponent("el-pagination");
-        const _component_el_card = vue.resolveComponent("el-card");
         const _component_el_row = vue.resolveComponent("el-row");
         const _directive_loading = vue.resolveDirective("loading");
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1, [
@@ -1940,680 +2173,515 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
             class: "box-card",
             shadow: "never"
           }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_el_row, { gutter: 30 }, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(_component_el_col, {
-                    span: 9,
-                    md: { span: 9 },
-                    sm: { span: 24 },
-                    xs: { span: 24 }
+            header: vue.withCtx(() => [
+              vue.createElementVNode("div", _hoisted_2, [
+                vue.createElementVNode("div", _hoisted_3, [
+                  !isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                    key: 0,
+                    type: "primary",
+                    size: "small",
+                    onClick: _cache[0] || (_cache[0] = ($event) => showLogin.value = true)
                   }, {
                     default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_tabs, {
-                        type: "border-card",
-                        class: "my-list-tabs",
-                        modelValue: vue.unref(currentTab),
-                        "onUpdate:modelValue": _cache[12] || (_cache[12] = ($event) => vue.isRef(currentTab) ? currentTab.value = $event : null)
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_tab_pane, {
-                            name: "mine",
-                            label: "我在用的"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.unref(myList).length === 0 && !vue.unref(isLogin) || vue.unref(showLoginForce) ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_2, [
-                                vue.createElementVNode("div", _hoisted_3, [
-                                  vue.createVNode(_component_app_login, {
-                                    onOnSuccess: onLoginSuccess,
-                                    onOnClose: loginCancel
-                                  }),
-                                  vue.createVNode(_component_el_space, {
-                                    direction: "vertical",
-                                    alignment: "flex-start"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* 登录后，即可在任意设备同步你的配置；")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* 云端只负责保存账号及其回复列表，不留存多余信息；")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* 忘记密码无法恢复，可重新注册；")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* 如不需登录，也可忽略登录界面，直接使用即可；")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ])
-                                    ]),
-                                    _: 1
-                                  })
-                                ])
-                              ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_4, [
-                                !vue.unref(showLoginForce) || vue.unref(myList).length > 0 ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_5, [
-                                  (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(myList), (item, index) => {
-                                    return vue.openBlock(), vue.createElementBlock("li", { key: index }, [
-                                      vue.createElementVNode("div", _hoisted_6, [
-                                        vue.createElementVNode("div", _hoisted_7, vue.toDisplayString(`${index + 1}、`), 1),
-                                        vue.createElementVNode("div", _hoisted_8, vue.toDisplayString(`${item}`), 1)
-                                      ]),
-                                      vue.createElementVNode("div", _hoisted_9, [
-                                        vue.createVNode(_component_el_tooltip, {
-                                          class: "item",
-                                          effect: "dark",
-                                          content: "分享它",
-                                          placement: "top-start"
-                                        }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createVNode(_component_el_button, {
-                                              type: "success",
-                                              size: "small",
-                                              icon: "Share",
-                                              circle: "",
-                                              onClick: ($event) => shareReply(index)
-                                            }, null, 8, ["onClick"])
-                                          ]),
-                                          _: 2
-                                        }, 1024),
-                                        vue.createVNode(_component_el_tooltip, {
-                                          class: "item",
-                                          effect: "dark",
-                                          content: "移除",
-                                          placement: "top-start"
-                                        }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createVNode(_component_el_button, {
-                                              type: "danger",
-                                              size: "small",
-                                              icon: "DeleteFilled",
-                                              circle: "",
-                                              onClick: ($event) => delReply(index)
-                                            }, null, 8, ["onClick"])
-                                          ]),
-                                          _: 2
-                                        }, 1024)
-                                      ])
-                                    ]);
-                                  }), 128))
-                                ])) : vue.createCommentVNode("", true),
-                                vue.unref(myList).length == 0 ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_10, _hoisted_12)) : vue.createCommentVNode("", true)
-                              ]))
-                            ]),
-                            _: 1
-                          }),
-                          vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_tab_pane, {
-                            key: 0,
-                            name: "options",
-                            label: "选项"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createVNode(_component_el_space, {
-                                direction: "vertical",
-                                alignment: "flex-start"
-                              }, {
-                                default: vue.withCtx(() => [
-                                  vue.createElementVNode("div", null, [
-                                    vue.createVNode(_component_el_checkbox, {
-                                      modelValue: vue.unref(realtimeSync),
-                                      "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(realtimeSync) ? realtimeSync.value = $event : null),
-                                      label: "实时同步，本地回复列表修改后立即上传",
-                                      size: "small",
-                                      checked: vue.unref(realtimeSync),
-                                      onChange: onRealtimeSyncChange
-                                    }, null, 8, ["modelValue", "checked"])
-                                  ]),
-                                  vue.createElementVNode("div", null, [
-                                    vue.createVNode(_component_el_checkbox, {
-                                      modelValue: vue.unref(realtimeBackup),
-                                      "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(realtimeBackup) ? realtimeBackup.value = $event : null),
-                                      label: "实时备份，本地回复列表及任一配置修改后立即备份至云端",
-                                      size: "small",
-                                      checked: vue.unref(realtimeBackup),
-                                      onChange: onRealtimeBackupChange
-                                    }, null, 8, ["modelValue", "checked"])
-                                  ]),
-                                  vue.createElementVNode("div", null, [
-                                    vue.createVNode(_component_el_checkbox, {
-                                      modelValue: vue.unref(submitNow),
-                                      "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => vue.isRef(submitNow) ? submitNow.value = $event : null),
-                                      label: "立即提交，选择快捷回帖内容后立即提交回帖",
-                                      size: "small",
-                                      checked: vue.unref(submitNow),
-                                      onChange: onSubmitNowChange
-                                    }, null, 8, ["modelValue", "checked"])
-                                  ]),
-                                  vue.createElementVNode("div", null, [
-                                    vue.createVNode(_component_el_checkbox, {
-                                      modelValue: vue.unref(webdavConfig).enabled,
-                                      "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => vue.unref(webdavConfig).enabled = $event),
-                                      label: "启用 WebDAV 备份",
-                                      size: "small",
-                                      onChange: saveWebDAVConfig
-                                    }, null, 8, ["modelValue"])
-                                  ]),
-                                  vue.createVNode(_component_el_space, {
-                                    direction: "vertical",
-                                    alignment: "flex-start",
-                                    style: { "margin-top": "18px" }
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* AI和常量只存在本地，不参与同步")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* 如需备份所有配置请使用操作中的全量备份、全量恢复")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* 全量备份仅为方便多设备同步配置，使用base64存储，请知悉")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ])
-                                    ]),
-                                    _: 1
-                                  })
-                                ]),
-                                _: 1
-                              })
-                            ]),
-                            _: 1
-                          })) : vue.createCommentVNode("", true),
-                          vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_tab_pane, {
-                            key: 1,
-                            name: "webdav",
-                            label: "WebDAV"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createVNode(_component_el_form, {
-                                model: vue.unref(webdavConfig),
-                                "label-width": "80px"
-                              }, {
-                                default: vue.withCtx(() => [
-                                  vue.createVNode(_component_el_form_item, { label: "服务器" }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_input, {
-                                        modelValue: vue.unref(webdavConfig).url,
-                                        "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => vue.unref(webdavConfig).url = $event),
-                                        placeholder: "请输入 WebDAV 服务器地址"
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_form_item, { label: "用户名" }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_input, {
-                                        modelValue: vue.unref(webdavConfig).username,
-                                        "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => vue.unref(webdavConfig).username = $event),
-                                        placeholder: "请输入用户名"
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_form_item, { label: "密码" }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_input, {
-                                        modelValue: vue.unref(webdavConfig).password,
-                                        "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => vue.unref(webdavConfig).password = $event),
-                                        type: "password",
-                                        placeholder: "请输入密码",
-                                        "show-password": ""
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_form_item, null, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_button, {
-                                        type: "primary",
-                                        onClick: saveWebDAVConfig
-                                      }, {
-                                        default: vue.withCtx(() => [
-                                          vue.createTextVNode("保存配置")
-                                        ]),
-                                        _: 1
-                                      }),
-                                      vue.createVNode(_component_el_button, {
-                                        type: "success",
-                                        onClick: testWebDAV
-                                      }, {
-                                        default: vue.withCtx(() => [
-                                          vue.createTextVNode("测试连接")
-                                        ]),
-                                        _: 1
-                                      })
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_space, {
-                                    direction: "vertical",
-                                    alignment: "flex-start",
-                                    style: { "margin-top": "18px" }
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* WebDAV 配置仅存储在本地，不会上传至云端")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* 启用 WebDAV 后，所有的同步操作将通过 WebDAV 进行")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ])
-                                    ]),
-                                    _: 1
-                                  })
-                                ]),
-                                _: 1
-                              }, 8, ["model"])
-                            ]),
-                            _: 1
-                          })) : vue.createCommentVNode("", true),
-                          vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_tab_pane, {
-                            key: 2,
-                            name: "constVar",
-                            label: "常量"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createVNode(_component_el_form, {
-                                model: vue.unref(constVar),
-                                "label-width": "60",
-                                style: { "max-width": "600px" }
-                              }, {
-                                default: vue.withCtx(() => [
-                                  vue.createVNode(_component_el_form_item, { label: "邮箱" }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_input, {
-                                        modelValue: vue.unref(constVar).email,
-                                        "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => vue.unref(constVar).email = $event),
-                                        onChange: constVarChange
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_form_item, { label: "QQ" }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_input, {
-                                        modelValue: vue.unref(constVar).qq,
-                                        "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => vue.unref(constVar).qq = $event),
-                                        onChange: constVarChange
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_form_item, { label: "微信" }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_input, {
-                                        modelValue: vue.unref(constVar).wechat,
-                                        "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => vue.unref(constVar).wechat = $event),
-                                        onChange: constVarChange
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_form_item, { label: "网址" }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_input, {
-                                        modelValue: vue.unref(constVar).url,
-                                        "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => vue.unref(constVar).url = $event),
-                                        onChange: constVarChange
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_form_item, { label: "加密" }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_switch, {
-                                        modelValue: vue.unref(constVar).base64,
-                                        "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => vue.unref(constVar).base64 = $event),
-                                        onChange: constVarChange
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  })
-                                ]),
-                                _: 1
-                              }, 8, ["model"]),
-                              vue.createVNode(_component_el_space, {
-                                direction: "vertical",
-                                alignment: "flex-start"
-                              }, {
-                                default: vue.withCtx(() => [
-                                  vue.createElementVNode("div", null, [
-                                    vue.createVNode(_component_el_text, { type: "info" }, {
-                                      default: vue.withCtx(() => [
-                                        vue.createTextVNode("* 可在快捷回帖中使用以上常量：{email}、{qq}、{wechat}、{url}，例：我的邮箱是{email}，我的QQ是{qq}；")
-                                      ]),
-                                      _: 1
-                                    })
-                                  ]),
-                                  vue.createElementVNode("div", null, [
-                                    vue.createVNode(_component_el_text, { type: "info" }, {
-                                      default: vue.withCtx(() => [
-                                        vue.createTextVNode("* 开启加密后，只在回帖时显示base64加密后的常量；")
-                                      ]),
-                                      _: 1
-                                    })
-                                  ])
-                                ]),
-                                _: 1
-                              })
-                            ]),
-                            _: 1
-                          })) : vue.createCommentVNode("", true),
-                          vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_tab_pane, {
-                            key: 3,
-                            name: "ai",
-                            label: "AI"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createVNode(_component_app_set_ai, {
-                                ref: "setAIPanel",
-                                onUpdateAI: updateAI
-                              }, null, 512)
-                            ]),
-                            _: 1
-                          })) : vue.createCommentVNode("", true),
-                          vue.createVNode(_component_el_tab_pane, {
-                            name: "actions",
-                            label: "操作"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createVNode(_component_el_space, { wrap: "" }, {
-                                default: vue.withCtx(() => [
-                                  !vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                                    key: 0,
-                                    type: "success",
-                                    icon: "UserFilled",
-                                    size: "small",
-                                    onClick: loginForce
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode("登录，登录后即可在任意设备同步你的配置")
-                                    ]),
-                                    _: 1
-                                  })) : vue.createCommentVNode("", true),
-                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                                    key: 1,
-                                    type: "danger",
-                                    icon: "SwitchButton",
-                                    size: "small",
-                                    onClick: logout
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode("注销，注销登录后将不能再同步列表")
-                                    ]),
-                                    _: 1
-                                  })) : vue.createCommentVNode("", true),
-                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                                    key: 2,
-                                    type: "primary",
-                                    icon: "Upload",
-                                    size: "small",
-                                    onClick: upload
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode("上传，上传本地列表会覆盖云端数据")
-                                    ]),
-                                    _: 1
-                                  })) : vue.createCommentVNode("", true),
-                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                                    key: 3,
-                                    type: "warning",
-                                    icon: "Download",
-                                    size: "small",
-                                    onClick: download
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode("下载，下载云端列表会覆盖本地数据")
-                                    ]),
-                                    _: 1
-                                  })) : vue.createCommentVNode("", true),
-                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                                    key: 4,
-                                    type: "primary",
-                                    icon: "Upload",
-                                    size: "small",
-                                    onClick: uploadAll
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode("全量备份，全量备份本地所有配置信息到云端")
-                                    ]),
-                                    _: 1
-                                  })) : vue.createCommentVNode("", true),
-                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                                    key: 5,
-                                    type: "warning",
-                                    icon: "Download",
-                                    size: "small",
-                                    onClick: downloadAll
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode("全量恢复，全量恢复云端配置信息覆盖本地数据")
-                                    ]),
-                                    _: 1
-                                  })) : vue.createCommentVNode("", true)
-                                ]),
-                                _: 1
-                              })
-                            ]),
-                            _: 1
-                          })
-                        ]),
-                        _: 1
-                      }, 8, ["modelValue"])
+                      vue.createTextVNode("登录")
                     ]),
                     _: 1
-                  }),
-                  vue.createVNode(_component_el_col, {
-                    span: 15,
-                    md: { span: 15 },
-                    sm: { span: 24 },
-                    xs: { span: 24 },
-                    style: vue.normalizeStyle({ "margin-top": vue.unref(windowSize).width < 992 ? "15px" : 0 })
+                  })) : (vue.openBlock(), vue.createBlock(_component_el_button, {
+                    key: 1,
+                    type: "danger",
+                    size: "small",
+                    onClick: logout
                   }, {
                     default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_card, {
-                        class: "box-card",
-                        shadow: "never",
-                        "body-style": { padding: "0 20px 20px" }
-                      }, {
-                        header: vue.withCtx(() => [
-                          _hoisted_13
-                        ]),
-                        default: vue.withCtx(() => [
-                          vue.withDirectives((vue.openBlock(), vue.createBlock(_component_el_table, {
-                            ref: "filterTable",
-                            data: vue.unref(systemList),
-                            size: "small",
-                            stripe: "",
-                            onSortChange: sortChange
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createVNode(_component_el_table_column, {
-                                prop: "replyId",
-                                label: "ID",
-                                width: "50",
-                                align: "center"
-                              }),
-                              vue.createVNode(_component_el_table_column, {
-                                prop: "content",
-                                label: "内容"
-                              }, {
-                                default: vue.withCtx((scope) => [
-                                  _ctx.$app.isNew(scope.row.created) ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_14, [
-                                    vue.createTextVNode(vue.toDisplayString(scope.row.content) + " ", 1),
-                                    vue.createVNode(_component_el_tooltip, {
-                                      class: "item",
-                                      effect: "dark",
-                                      content: "7天内新增",
-                                      placement: "top-start"
-                                    }, {
-                                      default: vue.withCtx(() => [
-                                        vue.createVNode(_component_el_tag, {
-                                          type: "primary",
-                                          effect: "dark",
-                                          size: "small",
-                                          round: "",
-                                          style: { "transform": "scale(0.7)" }
-                                        }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode(" NEW ")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      _: 1
-                                    })
-                                  ])) : vue.createCommentVNode("", true)
-                                ]),
-                                _: 1
-                              }),
-                              vue.createVNode(_component_el_table_column, {
-                                prop: "likeCount",
-                                sortable: "custom",
-                                width: "70",
-                                align: "center",
-                                label: "点赞"
-                              }, {
-                                default: vue.withCtx((scope) => [
-                                  vue.createVNode(_component_el_tag, {
-                                    type: "info",
-                                    size: "small"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode(vue.toDisplayString(scope.row.likeCount), 1)
-                                    ]),
-                                    _: 2
-                                  }, 1024)
-                                ]),
-                                _: 1
-                              }),
-                              vue.createVNode(_component_el_table_column, {
-                                label: "操作",
-                                width: "100",
-                                align: "center"
-                              }, {
-                                default: vue.withCtx((scope) => [
-                                  vue.createVNode(_component_el_tooltip, {
-                                    class: "item",
-                                    effect: "dark",
-                                    content: "给个赞",
-                                    placement: "top-start"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_button, {
-                                        type: "success",
-                                        size: "small",
-                                        icon: "Pointer",
-                                        circle: "",
-                                        onClick: ($event) => likeReply(scope.$index)
-                                      }, null, 8, ["onClick"])
-                                    ]),
-                                    _: 2
-                                  }, 1024),
-                                  vue.createVNode(_component_el_tooltip, {
-                                    class: "item",
-                                    effect: "dark",
-                                    content: "收藏进我的",
-                                    placement: "top-start"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_button, {
-                                        type: "danger",
-                                        size: "small",
-                                        icon: "StarFilled",
-                                        circle: "",
-                                        onClick: ($event) => collectReply(scope.$index)
-                                      }, null, 8, ["onClick"])
-                                    ]),
-                                    _: 2
-                                  }, 1024)
-                                ]),
-                                _: 1
-                              })
-                            ]),
-                            _: 1
-                          }, 8, ["data"])), [
-                            [_directive_loading, vue.unref(loading)]
-                          ]),
-                          vue.createVNode(_component_el_pagination, {
-                            background: "",
-                            layout: "prev, pager, next",
-                            small: vue.unref(windowSize).width <= 640,
-                            "page-size": 10,
-                            "pager-count": vue.unref(windowSize).width > 640 ? 5 : 3,
-                            onCurrentChange: currentPageChange,
-                            total: vue.unref(systemListCount)
-                          }, null, 8, ["small", "pager-count", "total"])
-                        ]),
-                        _: 1
-                      })
+                      vue.createTextVNode("注销")
                     ]),
                     _: 1
-                  }, 8, ["style"])
+                  })),
+                  isLogin.value && isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_4, "WebDAV 同步")) : vue.createCommentVNode("", true),
+                  isLogin.value && !isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_5, "账号同步")) : vue.createCommentVNode("", true)
                 ]),
-                _: 1
-              }),
-              vue.createElementVNode("div", _hoisted_15, [
-                vue.createVNode(_component_el_input, {
-                  placeholder: "请输入新的回复内容",
-                  modelValue: vue.unref(newReply),
-                  "onUpdate:modelValue": _cache[13] || (_cache[13] = ($event) => vue.isRef(newReply) ? newReply.value = $event : null),
-                  autosize: { minRows: 1, maxRows: 3 },
-                  maxlength: "100",
-                  "show-word-limit": true,
-                  resize: "none",
-                  clearable: "",
-                  class: "input-with-select"
-                }, {
-                  append: vue.withCtx(() => [
-                    vue.createVNode(_component_el_button, {
-                      icon: "Plus",
-                      onClick: addReply
+                vue.createElementVNode("div", _hoisted_6, [
+                  vue.createVNode(_component_el_space, null, {
+                    default: vue.withCtx(() => [
+                      isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                        key: 0,
+                        type: "primary",
+                        icon: "Upload",
+                        size: "small",
+                        onClick: uploadAll
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createTextVNode("全量备份")
+                        ]),
+                        _: 1
+                      })) : vue.createCommentVNode("", true),
+                      isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                        key: 1,
+                        type: "warning",
+                        icon: "Download",
+                        size: "small",
+                        onClick: downloadAll
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createTextVNode("全量恢复")
+                        ]),
+                        _: 1
+                      })) : vue.createCommentVNode("", true),
+                      isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                        key: 2,
+                        type: "success",
+                        icon: "Setting",
+                        size: "small",
+                        onClick: _cache[1] || (_cache[1] = ($event) => showSettings.value = !showSettings.value)
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createTextVNode("设置")
+                        ]),
+                        _: 1
+                      })) : vue.createCommentVNode("", true)
+                    ]),
+                    _: 1
+                  })
+                ])
+              ])
+            ]),
+            default: vue.withCtx(() => [
+              showLogin.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_7, [
+                vue.createElementVNode("div", _hoisted_8, [
+                  _hoisted_9,
+                  vue.createVNode(_component_el_button, {
+                    type: "link",
+                    icon: "Back",
+                    onClick: closeLogin
+                  }, {
+                    default: vue.withCtx(() => [
+                      vue.createTextVNode("返回")
+                    ]),
+                    _: 1
+                  })
+                ]),
+                vue.createVNode(_component_app_login, {
+                  onOnSuccess: onLoginSuccess,
+                  onOnClose: closeLogin
+                })
+              ])) : showSettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_10, [
+                vue.createVNode(_component_el_tabs, { type: "border-card" }, {
+                  default: vue.withCtx(() => [
+                    vue.createVNode(_component_el_tab_pane, {
+                      name: "options",
+                      label: "选项"
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_space, {
+                          direction: "vertical",
+                          alignment: "flex-start"
+                        }, {
+                          default: vue.withCtx(() => [
+                            isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_11, [
+                              vue.createVNode(_component_el_alert, {
+                                title: "您当前使用的是 WebDAV 登录",
+                                type: "success",
+                                description: "所有数据将通过 WebDAV 同步,无需配置其他同步选项",
+                                "show-icon": "",
+                                closable: false
+                              })
+                            ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_12, [
+                              vue.createVNode(_component_el_checkbox, {
+                                modelValue: realtimeSync.value,
+                                "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => realtimeSync.value = $event),
+                                label: "实时同步，本地回复列表修改后立即上传",
+                                size: "small",
+                                checked: realtimeSync.value,
+                                onChange: onRealtimeSyncChange
+                              }, null, 8, ["modelValue", "checked"])
+                            ])),
+                            !isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_13, [
+                              vue.createVNode(_component_el_checkbox, {
+                                modelValue: realtimeBackup.value,
+                                "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => realtimeBackup.value = $event),
+                                label: "实时备份，本地回复列表及任一配置修改后立即备份至云端",
+                                size: "small",
+                                checked: realtimeBackup.value,
+                                onChange: onRealtimeBackupChange
+                              }, null, 8, ["modelValue", "checked"])
+                            ])) : vue.createCommentVNode("", true),
+                            vue.createElementVNode("div", null, [
+                              vue.createVNode(_component_el_checkbox, {
+                                modelValue: submitNow.value,
+                                "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => submitNow.value = $event),
+                                label: "立即提交，选择快捷回帖内容后立即提交回帖",
+                                size: "small",
+                                checked: submitNow.value,
+                                onChange: onSubmitNowChange
+                              }, null, 8, ["modelValue", "checked"])
+                            ])
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_el_tab_pane, {
+                      name: "constVar",
+                      label: "常量"
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_form, {
+                          model: constVar.value,
+                          "label-width": "60",
+                          style: { "max-width": "600px" }
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_el_form_item, { label: "邮箱" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_input, {
+                                  modelValue: constVar.value.email,
+                                  "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => constVar.value.email = $event),
+                                  onChange: constVarChange
+                                }, null, 8, ["modelValue"])
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, { label: "QQ" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_input, {
+                                  modelValue: constVar.value.qq,
+                                  "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => constVar.value.qq = $event),
+                                  onChange: constVarChange
+                                }, null, 8, ["modelValue"])
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, { label: "微信" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_input, {
+                                  modelValue: constVar.value.wechat,
+                                  "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => constVar.value.wechat = $event),
+                                  onChange: constVarChange
+                                }, null, 8, ["modelValue"])
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, { label: "网址" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_input, {
+                                  modelValue: constVar.value.url,
+                                  "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => constVar.value.url = $event),
+                                  onChange: constVarChange
+                                }, null, 8, ["modelValue"])
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, { label: "加密" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_switch, {
+                                  modelValue: constVar.value.base64,
+                                  "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => constVar.value.base64 = $event),
+                                  onChange: constVarChange
+                                }, null, 8, ["modelValue"])
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        }, 8, ["model"]),
+                        vue.createVNode(_component_el_space, {
+                          direction: "vertical",
+                          alignment: "flex-start"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createElementVNode("div", null, [
+                              vue.createVNode(_component_el_text, { type: "info" }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode("* 可在快捷回帖中使用以上常量：{email}、{qq}、{wechat}、{url}，例：我的邮箱是{email}，我的QQ是{qq}；")
+                                ]),
+                                _: 1
+                              })
+                            ]),
+                            vue.createElementVNode("div", null, [
+                              vue.createVNode(_component_el_text, { type: "info" }, {
+                                default: vue.withCtx(() => [
+                                  vue.createTextVNode("* 开启加密后，只在回帖时显示base64加密后的常量；")
+                                ]),
+                                _: 1
+                              })
+                            ])
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_el_tab_pane, {
+                      name: "ai",
+                      label: "AI"
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_app_set_ai, {
+                          ref: "setAIPanel",
+                          onUpdateAI: updateAI
+                        }, null, 512)
+                      ]),
+                      _: 1
                     })
                   ]),
                   _: 1
-                }, 8, ["modelValue"])
-              ])
+                }),
+                vue.createElementVNode("div", _hoisted_14, [
+                  vue.createVNode(_component_el_button, {
+                    type: "primary",
+                    onClick: _cache[10] || (_cache[10] = ($event) => showSettings.value = false)
+                  }, {
+                    default: vue.withCtx(() => [
+                      vue.createTextVNode("返回")
+                    ]),
+                    _: 1
+                  })
+                ])
+              ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_15, [
+                vue.createVNode(_component_el_row, { gutter: 30 }, {
+                  default: vue.withCtx(() => [
+                    vue.createVNode(_component_el_col, {
+                      span: 9,
+                      md: { span: 9 },
+                      sm: { span: 24 },
+                      xs: { span: 24 }
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_card, {
+                          class: "my-replies-card",
+                          shadow: "never"
+                        }, {
+                          header: vue.withCtx(() => [
+                            _hoisted_16
+                          ]),
+                          default: vue.withCtx(() => [
+                            vue.createElementVNode("div", null, [
+                              myList.value.length > 0 ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_17, [
+                                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(myList.value, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock("li", { key: index }, [
+                                    vue.createElementVNode("div", _hoisted_18, [
+                                      vue.createElementVNode("div", _hoisted_19, vue.toDisplayString(`${index + 1}、`), 1),
+                                      vue.createElementVNode("div", _hoisted_20, vue.toDisplayString(`${item}`), 1)
+                                    ]),
+                                    vue.createElementVNode("div", _hoisted_21, [
+                                      vue.createVNode(_component_el_tooltip, {
+                                        class: "item",
+                                        effect: "dark",
+                                        content: "分享它",
+                                        placement: "top-start"
+                                      }, {
+                                        default: vue.withCtx(() => [
+                                          vue.createVNode(_component_el_button, {
+                                            type: "success",
+                                            size: "small",
+                                            icon: "Share",
+                                            circle: "",
+                                            onClick: ($event) => shareReply(index)
+                                          }, null, 8, ["onClick"])
+                                        ]),
+                                        _: 2
+                                      }, 1024),
+                                      vue.createVNode(_component_el_tooltip, {
+                                        class: "item",
+                                        effect: "dark",
+                                        content: "移除",
+                                        placement: "top-start"
+                                      }, {
+                                        default: vue.withCtx(() => [
+                                          vue.createVNode(_component_el_button, {
+                                            type: "danger",
+                                            size: "small",
+                                            icon: "DeleteFilled",
+                                            circle: "",
+                                            onClick: ($event) => delReply(index)
+                                          }, null, 8, ["onClick"])
+                                        ]),
+                                        _: 2
+                                      }, 1024)
+                                    ])
+                                  ]);
+                                }), 128))
+                              ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_22, _hoisted_24))
+                            ])
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_el_col, {
+                      span: 15,
+                      md: { span: 15 },
+                      sm: { span: 24 },
+                      xs: { span: 24 },
+                      style: vue.normalizeStyle({ "margin-top": windowSize.value.width < 992 ? "15px" : 0 })
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_card, {
+                          class: "box-card",
+                          shadow: "never",
+                          "body-style": { padding: "0 20px 20px" }
+                        }, {
+                          header: vue.withCtx(() => [
+                            _hoisted_25
+                          ]),
+                          default: vue.withCtx(() => [
+                            vue.withDirectives((vue.openBlock(), vue.createBlock(_component_el_table, {
+                              ref: "filterTable",
+                              data: systemList.value,
+                              size: "small",
+                              stripe: "",
+                              onSortChange: sortChange
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_table_column, {
+                                  prop: "replyId",
+                                  label: "ID",
+                                  width: "50",
+                                  align: "center"
+                                }),
+                                vue.createVNode(_component_el_table_column, {
+                                  prop: "content",
+                                  label: "内容"
+                                }, {
+                                  default: vue.withCtx((scope) => [
+                                    _ctx.$app.isNew(scope.row.created) ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_26, [
+                                      vue.createTextVNode(vue.toDisplayString(scope.row.content) + " ", 1),
+                                      vue.createVNode(_component_el_tooltip, {
+                                        class: "item",
+                                        effect: "dark",
+                                        content: "7天内新增",
+                                        placement: "top-start"
+                                      }, {
+                                        default: vue.withCtx(() => [
+                                          vue.createVNode(_component_el_tag, {
+                                            type: "primary",
+                                            effect: "dark",
+                                            size: "small",
+                                            round: "",
+                                            style: { "transform": "scale(0.7)" }
+                                          }, {
+                                            default: vue.withCtx(() => [
+                                              vue.createTextVNode(" NEW ")
+                                            ]),
+                                            _: 1
+                                          })
+                                        ]),
+                                        _: 1
+                                      })
+                                    ])) : vue.createCommentVNode("", true)
+                                  ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(_component_el_table_column, {
+                                  prop: "likeCount",
+                                  sortable: "custom",
+                                  width: "70",
+                                  align: "center",
+                                  label: "点赞"
+                                }, {
+                                  default: vue.withCtx((scope) => [
+                                    vue.createVNode(_component_el_tag, {
+                                      type: "info",
+                                      size: "small"
+                                    }, {
+                                      default: vue.withCtx(() => [
+                                        vue.createTextVNode(vue.toDisplayString(scope.row.likeCount), 1)
+                                      ]),
+                                      _: 2
+                                    }, 1024)
+                                  ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(_component_el_table_column, {
+                                  label: "操作",
+                                  width: "100",
+                                  align: "center"
+                                }, {
+                                  default: vue.withCtx((scope) => [
+                                    vue.createVNode(_component_el_tooltip, {
+                                      class: "item",
+                                      effect: "dark",
+                                      content: "给个赞",
+                                      placement: "top-start"
+                                    }, {
+                                      default: vue.withCtx(() => [
+                                        vue.createVNode(_component_el_button, {
+                                          type: "success",
+                                          size: "small",
+                                          icon: "Pointer",
+                                          circle: "",
+                                          onClick: ($event) => likeReply(scope.$index)
+                                        }, null, 8, ["onClick"])
+                                      ]),
+                                      _: 2
+                                    }, 1024),
+                                    vue.createVNode(_component_el_tooltip, {
+                                      class: "item",
+                                      effect: "dark",
+                                      content: "收藏进我的",
+                                      placement: "top-start"
+                                    }, {
+                                      default: vue.withCtx(() => [
+                                        vue.createVNode(_component_el_button, {
+                                          type: "danger",
+                                          size: "small",
+                                          icon: "StarFilled",
+                                          circle: "",
+                                          onClick: ($event) => collectReply(scope.$index)
+                                        }, null, 8, ["onClick"])
+                                      ]),
+                                      _: 2
+                                    }, 1024)
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }, 8, ["data"])), [
+                              [_directive_loading, loading.value]
+                            ]),
+                            vue.createVNode(_component_el_pagination, {
+                              background: "",
+                              layout: "prev, pager, next",
+                              small: windowSize.value.width <= 640,
+                              "page-size": 10,
+                              "pager-count": windowSize.value.width > 640 ? 5 : 3,
+                              onCurrentChange: currentPageChange,
+                              total: systemListCount.value
+                            }, null, 8, ["small", "pager-count", "total"])
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    }, 8, ["style"])
+                  ]),
+                  _: 1
+                }),
+                vue.createElementVNode("div", _hoisted_27, [
+                  vue.createVNode(_component_el_input, {
+                    placeholder: "请输入新的回复内容",
+                    modelValue: newReply.value,
+                    "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => newReply.value = $event),
+                    autosize: { minRows: 1, maxRows: 3 },
+                    maxlength: "100",
+                    "show-word-limit": true,
+                    resize: "none",
+                    clearable: "",
+                    class: "input-with-select"
+                  }, {
+                    append: vue.withCtx(() => [
+                      vue.createVNode(_component_el_button, {
+                        icon: "Plus",
+                        onClick: addReply
+                      })
+                    ]),
+                    _: 1
+                  }, 8, ["modelValue"])
+                ])
+              ]))
             ]),
             _: 1
           })
@@ -2621,17 +2689,17 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-3865a7e9"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-29a543ee"]]);
   const Util = {
     install: (app2, options) => {
       app2.config.globalProperties.$storage = {
-        key: "QuickReply",
+        storageKey: "QuickReply",
         userStorageKey: "QuickReplyUser",
         set(value) {
-          _GM_setValue(this.key, value);
+          _GM_setValue(this.storageKey, value);
         },
         get() {
-          return _GM_getValue(this.key, []);
+          return _GM_getValue(this.storageKey, []);
         },
         getAll() {
           let keyList = _GM_listValues();
@@ -2648,7 +2716,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         },
         setUserInfo(key, value) {
           let fullKey = `${this.userStorageKey}.${key}`;
-          _GM_setValue(fullKey, value);
+          _GM_setValue(fullKey, value || "");
         },
         getUserInfo(key) {
           let fullKey = `${this.userStorageKey}.${key}`;
@@ -2730,45 +2798,68 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                       }
                     }
                   } catch (e) {
-                    errorMsg += ": " + (response.statusText || "服务器返回状态码 " + response.status);
+                    errorMsg += ": " + (response.statusText || "状态码: " + response.status);
                   }
                   reject(new Error(errorMsg));
                 }
               },
               onerror: function(error) {
-                console.error("WebDAV 上传错误:", error);
                 reject(new Error("上传失败: " + (error.message || "网络错误")));
               }
             });
-          }).catch((error) => {
-            console.error("WebDAV 上传失败:", error);
-            throw error;
           });
         },
         async downloadFromWebDAV(filename) {
           const webdavConfig = this.getUserInfo("webdavConfig");
           if (!webdavConfig || !webdavConfig.enabled)
             return null;
+          let baseUrl = webdavConfig.url;
+          baseUrl = baseUrl.replace(/\/+$/, "");
+          baseUrl = `${baseUrl}/bbs_quickreply`;
+          const safeFilename = filename.startsWith("/") ? filename.substring(1) : filename;
+          const fullUrl = `${baseUrl}/${safeFilename}`;
+          console.log("正在从WebDAV下载文件:", fullUrl);
           return new Promise((resolve, reject) => {
             _GM_xmlhttpRequest({
               method: "GET",
-              url: webdavConfig.url + "/" + filename,
+              url: fullUrl,
               headers: {
-                "Authorization": "Basic " + btoa(webdavConfig.username + ":" + webdavConfig.password)
+                "Authorization": "Basic " + btoa(webdavConfig.username + ":" + webdavConfig.password),
+                "Content-Type": "application/json",
+                "Accept": "application/json, text/plain, */*"
               },
+              responseType: "text",
               onload: function(response) {
+                console.log("WebDAV下载响应:", response.status, response.statusText);
                 if (response.status >= 200 && response.status < 300) {
                   try {
-                    resolve(JSON.parse(response.responseText));
+                    if (!response.responseText || response.responseText.trim() === "") {
+                      console.error("WebDAV响应内容为空");
+                      reject(new Error("下载的文件内容为空"));
+                      return;
+                    }
+                    const parsedData = JSON.parse(response.responseText);
+                    console.log("WebDAV下载成功，数据已解析");
+                    resolve(parsedData);
                   } catch (e) {
+                    console.error("解析WebDAV响应失败:", e, "响应内容:", response.responseText);
                     reject(new Error("解析响应失败: " + e.message));
                   }
+                } else if (response.status === 404) {
+                  console.warn("WebDAV文件不存在:", fullUrl);
+                  resolve(null);
                 } else {
-                  reject(new Error("下载失败: " + response.statusText));
+                  console.error("WebDAV下载失败:", response.status, response.statusText);
+                  reject(new Error("下载失败: 状态码 " + response.status));
                 }
               },
               onerror: function(error) {
-                reject(new Error("下载失败: " + error.message));
+                console.error("WebDAV请求出错:", error);
+                reject(new Error("下载失败: 网络错误"));
+              },
+              ontimeout: function() {
+                console.error("WebDAV请求超时");
+                reject(new Error("下载失败: 请求超时"));
               }
             });
           }).catch((error) => {
@@ -2781,7 +2872,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           let userId = proxy.$storage.getUserInfo("userId");
           let myList = proxy.$storage.get() || [];
           let webdavConfig = this.getUserInfo("webdavConfig");
-          if (webdavConfig && webdavConfig.enabled) {
+          if (userId === "webdav_user" && webdavConfig && webdavConfig.enabled) {
             if (await this.uploadToWebDAV(myList, "quickreply_list.json")) {
               proxy.$message.success("WebDAV 上传成功");
               return true;
@@ -2810,15 +2901,30 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           let proxy = app2.config.globalProperties;
           let userId = proxy.$storage.getUserInfo("userId");
           let webdavConfig = this.getUserInfo("webdavConfig");
-          if (webdavConfig && webdavConfig.enabled) {
-            const data = await this.downloadFromWebDAV("quickreply_list.json");
-            if (data) {
-              proxy.$storage.set(data);
-              proxy.$message.success("WebDAV 下载成功");
-              return data;
+          if (userId === "webdav_user" && webdavConfig && webdavConfig.enabled) {
+            try {
+              await this.ensureWebDAVDirectory();
+              const data = await this.downloadFromWebDAV("quickreply_list.json");
+              if (data) {
+                proxy.$storage.set(data);
+                proxy.$message.success("WebDAV 下载成功");
+                return data;
+              } else {
+                const currentList = proxy.$storage.get() || [];
+                if (currentList.length > 0) {
+                  await this.uploadToWebDAV(currentList, "quickreply_list.json");
+                  proxy.$message.warning("WebDAV 中不存在数据，已上传当前数据");
+                  return currentList;
+                } else {
+                  proxy.$message.warning("WebDAV 中不存在数据，且本地无数据可上传");
+                  return [];
+                }
+              }
+            } catch (error) {
+              console.error("WebDAV 下载列表失败:", error);
+              proxy.$message.error(`WebDAV 下载失败: ${error.message}`);
+              return false;
             }
-            proxy.$message.error("WebDAV 下载失败");
-            return false;
           }
           if (!userId) {
             proxy.$message.error("请先登录");
@@ -2842,51 +2948,82 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         async uploadAll() {
           let proxy = app2.config.globalProperties;
           let userId = proxy.$storage.getUserInfo("userId");
-          let options2 = proxy.$storage.getAll();
           let webdavConfig = this.getUserInfo("webdavConfig");
-          if (options2.QuickReply && options2.QuickReply.length > 10) {
-            proxy.$message.error("回复列表超出数量限制：10 条");
-            return false;
-          }
-          let encryptedOptions = proxy.$tools.encodeStr(JSON.stringify(options2));
-          if (webdavConfig && webdavConfig.enabled) {
-            try {
-              if (await this.uploadToWebDAV({ options: encryptedOptions }, "quickreply_all.json")) {
-                proxy.$message.success("WebDAV 备份成功");
-                return true;
-              }
-            } catch (error) {
-              proxy.$message.error(error.message || "WebDAV 备份失败");
+          if (userId === "webdav_user" && webdavConfig && webdavConfig.enabled) {
+            const allConfig = proxy.$storage.getAll() || {};
+            if (Object.keys(allConfig).length === 0) {
+              proxy.$message.error("无可备份数据");
               return false;
             }
+            const encryptedData = {
+              options: proxy.$tools.encodeStr(JSON.stringify(allConfig))
+            };
+            if (await this.uploadToWebDAV(encryptedData, "quickreply_all.json")) {
+              proxy.$message.success("WebDAV 备份成功");
+              return true;
+            }
+            proxy.$message.error("WebDAV 备份失败");
+            return false;
           }
           if (!userId) {
             proxy.$message.error("请先登录");
             return false;
           }
-          proxy.$api.upUserAll({
+          let allData = proxy.$storage.getAll() || {};
+          if (Object.keys(allData).length === 0) {
+            proxy.$message.error("无可备份数据");
+            return false;
+          }
+          let res = await proxy.$api.upUserAll({
             userId,
-            options: options2
-          }).then((res) => {
-            proxy.$message.success("备份成功");
-          }).catch((err) => {
-            proxy.$message.error(err.message);
+            options: proxy.$tools.encodeStr(JSON.stringify(allData))
           });
+          if (res.code == 0) {
+            proxy.$message.success("备份成功");
+            return true;
+          } else {
+            proxy.$message.error(res.message);
+            return false;
+          }
         },
         async downloadAll() {
           let proxy = app2.config.globalProperties;
           let userId = proxy.$storage.getUserInfo("userId");
           let webdavConfig = this.getUserInfo("webdavConfig");
-          if (webdavConfig && webdavConfig.enabled) {
-            const data = await this.downloadFromWebDAV("quickreply_all.json");
-            if (data && data.options) {
-              const decryptedOptions = JSON.parse(proxy.$tools.decodeStr(data.options));
-              proxy.$storage.setAll(decryptedOptions);
-              proxy.$message.success("WebDAV 恢复成功");
-              return decryptedOptions;
+          if (userId === "webdav_user" && webdavConfig && webdavConfig.enabled) {
+            try {
+              await this.ensureWebDAVDirectory();
+              const data = await this.downloadFromWebDAV("quickreply_all.json");
+              if (data && data.options) {
+                try {
+                  const decryptedOptions = JSON.parse(proxy.$tools.decodeStr(data.options));
+                  proxy.$storage.setAll(decryptedOptions);
+                  proxy.$message.success("WebDAV 恢复成功");
+                  return decryptedOptions;
+                } catch (e) {
+                  console.error("解析WebDAV全量数据失败:", e);
+                  proxy.$message.error(`解析数据失败: ${e.message}`);
+                  return false;
+                }
+              } else {
+                const allConfig = proxy.$storage.getAll() || {};
+                if (Object.keys(allConfig).length > 0) {
+                  const encryptedData = {
+                    options: proxy.$tools.encodeStr(JSON.stringify(allConfig))
+                  };
+                  await this.uploadToWebDAV(encryptedData, "quickreply_all.json");
+                  proxy.$message.warning("WebDAV 中不存在全量数据，已上传当前配置");
+                  return allConfig;
+                } else {
+                  proxy.$message.warning("WebDAV 中不存在全量数据，且本地无配置可上传");
+                  return false;
+                }
+              }
+            } catch (error) {
+              console.error("WebDAV 下载全量数据失败:", error);
+              proxy.$message.error(`WebDAV 恢复失败: ${error.message}`);
+              return false;
             }
-            proxy.$message.error("WebDAV 恢复失败");
-            return false;
           }
           if (!userId) {
             proxy.$message.error("请先登录");
@@ -2902,40 +3039,49 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           } else {
             proxy.$message.error(res.message);
           }
-        }
-      };
-      app2.config.globalProperties.$app = {
-        getName() {
-          return _GM_info["script"]["name"];
         },
-        getVersion: function() {
-          return _GM_info["script"]["version"];
-        },
-        systemRole: "你是一个互联网高手，常年混迹于各大论坛，对所有内容都感兴趣，并且热衷于回复每一篇帖子，回复风格：简短、睿智、一语中的，又不失俏皮诙谐",
-        prompt: "请根据帖子标题：{{title}}，进行回帖。务必直接给出回帖内容，不要包含其他无关内容",
-        isNew: function(timestamp) {
-          if (!timestamp)
+        async ensureWebDAVDirectory() {
+          const webdavConfig = this.getUserInfo("webdavConfig");
+          if (!webdavConfig || !webdavConfig.enabled)
             return false;
-          let number = 3600 * 24 * 7;
-          return parseInt((/* @__PURE__ */ new Date()).getTime() / 1e3) - timestamp <= number;
-        }
-      };
-      app2.config.globalProperties.$tools = {
-        encodeStr: function(str) {
-          let encoder = new TextEncoder();
-          str = encoder.encode(str);
-          return btoa(String.fromCharCode.apply(null, str));
-        },
-        decodeStr: function(str) {
-          var byteCharacters = atob(str);
-          var byteArray = new Uint8Array(byteCharacters.length);
-          for (var i = 0; i < byteCharacters.length; i++) {
-            byteArray[i] = byteCharacters.charCodeAt(i);
+          let baseUrl = webdavConfig.url;
+          baseUrl = baseUrl.replace(/\/+$/, "");
+          const dirUrl = `${baseUrl}/bbs_quickreply`;
+          try {
+            await new Promise((resolve, reject) => {
+              _GM_xmlhttpRequest({
+                method: "MKCOL",
+                url: dirUrl,
+                headers: {
+                  "Authorization": "Basic " + btoa(webdavConfig.username + ":" + webdavConfig.password)
+                },
+                onload: function(response) {
+                  console.log("创建WebDAV目录响应:", response.status);
+                  if (response.status === 201 || response.status === 405) {
+                    resolve(true);
+                  } else {
+                    reject(new Error("创建目录失败: " + (response.statusText || "服务器返回状态码 " + response.status)));
+                  }
+                },
+                onerror: function(error) {
+                  reject(new Error("创建目录失败: " + (error.message || "网络错误")));
+                }
+              });
+            });
+            return true;
+          } catch (error) {
+            if (error.message.includes("405")) {
+              console.log("WebDAV目录已存在,无需创建");
+              return true;
+            }
+            console.error("确保WebDAV目录存在时出错:", error);
+            throw error;
           }
-          var decoder = new TextDecoder();
-          return decoder.decode(byteArray);
+        },
+        getName() {
+          return "论坛快捷回帖 by bmqy";
         }
-      };
+      }, app2.config.globalProperties.$version = "2.3.4";
     }
   };
   const app = vue.createApp(App);
@@ -2948,6 +3094,38 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
   app.use(ElementPlus);
   app.use(Util);
   app.use(Api);
+  app.config.globalProperties.$app = {
+    getName() {
+      return "论坛快捷回帖 by bmqy";
+    },
+    getVersion() {
+      return "2.3.4";
+    },
+    systemRole: "你是一个互联网高手，常年混迹于各大论坛，对所有内容都感兴趣，并且热衷于回复每一篇帖子，回复风格：简短、睿智、一语中的，又不失俏皮诙谐",
+    prompt: "请根据帖子标题：{{title}}，进行回帖。务必直接给出回帖内容，不要包含其他无关内容",
+    isNew(timestamp) {
+      if (!timestamp)
+        return false;
+      let number = 3600 * 24 * 7;
+      return parseInt((/* @__PURE__ */ new Date()).getTime() / 1e3) - timestamp <= number;
+    }
+  };
+  app.config.globalProperties.$tools = {
+    encodeStr(str) {
+      let encoder = new TextEncoder();
+      str = encoder.encode(str);
+      return btoa(String.fromCharCode.apply(null, str));
+    },
+    decodeStr(str) {
+      var byteCharacters = atob(str);
+      var byteArray = new Uint8Array(byteCharacters.length);
+      for (var i = 0; i < byteCharacters.length; i++) {
+        byteArray[i] = byteCharacters.charCodeAt(i);
+      }
+      var decoder = new TextDecoder();
+      return decoder.decode(byteArray);
+    }
+  };
   app.mount(
     (() => {
       const $fastposteditor = document.querySelector("#fastposteditor");
