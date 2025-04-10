@@ -274,10 +274,10 @@ function openAISettings() {
                         </el-col>
                         <el-col :xs="24" :sm="18" :md="18" :lg="18" :xl="18">
                             <div class="header-right">
-                                <el-row :gutter="5">
+                                <el-row :gutter="8">
                                     <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                                         <div class="button-group">
-                                            <el-dropdown v-if="isLogin" trigger="click">
+                                            <el-dropdown v-if="isLogin" trigger="click" class="header-button">
                                                 <el-button type="primary" size="small">
                                                     全量同步
                                                     <el-icon class="el-icon--right"><ArrowDown /></el-icon>
@@ -293,9 +293,9 @@ function openAISettings() {
                                                     </el-dropdown-menu>
                                                 </template>
                                             </el-dropdown>
-                                            <el-button v-if="isLogin" type="success" icon="Setting" size="small" @click="openOptionsSettings">选项</el-button>
-                                            <el-button v-if="isLogin" type="info" icon="Edit" size="small" @click="openConstSettings">常量</el-button>
-                                            <el-button v-if="isLogin" type="primary" icon="MagicStick" size="small" @click="openAISettings">AI</el-button>
+                                            <el-button v-if="isLogin" type="success" icon="Setting" size="small" class="header-button" @click="openOptionsSettings">选项</el-button>
+                                            <el-button v-if="isLogin" type="info" icon="Edit" size="small" class="header-button" @click="openConstSettings">常量</el-button>
+                                            <el-button v-if="isLogin" type="primary" icon="MagicStick" size="small" class="header-button" @click="openAISettings">AI</el-button>
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -542,7 +542,7 @@ function openAISettings() {
     .button-group {
         display: flex;
         flex-wrap: wrap;
-        gap: 5px;
+        gap: 8px;
         justify-content: flex-start;
 
         @media (min-width: 768px) {

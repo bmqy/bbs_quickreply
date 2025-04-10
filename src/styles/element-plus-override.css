@@ -186,4 +186,23 @@
 .el-icon-download:before {
   content: "\e606";
   font-family: element-icons !important;
+}
+
+/* 按钮间距统一 */
+.header-right .button-group {
+  display: flex;
+  gap: 8px !important;  /* 强制统一间距 */
+}
+
+.header-right .button-group .el-dropdown {
+  margin-right: 0;
+}
+
+/* 顶部按钮统一样式 */
+.header-button {
+  margin: 0 !important;
+}
+
+.button-group > * {
+  margin: 0 !important;
 } 
