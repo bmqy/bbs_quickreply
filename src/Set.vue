@@ -321,20 +321,11 @@ function openAISettings() {
                     <el-button type="primary" text icon="Back" @click="closeOptionsSettings">返回</el-button>
                 </div>
                 <el-space direction="vertical" alignment="flex-start">
-                    <!-- 显示当前登录类型 -->
-                    <div v-if="isWebDAVUser()">
-                        <el-alert
-                            title="您当前使用的是 WebDAV 登录"
-                            type="success"
-                            description="所有数据将通过 WebDAV 同步,无需配置其他同步选项"
-                            show-icon
-                            :closable="false"
-                        />
-                    </div>
-                    <div v-else>
+                    <!-- 只为非 WebDAV 用户显示实时同步选项 -->
+                    <div v-if="!isWebDAVUser()">
                         <el-checkbox v-model="realtimeSync" label="实时同步，本地回复列表修改后立即上传" size="small" :checked="realtimeSync" @change="onRealtimeSyncChange" />
                     </div>
-                    <div v-if="!isWebDAVUser()">
+                    <div>
                         <el-checkbox v-model="realtimeBackup" label="实时备份，本地回复列表及任一配置修改后立即备份至云端" size="small" :checked="realtimeBackup" @change="onRealtimeBackupChange" />
                     </div>
                     <div>
@@ -342,10 +333,10 @@ function openAISettings() {
                     </div>
                 
                     <el-space direction="vertical" alignment="flex-start" style="margin-top: 18px;">
-                        <div>
+                        <div v-if="!isWebDAVUser()">
                             <el-text type="primary" class="text-info">* AI和常量只存在本地，不参与同步</el-text>
                         </div>
-                        <div>
+                        <div v-if="!isWebDAVUser()">
                             <el-text type="primary" class="text-info">* 如需备份所有配置请使用操全量同步操作中的全量备份、全量恢复功能</el-text>
                         </div>
                         <div>
