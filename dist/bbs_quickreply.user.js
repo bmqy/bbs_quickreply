@@ -48,7 +48,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.box-card .el-card__header[data-v-c229a9d9]{padding:10px 20px}.box-card .el-card__header span[data-v-c229a9d9]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.quickReplyBox[data-v-1b723407]{position:relative}.quickReplyBox .el-form[data-v-1b723407]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-1b723407]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-1b723407]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1b723407]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1b723407],.el-form-item--small.el-form-item[data-v-1b723407]{margin-bottom:10px}.el-select[data-v-1b723407]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-798bfbbb]{width:100%}.header-left[data-v-798bfbbb]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-798bfbbb]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-798bfbbb]{margin-bottom:0}}.header-right[data-v-798bfbbb]{width:100%}.header-right .button-group[data-v-798bfbbb]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-798bfbbb]{justify-content:flex-end}}.login-container[data-v-798bfbbb]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-798bfbbb]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-798bfbbb]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-798bfbbb]{padding:20px}.settings-header[data-v-798bfbbb]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-798bfbbb]{min-height:300px}.my-replies-card .card-title[data-v-798bfbbb]{font-weight:700}.list-left[data-v-798bfbbb]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-798bfbbb]{margin-right:5px;color:#909399}.list-title[data-v-798bfbbb]{flex:1;font-weight:400}.list-right[data-v-798bfbbb]{min-width:70px}.list-right .el-badge.item[data-v-798bfbbb]{margin-right:30px}.list li[data-v-798bfbbb]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-798bfbbb]:hover{background-color:#f5f5f5}.tips[data-v-798bfbbb]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-798bfbbb]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-798bfbbb]{padding:10px 20px}.box-card .el-card__header span[data-v-798bfbbb]{font-size:14px}.clearfix[data-v-798bfbbb]:before,.clearfix[data-v-798bfbbb]:after{display:table;content:""}.clearfix[data-v-798bfbbb]:after{clear:both}.el-pagination[data-v-798bfbbb]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%;margin:5vh auto!important}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
+(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.box-card .el-card__header[data-v-c229a9d9]{padding:10px 20px}.box-card .el-card__header span[data-v-c229a9d9]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.quickReplyBox[data-v-aa4a3406]{position:relative}.quickReplyBox .el-form[data-v-aa4a3406]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-aa4a3406]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-aa4a3406]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-aa4a3406]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-aa4a3406],.el-form-item--small.el-form-item[data-v-aa4a3406]{margin-bottom:10px}.el-select[data-v-aa4a3406]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-2963c5b2]{width:100%}.header-left[data-v-2963c5b2]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-2963c5b2]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-2963c5b2]{margin-bottom:0}}.header-right[data-v-2963c5b2]{width:100%}.header-right .button-group[data-v-2963c5b2]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-2963c5b2]{justify-content:flex-end}}.login-container[data-v-2963c5b2]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-2963c5b2]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-2963c5b2]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-2963c5b2]{padding:20px}.settings-header[data-v-2963c5b2]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-2963c5b2]{min-height:300px}.my-replies-card .card-title[data-v-2963c5b2]{font-weight:700}.list-left[data-v-2963c5b2]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-2963c5b2]{margin-right:5px;color:#909399}.list-title[data-v-2963c5b2]{flex:1;font-weight:400}.list-right[data-v-2963c5b2]{min-width:70px}.list-right .el-badge.item[data-v-2963c5b2]{margin-right:30px}.list li[data-v-2963c5b2]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-2963c5b2]:hover{background-color:#f5f5f5}.tips[data-v-2963c5b2]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-2963c5b2]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-2963c5b2]{padding:10px 20px}.box-card .el-card__header span[data-v-2963c5b2]{font-size:14px}.clearfix[data-v-2963c5b2]:before,.clearfix[data-v-2963c5b2]:after{display:table;content:""}.clearfix[data-v-2963c5b2]:after{clear:both}.el-pagination[data-v-2963c5b2]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%;margin:5vh auto!important}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
 
 (function (ElementPlusIconsVue, ElementPlus, vue) {
   'use strict';
@@ -1188,7 +1188,38 @@
         useAI.value = proxy.$storage.getUserInfo("useAI") || "";
         updateConstVar();
         updateAIModel();
+        proxy.$on("dataRestored", handleDataRestored);
       });
+      function handleDataRestored(data) {
+        console.log("App组件接收到数据恢复事件", data);
+        if (data) {
+          if (data.QuickReply) {
+            list.value = data.QuickReply;
+            console.log("已更新快捷回复列表", list.value);
+          }
+          const userStorageKey = proxy.$storage.userStorageKey;
+          const submitNowKey = `${userStorageKey}.submitNow`;
+          const useAIKey = `${userStorageKey}.useAI`;
+          const constVarKey = `${userStorageKey}.constVar`;
+          if (data[submitNowKey] !== void 0) {
+            submitNow.value = data[submitNowKey] || false;
+            console.log("已更新提交设置", submitNow.value);
+          }
+          if (data[useAIKey] !== void 0) {
+            useAI.value = data[useAIKey] || "";
+            updateAIModel();
+            console.log("已更新AI模型设置", useAI.value);
+          }
+          if (data[constVarKey]) {
+            constVar.value = data[constVarKey];
+            console.log("已更新常量设置", constVar.value);
+          }
+          if (currentReply.value) {
+            enterReply();
+            console.log("已更新当前回复内容到编辑器");
+          }
+        }
+      }
       function checkPlatform() {
         if (location.host.indexOf("nodeseek") > -1) {
           currentPlatform.value = "nodeseek";
@@ -1212,8 +1243,16 @@
       }
       async function getList() {
         let myListStorage = proxy.$storage.get();
+        const oldListEmpty = list.value.length === 0;
         list.value = myListStorage && myListStorage.length > 0 ? myListStorage : [];
-        currentReply.value = "";
+        if (oldListEmpty && list.value.length > 0 || currentReply.value) {
+          if (currentReply.value && !list.value.includes(currentReply.value)) {
+            currentReply.value = "";
+          }
+          if (currentReply.value) {
+            enterReply();
+          }
+        }
       }
       function openSet() {
         setShow.value = true;
@@ -1560,7 +1599,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-1b723407"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-aa4a3406"]]);
   const _hoisted_1$1 = { class: "margin-left" };
   const _hoisted_2$1 = { class: "margin-left" };
   const _hoisted_3$1 = { class: "form-tip" };
@@ -2200,7 +2239,39 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         constVar.value = proxy.$storage.getUserInfo("constVar") || constVar.value;
         getMyList();
         getSystemList();
+        proxy.$on("dataRestored", handleDataRestored);
       });
+      function handleDataRestored(data) {
+        console.log("设置组件接收到数据恢复事件", data);
+        if (data) {
+          if (data.QuickReply) {
+            myList.value = data.QuickReply;
+            updateMyList();
+            console.log("设置面板已更新回复列表", myList.value.length, "条");
+          }
+          const userSettingsPrefix = proxy.$storage.userStorageKey + ".";
+          Object.keys(data).forEach((key) => {
+            if (key.startsWith(userSettingsPrefix)) {
+              const settingKey = key.replace(userSettingsPrefix, "");
+              if (settingKey === "realtimeSync") {
+                realtimeSync.value = data[key] || false;
+                console.log("已更新实时同步设置:", realtimeSync.value);
+              } else if (settingKey === "realtimeBackup") {
+                realtimeBackup.value = data[key] || false;
+                console.log("已更新实时备份设置:", realtimeBackup.value);
+              } else if (settingKey === "submitNow") {
+                submitNow.value = data[key] || false;
+                console.log("已更新立即提交设置:", submitNow.value);
+              } else if (settingKey === "constVar") {
+                constVar.value = data[key] || constVar.value;
+                emit("updateConstVar");
+                console.log("已更新常量设置");
+              }
+            }
+          });
+          getSystemList();
+        }
+      }
       function getMyList() {
         let myListStorage = proxy.$storage.get();
         myList.value = myListStorage && myListStorage.length > 0 ? myListStorage : [];
@@ -2294,7 +2365,13 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       function onLoginSuccess() {
         showLogin.value = false;
         isLogin.value = true;
-        myList.value.length === 0 && download();
+        const userId = proxy.$storage.getUserInfo("userId");
+        if (userId === "webdav_user") {
+          console.log("WebDAV用户登录成功，自动执行全量恢复");
+          downloadAll();
+        } else {
+          myList.value.length === 0 && download();
+        }
       }
       function closeLogin() {
         showLogin.value = false;
@@ -2320,9 +2397,22 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         proxy.$storage.uploadAll();
       }
       async function downloadAll() {
-        let all = await proxy.$storage.downloadAll();
-        myList.value = all.QuickReply || [];
-        updateMyList();
+        loading.value = true;
+        try {
+          let all = await proxy.$storage.downloadAll();
+          if (all) {
+            if (!all.QuickReply || all.QuickReply.length === 0) {
+              proxy.$message.warning("恢复的数据中没有快捷回复");
+            } else {
+              console.log("全量恢复完成，恢复了", all.QuickReply.length, "条回复");
+            }
+          }
+        } catch (error) {
+          console.error("全量恢复出错:", error);
+          proxy.$message.error("全量恢复出错: " + error.message);
+        } finally {
+          loading.value = false;
+        }
       }
       function logout() {
         proxy.$storage.setUserInfo("userId", "");
@@ -3062,9 +3152,33 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-798bfbbb"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-2963c5b2"]]);
   const Util = {
     install: (app2, options) => {
+      const eventBus = {
+        events: {},
+        emit(event, ...args) {
+          if (this.events[event]) {
+            this.events[event].forEach((callback) => callback(...args));
+          }
+        },
+        on(event, callback) {
+          if (!this.events[event]) {
+            this.events[event] = [];
+          }
+          this.events[event].push(callback);
+        },
+        off(event, callback) {
+          if (this.events[event]) {
+            this.events[event] = this.events[event].filter(
+              (cb) => cb !== callback
+            );
+          }
+        }
+      };
+      app2.config.globalProperties.$emit = eventBus.emit.bind(eventBus);
+      app2.config.globalProperties.$on = eventBus.on.bind(eventBus);
+      app2.config.globalProperties.$off = eventBus.off.bind(eventBus);
       app2.config.globalProperties.$storage = {
         storageKey: "QuickReply",
         userStorageKey: "QuickReplyUser",
@@ -3103,84 +3217,72 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           baseUrl = baseUrl.replace(/\/+$/, "");
           baseUrl = `${baseUrl}/bbs_quickreply`;
           const safeFilename = filename.startsWith("/") ? filename.substring(1) : filename;
+          const fullUrl = `${baseUrl}/${safeFilename}`;
+          console.log("准备上传文件到WebDAV:", fullUrl);
           try {
-            await new Promise((resolve, reject) => {
+            await this.ensureWebDAVDirectory();
+            return new Promise((resolve, reject) => {
               _GM_xmlhttpRequest({
-                method: "MKCOL",
-                url: baseUrl,
+                method: "PUT",
+                url: fullUrl,
                 headers: {
-                  "Authorization": "Basic " + btoa(webdavConfig.username + ":" + webdavConfig.password)
+                  "Authorization": "Basic " + btoa(webdavConfig.username + ":" + webdavConfig.password),
+                  "Content-Type": "application/json; charset=utf-8",
+                  "Accept": "*/*"
                 },
+                data: JSON.stringify(data),
                 onload: function(response) {
-                  if (response.status === 201 || response.status === 405) {
+                  console.log("WebDAV上传响应:", response.status, response.statusText);
+                  if (response.status >= 200 && response.status < 300) {
+                    console.log("WebDAV上传成功:", fullUrl);
                     resolve(true);
                   } else {
-                    reject(new Error("创建目录失败: " + (response.statusText || "服务器返回状态码 " + response.status)));
+                    console.error("WebDAV 上传失败:", response);
+                    let errorMsg = "上传失败";
+                    try {
+                      const parser = new DOMParser();
+                      const xmlDoc = parser.parseFromString(response.responseText, "text/xml");
+                      const message = xmlDoc.querySelector("s\\:message");
+                      if (message) {
+                        errorMsg += ": " + message.textContent;
+                      } else {
+                        switch (response.status) {
+                          case 401:
+                            errorMsg += ": 认证失败,请检查用户名和密码";
+                            break;
+                          case 403:
+                            errorMsg += ": 没有权限,请检查 WebDAV 设置";
+                            break;
+                          case 404:
+                            errorMsg += ": 路径不存在,请检查 WebDAV 地址";
+                            break;
+                          case 405:
+                            errorMsg += ": 不允许此操作,请检查 WebDAV 权限";
+                            break;
+                          default:
+                            errorMsg += ": " + (response.statusText || "服务器返回状态码 " + response.status);
+                        }
+                      }
+                    } catch (e) {
+                      errorMsg += ": " + (response.statusText || "状态码: " + response.status);
+                    }
+                    reject(new Error(errorMsg));
                   }
                 },
                 onerror: function(error) {
-                  reject(new Error("创建目录失败: " + (error.message || "网络错误")));
+                  console.error("WebDAV上传网络错误:", error);
+                  reject(new Error("上传失败: " + (error.message || "网络错误")));
+                },
+                ontimeout: function() {
+                  console.error("WebDAV上传请求超时");
+                  reject(new Error("上传失败: 请求超时"));
                 }
               });
             });
           } catch (error) {
-            if (error.message.includes("405")) {
-              console.log("目录已存在,继续上传");
-            } else {
-              throw error;
-            }
+            console.error("WebDAV上传过程中出错:", error);
+            throw error;
           }
-          return new Promise((resolve, reject) => {
-            _GM_xmlhttpRequest({
-              method: "PUT",
-              url: `${baseUrl}/${safeFilename}`,
-              headers: {
-                "Authorization": "Basic " + btoa(webdavConfig.username + ":" + webdavConfig.password),
-                "Content-Type": "application/json; charset=utf-8",
-                "Accept": "*/*"
-              },
-              data: JSON.stringify(data),
-              onload: function(response) {
-                if (response.status >= 200 && response.status < 300) {
-                  resolve(true);
-                } else {
-                  console.error("WebDAV 上传失败:", response);
-                  let errorMsg = "上传失败";
-                  try {
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(response.responseText, "text/xml");
-                    const message = xmlDoc.querySelector("s\\:message");
-                    if (message) {
-                      errorMsg += ": " + message.textContent;
-                    } else {
-                      switch (response.status) {
-                        case 401:
-                          errorMsg += ": 认证失败,请检查用户名和密码";
-                          break;
-                        case 403:
-                          errorMsg += ": 没有权限,请检查 WebDAV 设置";
-                          break;
-                        case 404:
-                          errorMsg += ": 路径不存在,请检查 WebDAV 地址";
-                          break;
-                        case 405:
-                          errorMsg += ": 不允许此操作,请检查 WebDAV 权限";
-                          break;
-                        default:
-                          errorMsg += ": " + (response.statusText || "服务器返回状态码 " + response.status);
-                      }
-                    }
-                  } catch (e) {
-                    errorMsg += ": " + (response.statusText || "状态码: " + response.status);
-                  }
-                  reject(new Error(errorMsg));
-                }
-              },
-              onerror: function(error) {
-                reject(new Error("上传失败: " + (error.message || "网络错误")));
-              }
-            });
-          });
         },
         async downloadFromWebDAV(filename) {
           const webdavConfig = this.getUserInfo("webdavConfig");
@@ -3215,7 +3317,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                     console.log("WebDAV下载成功，数据已解析");
                     resolve(parsedData);
                   } catch (e) {
-                    console.error("解析WebDAV响应失败:", e, "响应内容:", response.responseText);
+                    console.error("解析WebDAV响应失败:", e, "响应内容:", response.responseText.substring(0, 100) + "...");
                     reject(new Error("解析响应失败: " + e.message));
                   }
                 } else if (response.status === 404) {
@@ -3223,7 +3325,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                   resolve(null);
                 } else {
                   console.error("WebDAV下载失败:", response.status, response.statusText);
-                  reject(new Error("下载失败: 状态码 " + response.status));
+                  reject(new Error("下载失败: 状态码 " + response.status + " " + response.statusText));
                 }
               },
               onerror: function(error) {
@@ -3237,7 +3339,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
             });
           }).catch((error) => {
             console.error("WebDAV 下载失败:", error);
-            return null;
+            throw error;
           });
         },
         async uploadList() {
@@ -3369,8 +3471,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               const data = await this.downloadFromWebDAV("quickreply_all.json");
               if (data && data.options) {
                 try {
+                  console.log("开始解析WebDAV全量数据...");
                   const decryptedOptions = JSON.parse(proxy.$tools.decodeStr(data.options));
                   proxy.$storage.setAll(decryptedOptions);
+                  console.log("WebDAV全量数据已恢复到本地存储");
+                  setTimeout(() => {
+                    proxy.$emit("dataRestored", decryptedOptions);
+                    console.log("已发送dataRestored事件，通知组件更新");
+                  }, 100);
                   proxy.$message.success("WebDAV 恢复成功");
                   return decryptedOptions;
                 } catch (e) {
@@ -3381,12 +3489,18 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               } else {
                 const allConfig = proxy.$storage.getAll() || {};
                 if (Object.keys(allConfig).length > 0) {
-                  const encryptedData = {
-                    options: proxy.$tools.encodeStr(JSON.stringify(allConfig))
-                  };
-                  await this.uploadToWebDAV(encryptedData, "quickreply_all.json");
-                  proxy.$message.warning("WebDAV 中不存在全量数据，已上传当前配置");
-                  return allConfig;
+                  try {
+                    const encryptedData = {
+                      options: proxy.$tools.encodeStr(JSON.stringify(allConfig))
+                    };
+                    await this.uploadToWebDAV(encryptedData, "quickreply_all.json");
+                    proxy.$message.success("WebDAV 首次备份成功，已上传当前配置");
+                    return allConfig;
+                  } catch (e) {
+                    console.error("首次上传WebDAV数据失败:", e);
+                    proxy.$message.error(`首次备份失败: ${e.message}`);
+                    return false;
+                  }
                 } else {
                   proxy.$message.warning("WebDAV 中不存在全量数据，且本地无配置可上传");
                   return false;
@@ -3407,10 +3521,15 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           });
           if (res.code == 0) {
             proxy.$storage.setAll(res.data);
+            setTimeout(() => {
+              proxy.$emit("dataRestored", res.data);
+              console.log("已发送dataRestored事件，通知组件更新");
+            }, 100);
             proxy.$message.success("恢复成功");
             return res.data;
           } else {
             proxy.$message.error(res.message);
+            return false;
           }
         },
         async ensureWebDAVDirectory() {
@@ -3420,7 +3539,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           let baseUrl = webdavConfig.url;
           baseUrl = baseUrl.replace(/\/+$/, "");
           const dirUrl = `${baseUrl}/bbs_quickreply`;
+          console.log("准备确保WebDAV目录存在:", dirUrl);
           try {
+            const exists = await this.checkDirectoryExists(dirUrl, webdavConfig);
+            if (exists) {
+              console.log("WebDAV目录已存在:", dirUrl);
+              return true;
+            }
+            console.log("WebDAV目录不存在，尝试创建:", dirUrl);
             await new Promise((resolve, reject) => {
               _GM_xmlhttpRequest({
                 method: "MKCOL",
@@ -3429,8 +3555,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                   "Authorization": "Basic " + btoa(webdavConfig.username + ":" + webdavConfig.password)
                 },
                 onload: function(response) {
-                  console.log("创建WebDAV目录响应:", response.status);
-                  if (response.status === 201 || response.status === 405) {
+                  console.log("创建WebDAV目录响应:", response.status, response.statusText);
+                  if (response.status >= 200 && response.status < 300 || response.status === 405) {
                     resolve(true);
                   } else {
                     reject(new Error("创建目录失败: " + (response.statusText || "服务器返回状态码 " + response.status)));
@@ -3441,6 +3567,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                 }
               });
             });
+            console.log("WebDAV目录创建成功:", dirUrl);
             return true;
           } catch (error) {
             if (error.message.includes("405")) {
@@ -3449,6 +3576,31 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
             }
             console.error("确保WebDAV目录存在时出错:", error);
             throw error;
+          }
+        },
+        async checkDirectoryExists(url, webdavConfig) {
+          try {
+            const response = await new Promise((resolve, reject) => {
+              _GM_xmlhttpRequest({
+                method: "PROPFIND",
+                url,
+                headers: {
+                  "Authorization": "Basic " + btoa(webdavConfig.username + ":" + webdavConfig.password),
+                  "Depth": "0",
+                  "Content-Type": "application/xml"
+                },
+                onload: function(response2) {
+                  resolve(response2);
+                },
+                onerror: function(error) {
+                  reject(error);
+                }
+              });
+            });
+            return response.status >= 200 && response.status < 300;
+          } catch (error) {
+            console.warn("检查目录是否存在失败:", error);
+            return false;
           }
         },
         getName() {
