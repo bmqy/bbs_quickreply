@@ -45,7 +45,52 @@ onBeforeMount(()=>{
     
     getMyList();
     getSystemList();
+    
+    // 添加全局数据恢复事件监听
+    proxy.$on('dataRestored', handleDataRestored);
 });
+
+// 处理数据恢复事件
+function handleDataRestored(data) {
+    console.log('设置组件接收到数据恢复事件', data);
+    
+    // 更新所有组件状态
+    if (data) {
+        // 更新回复列表
+        if (data.QuickReply) {
+            myList.value = data.QuickReply;
+            updateMyList();
+            console.log('设置面板已更新回复列表', myList.value.length, '条');
+        }
+        
+        // 更新用户设置
+        const userSettingsPrefix = proxy.$storage.userStorageKey + '.';
+        Object.keys(data).forEach(key => {
+            if (key.startsWith(userSettingsPrefix)) {
+                const settingKey = key.replace(userSettingsPrefix, '');
+                
+                // 更新已知的设置项
+                if (settingKey === 'realtimeSync') {
+                    realtimeSync.value = data[key] || false;
+                    console.log('已更新实时同步设置:', realtimeSync.value);
+                } else if (settingKey === 'realtimeBackup') {
+                    realtimeBackup.value = data[key] || false;
+                    console.log('已更新实时备份设置:', realtimeBackup.value);
+                } else if (settingKey === 'submitNow') {
+                    submitNow.value = data[key] || false;
+                    console.log('已更新立即提交设置:', submitNow.value);
+                } else if (settingKey === 'constVar') {
+                    constVar.value = data[key] || constVar.value;
+                    emit('updateConstVar');
+                    console.log('已更新常量设置');
+                }
+            }
+        });
+        
+        // 更新系统列表（如有必要）
+        getSystemList();
+    }
+}
 
 // 获取我的自定义回复列表
 function getMyList() {
@@ -161,7 +206,17 @@ function collectReply(index) {
 function onLoginSuccess(){
     showLogin.value = false;
     isLogin.value = true;
-    myList.value.length===0 && download();
+    
+    // 判断是否是WebDAV用户，WebDAV用户直接进行全量恢复
+    const userId = proxy.$storage.getUserInfo('userId');
+    if (userId === 'webdav_user') {
+        // WebDAV用户直接执行全量恢复
+        console.log('WebDAV用户登录成功，自动执行全量恢复');
+        downloadAll();
+    } else {
+        // 非WebDAV用户仅在回复列表为空时下载回复列表
+        myList.value.length === 0 && download();
+    }
 }
 
 function closeLogin(){
@@ -191,10 +246,25 @@ async function download(){
 function uploadAll(){
     proxy.$storage.uploadAll();
 }
-async function downloadAll(){
-    let all = await proxy.$storage.downloadAll();
-    myList.value = all.QuickReply || [];
-    updateMyList();
+async function downloadAll() {
+    loading.value = true;
+    try {
+        let all = await proxy.$storage.downloadAll();
+        if (all) {
+            // 由于已经在 util.js 中触发了全局事件，这里不需要重复更新
+            // 显示提示信息
+            if (!all.QuickReply || all.QuickReply.length === 0) {
+                proxy.$message.warning('恢复的数据中没有快捷回复');
+            } else {
+                console.log('全量恢复完成，恢复了', all.QuickReply.length, '条回复');
+            }
+        }
+    } catch (error) {
+        console.error('全量恢复出错:', error);
+        proxy.$message.error('全量恢复出错: ' + error.message);
+    } finally {
+        loading.value = false;
+    }
 }
 function logout(){
     proxy.$storage.setUserInfo('userId', '');

@@ -31,7 +31,55 @@ onBeforeMount(()=>{
     useAI.value = proxy.$storage.getUserInfo('useAI') || '';
     updateConstVar();
     updateAIModel();
+    
+    // 监听数据恢复事件
+    proxy.$on('dataRestored', handleDataRestored);
 });
+
+// 处理数据恢复事件
+function handleDataRestored(data) {
+    console.log('App组件接收到数据恢复事件', data);
+    
+    // 更新所有数据
+    if (data) {
+        // 更新快捷回复列表
+        if (data.QuickReply) {
+            list.value = data.QuickReply;
+            console.log('已更新快捷回复列表', list.value);
+        }
+        
+        // 更新用户设置
+        const userStorageKey = proxy.$storage.userStorageKey;
+        const submitNowKey = `${userStorageKey}.submitNow`;
+        const useAIKey = `${userStorageKey}.useAI`;
+        const constVarKey = `${userStorageKey}.constVar`;
+        
+        // 更新提交设置
+        if (data[submitNowKey] !== undefined) {
+            submitNow.value = data[submitNowKey] || false;
+            console.log('已更新提交设置', submitNow.value);
+        }
+        
+        // 更新AI模型设置
+        if (data[useAIKey] !== undefined) {
+            useAI.value = data[useAIKey] || '';
+            updateAIModel();
+            console.log('已更新AI模型设置', useAI.value);
+        }
+        
+        // 更新常量设置
+        if (data[constVarKey]) {
+            constVar.value = data[constVarKey];
+            console.log('已更新常量设置', constVar.value);
+        }
+        
+        // 如果选择框有值，需要重新设置回复内容到编辑器中
+        if (currentReply.value) {
+            enterReply();
+            console.log('已更新当前回复内容到编辑器');
+        }
+    }
+}
 
 // 检测平台
 function checkPlatform() {
@@ -58,8 +106,21 @@ function checkPlatform() {
 // 获取APP自定义回复
 async function getList() {
     let myListStorage = proxy.$storage.get();
+    const oldListEmpty = list.value.length === 0;
     list.value = myListStorage && myListStorage.length > 0 ? myListStorage : [];
-    currentReply.value = '';
+    
+    // 如果从空列表变为有数据，或者当前已选择了回复内容，更新编辑器
+    if ((oldListEmpty && list.value.length > 0) || currentReply.value) {
+        // 当列表变化时，如果当前选中的回复在新列表中不存在，清空它
+        if (currentReply.value && !list.value.includes(currentReply.value)) {
+            currentReply.value = '';
+        }
+        
+        // 如果当前有选中回复，则重新应用到编辑器
+        if (currentReply.value) {
+            enterReply();
+        }
+    }
 };
 // 打开APP设置面板
 function openSet() {

@@ -1,5 +1,33 @@
 export default {
     install: (app, options) => {
+        // 添加简单的事件总线功能
+        const eventBus = {
+            events: {},
+            emit(event, ...args) {
+                if (this.events[event]) {
+                    this.events[event].forEach(callback => callback(...args));
+                }
+            },
+            on(event, callback) {
+                if (!this.events[event]) {
+                    this.events[event] = [];
+                }
+                this.events[event].push(callback);
+            },
+            off(event, callback) {
+                if (this.events[event]) {
+                    this.events[event] = this.events[event].filter(
+                        cb => cb !== callback
+                    );
+                }
+            }
+        };
+        
+        // 将事件总线方法添加到全局属性中
+        app.config.globalProperties.$emit = eventBus.emit.bind(eventBus);
+        app.config.globalProperties.$on = eventBus.on.bind(eventBus);
+        app.config.globalProperties.$off = eventBus.off.bind(eventBus);
+        
         // 全局storage方法
         app.config.globalProperties.$storage = {
             storageKey: "QuickReply",
@@ -45,90 +73,77 @@ export default {
                 
                 // 确保文件名不以斜杠开头
                 const safeFilename = filename.startsWith('/') ? filename.substring(1) : filename;
+                const fullUrl = `${baseUrl}/${safeFilename}`;
                 
-                // 先尝试创建目录
+                console.log('准备上传文件到WebDAV:', fullUrl);
+                
+                // 先确保目录存在
                 try {
-                    await new Promise((resolve, reject) => {
+                    await this.ensureWebDAVDirectory();
+                    
+                    // 上传文件
+                    return new Promise((resolve, reject) => {
                         GM_xmlhttpRequest({
-                            method: 'MKCOL',
-                            url: baseUrl,
+                            method: 'PUT',
+                            url: fullUrl,
                             headers: {
-                                'Authorization': 'Basic ' + btoa(webdavConfig.username + ':' + webdavConfig.password)
+                                'Authorization': 'Basic ' + btoa(webdavConfig.username + ':' + webdavConfig.password),
+                                'Content-Type': 'application/json; charset=utf-8',
+                                'Accept': '*/*'
                             },
+                            data: JSON.stringify(data),
                             onload: function(response) {
-                                if (response.status === 201 || response.status === 405) {
-                                    // 201 表示创建成功,405 表示目录已存在,都算正常
+                                console.log('WebDAV上传响应:', response.status, response.statusText);
+                                if (response.status >= 200 && response.status < 300) {
+                                    console.log('WebDAV上传成功:', fullUrl);
                                     resolve(true);
                                 } else {
-                                    reject(new Error('创建目录失败: ' + (response.statusText || '服务器返回状态码 ' + response.status)));
+                                    console.error("WebDAV 上传失败:", response);
+                                    let errorMsg = "上传失败";
+                                    try {
+                                        const parser = new DOMParser();
+                                        const xmlDoc = parser.parseFromString(response.responseText, "text/xml");
+                                        const message = xmlDoc.querySelector("s\\:message");
+                                        if (message) {
+                                            errorMsg += ": " + message.textContent;
+                                        } else {
+                                            switch (response.status) {
+                                                case 401:
+                                                    errorMsg += ": 认证失败,请检查用户名和密码";
+                                                    break;
+                                                case 403:
+                                                    errorMsg += ": 没有权限,请检查 WebDAV 设置";
+                                                    break;
+                                                case 404:
+                                                    errorMsg += ": 路径不存在,请检查 WebDAV 地址";
+                                                    break;
+                                                case 405:
+                                                    errorMsg += ": 不允许此操作,请检查 WebDAV 权限";
+                                                    break;
+                                                default:
+                                                    errorMsg += ": " + (response.statusText || "服务器返回状态码 " + response.status);
+                                            }
+                                        }
+                                    } catch (e) {
+                                        errorMsg += ": " + (response.statusText || "状态码: " + response.status);
+                                    }
+                                    reject(new Error(errorMsg));
                                 }
                             },
                             onerror: function(error) {
-                                reject(new Error('创建目录失败: ' + (error.message || '网络错误')));
+                                console.error('WebDAV上传网络错误:', error);
+                                reject(new Error("上传失败: " + (error.message || "网络错误")));
+                            },
+                            ontimeout: function() {
+                                console.error('WebDAV上传请求超时');
+                                reject(new Error("上传失败: 请求超时"));
                             }
                         });
                     });
                 } catch (error) {
-                    // 如果是 405 错误(目录已存在),继续执行
-                    if (error.message.includes('405')) {
-                        console.log('目录已存在,继续上传');
-                    } else {
-                        throw error;
-                    }
+                    console.error('WebDAV上传过程中出错:', error);
+                    throw error;
                 }
-                
-                // 上传文件
-                return new Promise((resolve, reject) => {
-                    GM_xmlhttpRequest({
-                        method: 'PUT',
-                        url: `${baseUrl}/${safeFilename}`,
-                        headers: {
-                            'Authorization': 'Basic ' + btoa(webdavConfig.username + ':' + webdavConfig.password),
-                            'Content-Type': 'application/json; charset=utf-8',
-                            'Accept': '*/*'
-                        },
-                        data: JSON.stringify(data),
-                        onload: function(response) {
-                            if (response.status >= 200 && response.status < 300) {
-                                resolve(true);
-                            } else {
-                                console.error("WebDAV 上传失败:", response);
-                                let errorMsg = "上传失败";
-                                try {
-                                    const parser = new DOMParser();
-                                    const xmlDoc = parser.parseFromString(response.responseText, "text/xml");
-                                    const message = xmlDoc.querySelector("s\\:message");
-                                    if (message) {
-                                        errorMsg += ": " + message.textContent;
-                                    } else {
-                                        switch (response.status) {
-                                            case 401:
-                                                errorMsg += ": 认证失败,请检查用户名和密码";
-                                                break;
-                                            case 403:
-                                                errorMsg += ": 没有权限,请检查 WebDAV 设置";
-                                                break;
-                                            case 404:
-                                                errorMsg += ": 路径不存在,请检查 WebDAV 地址";
-                                                break;
-                                            case 405:
-                                                errorMsg += ": 不允许此操作,请检查 WebDAV 权限";
-                                                break;
-                                            default:
-                                                errorMsg += ": " + (response.statusText || "服务器返回状态码 " + response.status);
-                                        }
-                                    }
-                                } catch (e) {
-                                    errorMsg += ": " + (response.statusText || "状态码: " + response.status);
-                                }
-                                reject(new Error(errorMsg));
-                            }
-                        },
-                        onerror: function(error) {
-                            reject(new Error("上传失败: " + (error.message || "网络错误")));
-                        }
-                    });
-                });
             },
             async downloadFromWebDAV(filename) {
                 const webdavConfig = this.getUserInfo('webdavConfig');
@@ -174,7 +189,7 @@ export default {
                                     console.log('WebDAV下载成功，数据已解析');
                                     resolve(parsedData);
                                 } catch (e) {
-                                    console.error('解析WebDAV响应失败:', e, '响应内容:', response.responseText);
+                                    console.error('解析WebDAV响应失败:', e, '响应内容:', response.responseText.substring(0, 100) + '...');
                                     reject(new Error('解析响应失败: ' + e.message));
                                 }
                             } else if (response.status === 404) {
@@ -182,7 +197,7 @@ export default {
                                 resolve(null); // 文件不存在返回null而不是报错
                             } else {
                                 console.error('WebDAV下载失败:', response.status, response.statusText);
-                                reject(new Error('下载失败: 状态码 ' + response.status));
+                                reject(new Error('下载失败: 状态码 ' + response.status + ' ' + response.statusText));
                             }
                         },
                         onerror: function(error) {
@@ -196,7 +211,7 @@ export default {
                     });
                 }).catch(error => {
                     console.error('WebDAV 下载失败:', error);
-                    return null;
+                    throw error;  // 重新抛出错误，让上层函数处理
                 });
             },
             async uploadList() {
@@ -353,8 +368,19 @@ export default {
                         const data = await this.downloadFromWebDAV('quickreply_all.json');
                         if (data && data.options) {
                             try {
+                                console.log('开始解析WebDAV全量数据...');
                                 const decryptedOptions = JSON.parse(proxy.$tools.decodeStr(data.options));
+                                
+                                // 添加一个延迟，确保数据正确恢复
                                 proxy.$storage.setAll(decryptedOptions);
+                                console.log('WebDAV全量数据已恢复到本地存储');
+                                
+                                // 触发全局事件，通知所有组件更新数据
+                                setTimeout(() => {
+                                    proxy.$emit('dataRestored', decryptedOptions);
+                                    console.log('已发送dataRestored事件，通知组件更新');
+                                }, 100);
+                                
                                 proxy.$message.success('WebDAV 恢复成功');
                                 return decryptedOptions;
                             } catch (e) {
@@ -363,15 +389,21 @@ export default {
                                 return false;
                             }
                         } else {
-                            // 文件可能不存在，先尝试上传一次当前数据
+                            // 文件可能不存在，自动上传当前配置
                             const allConfig = proxy.$storage.getAll() || {};
                             if (Object.keys(allConfig).length > 0) {
-                                const encryptedData = {
-                                    options: proxy.$tools.encodeStr(JSON.stringify(allConfig))
-                                };
-                                await this.uploadToWebDAV(encryptedData, 'quickreply_all.json');
-                                proxy.$message.warning('WebDAV 中不存在全量数据，已上传当前配置');
-                                return allConfig;
+                                try {
+                                    const encryptedData = {
+                                        options: proxy.$tools.encodeStr(JSON.stringify(allConfig))
+                                    };
+                                    await this.uploadToWebDAV(encryptedData, 'quickreply_all.json');
+                                    proxy.$message.success('WebDAV 首次备份成功，已上传当前配置');
+                                    return allConfig;
+                                } catch (e) {
+                                    console.error('首次上传WebDAV数据失败:', e);
+                                    proxy.$message.error(`首次备份失败: ${e.message}`);
+                                    return false;
+                                }
                             } else {
                                 proxy.$message.warning('WebDAV 中不存在全量数据，且本地无配置可上传');
                                 return false;
@@ -395,10 +427,18 @@ export default {
                 });
                 if (res.code == 0) {
                     proxy.$storage.setAll(res.data);
+                    
+                    // 触发全局事件，通知所有组件更新数据
+                    setTimeout(() => {
+                        proxy.$emit('dataRestored', res.data);
+                        console.log('已发送dataRestored事件，通知组件更新');
+                    }, 100);
+                    
                     proxy.$message.success('恢复成功');
                     return res.data;
                 } else {
                     proxy.$message.error(res.message);
+                    return false;
                 }
             },
             async ensureWebDAVDirectory() {
@@ -413,8 +453,19 @@ export default {
                 // 添加 bbs_quickreply 目录
                 const dirUrl = `${baseUrl}/bbs_quickreply`;
                 
+                console.log('准备确保WebDAV目录存在:', dirUrl);
+                
                 // 尝试创建目录
                 try {
+                    // 先检查目录是否存在
+                    const exists = await this.checkDirectoryExists(dirUrl, webdavConfig);
+                    if (exists) {
+                        console.log('WebDAV目录已存在:', dirUrl);
+                        return true;
+                    }
+                    
+                    // 目录不存在，尝试创建
+                    console.log('WebDAV目录不存在，尝试创建:', dirUrl);
                     await new Promise((resolve, reject) => {
                         GM_xmlhttpRequest({
                             method: 'MKCOL',
@@ -423,8 +474,8 @@ export default {
                                 'Authorization': 'Basic ' + btoa(webdavConfig.username + ':' + webdavConfig.password)
                             },
                             onload: function(response) {
-                                console.log('创建WebDAV目录响应:', response.status);
-                                if (response.status === 201 || response.status === 405) {
+                                console.log('创建WebDAV目录响应:', response.status, response.statusText);
+                                if (response.status >= 200 && response.status < 300 || response.status === 405) {
                                     // 201 表示创建成功,405 表示目录已存在,都算正常
                                     resolve(true);
                                 } else {
@@ -436,6 +487,8 @@ export default {
                             }
                         });
                     });
+                    
+                    console.log('WebDAV目录创建成功:', dirUrl);
                     return true;
                 } catch (error) {
                     // 如果是 405 错误(目录已存在),表示成功
@@ -445,6 +498,32 @@ export default {
                     }
                     console.error('确保WebDAV目录存在时出错:', error);
                     throw error;
+                }
+            },
+            async checkDirectoryExists(url, webdavConfig) {
+                try {
+                    const response = await new Promise((resolve, reject) => {
+                        GM_xmlhttpRequest({
+                            method: 'PROPFIND',
+                            url: url,
+                            headers: {
+                                'Authorization': 'Basic ' + btoa(webdavConfig.username + ':' + webdavConfig.password),
+                                'Depth': '0',
+                                'Content-Type': 'application/xml'
+                            },
+                            onload: function(response) {
+                                resolve(response);
+                            },
+                            onerror: function(error) {
+                                reject(error);
+                            }
+                        });
+                    });
+                    
+                    return response.status >= 200 && response.status < 300;
+                } catch (error) {
+                    console.warn('检查目录是否存在失败:', error);
+                    return false;
                 }
             },
             getName(){
