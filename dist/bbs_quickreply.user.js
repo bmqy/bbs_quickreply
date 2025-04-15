@@ -36,6 +36,7 @@
 // @connect      api.openai.com
 // @connect      api.deepseek.com
 // @connect      dav.jianguoyun.com
+// @connect      ogi.teracloud.jp
 // @connect      *
 // @grant        GM_download
 // @grant        GM_getResourceText
