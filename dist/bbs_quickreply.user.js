@@ -35,6 +35,7 @@
 // @connect      api.moonshot.cn
 // @connect      api.openai.com
 // @connect      api.deepseek.com
+// @connect      api.x.ai
 // @connect      dav.jianguoyun.com
 // @connect      ogi.teracloud.jp
 // @connect      *
@@ -49,7 +50,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.box-card .el-card__header[data-v-c229a9d9]{padding:10px 20px}.box-card .el-card__header span[data-v-c229a9d9]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.quickReplyBox[data-v-aa4a3406]{position:relative}.quickReplyBox .el-form[data-v-aa4a3406]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-aa4a3406]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-aa4a3406]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-aa4a3406]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-aa4a3406],.el-form-item--small.el-form-item[data-v-aa4a3406]{margin-bottom:10px}.el-select[data-v-aa4a3406]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-2963c5b2]{width:100%}.header-left[data-v-2963c5b2]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-2963c5b2]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-2963c5b2]{margin-bottom:0}}.header-right[data-v-2963c5b2]{width:100%}.header-right .button-group[data-v-2963c5b2]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-2963c5b2]{justify-content:flex-end}}.login-container[data-v-2963c5b2]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-2963c5b2]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-2963c5b2]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-2963c5b2]{padding:20px}.settings-header[data-v-2963c5b2]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-2963c5b2]{min-height:300px}.my-replies-card .card-title[data-v-2963c5b2]{font-weight:700}.list-left[data-v-2963c5b2]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-2963c5b2]{margin-right:5px;color:#909399}.list-title[data-v-2963c5b2]{flex:1;font-weight:400}.list-right[data-v-2963c5b2]{min-width:70px}.list-right .el-badge.item[data-v-2963c5b2]{margin-right:30px}.list li[data-v-2963c5b2]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-2963c5b2]:hover{background-color:#f5f5f5}.tips[data-v-2963c5b2]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-2963c5b2]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-2963c5b2]{padding:10px 20px}.box-card .el-card__header span[data-v-2963c5b2]{font-size:14px}.clearfix[data-v-2963c5b2]:before,.clearfix[data-v-2963c5b2]:after{display:table;content:""}.clearfix[data-v-2963c5b2]:after{clear:both}.el-pagination[data-v-2963c5b2]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%;margin:5vh auto!important}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
+(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.box-card .el-card__header[data-v-54e344b4]{padding:10px 20px}.box-card .el-card__header span[data-v-54e344b4]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.quickReplyBox[data-v-1edb02ba]{position:relative}.quickReplyBox .el-form[data-v-1edb02ba]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-1edb02ba]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-1edb02ba]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1edb02ba]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1edb02ba],.el-form-item--small.el-form-item[data-v-1edb02ba]{margin-bottom:10px}.el-select[data-v-1edb02ba]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-2963c5b2]{width:100%}.header-left[data-v-2963c5b2]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-2963c5b2]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-2963c5b2]{margin-bottom:0}}.header-right[data-v-2963c5b2]{width:100%}.header-right .button-group[data-v-2963c5b2]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-2963c5b2]{justify-content:flex-end}}.login-container[data-v-2963c5b2]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-2963c5b2]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-2963c5b2]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-2963c5b2]{padding:20px}.settings-header[data-v-2963c5b2]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-2963c5b2]{min-height:300px}.my-replies-card .card-title[data-v-2963c5b2]{font-weight:700}.list-left[data-v-2963c5b2]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-2963c5b2]{margin-right:5px;color:#909399}.list-title[data-v-2963c5b2]{flex:1;font-weight:400}.list-right[data-v-2963c5b2]{min-width:70px}.list-right .el-badge.item[data-v-2963c5b2]{margin-right:30px}.list li[data-v-2963c5b2]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-2963c5b2]:hover{background-color:#f5f5f5}.tips[data-v-2963c5b2]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-2963c5b2]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-2963c5b2]{padding:10px 20px}.box-card .el-card__header span[data-v-2963c5b2]{font-size:14px}.clearfix[data-v-2963c5b2]:before,.clearfix[data-v-2963c5b2]:after{display:table;content:""}.clearfix[data-v-2963c5b2]:after{clear:both}.el-pagination[data-v-2963c5b2]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%;margin:5vh auto!important}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
 
 (function (ElementPlusIconsVue, ElementPlus, vue) {
   'use strict';
@@ -304,6 +305,16 @@
         { value: "deepseek-reasoner", label: "deepseek-reasoner" }
       ]);
       const useDeepseek = vue.ref(false);
+      const grokDomain = vue.ref("");
+      const grokApiKey = vue.ref("");
+      const grokModel = vue.ref("grok-3-mini-beta");
+      const grokModelList = vue.ref([
+        { value: "grok-3-mini-beta", label: "grok-3-mini-beta" },
+        { value: "grok-3-mini-fast-beta", label: "grok-3-mini-fast-beta" },
+        { value: "grok-3-beta", label: "grok-3-beta" },
+        { value: "grok-3-fast-beta", label: "grok-3-fast-beta" }
+      ]);
+      const useGrok = vue.ref(false);
       const useAI = vue.ref("");
       const systemRoleCustom = vue.ref("");
       const useSystemRoleCustom = vue.ref(false);
@@ -326,6 +337,10 @@
         deepseekApiKey.value = proxy.$storage.getUserInfo("deepseekApiKey") || "";
         deepseekModel.value = proxy.$storage.getUserInfo("deepseekModel") || "";
         useDeepseek.value = useAI.value == "deepseek";
+        grokDomain.value = proxy.$storage.getUserInfo("grokDomain") || "";
+        grokApiKey.value = proxy.$storage.getUserInfo("grokApiKey") || "";
+        grokModel.value = proxy.$storage.getUserInfo("grokModel") || "";
+        useGrok.value = useAI.value == "grok";
         promptCustom.value = proxy.$storage.getUserInfo("promptCustom") || "";
         usePromptCustom.value = proxy.$storage.getUserInfo("usePromptCustom") || false;
       });
@@ -434,6 +449,33 @@
         }
         return true;
       }
+      function onGrokDomainChange(e) {
+        proxy.$storage.setUserInfo("grokDomain", e);
+        emit("updateAI");
+      }
+      function onGrokApiKeyChange(e) {
+        proxy.$storage.setUserInfo("grokApiKey", e);
+        emit("updateAI");
+      }
+      function onGrokModelChange(e) {
+        proxy.$storage.setUserInfo("grokModel", e);
+        emit("updateAI");
+      }
+      function onGrokChange(e) {
+        useAI.value = e ? "grok" : "";
+        proxy.$storage.setUserInfo("useAI", useAI.value);
+        proxy.$storage.setUserInfo("grokDomain", grokDomain.value || "");
+        proxy.$storage.setUserInfo("grokApiKey", grokApiKey.value || "");
+        proxy.$storage.setUserInfo("grokModel", grokModel.value || "");
+        emit("updateAI");
+      }
+      function useGrokBeforeChange() {
+        if (!useGrok.value && !grokApiKey.value) {
+          proxy.$message.error("请先填写：grok apiKey");
+          return false;
+        }
+        return true;
+      }
       function onSystemRoleCustomChange(e) {
         proxy.$storage.setUserInfo("systemRoleCustom", e);
         emit("updateAI");
@@ -476,6 +518,7 @@
         useKimi.value = n == "kimi";
         useChatgpt.value = n == "chatgpt";
         useDeepseek.value = n == "deepseek";
+        useGrok.value = n == "grok";
       });
       return (_ctx, _cache) => {
         const _component_el_input = vue.resolveComponent("el-input");
@@ -743,6 +786,85 @@
                     ]),
                     _: 1
                   }),
+                  vue.createVNode(_component_el_form_item, { label: "Grok Domain" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "请自行寻找可用域名，example: chat.customai.com",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_input, {
+                            modelValue: grokDomain.value,
+                            "onUpdate:modelValue": _cache[14] || (_cache[14] = ($event) => grokDomain.value = $event),
+                            onChange: onGrokDomainChange
+                          }, null, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "Grok API Key" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "按接口规则填写",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_input, {
+                            modelValue: grokApiKey.value,
+                            "onUpdate:modelValue": _cache[15] || (_cache[15] = ($event) => grokApiKey.value = $event),
+                            onChange: onGrokApiKeyChange
+                          }, null, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "Grok Model" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_tooltip, {
+                        content: "默认使用：grok-3-mini-beta，需接口支持",
+                        placement: "top"
+                      }, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_select, {
+                            modelValue: grokModel.value,
+                            "onUpdate:modelValue": _cache[16] || (_cache[16] = ($event) => grokModel.value = $event),
+                            placeholder: "Select",
+                            size: "large",
+                            style: { "width": "240px" },
+                            onChange: onGrokModelChange
+                          }, {
+                            default: vue.withCtx(() => [
+                              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(grokModelList.value, (item) => {
+                                return vue.openBlock(), vue.createBlock(_component_el_option, {
+                                  key: item.value,
+                                  label: item.label,
+                                  value: item.value
+                                }, null, 8, ["label", "value"]);
+                              }), 128))
+                            ]),
+                            _: 1
+                          }, 8, ["modelValue"])
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_switch, {
+                        modelValue: useGrok.value,
+                        "onUpdate:modelValue": _cache[17] || (_cache[17] = ($event) => useGrok.value = $event),
+                        onChange: onGrokChange,
+                        "before-change": useGrokBeforeChange
+                      }, null, 8, ["modelValue"])
+                    ]),
+                    _: 1
+                  }),
                   vue.createVNode(_component_el_form_item, { label: "自定义 SystemRole" }, {
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_tooltip, {
@@ -753,7 +875,7 @@
                           vue.createVNode(_component_el_input, {
                             type: "textarea",
                             modelValue: systemRoleCustom.value,
-                            "onUpdate:modelValue": _cache[14] || (_cache[14] = ($event) => systemRoleCustom.value = $event),
+                            "onUpdate:modelValue": _cache[18] || (_cache[18] = ($event) => systemRoleCustom.value = $event),
                             onChange: onSystemRoleCustomChange,
                             placeholder: `默认：${vue.unref(proxy).$app.systemRole}`
                           }, null, 8, ["modelValue", "placeholder"])
@@ -767,7 +889,7 @@
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_switch, {
                         modelValue: useSystemRoleCustom.value,
-                        "onUpdate:modelValue": _cache[15] || (_cache[15] = ($event) => useSystemRoleCustom.value = $event),
+                        "onUpdate:modelValue": _cache[19] || (_cache[19] = ($event) => useSystemRoleCustom.value = $event),
                         onChange: onUseSystemRoleCustomChange,
                         "before-change": useSystemRoleCustomBeforeChange
                       }, null, 8, ["modelValue"])
@@ -784,7 +906,7 @@
                           vue.createVNode(_component_el_input, {
                             type: "textarea",
                             modelValue: promptCustom.value,
-                            "onUpdate:modelValue": _cache[16] || (_cache[16] = ($event) => promptCustom.value = $event),
+                            "onUpdate:modelValue": _cache[20] || (_cache[20] = ($event) => promptCustom.value = $event),
                             onChange: onPromptCustomChange,
                             placeholder: `默认：${vue.unref(proxy).$app.prompt}`
                           }, null, 8, ["modelValue", "placeholder"])
@@ -798,7 +920,7 @@
                     default: vue.withCtx(() => [
                       vue.createVNode(_component_el_switch, {
                         modelValue: usePromptCustom.value,
-                        "onUpdate:modelValue": _cache[17] || (_cache[17] = ($event) => usePromptCustom.value = $event),
+                        "onUpdate:modelValue": _cache[21] || (_cache[21] = ($event) => usePromptCustom.value = $event),
                         onChange: onUsePromptCustomChange,
                         "before-change": usePromptCustomBeforeChange
                       }, null, 8, ["modelValue"])
@@ -815,7 +937,7 @@
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-c229a9d9"]]);
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-54e344b4"]]);
   var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
   var _GM_listValues = /* @__PURE__ */ (() => typeof GM_listValues != "undefined" ? GM_listValues : void 0)();
   var _GM_setValue = /* @__PURE__ */ (() => typeof GM_setValue != "undefined" ? GM_setValue : void 0)();
@@ -1141,6 +1263,53 @@
                   reject(xhr.response);
                 }
               });
+            } else if (useAI == "grok") {
+              let grokDomain = proxy.$storage.getUserInfo("grokDomain") || "api.x.ai";
+              let grokModel = proxy.$storage.getUserInfo("grokModel") || "grok-3-mini-beta";
+              let grokApiKey = proxy.$storage.getUserInfo("grokApiKey") || "";
+              if (!grokDomain) {
+                reject("无效地址");
+              }
+              let url = `https://${grokDomain}/v1/chat/completions`;
+              let data = {
+                "model": `${grokModel}`,
+                "messages": [
+                  {
+                    role: "system",
+                    content: systemRole
+                  },
+                  {
+                    "role": "user",
+                    "content": prompt
+                  }
+                ],
+                "stream": false
+              };
+              let headers = {
+                "Content-Type": "application/json; charset=utf-8",
+                "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`
+              };
+              if (grokApiKey) {
+                headers["Authorization"] = `Bearer ${grokApiKey}`;
+              }
+              _GM_xmlhttpRequest({
+                method: "POST",
+                url,
+                headers,
+                data: `${JSON.stringify(data)}`,
+                responseType: "json",
+                onload: function(xhr) {
+                  let { choices, error } = xhr.response;
+                  if (error) {
+                    reject(error.message);
+                  }
+                  let result = choices[0].message.content;
+                  resolve(result);
+                },
+                onerror: function(xhr) {
+                  reject(xhr.response);
+                }
+              });
             } else {
               reject("暂未配置AI");
             }
@@ -1173,7 +1342,8 @@
         qianwen: "通义千问-turbo",
         kimi: "Kimi",
         chatgpt: "ChatGPT",
-        deepseek: "DeepSeek"
+        deepseek: "DeepSeek",
+        grok: "Grok"
       });
       const constVar = vue.ref({
         email: "",
@@ -1600,7 +1770,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-aa4a3406"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-1edb02ba"]]);
   const _hoisted_1$1 = { class: "margin-left" };
   const _hoisted_2$1 = { class: "margin-left" };
   const _hoisted_3$1 = { class: "form-tip" };
