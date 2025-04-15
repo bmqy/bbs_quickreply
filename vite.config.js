@@ -45,6 +45,7 @@ export default defineConfig({
             'api.openai.com',
             'api.deepseek.com',
             'dav.jianguoyun.com',
+            'ogi.teracloud.jp',
             '*'
         ],
         grant: [
