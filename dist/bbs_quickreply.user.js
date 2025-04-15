@@ -999,6 +999,7 @@
   };
   const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-90316def"]]);
   var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
+  var _GM_info = /* @__PURE__ */ (() => typeof GM_info != "undefined" ? GM_info : void 0)();
   var _GM_listValues = /* @__PURE__ */ (() => typeof GM_listValues != "undefined" ? GM_listValues : void 0)();
   var _GM_setValue = /* @__PURE__ */ (() => typeof GM_setValue != "undefined" ? GM_setValue : void 0)();
   var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
@@ -3833,11 +3834,40 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
             console.warn("检查目录是否存在失败:", error);
             return false;
           }
-        },
-        getName() {
-          return "论坛快捷回帖 by bmqy";
         }
-      }, app2.config.globalProperties.$version = "2.3.4";
+      }, // 全局
+      app2.config.globalProperties.$app = {
+        getName() {
+          return _GM_info["script"]["name"];
+        },
+        getVersion: function() {
+          return _GM_info["script"]["version"];
+        },
+        systemRole: "你是一个互联网高手，常年混迹于各大论坛，对所有内容都感兴趣，并且热衷于回复每一篇帖子，回复风格：简短、睿智、一语中的，又不失俏皮诙谐",
+        prompt: "请根据帖子标题：{{title}}，进行回帖。务必直接给出回帖内容，不要包含其他无关内容",
+        isNew: function(timestamp) {
+          if (!timestamp)
+            return false;
+          let number = 3600 * 24 * 7;
+          return parseInt((/* @__PURE__ */ new Date()).getTime() / 1e3) - timestamp <= number;
+        }
+      };
+      app2.config.globalProperties.$tools = {
+        encodeStr: function(str) {
+          let encoder = new TextEncoder();
+          str = encoder.encode(str);
+          return btoa(String.fromCharCode.apply(null, str));
+        },
+        decodeStr: function(str) {
+          var byteCharacters = atob(str);
+          var byteArray = new Uint8Array(byteCharacters.length);
+          for (var i = 0; i < byteCharacters.length; i++) {
+            byteArray[i] = byteCharacters.charCodeAt(i);
+          }
+          var decoder = new TextDecoder();
+          return decoder.decode(byteArray);
+        }
+      };
     }
   };
   const app = vue.createApp(App);
@@ -3853,38 +3883,6 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
   });
   app.use(Util);
   app.use(Api);
-  app.config.globalProperties.$app = {
-    getName() {
-      return "论坛快捷回帖 by bmqy";
-    },
-    getVersion() {
-      return "2.3.4";
-    },
-    systemRole: "你是一个互联网高手，常年混迹于各大论坛，对所有内容都感兴趣，并且热衷于回复每一篇帖子，回复风格：简短、睿智、一语中的，又不失俏皮诙谐",
-    prompt: "请根据帖子标题：{{title}}，进行回帖。务必直接给出回帖内容，不要包含其他无关内容",
-    isNew(timestamp) {
-      if (!timestamp)
-        return false;
-      let number = 3600 * 24 * 7;
-      return parseInt((/* @__PURE__ */ new Date()).getTime() / 1e3) - timestamp <= number;
-    }
-  };
-  app.config.globalProperties.$tools = {
-    encodeStr(str) {
-      let encoder = new TextEncoder();
-      str = encoder.encode(str);
-      return btoa(String.fromCharCode.apply(null, str));
-    },
-    decodeStr(str) {
-      var byteCharacters = atob(str);
-      var byteArray = new Uint8Array(byteCharacters.length);
-      for (var i = 0; i < byteCharacters.length; i++) {
-        byteArray[i] = byteCharacters.charCodeAt(i);
-      }
-      var decoder = new TextDecoder();
-      return decoder.decode(byteArray);
-    }
-  };
   app.mount(
     (() => {
       const $fastposteditor = document.querySelector("#fastposteditor");
