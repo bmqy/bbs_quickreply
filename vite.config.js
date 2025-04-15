@@ -44,6 +44,7 @@ export default defineConfig({
             'api.moonshot.cn',
             'api.openai.com',
             'api.deepseek.com',
+            'api.x.ai',
             'dav.jianguoyun.com',
             'ogi.teracloud.jp',
             '*'

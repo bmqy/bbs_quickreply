@@ -36,6 +36,16 @@ const deepseekModelList = ref([
     {value: 'deepseek-reasoner', label: 'deepseek-reasoner'},
 ]);
 const useDeepseek = ref(false);
+const grokDomain = ref('');
+const grokApiKey = ref('');
+const grokModel = ref('grok-3-mini-beta');
+const grokModelList = ref([
+    {value: 'grok-3-mini-beta', label: 'grok-3-mini-beta'},
+    {value: 'grok-3-mini-fast-beta', label: 'grok-3-mini-fast-beta'},
+    {value: 'grok-3-beta', label: 'grok-3-beta'},
+    {value: 'grok-3-fast-beta', label: 'grok-3-fast-beta'},
+]);
+const useGrok = ref(false);
 const useAI = ref('');
 const systemRoleCustom = ref('');
 const useSystemRoleCustom = ref(false);
@@ -58,6 +68,10 @@ onBeforeMount(()=>{
     deepseekApiKey.value = proxy.$storage.getUserInfo('deepseekApiKey') || '';
     deepseekModel.value = proxy.$storage.getUserInfo('deepseekModel') || '';
     useDeepseek.value = useAI.value=='deepseek';
+    grokDomain.value = proxy.$storage.getUserInfo('grokDomain') || '';
+    grokApiKey.value = proxy.$storage.getUserInfo('grokApiKey') || '';
+    grokModel.value = proxy.$storage.getUserInfo('grokModel') || '';
+    useGrok.value = useAI.value=='grok';
     promptCustom.value = proxy.$storage.getUserInfo('promptCustom') || '';
     usePromptCustom.value = proxy.$storage.getUserInfo('usePromptCustom') || false;
 });
@@ -167,6 +181,33 @@ function useDeepseekBeforeChange(){
     }
     return true;
 }
+function onGrokDomainChange(e){
+    proxy.$storage.setUserInfo('grokDomain', e);
+    emit('updateAI');
+}
+function onGrokApiKeyChange(e){
+    proxy.$storage.setUserInfo('grokApiKey', e);
+    emit('updateAI');
+}
+function onGrokModelChange(e){
+    proxy.$storage.setUserInfo('grokModel', e);
+    emit('updateAI');
+}
+function onGrokChange(e){
+    useAI.value = e ? 'grok' : '';
+    proxy.$storage.setUserInfo('useAI', useAI.value);
+    proxy.$storage.setUserInfo('grokDomain', grokDomain.value || '');
+    proxy.$storage.setUserInfo('grokApiKey', grokApiKey.value || '');
+    proxy.$storage.setUserInfo('grokModel', grokModel.value || '');
+    emit('updateAI');
+}
+function useGrokBeforeChange(){
+    if(!useGrok.value && !grokApiKey.value){
+        proxy.$message.error('请先填写：grok apiKey');
+        return false;
+    }
+    return true;
+}
 function onSystemRoleCustomChange(e){
     proxy.$storage.setUserInfo('systemRoleCustom', e);
     emit('updateAI');
@@ -209,6 +250,7 @@ watch(useAI, (n, o) => {
     useKimi.value = n == 'kimi';
     useChatgpt.value = n == 'chatgpt';
     useDeepseek.value = n == 'deepseek';
+    useGrok.value = n == 'grok';
 })
 </script>
 
@@ -301,6 +343,37 @@ watch(useAI, (n, o) => {
                 </el-form-item>
                 <el-form-item label="启用">
                 <el-switch v-model="useDeepseek" @change="onDeepseekChange" :before-change="useDeepseekBeforeChange" />
+                </el-form-item>
+                <el-form-item label="Grok Domain">
+                    <el-tooltip content="请自行寻找可用域名，example: chat.customai.com" placement="top">
+                        <el-input v-model="grokDomain" @change="onGrokDomainChange" />
+                    </el-tooltip>
+                </el-form-item>
+                <el-form-item label="Grok API Key">
+                    <el-tooltip content="按接口规则填写" placement="top">
+                        <el-input v-model="grokApiKey" @change="onGrokApiKeyChange" />
+                    </el-tooltip>
+                </el-form-item>
+                <el-form-item label="Grok Model">
+                    <el-tooltip content="默认使用：grok-3-mini-beta，需接口支持" placement="top">
+                        <el-select
+                            v-model="grokModel"
+                            placeholder="Select"
+                            size="large"
+                            style="width: 240px"
+                            @change="onGrokModelChange"
+                            >
+                            <el-option
+                                v-for="item in grokModelList"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
+                            />
+                            </el-select>
+                    </el-tooltip>
+                </el-form-item>
+                <el-form-item label="启用">
+                <el-switch v-model="useGrok" @change="onGrokChange" :before-change="useGrokBeforeChange" />
                 </el-form-item>
                 <el-form-item label="自定义 SystemRole">
                     <el-tooltip content="自定义系统角色，帮你获得更个性化的回帖内容。" placement="top">

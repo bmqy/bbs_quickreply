@@ -16,6 +16,7 @@ const aiNameList = ref({
     kimi: 'Kimi',
     chatgpt: 'ChatGPT',
     deepseek: 'DeepSeek',
+    grok: 'Grok',
 });
 const constVar = ref({
     email: '',
