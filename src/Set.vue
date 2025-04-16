@@ -269,6 +269,12 @@ async function downloadAll() {
 function logout(){
     proxy.$storage.setUserInfo('userId', '');
     isLogin.value = false;
+    
+    // 确保关闭所有设置页面，返回到主页面
+    showOptionsSettings.value = false;
+    showConstSettings.value = false;
+    showAISettings.value = false;
+    
     proxy.$message.success('已注销登录');
 }
 
