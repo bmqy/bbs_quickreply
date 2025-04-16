@@ -50,7 +50,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-90316def]{width:100%}.box-card[data-v-90316def]{border:none}.box-card .el-card__header[data-v-90316def]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-90316def]{padding:0}.tab-content[data-v-90316def]{padding:20px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-90316def]{padding:15px 10px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-1edb02ba]{position:relative}.quickReplyBox .el-form[data-v-1edb02ba]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-1edb02ba]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-1edb02ba]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1edb02ba]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1edb02ba],.el-form-item--small.el-form-item[data-v-1edb02ba]{margin-bottom:10px}.el-select[data-v-1edb02ba]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-2963c5b2]{width:100%}.header-left[data-v-2963c5b2]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-2963c5b2]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-2963c5b2]{margin-bottom:0}}.header-right[data-v-2963c5b2]{width:100%}.header-right .button-group[data-v-2963c5b2]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-2963c5b2]{justify-content:flex-end}}.login-container[data-v-2963c5b2]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-2963c5b2]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-2963c5b2]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-2963c5b2]{padding:20px}.settings-header[data-v-2963c5b2]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-2963c5b2]{min-height:300px}.my-replies-card .card-title[data-v-2963c5b2]{font-weight:700}.list-left[data-v-2963c5b2]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-2963c5b2]{margin-right:5px;color:#909399}.list-title[data-v-2963c5b2]{flex:1;font-weight:400}.list-right[data-v-2963c5b2]{min-width:70px}.list-right .el-badge.item[data-v-2963c5b2]{margin-right:30px}.list li[data-v-2963c5b2]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-2963c5b2]:hover{background-color:#f5f5f5}.tips[data-v-2963c5b2]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-2963c5b2]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-2963c5b2]{padding:10px 20px}.box-card .el-card__header span[data-v-2963c5b2]{font-size:14px}.clearfix[data-v-2963c5b2]:before,.clearfix[data-v-2963c5b2]:after{display:table;content:""}.clearfix[data-v-2963c5b2]:after{clear:both}.el-pagination[data-v-2963c5b2]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%;margin:5vh auto!important}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
+(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-6e38d9a1]{width:100%}.box-card[data-v-6e38d9a1]{border:none}.box-card .el-card__header[data-v-6e38d9a1]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-6e38d9a1]{padding:0}.tab-content[data-v-6e38d9a1]{padding:20px}.form-tips[data-v-6e38d9a1]{margin-bottom:20px}.required-star[data-v-6e38d9a1]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-6e38d9a1]{padding:15px 10px}.form-tips[data-v-6e38d9a1]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-1edb02ba]{position:relative}.quickReplyBox .el-form[data-v-1edb02ba]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-1edb02ba]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-1edb02ba]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1edb02ba]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1edb02ba],.el-form-item--small.el-form-item[data-v-1edb02ba]{margin-bottom:10px}.el-select[data-v-1edb02ba]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-2963c5b2]{width:100%}.header-left[data-v-2963c5b2]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-2963c5b2]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-2963c5b2]{margin-bottom:0}}.header-right[data-v-2963c5b2]{width:100%}.header-right .button-group[data-v-2963c5b2]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-2963c5b2]{justify-content:flex-end}}.login-container[data-v-2963c5b2]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-2963c5b2]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-2963c5b2]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-2963c5b2]{padding:20px}.settings-header[data-v-2963c5b2]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-2963c5b2]{min-height:300px}.my-replies-card .card-title[data-v-2963c5b2]{font-weight:700}.list-left[data-v-2963c5b2]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-2963c5b2]{margin-right:5px;color:#909399}.list-title[data-v-2963c5b2]{flex:1;font-weight:400}.list-right[data-v-2963c5b2]{min-width:70px}.list-right .el-badge.item[data-v-2963c5b2]{margin-right:30px}.list li[data-v-2963c5b2]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-2963c5b2]:hover{background-color:#f5f5f5}.tips[data-v-2963c5b2]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-2963c5b2]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-2963c5b2]{padding:10px 20px}.box-card .el-card__header span[data-v-2963c5b2]{font-size:14px}.clearfix[data-v-2963c5b2]:before,.clearfix[data-v-2963c5b2]:after{display:table;content:""}.clearfix[data-v-2963c5b2]:after{clear:both}.el-pagination[data-v-2963c5b2]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
 
 (function (ElementPlusIconsVue, ElementPlus, vue) {
   'use strict';
@@ -272,11 +272,17 @@
     style: { "float": "right", "color": "#E6A23C", "font-size": "12px" }
   };
   const _hoisted_4$2 = { class: "tab-content" };
-  const _hoisted_5$2 = { class: "tab-content" };
+  const _hoisted_5$2 = { class: "form-tips" };
   const _hoisted_6$1 = { class: "tab-content" };
-  const _hoisted_7$1 = { class: "tab-content" };
+  const _hoisted_7$1 = { class: "form-tips" };
   const _hoisted_8$1 = { class: "tab-content" };
-  const _hoisted_9$1 = { class: "tab-content" };
+  const _hoisted_9$1 = { class: "form-tips" };
+  const _hoisted_10$1 = { class: "tab-content" };
+  const _hoisted_11$1 = { class: "form-tips" };
+  const _hoisted_12$1 = { class: "tab-content" };
+  const _hoisted_13$1 = { class: "form-tips" };
+  const _hoisted_14$1 = { class: "tab-content" };
+  const _hoisted_15$1 = { class: "form-tips" };
   const _sfc_main$3 = {
     __name: "Ai",
     emits: ["updateAI"],
@@ -488,6 +494,7 @@
         const _component_el_switch = vue.resolveComponent("el-switch");
         const _component_el_form = vue.resolveComponent("el-form");
         const _component_el_tab_pane = vue.resolveComponent("el-tab-pane");
+        const _component_el_alert = vue.resolveComponent("el-alert");
         const _component_el_tabs = vue.resolveComponent("el-tabs");
         const _component_el_card = vue.resolveComponent("el-card");
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$3, [
@@ -624,13 +631,32 @@
                   }, {
                     default: vue.withCtx(() => [
                       vue.createElementVNode("div", _hoisted_4$2, [
+                        vue.createElementVNode("div", _hoisted_5$2, [
+                          vue.createVNode(_component_el_alert, {
+                            type: "info",
+                            closable: false,
+                            "show-icon": ""
+                          }, {
+                            default: vue.withCtx(() => _cache[18] || (_cache[18] = [
+                              vue.createElementVNode("p", { style: { "margin": "0" } }, [
+                                vue.createTextVNode("带 "),
+                                vue.createElementVNode("span", { class: "required-star" }, "*"),
+                                vue.createTextVNode(" 标记的字段为必填项")
+                              ], -1)
+                            ])),
+                            _: 1
+                          })
+                        ]),
                         vue.createVNode(_component_el_form, {
                           "label-width": useMobileLayout.value ? "auto" : "120",
                           "label-position": useMobileLayout.value ? "top" : "left",
                           size: "small"
                         }, {
                           default: vue.withCtx(() => [
-                            vue.createVNode(_component_el_form_item, { label: "API Key" }, {
+                            vue.createVNode(_component_el_form_item, {
+                              label: "API Key",
+                              required: ""
+                            }, {
                               default: vue.withCtx(() => [
                                 vue.createVNode(_component_el_tooltip, {
                                   content: "获取API Key：https://aistudio.google.com/app/apikey",
@@ -660,14 +686,33 @@
                     name: "qianwen"
                   }, {
                     default: vue.withCtx(() => [
-                      vue.createElementVNode("div", _hoisted_5$2, [
+                      vue.createElementVNode("div", _hoisted_6$1, [
+                        vue.createElementVNode("div", _hoisted_7$1, [
+                          vue.createVNode(_component_el_alert, {
+                            type: "info",
+                            closable: false,
+                            "show-icon": ""
+                          }, {
+                            default: vue.withCtx(() => _cache[19] || (_cache[19] = [
+                              vue.createElementVNode("p", { style: { "margin": "0" } }, [
+                                vue.createTextVNode("带 "),
+                                vue.createElementVNode("span", { class: "required-star" }, "*"),
+                                vue.createTextVNode(" 标记的字段为必填项")
+                              ], -1)
+                            ])),
+                            _: 1
+                          })
+                        ]),
                         vue.createVNode(_component_el_form, {
                           "label-width": useMobileLayout.value ? "auto" : "120",
                           "label-position": useMobileLayout.value ? "top" : "left",
                           size: "small"
                         }, {
                           default: vue.withCtx(() => [
-                            vue.createVNode(_component_el_form_item, { label: "API Key" }, {
+                            vue.createVNode(_component_el_form_item, {
+                              label: "API Key",
+                              required: ""
+                            }, {
                               default: vue.withCtx(() => [
                                 vue.createVNode(_component_el_tooltip, {
                                   content: "获取API Key：https://dashscope.console.aliyun.com/apiKey",
@@ -697,14 +742,33 @@
                     name: "kimi"
                   }, {
                     default: vue.withCtx(() => [
-                      vue.createElementVNode("div", _hoisted_6$1, [
+                      vue.createElementVNode("div", _hoisted_8$1, [
+                        vue.createElementVNode("div", _hoisted_9$1, [
+                          vue.createVNode(_component_el_alert, {
+                            type: "info",
+                            closable: false,
+                            "show-icon": ""
+                          }, {
+                            default: vue.withCtx(() => _cache[20] || (_cache[20] = [
+                              vue.createElementVNode("p", { style: { "margin": "0" } }, [
+                                vue.createTextVNode("带 "),
+                                vue.createElementVNode("span", { class: "required-star" }, "*"),
+                                vue.createTextVNode(" 标记的字段为必填项")
+                              ], -1)
+                            ])),
+                            _: 1
+                          })
+                        ]),
                         vue.createVNode(_component_el_form, {
                           "label-width": useMobileLayout.value ? "auto" : "120",
                           "label-position": useMobileLayout.value ? "top" : "left",
                           size: "small"
                         }, {
                           default: vue.withCtx(() => [
-                            vue.createVNode(_component_el_form_item, { label: "API Key" }, {
+                            vue.createVNode(_component_el_form_item, {
+                              label: "API Key",
+                              required: ""
+                            }, {
                               default: vue.withCtx(() => [
                                 vue.createVNode(_component_el_tooltip, {
                                   content: "获取API Key：https://platform.moonshot.cn/console/api-keys",
@@ -734,7 +798,23 @@
                     name: "chatgpt"
                   }, {
                     default: vue.withCtx(() => [
-                      vue.createElementVNode("div", _hoisted_7$1, [
+                      vue.createElementVNode("div", _hoisted_10$1, [
+                        vue.createElementVNode("div", _hoisted_11$1, [
+                          vue.createVNode(_component_el_alert, {
+                            type: "info",
+                            closable: false,
+                            "show-icon": ""
+                          }, {
+                            default: vue.withCtx(() => _cache[21] || (_cache[21] = [
+                              vue.createElementVNode("p", { style: { "margin": "0" } }, [
+                                vue.createTextVNode("带 "),
+                                vue.createElementVNode("span", { class: "required-star" }, "*"),
+                                vue.createTextVNode(" 标记的字段为必填项")
+                              ], -1)
+                            ])),
+                            _: 1
+                          })
+                        ]),
                         vue.createVNode(_component_el_form, {
                           "label-width": useMobileLayout.value ? "auto" : "120",
                           "label-position": useMobileLayout.value ? "top" : "left",
@@ -759,7 +839,10 @@
                               ]),
                               _: 1
                             }),
-                            vue.createVNode(_component_el_form_item, { label: "API Key" }, {
+                            vue.createVNode(_component_el_form_item, {
+                              label: "API Key",
+                              required: ""
+                            }, {
                               default: vue.withCtx(() => [
                                 vue.createVNode(_component_el_tooltip, {
                                   content: "按接口规则填写",
@@ -777,7 +860,10 @@
                               ]),
                               _: 1
                             }),
-                            vue.createVNode(_component_el_form_item, { label: "模型选择" }, {
+                            vue.createVNode(_component_el_form_item, {
+                              label: "模型选择",
+                              required: ""
+                            }, {
                               default: vue.withCtx(() => [
                                 vue.createVNode(_component_el_tooltip, {
                                   content: "默认使用：gpt-3.5-turbo，需接口支持",
@@ -820,7 +906,23 @@
                     name: "deepseek"
                   }, {
                     default: vue.withCtx(() => [
-                      vue.createElementVNode("div", _hoisted_8$1, [
+                      vue.createElementVNode("div", _hoisted_12$1, [
+                        vue.createElementVNode("div", _hoisted_13$1, [
+                          vue.createVNode(_component_el_alert, {
+                            type: "info",
+                            closable: false,
+                            "show-icon": ""
+                          }, {
+                            default: vue.withCtx(() => _cache[22] || (_cache[22] = [
+                              vue.createElementVNode("p", { style: { "margin": "0" } }, [
+                                vue.createTextVNode("带 "),
+                                vue.createElementVNode("span", { class: "required-star" }, "*"),
+                                vue.createTextVNode(" 标记的字段为必填项")
+                              ], -1)
+                            ])),
+                            _: 1
+                          })
+                        ]),
                         vue.createVNode(_component_el_form, {
                           "label-width": useMobileLayout.value ? "auto" : "120",
                           "label-position": useMobileLayout.value ? "top" : "left",
@@ -845,7 +947,10 @@
                               ]),
                               _: 1
                             }),
-                            vue.createVNode(_component_el_form_item, { label: "API Key" }, {
+                            vue.createVNode(_component_el_form_item, {
+                              label: "API Key",
+                              required: ""
+                            }, {
                               default: vue.withCtx(() => [
                                 vue.createVNode(_component_el_tooltip, {
                                   content: "按接口规则填写",
@@ -863,7 +968,10 @@
                               ]),
                               _: 1
                             }),
-                            vue.createVNode(_component_el_form_item, { label: "模型选择" }, {
+                            vue.createVNode(_component_el_form_item, {
+                              label: "模型选择",
+                              required: ""
+                            }, {
                               default: vue.withCtx(() => [
                                 vue.createVNode(_component_el_tooltip, {
                                   content: "默认使用：deepseek-chat，需接口支持",
@@ -906,7 +1014,23 @@
                     name: "grok"
                   }, {
                     default: vue.withCtx(() => [
-                      vue.createElementVNode("div", _hoisted_9$1, [
+                      vue.createElementVNode("div", _hoisted_14$1, [
+                        vue.createElementVNode("div", _hoisted_15$1, [
+                          vue.createVNode(_component_el_alert, {
+                            type: "info",
+                            closable: false,
+                            "show-icon": ""
+                          }, {
+                            default: vue.withCtx(() => _cache[23] || (_cache[23] = [
+                              vue.createElementVNode("p", { style: { "margin": "0" } }, [
+                                vue.createTextVNode("带 "),
+                                vue.createElementVNode("span", { class: "required-star" }, "*"),
+                                vue.createTextVNode(" 标记的字段为必填项")
+                              ], -1)
+                            ])),
+                            _: 1
+                          })
+                        ]),
                         vue.createVNode(_component_el_form, {
                           "label-width": useMobileLayout.value ? "auto" : "120",
                           "label-position": useMobileLayout.value ? "top" : "left",
@@ -931,7 +1055,10 @@
                               ]),
                               _: 1
                             }),
-                            vue.createVNode(_component_el_form_item, { label: "API Key" }, {
+                            vue.createVNode(_component_el_form_item, {
+                              label: "API Key",
+                              required: ""
+                            }, {
                               default: vue.withCtx(() => [
                                 vue.createVNode(_component_el_tooltip, {
                                   content: "按接口规则填写",
@@ -949,7 +1076,10 @@
                               ]),
                               _: 1
                             }),
-                            vue.createVNode(_component_el_form_item, { label: "模型选择" }, {
+                            vue.createVNode(_component_el_form_item, {
+                              label: "模型选择",
+                              required: ""
+                            }, {
                               default: vue.withCtx(() => [
                                 vue.createVNode(_component_el_tooltip, {
                                   content: "默认使用：grok-3-mini-beta，需接口支持",
@@ -997,7 +1127,7 @@
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-90316def"]]);
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-6e38d9a1"]]);
   var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
   var _GM_info = /* @__PURE__ */ (() => typeof GM_info != "undefined" ? GM_info : void 0)();
   var _GM_listValues = /* @__PURE__ */ (() => typeof GM_listValues != "undefined" ? GM_listValues : void 0)();
