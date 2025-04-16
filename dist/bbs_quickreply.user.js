@@ -50,7 +50,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-6e38d9a1]{width:100%}.box-card[data-v-6e38d9a1]{border:none}.box-card .el-card__header[data-v-6e38d9a1]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-6e38d9a1]{padding:0}.tab-content[data-v-6e38d9a1]{padding:20px}.form-tips[data-v-6e38d9a1]{margin-bottom:20px}.required-star[data-v-6e38d9a1]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-6e38d9a1]{padding:15px 10px}.form-tips[data-v-6e38d9a1]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-1edb02ba]{position:relative}.quickReplyBox .el-form[data-v-1edb02ba]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-1edb02ba]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-1edb02ba]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1edb02ba]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1edb02ba],.el-form-item--small.el-form-item[data-v-1edb02ba]{margin-bottom:10px}.el-select[data-v-1edb02ba]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-15c77d37]{width:100%}.header-left[data-v-15c77d37]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-15c77d37]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-15c77d37]{margin-bottom:0}}.header-right[data-v-15c77d37]{width:100%}.header-right .button-group[data-v-15c77d37]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-15c77d37]{justify-content:flex-end}}.login-container[data-v-15c77d37]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-15c77d37]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-15c77d37]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-15c77d37]{padding:20px}.settings-header[data-v-15c77d37]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-15c77d37]{min-height:300px}.my-replies-card .card-title[data-v-15c77d37]{font-weight:700}.list-left[data-v-15c77d37]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-15c77d37]{margin-right:5px;color:#909399}.list-title[data-v-15c77d37]{flex:1;font-weight:400}.list-right[data-v-15c77d37]{min-width:70px}.list-right .el-badge.item[data-v-15c77d37]{margin-right:30px}.list li[data-v-15c77d37]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-15c77d37]:hover{background-color:#f5f5f5}.tips[data-v-15c77d37]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-15c77d37]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-15c77d37]{padding:10px 20px}.box-card .el-card__header span[data-v-15c77d37]{font-size:14px}.clearfix[data-v-15c77d37]:before,.clearfix[data-v-15c77d37]:after{display:table;content:""}.clearfix[data-v-15c77d37]:after{clear:both}.el-pagination[data-v-15c77d37]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
+(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-6e38d9a1]{width:100%}.box-card[data-v-6e38d9a1]{border:none}.box-card .el-card__header[data-v-6e38d9a1]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-6e38d9a1]{padding:0}.tab-content[data-v-6e38d9a1]{padding:20px}.form-tips[data-v-6e38d9a1]{margin-bottom:20px}.required-star[data-v-6e38d9a1]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-6e38d9a1]{padding:15px 10px}.form-tips[data-v-6e38d9a1]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-1edb02ba]{position:relative}.quickReplyBox .el-form[data-v-1edb02ba]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-1edb02ba]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-1edb02ba]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1edb02ba]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1edb02ba],.el-form-item--small.el-form-item[data-v-1edb02ba]{margin-bottom:10px}.el-select[data-v-1edb02ba]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-a4326af6]{width:100%}.header-left[data-v-a4326af6]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-a4326af6]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-a4326af6]{margin-bottom:0}}.header-right[data-v-a4326af6]{width:100%}.header-right .button-group[data-v-a4326af6]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-a4326af6]{justify-content:flex-end}}.login-container[data-v-a4326af6]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-a4326af6]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-a4326af6]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-a4326af6]{padding:20px}.settings-header[data-v-a4326af6]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-a4326af6]{min-height:300px}.my-replies-card .card-title[data-v-a4326af6]{font-weight:700}.list-left[data-v-a4326af6]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-a4326af6]{margin-right:5px;color:#909399}.list-title[data-v-a4326af6]{flex:1;font-weight:400}.list-right[data-v-a4326af6]{min-width:70px}.list-right .el-badge.item[data-v-a4326af6]{margin-right:30px}.list li[data-v-a4326af6]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-a4326af6]:hover{background-color:#f5f5f5}.tips[data-v-a4326af6]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-a4326af6]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-a4326af6]{padding:10px 20px}.box-card .el-card__header span[data-v-a4326af6]{font-size:14px}.clearfix[data-v-a4326af6]:before,.clearfix[data-v-a4326af6]:after{display:table;content:""}.clearfix[data-v-a4326af6]:after{clear:both}.el-pagination[data-v-a4326af6]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
 
 (function (ElementPlusIconsVue, ElementPlus, vue) {
   'use strict';
@@ -2827,12 +2827,95 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         showConstSettings.value = false;
         showAISettings.value = true;
       }
+      function backupToClipboard() {
+        loading.value = true;
+        try {
+          const allData = proxy.$storage.getAllUserData();
+          const dataString = JSON.stringify({
+            _meta: {
+              app: "bbs_quickreply",
+              version: proxy.$app.version,
+              timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+              note: "Beta功能: 此备份仅用于在不同登录方式间迁移数据，非长期存储方案"
+            },
+            data: allData
+          });
+          navigator.clipboard.writeText(dataString).then(() => {
+            proxy.$message.success("数据已成功备份到剪贴板");
+          }).catch((err) => {
+            console.error("剪贴板操作失败:", err);
+            proxy.$message.error("剪贴板操作失败: " + err.message);
+          });
+        } catch (error) {
+          console.error("备份到剪贴板出错:", error);
+          proxy.$message.error("备份到剪贴板出错: " + error.message);
+        } finally {
+          loading.value = false;
+        }
+      }
+      function restoreFromClipboard() {
+        loading.value = true;
+        try {
+          navigator.clipboard.readText().then((text) => {
+            try {
+              const clipData = JSON.parse(text);
+              if (!clipData._meta || clipData._meta.app !== "bbs_quickreply") {
+                proxy.$message.error("无效的备份数据格式");
+                loading.value = false;
+                return;
+              }
+              proxy.$confirm(
+                "从剪贴板恢复将覆盖当前数据。这是一个Beta功能，主要用于数据迁移。确定要继续吗？",
+                "恢复确认",
+                {
+                  confirmButtonText: "确定",
+                  cancelButtonText: "取消",
+                  type: "warning"
+                }
+              ).then(() => {
+                const restoreData = clipData.data;
+                proxy.$storage.restoreAllUserData(restoreData);
+                if (restoreData.QuickReply) {
+                  myList.value = restoreData.QuickReply;
+                  updateMyList();
+                }
+                const userId = proxy.$storage.getUserInfo("userId");
+                isLogin.value = !!userId;
+                realtimeSync.value = proxy.$storage.getUserInfo("realtimeSync") || false;
+                realtimeBackup.value = proxy.$storage.getUserInfo("realtimeBackup") || false;
+                submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
+                constVar.value = proxy.$storage.getUserInfo("constVar") || constVar.value;
+                emit("updateConstVar");
+                emit("updateAIModel");
+                proxy.$message.success("数据恢复成功");
+              }).catch(() => {
+                proxy.$message.info("已取消恢复操作");
+              }).finally(() => {
+                loading.value = false;
+              });
+            } catch (error) {
+              console.error("解析剪贴板数据出错:", error);
+              proxy.$message.error("无法解析剪贴板数据: " + error.message);
+              loading.value = false;
+            }
+          }).catch((err) => {
+            console.error("读取剪贴板失败:", err);
+            proxy.$message.error("读取剪贴板失败: " + err.message);
+            loading.value = false;
+          });
+        } catch (error) {
+          console.error("从剪贴板恢复出错:", error);
+          proxy.$message.error("从剪贴板恢复出错: " + error.message);
+          loading.value = false;
+        }
+      }
       return (_ctx, _cache) => {
         const _component_el_button = vue.resolveComponent("el-button");
         const _component_el_col = vue.resolveComponent("el-col");
         const _component_ArrowDown = vue.resolveComponent("ArrowDown");
         const _component_el_icon = vue.resolveComponent("el-icon");
         const _component_el_dropdown_item = vue.resolveComponent("el-dropdown-item");
+        const _component_el_divider = vue.resolveComponent("el-divider");
         const _component_el_dropdown_menu = vue.resolveComponent("el-dropdown-menu");
         const _component_el_dropdown = vue.resolveComponent("el-dropdown");
         const _component_el_row = vue.resolveComponent("el-row");
@@ -2942,6 +3025,25 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                                 vue.createTextVNode(" 全量恢复 ")
                                               ])),
                                               _: 1
+                                            }),
+                                            vue.createVNode(_component_el_divider, { style: { "margin": "5px 0" } }),
+                                            vue.createVNode(_component_el_dropdown_item, {
+                                              icon: "CopyDocument",
+                                              onClick: backupToClipboard
+                                            }, {
+                                              default: vue.withCtx(() => _cache[15] || (_cache[15] = [
+                                                vue.createTextVNode(" 备份到剪贴板 ")
+                                              ])),
+                                              _: 1
+                                            }),
+                                            vue.createVNode(_component_el_dropdown_item, {
+                                              icon: "DocumentCopy",
+                                              onClick: restoreFromClipboard
+                                            }, {
+                                              default: vue.withCtx(() => _cache[16] || (_cache[16] = [
+                                                vue.createTextVNode(" 从剪贴板恢复 ")
+                                              ])),
+                                              _: 1
                                             })
                                           ]),
                                           _: 1
@@ -2974,7 +3076,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                       class: "header-button",
                                       onClick: openOptionsSettings
                                     }, {
-                                      default: vue.withCtx(() => _cache[15] || (_cache[15] = [
+                                      default: vue.withCtx(() => _cache[17] || (_cache[17] = [
                                         vue.createTextVNode("选项")
                                       ])),
                                       _: 1
@@ -2987,7 +3089,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                       class: "header-button",
                                       onClick: openConstSettings
                                     }, {
-                                      default: vue.withCtx(() => _cache[16] || (_cache[16] = [
+                                      default: vue.withCtx(() => _cache[18] || (_cache[18] = [
                                         vue.createTextVNode("常量")
                                       ])),
                                       _: 1
@@ -3000,7 +3102,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                       class: "header-button",
                                       onClick: openAISettings
                                     }, {
-                                      default: vue.withCtx(() => _cache[17] || (_cache[17] = [
+                                      default: vue.withCtx(() => _cache[19] || (_cache[19] = [
                                         vue.createTextVNode("AI")
                                       ])),
                                       _: 1
@@ -3024,14 +3126,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
             default: vue.withCtx(() => [
               showLogin.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_8, [
                 vue.createElementVNode("div", _hoisted_9, [
-                  _cache[19] || (_cache[19] = vue.createElementVNode("h3", null, "账号登录", -1)),
+                  _cache[21] || (_cache[21] = vue.createElementVNode("h3", null, "账号登录", -1)),
                   vue.createVNode(_component_el_button, {
                     type: "primary",
                     text: "",
                     icon: "Back",
                     onClick: closeLogin
                   }, {
-                    default: vue.withCtx(() => _cache[18] || (_cache[18] = [
+                    default: vue.withCtx(() => _cache[20] || (_cache[20] = [
                       vue.createTextVNode("返回")
                     ])),
                     _: 1
@@ -3044,14 +3146,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               ])) : vue.createCommentVNode("", true),
               showOptionsSettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_10, [
                 vue.createElementVNode("div", _hoisted_11, [
-                  _cache[21] || (_cache[21] = vue.createElementVNode("h3", null, "选项设置", -1)),
+                  _cache[23] || (_cache[23] = vue.createElementVNode("h3", null, "选项设置", -1)),
                   vue.createVNode(_component_el_button, {
                     type: "primary",
                     text: "",
                     icon: "Back",
                     onClick: closeOptionsSettings
                   }, {
-                    default: vue.withCtx(() => _cache[20] || (_cache[20] = [
+                    default: vue.withCtx(() => _cache[22] || (_cache[22] = [
                       vue.createTextVNode("返回")
                     ])),
                     _: 1
@@ -3103,7 +3205,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                             type: "primary",
                             class: "text-info"
                           }, {
-                            default: vue.withCtx(() => _cache[22] || (_cache[22] = [
+                            default: vue.withCtx(() => _cache[24] || (_cache[24] = [
                               vue.createTextVNode("* AI和常量只存在本地，不参与同步")
                             ])),
                             _: 1
@@ -3114,7 +3216,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                             type: "primary",
                             class: "text-info"
                           }, {
-                            default: vue.withCtx(() => _cache[23] || (_cache[23] = [
+                            default: vue.withCtx(() => _cache[25] || (_cache[25] = [
                               vue.createTextVNode("* 如需备份所有配置请使用操全量同步操作中的全量备份、全量恢复功能")
                             ])),
                             _: 1
@@ -3125,7 +3227,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                             type: "primary",
                             class: "text-info"
                           }, {
-                            default: vue.withCtx(() => _cache[24] || (_cache[24] = [
+                            default: vue.withCtx(() => _cache[26] || (_cache[26] = [
                               vue.createTextVNode("* 全量备份仅为方便多设备同步配置，使用base64存储，请知悉")
                             ])),
                             _: 1
@@ -3140,14 +3242,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               ])) : vue.createCommentVNode("", true),
               showConstSettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_15, [
                 vue.createElementVNode("div", _hoisted_16, [
-                  _cache[26] || (_cache[26] = vue.createElementVNode("h3", null, "常量设置", -1)),
+                  _cache[28] || (_cache[28] = vue.createElementVNode("h3", null, "常量设置", -1)),
                   vue.createVNode(_component_el_button, {
                     type: "primary",
                     text: "",
                     icon: "Back",
                     onClick: closeConstSettings
                   }, {
-                    default: vue.withCtx(() => _cache[25] || (_cache[25] = [
+                    default: vue.withCtx(() => _cache[27] || (_cache[27] = [
                       vue.createTextVNode("返回")
                     ])),
                     _: 1
@@ -3222,7 +3324,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                         type: "primary",
                         class: "text-info"
                       }, {
-                        default: vue.withCtx(() => _cache[27] || (_cache[27] = [
+                        default: vue.withCtx(() => _cache[29] || (_cache[29] = [
                           vue.createTextVNode("* 可在快捷回帖中使用以上常量：{email}、{qq}、{wechat}、{url}，例：我的邮箱是{email}，我的QQ是{qq}；")
                         ])),
                         _: 1
@@ -3233,7 +3335,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                         type: "primary",
                         class: "text-info"
                       }, {
-                        default: vue.withCtx(() => _cache[28] || (_cache[28] = [
+                        default: vue.withCtx(() => _cache[30] || (_cache[30] = [
                           vue.createTextVNode("* 开启加密后，只在回帖时显示base64加密后的常量；")
                         ])),
                         _: 1
@@ -3245,14 +3347,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               ])) : vue.createCommentVNode("", true),
               showAISettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_17, [
                 vue.createElementVNode("div", _hoisted_18, [
-                  _cache[30] || (_cache[30] = vue.createElementVNode("h3", null, "AI设置", -1)),
+                  _cache[32] || (_cache[32] = vue.createElementVNode("h3", null, "AI设置", -1)),
                   vue.createVNode(_component_el_button, {
                     type: "primary",
                     text: "",
                     icon: "Back",
                     onClick: closeAISettings
                   }, {
-                    default: vue.withCtx(() => _cache[29] || (_cache[29] = [
+                    default: vue.withCtx(() => _cache[31] || (_cache[31] = [
                       vue.createTextVNode("返回")
                     ])),
                     _: 1
@@ -3277,7 +3379,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                           class: "my-replies-card",
                           shadow: "never"
                         }, {
-                          header: vue.withCtx(() => _cache[31] || (_cache[31] = [
+                          header: vue.withCtx(() => _cache[33] || (_cache[33] = [
                             vue.createElementVNode("div", { class: "card-title" }, "我在用的", -1)
                           ])),
                           default: vue.withCtx(() => [
@@ -3327,7 +3429,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                     ])
                                   ]);
                                 }), 128))
-                              ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_25, _cache[32] || (_cache[32] = [
+                              ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_25, _cache[34] || (_cache[34] = [
                                 vue.createElementVNode("p", null, "未设置快速回帖内容!", -1)
                               ])))
                             ])
@@ -3350,7 +3452,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                           shadow: "never",
                           "body-style": { padding: "0 20px 20px" }
                         }, {
-                          header: vue.withCtx(() => _cache[33] || (_cache[33] = [
+                          header: vue.withCtx(() => _cache[35] || (_cache[35] = [
                             vue.createElementVNode("span", null, "网友分享的", -1)
                           ])),
                           default: vue.withCtx(() => [
@@ -3389,7 +3491,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                             round: "",
                                             style: { "transform": "scale(0.7)" }
                                           }, {
-                                            default: vue.withCtx(() => _cache[34] || (_cache[34] = [
+                                            default: vue.withCtx(() => _cache[36] || (_cache[36] = [
                                               vue.createTextVNode(" NEW ")
                                             ])),
                                             _: 1
@@ -3517,7 +3619,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-15c77d37"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-a4326af6"]]);
   const Util = {
     install: (app2, options) => {
       const eventBus = {
@@ -3965,6 +4067,29 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
             return response.status >= 200 && response.status < 300;
           } catch (error) {
             console.warn("检查目录是否存在失败:", error);
+            return false;
+          }
+        },
+        // 获取所有用户数据（用于剪贴板备份）
+        getAllUserData() {
+          const allData = this.getAll();
+          if (Object.keys(allData).length === 0) {
+            return {};
+          }
+          return allData;
+        },
+        // 从对象恢复所有用户数据（用于剪贴板恢复）
+        restoreAllUserData(data) {
+          if (!data || Object.keys(data).length === 0) {
+            console.error("无效的恢复数据");
+            return false;
+          }
+          try {
+            this.setAll(data);
+            console.log("数据已从剪贴板恢复到本地存储");
+            return true;
+          } catch (error) {
+            console.error("恢复数据失败:", error);
             return false;
           }
         }
