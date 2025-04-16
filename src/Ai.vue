@@ -308,10 +308,19 @@ function onUsePromptCustomChange(e) {
                 <!-- Gemini Tab -->
                 <el-tab-pane label="Gemini" name="gemini">
                     <div class="tab-content">
+                        <div class="form-tips">
+                            <el-alert
+                                type="info"
+                                :closable="false"
+                                show-icon
+                            >
+                                <p style="margin: 0;">带 <span class="required-star">*</span> 标记的字段为必填项</p>
+                            </el-alert>
+                        </div>
                         <el-form :label-width="useMobileLayout ? 'auto' : '120'" 
                                :label-position="useMobileLayout ? 'top' : 'left'"
                                size="small">
-                            <el-form-item label="API Key">
+                            <el-form-item label="API Key" required>
                                 <el-tooltip content="获取API Key：https://aistudio.google.com/app/apikey" placement="top">
                                     <el-input v-model="geminiApiKey" @change="onGeminiApiKeyChange" />
                                 </el-tooltip>
@@ -323,10 +332,19 @@ function onUsePromptCustomChange(e) {
                 <!-- 通义千问 Tab -->
                 <el-tab-pane label="通义千问" name="qianwen">
                     <div class="tab-content">
+                        <div class="form-tips">
+                            <el-alert
+                                type="info"
+                                :closable="false"
+                                show-icon
+                            >
+                                <p style="margin: 0;">带 <span class="required-star">*</span> 标记的字段为必填项</p>
+                            </el-alert>
+                        </div>
                         <el-form :label-width="useMobileLayout ? 'auto' : '120'" 
                                :label-position="useMobileLayout ? 'top' : 'left'"
                                size="small">
-                            <el-form-item label="API Key">
+                            <el-form-item label="API Key" required>
                                 <el-tooltip content="获取API Key：https://dashscope.console.aliyun.com/apiKey" placement="top">
                                     <el-input v-model="qianwenApiKey" @change="onQianwenApiKeyChange" />
                                 </el-tooltip>
@@ -338,10 +356,19 @@ function onUsePromptCustomChange(e) {
                 <!-- Kimi Tab -->
                 <el-tab-pane label="Kimi" name="kimi">
                     <div class="tab-content">
+                        <div class="form-tips">
+                            <el-alert
+                                type="info"
+                                :closable="false"
+                                show-icon
+                            >
+                                <p style="margin: 0;">带 <span class="required-star">*</span> 标记的字段为必填项</p>
+                            </el-alert>
+                        </div>
                         <el-form :label-width="useMobileLayout ? 'auto' : '120'" 
                                :label-position="useMobileLayout ? 'top' : 'left'"
                                size="small">
-                            <el-form-item label="API Key">
+                            <el-form-item label="API Key" required>
                                 <el-tooltip content="获取API Key：https://platform.moonshot.cn/console/api-keys" placement="top">
                                     <el-input v-model="kimiApiKey" @change="onKimiApiKeyChange" />
                                 </el-tooltip>
@@ -353,6 +380,15 @@ function onUsePromptCustomChange(e) {
                 <!-- ChatGPT Tab -->
                 <el-tab-pane label="ChatGPT" name="chatgpt">
                     <div class="tab-content">
+                        <div class="form-tips">
+                            <el-alert
+                                type="info"
+                                :closable="false"
+                                show-icon
+                            >
+                                <p style="margin: 0;">带 <span class="required-star">*</span> 标记的字段为必填项</p>
+                            </el-alert>
+                        </div>
                         <el-form :label-width="useMobileLayout ? 'auto' : '120'" 
                                :label-position="useMobileLayout ? 'top' : 'left'"
                                size="small">
@@ -362,13 +398,13 @@ function onUsePromptCustomChange(e) {
                                 </el-tooltip>
                             </el-form-item>
                             
-                            <el-form-item label="API Key">
+                            <el-form-item label="API Key" required>
                                 <el-tooltip content="按接口规则填写" placement="top">
                                     <el-input v-model="chatgptApiKey" @change="onChatgptApiKeyChange" />
                                 </el-tooltip>
                             </el-form-item>
                             
-                            <el-form-item label="模型选择">
+                            <el-form-item label="模型选择" required>
                                 <el-tooltip content="默认使用：gpt-3.5-turbo，需接口支持" placement="top">
                                     <el-select
                                         v-model="chatgptModel"
@@ -392,6 +428,15 @@ function onUsePromptCustomChange(e) {
                 <!-- DeepSeek Tab -->
                 <el-tab-pane label="DeepSeek" name="deepseek">
                     <div class="tab-content">
+                        <div class="form-tips">
+                            <el-alert
+                                type="info"
+                                :closable="false"
+                                show-icon
+                            >
+                                <p style="margin: 0;">带 <span class="required-star">*</span> 标记的字段为必填项</p>
+                            </el-alert>
+                        </div>
                         <el-form :label-width="useMobileLayout ? 'auto' : '120'" 
                                :label-position="useMobileLayout ? 'top' : 'left'"
                                size="small">
@@ -401,13 +446,13 @@ function onUsePromptCustomChange(e) {
                                 </el-tooltip>
                             </el-form-item>
                             
-                            <el-form-item label="API Key">
+                            <el-form-item label="API Key" required>
                                 <el-tooltip content="按接口规则填写" placement="top">
                                     <el-input v-model="deepseekApiKey" @change="onDeepseekApiKeyChange" />
                                 </el-tooltip>
                             </el-form-item>
                             
-                            <el-form-item label="模型选择">
+                            <el-form-item label="模型选择" required>
                                 <el-tooltip content="默认使用：deepseek-chat，需接口支持" placement="top">
                                     <el-select
                                         v-model="deepseekModel"
@@ -431,6 +476,15 @@ function onUsePromptCustomChange(e) {
                 <!-- Grok Tab -->
                 <el-tab-pane label="Grok" name="grok">
                     <div class="tab-content">
+                        <div class="form-tips">
+                            <el-alert
+                                type="info"
+                                :closable="false"
+                                show-icon
+                            >
+                                <p style="margin: 0;">带 <span class="required-star">*</span> 标记的字段为必填项</p>
+                            </el-alert>
+                        </div>
                         <el-form :label-width="useMobileLayout ? 'auto' : '120'" 
                                :label-position="useMobileLayout ? 'top' : 'left'"
                                size="small">
@@ -440,13 +494,13 @@ function onUsePromptCustomChange(e) {
                                 </el-tooltip>
                             </el-form-item>
                             
-                            <el-form-item label="API Key">
+                            <el-form-item label="API Key" required>
                                 <el-tooltip content="按接口规则填写" placement="top">
                                     <el-input v-model="grokApiKey" @change="onGrokApiKeyChange" />
                                 </el-tooltip>
                             </el-form-item>
                             
-                            <el-form-item label="模型选择">
+                            <el-form-item label="模型选择" required>
                                 <el-tooltip content="默认使用：grok-3-mini-beta，需接口支持" placement="top">
                                     <el-select
                                         v-model="grokModel"
@@ -494,6 +548,15 @@ function onUsePromptCustomChange(e) {
     padding: 20px;
 }
 
+.form-tips {
+    margin-bottom: 20px;
+}
+
+.required-star {
+    color: #F56C6C;
+    font-weight: bold;
+}
+
 :global(.setAIBox .el-input__inner) {
     margin-bottom: 0;
     background-color: transparent;
@@ -530,6 +593,10 @@ function onUsePromptCustomChange(e) {
 @media (max-width: 768px) {
     .tab-content {
         padding: 15px 10px;
+    }
+    
+    .form-tips {
+        margin-bottom: 15px;
     }
     
     :global(.setAIBox .el-tabs__item) {
