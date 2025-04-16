@@ -526,6 +526,36 @@ export default {
                     return false;
                 }
             },
+            // 获取所有用户数据（用于剪贴板备份）
+            getAllUserData() {
+                // 获取所有存储的数据
+                const allData = this.getAll();
+                
+                // 如果没有数据，返回空对象
+                if(Object.keys(allData).length === 0) {
+                    return {};
+                }
+                
+                return allData;
+            },
+            
+            // 从对象恢复所有用户数据（用于剪贴板恢复）
+            restoreAllUserData(data) {
+                if (!data || Object.keys(data).length === 0) {
+                    console.error('无效的恢复数据');
+                    return false;
+                }
+                
+                try {
+                    // 恢复所有数据到本地存储
+                    this.setAll(data);
+                    console.log('数据已从剪贴板恢复到本地存储');
+                    return true;
+                } catch (error) {
+                    console.error('恢复数据失败:', error);
+                    return false;
+                }
+            },
         },
 
         // 全局

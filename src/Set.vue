@@ -331,6 +331,110 @@ function openAISettings() {
     showConstSettings.value = false;
     showAISettings.value = true;
 }
+
+function backupToClipboard() {
+    loading.value = true;
+    try {
+        // 获取所有数据
+        const allData = proxy.$storage.getAllUserData();
+        // 将数据转换为JSON字符串并添加前缀提示信息
+        const dataString = JSON.stringify({
+            _meta: {
+                app: 'bbs_quickreply',
+                version: proxy.$app.version,
+                timestamp: new Date().toISOString(),
+                note: 'Beta功能: 此备份仅用于在不同登录方式间迁移数据，非长期存储方案'
+            },
+            data: allData
+        });
+        
+        // 复制到剪贴板
+        navigator.clipboard.writeText(dataString).then(() => {
+            proxy.$message.success('数据已成功备份到剪贴板');
+        }).catch(err => {
+            console.error('剪贴板操作失败:', err);
+            proxy.$message.error('剪贴板操作失败: ' + err.message);
+        });
+    } catch (error) {
+        console.error('备份到剪贴板出错:', error);
+        proxy.$message.error('备份到剪贴板出错: ' + error.message);
+    } finally {
+        loading.value = false;
+    }
+}
+
+function restoreFromClipboard() {
+    loading.value = true;
+    try {
+        // 从剪贴板读取数据
+        navigator.clipboard.readText().then(text => {
+            try {
+                const clipData = JSON.parse(text);
+                
+                // 验证剪贴板数据格式
+                if (!clipData._meta || clipData._meta.app !== 'bbs_quickreply') {
+                    proxy.$message.error('无效的备份数据格式');
+                    loading.value = false;
+                    return;
+                }
+                
+                // 显示确认对话框
+                proxy.$confirm(
+                    '从剪贴板恢复将覆盖当前数据。这是一个Beta功能，主要用于数据迁移。确定要继续吗？',
+                    '恢复确认',
+                    {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }
+                ).then(() => {
+                    // 用户确认，开始恢复
+                    const restoreData = clipData.data;
+                    
+                    // 恢复数据
+                    proxy.$storage.restoreAllUserData(restoreData);
+                    
+                    // 更新UI
+                    if (restoreData.QuickReply) {
+                        myList.value = restoreData.QuickReply;
+                        updateMyList();
+                    }
+                    
+                    // 重新加载用户设置
+                    const userId = proxy.$storage.getUserInfo('userId');
+                    isLogin.value = !!userId;
+                    realtimeSync.value = proxy.$storage.getUserInfo('realtimeSync') || false;
+                    realtimeBackup.value = proxy.$storage.getUserInfo('realtimeBackup') || false;
+                    submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
+                    constVar.value = proxy.$storage.getUserInfo('constVar') || constVar.value;
+                    
+                    // 发送更新事件
+                    emit('updateConstVar');
+                    emit('updateAIModel');
+                    
+                    proxy.$message.success('数据恢复成功');
+                }).catch(() => {
+                    // 用户取消
+                    proxy.$message.info('已取消恢复操作');
+                }).finally(() => {
+                    loading.value = false;
+                });
+            } catch (error) {
+                console.error('解析剪贴板数据出错:', error);
+                proxy.$message.error('无法解析剪贴板数据: ' + error.message);
+                loading.value = false;
+            }
+        }).catch(err => {
+            console.error('读取剪贴板失败:', err);
+            proxy.$message.error('读取剪贴板失败: ' + err.message);
+            loading.value = false;
+        });
+    } catch (error) {
+        console.error('从剪贴板恢复出错:', error);
+        proxy.$message.error('从剪贴板恢复出错: ' + error.message);
+        loading.value = false;
+    }
+}
 </script>
 
 <template>
@@ -365,6 +469,13 @@ function openAISettings() {
                                                         </el-dropdown-item>
                                                         <el-dropdown-item icon="Download" @click="downloadAll">
                                                             全量恢复
+                                                        </el-dropdown-item>
+                                                        <el-divider style="margin: 5px 0;"></el-divider>
+                                                        <el-dropdown-item icon="CopyDocument" @click="backupToClipboard">
+                                                            备份到剪贴板
+                                                        </el-dropdown-item>
+                                                        <el-dropdown-item icon="DocumentCopy" @click="restoreFromClipboard">
+                                                            从剪贴板恢复
                                                         </el-dropdown-item>
                                                     </el-dropdown-menu>
                                                 </template>
