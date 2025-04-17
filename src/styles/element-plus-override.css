@@ -1,0 +1,207 @@
+/* Element Plus 样式覆盖 */
+
+/* Text 文本组件样式 */
+.text-info {
+  color: #909399 !important;
+  font-size: 13px;
+}
+
+/* 文本按钮样式 */
+.el-button.is-text {
+  padding: 0;
+  color: #409eff;
+  background: transparent;
+  border-color: transparent;
+}
+
+.el-button.is-text:hover {
+  color: #66b1ff;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.el-button.is-text.is-disabled {
+  color: #c0c4cc;
+}
+
+/* 标签样式调整 */
+.el-tag--info.el-tag--light {
+  color: #909399;
+  background-color: #f4f4f5;
+  border-color: #e9e9eb;
+}
+
+/* 修复表单样式 */
+.el-form-item__label {
+  font-weight: normal;
+}
+
+/* 确保小尺寸元素样式正确 */
+.el-button--small {
+  padding: 5px 11px;
+  font-size: 12px;
+}
+
+/* 对话框样式调整 */
+.el-dialog {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* 确保卡片内容样式正确 */
+.el-card__body {
+  padding: 20px;
+}
+
+/* 修复输入框样式 */
+.el-input__inner {
+  line-height: normal;
+}
+
+/* 全局覆盖 element-plus 默认样式 */
+
+/* 移动端适配 */
+@media (max-width: 767px) {
+  /* 按钮样式优化 */
+  .el-button {
+    margin-bottom: 5px;
+    margin-right: 3px;
+  }
+  
+  .el-button--small {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  
+  .el-button-group .el-button {
+    margin-right: 0;
+  }
+  
+  /* 卡片和对话框调整 */
+  .el-card__header {
+    padding: 10px;
+  }
+  
+  .el-dialog {
+    width: 90% !important;
+    max-width: 100%;
+  }
+  
+  .el-dialog__body {
+    padding: 15px 10px;
+  }
+  
+  /* 表单元素适配 */
+  .el-form-item {
+    margin-bottom: 15px;
+  }
+  
+  .el-form-item__label {
+    padding-bottom: 5px;
+  }
+  
+  /* 下拉菜单适配 */
+  .el-dropdown-menu {
+    min-width: 100px;
+  }
+  
+  /* 输入框调整 */
+  .el-input__inner {
+    height: 36px;
+  }
+  
+  /* 标签页适配 */
+  .el-tabs__item {
+    padding: 0 12px;
+  }
+  
+  /* 分页组件适配 */
+  .el-pagination {
+    justify-content: center;
+    padding: 15px 0;
+  }
+  
+  .el-pagination .el-pager {
+    margin: 0 5px;
+  }
+  
+  .el-pagination .btn-prev, 
+  .el-pagination .btn-next {
+    min-width: 24px;
+  }
+}
+
+/* 针对小屏幕特别优化分页组件 */
+@media (max-width: 480px) {
+  .el-pagination {
+    padding: 10px 0;
+  }
+  
+  .el-pagination button {
+    min-width: 24px !important;
+    margin: 0 2px !important;
+  }
+  
+  .el-pagination .el-pager li {
+    min-width: 24px !important;
+    margin: 0 2px !important;
+    font-size: 12px;
+  }
+}
+
+/* 下拉菜单适配 */
+.el-dropdown-menu {
+  min-width: 100px;
+}
+
+.el-dropdown-menu__item {
+  display: flex;
+  align-items: center;
+  line-height: 1.5;
+  padding: 8px 16px;
+}
+
+.el-dropdown-menu__item .el-icon {
+  margin-right: 8px;
+}
+
+@media (max-width: 480px) {
+  .el-dropdown-menu {
+    min-width: 90px;
+  }
+  
+  .el-dropdown-menu__item {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+/* 自定义图标字体 */
+.el-icon-upload:before {
+  content: "\e602";
+  font-family: element-icons !important;
+}
+
+.el-icon-download:before {
+  content: "\e606";
+  font-family: element-icons !important;
+}
+
+/* 按钮间距统一 */
+.header-right .button-group {
+  display: flex;
+  gap: 8px !important;  /* 强制统一间距 */
+}
+
+.header-right .button-group .el-dropdown {
+  margin-right: 0;
+}
+
+/* 顶部按钮统一样式 */
+.header-button {
+  margin: 0 !important;
+}
+
+.button-group > * {
+  margin: 0 !important;
+} 

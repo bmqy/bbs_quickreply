@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      3.7.9
+// @version      4.0.0
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -24,18 +24,22 @@
 // @match        *://www.v2ex.com/t/*
 // @match        *://discuss.flarum.org/*
 // @match        *://www.nodeloc.com/*
-// @require      https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js
+// @require      https://cdn.jsdelivr.net/npm/vue@3.5.13/dist/vue.global.prod.js
 // @require      data:application/javascript,%3Bwindow.Vue%3DVue%3B
-// @require      https://cdn.jsdelivr.net/npm/element-plus@2.3.6/dist/index.full.min.js
-// @require      https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.1.0/dist/index.iife.min.js
-// @resource     element-plus/dist/index.css  https://cdn.jsdelivr.net/npm/element-plus@2.3.6/dist/index.css
+// @require      https://cdn.jsdelivr.net/npm/element-plus@2.9.7/dist/index.full.min.js
+// @require      https://cdn.jsdelivr.net/npm/@element-plus/icons-vue@2.3.1/dist/index.iife.min.js
+// @resource     element-plus/dist/index.css  https://cdn.jsdelivr.net/npm/element-plus@2.9.7/dist/index.css
 // @connect      quickreply.bmqy.net
 // @connect      generativelanguage.googleapis.com
 // @connect      dashscope.aliyuncs.com
 // @connect      api.moonshot.cn
 // @connect      api.openai.com
 // @connect      api.deepseek.com
+// @connect      api.x.ai
+// @connect      dav.jianguoyun.com
+// @connect      ogi.teracloud.jp
 // @connect      *
+// @grant        GM_download
 // @grant        GM_getResourceText
 // @grant        GM_getValue
 // @grant        GM_info
@@ -43,11 +47,12 @@
 // @grant        GM_setValue
 // @grant        GM_xmlhttpRequest
 // @grant        unsafeWindow
+// @run-at       document-end
 // ==/UserScript==
 
-(e=>{const a=document.createElement("style");a.dataset.source="vite-plugin-monkey",a.textContent=e,document.head.append(a)})(' .quickReplyBox[data-v-1b723407]{position:relative}.quickReplyBox .el-form[data-v-1b723407]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-1b723407]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-1b723407]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1b723407]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1b723407],.el-form-item--small.el-form-item[data-v-1b723407]{margin-bottom:10px}.el-select[data-v-1b723407]{width:300px}.el-dialog__footer{background-color:#fff}.app-margin-right-30[data-v-54a1a6de]{margin-right:30px}.my-list-tabs[data-v-54a1a6de]{border-radius:var(--el-card-border-radius);border:1px solid var(--el-card-border-color)}.list-left[data-v-54a1a6de]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-54a1a6de]{margin-right:5px;color:#909399}.list-title[data-v-54a1a6de]{flex:1;font-weight:400}.list-right[data-v-54a1a6de]{min-width:70px}.list-right .el-badge.item[data-v-54a1a6de]{margin-right:30px}.list li[data-v-54a1a6de]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-54a1a6de]:hover{background-color:#f5f5f5}.quickReplyLoginBox .tips[data-v-54a1a6de]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-54a1a6de]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-54a1a6de]{padding:10px 20px}.box-card .el-card__header span[data-v-54a1a6de]{font-size:14px}.clearfix[data-v-54a1a6de]:before,.clearfix[data-v-54a1a6de]:after{display:table;content:""}.clearfix[data-v-54a1a6de]:after{clear:both}.el-pagination[data-v-54a1a6de]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.box-card .el-card__header[data-v-e87ab068]{padding:10px 20px}.box-card .el-card__header span[data-v-e87ab068]{font-size:14px}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.margin-left{margin-left:15px} ');
+(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-6e38d9a1]{width:100%}.box-card[data-v-6e38d9a1]{border:none}.box-card .el-card__header[data-v-6e38d9a1]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-6e38d9a1]{padding:0}.tab-content[data-v-6e38d9a1]{padding:20px}.form-tips[data-v-6e38d9a1]{margin-bottom:20px}.required-star[data-v-6e38d9a1]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-6e38d9a1]{padding:15px 10px}.form-tips[data-v-6e38d9a1]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-1edb02ba]{position:relative}.quickReplyBox .el-form[data-v-1edb02ba]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-1edb02ba]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-1edb02ba]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-1edb02ba]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-1edb02ba],.el-form-item--small.el-form-item[data-v-1edb02ba]{margin-bottom:10px}.el-select[data-v-1edb02ba]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-a4326af6]{width:100%}.header-left[data-v-a4326af6]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-a4326af6]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-a4326af6]{margin-bottom:0}}.header-right[data-v-a4326af6]{width:100%}.header-right .button-group[data-v-a4326af6]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-a4326af6]{justify-content:flex-end}}.login-container[data-v-a4326af6]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-a4326af6]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-a4326af6]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-a4326af6]{padding:20px}.settings-header[data-v-a4326af6]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-a4326af6]{min-height:300px}.my-replies-card .card-title[data-v-a4326af6]{font-weight:700}.list-left[data-v-a4326af6]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-a4326af6]{margin-right:5px;color:#909399}.list-title[data-v-a4326af6]{flex:1;font-weight:400}.list-right[data-v-a4326af6]{min-width:70px}.list-right .el-badge.item[data-v-a4326af6]{margin-right:30px}.list li[data-v-a4326af6]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-a4326af6]:hover{background-color:#f5f5f5}.tips[data-v-a4326af6]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-a4326af6]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-a4326af6]{padding:10px 20px}.box-card .el-card__header span[data-v-a4326af6]{font-size:14px}.clearfix[data-v-a4326af6]:before,.clearfix[data-v-a4326af6]:after{display:table;content:""}.clearfix[data-v-a4326af6]:after{clear:both}.el-pagination[data-v-a4326af6]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
 
-(function (vue, ElementPlus, ElementPlusIconsVue) {
+(function (ElementPlusIconsVue, ElementPlus, vue) {
   'use strict';
 
   function _interopNamespaceDefault(e) {
@@ -74,12 +79,185 @@
     return o.innerText = t, document.head.append(o), t;
   };
   cssLoader("element-plus/dist/index.css");
-  var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
-  var _GM_info = /* @__PURE__ */ (() => typeof GM_info != "undefined" ? GM_info : void 0)();
-  var _GM_listValues = /* @__PURE__ */ (() => typeof GM_listValues != "undefined" ? GM_listValues : void 0)();
-  var _GM_setValue = /* @__PURE__ */ (() => typeof GM_setValue != "undefined" ? GM_setValue : void 0)();
-  var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
-  var _unsafeWindow = /* @__PURE__ */ (() => typeof unsafeWindow != "undefined" ? unsafeWindow : void 0)();
+  /*! Element Plus v2.9.7 */
+  var zhCn = {
+    name: "zh-cn",
+    el: {
+      breadcrumb: {
+        label: "面包屑"
+      },
+      colorpicker: {
+        confirm: "确定",
+        clear: "清空",
+        defaultLabel: "颜色选择器",
+        description: "当前颜色 {color}，按 Enter 键选择新颜色",
+        alphaLabel: "选择透明度的值"
+      },
+      datepicker: {
+        now: "此刻",
+        today: "今天",
+        cancel: "取消",
+        clear: "清空",
+        confirm: "确定",
+        dateTablePrompt: "使用方向键与 Enter 键可选择日期",
+        monthTablePrompt: "使用方向键与 Enter 键可选择月份",
+        yearTablePrompt: "使用方向键与 Enter 键可选择年份",
+        selectedDate: "已选日期",
+        selectDate: "选择日期",
+        selectTime: "选择时间",
+        startDate: "开始日期",
+        startTime: "开始时间",
+        endDate: "结束日期",
+        endTime: "结束时间",
+        prevYear: "前一年",
+        nextYear: "后一年",
+        prevMonth: "上个月",
+        nextMonth: "下个月",
+        year: "年",
+        month1: "1 月",
+        month2: "2 月",
+        month3: "3 月",
+        month4: "4 月",
+        month5: "5 月",
+        month6: "6 月",
+        month7: "7 月",
+        month8: "8 月",
+        month9: "9 月",
+        month10: "10 月",
+        month11: "11 月",
+        month12: "12 月",
+        weeks: {
+          sun: "日",
+          mon: "一",
+          tue: "二",
+          wed: "三",
+          thu: "四",
+          fri: "五",
+          sat: "六"
+        },
+        weeksFull: {
+          sun: "星期日",
+          mon: "星期一",
+          tue: "星期二",
+          wed: "星期三",
+          thu: "星期四",
+          fri: "星期五",
+          sat: "星期六"
+        },
+        months: {
+          jan: "一月",
+          feb: "二月",
+          mar: "三月",
+          apr: "四月",
+          may: "五月",
+          jun: "六月",
+          jul: "七月",
+          aug: "八月",
+          sep: "九月",
+          oct: "十月",
+          nov: "十一月",
+          dec: "十二月"
+        }
+      },
+      inputNumber: {
+        decrease: "减少数值",
+        increase: "增加数值"
+      },
+      select: {
+        loading: "加载中",
+        noMatch: "无匹配数据",
+        noData: "无数据",
+        placeholder: "请选择"
+      },
+      dropdown: {
+        toggleDropdown: "切换下拉选项"
+      },
+      mention: {
+        loading: "加载中"
+      },
+      cascader: {
+        noMatch: "无匹配数据",
+        loading: "加载中",
+        placeholder: "请选择",
+        noData: "暂无数据"
+      },
+      pagination: {
+        goto: "前往",
+        pagesize: "条/页",
+        total: "共 {total} 条",
+        pageClassifier: "页",
+        page: "页",
+        prev: "上一页",
+        next: "下一页",
+        currentPage: "第 {pager} 页",
+        prevPages: "向前 {pager} 页",
+        nextPages: "向后 {pager} 页",
+        deprecationWarning: "你使用了一些已被废弃的用法，请参考 el-pagination 的官方文档"
+      },
+      dialog: {
+        close: "关闭此对话框"
+      },
+      drawer: {
+        close: "关闭此对话框"
+      },
+      messagebox: {
+        title: "提示",
+        confirm: "确定",
+        cancel: "取消",
+        error: "输入的数据不合法!",
+        close: "关闭此对话框"
+      },
+      upload: {
+        deleteTip: "按 delete 键可删除",
+        delete: "删除",
+        preview: "查看图片",
+        continue: "继续上传"
+      },
+      slider: {
+        defaultLabel: "滑块介于 {min} 至 {max}",
+        defaultRangeStartLabel: "选择起始值",
+        defaultRangeEndLabel: "选择结束值"
+      },
+      table: {
+        emptyText: "暂无数据",
+        confirmFilter: "筛选",
+        resetFilter: "重置",
+        clearFilter: "全部",
+        sumText: "合计"
+      },
+      tour: {
+        next: "下一步",
+        previous: "上一步",
+        finish: "结束导览"
+      },
+      tree: {
+        emptyText: "暂无数据"
+      },
+      transfer: {
+        noMatch: "无匹配数据",
+        noData: "无数据",
+        titles: ["列表 1", "列表 2"],
+        filterPlaceholder: "请输入搜索内容",
+        noCheckedFormat: "共 {total} 项",
+        hasCheckedFormat: "已选 {checked}/{total} 项"
+      },
+      image: {
+        error: "加载失败"
+      },
+      pageHeader: {
+        title: "返回"
+      },
+      popconfirm: {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消"
+      },
+      carousel: {
+        leftArrow: "上一张幻灯片",
+        rightArrow: "下一张幻灯片",
+        indicator: "幻灯片切换至索引 {index}"
+      }
+    }
+  };
   const _export_sfc = (sfc, props) => {
     const target = sfc.__vccOpts || sfc;
     for (const [key, val] of props) {
@@ -87,1249 +265,38 @@
     }
     return target;
   };
-  const _hoisted_1$3 = { class: "quickReplyBox" };
-  const _hoisted_2$2 = {
-    slot: "label",
-    class: "quickReplyBoxTitle"
+  const _hoisted_1$3 = { class: "setAIBox" };
+  const _hoisted_2$3 = { class: "tab-content" };
+  const _hoisted_3$2 = {
+    key: 0,
+    style: { "float": "right", "color": "#E6A23C", "font-size": "12px" }
   };
+  const _hoisted_4$2 = { class: "tab-content" };
+  const _hoisted_5$2 = { class: "form-tips" };
+  const _hoisted_6$1 = { class: "tab-content" };
+  const _hoisted_7$1 = { class: "form-tips" };
+  const _hoisted_8$1 = { class: "tab-content" };
+  const _hoisted_9$1 = { class: "form-tips" };
+  const _hoisted_10$1 = { class: "tab-content" };
+  const _hoisted_11$1 = { class: "form-tips" };
+  const _hoisted_12$1 = { class: "tab-content" };
+  const _hoisted_13$1 = { class: "form-tips" };
+  const _hoisted_14$1 = { class: "tab-content" };
+  const _hoisted_15$1 = { class: "form-tips" };
   const _sfc_main$3 = {
-    __name: "App",
-    setup(__props) {
-      const { proxy } = vue.getCurrentInstance();
-      const list = vue.ref([]);
-      const currentReply = vue.ref("");
-      const currentPlatform = vue.ref("discuz");
-      const fwin_replyLoaded = vue.ref(false);
-      const submitNow = vue.ref(false);
-      const hasEditor = vue.ref(false);
-      const lastClickElement = vue.ref(false);
-      const setShow = vue.ref(false);
-      const useAI = vue.ref("");
-      const loadingAIReply = vue.ref(false);
-      const aiNameList = vue.ref({
-        gemini: "Gemini 2.0 Flash",
-        qianwen: "通义千问-turbo",
-        kimi: "Kimi",
-        chatgpt: "ChatGPT",
-        deepseek: "DeepSeek"
-      });
-      const constVar = vue.ref({
-        email: "",
-        qq: "",
-        wechat: "",
-        url: "",
-        base64: false
-      });
-      vue.onBeforeMount(() => {
-        checkPlatform();
-        getList();
-        submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
-        useAI.value = proxy.$storage.getUserInfo("useAI") || "";
-        updateConstVar();
-        updateAIModel();
-      });
-      function checkPlatform() {
-        if (location.host.indexOf("nodeseek") > -1) {
-          currentPlatform.value = "nodeseek";
-        } else if (location.host.indexOf("v2ex") > -1) {
-          currentPlatform.value = "v2ex";
-        } else {
-          let $generator = document.head.querySelector("meta[name=generator]");
-          if ($generator) {
-            if ($generator.content.indexOf("Discuz") > -1) {
-              currentPlatform.value = "discuz";
-            } else if ($generator.content.indexOf("Discourse") > -1) {
-              currentPlatform.value = "discourse";
-            }
-          } else {
-            let $html = document.body.innerHTML;
-            if ($html.indexOf("flarum-loading") > -1) {
-              currentPlatform.value = "flarum";
-            }
-          }
-        }
-      }
-      async function getList() {
-        let myListStorage = proxy.$storage.get();
-        list.value = myListStorage && myListStorage.length > 0 ? myListStorage : [];
-        currentReply.value = "";
-      }
-      function openSet() {
-        setShow.value = true;
-      }
-      function closeSet() {
-        setShow.value = false;
-      }
-      function updateAIModel() {
-        useAI.value = proxy.$storage.getUserInfo("useAI") || "";
-        let chatgptModel = proxy.$storage.getUserInfo("chatgptModel") || "gpt-3.5-turbo";
-        if (useAI.value === "chatgpt") {
-          aiNameList.value["chatgpt"] = `ChatGPT (${chatgptModel})`;
-        }
-      }
-      function updateConstVar() {
-        constVar.value = proxy.$storage.getUserInfo("constVar") || constVar.value;
-      }
-      function updateMyList(data) {
-        let myListStorage = data || [];
-        list.value = myListStorage;
-      }
-      async function getAIReply() {
-        let title2 = "";
-        if (loadingAIReply.value)
-          return false;
-        loadingAIReply.value = true;
-        if (currentPlatform.value == "discuz") {
-          title2 = document.querySelector("#thread_subject").innerText;
-        } else if (currentPlatform.value == "discourse") {
-          if (document.querySelector("#topic-title h1>a")) {
-            title2 = document.querySelector("#topic-title h1>a").innerText;
-          } else {
-            title2 = document.querySelector("h1.header-title a").innerText;
-          }
-        } else if (currentPlatform.value == "nodeseek") {
-          title2 = document.querySelector("h1>a.post-title-link").innerText;
-        } else if (currentPlatform.value == "v2ex") {
-          title2 = document.querySelector("#Main .header>h1").innerText;
-        }
-        if (!title2) {
-          proxy.$message.error("无法获取帖子标题，请检查脚本是否支持此论坛");
-          return false;
-        }
-        await proxy.$api.getAIReply(title2).then((res) => {
-          currentReply.value = res;
-          enterReply();
-        }).catch((err) => {
-          proxy.$message.error(err);
-        }).finally(() => {
-          loadingAIReply.value = false;
-        });
-      }
-      function enterPostReply() {
-        let $postmessage = document.querySelector("#postmessage");
-        $postmessage.value = currentReply.value;
-      }
-      function enterEditorReply() {
-        let $editorTextarea = document.querySelector("#e_textarea");
-        let $editorIframe = document.querySelector("#e_iframe").contentWindow.document.body;
-        $editorIframe.style.background = "";
-        $editorIframe.innerHTML = currentReply.value || window.bbcode2html(`${$editorTextarea.value}`);
-      }
-      function fastreBindClick() {
-        document.querySelector("body").addEventListener(
-          "click",
-          (e) => {
-            let theElement = `fastre&${e.target.href}`;
-            if (lastClickElement.value != theElement && e.target.className == "fastre") {
-              lastClickElement.value = theElement;
-              fwin_replyLoaded.value = false;
-            }
-          },
-          true
-        );
-      }
-      function replyfastBindClick() {
-        document.querySelector("body").addEventListener(
-          "click",
-          (e) => {
-            let theElement = `replyfast&${e.target.href}`;
-            if (lastClickElement.value != theElement && e.target.className == "replyfast") {
-              lastClickElement.value = theElement;
-              fwin_replyLoaded.value = false;
-            }
-          },
-          true
-        );
-      }
-      function flbcBindClick() {
-        document.querySelector("body").addEventListener(
-          "click",
-          (e) => {
-            let theElement = `flbc&${e.target.href}`;
-            if (lastClickElement.value != theElement && e.target.className == "flbc") {
-              lastClickElement.value = theElement;
-              fwin_replyLoaded.value = false;
-            }
-          },
-          true
-        );
-      }
-      function checkEditor() {
-        hasEditor.value = document.querySelector("#e_iframe");
-      }
-      function postReplyMutationObserver() {
-        let mos = new MutationObserver(function(mutations, observer) {
-          for (const mutation in mutations) {
-            if (Object.hasOwnProperty.call(mutations, mutation)) {
-              const element = mutations[mutation];
-              if (element.target.id == "subjecthide") {
-                fwin_replyLoaded.value = true;
-              }
-            }
-          }
-        });
-        if (document.querySelector("#append_parent")) {
-          mos.observe(document.querySelector("#append_parent"), {
-            attributes: true,
-            childList: true,
-            subtree: true
-          });
-        }
-      }
-      function enterReply() {
-        currentReply.value = currentReply.value.replace("{email}", constVar.value.base64 ? proxy.$tools.encodeStr(constVar.value.email) : constVar.value.email);
-        currentReply.value = currentReply.value.replace("{qq}", constVar.value.base64 ? proxy.$tools.encodeStr(constVar.value.qq) : constVar.value.qq);
-        currentReply.value = currentReply.value.replace("{wechat}", constVar.value.base64 ? proxy.$tools.encodeStr(constVar.value.wechat) : constVar.value.wechat);
-        currentReply.value = currentReply.value.replace("{url}", constVar.value.base64 ? proxy.$tools.encodeStr(constVar.value.url) : constVar.value.url);
-        if (fwin_replyLoaded.value) {
-          enterPostReply();
-        } else if (hasEditor.value) {
-          enterEditorReply();
-        } else if (currentPlatform.value == "nodeseek") {
-          enterMarkdownItReply();
-        } else if (currentPlatform.value == "discourse") {
-          enterDiscourseEmberReply();
-        } else if (currentPlatform.value == "v2ex") {
-          enterReplyContentReply();
-        } else if (currentPlatform.value == "flarum") {
-          enterFlarumTextEditorReply();
-        } else {
-          enterFastPostReply();
-        }
-      }
-      function enterMarkdownItReply() {
-        _unsafeWindow.editor && _unsafeWindow.editor.setMarkdown && _unsafeWindow.editor.setMarkdown(currentReply.value);
-        if (submitNow.value && !useAI.value && currentReply.value) {
-          document.querySelector(".md-editor button.submit").click();
-        }
-      }
-      function enterDiscourseEmberReply() {
-        let $emberTextarea = document.querySelector("textarea.ember-text-area.d-editor-input");
-        if ($emberTextarea) {
-          $emberTextarea.value = currentReply.value;
-          $emberTextarea.dispatchEvent(new Event("change"));
-        }
-        if (submitNow.value && !useAI.value && currentReply.value) {
-          document.querySelector(".submit-panel button.btn.create").click();
-          currentReply.value = "";
-        }
-      }
-      function enterReplyContentReply() {
-        let $replyContent = document.querySelector("textarea#reply_content");
-        if ($replyContent) {
-          $replyContent.value = currentReply.value;
-        }
-        if (submitNow.value && !useAI.value && currentReply.value) {
-          document.querySelector('#reply-box input[type="submit"]').click();
-          currentReply.value = "";
-        }
-      }
-      function enterFlarumTextEditorReply() {
-        let $textEditor = document.querySelector("textarea.FormControl.TextEditor-editor");
-        if ($textEditor) {
-          $textEditor.value = currentReply.value;
-          $textEditor.dispatchEvent(new Event("change"));
-        }
-        if (submitNow.value && !useAI.value && currentReply.value) {
-          document.querySelector(".item-submit button.Button").click();
-          currentReply.value = "";
-        }
-      }
-      function enterFastPostReply() {
-        try {
-          let $fastpostmessage = document.querySelector(
-            "#fastpostmessage"
-          );
-          $fastpostmessage.style.background = "";
-          $fastpostmessage.value = currentReply.value;
-          if (submitNow.value && !useAI.value && currentReply.value) {
-            document.querySelector("button#fastpostsubmit").click();
-          }
-        } catch (err) {
-          console.log("请检查发帖权限！");
-        }
-      }
-      const title = vue.computed(() => {
-        return `${proxy.$app.getName()}`;
-      });
-      const tips = vue.computed(() => {
-        return `${proxy.$app.getName()}，控制面板：
-- 分享、收藏更多精彩回帖；
-- 登录账号（登录后可打开脚本菜单同步你的回帖，在任何设备上恢复并使用）；
-- AI及更多功能，请点击设置图标开启或关闭；`;
-      });
-      vue.onMounted(() => {
-        checkEditor();
-        postReplyMutationObserver();
-        enterReply();
-        fastreBindClick();
-        replyfastBindClick();
-        flbcBindClick();
-      });
-      vue.watch(fwin_replyLoaded, (n) => {
-        if (n) {
-          let $floatlayout_reply = document.querySelector(
-            "#floatlayout_reply"
-          );
-          $floatlayout_reply.insertBefore(
-            proxy.$el,
-            $floatlayout_reply.childNodes[0]
-          );
-          enterPostReply();
-        } else {
-          let $fastposteditor = document.querySelector(
-            "#fastposteditor"
-          );
-          $fastposteditor.insertBefore(
-            proxy.$el,
-            $fastposteditor.childNodes[0]
-          );
-        }
-      });
-      return (_ctx, _cache) => {
-        const _component_el_option = vue.resolveComponent("el-option");
-        const _component_el_select = vue.resolveComponent("el-select");
-        const _component_el_form_item = vue.resolveComponent("el-form-item");
-        const _component_el_button = vue.resolveComponent("el-button");
-        const _component_el_button_group = vue.resolveComponent("el-button-group");
-        const _component_el_form = vue.resolveComponent("el-form");
-        const _component_app_set = vue.resolveComponent("app-set");
-        const _component_el_link = vue.resolveComponent("el-link");
-        const _component_el_dialog = vue.resolveComponent("el-dialog");
-        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$3, [
-          vue.createVNode(vue.Transition, { name: "el-fade-in-linear" }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_el_form, {
-                inline: true,
-                class: "reply-form-inline"
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(_component_el_form_item, null, {
-                    default: vue.withCtx(() => [
-                      vue.createElementVNode("div", _hoisted_2$2, vue.toDisplayString(`${vue.unref(title)}: `), 1),
-                      vue.createVNode(_component_el_select, {
-                        modelValue: vue.unref(currentReply),
-                        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(currentReply) ? currentReply.value = $event : null),
-                        placeholder: "请选择",
-                        "no-data-text": "这里啥都没有...",
-                        onChange: enterReply
-                      }, {
-                        default: vue.withCtx(() => [
-                          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(list), (item, index) => {
-                            return vue.openBlock(), vue.createBlock(_component_el_option, {
-                              key: index,
-                              label: item,
-                              value: item
-                            }, null, 8, ["label", "value"]);
-                          }), 128))
-                        ]),
-                        _: 1
-                      }, 8, ["modelValue"])
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_form_item, null, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_button_group, null, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_button, {
-                            type: "primary",
-                            class: "btnQuickReplySet",
-                            icon: "tools",
-                            onClick: openSet,
-                            title: vue.unref(tips)
-                          }, null, 8, ["title"]),
-                          vue.unref(useAI) != "" ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                            key: 0,
-                            type: "success",
-                            class: "btnQuickReplySet",
-                            loading: vue.unref(loadingAIReply),
-                            icon: "magicStick",
-                            onClick: getAIReply,
-                            title: `正在由【${vue.unref(aiNameList)[vue.unref(useAI)]}】为你提供创意回帖
-
-Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
-                          }, null, 8, ["loading", "title"])) : vue.createCommentVNode("", true)
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    _: 1
-                  })
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          }),
-          vue.createVNode(_component_el_dialog, {
-            modelValue: vue.unref(setShow),
-            "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(setShow) ? setShow.value = $event : null),
-            onClose: closeSet,
-            title: _ctx.$app.getName(),
-            width: "96%",
-            "show-close": true,
-            "destroy-on-close": "",
-            "append-to-body": ""
-          }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_app_set, {
-                ref: "setPanel",
-                onUpdateMyList: updateMyList,
-                onUpdateConstVar: updateConstVar,
-                onUpdateAIModel: updateAIModel
-              }, null, 512)
-            ]),
-            footer: vue.withCtx(() => [
-              vue.createVNode(_component_el_link, {
-                type: "info",
-                href: "https://github.com/bmqy/bbs_quickreply?tab=readme-ov-file#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97",
-                title: "更新日志",
-                target: "_blank"
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createTextVNode(vue.toDisplayString(`ver: ${_ctx.$app.getVersion()}`), 1)
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          }, 8, ["modelValue", "title"])
-        ]);
-      };
-    }
-  };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-1b723407"]]);
-  const _withScopeId = (n) => (vue.pushScopeId("data-v-54a1a6de"), n = n(), vue.popScopeId(), n);
-  const _hoisted_1$2 = { class: "setBox" };
-  const _hoisted_2$1 = {
-    key: 0,
-    class: "quickReplyLoginBox"
-  };
-  const _hoisted_3 = { style: { "margin-top": "15px" } };
-  const _hoisted_4 = { key: 1 };
-  const _hoisted_5 = {
-    key: 0,
-    class: "list"
-  };
-  const _hoisted_6 = { class: "list-left" };
-  const _hoisted_7 = { class: "list-number" };
-  const _hoisted_8 = { class: "list-title" };
-  const _hoisted_9 = { class: "list-right" };
-  const _hoisted_10 = {
-    key: 1,
-    class: "tips"
-  };
-  const _hoisted_11 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("p", null, "未设置快速回帖内容!", -1));
-  const _hoisted_12 = [
-    _hoisted_11
-  ];
-  const _hoisted_13 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ vue.createElementVNode("span", null, "网友分享的", -1));
-  const _hoisted_14 = { key: 0 };
-  const _hoisted_15 = { class: "addReplyBox" };
-  const _sfc_main$2 = {
-    __name: "Set",
-    emits: ["updateMyList", "updateConstVar", "updateAIModel"],
-    setup(__props, { emit }) {
-      const { proxy } = vue.getCurrentInstance();
-      const myList = vue.ref([]);
-      const systemList = vue.ref([]);
-      const systemListCount = vue.ref(0);
-      const loading = vue.ref(false);
-      const isLogin = vue.ref(false);
-      const realtimeSync = vue.ref(false);
-      const realtimeBackup = vue.ref(false);
-      const submitNow = vue.ref(false);
-      const currentTab = vue.ref("mine");
-      const showLoginForce = vue.ref(false);
-      const newReply = vue.ref("");
-      const windowSize = vue.ref({
-        width: window.innerWidth,
-        height: window.innerHeight
-      });
-      const queryData = vue.ref({
-        page: 1,
-        prop: "replyId",
-        order: "desc"
-      });
-      const constVar = vue.ref({
-        email: "",
-        qq: "",
-        wechat: "",
-        url: "",
-        base64: false
-      });
-      vue.onBeforeMount(() => {
-        isLogin.value = proxy.$storage.getUserInfo("userId");
-        realtimeSync.value = proxy.$storage.getUserInfo("realtimeSync") || false;
-        realtimeBackup.value = proxy.$storage.getUserInfo("realtimeBackup") || false;
-        submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
-        constVar.value = proxy.$storage.getUserInfo("constVar") || constVar.value;
-        getMyList();
-        getSystemList();
-      });
-      function getMyList() {
-        let myListStorage = proxy.$storage.get();
-        myList.value = myListStorage && myListStorage.length > 0 ? myListStorage : [];
-      }
-      async function getSystemList() {
-        loading.value = true;
-        let res = await proxy.$api.selectList(queryData.value.page, queryData.value.prop, queryData.value.order);
-        systemList.value = res.data.totalCount > 0 ? res.data.list : [];
-        systemListCount.value = res.data.totalCount;
-        loading.value = false;
-      }
-      function currentPageChange(current) {
-        queryData.value.page = current;
-        getSystemList();
-      }
-      function sortChange(e) {
-        queryData.value.prop = e.order ? e.prop : "replyId";
-        queryData.value.order = e.order === "descending" || !e.order ? "desc" : "asc";
-        getSystemList();
-      }
-      function addReply() {
-        if (newReply.value == "") {
-          proxy.$message.error("回复内容不能为空！");
-          return false;
-        }
-        if (myList.value.indexOf(newReply.value) != -1) {
-          proxy.$message.error("该回复已添加过！");
-          newReply.value = "";
-          return false;
-        }
-        if (myList.value.length >= 10) {
-          proxy.$message.warning("自定义回复，超出条数上限！");
-          return false;
-        }
-        myList.value.push(newReply.value);
-        realtimeSync.value && upload();
-        realtimeBackup.value && uploadAll();
-        updateMyList();
-        newReply.value = "";
-        return true;
-      }
-      function updateMyList() {
-        proxy.$storage.set(myList.value);
-        emit("updateMyList", myList.value);
-      }
-      function delReply(index) {
-        myList.value.splice(index, 1);
-        updateMyList();
-        realtimeSync.value && upload();
-        realtimeBackup.value && uploadAll();
-      }
-      function shareReply(index) {
-        proxy.$api.replyInsert(myList.value[index]).then((res) => {
-          proxy.$message.success(res.message);
-          getSystemList();
-        }).catch((err) => {
-          proxy.$message.error(err.message);
-        });
-      }
-      function likeReply(index) {
-        proxy.$api.likeCountUpdate(systemList.value[index].replyId).then((res) => {
-          if (res.code == 0) {
-            systemList.value[index]["likeCount"] = res.data.likeCount;
-            proxy.$message.success("点赞成功");
-          } else {
-            proxy.$message.error(res.message);
-          }
-        }).catch((err) => {
-          proxy.$message.error(err.message);
-        });
-      }
-      function collectReply(index) {
-        let nStr = systemList.value[index].content;
-        if (myList.value.indexOf(nStr) != -1) {
-          proxy.$message.error("该回复已添加过！");
-          return false;
-        }
-        newReply.value = nStr;
-        proxy.$api.collectCountUpdate(systemList.value[index].replyId).then((res) => {
-          if (res.code == 0) {
-            addReply() && proxy.$message.success("收藏成功");
-            realtimeSync.value && upload();
-            realtimeBackup.value && uploadAll();
-          } else {
-            proxy.$message.error(res.message);
-          }
-        }).catch((err) => {
-          proxy.$message.error(err.message);
-        });
-      }
-      function onLoginSuccess() {
-        showLoginForce.value = false;
-        isLogin.value = true;
-        myList.value.length === 0 && download();
-      }
-      function upload() {
-        proxy.$storage.uploadList();
-      }
-      async function download() {
-        let list = await proxy.$storage.downloadList();
-        myList.value = list;
-        updateMyList();
-      }
-      function uploadAll() {
-        proxy.$storage.uploadAll();
-      }
-      async function downloadAll() {
-        let all = await proxy.$storage.downloadAll();
-        myList.value = all.QuickReply || [];
-        updateMyList();
-      }
-      function loginForce() {
-        showLoginForce.value = !showLoginForce.value;
-        currentTab.value = "mine";
-      }
-      function loginCancel() {
-        showLoginForce.value = false;
-        currentTab.value = "mine";
-      }
-      function logout() {
-        proxy.$storage.setUserInfo("userId", "");
-        isLogin.value = false;
-      }
-      function onRealtimeSyncChange(e) {
-        realtimeSync.value = e;
-        proxy.$storage.setUserInfo("realtimeSync", e);
-        realtimeBackup.value && uploadAll();
-      }
-      function onRealtimeBackupChange(e) {
-        realtimeBackup.value = e;
-        proxy.$storage.setUserInfo("realtimeBackup", e);
-        realtimeBackup.value && uploadAll();
-      }
-      function onSubmitNowChange(e) {
-        submitNow.value = e;
-        proxy.$storage.setUserInfo("submitNow", e);
-        realtimeBackup.value && uploadAll();
-      }
-      function updateAI() {
-        emit("updateAIModel");
-        realtimeBackup.value && uploadAll();
-      }
-      function constVarChange() {
-        proxy.$storage.setUserInfo("constVar", constVar.value);
-        emit("updateConstVar");
-        realtimeBackup.value && uploadAll();
-      }
-      return (_ctx, _cache) => {
-        const _component_app_login = vue.resolveComponent("app-login");
-        const _component_el_text = vue.resolveComponent("el-text");
-        const _component_el_space = vue.resolveComponent("el-space");
-        const _component_el_button = vue.resolveComponent("el-button");
-        const _component_el_tooltip = vue.resolveComponent("el-tooltip");
-        const _component_el_tab_pane = vue.resolveComponent("el-tab-pane");
-        const _component_el_checkbox = vue.resolveComponent("el-checkbox");
-        const _component_el_input = vue.resolveComponent("el-input");
-        const _component_el_form_item = vue.resolveComponent("el-form-item");
-        const _component_el_switch = vue.resolveComponent("el-switch");
-        const _component_el_form = vue.resolveComponent("el-form");
-        const _component_app_set_ai = vue.resolveComponent("app-set-ai");
-        const _component_el_tabs = vue.resolveComponent("el-tabs");
-        const _component_el_col = vue.resolveComponent("el-col");
-        const _component_el_table_column = vue.resolveComponent("el-table-column");
-        const _component_el_tag = vue.resolveComponent("el-tag");
-        const _component_el_table = vue.resolveComponent("el-table");
-        const _component_el_pagination = vue.resolveComponent("el-pagination");
-        const _component_el_card = vue.resolveComponent("el-card");
-        const _component_el_row = vue.resolveComponent("el-row");
-        const _directive_loading = vue.resolveDirective("loading");
-        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$2, [
-          vue.createVNode(_component_el_card, {
-            class: "box-card",
-            shadow: "never"
-          }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_el_row, { gutter: 30 }, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(_component_el_col, {
-                    span: 9,
-                    md: { span: 9 },
-                    sm: { span: 24 },
-                    xs: { span: 24 }
-                  }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_tabs, {
-                        type: "border-card",
-                        class: "my-list-tabs",
-                        modelValue: vue.unref(currentTab),
-                        "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => vue.isRef(currentTab) ? currentTab.value = $event : null)
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_tab_pane, {
-                            name: "mine",
-                            label: "我在用的"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.unref(myList).length === 0 && !vue.unref(isLogin) || vue.unref(showLoginForce) ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_2$1, [
-                                vue.createElementVNode("div", _hoisted_3, [
-                                  vue.createVNode(_component_app_login, {
-                                    onOnSuccess: onLoginSuccess,
-                                    onOnClose: loginCancel
-                                  }),
-                                  vue.createVNode(_component_el_space, {
-                                    direction: "vertical",
-                                    alignment: "flex-start"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* 登录后，即可在任意设备同步你的配置；")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* 云端只负责保存账号及其回复列表，不留存多余信息；")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* 忘记密码无法恢复，可重新注册；")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* 如不需登录，也可忽略登录界面，直接使用即可；")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ])
-                                    ]),
-                                    _: 1
-                                  })
-                                ])
-                              ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_4, [
-                                !vue.unref(showLoginForce) || vue.unref(myList).length > 0 ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_5, [
-                                  (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(myList), (item, index) => {
-                                    return vue.openBlock(), vue.createElementBlock("li", { key: index }, [
-                                      vue.createElementVNode("div", _hoisted_6, [
-                                        vue.createElementVNode("div", _hoisted_7, vue.toDisplayString(`${index + 1}、`), 1),
-                                        vue.createElementVNode("div", _hoisted_8, vue.toDisplayString(`${item}`), 1)
-                                      ]),
-                                      vue.createElementVNode("div", _hoisted_9, [
-                                        vue.createVNode(_component_el_tooltip, {
-                                          class: "item",
-                                          effect: "dark",
-                                          content: "分享它",
-                                          placement: "top-start"
-                                        }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createVNode(_component_el_button, {
-                                              type: "success",
-                                              size: "small",
-                                              icon: "Share",
-                                              circle: "",
-                                              onClick: ($event) => shareReply(index)
-                                            }, null, 8, ["onClick"])
-                                          ]),
-                                          _: 2
-                                        }, 1024),
-                                        vue.createVNode(_component_el_tooltip, {
-                                          class: "item",
-                                          effect: "dark",
-                                          content: "移除",
-                                          placement: "top-start"
-                                        }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createVNode(_component_el_button, {
-                                              type: "danger",
-                                              size: "small",
-                                              icon: "DeleteFilled",
-                                              circle: "",
-                                              onClick: ($event) => delReply(index)
-                                            }, null, 8, ["onClick"])
-                                          ]),
-                                          _: 2
-                                        }, 1024)
-                                      ])
-                                    ]);
-                                  }), 128))
-                                ])) : vue.createCommentVNode("", true),
-                                vue.unref(myList).length == 0 ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_10, _hoisted_12)) : vue.createCommentVNode("", true)
-                              ]))
-                            ]),
-                            _: 1
-                          }),
-                          vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_tab_pane, {
-                            key: 0,
-                            name: "options",
-                            label: "选项"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createVNode(_component_el_space, {
-                                direction: "vertical",
-                                alignment: "flex-start"
-                              }, {
-                                default: vue.withCtx(() => [
-                                  vue.createElementVNode("div", null, [
-                                    vue.createVNode(_component_el_checkbox, {
-                                      modelValue: vue.unref(realtimeSync),
-                                      "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(realtimeSync) ? realtimeSync.value = $event : null),
-                                      label: "实时同步，本地回复列表修改后立即上传",
-                                      size: "small",
-                                      checked: vue.unref(realtimeSync),
-                                      onChange: onRealtimeSyncChange
-                                    }, null, 8, ["modelValue", "checked"])
-                                  ]),
-                                  vue.createElementVNode("div", null, [
-                                    vue.createVNode(_component_el_checkbox, {
-                                      modelValue: vue.unref(realtimeBackup),
-                                      "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(realtimeBackup) ? realtimeBackup.value = $event : null),
-                                      label: "实时备份，本地回复列表及任一配置修改后立即备份至云端",
-                                      size: "small",
-                                      checked: vue.unref(realtimeBackup),
-                                      onChange: onRealtimeBackupChange
-                                    }, null, 8, ["modelValue", "checked"])
-                                  ]),
-                                  vue.createElementVNode("div", null, [
-                                    vue.createVNode(_component_el_checkbox, {
-                                      modelValue: vue.unref(submitNow),
-                                      "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => vue.isRef(submitNow) ? submitNow.value = $event : null),
-                                      label: "立即提交，选择快捷回帖内容后立即提交回帖",
-                                      size: "small",
-                                      checked: vue.unref(submitNow),
-                                      onChange: onSubmitNowChange
-                                    }, null, 8, ["modelValue", "checked"])
-                                  ]),
-                                  vue.createVNode(_component_el_space, {
-                                    direction: "vertical",
-                                    alignment: "flex-start",
-                                    style: { "margin-top": "18px" }
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* AI和常量只存在本地，不参与同步")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* 如需备份所有配置请使用操作中的全量备份、全量恢复")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      vue.createElementVNode("div", null, [
-                                        vue.createVNode(_component_el_text, { type: "info" }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode("* 全量备份仅为方便多设备同步配置，使用base64存储，请知悉")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ])
-                                    ]),
-                                    _: 1
-                                  })
-                                ]),
-                                _: 1
-                              })
-                            ]),
-                            _: 1
-                          })) : vue.createCommentVNode("", true),
-                          vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_tab_pane, {
-                            key: 1,
-                            name: "constVar",
-                            label: "常量"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createVNode(_component_el_form, {
-                                model: vue.unref(constVar),
-                                "label-width": "60",
-                                style: { "max-width": "600px" }
-                              }, {
-                                default: vue.withCtx(() => [
-                                  vue.createVNode(_component_el_form_item, { label: "邮箱" }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_input, {
-                                        modelValue: vue.unref(constVar).email,
-                                        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => vue.unref(constVar).email = $event),
-                                        onChange: constVarChange
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_form_item, { label: "QQ" }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_input, {
-                                        modelValue: vue.unref(constVar).qq,
-                                        "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => vue.unref(constVar).qq = $event),
-                                        onChange: constVarChange
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_form_item, { label: "微信" }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_input, {
-                                        modelValue: vue.unref(constVar).wechat,
-                                        "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => vue.unref(constVar).wechat = $event),
-                                        onChange: constVarChange
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_form_item, { label: "网址" }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_input, {
-                                        modelValue: vue.unref(constVar).url,
-                                        "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => vue.unref(constVar).url = $event),
-                                        onChange: constVarChange
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  }),
-                                  vue.createVNode(_component_el_form_item, { label: "加密" }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_switch, {
-                                        modelValue: vue.unref(constVar).base64,
-                                        "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => vue.unref(constVar).base64 = $event),
-                                        onChange: constVarChange
-                                      }, null, 8, ["modelValue"])
-                                    ]),
-                                    _: 1
-                                  })
-                                ]),
-                                _: 1
-                              }, 8, ["model"]),
-                              vue.createVNode(_component_el_space, {
-                                direction: "vertical",
-                                alignment: "flex-start"
-                              }, {
-                                default: vue.withCtx(() => [
-                                  vue.createElementVNode("div", null, [
-                                    vue.createVNode(_component_el_text, { type: "info" }, {
-                                      default: vue.withCtx(() => [
-                                        vue.createTextVNode("* 可在快捷回帖中使用以上常量：{email}、{qq}、{wechat}、{url}，例：我的邮箱是{email}，我的QQ是{qq}；")
-                                      ]),
-                                      _: 1
-                                    })
-                                  ]),
-                                  vue.createElementVNode("div", null, [
-                                    vue.createVNode(_component_el_text, { type: "info" }, {
-                                      default: vue.withCtx(() => [
-                                        vue.createTextVNode("* 开启加密后，只在回帖时显示base64加密后的常量；")
-                                      ]),
-                                      _: 1
-                                    })
-                                  ])
-                                ]),
-                                _: 1
-                              })
-                            ]),
-                            _: 1
-                          })) : vue.createCommentVNode("", true),
-                          vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_tab_pane, {
-                            key: 2,
-                            name: "ai",
-                            label: "AI"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createVNode(_component_app_set_ai, {
-                                ref: "setAIPanel",
-                                onUpdateAI: updateAI
-                              }, null, 512)
-                            ]),
-                            _: 1
-                          })) : vue.createCommentVNode("", true),
-                          vue.createVNode(_component_el_tab_pane, {
-                            name: "actions",
-                            label: "操作"
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createVNode(_component_el_space, { wrap: "" }, {
-                                default: vue.withCtx(() => [
-                                  !vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                                    key: 0,
-                                    type: "success",
-                                    icon: "UserFilled",
-                                    size: "small",
-                                    onClick: loginForce
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode("登录，登录后即可在任意设备同步你的配置")
-                                    ]),
-                                    _: 1
-                                  })) : vue.createCommentVNode("", true),
-                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                                    key: 1,
-                                    type: "danger",
-                                    icon: "SwitchButton",
-                                    size: "small",
-                                    onClick: logout
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode("注销，注销登录后将不能再同步列表")
-                                    ]),
-                                    _: 1
-                                  })) : vue.createCommentVNode("", true),
-                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                                    key: 2,
-                                    type: "primary",
-                                    icon: "Upload",
-                                    size: "small",
-                                    onClick: upload
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode("上传，上传本地列表会覆盖云端数据")
-                                    ]),
-                                    _: 1
-                                  })) : vue.createCommentVNode("", true),
-                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                                    key: 3,
-                                    type: "warning",
-                                    icon: "Download",
-                                    size: "small",
-                                    onClick: download
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode("下载，下载云端列表会覆盖本地数据")
-                                    ]),
-                                    _: 1
-                                  })) : vue.createCommentVNode("", true),
-                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                                    key: 4,
-                                    type: "primary",
-                                    icon: "Upload",
-                                    size: "small",
-                                    onClick: uploadAll
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode("全量备份，全量备份本地所有配置信息到云端")
-                                    ]),
-                                    _: 1
-                                  })) : vue.createCommentVNode("", true),
-                                  vue.unref(isLogin) ? (vue.openBlock(), vue.createBlock(_component_el_button, {
-                                    key: 5,
-                                    type: "warning",
-                                    icon: "Download",
-                                    size: "small",
-                                    onClick: downloadAll
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode("全量恢复，全量恢复云端配置信息覆盖本地数据")
-                                    ]),
-                                    _: 1
-                                  })) : vue.createCommentVNode("", true)
-                                ]),
-                                _: 1
-                              })
-                            ]),
-                            _: 1
-                          })
-                        ]),
-                        _: 1
-                      }, 8, ["modelValue"])
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_col, {
-                    span: 15,
-                    md: { span: 15 },
-                    sm: { span: 24 },
-                    xs: { span: 24 },
-                    style: vue.normalizeStyle({ "margin-top": vue.unref(windowSize).width < 992 ? "15px" : 0 })
-                  }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_card, {
-                        class: "box-card",
-                        shadow: "never",
-                        "body-style": { padding: "0 20px 20px" }
-                      }, {
-                        header: vue.withCtx(() => [
-                          _hoisted_13
-                        ]),
-                        default: vue.withCtx(() => [
-                          vue.withDirectives((vue.openBlock(), vue.createBlock(_component_el_table, {
-                            ref: "filterTable",
-                            data: vue.unref(systemList),
-                            size: "small",
-                            stripe: "",
-                            onSortChange: sortChange
-                          }, {
-                            default: vue.withCtx(() => [
-                              vue.createVNode(_component_el_table_column, {
-                                prop: "replyId",
-                                label: "ID",
-                                width: "50",
-                                align: "center"
-                              }),
-                              vue.createVNode(_component_el_table_column, {
-                                prop: "content",
-                                label: "内容"
-                              }, {
-                                default: vue.withCtx((scope) => [
-                                  _ctx.$app.isNew(scope.row.created) ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_14, [
-                                    vue.createTextVNode(vue.toDisplayString(scope.row.content) + " ", 1),
-                                    vue.createVNode(_component_el_tooltip, {
-                                      class: "item",
-                                      effect: "dark",
-                                      content: "7天内新增",
-                                      placement: "top-start"
-                                    }, {
-                                      default: vue.withCtx(() => [
-                                        vue.createVNode(_component_el_tag, {
-                                          type: "primary",
-                                          effect: "dark",
-                                          size: "small",
-                                          round: "",
-                                          style: { "transform": "scale(0.7)" }
-                                        }, {
-                                          default: vue.withCtx(() => [
-                                            vue.createTextVNode(" NEW ")
-                                          ]),
-                                          _: 1
-                                        })
-                                      ]),
-                                      _: 1
-                                    })
-                                  ])) : vue.createCommentVNode("", true)
-                                ]),
-                                _: 1
-                              }),
-                              vue.createVNode(_component_el_table_column, {
-                                prop: "likeCount",
-                                sortable: "custom",
-                                width: "70",
-                                align: "center",
-                                label: "点赞"
-                              }, {
-                                default: vue.withCtx((scope) => [
-                                  vue.createVNode(_component_el_tag, {
-                                    type: "info",
-                                    size: "small"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createTextVNode(vue.toDisplayString(scope.row.likeCount), 1)
-                                    ]),
-                                    _: 2
-                                  }, 1024)
-                                ]),
-                                _: 1
-                              }),
-                              vue.createVNode(_component_el_table_column, {
-                                label: "操作",
-                                width: "100",
-                                align: "center"
-                              }, {
-                                default: vue.withCtx((scope) => [
-                                  vue.createVNode(_component_el_tooltip, {
-                                    class: "item",
-                                    effect: "dark",
-                                    content: "给个赞",
-                                    placement: "top-start"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_button, {
-                                        type: "success",
-                                        size: "small",
-                                        icon: "Pointer",
-                                        circle: "",
-                                        onClick: ($event) => likeReply(scope.$index)
-                                      }, null, 8, ["onClick"])
-                                    ]),
-                                    _: 2
-                                  }, 1024),
-                                  vue.createVNode(_component_el_tooltip, {
-                                    class: "item",
-                                    effect: "dark",
-                                    content: "收藏进我的",
-                                    placement: "top-start"
-                                  }, {
-                                    default: vue.withCtx(() => [
-                                      vue.createVNode(_component_el_button, {
-                                        type: "danger",
-                                        size: "small",
-                                        icon: "StarFilled",
-                                        circle: "",
-                                        onClick: ($event) => collectReply(scope.$index)
-                                      }, null, 8, ["onClick"])
-                                    ]),
-                                    _: 2
-                                  }, 1024)
-                                ]),
-                                _: 1
-                              })
-                            ]),
-                            _: 1
-                          }, 8, ["data"])), [
-                            [_directive_loading, vue.unref(loading)]
-                          ]),
-                          vue.createVNode(_component_el_pagination, {
-                            background: "",
-                            layout: "prev, pager, next",
-                            small: vue.unref(windowSize).width <= 640,
-                            "page-size": 10,
-                            "pager-count": vue.unref(windowSize).width > 640 ? 5 : 3,
-                            onCurrentChange: currentPageChange,
-                            total: vue.unref(systemListCount)
-                          }, null, 8, ["small", "pager-count", "total"])
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    _: 1
-                  }, 8, ["style"])
-                ]),
-                _: 1
-              }),
-              vue.createElementVNode("div", _hoisted_15, [
-                vue.createVNode(_component_el_input, {
-                  placeholder: "请输入新的回复内容",
-                  modelValue: vue.unref(newReply),
-                  "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => vue.isRef(newReply) ? newReply.value = $event : null),
-                  autosize: { minRows: 1, maxRows: 3 },
-                  maxlength: "100",
-                  "show-word-limit": true,
-                  resize: "none",
-                  clearable: "",
-                  class: "input-with-select"
-                }, {
-                  append: vue.withCtx(() => [
-                    vue.createVNode(_component_el_button, {
-                      icon: "Plus",
-                      onClick: addReply
-                    })
-                  ]),
-                  _: 1
-                }, 8, ["modelValue"])
-              ])
-            ]),
-            _: 1
-          })
-        ]);
-      };
-    }
-  };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-54a1a6de"]]);
-  const _hoisted_1$1 = { class: "setAIBox" };
-  const _sfc_main$1 = {
     __name: "Ai",
     emits: ["updateAI"],
-    setup(__props, { emit }) {
+    setup(__props, { emit: __emit }) {
       const { proxy } = vue.getCurrentInstance();
+      const activeTab = vue.ref("general");
+      const currentAI = vue.ref("");
+      const systemRoleCustom = vue.ref("");
+      const useSystemRoleCustom = vue.ref(false);
+      const promptCustom = vue.ref("");
+      const usePromptCustom = vue.ref(false);
       const geminiApiKey = vue.ref("");
-      const useGemini = vue.ref(false);
       const qianwenApiKey = vue.ref("");
-      const useQianwen = vue.ref(false);
       const kimiApiKey = vue.ref("");
-      const useKimi = vue.ref(false);
       const chatgptDomain = vue.ref("");
       const chatgptApiKey = vue.ref("");
       const chatgptModel = vue.ref("gpt-3.5-turbo");
@@ -1349,7 +316,6 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         { value: "gpt-3.5-turbo-16k", label: "gpt-3.5-turbo-16k" },
         { value: "gpt-3.5-turbo-16k-0613", label: "gpt-3.5-turbo-16k-0613" }
       ]);
-      const useChatgpt = vue.ref(false);
       const deepseekDomain = vue.ref("");
       const deepseekApiKey = vue.ref("");
       const deepseekModel = vue.ref("deepseek-chat");
@@ -1357,81 +323,98 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         { value: "deepseek-chat", label: "deepseek-chat" },
         { value: "deepseek-reasoner", label: "deepseek-reasoner" }
       ]);
-      const useDeepseek = vue.ref(false);
-      const useAI = vue.ref("");
-      const systemRoleCustom = vue.ref("");
-      const useSystemRoleCustom = vue.ref(false);
-      const promptCustom = vue.ref("");
-      const usePromptCustom = vue.ref(false);
+      const grokDomain = vue.ref("");
+      const grokApiKey = vue.ref("");
+      const grokModel = vue.ref("grok-3-mini-beta");
+      const grokModelList = vue.ref([
+        { value: "grok-3-mini-beta", label: "grok-3-mini-beta" },
+        { value: "grok-3-mini-fast-beta", label: "grok-3-mini-fast-beta" },
+        { value: "grok-3-beta", label: "grok-3-beta" },
+        { value: "grok-3-fast-beta", label: "grok-3-fast-beta" }
+      ]);
+      const emit = __emit;
+      const aiOptions = vue.computed(() => {
+        return [
+          { value: "gemini", label: "Gemini 2.0 Flash", disabled: !geminiApiKey.value },
+          { value: "qianwen", label: "通义千问-turbo", disabled: !qianwenApiKey.value },
+          { value: "kimi", label: "Kimi", disabled: !kimiApiKey.value },
+          { value: "chatgpt", label: `ChatGPT (${chatgptModel.value})`, disabled: !chatgptApiKey.value },
+          { value: "deepseek", label: `DeepSeek (${deepseekModel.value})`, disabled: !deepseekApiKey.value },
+          { value: "grok", label: `Grok (${grokModel.value})`, disabled: !grokApiKey.value }
+        ];
+      });
+      const useMobileLayout = vue.ref(false);
+      vue.onMounted(() => {
+        checkScreenSize();
+        window.addEventListener("resize", checkScreenSize);
+      });
+      vue.onUnmounted(() => {
+        window.removeEventListener("resize", checkScreenSize);
+      });
+      function checkScreenSize() {
+        useMobileLayout.value = window.innerWidth <= 768;
+      }
       vue.onBeforeMount(() => {
-        useAI.value = proxy.$storage.getUserInfo("useAI") || "";
-        geminiApiKey.value = proxy.$storage.getUserInfo("geminiApiKey") || "";
-        useGemini.value = useAI.value == "gemini";
-        qianwenApiKey.value = proxy.$storage.getUserInfo("qianwenApiKey") || "";
-        useQianwen.value = useAI.value == "qianwen";
-        kimiApiKey.value = proxy.$storage.getUserInfo("kimiApiKey") || "";
-        useKimi.value = useAI.value == "kimi";
-        chatgptDomain.value = proxy.$storage.getUserInfo("chatgptDomain") || "";
-        chatgptApiKey.value = proxy.$storage.getUserInfo("chatgptApiKey") || "";
-        chatgptModel.value = proxy.$storage.getUserInfo("chatgptModel") || "";
-        useChatgpt.value = useAI.value == "chatgpt";
-        deepseekDomain.value = proxy.$storage.getUserInfo("deepseekDomain") || "";
-        deepseekApiKey.value = proxy.$storage.getUserInfo("deepseekApiKey") || "";
-        deepseekModel.value = proxy.$storage.getUserInfo("deepseekModel") || "";
-        useDeepseek.value = useAI.value == "deepseek";
+        currentAI.value = proxy.$storage.getUserInfo("useAI") || "";
+        systemRoleCustom.value = proxy.$storage.getUserInfo("systemRoleCustom") || "";
+        useSystemRoleCustom.value = proxy.$storage.getUserInfo("useSystemRoleCustom") || false;
         promptCustom.value = proxy.$storage.getUserInfo("promptCustom") || "";
         usePromptCustom.value = proxy.$storage.getUserInfo("usePromptCustom") || false;
+        geminiApiKey.value = proxy.$storage.getUserInfo("geminiApiKey") || "";
+        qianwenApiKey.value = proxy.$storage.getUserInfo("qianwenApiKey") || "";
+        kimiApiKey.value = proxy.$storage.getUserInfo("kimiApiKey") || "";
+        chatgptDomain.value = proxy.$storage.getUserInfo("chatgptDomain") || "";
+        chatgptApiKey.value = proxy.$storage.getUserInfo("chatgptApiKey") || "";
+        chatgptModel.value = proxy.$storage.getUserInfo("chatgptModel") || "gpt-3.5-turbo";
+        deepseekDomain.value = proxy.$storage.getUserInfo("deepseekDomain") || "";
+        deepseekApiKey.value = proxy.$storage.getUserInfo("deepseekApiKey") || "";
+        deepseekModel.value = proxy.$storage.getUserInfo("deepseekModel") || "deepseek-chat";
+        grokDomain.value = proxy.$storage.getUserInfo("grokDomain") || "";
+        grokApiKey.value = proxy.$storage.getUserInfo("grokApiKey") || "";
+        grokModel.value = proxy.$storage.getUserInfo("grokModel") || "grok-3-mini-beta";
       });
+      function onCurrentAIChange(value) {
+        if (value && !isAIConfigValid(value)) {
+          proxy.$message.error(`${getAILabel(value)}配置不完整，请先完成配置`);
+          currentAI.value = "";
+          return;
+        }
+        proxy.$storage.setUserInfo("useAI", value);
+        emit("updateAI");
+      }
+      function isAIConfigValid(aiType) {
+        switch (aiType) {
+          case "gemini":
+            return !!geminiApiKey.value;
+          case "qianwen":
+            return !!qianwenApiKey.value;
+          case "kimi":
+            return !!kimiApiKey.value;
+          case "chatgpt":
+            return !!chatgptApiKey.value;
+          case "deepseek":
+            return !!deepseekApiKey.value;
+          case "grok":
+            return !!grokApiKey.value;
+          default:
+            return false;
+        }
+      }
+      function getAILabel(aiType) {
+        const option = aiOptions.value.find((opt) => opt.value === aiType);
+        return option ? option.label : aiType;
+      }
       function onGeminiApiKeyChange(e) {
         proxy.$storage.setUserInfo("geminiApiKey", e);
         emit("updateAI");
-      }
-      function onGeminiChange(e) {
-        useAI.value = e ? "gemini" : "";
-        proxy.$storage.setUserInfo("useAI", useAI.value);
-        proxy.$storage.setUserInfo("geminiApiKey", geminiApiKey.value || "");
-        emit("updateAI");
-      }
-      function useGeminiBeforeChange() {
-        if (!useGemini.value && !geminiApiKey.value) {
-          proxy.$message.error("请先填写：gemini api key");
-          return false;
-        }
-        return true;
       }
       function onQianwenApiKeyChange(e) {
         proxy.$storage.setUserInfo("qianwenApiKey", e);
         emit("updateAI");
       }
-      function onQianwenChange(e) {
-        useAI.value = e ? "qianwen" : "";
-        proxy.$storage.setUserInfo("useAI", useAI.value);
-        proxy.$storage.setUserInfo("qianwenApiKey", qianwenApiKey.value || "");
-        emit("updateAI");
-      }
-      function useQianwenBeforeChange() {
-        if (!useQianwen.value && !qianwenApiKey.value) {
-          proxy.$message.error("请先填写：通义千问 api key");
-          return false;
-        }
-        return true;
-      }
       function onKimiApiKeyChange(e) {
         proxy.$storage.setUserInfo("kimiApiKey", e);
         emit("updateAI");
-      }
-      function onKimiChange(e) {
-        useAI.value = e ? "kimi" : "";
-        proxy.$storage.setUserInfo("useAI", useAI.value);
-        proxy.$storage.setUserInfo("kimiApiKey", kimiApiKey.value || "");
-        emit("updateAI");
-      }
-      function useKimiBeforeChange() {
-        if (!useKimi.value && !kimiApiKey.value) {
-          proxy.$message.error("请先填写：Kimi api key");
-          return false;
-        }
-        return true;
       }
       function onChatgptDomainChange(e) {
         proxy.$storage.setUserInfo("chatgptDomain", e);
@@ -1445,21 +428,6 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         proxy.$storage.setUserInfo("chatgptModel", e);
         emit("updateAI");
       }
-      function onChatgptChange(e) {
-        useAI.value = e ? "chatgpt" : "";
-        proxy.$storage.setUserInfo("useAI", useAI.value);
-        proxy.$storage.setUserInfo("chatgptDomain", chatgptDomain.value || "");
-        proxy.$storage.setUserInfo("chatgptApiKey", chatgptApiKey.value || "");
-        proxy.$storage.setUserInfo("chatgptModel", chatgptModel.value || "");
-        emit("updateAI");
-      }
-      function useChatgptBeforeChange() {
-        if (!useChatgpt.value && !chatgptApiKey.value) {
-          proxy.$message.error("请先填写：chatgpt apiKey");
-          return false;
-        }
-        return true;
-      }
       function onDeepseekDomainChange(e) {
         proxy.$storage.setUserInfo("deepseekDomain", e);
         emit("updateAI");
@@ -1472,395 +440,686 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         proxy.$storage.setUserInfo("deepseekModel", e);
         emit("updateAI");
       }
-      function onDeepseekChange(e) {
-        useAI.value = e ? "deepseek" : "";
-        proxy.$storage.setUserInfo("useAI", useAI.value);
-        proxy.$storage.setUserInfo("deepseekDomain", deepseekDomain.value || "");
-        proxy.$storage.setUserInfo("deepseekApiKey", deepseekApiKey.value || "");
-        proxy.$storage.setUserInfo("deepseekModel", deepseekModel.value || "");
+      function onGrokDomainChange(e) {
+        proxy.$storage.setUserInfo("grokDomain", e);
         emit("updateAI");
       }
-      function useDeepseekBeforeChange() {
-        if (!useDeepseek.value && !deepseekApiKey.value) {
-          proxy.$message.error("请先填写：deepseek apiKey");
-          return false;
-        }
-        return true;
+      function onGrokApiKeyChange(e) {
+        proxy.$storage.setUserInfo("grokApiKey", e);
+        emit("updateAI");
+      }
+      function onGrokModelChange(e) {
+        proxy.$storage.setUserInfo("grokModel", e);
+        emit("updateAI");
       }
       function onSystemRoleCustomChange(e) {
         proxy.$storage.setUserInfo("systemRoleCustom", e);
         emit("updateAI");
       }
       function onUseSystemRoleCustomChange(e) {
+        if (!useSystemRoleCustom.value && !systemRoleCustom.value) {
+          proxy.$message.error("请先填写：自定义 SystemRole");
+          useSystemRoleCustom.value = false;
+          return;
+        }
         proxy.$storage.setUserInfo("useSystemRoleCustom", useSystemRoleCustom.value);
         proxy.$storage.setUserInfo("systemRoleCustom", systemRoleCustom.value);
         emit("updateAI");
-      }
-      function useSystemRoleCustomBeforeChange() {
-        if (!useSystemRoleCustom.value && !systemRoleCustom.value) {
-          proxy.$message.error("请先填写：自定义 SystemRole");
-          return false;
-        }
-        return true;
       }
       function onPromptCustomChange(e) {
         proxy.$storage.setUserInfo("promptCustom", e);
         emit("updateAI");
       }
       function onUsePromptCustomChange(e) {
+        if (!usePromptCustom.value && !promptCustom.value) {
+          proxy.$message.error("请先填写：自定义 Prompt");
+          usePromptCustom.value = false;
+          return;
+        }
+        if (!usePromptCustom.value && promptCustom.value.indexOf("{{title}}") == -1) {
+          proxy.$message.error("请检查自定义 Prompt 中是否包含变量：{{title}}");
+          usePromptCustom.value = false;
+          return;
+        }
         proxy.$storage.setUserInfo("usePromptCustom", usePromptCustom.value);
         proxy.$storage.setUserInfo("promptCustom", promptCustom.value);
         emit("updateAI");
       }
-      function usePromptCustomBeforeChange() {
-        if (!usePromptCustom.value && !promptCustom.value) {
-          proxy.$message.error("请先填写：自定义 Prompt");
-          return false;
-        }
-        if (!usePromptCustom.value && promptCustom.value.indexOf("{{title}}") == -1) {
-          proxy.$message.error("请检查自定义 Prompt 中是否包含变量：{{title}}");
-          return false;
-        }
-        return true;
-      }
-      vue.watch(useAI, (n, o) => {
-        useGemini.value = n == "gemini";
-        useQianwen.value = n == "qianwen";
-        useKimi.value = n == "kimi";
-        useChatgpt.value = n == "chatgpt";
-        useDeepseek.value = n == "deepseek";
-      });
       return (_ctx, _cache) => {
-        const _component_el_input = vue.resolveComponent("el-input");
-        const _component_el_tooltip = vue.resolveComponent("el-tooltip");
-        const _component_el_form_item = vue.resolveComponent("el-form-item");
-        const _component_el_switch = vue.resolveComponent("el-switch");
         const _component_el_option = vue.resolveComponent("el-option");
         const _component_el_select = vue.resolveComponent("el-select");
+        const _component_el_form_item = vue.resolveComponent("el-form-item");
+        const _component_el_input = vue.resolveComponent("el-input");
+        const _component_el_tooltip = vue.resolveComponent("el-tooltip");
+        const _component_el_switch = vue.resolveComponent("el-switch");
         const _component_el_form = vue.resolveComponent("el-form");
+        const _component_el_tab_pane = vue.resolveComponent("el-tab-pane");
+        const _component_el_alert = vue.resolveComponent("el-alert");
+        const _component_el_tabs = vue.resolveComponent("el-tabs");
         const _component_el_card = vue.resolveComponent("el-card");
-        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$1, [
+        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$3, [
           vue.createVNode(_component_el_card, {
             class: "box-card",
+            "body-style": { padding: "0" },
             shadow: "never"
           }, {
             default: vue.withCtx(() => [
-              vue.createVNode(_component_el_form, {
-                "label-width": "120",
-                "label-position": "left",
-                size: "small"
+              vue.createVNode(_component_el_tabs, {
+                modelValue: activeTab.value,
+                "onUpdate:modelValue": _cache[17] || (_cache[17] = ($event) => activeTab.value = $event),
+                type: "border-card"
               }, {
                 default: vue.withCtx(() => [
-                  vue.createVNode(_component_el_form_item, { label: "Gemini API Key" }, {
+                  vue.createVNode(_component_el_tab_pane, {
+                    label: "通用设置",
+                    name: "general"
+                  }, {
                     default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_tooltip, {
-                        content: "获取API Key：https://aistudio.google.com/app/apikey",
-                        placement: "top"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(geminiApiKey),
-                            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(geminiApiKey) ? geminiApiKey.value = $event : null),
-                            onChange: onGeminiApiKeyChange
-                          }, null, 8, ["modelValue"])
-                        ]),
-                        _: 1
-                      })
+                      vue.createElementVNode("div", _hoisted_2$3, [
+                        vue.createVNode(_component_el_form, {
+                          "label-width": useMobileLayout.value ? "auto" : "120",
+                          "label-position": useMobileLayout.value ? "top" : "left",
+                          size: "small"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_el_form_item, { label: "选择AI" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_select, {
+                                  modelValue: currentAI.value,
+                                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => currentAI.value = $event),
+                                  placeholder: "选择AI",
+                                  onChange: onCurrentAIChange,
+                                  style: vue.normalizeStyle(useMobileLayout.value ? "width: 100%" : "width: 220px")
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_option, {
+                                      value: "",
+                                      label: "请选择"
+                                    }),
+                                    (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(aiOptions.value, (item) => {
+                                      return vue.openBlock(), vue.createBlock(_component_el_option, {
+                                        key: item.value,
+                                        label: item.label,
+                                        value: item.value,
+                                        disabled: item.disabled
+                                      }, {
+                                        default: vue.withCtx(() => [
+                                          vue.createElementVNode("span", {
+                                            style: vue.normalizeStyle({ color: item.disabled ? "#909399" : "#606266" })
+                                          }, vue.toDisplayString(item.label), 5),
+                                          item.disabled ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_3$2, "未配置")) : vue.createCommentVNode("", true)
+                                        ]),
+                                        _: 2
+                                      }, 1032, ["label", "value", "disabled"]);
+                                    }), 128))
+                                  ]),
+                                  _: 1
+                                }, 8, ["modelValue", "style"])
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, { label: "系统角色" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "自定义系统角色，帮你获得更个性化的回帖内容。",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      type: "textarea",
+                                      modelValue: systemRoleCustom.value,
+                                      "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => systemRoleCustom.value = $event),
+                                      onChange: onSystemRoleCustomChange,
+                                      placeholder: `默认：${vue.unref(proxy).$app.systemRole}`
+                                    }, null, 8, ["modelValue", "placeholder"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_switch, {
+                                  modelValue: useSystemRoleCustom.value,
+                                  "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => useSystemRoleCustom.value = $event),
+                                  onChange: onUseSystemRoleCustomChange
+                                }, null, 8, ["modelValue"])
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, { label: "提示词" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "自定义提示词，帮你获得更个性化的回帖内容。必须包含唯一变量：{{title}}",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      type: "textarea",
+                                      modelValue: promptCustom.value,
+                                      "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => promptCustom.value = $event),
+                                      onChange: onPromptCustomChange,
+                                      placeholder: `默认：${vue.unref(proxy).$app.prompt}`
+                                    }, null, 8, ["modelValue", "placeholder"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_switch, {
+                                  modelValue: usePromptCustom.value,
+                                  "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => usePromptCustom.value = $event),
+                                  onChange: onUsePromptCustomChange
+                                }, null, 8, ["modelValue"])
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        }, 8, ["label-width", "label-position"])
+                      ])
                     ]),
                     _: 1
                   }),
-                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                  vue.createVNode(_component_el_tab_pane, {
+                    label: "Gemini",
+                    name: "gemini"
+                  }, {
                     default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(useGemini),
-                        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(useGemini) ? useGemini.value = $event : null),
-                        onChange: onGeminiChange,
-                        "before-change": useGeminiBeforeChange
-                      }, null, 8, ["modelValue"])
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_form_item, { label: "通义千问 API Key" }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_tooltip, {
-                        content: "获取API Key：https://dashscope.console.aliyun.com/apiKey",
-                        placement: "top"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(qianwenApiKey),
-                            "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => vue.isRef(qianwenApiKey) ? qianwenApiKey.value = $event : null),
-                            onChange: onQianwenApiKeyChange
-                          }, null, 8, ["modelValue"])
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(useQianwen),
-                        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => vue.isRef(useQianwen) ? useQianwen.value = $event : null),
-                        onChange: onQianwenChange,
-                        "before-change": useQianwenBeforeChange
-                      }, null, 8, ["modelValue"])
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_form_item, { label: "Kimi API Key" }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_tooltip, {
-                        content: "获取API Key：https://platform.moonshot.cn/console/api-keys",
-                        placement: "top"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(kimiApiKey),
-                            "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => vue.isRef(kimiApiKey) ? kimiApiKey.value = $event : null),
-                            onChange: onKimiApiKeyChange
-                          }, null, 8, ["modelValue"])
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(useKimi),
-                        "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => vue.isRef(useKimi) ? useKimi.value = $event : null),
-                        onChange: onKimiChange,
-                        "before-change": useKimiBeforeChange
-                      }, null, 8, ["modelValue"])
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_form_item, { label: "Chatgpt Domain" }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_tooltip, {
-                        content: "请自行寻找可用域名，example: chat.customai.com",
-                        placement: "top"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(chatgptDomain),
-                            "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => vue.isRef(chatgptDomain) ? chatgptDomain.value = $event : null),
-                            onChange: onChatgptDomainChange
-                          }, null, 8, ["modelValue"])
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_form_item, { label: "Chatgpt API Key" }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_tooltip, {
-                        content: "按接口规则填写",
-                        placement: "top"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(chatgptApiKey),
-                            "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => vue.isRef(chatgptApiKey) ? chatgptApiKey.value = $event : null),
-                            onChange: onChatgptApiKeyChange
-                          }, null, 8, ["modelValue"])
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_form_item, { label: "Chatgpt Model" }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_tooltip, {
-                        content: "默认使用：gpt-3.5-turbo，需接口支持",
-                        placement: "top"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_select, {
-                            modelValue: vue.unref(chatgptModel),
-                            "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => vue.isRef(chatgptModel) ? chatgptModel.value = $event : null),
-                            placeholder: "Select",
-                            size: "large",
-                            style: { "width": "240px" },
-                            onChange: onChatgptModelChange
+                      vue.createElementVNode("div", _hoisted_4$2, [
+                        vue.createElementVNode("div", _hoisted_5$2, [
+                          vue.createVNode(_component_el_alert, {
+                            type: "info",
+                            closable: false,
+                            "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => [
-                              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(chatgptModelList), (item) => {
-                                return vue.openBlock(), vue.createBlock(_component_el_option, {
-                                  key: item.value,
-                                  label: item.label,
-                                  value: item.value
-                                }, null, 8, ["label", "value"]);
-                              }), 128))
-                            ]),
+                            default: vue.withCtx(() => _cache[18] || (_cache[18] = [
+                              vue.createElementVNode("p", { style: { "margin": "0" } }, [
+                                vue.createTextVNode("带 "),
+                                vue.createElementVNode("span", { class: "required-star" }, "*"),
+                                vue.createTextVNode(" 标记的字段为必填项")
+                              ], -1)
+                            ])),
                             _: 1
-                          }, 8, ["modelValue"])
+                          })
                         ]),
-                        _: 1
-                      })
+                        vue.createVNode(_component_el_form, {
+                          "label-width": useMobileLayout.value ? "auto" : "120",
+                          "label-position": useMobileLayout.value ? "top" : "left",
+                          size: "small"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_el_form_item, {
+                              label: "API Key",
+                              required: ""
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "获取API Key：https://aistudio.google.com/app/apikey",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: geminiApiKey.value,
+                                      "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => geminiApiKey.value = $event),
+                                      onChange: onGeminiApiKeyChange
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        }, 8, ["label-width", "label-position"])
+                      ])
                     ]),
                     _: 1
                   }),
-                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                  vue.createVNode(_component_el_tab_pane, {
+                    label: "通义千问",
+                    name: "qianwen"
+                  }, {
                     default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(useChatgpt),
-                        "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => vue.isRef(useChatgpt) ? useChatgpt.value = $event : null),
-                        onChange: onChatgptChange,
-                        "before-change": useChatgptBeforeChange
-                      }, null, 8, ["modelValue"])
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_form_item, { label: "Deepseek Domain" }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_tooltip, {
-                        content: "请自行寻找可用域名，example: chat.customai.com",
-                        placement: "top"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(deepseekDomain),
-                            "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => vue.isRef(deepseekDomain) ? deepseekDomain.value = $event : null),
-                            onChange: onDeepseekDomainChange
-                          }, null, 8, ["modelValue"])
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_form_item, { label: "Deepseek API Key" }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_tooltip, {
-                        content: "按接口规则填写",
-                        placement: "top"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_input, {
-                            modelValue: vue.unref(deepseekApiKey),
-                            "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => vue.isRef(deepseekApiKey) ? deepseekApiKey.value = $event : null),
-                            onChange: onDeepseekApiKeyChange
-                          }, null, 8, ["modelValue"])
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_form_item, { label: "Deepseek Model" }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_tooltip, {
-                        content: "默认使用：deepseek-chat，需接口支持",
-                        placement: "top"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_select, {
-                            modelValue: vue.unref(deepseekModel),
-                            "onUpdate:modelValue": _cache[12] || (_cache[12] = ($event) => vue.isRef(deepseekModel) ? deepseekModel.value = $event : null),
-                            placeholder: "Select",
-                            size: "large",
-                            style: { "width": "240px" },
-                            onChange: onDeepseekModelChange
+                      vue.createElementVNode("div", _hoisted_6$1, [
+                        vue.createElementVNode("div", _hoisted_7$1, [
+                          vue.createVNode(_component_el_alert, {
+                            type: "info",
+                            closable: false,
+                            "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => [
-                              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(deepseekModelList), (item) => {
-                                return vue.openBlock(), vue.createBlock(_component_el_option, {
-                                  key: item.value,
-                                  label: item.label,
-                                  value: item.value
-                                }, null, 8, ["label", "value"]);
-                              }), 128))
-                            ]),
+                            default: vue.withCtx(() => _cache[19] || (_cache[19] = [
+                              vue.createElementVNode("p", { style: { "margin": "0" } }, [
+                                vue.createTextVNode("带 "),
+                                vue.createElementVNode("span", { class: "required-star" }, "*"),
+                                vue.createTextVNode(" 标记的字段为必填项")
+                              ], -1)
+                            ])),
                             _: 1
-                          }, 8, ["modelValue"])
+                          })
                         ]),
-                        _: 1
-                      })
+                        vue.createVNode(_component_el_form, {
+                          "label-width": useMobileLayout.value ? "auto" : "120",
+                          "label-position": useMobileLayout.value ? "top" : "left",
+                          size: "small"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_el_form_item, {
+                              label: "API Key",
+                              required: ""
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "获取API Key：https://dashscope.console.aliyun.com/apiKey",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: qianwenApiKey.value,
+                                      "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => qianwenApiKey.value = $event),
+                                      onChange: onQianwenApiKeyChange
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        }, 8, ["label-width", "label-position"])
+                      ])
                     ]),
                     _: 1
                   }),
-                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                  vue.createVNode(_component_el_tab_pane, {
+                    label: "Kimi",
+                    name: "kimi"
+                  }, {
                     default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(useDeepseek),
-                        "onUpdate:modelValue": _cache[13] || (_cache[13] = ($event) => vue.isRef(useDeepseek) ? useDeepseek.value = $event : null),
-                        onChange: onDeepseekChange,
-                        "before-change": useDeepseekBeforeChange
-                      }, null, 8, ["modelValue"])
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_form_item, { label: "自定义 SystemRole" }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_tooltip, {
-                        content: "自定义系统角色，帮你获得更个性化的回帖内容。",
-                        placement: "top"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_input, {
-                            type: "textarea",
-                            modelValue: vue.unref(systemRoleCustom),
-                            "onUpdate:modelValue": _cache[14] || (_cache[14] = ($event) => vue.isRef(systemRoleCustom) ? systemRoleCustom.value = $event : null),
-                            onChange: onSystemRoleCustomChange,
-                            placeholder: `默认：${vue.unref(proxy).$app.systemRole}`
-                          }, null, 8, ["modelValue", "placeholder"])
+                      vue.createElementVNode("div", _hoisted_8$1, [
+                        vue.createElementVNode("div", _hoisted_9$1, [
+                          vue.createVNode(_component_el_alert, {
+                            type: "info",
+                            closable: false,
+                            "show-icon": ""
+                          }, {
+                            default: vue.withCtx(() => _cache[20] || (_cache[20] = [
+                              vue.createElementVNode("p", { style: { "margin": "0" } }, [
+                                vue.createTextVNode("带 "),
+                                vue.createElementVNode("span", { class: "required-star" }, "*"),
+                                vue.createTextVNode(" 标记的字段为必填项")
+                              ], -1)
+                            ])),
+                            _: 1
+                          })
                         ]),
-                        _: 1
-                      })
+                        vue.createVNode(_component_el_form, {
+                          "label-width": useMobileLayout.value ? "auto" : "120",
+                          "label-position": useMobileLayout.value ? "top" : "left",
+                          size: "small"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_el_form_item, {
+                              label: "API Key",
+                              required: ""
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "获取API Key：https://platform.moonshot.cn/console/api-keys",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: kimiApiKey.value,
+                                      "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => kimiApiKey.value = $event),
+                                      onChange: onKimiApiKeyChange
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        }, 8, ["label-width", "label-position"])
+                      ])
                     ]),
                     _: 1
                   }),
-                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                  vue.createVNode(_component_el_tab_pane, {
+                    label: "ChatGPT",
+                    name: "chatgpt"
+                  }, {
                     default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(useSystemRoleCustom),
-                        "onUpdate:modelValue": _cache[15] || (_cache[15] = ($event) => vue.isRef(useSystemRoleCustom) ? useSystemRoleCustom.value = $event : null),
-                        onChange: onUseSystemRoleCustomChange,
-                        "before-change": useSystemRoleCustomBeforeChange
-                      }, null, 8, ["modelValue"])
-                    ]),
-                    _: 1
-                  }),
-                  vue.createVNode(_component_el_form_item, { label: "自定义 Prompt" }, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_tooltip, {
-                        content: "自定义提示词，帮你获得更个性化的回帖内容。必须包含唯一变量：{{title}}",
-                        placement: "top"
-                      }, {
-                        default: vue.withCtx(() => [
-                          vue.createVNode(_component_el_input, {
-                            type: "textarea",
-                            modelValue: vue.unref(promptCustom),
-                            "onUpdate:modelValue": _cache[16] || (_cache[16] = ($event) => vue.isRef(promptCustom) ? promptCustom.value = $event : null),
-                            onChange: onPromptCustomChange,
-                            placeholder: `默认：${vue.unref(proxy).$app.prompt}`
-                          }, null, 8, ["modelValue", "placeholder"])
+                      vue.createElementVNode("div", _hoisted_10$1, [
+                        vue.createElementVNode("div", _hoisted_11$1, [
+                          vue.createVNode(_component_el_alert, {
+                            type: "info",
+                            closable: false,
+                            "show-icon": ""
+                          }, {
+                            default: vue.withCtx(() => _cache[21] || (_cache[21] = [
+                              vue.createElementVNode("p", { style: { "margin": "0" } }, [
+                                vue.createTextVNode("带 "),
+                                vue.createElementVNode("span", { class: "required-star" }, "*"),
+                                vue.createTextVNode(" 标记的字段为必填项")
+                              ], -1)
+                            ])),
+                            _: 1
+                          })
                         ]),
-                        _: 1
-                      })
+                        vue.createVNode(_component_el_form, {
+                          "label-width": useMobileLayout.value ? "auto" : "120",
+                          "label-position": useMobileLayout.value ? "top" : "left",
+                          size: "small"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_el_form_item, { label: "API Domain" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "请自行寻找可用域名，example: chat.customai.com",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: chatgptDomain.value,
+                                      "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => chatgptDomain.value = $event),
+                                      onChange: onChatgptDomainChange
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, {
+                              label: "API Key",
+                              required: ""
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "按接口规则填写",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: chatgptApiKey.value,
+                                      "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => chatgptApiKey.value = $event),
+                                      onChange: onChatgptApiKeyChange
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, {
+                              label: "模型选择",
+                              required: ""
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "默认使用：gpt-3.5-turbo，需接口支持",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_select, {
+                                      modelValue: chatgptModel.value,
+                                      "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => chatgptModel.value = $event),
+                                      placeholder: "Select",
+                                      style: vue.normalizeStyle(useMobileLayout.value ? "width: 100%" : "width: 240px"),
+                                      onChange: onChatgptModelChange
+                                    }, {
+                                      default: vue.withCtx(() => [
+                                        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(chatgptModelList.value, (item) => {
+                                          return vue.openBlock(), vue.createBlock(_component_el_option, {
+                                            key: item.value,
+                                            label: item.label,
+                                            value: item.value
+                                          }, null, 8, ["label", "value"]);
+                                        }), 128))
+                                      ]),
+                                      _: 1
+                                    }, 8, ["modelValue", "style"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        }, 8, ["label-width", "label-position"])
+                      ])
                     ]),
                     _: 1
                   }),
-                  vue.createVNode(_component_el_form_item, { label: "启用" }, {
+                  vue.createVNode(_component_el_tab_pane, {
+                    label: "DeepSeek",
+                    name: "deepseek"
+                  }, {
                     default: vue.withCtx(() => [
-                      vue.createVNode(_component_el_switch, {
-                        modelValue: vue.unref(usePromptCustom),
-                        "onUpdate:modelValue": _cache[17] || (_cache[17] = ($event) => vue.isRef(usePromptCustom) ? usePromptCustom.value = $event : null),
-                        onChange: onUsePromptCustomChange,
-                        "before-change": usePromptCustomBeforeChange
-                      }, null, 8, ["modelValue"])
+                      vue.createElementVNode("div", _hoisted_12$1, [
+                        vue.createElementVNode("div", _hoisted_13$1, [
+                          vue.createVNode(_component_el_alert, {
+                            type: "info",
+                            closable: false,
+                            "show-icon": ""
+                          }, {
+                            default: vue.withCtx(() => _cache[22] || (_cache[22] = [
+                              vue.createElementVNode("p", { style: { "margin": "0" } }, [
+                                vue.createTextVNode("带 "),
+                                vue.createElementVNode("span", { class: "required-star" }, "*"),
+                                vue.createTextVNode(" 标记的字段为必填项")
+                              ], -1)
+                            ])),
+                            _: 1
+                          })
+                        ]),
+                        vue.createVNode(_component_el_form, {
+                          "label-width": useMobileLayout.value ? "auto" : "120",
+                          "label-position": useMobileLayout.value ? "top" : "left",
+                          size: "small"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_el_form_item, { label: "API Domain" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "请自行寻找可用域名，example: chat.customai.com",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: deepseekDomain.value,
+                                      "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => deepseekDomain.value = $event),
+                                      onChange: onDeepseekDomainChange
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, {
+                              label: "API Key",
+                              required: ""
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "按接口规则填写",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: deepseekApiKey.value,
+                                      "onUpdate:modelValue": _cache[12] || (_cache[12] = ($event) => deepseekApiKey.value = $event),
+                                      onChange: onDeepseekApiKeyChange
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, {
+                              label: "模型选择",
+                              required: ""
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "默认使用：deepseek-chat，需接口支持",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_select, {
+                                      modelValue: deepseekModel.value,
+                                      "onUpdate:modelValue": _cache[13] || (_cache[13] = ($event) => deepseekModel.value = $event),
+                                      placeholder: "Select",
+                                      style: vue.normalizeStyle(useMobileLayout.value ? "width: 100%" : "width: 240px"),
+                                      onChange: onDeepseekModelChange
+                                    }, {
+                                      default: vue.withCtx(() => [
+                                        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(deepseekModelList.value, (item) => {
+                                          return vue.openBlock(), vue.createBlock(_component_el_option, {
+                                            key: item.value,
+                                            label: item.label,
+                                            value: item.value
+                                          }, null, 8, ["label", "value"]);
+                                        }), 128))
+                                      ]),
+                                      _: 1
+                                    }, 8, ["modelValue", "style"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        }, 8, ["label-width", "label-position"])
+                      ])
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_tab_pane, {
+                    label: "Grok",
+                    name: "grok"
+                  }, {
+                    default: vue.withCtx(() => [
+                      vue.createElementVNode("div", _hoisted_14$1, [
+                        vue.createElementVNode("div", _hoisted_15$1, [
+                          vue.createVNode(_component_el_alert, {
+                            type: "info",
+                            closable: false,
+                            "show-icon": ""
+                          }, {
+                            default: vue.withCtx(() => _cache[23] || (_cache[23] = [
+                              vue.createElementVNode("p", { style: { "margin": "0" } }, [
+                                vue.createTextVNode("带 "),
+                                vue.createElementVNode("span", { class: "required-star" }, "*"),
+                                vue.createTextVNode(" 标记的字段为必填项")
+                              ], -1)
+                            ])),
+                            _: 1
+                          })
+                        ]),
+                        vue.createVNode(_component_el_form, {
+                          "label-width": useMobileLayout.value ? "auto" : "120",
+                          "label-position": useMobileLayout.value ? "top" : "left",
+                          size: "small"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_el_form_item, { label: "API Domain" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "请自行寻找可用域名，example: chat.customai.com",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: grokDomain.value,
+                                      "onUpdate:modelValue": _cache[14] || (_cache[14] = ($event) => grokDomain.value = $event),
+                                      onChange: onGrokDomainChange
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, {
+                              label: "API Key",
+                              required: ""
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "按接口规则填写",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: grokApiKey.value,
+                                      "onUpdate:modelValue": _cache[15] || (_cache[15] = ($event) => grokApiKey.value = $event),
+                                      onChange: onGrokApiKeyChange
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, {
+                              label: "模型选择",
+                              required: ""
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "默认使用：grok-3-mini-beta，需接口支持",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_select, {
+                                      modelValue: grokModel.value,
+                                      "onUpdate:modelValue": _cache[16] || (_cache[16] = ($event) => grokModel.value = $event),
+                                      placeholder: "Select",
+                                      style: vue.normalizeStyle(useMobileLayout.value ? "width: 100%" : "width: 240px"),
+                                      onChange: onGrokModelChange
+                                    }, {
+                                      default: vue.withCtx(() => [
+                                        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(grokModelList.value, (item) => {
+                                          return vue.openBlock(), vue.createBlock(_component_el_option, {
+                                            key: item.value,
+                                            label: item.label,
+                                            value: item.value
+                                          }, null, 8, ["label", "value"]);
+                                        }), 128))
+                                      ]),
+                                      _: 1
+                                    }, 8, ["modelValue", "style"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        }, 8, ["label-width", "label-position"])
+                      ])
                     ]),
                     _: 1
                   })
                 ]),
                 _: 1
-              })
+              }, 8, ["modelValue"])
             ]),
             _: 1
           })
@@ -1868,430 +1127,13 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-e87ab068"]]);
-  const _hoisted_1 = { class: "margin-left" };
-  const _hoisted_2 = { class: "margin-left" };
-  const _sfc_main = {
-    __name: "Login",
-    emits: ["onSuccess", "onClose"],
-    setup(__props, { emit }) {
-      const { proxy } = vue.getCurrentInstance();
-      const checkName = (rule, value, callback) => {
-        if (!/[0-9a-zA-Z@\.]{5,20}/.test(value)) {
-          callback("用户名5-20，只能包含字母、数字、“.”、“@”等");
-        }
-        callback();
-      };
-      const checkPassword = (rule, value, callback) => {
-        if (!/[0-9a-zA-Z\.\-_]{2,20}/.test(value)) {
-          callback("密码2-20，只能包含字母、数字、“.”、“-”、“_”等");
-        }
-        callback();
-      };
-      const checkRePassword = (rule, value, callback) => {
-        if (value !== loginForm.value.password) {
-          callback("两次密码不一致");
-        }
-        callback();
-      };
-      const registerFormRef = vue.ref();
-      const formMode = vue.ref(1);
-      const registerRules = vue.ref({
-        username: [
-          { required: true, message: "用户名不能为空", trigger: "blur" }
-          // { validator: checkName, trigger: 'blur'}
-        ],
-        password: [
-          { required: true, message: "密码不能为空", trigger: "blur" },
-          { validator: checkPassword, trigger: "blur" }
-        ],
-        rePassword: [
-          { required: true, message: "确认密码不能为空", trigger: "blur" },
-          { validator: checkRePassword, trigger: "blur" }
-        ]
-      });
-      const loginFormRef = vue.ref();
-      const loginForm = vue.ref({
-        username: "",
-        password: "",
-        rePassword: ""
-      });
-      const loginRules = vue.ref({
-        username: [
-          { required: true, message: "用户名不能为空", trigger: "blur" },
-          { validator: checkName, trigger: "blur" }
-        ],
-        password: [
-          { required: true, message: "密码不能为空", trigger: "blur" },
-          { validator: checkPassword, trigger: "blur" }
-        ]
-      });
-      const loginSuccess = (res) => {
-        proxy.$storage.setUserInfo("userId", res.data.userId);
-        emit("onSuccess");
-      };
-      const loginOnSubmit = () => {
-        loginFormRef.value.validate(async (valid, fields) => {
-          if (valid) {
-            proxy.$api.login(loginForm.value).then((res) => {
-              if (res.code != 0) {
-                proxy.$message.error(res.message);
-                return false;
-              }
-              loginSuccess(res);
-            }).catch((err) => {
-              proxy.$message.error(err.message);
-            });
-          }
-        });
-      };
-      const registerOnSubmit = () => {
-        registerFormRef.value.validate(async (valid, fields) => {
-          if (valid) {
-            proxy.$api.register(loginForm.value).then((res) => {
-              if (res.code != 0) {
-                proxy.$message.error(res.message);
-                return false;
-              }
-              loginSuccess(res);
-            }).catch((err) => {
-              proxy.$message.error(err.message);
-            });
-          }
-        });
-      };
-      const close = () => {
-        emit("onClose");
-      };
-      return (_ctx, _cache) => {
-        const _component_el_input = vue.resolveComponent("el-input");
-        const _component_el_form_item = vue.resolveComponent("el-form-item");
-        const _component_el_button = vue.resolveComponent("el-button");
-        const _component_el_link = vue.resolveComponent("el-link");
-        const _component_el_space = vue.resolveComponent("el-space");
-        const _component_el_form = vue.resolveComponent("el-form");
-        return vue.openBlock(), vue.createElementBlock("div", null, [
-          vue.unref(formMode) === 1 ? (vue.openBlock(), vue.createBlock(_component_el_form, {
-            key: 0,
-            ref_key: "loginFormRef",
-            ref: loginFormRef,
-            model: vue.unref(loginForm),
-            rules: vue.unref(loginRules),
-            "label-width": "120px"
-          }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_el_form_item, {
-                label: "用户名：",
-                prop: "username",
-                required: ""
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(_component_el_input, {
-                    modelValue: vue.unref(loginForm).username,
-                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.unref(loginForm).username = $event)
-                  }, null, 8, ["modelValue"])
-                ]),
-                _: 1
-              }),
-              vue.createVNode(_component_el_form_item, {
-                label: "密码：",
-                prop: "password",
-                required: ""
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(_component_el_input, {
-                    modelValue: vue.unref(loginForm).password,
-                    "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.unref(loginForm).password = $event)
-                  }, null, 8, ["modelValue"])
-                ]),
-                _: 1
-              }),
-              vue.createVNode(_component_el_form_item, null, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(_component_el_button, {
-                    type: "primary",
-                    onClick: loginOnSubmit
-                  }, {
-                    default: vue.withCtx(() => [
-                      vue.createTextVNode("登录")
-                    ]),
-                    _: 1
-                  }),
-                  vue.createElementVNode("div", _hoisted_1, [
-                    vue.createVNode(_component_el_space, null, {
-                      default: vue.withCtx(() => [
-                        vue.createVNode(_component_el_link, {
-                          href: "javascript:;",
-                          onClick: _cache[2] || (_cache[2] = ($event) => formMode.value = 0)
-                        }, {
-                          default: vue.withCtx(() => [
-                            vue.createTextVNode("注册")
-                          ]),
-                          _: 1
-                        }),
-                        vue.createVNode(_component_el_link, {
-                          href: "javascript:;",
-                          onClick: close
-                        }, {
-                          default: vue.withCtx(() => [
-                            vue.createTextVNode("关闭")
-                          ]),
-                          _: 1
-                        })
-                      ]),
-                      _: 1
-                    })
-                  ])
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          }, 8, ["model", "rules"])) : (vue.openBlock(), vue.createBlock(_component_el_form, {
-            key: 1,
-            ref_key: "registerFormRef",
-            ref: registerFormRef,
-            model: vue.unref(loginForm),
-            rules: vue.unref(registerRules),
-            "label-width": "120px"
-          }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_el_form_item, {
-                label: "用户名：",
-                prop: "username",
-                required: ""
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(_component_el_input, {
-                    modelValue: vue.unref(loginForm).username,
-                    "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => vue.unref(loginForm).username = $event)
-                  }, null, 8, ["modelValue"])
-                ]),
-                _: 1
-              }),
-              vue.createVNode(_component_el_form_item, {
-                label: "密码：",
-                prop: "password",
-                required: ""
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(_component_el_input, {
-                    modelValue: vue.unref(loginForm).password,
-                    "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => vue.unref(loginForm).password = $event)
-                  }, null, 8, ["modelValue"])
-                ]),
-                _: 1
-              }),
-              vue.createVNode(_component_el_form_item, {
-                label: "确认密码：",
-                prop: "rePassword",
-                required: ""
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(_component_el_input, {
-                    modelValue: vue.unref(loginForm).rePassword,
-                    "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => vue.unref(loginForm).rePassword = $event)
-                  }, null, 8, ["modelValue"])
-                ]),
-                _: 1
-              }),
-              vue.createVNode(_component_el_form_item, null, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(_component_el_button, {
-                    type: "primary",
-                    onClick: registerOnSubmit
-                  }, {
-                    default: vue.withCtx(() => [
-                      vue.createTextVNode("注册")
-                    ]),
-                    _: 1
-                  }),
-                  vue.createElementVNode("div", _hoisted_2, [
-                    vue.createVNode(_component_el_space, null, {
-                      default: vue.withCtx(() => [
-                        vue.createVNode(_component_el_link, {
-                          href: "javascript:;",
-                          onClick: _cache[6] || (_cache[6] = ($event) => formMode.value = 1)
-                        }, {
-                          default: vue.withCtx(() => [
-                            vue.createTextVNode("登录")
-                          ]),
-                          _: 1
-                        }),
-                        vue.createVNode(_component_el_link, {
-                          href: "javascript:;",
-                          onClick: close
-                        }, {
-                          default: vue.withCtx(() => [
-                            vue.createTextVNode("关闭")
-                          ]),
-                          _: 1
-                        })
-                      ]),
-                      _: 1
-                    })
-                  ])
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          }, 8, ["model", "rules"]))
-        ]);
-      };
-    }
-  };
-  const Util = {
-    install: (app2, options) => {
-      app2.config.globalProperties.$storage = {
-        key: "QuickReply",
-        userStorageKey: "QuickReplyUser",
-        set(value) {
-          _GM_setValue(this.key, value);
-        },
-        get() {
-          return _GM_getValue(this.key, []);
-        },
-        getAll() {
-          let keyList = _GM_listValues();
-          let all = {};
-          keyList.forEach((key) => {
-            all[key] = _GM_getValue(key, "");
-          });
-          return all;
-        },
-        setAll(data) {
-          for (let key in data) {
-            _GM_setValue(key, data[key]);
-          }
-        },
-        setUserInfo(key, value) {
-          let fullKey = `${this.userStorageKey}.${key}`;
-          _GM_setValue(fullKey, value);
-        },
-        getUserInfo(key) {
-          let fullKey = `${this.userStorageKey}.${key}`;
-          return _GM_getValue(fullKey, "");
-        },
-        uploadList() {
-          let proxy = app2.config.globalProperties;
-          let userId = proxy.$storage.getUserInfo("userId");
-          let myList = proxy.$storage.get() || [];
-          if (!userId) {
-            proxy.$message.error("请先登录");
-            return false;
-          }
-          if (myList.length == 0) {
-            proxy.$message.error("无可同步数据");
-            return false;
-          }
-          proxy.$api.upQuickReplyList({
-            userId,
-            list: myList
-          }).then((res) => {
-            proxy.$message.success("上传成功");
-          }).catch((err) => {
-            proxy.$message.error(err.message);
-          });
-        },
-        async downloadList() {
-          let proxy = app2.config.globalProperties;
-          let userId = proxy.$storage.getUserInfo("userId");
-          if (!userId) {
-            proxy.$message.error("请先登录");
-            return false;
-          }
-          let res = await proxy.$api.downQuickReplyList({
-            userId
-          });
-          if (res.code == 0) {
-            if (res.data.length == 0) {
-              proxy.$message.error("云端无数据");
-            } else {
-              proxy.$storage.set(res.data);
-              proxy.$message.success("下载成功");
-              return res.data;
-            }
-          } else {
-            proxy.$message.error(res.message);
-          }
-        },
-        uploadAll() {
-          let proxy = app2.config.globalProperties;
-          let userId = proxy.$storage.getUserInfo("userId");
-          let options2 = proxy.$storage.getAll();
-          if (options2.QuickReply && options2.QuickReply.length > 10) {
-            proxy.$message.error("回复列表超出数量限制：10 条");
-            return false;
-          }
-          options2 = JSON.stringify(options2);
-          options2 = proxy.$tools.encodeStr(options2);
-          if (!userId) {
-            proxy.$message.error("请先登录");
-            return false;
-          }
-          proxy.$api.upUserAll({
-            userId,
-            options: options2
-          }).then((res) => {
-            proxy.$message.success("备份成功");
-          }).catch((err) => {
-            proxy.$message.error(err.message);
-          });
-        },
-        async downloadAll() {
-          let proxy = app2.config.globalProperties;
-          let userId = proxy.$storage.getUserInfo("userId");
-          if (!userId) {
-            proxy.$message.error("请先登录");
-            return false;
-          }
-          let res = await proxy.$api.downUserAll({
-            userId
-          });
-          if (res.code == 0) {
-            proxy.$storage.setAll(res.data);
-            proxy.$message.success("恢复成功");
-            return res.data;
-          } else {
-            proxy.$message.error(res.message);
-          }
-        }
-      };
-      app2.config.globalProperties.$app = {
-        getName() {
-          return _GM_info["script"]["name"];
-        },
-        getVersion: function() {
-          return _GM_info["script"]["version"];
-        },
-        systemRole: "你是一个互联网高手，常年混迹于各大论坛，对所有内容都感兴趣，并且热衷于回复每一篇帖子，回复风格：简短、睿智、一语中的，又不失俏皮诙谐",
-        prompt: "请根据帖子标题：{{title}}，进行回帖。务必直接给出回帖内容，不要包含其他无关内容",
-        isNew: function(timestamp) {
-          if (!timestamp)
-            return false;
-          let number = 3600 * 24 * 7;
-          return parseInt((/* @__PURE__ */ new Date()).getTime() / 1e3) - timestamp <= number;
-        }
-      };
-      app2.config.globalProperties.$tools = {
-        encodeStr: function(str) {
-          let encoder = new TextEncoder();
-          str = encoder.encode(str);
-          return btoa(String.fromCharCode.apply(null, str));
-        },
-        decodeStr: function(str) {
-          var byteCharacters = atob(str);
-          var byteArray = new Uint8Array(byteCharacters.length);
-          for (var i = 0; i < byteCharacters.length; i++) {
-            byteArray[i] = byteCharacters.charCodeAt(i);
-          }
-          var decoder = new TextDecoder();
-          return decoder.decode(byteArray);
-        }
-      };
-    }
-  };
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-6e38d9a1"]]);
+  var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
+  var _GM_info = /* @__PURE__ */ (() => typeof GM_info != "undefined" ? GM_info : void 0)();
+  var _GM_listValues = /* @__PURE__ */ (() => typeof GM_listValues != "undefined" ? GM_listValues : void 0)();
+  var _GM_setValue = /* @__PURE__ */ (() => typeof GM_setValue != "undefined" ? GM_setValue : void 0)();
+  var _GM_xmlhttpRequest = /* @__PURE__ */ (() => typeof GM_xmlhttpRequest != "undefined" ? GM_xmlhttpRequest : void 0)();
+  var _unsafeWindow = /* @__PURE__ */ (() => typeof unsafeWindow != "undefined" ? unsafeWindow : void 0)();
   const http = function(api, data, method) {
     method = method ? method.toLowerCase() : "post";
     return new Promise((resolve, reject) => {
@@ -2612,10 +1454,2676 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                   reject(xhr.response);
                 }
               });
+            } else if (useAI == "grok") {
+              let grokDomain = proxy.$storage.getUserInfo("grokDomain") || "api.x.ai";
+              let grokModel = proxy.$storage.getUserInfo("grokModel") || "grok-3-mini-beta";
+              let grokApiKey = proxy.$storage.getUserInfo("grokApiKey") || "";
+              if (!grokDomain) {
+                reject("无效地址");
+              }
+              let url = `https://${grokDomain}/v1/chat/completions`;
+              let data = {
+                "model": `${grokModel}`,
+                "messages": [
+                  {
+                    role: "system",
+                    content: systemRole
+                  },
+                  {
+                    "role": "user",
+                    "content": prompt
+                  }
+                ],
+                "stream": false
+              };
+              let headers = {
+                "Content-Type": "application/json; charset=utf-8",
+                "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`
+              };
+              if (grokApiKey) {
+                headers["Authorization"] = `Bearer ${grokApiKey}`;
+              }
+              _GM_xmlhttpRequest({
+                method: "POST",
+                url,
+                headers,
+                data: `${JSON.stringify(data)}`,
+                responseType: "json",
+                onload: function(xhr) {
+                  let { choices, error } = xhr.response;
+                  if (error) {
+                    reject(error.message);
+                  }
+                  let result = choices[0].message.content;
+                  resolve(result);
+                },
+                onerror: function(xhr) {
+                  reject(xhr.response);
+                }
+              });
             } else {
               reject("暂未配置AI");
             }
           });
+        }
+      };
+    }
+  };
+  const _hoisted_1$2 = { class: "quickReplyBox" };
+  const _hoisted_2$2 = {
+    slot: "label",
+    class: "quickReplyBoxTitle"
+  };
+  const _sfc_main$2 = {
+    __name: "App",
+    setup(__props) {
+      const { proxy } = vue.getCurrentInstance();
+      const list = vue.ref([]);
+      const currentReply = vue.ref("");
+      const currentPlatform = vue.ref("discuz");
+      const fwin_replyLoaded = vue.ref(false);
+      const submitNow = vue.ref(false);
+      const hasEditor = vue.ref(false);
+      const lastClickElement = vue.ref(false);
+      const setShow = vue.ref(false);
+      const useAI = vue.ref("");
+      const loadingAIReply = vue.ref(false);
+      const aiNameList = vue.ref({
+        gemini: "Gemini 2.0 Flash",
+        qianwen: "通义千问-turbo",
+        kimi: "Kimi",
+        chatgpt: "ChatGPT",
+        deepseek: "DeepSeek",
+        grok: "Grok"
+      });
+      const constVar = vue.ref({
+        email: "",
+        qq: "",
+        wechat: "",
+        url: "",
+        base64: false
+      });
+      vue.onBeforeMount(() => {
+        checkPlatform();
+        getList();
+        submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
+        useAI.value = proxy.$storage.getUserInfo("useAI") || "";
+        updateConstVar();
+        updateAIModel();
+        proxy.$on("dataRestored", handleDataRestored);
+      });
+      function handleDataRestored(data) {
+        console.log("App组件接收到数据恢复事件", data);
+        if (data) {
+          if (data.QuickReply) {
+            list.value = data.QuickReply;
+            console.log("已更新快捷回复列表", list.value);
+          }
+          const userStorageKey = proxy.$storage.userStorageKey;
+          const submitNowKey = `${userStorageKey}.submitNow`;
+          const useAIKey = `${userStorageKey}.useAI`;
+          const constVarKey = `${userStorageKey}.constVar`;
+          if (data[submitNowKey] !== void 0) {
+            submitNow.value = data[submitNowKey] || false;
+            console.log("已更新提交设置", submitNow.value);
+          }
+          if (data[useAIKey] !== void 0) {
+            useAI.value = data[useAIKey] || "";
+            updateAIModel();
+            console.log("已更新AI模型设置", useAI.value);
+          }
+          if (data[constVarKey]) {
+            constVar.value = data[constVarKey];
+            console.log("已更新常量设置", constVar.value);
+          }
+          if (currentReply.value) {
+            enterReply();
+            console.log("已更新当前回复内容到编辑器");
+          }
+        }
+      }
+      function checkPlatform() {
+        if (location.host.indexOf("nodeseek") > -1) {
+          currentPlatform.value = "nodeseek";
+        } else if (location.host.indexOf("v2ex") > -1) {
+          currentPlatform.value = "v2ex";
+        } else {
+          let $generator = document.head.querySelector("meta[name=generator]");
+          if ($generator) {
+            if ($generator.content.indexOf("Discuz") > -1) {
+              currentPlatform.value = "discuz";
+            } else if ($generator.content.indexOf("Discourse") > -1) {
+              currentPlatform.value = "discourse";
+            }
+          } else {
+            let $html = document.body.innerHTML;
+            if ($html.indexOf("flarum-loading") > -1) {
+              currentPlatform.value = "flarum";
+            }
+          }
+        }
+      }
+      async function getList() {
+        let myListStorage = proxy.$storage.get();
+        const oldListEmpty = list.value.length === 0;
+        list.value = myListStorage && myListStorage.length > 0 ? myListStorage : [];
+        if (oldListEmpty && list.value.length > 0 || currentReply.value) {
+          if (currentReply.value && !list.value.includes(currentReply.value)) {
+            currentReply.value = "";
+          }
+          if (currentReply.value) {
+            enterReply();
+          }
+        }
+      }
+      function openSet() {
+        setShow.value = true;
+      }
+      function closeSet() {
+        setShow.value = false;
+      }
+      function updateAIModel() {
+        useAI.value = proxy.$storage.getUserInfo("useAI") || "";
+        let chatgptModel = proxy.$storage.getUserInfo("chatgptModel") || "gpt-3.5-turbo";
+        if (useAI.value === "chatgpt") {
+          aiNameList.value["chatgpt"] = `ChatGPT (${chatgptModel})`;
+        }
+      }
+      function updateConstVar() {
+        constVar.value = proxy.$storage.getUserInfo("constVar") || constVar.value;
+      }
+      function updateMyList(data) {
+        let myListStorage = data || [];
+        list.value = myListStorage;
+      }
+      async function getAIReply() {
+        let title2 = "";
+        if (loadingAIReply.value)
+          return false;
+        loadingAIReply.value = true;
+        if (currentPlatform.value == "discuz") {
+          title2 = document.querySelector("#thread_subject").innerText;
+        } else if (currentPlatform.value == "discourse") {
+          if (document.querySelector("#topic-title h1>a")) {
+            title2 = document.querySelector("#topic-title h1>a").innerText;
+          } else {
+            title2 = document.querySelector("h1.header-title a").innerText;
+          }
+        } else if (currentPlatform.value == "nodeseek") {
+          title2 = document.querySelector("h1>a.post-title-link").innerText;
+        } else if (currentPlatform.value == "v2ex") {
+          title2 = document.querySelector("#Main .header>h1").innerText;
+        }
+        if (!title2) {
+          proxy.$message.error("无法获取帖子标题，请检查脚本是否支持此论坛");
+          return false;
+        }
+        await proxy.$api.getAIReply(title2).then((res) => {
+          currentReply.value = res;
+          enterReply();
+        }).catch((err) => {
+          proxy.$message.error(err);
+        }).finally(() => {
+          loadingAIReply.value = false;
+        });
+      }
+      function enterPostReply() {
+        let $postmessage = document.querySelector("#postmessage");
+        $postmessage.value = currentReply.value;
+      }
+      function enterEditorReply() {
+        let $editorTextarea = document.querySelector("#e_textarea");
+        let $editorIframe = document.querySelector("#e_iframe").contentWindow.document.body;
+        $editorIframe.style.background = "";
+        $editorIframe.innerHTML = currentReply.value || window.bbcode2html(`${$editorTextarea.value}`);
+      }
+      function fastreBindClick() {
+        document.querySelector("body").addEventListener(
+          "click",
+          (e) => {
+            let theElement = `fastre&${e.target.href}`;
+            if (lastClickElement.value != theElement && e.target.className == "fastre") {
+              lastClickElement.value = theElement;
+              fwin_replyLoaded.value = false;
+            }
+          },
+          true
+        );
+      }
+      function replyfastBindClick() {
+        document.querySelector("body").addEventListener(
+          "click",
+          (e) => {
+            let theElement = `replyfast&${e.target.href}`;
+            if (lastClickElement.value != theElement && e.target.className == "replyfast") {
+              lastClickElement.value = theElement;
+              fwin_replyLoaded.value = false;
+            }
+          },
+          true
+        );
+      }
+      function flbcBindClick() {
+        document.querySelector("body").addEventListener(
+          "click",
+          (e) => {
+            let theElement = `flbc&${e.target.href}`;
+            if (lastClickElement.value != theElement && e.target.className == "flbc") {
+              lastClickElement.value = theElement;
+              fwin_replyLoaded.value = false;
+            }
+          },
+          true
+        );
+      }
+      function checkEditor() {
+        hasEditor.value = document.querySelector("#e_iframe");
+      }
+      function postReplyMutationObserver() {
+        let mos = new MutationObserver(function(mutations, observer) {
+          for (const mutation in mutations) {
+            if (Object.hasOwnProperty.call(mutations, mutation)) {
+              const element = mutations[mutation];
+              if (element.target.id == "subjecthide") {
+                fwin_replyLoaded.value = true;
+              }
+            }
+          }
+        });
+        if (document.querySelector("#append_parent")) {
+          mos.observe(document.querySelector("#append_parent"), {
+            attributes: true,
+            childList: true,
+            subtree: true
+          });
+        }
+      }
+      function enterReply() {
+        currentReply.value = currentReply.value.replace("{email}", constVar.value.base64 ? proxy.$tools.encodeStr(constVar.value.email) : constVar.value.email);
+        currentReply.value = currentReply.value.replace("{qq}", constVar.value.base64 ? proxy.$tools.encodeStr(constVar.value.qq) : constVar.value.qq);
+        currentReply.value = currentReply.value.replace("{wechat}", constVar.value.base64 ? proxy.$tools.encodeStr(constVar.value.wechat) : constVar.value.wechat);
+        currentReply.value = currentReply.value.replace("{url}", constVar.value.base64 ? proxy.$tools.encodeStr(constVar.value.url) : constVar.value.url);
+        if (fwin_replyLoaded.value) {
+          enterPostReply();
+        } else if (hasEditor.value) {
+          enterEditorReply();
+        } else if (currentPlatform.value == "nodeseek") {
+          enterMarkdownItReply();
+        } else if (currentPlatform.value == "discourse") {
+          enterDiscourseEmberReply();
+        } else if (currentPlatform.value == "v2ex") {
+          enterReplyContentReply();
+        } else if (currentPlatform.value == "flarum") {
+          enterFlarumTextEditorReply();
+        } else {
+          enterFastPostReply();
+        }
+      }
+      function enterMarkdownItReply() {
+        _unsafeWindow.editor && _unsafeWindow.editor.setMarkdown && _unsafeWindow.editor.setMarkdown(currentReply.value);
+        if (submitNow.value && !useAI.value && currentReply.value) {
+          document.querySelector(".md-editor button.submit").click();
+        }
+      }
+      function enterDiscourseEmberReply() {
+        let $emberTextarea = document.querySelector("textarea.ember-text-area.d-editor-input");
+        if ($emberTextarea) {
+          $emberTextarea.value = currentReply.value;
+          $emberTextarea.dispatchEvent(new Event("change"));
+        }
+        if (submitNow.value && !useAI.value && currentReply.value) {
+          document.querySelector(".submit-panel button.btn.create").click();
+          currentReply.value = "";
+        }
+      }
+      function enterReplyContentReply() {
+        let $replyContent = document.querySelector("textarea#reply_content");
+        if ($replyContent) {
+          $replyContent.value = currentReply.value;
+        }
+        if (submitNow.value && !useAI.value && currentReply.value) {
+          document.querySelector('#reply-box input[type="submit"]').click();
+          currentReply.value = "";
+        }
+      }
+      function enterFlarumTextEditorReply() {
+        let $textEditor = document.querySelector("textarea.FormControl.TextEditor-editor");
+        if ($textEditor) {
+          $textEditor.value = currentReply.value;
+          $textEditor.dispatchEvent(new Event("change"));
+        }
+        if (submitNow.value && !useAI.value && currentReply.value) {
+          document.querySelector(".item-submit button.Button").click();
+          currentReply.value = "";
+        }
+      }
+      function enterFastPostReply() {
+        try {
+          let $fastpostmessage = document.querySelector(
+            "#fastpostmessage"
+          );
+          $fastpostmessage.style.background = "";
+          $fastpostmessage.value = currentReply.value;
+          if (submitNow.value && !useAI.value && currentReply.value) {
+            document.querySelector("button#fastpostsubmit").click();
+          }
+        } catch (err) {
+          console.log("请检查发帖权限！");
+        }
+      }
+      const title = vue.computed(() => {
+        return `${proxy.$app.getName()}`;
+      });
+      const tips = vue.computed(() => {
+        return `${proxy.$app.getName()}，控制面板：
+- 分享、收藏更多精彩回帖；
+- 登录账号（登录后可打开脚本菜单同步你的回帖，在任何设备上恢复并使用）；
+- AI及更多功能，请点击设置图标开启或关闭；`;
+      });
+      vue.onMounted(() => {
+        checkEditor();
+        postReplyMutationObserver();
+        enterReply();
+        fastreBindClick();
+        replyfastBindClick();
+        flbcBindClick();
+      });
+      vue.watch(fwin_replyLoaded, (n) => {
+        if (n) {
+          let $floatlayout_reply = document.querySelector(
+            "#floatlayout_reply"
+          );
+          $floatlayout_reply.insertBefore(
+            proxy.$el,
+            $floatlayout_reply.childNodes[0]
+          );
+          enterPostReply();
+        } else {
+          let $fastposteditor = document.querySelector(
+            "#fastposteditor"
+          );
+          $fastposteditor.insertBefore(
+            proxy.$el,
+            $fastposteditor.childNodes[0]
+          );
+        }
+      });
+      return (_ctx, _cache) => {
+        const _component_el_option = vue.resolveComponent("el-option");
+        const _component_el_select = vue.resolveComponent("el-select");
+        const _component_el_form_item = vue.resolveComponent("el-form-item");
+        const _component_el_button = vue.resolveComponent("el-button");
+        const _component_el_button_group = vue.resolveComponent("el-button-group");
+        const _component_el_form = vue.resolveComponent("el-form");
+        const _component_app_set = vue.resolveComponent("app-set");
+        const _component_el_link = vue.resolveComponent("el-link");
+        const _component_el_dialog = vue.resolveComponent("el-dialog");
+        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$2, [
+          vue.createVNode(vue.Transition, { name: "el-fade-in-linear" }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_el_form, {
+                inline: true,
+                class: "reply-form-inline"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_form_item, null, {
+                    default: vue.withCtx(() => [
+                      vue.createElementVNode("div", _hoisted_2$2, vue.toDisplayString(`${vue.unref(title)}: `), 1),
+                      vue.createVNode(_component_el_select, {
+                        modelValue: vue.unref(currentReply),
+                        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => vue.isRef(currentReply) ? currentReply.value = $event : null),
+                        placeholder: "请选择",
+                        "no-data-text": "这里啥都没有...",
+                        onChange: enterReply
+                      }, {
+                        default: vue.withCtx(() => [
+                          (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(list), (item, index) => {
+                            return vue.openBlock(), vue.createBlock(_component_el_option, {
+                              key: index,
+                              label: item,
+                              value: item
+                            }, null, 8, ["label", "value"]);
+                          }), 128))
+                        ]),
+                        _: 1
+                      }, 8, ["modelValue"])
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_form_item, null, {
+                    default: vue.withCtx(() => [
+                      vue.createVNode(_component_el_button_group, null, {
+                        default: vue.withCtx(() => [
+                          vue.createVNode(_component_el_button, {
+                            type: "primary",
+                            class: "btnQuickReplySet",
+                            icon: "tools",
+                            onClick: openSet,
+                            title: vue.unref(tips)
+                          }, null, 8, ["title"]),
+                          vue.unref(useAI) != "" ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                            key: 0,
+                            type: "success",
+                            class: "btnQuickReplySet",
+                            loading: vue.unref(loadingAIReply),
+                            icon: "magicStick",
+                            onClick: getAIReply,
+                            title: `正在由【${vue.unref(aiNameList)[vue.unref(useAI)]}】为你提供创意回帖
+
+Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
+                          }, null, 8, ["loading", "title"])) : vue.createCommentVNode("", true)
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  })
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }),
+          vue.createVNode(_component_el_dialog, {
+            modelValue: vue.unref(setShow),
+            "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => vue.isRef(setShow) ? setShow.value = $event : null),
+            onClose: closeSet,
+            title: _ctx.$app.getName(),
+            width: "96%",
+            "show-close": true,
+            "destroy-on-close": "",
+            "append-to-body": ""
+          }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_app_set, {
+                ref: "setPanel",
+                onUpdateMyList: updateMyList,
+                onUpdateConstVar: updateConstVar,
+                onUpdateAIModel: updateAIModel
+              }, null, 512)
+            ]),
+            footer: vue.withCtx(() => [
+              vue.createVNode(_component_el_link, {
+                type: "info",
+                href: "https://github.com/bmqy/bbs_quickreply?tab=readme-ov-file#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97",
+                title: "更新日志",
+                target: "_blank"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createTextVNode(vue.toDisplayString(`ver: ${_ctx.$app.getVersion()}`), 1)
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 8, ["modelValue", "title"])
+        ]);
+      };
+    }
+  };
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-1edb02ba"]]);
+  const _hoisted_1$1 = { class: "margin-left" };
+  const _hoisted_2$1 = { class: "margin-left" };
+  const _hoisted_3$1 = { class: "form-tip" };
+  const _hoisted_4$1 = { class: "form-tip" };
+  const _hoisted_5$1 = { class: "margin-left" };
+  const _sfc_main$1 = {
+    __name: "Login",
+    emits: ["onSuccess", "onClose"],
+    setup(__props, { emit: __emit }) {
+      const { proxy } = vue.getCurrentInstance();
+      const checkName = (rule, value, callback) => {
+        if (!/[0-9a-zA-Z@\.]{5,20}/.test(value)) {
+          callback('用户名5-20，只能包含字母、数字、"."、"@"等');
+        }
+        callback();
+      };
+      const checkPassword = (rule, value, callback) => {
+        if (!/[0-9a-zA-Z\.\-_]{2,20}/.test(value)) {
+          callback('密码2-20，只能包含字母、数字、"."、"-"、"_"等');
+        }
+        callback();
+      };
+      const checkRePassword = (rule, value, callback) => {
+        if (value !== loginForm.value.password) {
+          callback("两次密码不一致");
+        }
+        callback();
+      };
+      const checkWebDAVUrl = (rule, value, callback) => {
+        if (!value) {
+          callback("WebDAV 服务器地址不能为空");
+          return;
+        }
+        const urlPattern = /^https?:\/\/.+/i;
+        if (!urlPattern.test(value)) {
+          callback("请输入有效的 WebDAV 服务器地址，以 http:// 或 https:// 开头");
+        }
+        callback();
+      };
+      const loginType = vue.ref("account");
+      const registerFormRef = vue.ref();
+      const formMode = vue.ref(1);
+      const registerRules = vue.ref({
+        username: [
+          { required: true, message: "用户名不能为空", trigger: "blur" },
+          { validator: checkName, trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "密码不能为空", trigger: "blur" },
+          { validator: checkPassword, trigger: "blur" }
+        ],
+        rePassword: [
+          { required: true, message: "确认密码不能为空", trigger: "blur" },
+          { validator: checkRePassword, trigger: "blur" }
+        ]
+      });
+      const loginFormRef = vue.ref();
+      const loginForm = vue.ref({
+        username: "",
+        password: "",
+        rePassword: ""
+      });
+      const loginRules = vue.ref({
+        username: [
+          { required: true, message: "用户名不能为空", trigger: "blur" },
+          { validator: checkName, trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "密码不能为空", trigger: "blur" },
+          { validator: checkPassword, trigger: "blur" }
+        ]
+      });
+      const webdavFormRef = vue.ref();
+      const webdavForm = vue.ref({
+        url: "",
+        username: "",
+        password: ""
+      });
+      const webdavLoading = vue.ref(false);
+      const webdavRules = vue.ref({
+        url: [
+          { required: true, message: "WebDAV 服务器地址不能为空", trigger: "blur" },
+          { validator: checkWebDAVUrl, trigger: "blur" }
+        ],
+        username: [
+          { required: true, message: "用户名不能为空", trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "密码不能为空", trigger: "blur" }
+        ]
+      });
+      const emit = __emit;
+      const loginSuccess = (res) => {
+        proxy.$storage.setUserInfo("userId", res.data.userId);
+        emit("onSuccess");
+      };
+      const webdavLoginSuccess = () => {
+        const webdavConfig = {
+          enabled: true,
+          url: webdavForm.value.url,
+          username: webdavForm.value.username,
+          password: webdavForm.value.password
+        };
+        proxy.$storage.setUserInfo("webdavConfig", webdavConfig);
+        proxy.$storage.setUserInfo("userId", "webdav_user");
+        emit("onSuccess");
+      };
+      const loginOnSubmit = () => {
+        loginFormRef.value.validate(async (valid, fields) => {
+          if (valid) {
+            proxy.$api.login(loginForm.value).then((res) => {
+              if (res.code != 0) {
+                proxy.$message.error(res.message);
+                return false;
+              }
+              loginSuccess(res);
+            }).catch((err) => {
+              proxy.$message.error(err.message);
+            });
+          }
+        });
+      };
+      const registerOnSubmit = () => {
+        registerFormRef.value.validate(async (valid, fields) => {
+          if (valid) {
+            proxy.$api.register(loginForm.value).then((res) => {
+              if (res.code != 0) {
+                proxy.$message.error(res.message);
+                return false;
+              }
+              loginSuccess(res);
+            }).catch((err) => {
+              proxy.$message.error(err.message);
+            });
+          }
+        });
+      };
+      const webdavLoginOnSubmit = () => {
+        webdavFormRef.value.validate(async (valid, fields) => {
+          if (valid) {
+            webdavLoading.value = true;
+            try {
+              await testWebDAVConnection();
+              webdavLoginSuccess();
+              proxy.$message.success("WebDAV 登录成功");
+            } catch (error) {
+              proxy.$message.error("WebDAV 登录失败: " + error.message);
+            } finally {
+              webdavLoading.value = false;
+            }
+          }
+        });
+      };
+      const testWebDAVConnection = () => {
+        return new Promise((resolve, reject) => {
+          _GM_xmlhttpRequest({
+            method: "PROPFIND",
+            // 使用 PROPFIND 更适合检测 WebDAV 服务器
+            url: webdavForm.value.url,
+            headers: {
+              "Authorization": "Basic " + btoa(webdavForm.value.username + ":" + webdavForm.value.password),
+              "Depth": "0",
+              "Content-Type": "application/xml"
+            },
+            data: '<?xml version="1.0" encoding="utf-8"?><propfind xmlns="DAV:"><prop><resourcetype/></prop></propfind>',
+            timeout: 15e3,
+            // 增加到15秒超时时间
+            onload: function(response) {
+              console.log("WebDAV 响应:", response.status, response);
+              if (response.status >= 200 && response.status < 300 || response.status === 207) {
+                resolve(true);
+              } else if (response.status === 401) {
+                reject(new Error("认证失败：用户名或密码错误"));
+              } else if (response.status === 404) {
+                reject(new Error("服务器地址错误：请确认输入了正确的WebDAV路径 (例如: https://dav.jianguoyun.com/dav/)"));
+              } else {
+                reject(new Error(`连接失败: 状态码 ${response.status}，请检查服务器地址和认证信息`));
+              }
+            },
+            onerror: function(error) {
+              console.error("WebDAV连接错误:", error);
+              reject(new Error("连接失败：无法连接到服务器，请检查URL是否正确或网络是否通畅"));
+            },
+            ontimeout: function() {
+              reject(new Error("连接超时：请检查网络或服务器地址"));
+            }
+          });
+        });
+      };
+      const close = () => {
+        emit("onClose");
+      };
+      return (_ctx, _cache) => {
+        const _component_el_tab_pane = vue.resolveComponent("el-tab-pane");
+        const _component_el_tabs = vue.resolveComponent("el-tabs");
+        const _component_el_input = vue.resolveComponent("el-input");
+        const _component_el_form_item = vue.resolveComponent("el-form-item");
+        const _component_el_button = vue.resolveComponent("el-button");
+        const _component_el_space = vue.resolveComponent("el-space");
+        const _component_el_form = vue.resolveComponent("el-form");
+        const _component_el_text = vue.resolveComponent("el-text");
+        return vue.openBlock(), vue.createElementBlock("div", null, [
+          vue.createVNode(_component_el_tabs, {
+            modelValue: loginType.value,
+            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => loginType.value = $event),
+            class: "login-tabs"
+          }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_el_tab_pane, {
+                label: "账号登录",
+                name: "account"
+              }),
+              vue.createVNode(_component_el_tab_pane, {
+                label: "WebDAV",
+                name: "webdav"
+              })
+            ]),
+            _: 1
+          }, 8, ["modelValue"]),
+          loginType.value === "account" && formMode.value === 1 ? (vue.openBlock(), vue.createBlock(_component_el_form, {
+            key: 0,
+            ref_key: "loginFormRef",
+            ref: loginFormRef,
+            model: loginForm.value,
+            rules: loginRules.value,
+            "label-width": "120px"
+          }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_el_form_item, {
+                label: "用户名：",
+                prop: "username",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: loginForm.value.username,
+                    "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => loginForm.value.username = $event)
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, {
+                label: "密码：",
+                prop: "password",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: loginForm.value.password,
+                    "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => loginForm.value.password = $event),
+                    type: "password",
+                    "show-password": ""
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, null, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_button, {
+                    type: "primary",
+                    onClick: loginOnSubmit
+                  }, {
+                    default: vue.withCtx(() => _cache[11] || (_cache[11] = [
+                      vue.createTextVNode("登录")
+                    ])),
+                    _: 1
+                  }),
+                  vue.createElementVNode("div", _hoisted_1$1, [
+                    vue.createVNode(_component_el_space, null, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_button, {
+                          type: "primary",
+                          text: "",
+                          onClick: _cache[3] || (_cache[3] = ($event) => formMode.value = 0)
+                        }, {
+                          default: vue.withCtx(() => _cache[12] || (_cache[12] = [
+                            vue.createTextVNode("注册")
+                          ])),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_el_button, {
+                          type: "primary",
+                          text: "",
+                          onClick: close
+                        }, {
+                          default: vue.withCtx(() => _cache[13] || (_cache[13] = [
+                            vue.createTextVNode("关闭")
+                          ])),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 8, ["model", "rules"])) : vue.createCommentVNode("", true),
+          loginType.value === "account" && formMode.value === 0 ? (vue.openBlock(), vue.createBlock(_component_el_form, {
+            key: 1,
+            ref_key: "registerFormRef",
+            ref: registerFormRef,
+            model: loginForm.value,
+            rules: registerRules.value,
+            "label-width": "120px"
+          }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_el_form_item, {
+                label: "用户名：",
+                prop: "username",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: loginForm.value.username,
+                    "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => loginForm.value.username = $event)
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, {
+                label: "密码：",
+                prop: "password",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: loginForm.value.password,
+                    "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => loginForm.value.password = $event),
+                    type: "password",
+                    "show-password": ""
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, {
+                label: "确认密码：",
+                prop: "rePassword",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: loginForm.value.rePassword,
+                    "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => loginForm.value.rePassword = $event),
+                    type: "password",
+                    "show-password": ""
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, null, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_button, {
+                    type: "primary",
+                    onClick: registerOnSubmit
+                  }, {
+                    default: vue.withCtx(() => _cache[14] || (_cache[14] = [
+                      vue.createTextVNode("注册")
+                    ])),
+                    _: 1
+                  }),
+                  vue.createElementVNode("div", _hoisted_2$1, [
+                    vue.createVNode(_component_el_space, null, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_button, {
+                          type: "primary",
+                          text: "",
+                          onClick: _cache[7] || (_cache[7] = ($event) => formMode.value = 1)
+                        }, {
+                          default: vue.withCtx(() => _cache[15] || (_cache[15] = [
+                            vue.createTextVNode("登录")
+                          ])),
+                          _: 1
+                        }),
+                        vue.createVNode(_component_el_button, {
+                          type: "primary",
+                          text: "",
+                          onClick: close
+                        }, {
+                          default: vue.withCtx(() => _cache[16] || (_cache[16] = [
+                            vue.createTextVNode("关闭")
+                          ])),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 8, ["model", "rules"])) : vue.createCommentVNode("", true),
+          loginType.value === "webdav" ? (vue.openBlock(), vue.createBlock(_component_el_form, {
+            key: 2,
+            ref_key: "webdavFormRef",
+            ref: webdavFormRef,
+            model: webdavForm.value,
+            rules: webdavRules.value,
+            "label-width": "120px"
+          }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_el_form_item, {
+                label: "服务器：",
+                prop: "url",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: webdavForm.value.url,
+                    "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => webdavForm.value.url = $event),
+                    placeholder: "例如: https://dav.jianguoyun.com/dav/"
+                  }, null, 8, ["modelValue"]),
+                  vue.createElementVNode("div", _hoisted_3$1, [
+                    vue.createVNode(_component_el_text, {
+                      type: "primary",
+                      class: "text-info"
+                    }, {
+                      default: vue.withCtx(() => _cache[17] || (_cache[17] = [
+                        vue.createTextVNode("* 坚果云 WebDAV 地址格式：https://dav.jianguoyun.com/dav/")
+                      ])),
+                      _: 1
+                    })
+                  ])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, {
+                label: "用户名：",
+                prop: "username",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: webdavForm.value.username,
+                    "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => webdavForm.value.username = $event),
+                    placeholder: "请输入邮箱地址"
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, {
+                label: "密码：",
+                prop: "password",
+                required: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_input, {
+                    modelValue: webdavForm.value.password,
+                    "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => webdavForm.value.password = $event),
+                    type: "password",
+                    placeholder: "请输入应用密码",
+                    "show-password": ""
+                  }, null, 8, ["modelValue"]),
+                  vue.createElementVNode("div", _hoisted_4$1, [
+                    vue.createVNode(_component_el_text, {
+                      type: "primary",
+                      class: "text-info"
+                    }, {
+                      default: vue.withCtx(() => _cache[18] || (_cache[18] = [
+                        vue.createTextVNode("* 坚果云需要使用应用密码而非登录密码")
+                      ])),
+                      _: 1
+                    })
+                  ])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_form_item, null, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_el_button, {
+                    type: "primary",
+                    onClick: webdavLoginOnSubmit,
+                    loading: webdavLoading.value
+                  }, {
+                    default: vue.withCtx(() => _cache[19] || (_cache[19] = [
+                      vue.createTextVNode("登录")
+                    ])),
+                    _: 1
+                  }, 8, ["loading"]),
+                  vue.createElementVNode("div", _hoisted_5$1, [
+                    vue.createVNode(_component_el_space, null, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_button, {
+                          type: "primary",
+                          text: "",
+                          onClick: close
+                        }, {
+                          default: vue.withCtx(() => _cache[20] || (_cache[20] = [
+                            vue.createTextVNode("关闭")
+                          ])),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ]),
+                _: 1
+              }),
+              vue.createVNode(_component_el_space, {
+                direction: "vertical",
+                alignment: "flex-start",
+                style: { "margin-top": "18px" }
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("div", null, [
+                    vue.createVNode(_component_el_text, {
+                      type: "primary",
+                      class: "text-info"
+                    }, {
+                      default: vue.withCtx(() => _cache[21] || (_cache[21] = [
+                        vue.createTextVNode("* WebDAV 配置仅存储在本地，不会上传至云端")
+                      ])),
+                      _: 1
+                    })
+                  ]),
+                  vue.createElementVNode("div", null, [
+                    vue.createVNode(_component_el_text, {
+                      type: "primary",
+                      class: "text-info"
+                    }, {
+                      default: vue.withCtx(() => _cache[22] || (_cache[22] = [
+                        vue.createTextVNode("* 启用 WebDAV 后，所有的同步操作将通过 WebDAV 进行")
+                      ])),
+                      _: 1
+                    })
+                  ])
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }, 8, ["model", "rules"])) : vue.createCommentVNode("", true)
+        ]);
+      };
+    }
+  };
+  const _hoisted_1 = { class: "setBox" };
+  const _hoisted_2 = { class: "card-header" };
+  const _hoisted_3 = { class: "header-left" };
+  const _hoisted_4 = {
+    key: 2,
+    class: "login-type"
+  };
+  const _hoisted_5 = {
+    key: 3,
+    class: "login-type"
+  };
+  const _hoisted_6 = { class: "header-right" };
+  const _hoisted_7 = { class: "button-group" };
+  const _hoisted_8 = {
+    key: 0,
+    class: "login-container"
+  };
+  const _hoisted_9 = { class: "login-header" };
+  const _hoisted_10 = {
+    key: 1,
+    class: "settings-container"
+  };
+  const _hoisted_11 = { class: "settings-header" };
+  const _hoisted_12 = { key: 0 };
+  const _hoisted_13 = { key: 0 };
+  const _hoisted_14 = { key: 1 };
+  const _hoisted_15 = {
+    key: 2,
+    class: "settings-container"
+  };
+  const _hoisted_16 = { class: "settings-header" };
+  const _hoisted_17 = {
+    key: 3,
+    class: "settings-container"
+  };
+  const _hoisted_18 = { class: "settings-header" };
+  const _hoisted_19 = {
+    key: 4,
+    class: "main-content"
+  };
+  const _hoisted_20 = {
+    key: 0,
+    class: "list"
+  };
+  const _hoisted_21 = { class: "list-left" };
+  const _hoisted_22 = { class: "list-number" };
+  const _hoisted_23 = { class: "list-title" };
+  const _hoisted_24 = { class: "list-right" };
+  const _hoisted_25 = {
+    key: 1,
+    class: "tips"
+  };
+  const _hoisted_26 = { key: 0 };
+  const _hoisted_27 = { class: "addReplyBox" };
+  const _sfc_main = {
+    __name: "Set",
+    emits: ["updateMyList", "updateConstVar", "updateAIModel"],
+    setup(__props, { emit: __emit }) {
+      const { proxy } = vue.getCurrentInstance();
+      const myList = vue.ref([]);
+      const systemList = vue.ref([]);
+      const systemListCount = vue.ref(0);
+      const loading = vue.ref(false);
+      const isLogin = vue.ref(false);
+      const realtimeSync = vue.ref(false);
+      const realtimeBackup = vue.ref(false);
+      const submitNow = vue.ref(false);
+      const showLogin = vue.ref(false);
+      const showOptionsSettings = vue.ref(false);
+      const showConstSettings = vue.ref(false);
+      const showAISettings = vue.ref(false);
+      const newReply = vue.ref("");
+      const windowSize = vue.ref({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+      const queryData = vue.ref({
+        page: 1,
+        prop: "replyId",
+        order: "desc"
+      });
+      const constVar = vue.ref({
+        email: "",
+        qq: "",
+        wechat: "",
+        url: "",
+        base64: false
+      });
+      const emit = __emit;
+      vue.onBeforeMount(() => {
+        const userId = proxy.$storage.getUserInfo("userId");
+        isLogin.value = !!userId;
+        realtimeSync.value = proxy.$storage.getUserInfo("realtimeSync") || false;
+        realtimeBackup.value = proxy.$storage.getUserInfo("realtimeBackup") || false;
+        submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
+        constVar.value = proxy.$storage.getUserInfo("constVar") || constVar.value;
+        getMyList();
+        getSystemList();
+        proxy.$on("dataRestored", handleDataRestored);
+      });
+      function handleDataRestored(data) {
+        console.log("设置组件接收到数据恢复事件", data);
+        if (data) {
+          if (data.QuickReply) {
+            myList.value = data.QuickReply;
+            updateMyList();
+            console.log("设置面板已更新回复列表", myList.value.length, "条");
+          }
+          const userSettingsPrefix = proxy.$storage.userStorageKey + ".";
+          Object.keys(data).forEach((key) => {
+            if (key.startsWith(userSettingsPrefix)) {
+              const settingKey = key.replace(userSettingsPrefix, "");
+              if (settingKey === "realtimeSync") {
+                realtimeSync.value = data[key] || false;
+                console.log("已更新实时同步设置:", realtimeSync.value);
+              } else if (settingKey === "realtimeBackup") {
+                realtimeBackup.value = data[key] || false;
+                console.log("已更新实时备份设置:", realtimeBackup.value);
+              } else if (settingKey === "submitNow") {
+                submitNow.value = data[key] || false;
+                console.log("已更新立即提交设置:", submitNow.value);
+              } else if (settingKey === "constVar") {
+                constVar.value = data[key] || constVar.value;
+                emit("updateConstVar");
+                console.log("已更新常量设置");
+              }
+            }
+          });
+          getSystemList();
+        }
+      }
+      function getMyList() {
+        let myListStorage = proxy.$storage.get();
+        myList.value = myListStorage && myListStorage.length > 0 ? myListStorage : [];
+      }
+      async function getSystemList() {
+        loading.value = true;
+        let res = await proxy.$api.selectList(queryData.value.page, queryData.value.prop, queryData.value.order);
+        systemList.value = res.data.totalCount > 0 ? res.data.list : [];
+        systemListCount.value = res.data.totalCount;
+        loading.value = false;
+      }
+      function currentPageChange(current) {
+        queryData.value.page = current;
+        getSystemList();
+      }
+      function sortChange(e) {
+        queryData.value.prop = e.order ? e.prop : "replyId";
+        queryData.value.order = e.order === "descending" || !e.order ? "desc" : "asc";
+        getSystemList();
+      }
+      function addReply() {
+        if (newReply.value == "") {
+          proxy.$message.error("回复内容不能为空！");
+          return false;
+        }
+        if (myList.value.indexOf(newReply.value) != -1) {
+          proxy.$message.error("该回复已添加过！");
+          newReply.value = "";
+          return false;
+        }
+        if (myList.value.length >= 10) {
+          proxy.$message.warning("自定义回复，超出条数上限！");
+          return false;
+        }
+        myList.value.push(newReply.value);
+        realtimeSync.value && upload();
+        realtimeBackup.value && uploadAll();
+        updateMyList();
+        newReply.value = "";
+        return true;
+      }
+      function updateMyList() {
+        proxy.$storage.set(myList.value);
+        emit("updateMyList", myList.value);
+      }
+      function delReply(index) {
+        myList.value.splice(index, 1);
+        updateMyList();
+        realtimeSync.value && upload();
+        realtimeBackup.value && uploadAll();
+      }
+      function shareReply(index) {
+        proxy.$api.replyInsert(myList.value[index]).then((res) => {
+          proxy.$message.success(res.message);
+          getSystemList();
+        }).catch((err) => {
+          proxy.$message.error(err.message);
+        });
+      }
+      function likeReply(index) {
+        proxy.$api.likeCountUpdate(systemList.value[index].replyId).then((res) => {
+          if (res.code == 0) {
+            systemList.value[index]["likeCount"] = res.data.likeCount;
+            proxy.$message.success("点赞成功");
+          } else {
+            proxy.$message.error(res.message);
+          }
+        }).catch((err) => {
+          proxy.$message.error(err.message);
+        });
+      }
+      function collectReply(index) {
+        let nStr = systemList.value[index].content;
+        if (myList.value.indexOf(nStr) != -1) {
+          proxy.$message.error("该回复已添加过！");
+          return false;
+        }
+        newReply.value = nStr;
+        proxy.$api.collectCountUpdate(systemList.value[index].replyId).then((res) => {
+          if (res.code == 0) {
+            addReply() && proxy.$message.success("收藏成功");
+            realtimeSync.value && upload();
+            realtimeBackup.value && uploadAll();
+          } else {
+            proxy.$message.error(res.message);
+          }
+        }).catch((err) => {
+          proxy.$message.error(err.message);
+        });
+      }
+      function onLoginSuccess() {
+        showLogin.value = false;
+        isLogin.value = true;
+        const userId = proxy.$storage.getUserInfo("userId");
+        if (userId === "webdav_user") {
+          console.log("WebDAV用户登录成功，自动执行全量恢复");
+          downloadAll();
+        } else {
+          myList.value.length === 0 && download();
+        }
+      }
+      function closeLogin() {
+        showLogin.value = false;
+      }
+      function closeOptionsSettings() {
+        showOptionsSettings.value = false;
+      }
+      function closeConstSettings() {
+        showConstSettings.value = false;
+      }
+      function closeAISettings() {
+        showAISettings.value = false;
+      }
+      function upload() {
+        proxy.$storage.uploadList();
+      }
+      async function download() {
+        let list = await proxy.$storage.downloadList();
+        myList.value = list;
+        updateMyList();
+      }
+      function uploadAll() {
+        proxy.$storage.uploadAll();
+      }
+      async function downloadAll() {
+        loading.value = true;
+        try {
+          let all = await proxy.$storage.downloadAll();
+          if (all) {
+            if (!all.QuickReply || all.QuickReply.length === 0) {
+              proxy.$message.warning("恢复的数据中没有快捷回复");
+            } else {
+              console.log("全量恢复完成，恢复了", all.QuickReply.length, "条回复");
+            }
+          }
+        } catch (error) {
+          console.error("全量恢复出错:", error);
+          proxy.$message.error("全量恢复出错: " + error.message);
+        } finally {
+          loading.value = false;
+        }
+      }
+      function logout() {
+        proxy.$storage.setUserInfo("userId", "");
+        isLogin.value = false;
+        showOptionsSettings.value = false;
+        showConstSettings.value = false;
+        showAISettings.value = false;
+        proxy.$message.success("已注销登录");
+      }
+      function onRealtimeSyncChange(e) {
+        realtimeSync.value = e;
+        proxy.$storage.setUserInfo("realtimeSync", e);
+        realtimeBackup.value && uploadAll();
+      }
+      function onRealtimeBackupChange(e) {
+        realtimeBackup.value = e;
+        proxy.$storage.setUserInfo("realtimeBackup", e);
+        realtimeBackup.value && uploadAll();
+      }
+      function onSubmitNowChange(e) {
+        submitNow.value = e;
+        proxy.$storage.setUserInfo("submitNow", e);
+        realtimeBackup.value && uploadAll();
+      }
+      function updateAI() {
+        emit("updateAIModel");
+        realtimeBackup.value && uploadAll();
+      }
+      function constVarChange() {
+        proxy.$storage.setUserInfo("constVar", constVar.value);
+        emit("updateConstVar");
+        realtimeBackup.value && uploadAll();
+      }
+      function isWebDAVUser() {
+        const userId = proxy.$storage.getUserInfo("userId");
+        return userId === "webdav_user";
+      }
+      function openOptionsSettings() {
+        showOptionsSettings.value = true;
+        showConstSettings.value = false;
+        showAISettings.value = false;
+      }
+      function openConstSettings() {
+        showOptionsSettings.value = false;
+        showConstSettings.value = true;
+        showAISettings.value = false;
+      }
+      function openAISettings() {
+        showOptionsSettings.value = false;
+        showConstSettings.value = false;
+        showAISettings.value = true;
+      }
+      function backupToClipboard() {
+        loading.value = true;
+        try {
+          const allData = proxy.$storage.getAllUserData();
+          const dataString = JSON.stringify({
+            _meta: {
+              app: "bbs_quickreply",
+              version: proxy.$app.version,
+              timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+              note: "Beta功能: 此备份仅用于在不同登录方式间迁移数据，非长期存储方案"
+            },
+            data: allData
+          });
+          navigator.clipboard.writeText(dataString).then(() => {
+            proxy.$message.success("数据已成功备份到剪贴板");
+          }).catch((err) => {
+            console.error("剪贴板操作失败:", err);
+            proxy.$message.error("剪贴板操作失败: " + err.message);
+          });
+        } catch (error) {
+          console.error("备份到剪贴板出错:", error);
+          proxy.$message.error("备份到剪贴板出错: " + error.message);
+        } finally {
+          loading.value = false;
+        }
+      }
+      function restoreFromClipboard() {
+        loading.value = true;
+        try {
+          navigator.clipboard.readText().then((text) => {
+            try {
+              const clipData = JSON.parse(text);
+              if (!clipData._meta || clipData._meta.app !== "bbs_quickreply") {
+                proxy.$message.error("无效的备份数据格式");
+                loading.value = false;
+                return;
+              }
+              proxy.$confirm(
+                "从剪贴板恢复将覆盖当前数据。这是一个Beta功能，主要用于数据迁移。确定要继续吗？",
+                "恢复确认",
+                {
+                  confirmButtonText: "确定",
+                  cancelButtonText: "取消",
+                  type: "warning"
+                }
+              ).then(() => {
+                const restoreData = clipData.data;
+                proxy.$storage.restoreAllUserData(restoreData);
+                if (restoreData.QuickReply) {
+                  myList.value = restoreData.QuickReply;
+                  updateMyList();
+                }
+                const userId = proxy.$storage.getUserInfo("userId");
+                isLogin.value = !!userId;
+                realtimeSync.value = proxy.$storage.getUserInfo("realtimeSync") || false;
+                realtimeBackup.value = proxy.$storage.getUserInfo("realtimeBackup") || false;
+                submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
+                constVar.value = proxy.$storage.getUserInfo("constVar") || constVar.value;
+                emit("updateConstVar");
+                emit("updateAIModel");
+                proxy.$message.success("数据恢复成功");
+              }).catch(() => {
+                proxy.$message.info("已取消恢复操作");
+              }).finally(() => {
+                loading.value = false;
+              });
+            } catch (error) {
+              console.error("解析剪贴板数据出错:", error);
+              proxy.$message.error("无法解析剪贴板数据: " + error.message);
+              loading.value = false;
+            }
+          }).catch((err) => {
+            console.error("读取剪贴板失败:", err);
+            proxy.$message.error("读取剪贴板失败: " + err.message);
+            loading.value = false;
+          });
+        } catch (error) {
+          console.error("从剪贴板恢复出错:", error);
+          proxy.$message.error("从剪贴板恢复出错: " + error.message);
+          loading.value = false;
+        }
+      }
+      return (_ctx, _cache) => {
+        const _component_el_button = vue.resolveComponent("el-button");
+        const _component_el_col = vue.resolveComponent("el-col");
+        const _component_ArrowDown = vue.resolveComponent("ArrowDown");
+        const _component_el_icon = vue.resolveComponent("el-icon");
+        const _component_el_dropdown_item = vue.resolveComponent("el-dropdown-item");
+        const _component_el_divider = vue.resolveComponent("el-divider");
+        const _component_el_dropdown_menu = vue.resolveComponent("el-dropdown-menu");
+        const _component_el_dropdown = vue.resolveComponent("el-dropdown");
+        const _component_el_row = vue.resolveComponent("el-row");
+        const _component_app_login = vue.resolveComponent("app-login");
+        const _component_el_checkbox = vue.resolveComponent("el-checkbox");
+        const _component_el_text = vue.resolveComponent("el-text");
+        const _component_el_space = vue.resolveComponent("el-space");
+        const _component_el_input = vue.resolveComponent("el-input");
+        const _component_el_form_item = vue.resolveComponent("el-form-item");
+        const _component_el_switch = vue.resolveComponent("el-switch");
+        const _component_el_form = vue.resolveComponent("el-form");
+        const _component_app_set_ai = vue.resolveComponent("app-set-ai");
+        const _component_el_tooltip = vue.resolveComponent("el-tooltip");
+        const _component_el_card = vue.resolveComponent("el-card");
+        const _component_el_table_column = vue.resolveComponent("el-table-column");
+        const _component_el_tag = vue.resolveComponent("el-tag");
+        const _component_el_table = vue.resolveComponent("el-table");
+        const _component_el_pagination = vue.resolveComponent("el-pagination");
+        const _directive_loading = vue.resolveDirective("loading");
+        return vue.openBlock(), vue.createElementBlock("div", _hoisted_1, [
+          vue.createVNode(_component_el_card, {
+            class: "box-card",
+            shadow: "never"
+          }, {
+            header: vue.withCtx(() => [
+              vue.createElementVNode("div", _hoisted_2, [
+                vue.createVNode(_component_el_row, { gutter: 10 }, {
+                  default: vue.withCtx(() => [
+                    vue.createVNode(_component_el_col, {
+                      xs: 24,
+                      sm: 6,
+                      md: 6,
+                      lg: 6,
+                      xl: 6
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createElementVNode("div", _hoisted_3, [
+                          !isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                            key: 0,
+                            type: "primary",
+                            size: "small",
+                            onClick: _cache[0] || (_cache[0] = ($event) => showLogin.value = true)
+                          }, {
+                            default: vue.withCtx(() => _cache[10] || (_cache[10] = [
+                              vue.createTextVNode("登录")
+                            ])),
+                            _: 1
+                          })) : (vue.openBlock(), vue.createBlock(_component_el_button, {
+                            key: 1,
+                            type: "danger",
+                            size: "small",
+                            onClick: logout
+                          }, {
+                            default: vue.withCtx(() => _cache[11] || (_cache[11] = [
+                              vue.createTextVNode("注销")
+                            ])),
+                            _: 1
+                          })),
+                          isLogin.value && isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_4, "WebDAV 同步")) : vue.createCommentVNode("", true),
+                          isLogin.value && !isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_5, "账号同步")) : vue.createCommentVNode("", true)
+                        ])
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_el_col, {
+                      xs: 24,
+                      sm: 18,
+                      md: 18,
+                      lg: 18,
+                      xl: 18
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createElementVNode("div", _hoisted_6, [
+                          vue.createVNode(_component_el_row, { gutter: 8 }, {
+                            default: vue.withCtx(() => [
+                              vue.createVNode(_component_el_col, {
+                                xs: 24,
+                                sm: 24,
+                                md: 24,
+                                lg: 24,
+                                xl: 24
+                              }, {
+                                default: vue.withCtx(() => [
+                                  vue.createElementVNode("div", _hoisted_7, [
+                                    isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_dropdown, {
+                                      key: 0,
+                                      trigger: "click",
+                                      class: "header-button"
+                                    }, {
+                                      dropdown: vue.withCtx(() => [
+                                        vue.createVNode(_component_el_dropdown_menu, null, {
+                                          default: vue.withCtx(() => [
+                                            vue.createVNode(_component_el_dropdown_item, {
+                                              icon: "Upload",
+                                              onClick: uploadAll
+                                            }, {
+                                              default: vue.withCtx(() => _cache[13] || (_cache[13] = [
+                                                vue.createTextVNode(" 全量备份 ")
+                                              ])),
+                                              _: 1
+                                            }),
+                                            vue.createVNode(_component_el_dropdown_item, {
+                                              icon: "Download",
+                                              onClick: downloadAll
+                                            }, {
+                                              default: vue.withCtx(() => _cache[14] || (_cache[14] = [
+                                                vue.createTextVNode(" 全量恢复 ")
+                                              ])),
+                                              _: 1
+                                            }),
+                                            vue.createVNode(_component_el_divider, { style: { "margin": "5px 0" } }),
+                                            vue.createVNode(_component_el_dropdown_item, {
+                                              icon: "CopyDocument",
+                                              onClick: backupToClipboard
+                                            }, {
+                                              default: vue.withCtx(() => _cache[15] || (_cache[15] = [
+                                                vue.createTextVNode(" 备份到剪贴板 ")
+                                              ])),
+                                              _: 1
+                                            }),
+                                            vue.createVNode(_component_el_dropdown_item, {
+                                              icon: "DocumentCopy",
+                                              onClick: restoreFromClipboard
+                                            }, {
+                                              default: vue.withCtx(() => _cache[16] || (_cache[16] = [
+                                                vue.createTextVNode(" 从剪贴板恢复 ")
+                                              ])),
+                                              _: 1
+                                            })
+                                          ]),
+                                          _: 1
+                                        })
+                                      ]),
+                                      default: vue.withCtx(() => [
+                                        vue.createVNode(_component_el_button, {
+                                          type: "primary",
+                                          size: "small"
+                                        }, {
+                                          default: vue.withCtx(() => [
+                                            _cache[12] || (_cache[12] = vue.createTextVNode(" 全量同步 ")),
+                                            vue.createVNode(_component_el_icon, { class: "el-icon--right" }, {
+                                              default: vue.withCtx(() => [
+                                                vue.createVNode(_component_ArrowDown)
+                                              ]),
+                                              _: 1
+                                            })
+                                          ]),
+                                          _: 1
+                                        })
+                                      ]),
+                                      _: 1
+                                    })) : vue.createCommentVNode("", true),
+                                    isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                                      key: 1,
+                                      type: "success",
+                                      icon: "Setting",
+                                      size: "small",
+                                      class: "header-button",
+                                      onClick: openOptionsSettings
+                                    }, {
+                                      default: vue.withCtx(() => _cache[17] || (_cache[17] = [
+                                        vue.createTextVNode("选项")
+                                      ])),
+                                      _: 1
+                                    })) : vue.createCommentVNode("", true),
+                                    isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                                      key: 2,
+                                      type: "info",
+                                      icon: "Edit",
+                                      size: "small",
+                                      class: "header-button",
+                                      onClick: openConstSettings
+                                    }, {
+                                      default: vue.withCtx(() => _cache[18] || (_cache[18] = [
+                                        vue.createTextVNode("常量")
+                                      ])),
+                                      _: 1
+                                    })) : vue.createCommentVNode("", true),
+                                    isLogin.value ? (vue.openBlock(), vue.createBlock(_component_el_button, {
+                                      key: 3,
+                                      type: "primary",
+                                      icon: "MagicStick",
+                                      size: "small",
+                                      class: "header-button",
+                                      onClick: openAISettings
+                                    }, {
+                                      default: vue.withCtx(() => _cache[19] || (_cache[19] = [
+                                        vue.createTextVNode("AI")
+                                      ])),
+                                      _: 1
+                                    })) : vue.createCommentVNode("", true)
+                                  ])
+                                ]),
+                                _: 1
+                              })
+                            ]),
+                            _: 1
+                          })
+                        ])
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  _: 1
+                })
+              ])
+            ]),
+            default: vue.withCtx(() => [
+              showLogin.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_8, [
+                vue.createElementVNode("div", _hoisted_9, [
+                  _cache[21] || (_cache[21] = vue.createElementVNode("h3", null, "账号登录", -1)),
+                  vue.createVNode(_component_el_button, {
+                    type: "primary",
+                    text: "",
+                    icon: "Back",
+                    onClick: closeLogin
+                  }, {
+                    default: vue.withCtx(() => _cache[20] || (_cache[20] = [
+                      vue.createTextVNode("返回")
+                    ])),
+                    _: 1
+                  })
+                ]),
+                vue.createVNode(_component_app_login, {
+                  onOnSuccess: onLoginSuccess,
+                  onOnClose: closeLogin
+                })
+              ])) : vue.createCommentVNode("", true),
+              showOptionsSettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_10, [
+                vue.createElementVNode("div", _hoisted_11, [
+                  _cache[23] || (_cache[23] = vue.createElementVNode("h3", null, "选项设置", -1)),
+                  vue.createVNode(_component_el_button, {
+                    type: "primary",
+                    text: "",
+                    icon: "Back",
+                    onClick: closeOptionsSettings
+                  }, {
+                    default: vue.withCtx(() => _cache[22] || (_cache[22] = [
+                      vue.createTextVNode("返回")
+                    ])),
+                    _: 1
+                  })
+                ]),
+                vue.createVNode(_component_el_space, {
+                  direction: "vertical",
+                  alignment: "flex-start"
+                }, {
+                  default: vue.withCtx(() => [
+                    !isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_12, [
+                      vue.createVNode(_component_el_checkbox, {
+                        modelValue: realtimeSync.value,
+                        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => realtimeSync.value = $event),
+                        label: "实时同步，本地回复列表修改后立即上传",
+                        size: "small",
+                        checked: realtimeSync.value,
+                        onChange: onRealtimeSyncChange
+                      }, null, 8, ["modelValue", "checked"])
+                    ])) : vue.createCommentVNode("", true),
+                    vue.createElementVNode("div", null, [
+                      vue.createVNode(_component_el_checkbox, {
+                        modelValue: realtimeBackup.value,
+                        "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => realtimeBackup.value = $event),
+                        label: "实时备份，本地回复列表及任一配置修改后立即备份至云端",
+                        size: "small",
+                        checked: realtimeBackup.value,
+                        onChange: onRealtimeBackupChange
+                      }, null, 8, ["modelValue", "checked"])
+                    ]),
+                    vue.createElementVNode("div", null, [
+                      vue.createVNode(_component_el_checkbox, {
+                        modelValue: submitNow.value,
+                        "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => submitNow.value = $event),
+                        label: "立即提交，选择快捷回帖内容后立即提交回帖",
+                        size: "small",
+                        checked: submitNow.value,
+                        onChange: onSubmitNowChange
+                      }, null, 8, ["modelValue", "checked"])
+                    ]),
+                    vue.createVNode(_component_el_space, {
+                      direction: "vertical",
+                      alignment: "flex-start",
+                      style: { "margin-top": "18px" }
+                    }, {
+                      default: vue.withCtx(() => [
+                        !isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_13, [
+                          vue.createVNode(_component_el_text, {
+                            type: "primary",
+                            class: "text-info"
+                          }, {
+                            default: vue.withCtx(() => _cache[24] || (_cache[24] = [
+                              vue.createTextVNode("* AI和常量只存在本地，不参与同步")
+                            ])),
+                            _: 1
+                          })
+                        ])) : vue.createCommentVNode("", true),
+                        !isWebDAVUser() ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_14, [
+                          vue.createVNode(_component_el_text, {
+                            type: "primary",
+                            class: "text-info"
+                          }, {
+                            default: vue.withCtx(() => _cache[25] || (_cache[25] = [
+                              vue.createTextVNode("* 如需备份所有配置请使用操全量同步操作中的全量备份、全量恢复功能")
+                            ])),
+                            _: 1
+                          })
+                        ])) : vue.createCommentVNode("", true),
+                        vue.createElementVNode("div", null, [
+                          vue.createVNode(_component_el_text, {
+                            type: "primary",
+                            class: "text-info"
+                          }, {
+                            default: vue.withCtx(() => _cache[26] || (_cache[26] = [
+                              vue.createTextVNode("* 全量备份仅为方便多设备同步配置，使用base64存储，请知悉")
+                            ])),
+                            _: 1
+                          })
+                        ])
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  _: 1
+                })
+              ])) : vue.createCommentVNode("", true),
+              showConstSettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_15, [
+                vue.createElementVNode("div", _hoisted_16, [
+                  _cache[28] || (_cache[28] = vue.createElementVNode("h3", null, "常量设置", -1)),
+                  vue.createVNode(_component_el_button, {
+                    type: "primary",
+                    text: "",
+                    icon: "Back",
+                    onClick: closeConstSettings
+                  }, {
+                    default: vue.withCtx(() => _cache[27] || (_cache[27] = [
+                      vue.createTextVNode("返回")
+                    ])),
+                    _: 1
+                  })
+                ]),
+                vue.createVNode(_component_el_form, {
+                  model: constVar.value,
+                  "label-width": "60",
+                  style: { "max-width": "600px" }
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createVNode(_component_el_form_item, { label: "邮箱" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_input, {
+                          modelValue: constVar.value.email,
+                          "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => constVar.value.email = $event),
+                          onChange: constVarChange
+                        }, null, 8, ["modelValue"])
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_el_form_item, { label: "QQ" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_input, {
+                          modelValue: constVar.value.qq,
+                          "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => constVar.value.qq = $event),
+                          onChange: constVarChange
+                        }, null, 8, ["modelValue"])
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_el_form_item, { label: "微信" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_input, {
+                          modelValue: constVar.value.wechat,
+                          "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => constVar.value.wechat = $event),
+                          onChange: constVarChange
+                        }, null, 8, ["modelValue"])
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_el_form_item, { label: "网址" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_input, {
+                          modelValue: constVar.value.url,
+                          "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => constVar.value.url = $event),
+                          onChange: constVarChange
+                        }, null, 8, ["modelValue"])
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_el_form_item, { label: "加密" }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_switch, {
+                          modelValue: constVar.value.base64,
+                          "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => constVar.value.base64 = $event),
+                          onChange: constVarChange
+                        }, null, 8, ["modelValue"])
+                      ]),
+                      _: 1
+                    })
+                  ]),
+                  _: 1
+                }, 8, ["model"]),
+                vue.createVNode(_component_el_space, {
+                  direction: "vertical",
+                  alignment: "flex-start"
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createElementVNode("div", null, [
+                      vue.createVNode(_component_el_text, {
+                        type: "primary",
+                        class: "text-info"
+                      }, {
+                        default: vue.withCtx(() => _cache[29] || (_cache[29] = [
+                          vue.createTextVNode("* 可在快捷回帖中使用以上常量：{email}、{qq}、{wechat}、{url}，例：我的邮箱是{email}，我的QQ是{qq}；")
+                        ])),
+                        _: 1
+                      })
+                    ]),
+                    vue.createElementVNode("div", null, [
+                      vue.createVNode(_component_el_text, {
+                        type: "primary",
+                        class: "text-info"
+                      }, {
+                        default: vue.withCtx(() => _cache[30] || (_cache[30] = [
+                          vue.createTextVNode("* 开启加密后，只在回帖时显示base64加密后的常量；")
+                        ])),
+                        _: 1
+                      })
+                    ])
+                  ]),
+                  _: 1
+                })
+              ])) : vue.createCommentVNode("", true),
+              showAISettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_17, [
+                vue.createElementVNode("div", _hoisted_18, [
+                  _cache[32] || (_cache[32] = vue.createElementVNode("h3", null, "AI设置", -1)),
+                  vue.createVNode(_component_el_button, {
+                    type: "primary",
+                    text: "",
+                    icon: "Back",
+                    onClick: closeAISettings
+                  }, {
+                    default: vue.withCtx(() => _cache[31] || (_cache[31] = [
+                      vue.createTextVNode("返回")
+                    ])),
+                    _: 1
+                  })
+                ]),
+                vue.createVNode(_component_app_set_ai, {
+                  ref: "setAIPanel",
+                  onUpdateAI: updateAI
+                }, null, 512)
+              ])) : vue.createCommentVNode("", true),
+              !showLogin.value && !showOptionsSettings.value && !showConstSettings.value && !showAISettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_19, [
+                vue.createVNode(_component_el_row, { gutter: 30 }, {
+                  default: vue.withCtx(() => [
+                    vue.createVNode(_component_el_col, {
+                      span: 9,
+                      md: { span: 9 },
+                      sm: { span: 24 },
+                      xs: { span: 24 }
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_card, {
+                          class: "my-replies-card",
+                          shadow: "never"
+                        }, {
+                          header: vue.withCtx(() => _cache[33] || (_cache[33] = [
+                            vue.createElementVNode("div", { class: "card-title" }, "我在用的", -1)
+                          ])),
+                          default: vue.withCtx(() => [
+                            vue.createElementVNode("div", null, [
+                              myList.value.length > 0 ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_20, [
+                                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(myList.value, (item, index) => {
+                                  return vue.openBlock(), vue.createElementBlock("li", { key: index }, [
+                                    vue.createElementVNode("div", _hoisted_21, [
+                                      vue.createElementVNode("div", _hoisted_22, vue.toDisplayString(`${index + 1}、`), 1),
+                                      vue.createElementVNode("div", _hoisted_23, vue.toDisplayString(`${item}`), 1)
+                                    ]),
+                                    vue.createElementVNode("div", _hoisted_24, [
+                                      vue.createVNode(_component_el_tooltip, {
+                                        class: "item",
+                                        effect: "dark",
+                                        content: "分享它",
+                                        placement: "top-start"
+                                      }, {
+                                        default: vue.withCtx(() => [
+                                          vue.createVNode(_component_el_button, {
+                                            type: "success",
+                                            size: "small",
+                                            icon: "Share",
+                                            circle: "",
+                                            onClick: ($event) => shareReply(index)
+                                          }, null, 8, ["onClick"])
+                                        ]),
+                                        _: 2
+                                      }, 1024),
+                                      vue.createVNode(_component_el_tooltip, {
+                                        class: "item",
+                                        effect: "dark",
+                                        content: "移除",
+                                        placement: "top-start"
+                                      }, {
+                                        default: vue.withCtx(() => [
+                                          vue.createVNode(_component_el_button, {
+                                            type: "danger",
+                                            size: "small",
+                                            icon: "DeleteFilled",
+                                            circle: "",
+                                            onClick: ($event) => delReply(index)
+                                          }, null, 8, ["onClick"])
+                                        ]),
+                                        _: 2
+                                      }, 1024)
+                                    ])
+                                  ]);
+                                }), 128))
+                              ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_25, _cache[34] || (_cache[34] = [
+                                vue.createElementVNode("p", null, "未设置快速回帖内容!", -1)
+                              ])))
+                            ])
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    }),
+                    vue.createVNode(_component_el_col, {
+                      span: 15,
+                      md: { span: 15 },
+                      sm: { span: 24 },
+                      xs: { span: 24 },
+                      style: vue.normalizeStyle({ "margin-top": windowSize.value.width < 992 ? "15px" : 0 })
+                    }, {
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_el_card, {
+                          class: "box-card",
+                          shadow: "never",
+                          "body-style": { padding: "0 20px 20px" }
+                        }, {
+                          header: vue.withCtx(() => _cache[35] || (_cache[35] = [
+                            vue.createElementVNode("span", null, "网友分享的", -1)
+                          ])),
+                          default: vue.withCtx(() => [
+                            vue.withDirectives((vue.openBlock(), vue.createBlock(_component_el_table, {
+                              ref: "filterTable",
+                              data: systemList.value,
+                              size: "small",
+                              stripe: "",
+                              onSortChange: sortChange
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_table_column, {
+                                  prop: "replyId",
+                                  label: "ID",
+                                  width: "50",
+                                  align: "center"
+                                }),
+                                vue.createVNode(_component_el_table_column, {
+                                  prop: "content",
+                                  label: "内容"
+                                }, {
+                                  default: vue.withCtx((scope) => [
+                                    _ctx.$app.isNew(scope.row.created) ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_26, [
+                                      vue.createTextVNode(vue.toDisplayString(scope.row.content) + " ", 1),
+                                      vue.createVNode(_component_el_tooltip, {
+                                        class: "item",
+                                        effect: "dark",
+                                        content: "7天内新增",
+                                        placement: "top-start"
+                                      }, {
+                                        default: vue.withCtx(() => [
+                                          vue.createVNode(_component_el_tag, {
+                                            type: "primary",
+                                            effect: "plain",
+                                            size: "small",
+                                            round: "",
+                                            style: { "transform": "scale(0.7)" }
+                                          }, {
+                                            default: vue.withCtx(() => _cache[36] || (_cache[36] = [
+                                              vue.createTextVNode(" NEW ")
+                                            ])),
+                                            _: 1
+                                          })
+                                        ]),
+                                        _: 1
+                                      })
+                                    ])) : vue.createCommentVNode("", true)
+                                  ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(_component_el_table_column, {
+                                  prop: "likeCount",
+                                  sortable: "custom",
+                                  width: "70",
+                                  align: "center",
+                                  label: "点赞"
+                                }, {
+                                  default: vue.withCtx((scope) => [
+                                    vue.createVNode(_component_el_tag, {
+                                      effect: "light",
+                                      type: "info",
+                                      size: "small"
+                                    }, {
+                                      default: vue.withCtx(() => [
+                                        vue.createTextVNode(vue.toDisplayString(scope.row.likeCount), 1)
+                                      ]),
+                                      _: 2
+                                    }, 1024)
+                                  ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(_component_el_table_column, {
+                                  label: "操作",
+                                  width: "100",
+                                  align: "center"
+                                }, {
+                                  default: vue.withCtx((scope) => [
+                                    vue.createVNode(_component_el_tooltip, {
+                                      class: "item",
+                                      effect: "dark",
+                                      content: "给个赞",
+                                      placement: "top-start"
+                                    }, {
+                                      default: vue.withCtx(() => [
+                                        vue.createVNode(_component_el_button, {
+                                          type: "success",
+                                          size: "small",
+                                          icon: "Pointer",
+                                          circle: "",
+                                          onClick: ($event) => likeReply(scope.$index)
+                                        }, null, 8, ["onClick"])
+                                      ]),
+                                      _: 2
+                                    }, 1024),
+                                    vue.createVNode(_component_el_tooltip, {
+                                      class: "item",
+                                      effect: "dark",
+                                      content: "收藏进我的",
+                                      placement: "top-start"
+                                    }, {
+                                      default: vue.withCtx(() => [
+                                        vue.createVNode(_component_el_button, {
+                                          type: "danger",
+                                          size: "small",
+                                          icon: "StarFilled",
+                                          circle: "",
+                                          onClick: ($event) => collectReply(scope.$index)
+                                        }, null, 8, ["onClick"])
+                                      ]),
+                                      _: 2
+                                    }, 1024)
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }, 8, ["data"])), [
+                              [_directive_loading, loading.value]
+                            ]),
+                            vue.createVNode(_component_el_pagination, {
+                              background: "",
+                              layout: "prev, pager, next",
+                              size: windowSize.value.width <= 640 ? "small" : "default",
+                              "page-size": 10,
+                              "pager-count": 5,
+                              onCurrentChange: currentPageChange,
+                              total: systemListCount.value
+                            }, null, 8, ["size", "total"])
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    }, 8, ["style"])
+                  ]),
+                  _: 1
+                }),
+                vue.createElementVNode("div", _hoisted_27, [
+                  vue.createVNode(_component_el_input, {
+                    placeholder: "请输入新的回复内容",
+                    modelValue: newReply.value,
+                    "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => newReply.value = $event),
+                    autosize: { minRows: 1, maxRows: 3 },
+                    maxlength: "100",
+                    "show-word-limit": true,
+                    resize: "none",
+                    clearable: "",
+                    class: "input-with-select"
+                  }, {
+                    append: vue.withCtx(() => [
+                      vue.createVNode(_component_el_button, {
+                        icon: "Plus",
+                        onClick: addReply
+                      })
+                    ]),
+                    _: 1
+                  }, 8, ["modelValue"])
+                ])
+              ])) : vue.createCommentVNode("", true)
+            ]),
+            _: 1
+          })
+        ]);
+      };
+    }
+  };
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-a4326af6"]]);
+  const Util = {
+    install: (app2, options) => {
+      const eventBus = {
+        events: {},
+        emit(event, ...args) {
+          if (this.events[event]) {
+            this.events[event].forEach((callback) => callback(...args));
+          }
+        },
+        on(event, callback) {
+          if (!this.events[event]) {
+            this.events[event] = [];
+          }
+          this.events[event].push(callback);
+        },
+        off(event, callback) {
+          if (this.events[event]) {
+            this.events[event] = this.events[event].filter(
+              (cb) => cb !== callback
+            );
+          }
+        }
+      };
+      app2.config.globalProperties.$emit = eventBus.emit.bind(eventBus);
+      app2.config.globalProperties.$on = eventBus.on.bind(eventBus);
+      app2.config.globalProperties.$off = eventBus.off.bind(eventBus);
+      app2.config.globalProperties.$storage = {
+        storageKey: "QuickReply",
+        userStorageKey: "QuickReplyUser",
+        set(value) {
+          _GM_setValue(this.storageKey, value);
+        },
+        get() {
+          return _GM_getValue(this.storageKey, []);
+        },
+        getAll() {
+          let keyList = _GM_listValues();
+          let all = {};
+          keyList.forEach((key) => {
+            all[key] = _GM_getValue(key, "");
+          });
+          return all;
+        },
+        setAll(data) {
+          for (let key in data) {
+            _GM_setValue(key, data[key]);
+          }
+        },
+        setUserInfo(key, value) {
+          let fullKey = `${this.userStorageKey}.${key}`;
+          _GM_setValue(fullKey, value || "");
+        },
+        getUserInfo(key) {
+          let fullKey = `${this.userStorageKey}.${key}`;
+          return _GM_getValue(fullKey, "");
+        },
+        async uploadToWebDAV(data, filename) {
+          const webdavConfig = this.getUserInfo("webdavConfig");
+          if (!webdavConfig || !webdavConfig.enabled)
+            return false;
+          let baseUrl = webdavConfig.url;
+          baseUrl = baseUrl.replace(/\/+$/, "");
+          baseUrl = `${baseUrl}/bbs_quickreply`;
+          const safeFilename = filename.startsWith("/") ? filename.substring(1) : filename;
+          const fullUrl = `${baseUrl}/${safeFilename}`;
+          console.log("准备上传文件到WebDAV:", fullUrl);
+          try {
+            await this.ensureWebDAVDirectory();
+            return new Promise((resolve, reject) => {
+              _GM_xmlhttpRequest({
+                method: "PUT",
+                url: fullUrl,
+                headers: {
+                  "Authorization": "Basic " + btoa(webdavConfig.username + ":" + webdavConfig.password),
+                  "Content-Type": "application/json; charset=utf-8",
+                  "Accept": "*/*"
+                },
+                data: JSON.stringify(data),
+                onload: function(response) {
+                  console.log("WebDAV上传响应:", response.status, response.statusText);
+                  if (response.status >= 200 && response.status < 300) {
+                    console.log("WebDAV上传成功:", fullUrl);
+                    resolve(true);
+                  } else {
+                    console.error("WebDAV 上传失败:", response);
+                    let errorMsg = "上传失败";
+                    try {
+                      const parser = new DOMParser();
+                      const xmlDoc = parser.parseFromString(response.responseText, "text/xml");
+                      const message = xmlDoc.querySelector("s\\:message");
+                      if (message) {
+                        errorMsg += ": " + message.textContent;
+                      } else {
+                        switch (response.status) {
+                          case 401:
+                            errorMsg += ": 认证失败,请检查用户名和密码";
+                            break;
+                          case 403:
+                            errorMsg += ": 没有权限,请检查 WebDAV 设置";
+                            break;
+                          case 404:
+                            errorMsg += ": 路径不存在,请检查 WebDAV 地址";
+                            break;
+                          case 405:
+                            errorMsg += ": 不允许此操作,请检查 WebDAV 权限";
+                            break;
+                          default:
+                            errorMsg += ": " + (response.statusText || "服务器返回状态码 " + response.status);
+                        }
+                      }
+                    } catch (e) {
+                      errorMsg += ": " + (response.statusText || "状态码: " + response.status);
+                    }
+                    reject(new Error(errorMsg));
+                  }
+                },
+                onerror: function(error) {
+                  console.error("WebDAV上传网络错误:", error);
+                  reject(new Error("上传失败: " + (error.message || "网络错误")));
+                },
+                ontimeout: function() {
+                  console.error("WebDAV上传请求超时");
+                  reject(new Error("上传失败: 请求超时"));
+                }
+              });
+            });
+          } catch (error) {
+            console.error("WebDAV上传过程中出错:", error);
+            throw error;
+          }
+        },
+        async downloadFromWebDAV(filename) {
+          const webdavConfig = this.getUserInfo("webdavConfig");
+          if (!webdavConfig || !webdavConfig.enabled)
+            return null;
+          let baseUrl = webdavConfig.url;
+          baseUrl = baseUrl.replace(/\/+$/, "");
+          baseUrl = `${baseUrl}/bbs_quickreply`;
+          const safeFilename = filename.startsWith("/") ? filename.substring(1) : filename;
+          const fullUrl = `${baseUrl}/${safeFilename}`;
+          console.log("正在从WebDAV下载文件:", fullUrl);
+          return new Promise((resolve, reject) => {
+            _GM_xmlhttpRequest({
+              method: "GET",
+              url: fullUrl,
+              headers: {
+                "Authorization": "Basic " + btoa(webdavConfig.username + ":" + webdavConfig.password),
+                "Content-Type": "application/json",
+                "Accept": "application/json, text/plain, */*"
+              },
+              responseType: "text",
+              onload: function(response) {
+                console.log("WebDAV下载响应:", response.status, response.statusText);
+                if (response.status >= 200 && response.status < 300) {
+                  try {
+                    if (!response.responseText || response.responseText.trim() === "") {
+                      console.error("WebDAV响应内容为空");
+                      reject(new Error("下载的文件内容为空"));
+                      return;
+                    }
+                    const parsedData = JSON.parse(response.responseText);
+                    console.log("WebDAV下载成功，数据已解析");
+                    resolve(parsedData);
+                  } catch (e) {
+                    console.error("解析WebDAV响应失败:", e, "响应内容:", response.responseText.substring(0, 100) + "...");
+                    reject(new Error("解析响应失败: " + e.message));
+                  }
+                } else if (response.status === 404) {
+                  console.warn("WebDAV文件不存在:", fullUrl);
+                  resolve(null);
+                } else {
+                  console.error("WebDAV下载失败:", response.status, response.statusText);
+                  reject(new Error("下载失败: 状态码 " + response.status + " " + response.statusText));
+                }
+              },
+              onerror: function(error) {
+                console.error("WebDAV请求出错:", error);
+                reject(new Error("下载失败: 网络错误"));
+              },
+              ontimeout: function() {
+                console.error("WebDAV请求超时");
+                reject(new Error("下载失败: 请求超时"));
+              }
+            });
+          }).catch((error) => {
+            console.error("WebDAV 下载失败:", error);
+            throw error;
+          });
+        },
+        async uploadList() {
+          let proxy = app2.config.globalProperties;
+          let userId = proxy.$storage.getUserInfo("userId");
+          let myList = proxy.$storage.get() || [];
+          let webdavConfig = this.getUserInfo("webdavConfig");
+          if (userId === "webdav_user" && webdavConfig && webdavConfig.enabled) {
+            if (await this.uploadToWebDAV(myList, "quickreply_list.json")) {
+              proxy.$message.success("WebDAV 上传成功");
+              return true;
+            }
+            proxy.$message.error("WebDAV 上传失败");
+            return false;
+          }
+          if (!userId) {
+            proxy.$message.error("请先登录");
+            return false;
+          }
+          if (myList.length == 0) {
+            proxy.$message.error("无可同步数据");
+            return false;
+          }
+          proxy.$api.upQuickReplyList({
+            userId,
+            list: myList
+          }).then((res) => {
+            proxy.$message.success("上传成功");
+          }).catch((err) => {
+            proxy.$message.error(err.message);
+          });
+        },
+        async downloadList() {
+          let proxy = app2.config.globalProperties;
+          let userId = proxy.$storage.getUserInfo("userId");
+          let webdavConfig = this.getUserInfo("webdavConfig");
+          if (userId === "webdav_user" && webdavConfig && webdavConfig.enabled) {
+            try {
+              await this.ensureWebDAVDirectory();
+              const data = await this.downloadFromWebDAV("quickreply_list.json");
+              if (data) {
+                proxy.$storage.set(data);
+                proxy.$message.success("WebDAV 下载成功");
+                return data;
+              } else {
+                const currentList = proxy.$storage.get() || [];
+                if (currentList.length > 0) {
+                  await this.uploadToWebDAV(currentList, "quickreply_list.json");
+                  proxy.$message.warning("WebDAV 中不存在数据，已上传当前数据");
+                  return currentList;
+                } else {
+                  proxy.$message.warning("WebDAV 中不存在数据，且本地无数据可上传");
+                  return [];
+                }
+              }
+            } catch (error) {
+              console.error("WebDAV 下载列表失败:", error);
+              proxy.$message.error(`WebDAV 下载失败: ${error.message}`);
+              return false;
+            }
+          }
+          if (!userId) {
+            proxy.$message.error("请先登录");
+            return false;
+          }
+          let res = await proxy.$api.downQuickReplyList({
+            userId
+          });
+          if (res.code == 0) {
+            if (res.data.length == 0) {
+              proxy.$message.error("云端无数据");
+            } else {
+              proxy.$storage.set(res.data);
+              proxy.$message.success("下载成功");
+              return res.data;
+            }
+          } else {
+            proxy.$message.error(res.message);
+          }
+        },
+        async uploadAll() {
+          let proxy = app2.config.globalProperties;
+          let userId = proxy.$storage.getUserInfo("userId");
+          let webdavConfig = this.getUserInfo("webdavConfig");
+          if (userId === "webdav_user" && webdavConfig && webdavConfig.enabled) {
+            const allConfig = proxy.$storage.getAll() || {};
+            if (Object.keys(allConfig).length === 0) {
+              proxy.$message.error("无可备份数据");
+              return false;
+            }
+            const encryptedData = {
+              options: proxy.$tools.encodeStr(JSON.stringify(allConfig))
+            };
+            if (await this.uploadToWebDAV(encryptedData, "quickreply_all.json")) {
+              proxy.$message.success("WebDAV 备份成功");
+              return true;
+            }
+            proxy.$message.error("WebDAV 备份失败");
+            return false;
+          }
+          if (!userId) {
+            proxy.$message.error("请先登录");
+            return false;
+          }
+          let allData = proxy.$storage.getAll() || {};
+          if (Object.keys(allData).length === 0) {
+            proxy.$message.error("无可备份数据");
+            return false;
+          }
+          let res = await proxy.$api.upUserAll({
+            userId,
+            options: proxy.$tools.encodeStr(JSON.stringify(allData))
+          });
+          if (res.code == 0) {
+            proxy.$message.success("备份成功");
+            return true;
+          } else {
+            proxy.$message.error(res.message);
+            return false;
+          }
+        },
+        async downloadAll() {
+          let proxy = app2.config.globalProperties;
+          let userId = proxy.$storage.getUserInfo("userId");
+          let webdavConfig = this.getUserInfo("webdavConfig");
+          if (userId === "webdav_user" && webdavConfig && webdavConfig.enabled) {
+            try {
+              await this.ensureWebDAVDirectory();
+              const data = await this.downloadFromWebDAV("quickreply_all.json");
+              if (data && data.options) {
+                try {
+                  console.log("开始解析WebDAV全量数据...");
+                  const decryptedOptions = JSON.parse(proxy.$tools.decodeStr(data.options));
+                  proxy.$storage.setAll(decryptedOptions);
+                  console.log("WebDAV全量数据已恢复到本地存储");
+                  setTimeout(() => {
+                    proxy.$emit("dataRestored", decryptedOptions);
+                    console.log("已发送dataRestored事件，通知组件更新");
+                  }, 100);
+                  proxy.$message.success("WebDAV 恢复成功");
+                  return decryptedOptions;
+                } catch (e) {
+                  console.error("解析WebDAV全量数据失败:", e);
+                  proxy.$message.error(`解析数据失败: ${e.message}`);
+                  return false;
+                }
+              } else {
+                const allConfig = proxy.$storage.getAll() || {};
+                if (Object.keys(allConfig).length > 0) {
+                  try {
+                    const encryptedData = {
+                      options: proxy.$tools.encodeStr(JSON.stringify(allConfig))
+                    };
+                    await this.uploadToWebDAV(encryptedData, "quickreply_all.json");
+                    proxy.$message.success("WebDAV 首次备份成功，已上传当前配置");
+                    return allConfig;
+                  } catch (e) {
+                    console.error("首次上传WebDAV数据失败:", e);
+                    proxy.$message.error(`首次备份失败: ${e.message}`);
+                    return false;
+                  }
+                } else {
+                  proxy.$message.warning("WebDAV 中不存在全量数据，且本地无配置可上传");
+                  return false;
+                }
+              }
+            } catch (error) {
+              console.error("WebDAV 下载全量数据失败:", error);
+              proxy.$message.error(`WebDAV 恢复失败: ${error.message}`);
+              return false;
+            }
+          }
+          if (!userId) {
+            proxy.$message.error("请先登录");
+            return false;
+          }
+          let res = await proxy.$api.downUserAll({
+            userId
+          });
+          if (res.code == 0) {
+            proxy.$storage.setAll(res.data);
+            setTimeout(() => {
+              proxy.$emit("dataRestored", res.data);
+              console.log("已发送dataRestored事件，通知组件更新");
+            }, 100);
+            proxy.$message.success("恢复成功");
+            return res.data;
+          } else {
+            proxy.$message.error(res.message);
+            return false;
+          }
+        },
+        async ensureWebDAVDirectory() {
+          const webdavConfig = this.getUserInfo("webdavConfig");
+          if (!webdavConfig || !webdavConfig.enabled)
+            return false;
+          let baseUrl = webdavConfig.url;
+          baseUrl = baseUrl.replace(/\/+$/, "");
+          const dirUrl = `${baseUrl}/bbs_quickreply`;
+          console.log("准备确保WebDAV目录存在:", dirUrl);
+          try {
+            const exists = await this.checkDirectoryExists(dirUrl, webdavConfig);
+            if (exists) {
+              console.log("WebDAV目录已存在:", dirUrl);
+              return true;
+            }
+            console.log("WebDAV目录不存在，尝试创建:", dirUrl);
+            await new Promise((resolve, reject) => {
+              _GM_xmlhttpRequest({
+                method: "MKCOL",
+                url: dirUrl,
+                headers: {
+                  "Authorization": "Basic " + btoa(webdavConfig.username + ":" + webdavConfig.password)
+                },
+                onload: function(response) {
+                  console.log("创建WebDAV目录响应:", response.status, response.statusText);
+                  if (response.status >= 200 && response.status < 300 || response.status === 405) {
+                    resolve(true);
+                  } else {
+                    reject(new Error("创建目录失败: " + (response.statusText || "服务器返回状态码 " + response.status)));
+                  }
+                },
+                onerror: function(error) {
+                  reject(new Error("创建目录失败: " + (error.message || "网络错误")));
+                }
+              });
+            });
+            console.log("WebDAV目录创建成功:", dirUrl);
+            return true;
+          } catch (error) {
+            if (error.message.includes("405")) {
+              console.log("WebDAV目录已存在,无需创建");
+              return true;
+            }
+            console.error("确保WebDAV目录存在时出错:", error);
+            throw error;
+          }
+        },
+        async checkDirectoryExists(url, webdavConfig) {
+          try {
+            const response = await new Promise((resolve, reject) => {
+              _GM_xmlhttpRequest({
+                method: "PROPFIND",
+                url,
+                headers: {
+                  "Authorization": "Basic " + btoa(webdavConfig.username + ":" + webdavConfig.password),
+                  "Depth": "0",
+                  "Content-Type": "application/xml"
+                },
+                onload: function(response2) {
+                  resolve(response2);
+                },
+                onerror: function(error) {
+                  reject(error);
+                }
+              });
+            });
+            return response.status >= 200 && response.status < 300;
+          } catch (error) {
+            console.warn("检查目录是否存在失败:", error);
+            return false;
+          }
+        },
+        // 获取所有用户数据（用于剪贴板备份）
+        getAllUserData() {
+          const allData = this.getAll();
+          if (Object.keys(allData).length === 0) {
+            return {};
+          }
+          return allData;
+        },
+        // 从对象恢复所有用户数据（用于剪贴板恢复）
+        restoreAllUserData(data) {
+          if (!data || Object.keys(data).length === 0) {
+            console.error("无效的恢复数据");
+            return false;
+          }
+          try {
+            this.setAll(data);
+            console.log("数据已从剪贴板恢复到本地存储");
+            return true;
+          } catch (error) {
+            console.error("恢复数据失败:", error);
+            return false;
+          }
+        }
+      }, // 全局
+      app2.config.globalProperties.$app = {
+        getName() {
+          return _GM_info["script"]["name"];
+        },
+        getVersion: function() {
+          return _GM_info["script"]["version"];
+        },
+        systemRole: "你是一个互联网高手，常年混迹于各大论坛，对所有内容都感兴趣，并且热衷于回复每一篇帖子，回复风格：简短、睿智、一语中的，又不失俏皮诙谐",
+        prompt: "请根据帖子标题：{{title}}，进行回帖。务必直接给出回帖内容，不要包含其他无关内容",
+        isNew: function(timestamp) {
+          if (!timestamp)
+            return false;
+          let number = 3600 * 24 * 7;
+          return parseInt((/* @__PURE__ */ new Date()).getTime() / 1e3) - timestamp <= number;
+        }
+      };
+      app2.config.globalProperties.$tools = {
+        encodeStr: function(str) {
+          let encoder = new TextEncoder();
+          str = encoder.encode(str);
+          return btoa(String.fromCharCode.apply(null, str));
+        },
+        decodeStr: function(str) {
+          var byteCharacters = atob(str);
+          var byteArray = new Uint8Array(byteCharacters.length);
+          for (var i = 0; i < byteCharacters.length; i++) {
+            byteArray[i] = byteCharacters.charCodeAt(i);
+          }
+          var decoder = new TextDecoder();
+          return decoder.decode(byteArray);
         }
       };
     }
@@ -2626,8 +4134,11 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
   }
   app.component("app-set-ai", AI);
   app.component("app-set", Set);
-  app.component("app-login", _sfc_main);
-  app.use(ElementPlus);
+  app.component("app-login", _sfc_main$1);
+  app.use(ElementPlus, {
+    locale: zhCn,
+    size: "default"
+  });
   app.use(Util);
   app.use(Api);
   app.mount(
@@ -2667,4 +4178,4 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
     })()
   );
 
-})(Vue, ElementPlus, ElementPlusIconsVue);
+})(ElementPlusIconsVue, ElementPlus, Vue);

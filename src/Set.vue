@@ -1,5 +1,5 @@
 <script setup name="quickReplySet">
-import { onMounted } from 'vue';
+import { getCurrentInstance, ref } from 'vue';
 
 const {proxy} = getCurrentInstance();
 const myList = ref([]);
@@ -10,8 +10,10 @@ const isLogin = ref(false);
 const realtimeSync = ref(false);
 const realtimeBackup = ref(false);
 const submitNow = ref(false);
-const currentTab = ref('mine');
-const showLoginForce = ref(false);
+const showLogin = ref(false);
+const showOptionsSettings = ref(false);
+const showConstSettings = ref(false);
+const showAISettings = ref(false);
 const newReply = ref('');
 const windowSize = ref({
     width: window.innerWidth,
@@ -31,14 +33,64 @@ const constVar = ref({
 });
 const emit = defineEmits(['updateMyList', 'updateConstVar', 'updateAIModel']);
 onBeforeMount(()=>{
-    isLogin.value = proxy.$storage.getUserInfo('userId');
+    const userId = proxy.$storage.getUserInfo('userId');
+    isLogin.value = !!userId;
     realtimeSync.value = proxy.$storage.getUserInfo('realtimeSync') || false;
     realtimeBackup.value = proxy.$storage.getUserInfo('realtimeBackup') || false;
     submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
     constVar.value = proxy.$storage.getUserInfo('constVar') || constVar.value;
+    
+    // WebDAV 配置仅在登录界面中管理,这里不再需要加载
+    // webdavConfig.value = proxy.$storage.getUserInfo('webdavConfig') || webdavConfig.value;
+    
     getMyList();
     getSystemList();
+    
+    // 添加全局数据恢复事件监听
+    proxy.$on('dataRestored', handleDataRestored);
 });
+
+// 处理数据恢复事件
+function handleDataRestored(data) {
+    console.log('设置组件接收到数据恢复事件', data);
+    
+    // 更新所有组件状态
+    if (data) {
+        // 更新回复列表
+        if (data.QuickReply) {
+            myList.value = data.QuickReply;
+            updateMyList();
+            console.log('设置面板已更新回复列表', myList.value.length, '条');
+        }
+        
+        // 更新用户设置
+        const userSettingsPrefix = proxy.$storage.userStorageKey + '.';
+        Object.keys(data).forEach(key => {
+            if (key.startsWith(userSettingsPrefix)) {
+                const settingKey = key.replace(userSettingsPrefix, '');
+                
+                // 更新已知的设置项
+                if (settingKey === 'realtimeSync') {
+                    realtimeSync.value = data[key] || false;
+                    console.log('已更新实时同步设置:', realtimeSync.value);
+                } else if (settingKey === 'realtimeBackup') {
+                    realtimeBackup.value = data[key] || false;
+                    console.log('已更新实时备份设置:', realtimeBackup.value);
+                } else if (settingKey === 'submitNow') {
+                    submitNow.value = data[key] || false;
+                    console.log('已更新立即提交设置:', submitNow.value);
+                } else if (settingKey === 'constVar') {
+                    constVar.value = data[key] || constVar.value;
+                    emit('updateConstVar');
+                    console.log('已更新常量设置');
+                }
+            }
+        });
+        
+        // 更新系统列表（如有必要）
+        getSystemList();
+    }
+}
 
 // 获取我的自定义回复列表
 function getMyList() {
@@ -152,10 +204,37 @@ function collectReply(index) {
 }
 
 function onLoginSuccess(){
-    showLoginForce.value = false;
+    showLogin.value = false;
     isLogin.value = true;
-    myList.value.length===0 && download();
+    
+    // 判断是否是WebDAV用户，WebDAV用户直接进行全量恢复
+    const userId = proxy.$storage.getUserInfo('userId');
+    if (userId === 'webdav_user') {
+        // WebDAV用户直接执行全量恢复
+        console.log('WebDAV用户登录成功，自动执行全量恢复');
+        downloadAll();
+    } else {
+        // 非WebDAV用户仅在回复列表为空时下载回复列表
+        myList.value.length === 0 && download();
+    }
 }
+
+function closeLogin(){
+    showLogin.value = false;
+}
+
+function closeOptionsSettings() {
+    showOptionsSettings.value = false;
+}
+
+function closeConstSettings() {
+    showConstSettings.value = false;
+}
+
+function closeAISettings() {
+    showAISettings.value = false;
+}
+
 function upload(){
     proxy.$storage.uploadList();
 }
@@ -167,22 +246,36 @@ async function download(){
 function uploadAll(){
     proxy.$storage.uploadAll();
 }
-async function downloadAll(){
-    let all = await proxy.$storage.downloadAll();
-    myList.value = all.QuickReply || [];
-    updateMyList();
-}
-function loginForce(){
-    showLoginForce.value = !showLoginForce.value;
-    currentTab.value = 'mine';
-}
-function loginCancel(){
-    showLoginForce.value = false;
-    currentTab.value = 'mine';
+async function downloadAll() {
+    loading.value = true;
+    try {
+        let all = await proxy.$storage.downloadAll();
+        if (all) {
+            // 由于已经在 util.js 中触发了全局事件，这里不需要重复更新
+            // 显示提示信息
+            if (!all.QuickReply || all.QuickReply.length === 0) {
+                proxy.$message.warning('恢复的数据中没有快捷回复');
+            } else {
+                console.log('全量恢复完成，恢复了', all.QuickReply.length, '条回复');
+            }
+        }
+    } catch (error) {
+        console.error('全量恢复出错:', error);
+        proxy.$message.error('全量恢复出错: ' + error.message);
+    } finally {
+        loading.value = false;
+    }
 }
 function logout(){
-    proxy.$storage.setUserInfo('userId', '')
+    proxy.$storage.setUserInfo('userId', '');
     isLogin.value = false;
+    
+    // 确保关闭所有设置页面，返回到主页面
+    showOptionsSettings.value = false;
+    showConstSettings.value = false;
+    showAISettings.value = false;
+    
+    proxy.$message.success('已注销登录');
 }
 
 function onRealtimeSyncChange(e){
@@ -213,36 +306,286 @@ function constVarChange(){
     emit('updateConstVar');
     realtimeBackup.value && uploadAll();
 }
+
+// 判断是否是 WebDAV 用户
+function isWebDAVUser() {
+    const userId = proxy.$storage.getUserInfo('userId');
+    return userId === 'webdav_user';
+}
+
+// 添加函数处理按钮点击
+function openOptionsSettings() {
+    showOptionsSettings.value = true;
+    showConstSettings.value = false;
+    showAISettings.value = false;
+}
+
+function openConstSettings() {
+    showOptionsSettings.value = false;
+    showConstSettings.value = true;
+    showAISettings.value = false;
+}
+
+function openAISettings() {
+    showOptionsSettings.value = false;
+    showConstSettings.value = false;
+    showAISettings.value = true;
+}
+
+function backupToClipboard() {
+    loading.value = true;
+    try {
+        // 获取所有数据
+        const allData = proxy.$storage.getAllUserData();
+        // 将数据转换为JSON字符串并添加前缀提示信息
+        const dataString = JSON.stringify({
+            _meta: {
+                app: 'bbs_quickreply',
+                version: proxy.$app.version,
+                timestamp: new Date().toISOString(),
+                note: 'Beta功能: 此备份仅用于在不同登录方式间迁移数据，非长期存储方案'
+            },
+            data: allData
+        });
+        
+        // 复制到剪贴板
+        navigator.clipboard.writeText(dataString).then(() => {
+            proxy.$message.success('数据已成功备份到剪贴板');
+        }).catch(err => {
+            console.error('剪贴板操作失败:', err);
+            proxy.$message.error('剪贴板操作失败: ' + err.message);
+        });
+    } catch (error) {
+        console.error('备份到剪贴板出错:', error);
+        proxy.$message.error('备份到剪贴板出错: ' + error.message);
+    } finally {
+        loading.value = false;
+    }
+}
+
+function restoreFromClipboard() {
+    loading.value = true;
+    try {
+        // 从剪贴板读取数据
+        navigator.clipboard.readText().then(text => {
+            try {
+                const clipData = JSON.parse(text);
+                
+                // 验证剪贴板数据格式
+                if (!clipData._meta || clipData._meta.app !== 'bbs_quickreply') {
+                    proxy.$message.error('无效的备份数据格式');
+                    loading.value = false;
+                    return;
+                }
+                
+                // 显示确认对话框
+                proxy.$confirm(
+                    '从剪贴板恢复将覆盖当前数据。这是一个Beta功能，主要用于数据迁移。确定要继续吗？',
+                    '恢复确认',
+                    {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }
+                ).then(() => {
+                    // 用户确认，开始恢复
+                    const restoreData = clipData.data;
+                    
+                    // 恢复数据
+                    proxy.$storage.restoreAllUserData(restoreData);
+                    
+                    // 更新UI
+                    if (restoreData.QuickReply) {
+                        myList.value = restoreData.QuickReply;
+                        updateMyList();
+                    }
+                    
+                    // 重新加载用户设置
+                    const userId = proxy.$storage.getUserInfo('userId');
+                    isLogin.value = !!userId;
+                    realtimeSync.value = proxy.$storage.getUserInfo('realtimeSync') || false;
+                    realtimeBackup.value = proxy.$storage.getUserInfo('realtimeBackup') || false;
+                    submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
+                    constVar.value = proxy.$storage.getUserInfo('constVar') || constVar.value;
+                    
+                    // 发送更新事件
+                    emit('updateConstVar');
+                    emit('updateAIModel');
+                    
+                    proxy.$message.success('数据恢复成功');
+                }).catch(() => {
+                    // 用户取消
+                    proxy.$message.info('已取消恢复操作');
+                }).finally(() => {
+                    loading.value = false;
+                });
+            } catch (error) {
+                console.error('解析剪贴板数据出错:', error);
+                proxy.$message.error('无法解析剪贴板数据: ' + error.message);
+                loading.value = false;
+            }
+        }).catch(err => {
+            console.error('读取剪贴板失败:', err);
+            proxy.$message.error('读取剪贴板失败: ' + err.message);
+            loading.value = false;
+        });
+    } catch (error) {
+        console.error('从剪贴板恢复出错:', error);
+        proxy.$message.error('从剪贴板恢复出错: ' + error.message);
+        loading.value = false;
+    }
+}
 </script>
 
 <template>
     <div class="setBox">
         <el-card class="box-card" shadow="never">
-            <el-row :gutter="30">
-                <el-col :span="9" :md="{span: 9}" :sm="{span: 24}" :xs="{span: 24}">
-                    <el-tabs type="border-card" class="my-list-tabs" v-model="currentTab">
-                        <el-tab-pane name="mine" label="我在用的">
-                            <div v-if="(myList.length===0 && !isLogin) || showLoginForce" class="quickReplyLoginBox">
-                                <div style="margin-top: 15px;">
-                                    <app-login @onSuccess="onLoginSuccess" @onClose="loginCancel"></app-login>
-                                    <el-space direction="vertical" alignment="flex-start">
-                                        <div>
-                                            <el-text type="info">* 登录后，即可在任意设备同步你的配置；</el-text>
-                                        </div>
-                                        <div>
-                                            <el-text type="info">* 云端只负责保存账号及其回复列表，不留存多余信息；</el-text>
-                                        </div>
-                                        <div>
-                                            <el-text type="info">* 忘记密码无法恢复，可重新注册；</el-text>
-                                        </div>
-                                        <div>
-                                            <el-text type="info">* 如不需登录，也可忽略登录界面，直接使用即可；</el-text>
-                                        </div>
-                                    </el-space>
-                                </div>
+            <!-- 顶部添加登录按钮 -->
+            <template #header>
+                <div class="card-header">
+                    <el-row :gutter="10">
+                        <el-col :xs="24" :sm="6" :md="6" :lg="6" :xl="6">
+                            <div class="header-left">
+                                <el-button v-if="!isLogin" type="primary" size="small" @click="showLogin = true">登录</el-button>
+                                <el-button v-else type="danger" size="small" @click="logout">注销</el-button>
+                                <span v-if="isLogin && isWebDAVUser()" class="login-type">WebDAV 同步</span>
+                                <span v-if="isLogin && !isWebDAVUser()" class="login-type">账号同步</span>
                             </div>
-                            <div v-else>
-                                <ul class="list" v-if="!showLoginForce || myList.length>0">
+                        </el-col>
+                        <el-col :xs="24" :sm="18" :md="18" :lg="18" :xl="18">
+                            <div class="header-right">
+                                <el-row :gutter="8">
+                                    <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                                        <div class="button-group">
+                                            <el-dropdown v-if="isLogin" trigger="click" class="header-button">
+                                                <el-button type="primary" size="small">
+                                                    全量同步
+                                                    <el-icon class="el-icon--right"><ArrowDown /></el-icon>
+                                                </el-button>
+                                                <template #dropdown>
+                                                    <el-dropdown-menu>
+                                                        <el-dropdown-item icon="Upload" @click="uploadAll">
+                                                            全量备份
+                                                        </el-dropdown-item>
+                                                        <el-dropdown-item icon="Download" @click="downloadAll">
+                                                            全量恢复
+                                                        </el-dropdown-item>
+                                                        <el-divider style="margin: 5px 0;"></el-divider>
+                                                        <el-dropdown-item icon="CopyDocument" @click="backupToClipboard">
+                                                            备份到剪贴板
+                                                        </el-dropdown-item>
+                                                        <el-dropdown-item icon="DocumentCopy" @click="restoreFromClipboard">
+                                                            从剪贴板恢复
+                                                        </el-dropdown-item>
+                                                    </el-dropdown-menu>
+                                                </template>
+                                            </el-dropdown>
+                                            <el-button v-if="isLogin" type="success" icon="Setting" size="small" class="header-button" @click="openOptionsSettings">选项</el-button>
+                                            <el-button v-if="isLogin" type="info" icon="Edit" size="small" class="header-button" @click="openConstSettings">常量</el-button>
+                                            <el-button v-if="isLogin" type="primary" icon="MagicStick" size="small" class="header-button" @click="openAISettings">AI</el-button>
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </div>
+            </template>
+
+            <!-- 登录界面 -->
+            <div v-if="showLogin" class="login-container">
+                <div class="login-header">
+                    <h3>账号登录</h3>
+                    <el-button type="primary" text icon="Back" @click="closeLogin">返回</el-button>
+                </div>
+                <app-login @onSuccess="onLoginSuccess" @onClose="closeLogin"></app-login>
+            </div>
+
+            <!-- 选项设置界面 -->
+            <div v-if="showOptionsSettings" class="settings-container">
+                <div class="settings-header">
+                    <h3>选项设置</h3>
+                    <el-button type="primary" text icon="Back" @click="closeOptionsSettings">返回</el-button>
+                </div>
+                <el-space direction="vertical" alignment="flex-start">
+                    <!-- 只为非 WebDAV 用户显示实时同步选项 -->
+                    <div v-if="!isWebDAVUser()">
+                        <el-checkbox v-model="realtimeSync" label="实时同步，本地回复列表修改后立即上传" size="small" :checked="realtimeSync" @change="onRealtimeSyncChange" />
+                    </div>
+                    <div>
+                        <el-checkbox v-model="realtimeBackup" label="实时备份，本地回复列表及任一配置修改后立即备份至云端" size="small" :checked="realtimeBackup" @change="onRealtimeBackupChange" />
+                    </div>
+                    <div>
+                        <el-checkbox v-model="submitNow" label="立即提交，选择快捷回帖内容后立即提交回帖" size="small" :checked="submitNow" @change="onSubmitNowChange" />
+                    </div>
+                
+                    <el-space direction="vertical" alignment="flex-start" style="margin-top: 18px;">
+                        <div v-if="!isWebDAVUser()">
+                            <el-text type="primary" class="text-info">* AI和常量只存在本地，不参与同步</el-text>
+                        </div>
+                        <div v-if="!isWebDAVUser()">
+                            <el-text type="primary" class="text-info">* 如需备份所有配置请使用操全量同步操作中的全量备份、全量恢复功能</el-text>
+                        </div>
+                        <div>
+                            <el-text type="primary" class="text-info">* 全量备份仅为方便多设备同步配置，使用base64存储，请知悉</el-text>
+                        </div>
+                    </el-space>
+                </el-space>
+            </div>
+
+            <!-- 常量设置界面 -->
+            <div v-if="showConstSettings" class="settings-container">
+                <div class="settings-header">
+                    <h3>常量设置</h3>
+                    <el-button type="primary" text icon="Back" @click="closeConstSettings">返回</el-button>
+                </div>
+                <el-form :model="constVar" label-width="60" style="max-width: 600px">
+                    <el-form-item label="邮箱">
+                        <el-input v-model="constVar.email" @change="constVarChange" />
+                    </el-form-item>
+                    <el-form-item label="QQ">
+                        <el-input v-model="constVar.qq" @change="constVarChange" />
+                    </el-form-item>
+                    <el-form-item label="微信">
+                        <el-input v-model="constVar.wechat" @change="constVarChange" />
+                    </el-form-item>
+                    <el-form-item label="网址">
+                        <el-input v-model="constVar.url" @change="constVarChange" />
+                    </el-form-item>
+                    <el-form-item label="加密">
+                        <el-switch v-model="constVar.base64" @change="constVarChange" />
+                    </el-form-item>
+                </el-form>
+                <el-space direction="vertical" alignment="flex-start">
+                    <div>
+                        <el-text type="primary" class="text-info">* 可在快捷回帖中使用以上常量：{email}、{qq}、{wechat}、{url}，例：我的邮箱是{email}，我的QQ是{qq}；</el-text>
+                    </div>
+                    <div>
+                        <el-text type="primary" class="text-info">* 开启加密后，只在回帖时显示base64加密后的常量；</el-text>
+                    </div>
+                </el-space>
+            </div>
+
+            <!-- AI设置界面 -->
+            <div v-if="showAISettings" class="settings-container">
+                <div class="settings-header">
+                    <h3>AI设置</h3>
+                    <el-button type="primary" text icon="Back" @click="closeAISettings">返回</el-button>
+                </div>
+                <app-set-ai ref="setAIPanel" @updateAI="updateAI" />
+            </div>
+
+            <!-- 主体内容区域 -->
+            <div v-if="!showLogin && !showOptionsSettings && !showConstSettings && !showAISettings" class="main-content">
+                <el-row :gutter="30">
+                    <!-- 左侧我在用的列表 -->
+                    <el-col :span="9" :md="{span: 9}" :sm="{span: 24}" :xs="{span: 24}">
+                        <el-card class="my-replies-card" shadow="never">
+                            <template #header>
+                                <div class="card-title">我在用的</div>
+                            </template>
+                            <div>
+                                <ul class="list" v-if="myList.length > 0">
                                     <li v-for="(item, index) in myList" :key="index">
                                         <div class="list-left">
                                             <div class="list-number">
@@ -263,138 +606,82 @@ function constVarChange(){
                                         </div>
                                     </li>
                                 </ul>
-                                <div v-if="myList.length == 0" class="tips">
+                                <div v-else class="tips">
                                     <p>未设置快速回帖内容!</p>
                                 </div>
                             </div>
-                        </el-tab-pane>
-                        <el-tab-pane v-if="isLogin" name="options" label="选项">
-                            <el-space direction="vertical" alignment="flex-start">
-                                <div>
-                                    <el-checkbox v-model="realtimeSync" label="实时同步，本地回复列表修改后立即上传" size="small" :checked="realtimeSync" @change="onRealtimeSyncChange" />
-                                </div>
-                                <div>
-                                    <el-checkbox v-model="realtimeBackup" label="实时备份，本地回复列表及任一配置修改后立即备份至云端" size="small" :checked="realtimeBackup" @change="onRealtimeBackupChange" />
-                                </div>
-                                <div>
-                                    <el-checkbox v-model="submitNow" label="立即提交，选择快捷回帖内容后立即提交回帖" size="small" :checked="submitNow" @change="onSubmitNowChange" />
-                                </div>
-                                <el-space direction="vertical" alignment="flex-start" style="margin-top: 18px;">
-                                    <div>
-                                        <el-text type="info">* AI和常量只存在本地，不参与同步</el-text>
-                                    </div>
-                                    <div>
-                                        <el-text type="info">* 如需备份所有配置请使用操作中的全量备份、全量恢复</el-text>
-                                    </div>
-                                    <div>
-                                        <el-text type="info">* 全量备份仅为方便多设备同步配置，使用base64存储，请知悉</el-text>
-                                    </div>
-                                </el-space>
-                            </el-space>
-                        </el-tab-pane>
-                        <el-tab-pane v-if="isLogin" name="constVar" label="常量">
-                            <el-form :model="constVar" label-width="60" style="max-width: 600px">
-                                <el-form-item label="邮箱">
-                                    <el-input v-model="constVar.email" @change="constVarChange" />
-                                </el-form-item>
-                                <el-form-item label="QQ">
-                                    <el-input v-model="constVar.qq" @change="constVarChange" />
-                                </el-form-item>
-                                <el-form-item label="微信">
-                                    <el-input v-model="constVar.wechat" @change="constVarChange" />
-                                </el-form-item>
-                                <el-form-item label="网址">
-                                    <el-input v-model="constVar.url" @change="constVarChange" />
-                                </el-form-item>
-                                <el-form-item label="加密">
-                                    <el-switch v-model="constVar.base64" @change="constVarChange" />
-                                </el-form-item>
-                            </el-form>
-                            <el-space direction="vertical" alignment="flex-start">
-                                <div>
-                                    <el-text type="info">* 可在快捷回帖中使用以上常量：{email}、{qq}、{wechat}、{url}，例：我的邮箱是{email}，我的QQ是{qq}；</el-text>
-                                </div>
-                                <div>
-                                    <el-text type="info">* 开启加密后，只在回帖时显示base64加密后的常量；</el-text>
-                                </div>
-                            </el-space>
-                        </el-tab-pane>
-                        <el-tab-pane v-if="isLogin" name="ai" label="AI">
-                            <app-set-ai ref="setAIPanel" @updateAI="updateAI" />
-                        </el-tab-pane>
-                        <el-tab-pane name="actions" label="操作">
-                            <el-space wrap>
-                                <el-button v-if="!isLogin" type="success" icon="UserFilled" size="small" @click="loginForce">登录，登录后即可在任意设备同步你的配置</el-button>
-                                <el-button v-if="isLogin" type="danger" icon="SwitchButton" size="small" @click="logout">注销，注销登录后将不能再同步列表</el-button>
-                                <el-button v-if="isLogin" type="primary" icon="Upload" size="small" @click="upload">上传，上传本地列表会覆盖云端数据</el-button>
-                                <el-button v-if="isLogin" type="warning" icon="Download" size="small" @click="download">下载，下载云端列表会覆盖本地数据</el-button>
-                                <el-button v-if="isLogin" type="primary" icon="Upload" size="small" @click="uploadAll">全量备份，全量备份本地所有配置信息到云端</el-button>
-                                <el-button v-if="isLogin" type="warning" icon="Download" size="small" @click="downloadAll">全量恢复，全量恢复云端配置信息覆盖本地数据</el-button>
-                            </el-space>
-                        </el-tab-pane>
-                    </el-tabs>
-                </el-col>
-                <el-col :span="15" :md="{span: 15}" :sm="{span: 24}" :xs="{span: 24}" :style="{'margin-top': windowSize.width<992?'15px':0}">
-                    <el-card class="box-card" shadow="never" :body-style="{padding: '0 20px 20px'}">
-                        <template #header class="cle        arfix">
-                            <span>网友分享的</span>
-                        </template>
+                        </el-card>
+                    </el-col>
 
-                        <el-table ref="filterTable" :data="systemList" size="small" stripe v-loading="loading"
-                            @sort-change="sortChange">
-                            <el-table-column prop="replyId" label="ID" width="50" align="center"></el-table-column>
-                            <el-table-column prop="content" label="内容">
-                                <template #default="scope">
-                                    <div v-if="$app.isNew(scope.row.created)">
-                                        {{ scope.row.content }}
-                                        <el-tooltip class="item" effect="dark" content="7天内新增" placement="top-start">
-                                            <el-tag
-                                                type="primary"
-                                                effect="dark"
-                                                size="small"
-                                                round
-                                                style="transform: scale(0.7);"
-                                                >
-                                            NEW
-                                            </el-tag>
+                    <!-- 右侧网友分享的列表 -->
+                    <el-col :span="15" :md="{span: 15}" :sm="{span: 24}" :xs="{span: 24}" :style="{'margin-top': windowSize.width<992?'15px':0}">
+                        <el-card class="box-card" shadow="never" :body-style="{padding: '0 20px 20px'}">
+                            <template #header class="clearfix">
+                                <span>网友分享的</span>
+                            </template>
+
+                            <el-table ref="filterTable" :data="systemList" size="small" stripe v-loading="loading"
+                                @sort-change="sortChange">
+                                <el-table-column prop="replyId" label="ID" width="50" align="center"></el-table-column>
+                                <el-table-column prop="content" label="内容">
+                                    <template #default="scope">
+                                        <div v-if="$app.isNew(scope.row.created)">
+                                            {{ scope.row.content }}
+                                            <el-tooltip class="item" effect="dark" content="7天内新增" placement="top-start">
+                                                <el-tag
+                                                    type="primary"
+                                                    effect="plain"
+                                                    size="small"
+                                                    round
+                                                    style="transform: scale(0.7);"
+                                                    >
+                                                NEW
+                                                </el-tag>
+                                            </el-tooltip>
+                                        </div>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column prop="likeCount" sortable="custom" width="70" align="center" label="点赞">
+                                    <template #default="scope">
+                                        <el-tag effect="light" type="info" size="small">{{scope.row.likeCount}}</el-tag>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="操作" width="100" align="center">
+                                    <template #default="scope">
+                                        <el-tooltip class="item" effect="dark" content="给个赞" placement="top-start">
+                                            <el-button type="success" size="small" icon="Pointer" circle
+                                                @click="likeReply(scope.$index)"></el-button>
                                         </el-tooltip>
-                                    </div>
-                                </template>
-                            </el-table-column>
-                            <el-table-column prop="likeCount" sortable="custom" width="70" align="center" label="点赞">
-                                <template #default="scope">
-                                    <el-tag type="info" size="small">{{scope.row.likeCount}}</el-tag>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="操作" width="100" align="center">
-                                <template #default="scope">
-                                    <el-tooltip class="item" effect="dark" content="给个赞" placement="top-start">
-                                        <el-button type="success" size="small" icon="Pointer" circle
-                                            @click="likeReply(scope.$index)"></el-button>
-                                    </el-tooltip>
-                                    <el-tooltip class="item" effect="dark" content="收藏进我的" placement="top-start">
-                                        <el-button type="danger" size="small" icon="StarFilled" circle
-                                            @click="collectReply(scope.$index)"></el-button>
-                                    </el-tooltip>
-                                </template>
-                            </el-table-column>
-                        </el-table>
+                                        <el-tooltip class="item" effect="dark" content="收藏进我的" placement="top-start">
+                                            <el-button type="danger" size="small" icon="StarFilled" circle
+                                                @click="collectReply(scope.$index)"></el-button>
+                                        </el-tooltip>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
 
-                        <el-pagination background layout="prev, pager, next" :small="windowSize.width<=640" :page-size="10" :pager-count="windowSize.width>640?5:3"
-                            @current-change="currentPageChange" :total="systemListCount">
-                        </el-pagination>
-                    </el-card>
-                </el-col>
-            </el-row>
+                            <el-pagination 
+                                background 
+                                layout="prev, pager, next" 
+                                :size="windowSize.width<=640 ? 'small' : 'default'" 
+                                :page-size="10" 
+                                :pager-count="5"
+                                @current-change="currentPageChange" 
+                                :total="systemListCount">
+                            </el-pagination>
+                        </el-card>
+                    </el-col>
+                </el-row>
 
-            <div class="addReplyBox">
-                <el-input placeholder="请输入新的回复内容" v-model="newReply" :autosize="{ minRows: 1, maxRows: 3 }" maxlength="100"
-                    :show-word-limit="true" resize="none" clearable class="input-with-select">
+                <div class="addReplyBox">
+                    <el-input placeholder="请输入新的回复内容" v-model="newReply" :autosize="{ minRows: 1, maxRows: 3 }" maxlength="100"
+                        :show-word-limit="true" resize="none" clearable class="input-with-select">
 
-                    <template #append>
-                        <el-button icon="Plus" @click="addReply"></el-button>
-                    </template>
-                </el-input>
+                        <template #append>
+                            <el-button icon="Plus" @click="addReply"></el-button>
+                        </template>
+                    </el-input>
+                </div>
             </div>
         </el-card>
     </div>
@@ -407,13 +694,80 @@ function constVarChange(){
     }
 }
 
-.app-margin-right-30 {
-    margin-right: 30px;
+.card-header {
+    width: 100%;
 }
 
-.my-list-tabs{
-    border-radius: var(--el-card-border-radius);
-    border: 1px solid var(--el-card-border-color);
+.header-left {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    
+    .login-type {
+        margin-left: 10px;
+        font-size: 14px;
+        color: #409eff;
+    }
+
+    @media (min-width: 768px) {
+        margin-bottom: 0;
+    }
+}
+
+.header-right {
+    width: 100%;
+
+    .button-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-start;
+
+        @media (min-width: 768px) {
+            justify-content: flex-end;
+        }
+    }
+}
+
+.login-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    
+    .login-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ebeef5;
+        
+        h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #303133;
+        }
+    }
+}
+
+.settings-container {
+    padding: 20px;
+}
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.my-replies-card {
+    min-height: 300px;
+    
+    .card-title {
+        font-weight: bold;
+    }
 }
 
 .list {
@@ -458,7 +812,8 @@ function constVarChange(){
         }
     }
 }
-.quickReplyLoginBox .tips {
+
+.tips {
     margin-left: 50px;
     text-align: left;
     font-size: 12px;
@@ -502,5 +857,11 @@ function constVarChange(){
 }
 :global(.setBox .el-checkbox) {
     white-space: wrap;
+}
+
+/* 添加自定义text-info样式 */
+:global(.text-info) {
+    color: #909399 !important;
+    font-size: 13px;
 }
 </style>

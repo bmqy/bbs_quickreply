@@ -44,8 +44,20 @@ export default defineConfig({
             'api.moonshot.cn',
             'api.openai.com',
             'api.deepseek.com',
+            'api.x.ai',
+            'dav.jianguoyun.com',
+            'ogi.teracloud.jp',
             '*'
-        ]
+        ],
+        grant: [
+            'GM_xmlhttpRequest',
+            'GM_setValue',
+            'GM_getValue',
+            'GM_listValues',
+            'GM_info',
+            'GM_download'
+        ],
+        "run-at": "document-end"
       },
       build: {
         externalGlobals: {
@@ -64,4 +76,13 @@ export default defineConfig({
       },
     }),
   ],
+  // 添加Vue功能标志配置
+  define: {
+    // 避免生产环境下的水合不匹配详细信息警告
+    __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
+    // 其他常见的Vue功能标志
+    __VUE_PROD_DEVTOOLS__: false,  // 禁用生产环境下的Vue开发工具
+    __VUE_OPTIONS_API__: true,     // 启用Options API支持
+    __VUE_PROD_TIPS__: false      // 禁用生产环境下的提示信息
+  }
 });
