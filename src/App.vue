@@ -1,4 +1,5 @@
 <script setup>
+import { StarFilled } from '@element-plus/icons-vue';
 const {proxy} = getCurrentInstance();
 const list = ref([]);
 const currentReply = ref('');
@@ -448,6 +449,10 @@ watch(fwin_replyLoaded, (n)=>{
             </template>
 
             <template #footer>
+                <el-link type="info" href="https://github.com/bmqy/bbs_quickreply" title="点个Star，支持下吧" target="_blank">
+                    <el-icon><StarFilled /></el-icon> Star
+                </el-link>
+                <el-divider direction="vertical" />
                 <el-link type="info" href="https://github.com/bmqy/bbs_quickreply?tab=readme-ov-file#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97" title="更新日志" target="_blank">{{ `ver: ${$app.getVersion()}` }}</el-link>
             </template>
         </el-dialog>
