@@ -34,6 +34,7 @@
 - [x] Kimi
 - [x] ChatGpt
 - [x] DeepSeek
+- [x] Grok
 
 ## 支持常量
 - [x] email：```{email}```
