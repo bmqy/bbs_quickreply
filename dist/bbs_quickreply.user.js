@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      4.0.1
+// @version      4.0.2
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -50,7 +50,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-6e38d9a1]{width:100%}.box-card[data-v-6e38d9a1]{border:none}.box-card .el-card__header[data-v-6e38d9a1]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-6e38d9a1]{padding:0}.tab-content[data-v-6e38d9a1]{padding:20px}.form-tips[data-v-6e38d9a1]{margin-bottom:20px}.required-star[data-v-6e38d9a1]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-6e38d9a1]{padding:15px 10px}.form-tips[data-v-6e38d9a1]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-78f83708]{position:relative}.quickReplyBox .el-form[data-v-78f83708]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-78f83708]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-78f83708]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-78f83708]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-78f83708],.el-form-item--small.el-form-item[data-v-78f83708]{margin-bottom:10px}.el-select[data-v-78f83708]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-a4326af6]{width:100%}.header-left[data-v-a4326af6]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-a4326af6]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-a4326af6]{margin-bottom:0}}.header-right[data-v-a4326af6]{width:100%}.header-right .button-group[data-v-a4326af6]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-a4326af6]{justify-content:flex-end}}.login-container[data-v-a4326af6]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-a4326af6]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-a4326af6]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-a4326af6]{padding:20px}.settings-header[data-v-a4326af6]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-a4326af6]{min-height:300px}.my-replies-card .card-title[data-v-a4326af6]{font-weight:700}.list-left[data-v-a4326af6]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-a4326af6]{margin-right:5px;color:#909399}.list-title[data-v-a4326af6]{flex:1;font-weight:400}.list-right[data-v-a4326af6]{min-width:70px}.list-right .el-badge.item[data-v-a4326af6]{margin-right:30px}.list li[data-v-a4326af6]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-a4326af6]:hover{background-color:#f5f5f5}.tips[data-v-a4326af6]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-a4326af6]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-a4326af6]{padding:10px 20px}.box-card .el-card__header span[data-v-a4326af6]{font-size:14px}.clearfix[data-v-a4326af6]:before,.clearfix[data-v-a4326af6]:after{display:table;content:""}.clearfix[data-v-a4326af6]:after{clear:both}.el-pagination[data-v-a4326af6]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-72fa2488]{width:100%}.box-card[data-v-72fa2488]{border:none}.box-card .el-card__header[data-v-72fa2488]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-72fa2488]{padding:0}.tab-content[data-v-72fa2488]{padding:20px}.form-tips[data-v-72fa2488]{margin-bottom:20px}.required-star[data-v-72fa2488]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-72fa2488]{padding:15px 10px}.form-tips[data-v-72fa2488]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-98d8052a]{position:relative}.quickReplyBox .el-form[data-v-98d8052a]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-98d8052a]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-98d8052a]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-98d8052a]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-98d8052a],.el-form-item--small.el-form-item[data-v-98d8052a]{margin-bottom:10px}.el-select[data-v-98d8052a]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-a4326af6]{width:100%}.header-left[data-v-a4326af6]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-a4326af6]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-a4326af6]{margin-bottom:0}}.header-right[data-v-a4326af6]{width:100%}.header-right .button-group[data-v-a4326af6]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-a4326af6]{justify-content:flex-end}}.login-container[data-v-a4326af6]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-a4326af6]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-a4326af6]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-a4326af6]{padding:20px}.settings-header[data-v-a4326af6]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-a4326af6]{min-height:300px}.my-replies-card .card-title[data-v-a4326af6]{font-weight:700}.list-left[data-v-a4326af6]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-a4326af6]{margin-right:5px;color:#909399}.list-title[data-v-a4326af6]{flex:1;font-weight:400}.list-right[data-v-a4326af6]{min-width:70px}.list-right .el-badge.item[data-v-a4326af6]{margin-right:30px}.list li[data-v-a4326af6]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-a4326af6]:hover{background-color:#f5f5f5}.tips[data-v-a4326af6]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-a4326af6]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-a4326af6]{padding:10px 20px}.box-card .el-card__header span[data-v-a4326af6]{font-size:14px}.clearfix[data-v-a4326af6]:before,.clearfix[data-v-a4326af6]:after{display:table;content:""}.clearfix[data-v-a4326af6]:after{clear:both}.el-pagination[data-v-a4326af6]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
 
 (function (ElementPlusIconsVue, ElementPlus, vue) {
   'use strict';
@@ -295,49 +295,26 @@
       const promptCustom = vue.ref("");
       const usePromptCustom = vue.ref(false);
       const geminiApiKey = vue.ref("");
+      const geminiModel = vue.ref("gemini-2.0-flash");
       const qianwenApiKey = vue.ref("");
+      const qianwenModel = vue.ref("qwen-turbo");
       const kimiApiKey = vue.ref("");
+      const kimiModel = vue.ref("moonshot-v1-8k");
       const chatgptDomain = vue.ref("");
       const chatgptApiKey = vue.ref("");
       const chatgptModel = vue.ref("gpt-3.5-turbo");
-      const chatgptModelList = vue.ref([
-        { value: "gpt-4", label: "gpt-4" },
-        { value: "gpt-4-0314", label: "gpt-4-0314" },
-        { value: "gpt-4-0613", label: "gpt-4-0613" },
-        { value: "gpt-4-32k", label: "gpt-4-32k" },
-        { value: "gpt-4-32k-0314", label: "gpt-4-32k-0314" },
-        { value: "gpt-4-32k-0613", label: "gpt-4-32k-0613" },
-        { value: "gpt-4-1106-preview", label: "gpt-4-1106-preview" },
-        { value: "gpt-4-vision-preview", label: "gpt-4-vision-preview" },
-        { value: "gpt-3.5-turbo", label: "gpt-3.5-turbo" },
-        { value: "gpt-3.5-turbo-0301", label: "gpt-3.5-turbo-0301" },
-        { value: "gpt-3.5-turbo-0613", label: "gpt-3.5-turbo-0613" },
-        { value: "gpt-3.5-turbo-1106", label: "gpt-3.5-turbo-1106" },
-        { value: "gpt-3.5-turbo-16k", label: "gpt-3.5-turbo-16k" },
-        { value: "gpt-3.5-turbo-16k-0613", label: "gpt-3.5-turbo-16k-0613" }
-      ]);
       const deepseekDomain = vue.ref("");
       const deepseekApiKey = vue.ref("");
       const deepseekModel = vue.ref("deepseek-chat");
-      const deepseekModelList = vue.ref([
-        { value: "deepseek-chat", label: "deepseek-chat" },
-        { value: "deepseek-reasoner", label: "deepseek-reasoner" }
-      ]);
       const grokDomain = vue.ref("");
       const grokApiKey = vue.ref("");
       const grokModel = vue.ref("grok-3-mini-beta");
-      const grokModelList = vue.ref([
-        { value: "grok-3-mini-beta", label: "grok-3-mini-beta" },
-        { value: "grok-3-mini-fast-beta", label: "grok-3-mini-fast-beta" },
-        { value: "grok-3-beta", label: "grok-3-beta" },
-        { value: "grok-3-fast-beta", label: "grok-3-fast-beta" }
-      ]);
       const emit = __emit;
       const aiOptions = vue.computed(() => {
         return [
-          { value: "gemini", label: "Gemini 2.0 Flash", disabled: !geminiApiKey.value },
-          { value: "qianwen", label: "通义千问-turbo", disabled: !qianwenApiKey.value },
-          { value: "kimi", label: "Kimi", disabled: !kimiApiKey.value },
+          { value: "gemini", label: `Gemini (${geminiModel.value})`, disabled: !geminiApiKey.value },
+          { value: "qianwen", label: `通义千问 (${qianwenModel.value})`, disabled: !qianwenApiKey.value },
+          { value: "kimi", label: `Kimi (${kimiModel.value})`, disabled: !kimiApiKey.value },
           { value: "chatgpt", label: `ChatGPT (${chatgptModel.value})`, disabled: !chatgptApiKey.value },
           { value: "deepseek", label: `DeepSeek (${deepseekModel.value})`, disabled: !deepseekApiKey.value },
           { value: "grok", label: `Grok (${grokModel.value})`, disabled: !grokApiKey.value }
@@ -361,8 +338,11 @@
         promptCustom.value = proxy.$storage.getUserInfo("promptCustom") || "";
         usePromptCustom.value = proxy.$storage.getUserInfo("usePromptCustom") || false;
         geminiApiKey.value = proxy.$storage.getUserInfo("geminiApiKey") || "";
+        geminiModel.value = proxy.$storage.getUserInfo("geminiModel") || "gemini-2.0-flash";
         qianwenApiKey.value = proxy.$storage.getUserInfo("qianwenApiKey") || "";
+        qianwenModel.value = proxy.$storage.getUserInfo("qianwenModel") || "qwen-turbo";
         kimiApiKey.value = proxy.$storage.getUserInfo("kimiApiKey") || "";
+        kimiModel.value = proxy.$storage.getUserInfo("kimiModel") || "moonshot-v1-8k";
         chatgptDomain.value = proxy.$storage.getUserInfo("chatgptDomain") || "";
         chatgptApiKey.value = proxy.$storage.getUserInfo("chatgptApiKey") || "";
         chatgptModel.value = proxy.$storage.getUserInfo("chatgptModel") || "gpt-3.5-turbo";
@@ -404,52 +384,16 @@
         const option = aiOptions.value.find((opt) => opt.value === aiType);
         return option ? option.label : aiType;
       }
-      function onGeminiApiKeyChange(e) {
-        proxy.$storage.setUserInfo("geminiApiKey", e);
+      function onDomainChange($event, aiName) {
+        proxy.$storage.setUserInfo(aiName + "Domain", $event);
         emit("updateAI");
       }
-      function onQianwenApiKeyChange(e) {
-        proxy.$storage.setUserInfo("qianwenApiKey", e);
+      function onApiKeyChange($event, aiName) {
+        proxy.$storage.setUserInfo(aiName + "ApiKey", $event);
         emit("updateAI");
       }
-      function onKimiApiKeyChange(e) {
-        proxy.$storage.setUserInfo("kimiApiKey", e);
-        emit("updateAI");
-      }
-      function onChatgptDomainChange(e) {
-        proxy.$storage.setUserInfo("chatgptDomain", e);
-        emit("updateAI");
-      }
-      function onChatgptApiKeyChange(e) {
-        proxy.$storage.setUserInfo("chatgptApiKey", e);
-        emit("updateAI");
-      }
-      function onChatgptModelChange(e) {
-        proxy.$storage.setUserInfo("chatgptModel", e);
-        emit("updateAI");
-      }
-      function onDeepseekDomainChange(e) {
-        proxy.$storage.setUserInfo("deepseekDomain", e);
-        emit("updateAI");
-      }
-      function onDeepseekApiKeyChange(e) {
-        proxy.$storage.setUserInfo("deepseekApiKey", e);
-        emit("updateAI");
-      }
-      function onDeepseekModelChange(e) {
-        proxy.$storage.setUserInfo("deepseekModel", e);
-        emit("updateAI");
-      }
-      function onGrokDomainChange(e) {
-        proxy.$storage.setUserInfo("grokDomain", e);
-        emit("updateAI");
-      }
-      function onGrokApiKeyChange(e) {
-        proxy.$storage.setUserInfo("grokApiKey", e);
-        emit("updateAI");
-      }
-      function onGrokModelChange(e) {
-        proxy.$storage.setUserInfo("grokModel", e);
+      function onModelChange($event, aiName) {
+        proxy.$storage.setUserInfo(aiName + "Model", $event);
         emit("updateAI");
       }
       function onSystemRoleCustomChange(e) {
@@ -495,6 +439,7 @@
         const _component_el_form = vue.resolveComponent("el-form");
         const _component_el_tab_pane = vue.resolveComponent("el-tab-pane");
         const _component_el_alert = vue.resolveComponent("el-alert");
+        const _component_el_link = vue.resolveComponent("el-link");
         const _component_el_tabs = vue.resolveComponent("el-tabs");
         const _component_el_card = vue.resolveComponent("el-card");
         return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$3, [
@@ -506,7 +451,7 @@
             default: vue.withCtx(() => [
               vue.createVNode(_component_el_tabs, {
                 modelValue: activeTab.value,
-                "onUpdate:modelValue": _cache[17] || (_cache[17] = ($event) => activeTab.value = $event),
+                "onUpdate:modelValue": _cache[35] || (_cache[35] = ($event) => activeTab.value = $event),
                 type: "border-card"
               }, {
                 default: vue.withCtx(() => [
@@ -637,7 +582,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[18] || (_cache[18] = [
+                            default: vue.withCtx(() => _cache[36] || (_cache[36] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -666,9 +611,43 @@
                                     vue.createVNode(_component_el_input, {
                                       modelValue: geminiApiKey.value,
                                       "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => geminiApiKey.value = $event),
-                                      onChange: onGeminiApiKeyChange
+                                      onChange: _cache[6] || (_cache[6] = ($event) => onApiKeyChange($event, "gemini"))
                                     }, null, 8, ["modelValue"])
                                   ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, {
+                              label: "模型选择",
+                              required: ""
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "默认使用：gemini-2.0-flash，需接口支持",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: geminiModel.value,
+                                      "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => geminiModel.value = $event),
+                                      onChange: _cache[8] || (_cache[8] = ($event) => onModelChange($event, "gemini")),
+                                      placeholder: "gemini-2.0-flash"
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(_component_el_link, {
+                                  type: "primary",
+                                  underline: false,
+                                  href: "https://ai.google.dev/gemini-api/docs/models",
+                                  target: "_blank",
+                                  style: { "font-size": "12px" }
+                                }, {
+                                  default: vue.withCtx(() => _cache[37] || (_cache[37] = [
+                                    vue.createTextVNode("可用模型")
+                                  ])),
                                   _: 1
                                 })
                               ]),
@@ -693,7 +672,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[19] || (_cache[19] = [
+                            default: vue.withCtx(() => _cache[38] || (_cache[38] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -721,10 +700,44 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: qianwenApiKey.value,
-                                      "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => qianwenApiKey.value = $event),
-                                      onChange: onQianwenApiKeyChange
+                                      "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => qianwenApiKey.value = $event),
+                                      onChange: _cache[10] || (_cache[10] = ($event) => onApiKeyChange($event, "qianwen"))
                                     }, null, 8, ["modelValue"])
                                   ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, {
+                              label: "模型选择",
+                              required: ""
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "默认使用：qwen-turbo，需接口支持",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: qianwenModel.value,
+                                      "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => qianwenModel.value = $event),
+                                      onChange: _cache[12] || (_cache[12] = ($event) => onModelChange($event, "qianwen")),
+                                      placeholder: "qwen-turbo"
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(_component_el_link, {
+                                  type: "primary",
+                                  underline: false,
+                                  href: "https://help.aliyun.com/zh/model-studio/models",
+                                  target: "_blank",
+                                  style: { "font-size": "12px" }
+                                }, {
+                                  default: vue.withCtx(() => _cache[39] || (_cache[39] = [
+                                    vue.createTextVNode("可用模型")
+                                  ])),
                                   _: 1
                                 })
                               ]),
@@ -749,7 +762,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[20] || (_cache[20] = [
+                            default: vue.withCtx(() => _cache[40] || (_cache[40] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -777,10 +790,44 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: kimiApiKey.value,
-                                      "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => kimiApiKey.value = $event),
-                                      onChange: onKimiApiKeyChange
+                                      "onUpdate:modelValue": _cache[13] || (_cache[13] = ($event) => kimiApiKey.value = $event),
+                                      onChange: _cache[14] || (_cache[14] = ($event) => onApiKeyChange($event, "kimi"))
                                     }, null, 8, ["modelValue"])
                                   ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, {
+                              label: "模型选择",
+                              required: ""
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "默认使用：moonshot-v1-8k，需接口支持",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: kimiModel.value,
+                                      "onUpdate:modelValue": _cache[15] || (_cache[15] = ($event) => kimiModel.value = $event),
+                                      onChange: _cache[16] || (_cache[16] = ($event) => onModelChange($event, "kimi")),
+                                      placeholder: "moonshot-v1-8k"
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(_component_el_link, {
+                                  type: "primary",
+                                  underline: false,
+                                  href: "https://platform.moonshot.cn/docs/pricing/chat#%E4%BA%A7%E5%93%81%E5%AE%9A%E4%BB%B7",
+                                  target: "_blank",
+                                  style: { "font-size": "12px" }
+                                }, {
+                                  default: vue.withCtx(() => _cache[41] || (_cache[41] = [
+                                    vue.createTextVNode("可用模型")
+                                  ])),
                                   _: 1
                                 })
                               ]),
@@ -805,7 +852,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[21] || (_cache[21] = [
+                            default: vue.withCtx(() => _cache[42] || (_cache[42] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -830,8 +877,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: chatgptDomain.value,
-                                      "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => chatgptDomain.value = $event),
-                                      onChange: onChatgptDomainChange
+                                      "onUpdate:modelValue": _cache[17] || (_cache[17] = ($event) => chatgptDomain.value = $event),
+                                      onChange: _cache[18] || (_cache[18] = ($event) => onDomainChange($event, "chatgpt"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -851,8 +898,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: chatgptApiKey.value,
-                                      "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => chatgptApiKey.value = $event),
-                                      onChange: onChatgptApiKeyChange
+                                      "onUpdate:modelValue": _cache[19] || (_cache[19] = ($event) => chatgptApiKey.value = $event),
+                                      onChange: _cache[20] || (_cache[20] = ($event) => onApiKeyChange($event, "chatgpt"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -870,25 +917,25 @@
                                   placement: "top"
                                 }, {
                                   default: vue.withCtx(() => [
-                                    vue.createVNode(_component_el_select, {
+                                    vue.createVNode(_component_el_input, {
                                       modelValue: chatgptModel.value,
-                                      "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => chatgptModel.value = $event),
-                                      placeholder: "Select",
-                                      style: vue.normalizeStyle(useMobileLayout.value ? "width: 100%" : "width: 240px"),
-                                      onChange: onChatgptModelChange
-                                    }, {
-                                      default: vue.withCtx(() => [
-                                        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(chatgptModelList.value, (item) => {
-                                          return vue.openBlock(), vue.createBlock(_component_el_option, {
-                                            key: item.value,
-                                            label: item.label,
-                                            value: item.value
-                                          }, null, 8, ["label", "value"]);
-                                        }), 128))
-                                      ]),
-                                      _: 1
-                                    }, 8, ["modelValue", "style"])
+                                      "onUpdate:modelValue": _cache[21] || (_cache[21] = ($event) => chatgptModel.value = $event),
+                                      onChange: _cache[22] || (_cache[22] = ($event) => onModelChange($event, "chatgpt")),
+                                      placeholder: "gpt-3.5-turbo"
+                                    }, null, 8, ["modelValue"])
                                   ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(_component_el_link, {
+                                  type: "primary",
+                                  underline: false,
+                                  href: "https://platform.openai.com/docs/models",
+                                  target: "_blank",
+                                  style: { "font-size": "12px" }
+                                }, {
+                                  default: vue.withCtx(() => _cache[43] || (_cache[43] = [
+                                    vue.createTextVNode("可用模型")
+                                  ])),
                                   _: 1
                                 })
                               ]),
@@ -913,7 +960,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[22] || (_cache[22] = [
+                            default: vue.withCtx(() => _cache[44] || (_cache[44] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -938,8 +985,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: deepseekDomain.value,
-                                      "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => deepseekDomain.value = $event),
-                                      onChange: onDeepseekDomainChange
+                                      "onUpdate:modelValue": _cache[23] || (_cache[23] = ($event) => deepseekDomain.value = $event),
+                                      onChange: _cache[24] || (_cache[24] = ($event) => onDomainChange($event, "deepseek"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -959,8 +1006,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: deepseekApiKey.value,
-                                      "onUpdate:modelValue": _cache[12] || (_cache[12] = ($event) => deepseekApiKey.value = $event),
-                                      onChange: onDeepseekApiKeyChange
+                                      "onUpdate:modelValue": _cache[25] || (_cache[25] = ($event) => deepseekApiKey.value = $event),
+                                      onChange: _cache[26] || (_cache[26] = ($event) => onApiKeyChange($event, "deepseek"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -978,25 +1025,25 @@
                                   placement: "top"
                                 }, {
                                   default: vue.withCtx(() => [
-                                    vue.createVNode(_component_el_select, {
+                                    vue.createVNode(_component_el_input, {
                                       modelValue: deepseekModel.value,
-                                      "onUpdate:modelValue": _cache[13] || (_cache[13] = ($event) => deepseekModel.value = $event),
-                                      placeholder: "Select",
-                                      style: vue.normalizeStyle(useMobileLayout.value ? "width: 100%" : "width: 240px"),
-                                      onChange: onDeepseekModelChange
-                                    }, {
-                                      default: vue.withCtx(() => [
-                                        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(deepseekModelList.value, (item) => {
-                                          return vue.openBlock(), vue.createBlock(_component_el_option, {
-                                            key: item.value,
-                                            label: item.label,
-                                            value: item.value
-                                          }, null, 8, ["label", "value"]);
-                                        }), 128))
-                                      ]),
-                                      _: 1
-                                    }, 8, ["modelValue", "style"])
+                                      "onUpdate:modelValue": _cache[27] || (_cache[27] = ($event) => deepseekModel.value = $event),
+                                      onChange: _cache[28] || (_cache[28] = ($event) => onModelChange($event, "deepseek")),
+                                      placeholder: "deepseek-chat"
+                                    }, null, 8, ["modelValue"])
                                   ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(_component_el_link, {
+                                  type: "primary",
+                                  underline: false,
+                                  href: "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+                                  target: "_blank",
+                                  style: { "font-size": "12px" }
+                                }, {
+                                  default: vue.withCtx(() => _cache[45] || (_cache[45] = [
+                                    vue.createTextVNode("可用模型")
+                                  ])),
                                   _: 1
                                 })
                               ]),
@@ -1021,7 +1068,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[23] || (_cache[23] = [
+                            default: vue.withCtx(() => _cache[46] || (_cache[46] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -1046,8 +1093,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: grokDomain.value,
-                                      "onUpdate:modelValue": _cache[14] || (_cache[14] = ($event) => grokDomain.value = $event),
-                                      onChange: onGrokDomainChange
+                                      "onUpdate:modelValue": _cache[29] || (_cache[29] = ($event) => grokDomain.value = $event),
+                                      onChange: _cache[30] || (_cache[30] = ($event) => onDomainChange($event, "grok"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -1067,8 +1114,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: grokApiKey.value,
-                                      "onUpdate:modelValue": _cache[15] || (_cache[15] = ($event) => grokApiKey.value = $event),
-                                      onChange: onGrokApiKeyChange
+                                      "onUpdate:modelValue": _cache[31] || (_cache[31] = ($event) => grokApiKey.value = $event),
+                                      onChange: _cache[32] || (_cache[32] = ($event) => onApiKeyChange($event, "grok"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -1086,25 +1133,25 @@
                                   placement: "top"
                                 }, {
                                   default: vue.withCtx(() => [
-                                    vue.createVNode(_component_el_select, {
+                                    vue.createVNode(_component_el_input, {
                                       modelValue: grokModel.value,
-                                      "onUpdate:modelValue": _cache[16] || (_cache[16] = ($event) => grokModel.value = $event),
-                                      placeholder: "Select",
-                                      style: vue.normalizeStyle(useMobileLayout.value ? "width: 100%" : "width: 240px"),
-                                      onChange: onGrokModelChange
-                                    }, {
-                                      default: vue.withCtx(() => [
-                                        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(grokModelList.value, (item) => {
-                                          return vue.openBlock(), vue.createBlock(_component_el_option, {
-                                            key: item.value,
-                                            label: item.label,
-                                            value: item.value
-                                          }, null, 8, ["label", "value"]);
-                                        }), 128))
-                                      ]),
-                                      _: 1
-                                    }, 8, ["modelValue", "style"])
+                                      "onUpdate:modelValue": _cache[33] || (_cache[33] = ($event) => grokModel.value = $event),
+                                      onChange: _cache[34] || (_cache[34] = ($event) => onModelChange($event, "grok")),
+                                      placeholder: "grok-3-mini-beta"
+                                    }, null, 8, ["modelValue"])
                                   ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(_component_el_link, {
+                                  type: "primary",
+                                  underline: false,
+                                  href: "https://docs.x.ai/docs/models",
+                                  target: "_blank",
+                                  style: { "font-size": "12px" }
+                                }, {
+                                  default: vue.withCtx(() => _cache[47] || (_cache[47] = [
+                                    vue.createTextVNode("可用模型")
+                                  ])),
                                   _: 1
                                 })
                               ]),
@@ -1127,7 +1174,7 @@
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-6e38d9a1"]]);
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-72fa2488"]]);
   var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
   var _GM_info = /* @__PURE__ */ (() => typeof GM_info != "undefined" ? GM_info : void 0)();
   var _GM_listValues = /* @__PURE__ */ (() => typeof GM_listValues != "undefined" ? GM_listValues : void 0)();
@@ -1237,11 +1284,12 @@
             }
             prompt = prompt.replace("{{title}}", title);
             if (useAI == "gemini") {
+              let geminiModel = proxy.$storage.getUserInfo("geminiModel") || "gemini-2.0-flash";
               let geminiApiKey = proxy.$storage.getUserInfo("geminiApiKey") || "";
               if (!geminiApiKey) {
                 reject("无效api key");
               }
-              let url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiApiKey}`;
+              let url = `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${geminiApiKey}`;
               let data = {
                 "system_instruction": {
                   "parts": {
@@ -1279,13 +1327,14 @@
                 }
               });
             } else if (useAI == "qianwen") {
+              let qianwenModel = proxy.$storage.getUserInfo("qianwenModel") || "qwen-turbo";
               let qianwenApiKey = proxy.$storage.getUserInfo("qianwenApiKey") || "";
               if (!qianwenApiKey) {
                 reject("无效api key");
               }
               let url = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions";
               let data = {
-                "model": "qwen-turbo",
+                "model": `${qianwenModel}`,
                 "messages": [
                   {
                     "role": "system",
@@ -1320,13 +1369,14 @@
                 }
               });
             } else if (useAI == "kimi") {
+              let kimiModel = proxy.$storage.getUserInfo("kimiModel") || "moonshot-v1-8k";
               let kimiApiKey = proxy.$storage.getUserInfo("kimiApiKey") || "";
               if (!kimiApiKey) {
                 reject("无效api key");
               }
               let url = "https://api.moonshot.cn/v1/chat/completions";
               let data = {
-                "model": "moonshot-v1-8k",
+                "model": `${kimiModel}`,
                 "messages": [
                   {
                     role: "system",
@@ -1529,8 +1579,8 @@
       const useAI = vue.ref("");
       const loadingAIReply = vue.ref(false);
       const aiNameList = vue.ref({
-        gemini: "Gemini 2.0 Flash",
-        qianwen: "通义千问-turbo",
+        gemini: "Gemini",
+        qianwen: "通义千问",
         kimi: "Kimi",
         chatgpt: "ChatGPT",
         deepseek: "DeepSeek",
@@ -1624,9 +1674,9 @@
       }
       function updateAIModel() {
         useAI.value = proxy.$storage.getUserInfo("useAI") || "";
-        let chatgptModel = proxy.$storage.getUserInfo("chatgptModel") || "gpt-3.5-turbo";
-        if (useAI.value === "chatgpt") {
-          aiNameList.value["chatgpt"] = `ChatGPT (${chatgptModel})`;
+        if (useAI.value) {
+          let aiModel = proxy.$storage.getUserInfo(`${useAI.value}Model`);
+          aiNameList.value[useAI.value] = `${useAI.value} (${aiModel})`;
         }
       }
       function updateConstVar() {
@@ -1981,7 +2031,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-78f83708"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-98d8052a"]]);
   const _hoisted_1$1 = { class: "margin-left" };
   const _hoisted_2$1 = { class: "margin-left" };
   const _hoisted_3$1 = { class: "form-tip" };
