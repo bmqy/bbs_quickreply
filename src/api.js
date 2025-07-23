@@ -104,11 +104,12 @@ export default {
                     }
                     prompt = prompt.replace('{{title}}', title);
                     if(useAI == 'gemini'){
+                        let geminiModel = proxy.$storage.getUserInfo('geminiModel') || 'gemini-2.0-flash';
                         let geminiApiKey = proxy.$storage.getUserInfo('geminiApiKey') || '';
                         if(!geminiApiKey){
                             reject('无效api key');
                         };
-                        let url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiApiKey}`
+                        let url = `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${geminiApiKey}`
                         let data = {
                             "system_instruction": {
                                 "parts": {
@@ -146,13 +147,14 @@ export default {
                             }
                         });
                     } else if(useAI == 'qianwen'){
+                        let qianwenModel = proxy.$storage.getUserInfo('qianwenModel') || 'qwen-turbo';
                         let qianwenApiKey = proxy.$storage.getUserInfo('qianwenApiKey') || '';
                         if(!qianwenApiKey){
                             reject('无效api key');
                         };
                         let url = 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions'
                         let data = {
-                            "model": "qwen-turbo",
+                            "model": `${qianwenModel}`,
                             "messages": [
                                 {
                                     "role": "system",
@@ -187,13 +189,14 @@ export default {
                             }
                         });
                     } else if(useAI == 'kimi'){
+                        let kimiModel = proxy.$storage.getUserInfo('kimiModel') || 'moonshot-v1-8k';
                         let kimiApiKey = proxy.$storage.getUserInfo('kimiApiKey') || '';
                         if(!kimiApiKey){
                             reject('无效api key');
                         };
                         let url = 'https://api.moonshot.cn/v1/chat/completions'
                         let data = {
-                            "model": "moonshot-v1-8k",
+                            "model": `${kimiModel}`,
                             "messages": [
                                 {
                                     role: "system",

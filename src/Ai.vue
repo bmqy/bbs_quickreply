@@ -14,62 +14,39 @@ const usePromptCustom = ref(false);
 
 // Gemini配置
 const geminiApiKey = ref('');
+const geminiModel = ref('gemini-2.0-flash');
 
 // 通义千问配置
 const qianwenApiKey = ref('');
+const qianwenModel = ref('qwen-turbo');
 
 // Kimi配置
 const kimiApiKey = ref('');
+const kimiModel = ref('moonshot-v1-8k');
 
 // ChatGPT配置
 const chatgptDomain = ref('');
 const chatgptApiKey = ref('');
 const chatgptModel = ref('gpt-3.5-turbo');
-const chatgptModelList = ref([
-    {value: 'gpt-4', label: 'gpt-4'},
-    {value: 'gpt-4-0314', label: 'gpt-4-0314'},
-    {value: 'gpt-4-0613', label: 'gpt-4-0613'},
-    {value: 'gpt-4-32k', label: 'gpt-4-32k'},
-    {value: 'gpt-4-32k-0314', label: 'gpt-4-32k-0314'},
-    {value: 'gpt-4-32k-0613', label: 'gpt-4-32k-0613'},
-    {value: 'gpt-4-1106-preview', label: 'gpt-4-1106-preview'},
-    {value: 'gpt-4-vision-preview', label: 'gpt-4-vision-preview'},
-    {value: 'gpt-3.5-turbo', label: 'gpt-3.5-turbo'},
-    {value: 'gpt-3.5-turbo-0301', label: 'gpt-3.5-turbo-0301'},
-    {value: 'gpt-3.5-turbo-0613', label: 'gpt-3.5-turbo-0613'},
-    {value: 'gpt-3.5-turbo-1106', label: 'gpt-3.5-turbo-1106'},
-    {value: 'gpt-3.5-turbo-16k', label: 'gpt-3.5-turbo-16k'},
-    {value: 'gpt-3.5-turbo-16k-0613', label: 'gpt-3.5-turbo-16k-0613'},
-]);
 
 // DeepSeek配置
 const deepseekDomain = ref('');
 const deepseekApiKey = ref('');
 const deepseekModel = ref('deepseek-chat');
-const deepseekModelList = ref([
-    {value: 'deepseek-chat', label: 'deepseek-chat'},
-    {value: 'deepseek-reasoner', label: 'deepseek-reasoner'},
-]);
 
 // Grok配置
 const grokDomain = ref('');
 const grokApiKey = ref('');
 const grokModel = ref('grok-3-mini-beta');
-const grokModelList = ref([
-    {value: 'grok-3-mini-beta', label: 'grok-3-mini-beta'},
-    {value: 'grok-3-mini-fast-beta', label: 'grok-3-mini-fast-beta'},
-    {value: 'grok-3-beta', label: 'grok-3-beta'},
-    {value: 'grok-3-fast-beta', label: 'grok-3-fast-beta'},
-]);
 
 const emit = defineEmits(['updateAI']);
 
 // 可选的AI列表
 const aiOptions = computed(() => {
     return [
-        { value: 'gemini', label: 'Gemini 2.0 Flash', disabled: !geminiApiKey.value },
-        { value: 'qianwen', label: '通义千问-turbo', disabled: !qianwenApiKey.value },
-        { value: 'kimi', label: 'Kimi', disabled: !kimiApiKey.value },
+        { value: 'gemini', label: `Gemini (${geminiModel.value})`, disabled: !geminiApiKey.value },
+        { value: 'qianwen', label: `通义千问 (${qianwenModel.value})`, disabled: !qianwenApiKey.value },
+        { value: 'kimi', label: `Kimi (${kimiModel.value})`, disabled: !kimiApiKey.value },
         { value: 'chatgpt', label: `ChatGPT (${chatgptModel.value})`, disabled: !chatgptApiKey.value },
         { value: 'deepseek', label: `DeepSeek (${deepseekModel.value})`, disabled: !deepseekApiKey.value },
         { value: 'grok', label: `Grok (${grokModel.value})`, disabled: !grokApiKey.value },
@@ -101,8 +78,13 @@ onBeforeMount(()=>{
     
     // 加载各AI平台配置
     geminiApiKey.value = proxy.$storage.getUserInfo('geminiApiKey') || '';
+    geminiModel.value = proxy.$storage.getUserInfo('geminiModel') || 'gemini-2.0-flash';
+    
     qianwenApiKey.value = proxy.$storage.getUserInfo('qianwenApiKey') || '';
+    qianwenModel.value = proxy.$storage.getUserInfo('qianwenModel') || 'qwen-turbo';
+
     kimiApiKey.value = proxy.$storage.getUserInfo('kimiApiKey') || '';
+    kimiModel.value = proxy.$storage.getUserInfo('kimiModel') || 'moonshot-v1-8k';
     
     chatgptDomain.value = proxy.$storage.getUserInfo('chatgptDomain') || '';
     chatgptApiKey.value = proxy.$storage.getUserInfo('chatgptApiKey') || '';
@@ -149,69 +131,20 @@ function getAILabel(aiType) {
     return option ? option.label : aiType;
 }
 
-// Gemini API Key 变更
-function onGeminiApiKeyChange(e) {
-    proxy.$storage.setUserInfo('geminiApiKey', e);
+// Domain 变更
+function onDomainChange($event, aiName) {
+    proxy.$storage.setUserInfo(aiName + 'Domain', $event);
+    emit('updateAI');
+}
+// API Key 变更
+function onApiKeyChange($event, aiName) {
+    proxy.$storage.setUserInfo(aiName + 'ApiKey', $event);
     emit('updateAI');
 }
 
-// 通义千问 API Key 变更
-function onQianwenApiKeyChange(e) {
-    proxy.$storage.setUserInfo('qianwenApiKey', e);
-    emit('updateAI');
-}
-
-// Kimi API Key 变更
-function onKimiApiKeyChange(e) {
-    proxy.$storage.setUserInfo('kimiApiKey', e);
-    emit('updateAI');
-}
-
-// ChatGPT 配置变更
-function onChatgptDomainChange(e) {
-    proxy.$storage.setUserInfo('chatgptDomain', e);
-    emit('updateAI');
-}
-
-function onChatgptApiKeyChange(e) {
-    proxy.$storage.setUserInfo('chatgptApiKey', e);
-    emit('updateAI');
-}
-
-function onChatgptModelChange(e) {
-    proxy.$storage.setUserInfo('chatgptModel', e);
-    emit('updateAI');
-}
-
-// DeepSeek 配置变更
-function onDeepseekDomainChange(e) {
-    proxy.$storage.setUserInfo('deepseekDomain', e);
-    emit('updateAI');
-}
-
-function onDeepseekApiKeyChange(e) {
-    proxy.$storage.setUserInfo('deepseekApiKey', e);
-    emit('updateAI');
-}
-
-function onDeepseekModelChange(e) {
-    proxy.$storage.setUserInfo('deepseekModel', e);
-    emit('updateAI');
-}
-
-// Grok 配置变更
-function onGrokDomainChange(e) {
-    proxy.$storage.setUserInfo('grokDomain', e);
-    emit('updateAI');
-}
-
-function onGrokApiKeyChange(e) {
-    proxy.$storage.setUserInfo('grokApiKey', e);
-    emit('updateAI');
-}
-
-function onGrokModelChange(e) {
-    proxy.$storage.setUserInfo('grokModel', e);
+// Model 变更
+function onModelChange($event, aiName) {
+    proxy.$storage.setUserInfo(aiName + 'Model', $event);
     emit('updateAI');
 }
 
@@ -322,8 +255,14 @@ function onUsePromptCustomChange(e) {
                                size="small">
                             <el-form-item label="API Key" required>
                                 <el-tooltip content="获取API Key：https://aistudio.google.com/app/apikey" placement="top">
-                                    <el-input v-model="geminiApiKey" @change="onGeminiApiKeyChange" />
+                                    <el-input v-model="geminiApiKey" @change="onApiKeyChange($event, 'gemini')" />
                                 </el-tooltip>
+                            </el-form-item>
+                            <el-form-item label="模型选择" required>
+                                <el-tooltip content="默认使用：gemini-2.0-flash，需接口支持" placement="top">
+                                    <el-input v-model="geminiModel" @change="onModelChange($event, 'gemini')" placeholder="gemini-2.0-flash" />
+                                </el-tooltip>
+                                <el-link type="primary" :underline="false" href="https://ai.google.dev/gemini-api/docs/models" target="_blank" style="font-size: 12px;">可用模型</el-link>
                             </el-form-item>
                         </el-form>
                     </div>
@@ -346,8 +285,14 @@ function onUsePromptCustomChange(e) {
                                size="small">
                             <el-form-item label="API Key" required>
                                 <el-tooltip content="获取API Key：https://dashscope.console.aliyun.com/apiKey" placement="top">
-                                    <el-input v-model="qianwenApiKey" @change="onQianwenApiKeyChange" />
+                                    <el-input v-model="qianwenApiKey" @change="onApiKeyChange($event, 'qianwen')" />
                                 </el-tooltip>
+                            </el-form-item>
+                            <el-form-item label="模型选择" required>
+                                <el-tooltip content="默认使用：qwen-turbo，需接口支持" placement="top">
+                                    <el-input v-model="qianwenModel" @change="onModelChange($event, 'qianwen')" placeholder="qwen-turbo" />
+                                </el-tooltip>
+                                <el-link type="primary" :underline="false" href="https://help.aliyun.com/zh/model-studio/models" target="_blank" style="font-size: 12px;">可用模型</el-link>
                             </el-form-item>
                         </el-form>
                     </div>
@@ -370,8 +315,14 @@ function onUsePromptCustomChange(e) {
                                size="small">
                             <el-form-item label="API Key" required>
                                 <el-tooltip content="获取API Key：https://platform.moonshot.cn/console/api-keys" placement="top">
-                                    <el-input v-model="kimiApiKey" @change="onKimiApiKeyChange" />
+                                    <el-input v-model="kimiApiKey" @change="onApiKeyChange($event, 'kimi')" />
                                 </el-tooltip>
+                            </el-form-item>
+                            <el-form-item label="模型选择" required>
+                                <el-tooltip content="默认使用：moonshot-v1-8k，需接口支持" placement="top">
+                                    <el-input v-model="kimiModel" @change="onModelChange($event, 'kimi')" placeholder="moonshot-v1-8k" />
+                                </el-tooltip>
+                                <el-link type="primary" :underline="false" href="https://platform.moonshot.cn/docs/pricing/chat#%E4%BA%A7%E5%93%81%E5%AE%9A%E4%BB%B7" target="_blank" style="font-size: 12px;">可用模型</el-link>
                             </el-form-item>
                         </el-form>
                     </div>
@@ -394,32 +345,19 @@ function onUsePromptCustomChange(e) {
                                size="small">
                             <el-form-item label="API Domain">
                                 <el-tooltip content="请自行寻找可用域名，example: chat.customai.com" placement="top">
-                                    <el-input v-model="chatgptDomain" @change="onChatgptDomainChange" />
+                                    <el-input v-model="chatgptDomain" @change="onDomainChange($event, 'chatgpt')" />
                                 </el-tooltip>
                             </el-form-item>
-                            
                             <el-form-item label="API Key" required>
                                 <el-tooltip content="按接口规则填写" placement="top">
-                                    <el-input v-model="chatgptApiKey" @change="onChatgptApiKeyChange" />
+                                    <el-input v-model="chatgptApiKey" @change="onApiKeyChange($event, 'chatgpt')" />
                                 </el-tooltip>
                             </el-form-item>
-                            
                             <el-form-item label="模型选择" required>
                                 <el-tooltip content="默认使用：gpt-3.5-turbo，需接口支持" placement="top">
-                                    <el-select
-                                        v-model="chatgptModel"
-                                        placeholder="Select"
-                                        :style="useMobileLayout ? 'width: 100%' : 'width: 240px'"
-                                        @change="onChatgptModelChange"
-                                    >
-                                        <el-option
-                                            v-for="item in chatgptModelList"
-                                            :key="item.value"
-                                            :label="item.label"
-                                            :value="item.value"
-                                        />
-                                    </el-select>
+                                    <el-input v-model="chatgptModel" @change="onModelChange($event, 'chatgpt')" placeholder="gpt-3.5-turbo" />
                                 </el-tooltip>
+                                <el-link type="primary" :underline="false" href="https://platform.openai.com/docs/models" target="_blank" style="font-size: 12px;">可用模型</el-link>
                             </el-form-item>
                         </el-form>
                     </div>
@@ -442,32 +380,19 @@ function onUsePromptCustomChange(e) {
                                size="small">
                             <el-form-item label="API Domain">
                                 <el-tooltip content="请自行寻找可用域名，example: chat.customai.com" placement="top">
-                                    <el-input v-model="deepseekDomain" @change="onDeepseekDomainChange" />
+                                    <el-input v-model="deepseekDomain" @change="onDomainChange($event, 'deepseek')" />
                                 </el-tooltip>
                             </el-form-item>
-                            
                             <el-form-item label="API Key" required>
                                 <el-tooltip content="按接口规则填写" placement="top">
-                                    <el-input v-model="deepseekApiKey" @change="onDeepseekApiKeyChange" />
+                                    <el-input v-model="deepseekApiKey" @change="onApiKeyChange($event, 'deepseek')" />
                                 </el-tooltip>
                             </el-form-item>
-                            
                             <el-form-item label="模型选择" required>
                                 <el-tooltip content="默认使用：deepseek-chat，需接口支持" placement="top">
-                                    <el-select
-                                        v-model="deepseekModel"
-                                        placeholder="Select"
-                                        :style="useMobileLayout ? 'width: 100%' : 'width: 240px'"
-                                        @change="onDeepseekModelChange"
-                                    >
-                                        <el-option
-                                            v-for="item in deepseekModelList"
-                                            :key="item.value"
-                                            :label="item.label"
-                                            :value="item.value"
-                                        />
-                                    </el-select>
+                                    <el-input v-model="deepseekModel" @change="onModelChange($event, 'deepseek')" placeholder="deepseek-chat" />
                                 </el-tooltip>
+                                <el-link type="primary" :underline="false" href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing" target="_blank" style="font-size: 12px;">可用模型</el-link>
                             </el-form-item>
                         </el-form>
                     </div>
@@ -490,32 +415,19 @@ function onUsePromptCustomChange(e) {
                                size="small">
                             <el-form-item label="API Domain">
                                 <el-tooltip content="请自行寻找可用域名，example: chat.customai.com" placement="top">
-                                    <el-input v-model="grokDomain" @change="onGrokDomainChange" />
+                                    <el-input v-model="grokDomain" @change="onDomainChange($event, 'grok')" />
                                 </el-tooltip>
                             </el-form-item>
-                            
                             <el-form-item label="API Key" required>
                                 <el-tooltip content="按接口规则填写" placement="top">
-                                    <el-input v-model="grokApiKey" @change="onGrokApiKeyChange" />
+                                    <el-input v-model="grokApiKey" @change="onApiKeyChange($event, 'grok')" />
                                 </el-tooltip>
                             </el-form-item>
-                            
                             <el-form-item label="模型选择" required>
                                 <el-tooltip content="默认使用：grok-3-mini-beta，需接口支持" placement="top">
-                                    <el-select
-                                        v-model="grokModel"
-                                        placeholder="Select"
-                                        :style="useMobileLayout ? 'width: 100%' : 'width: 240px'"
-                                        @change="onGrokModelChange"
-                                    >
-                                        <el-option
-                                            v-for="item in grokModelList"
-                                            :key="item.value"
-                                            :label="item.label"
-                                            :value="item.value"
-                                        />
-                                    </el-select>
+                                    <el-input v-model="grokModel" @change="onModelChange($event, 'grok')" placeholder="grok-3-mini-beta" />
                                 </el-tooltip>
+                                <el-link type="primary" :underline="false" href="https://docs.x.ai/docs/models" target="_blank" style="font-size: 12px;">可用模型</el-link>
                             </el-form-item>
                         </el-form>
                     </div>

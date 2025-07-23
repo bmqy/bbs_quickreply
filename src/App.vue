@@ -12,8 +12,8 @@ const setShow = ref(false);
 const useAI = ref('');
 const loadingAIReply = ref(false);
 const aiNameList = ref({
-    gemini: 'Gemini 2.0 Flash',
-    qianwen: '通义千问-turbo',
+    gemini: 'Gemini',
+    qianwen: '通义千问',
     kimi: 'Kimi',
     chatgpt: 'ChatGPT',
     deepseek: 'DeepSeek',
@@ -135,9 +135,9 @@ function closeSet() {
 // 更新AI模型
 function updateAIModel(){
     useAI.value = proxy.$storage.getUserInfo('useAI') || '';
-    let chatgptModel = proxy.$storage.getUserInfo('chatgptModel') || 'gpt-3.5-turbo';
-    if(useAI.value === 'chatgpt'){
-        aiNameList.value['chatgpt'] = `ChatGPT (${chatgptModel})`;
+    if(useAI.value){
+        let aiModel = proxy.$storage.getUserInfo(`${useAI.value}Model`);
+        aiNameList.value[useAI.value] = `${useAI.value} (${aiModel})`;
     }
 }
 // 更新常量
