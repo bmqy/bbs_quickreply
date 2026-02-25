@@ -10,6 +10,9 @@ on:
 jobs:
     build:
         runs-on: ${{ matrix.operating-system }}
+        # 仅当 commit message 以 v 开头时执行
+        if: startsWith(github.event.head_commit.message, 'v')
+
         strategy:
             matrix:
                 # in this example, there is a newer version already installed, 3.7.7, so the older version will be downloaded
