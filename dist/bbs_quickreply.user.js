@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      4.0.2
+// @version      4.0.3
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -1316,11 +1316,18 @@
                 data: `${JSON.stringify(data)}`,
                 responseType: "json",
                 onload: function(xhr) {
-                  let { error, candidates } = xhr.response;
-                  if (error) {
-                    reject(error.message);
+                  let { status, response } = xhr;
+                  let { candidates, error } = response;
+                  if (status !== 200) {
+                    let res = JSON.parse(response);
+                    let { error: err } = res;
+                    reject(err.message);
+                  } else {
+                    if (error) {
+                      reject(error.message);
+                    }
+                    resolve(candidates[0].content.parts[0].text);
                   }
-                  resolve(candidates[0].content.parts[0].text);
                 },
                 onerror: function(xhr) {
                   reject(xhr.response);
@@ -1357,12 +1364,19 @@
                 data: `${JSON.stringify(data)}`,
                 responseType: "json",
                 onload: function(xhr) {
-                  let { choices, error } = xhr.response;
-                  if (error) {
-                    reject(error.message);
+                  let { status, response } = xhr;
+                  let { choices, error } = response;
+                  if (status !== 200) {
+                    let res = JSON.parse(response);
+                    let { error: err } = res;
+                    reject(err.message);
+                  } else {
+                    if (error) {
+                      reject(error.message);
+                    }
+                    let result = choices[0].message.content;
+                    resolve(result);
                   }
-                  let result = choices[0].message.content;
-                  resolve(result);
                 },
                 onerror: function(xhr) {
                   reject(xhr.response);
@@ -1399,12 +1413,19 @@
                 data: `${JSON.stringify(data)}`,
                 responseType: "json",
                 onload: function(xhr) {
-                  let { choices, error } = xhr.response;
-                  if (error) {
-                    reject(error.message);
+                  let { status, response } = xhr;
+                  let { choices, error } = response;
+                  if (status !== 200) {
+                    let res = JSON.parse(response);
+                    let { error: err } = res;
+                    reject(err.message);
+                  } else {
+                    if (error) {
+                      reject(error.message);
+                    }
+                    let result = choices[0].message.content;
+                    resolve(result);
                   }
-                  let result = choices[0].message.content;
-                  resolve(result);
                 },
                 onerror: function(xhr) {
                   reject(xhr.response);
@@ -1446,12 +1467,19 @@
                 data: `${JSON.stringify(data)}`,
                 responseType: "json",
                 onload: function(xhr) {
-                  let { choices, error } = xhr.response;
-                  if (error) {
-                    reject(error.message);
+                  let { status, response } = xhr;
+                  let { choices, error } = response;
+                  if (status !== 200) {
+                    let res = JSON.parse(response);
+                    let { error: err } = res;
+                    reject(err.message);
+                  } else {
+                    if (error) {
+                      reject(error.message);
+                    }
+                    let result = choices[0].message.content;
+                    resolve(result);
                   }
-                  let result = choices[0].message.content;
-                  resolve(result);
                 },
                 onerror: function(xhr) {
                   reject(xhr.response);
@@ -1493,12 +1521,19 @@
                 data: `${JSON.stringify(data)}`,
                 responseType: "json",
                 onload: function(xhr) {
-                  let { choices, error } = xhr.response;
-                  if (error) {
-                    reject(error.message);
+                  let { status, response } = xhr;
+                  let { choices, error } = response;
+                  if (status !== 200) {
+                    let res = JSON.parse(response);
+                    let { error: err } = res;
+                    reject(err.message);
+                  } else {
+                    if (error) {
+                      reject(error.message);
+                    }
+                    let result = choices[0].message.content;
+                    resolve(result);
                   }
-                  let result = choices[0].message.content;
-                  resolve(result);
                 },
                 onerror: function(xhr) {
                   reject(xhr.response);
@@ -1540,12 +1575,19 @@
                 data: `${JSON.stringify(data)}`,
                 responseType: "json",
                 onload: function(xhr) {
-                  let { choices, error } = xhr.response;
-                  if (error) {
-                    reject(error.message);
+                  let { status, response } = xhr;
+                  let { choices, error } = response;
+                  if (status !== 200) {
+                    let res = JSON.parse(response);
+                    let { error: err } = res;
+                    reject(err.message);
+                  } else {
+                    if (error) {
+                      reject(error.message);
+                    }
+                    let result = choices[0].message.content;
+                    resolve(result);
                   }
-                  let result = choices[0].message.content;
-                  resolve(result);
                 },
                 onerror: function(xhr) {
                   reject(xhr.response);
