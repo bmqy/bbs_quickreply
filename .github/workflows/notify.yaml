@@ -8,6 +8,10 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+
+    # 仅当 commit message 以 v 开头时执行
+    if: startsWith(github.event.head_commit.message, 'v')
+
     steps:
       - name: send telegram message on push
         uses: appleboy/telegram-action@master
