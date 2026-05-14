@@ -149,9 +149,64 @@ function updateMyList(data) {
     let myListStorage = data || [];
     list.value = myListStorage;
 };
+// 获取帖子内容
+function getPostContent() {
+    let content = '';
+    const contentLengthLimit = proxy.$storage.getUserInfo('contentLengthLimit') || 500;
+    
+    if(currentPlatform.value == 'discuz'){
+        // Discuz: 获取帖子正文内容
+        let $postContent = document.querySelector('#post_content');
+        if(!$postContent) {
+            $postContent = document.querySelector('.t_fsz');
+        }
+        if($postContent) {
+            content = $postContent.innerText;
+        }
+    } else if(currentPlatform.value == 'discourse'){
+        // Discourse: 获取帖子正文
+        let $cooked = document.querySelector('.cooked');
+        if(!$cooked) {
+            $cooked = document.querySelector('[data-post-id] .post-content');
+        }
+        if($cooked) {
+            content = $cooked.innerText;
+        }
+    } else if(currentPlatform.value == 'nodeseek'){
+        // NodeSeek: 获取帖子内容
+        let $postContent = document.querySelector('.post-content');
+        if(!$postContent) {
+            $postContent = document.querySelector('[data-content]');
+        }
+        if($postContent) {
+            content = $postContent.innerText;
+        }
+    } else if(currentPlatform.value == 'v2ex'){
+        // V2ex: 获取话题内容
+        let $topicContent = document.querySelector('.topic_content');
+        if(!$topicContent) {
+            $topicContent = document.querySelector('#Main .box .cell');
+        }
+        if($topicContent) {
+            content = $topicContent.innerText;
+        }
+    }
+    
+    // 清理内容：移除多余空白和换行
+    content = content.trim().replace(/\s+/g, ' ');
+    
+    // 限制内容长度
+    if(content.length > contentLengthLimit) {
+        content = content.substring(0, contentLengthLimit) + '...';
+    }
+    
+    return content;
+}
+
 // 获取AI回复
 async function getAIReply(){
     let title = ''
+    let content = ''
     if(loadingAIReply.value) return false;
     loadingAIReply.value = true;
     if(currentPlatform.value == 'discuz'){
@@ -169,9 +224,23 @@ async function getAIReply(){
     }
     if(!title){
         proxy.$message.error('无法获取帖子标题，请检查脚本是否支持此论坛')
+        loadingAIReply.value = false;
         return false;
     }
-    await proxy.$api.getAIReply(title).then((res) => {
+    
+    // 获取帖子内容
+    content = getPostContent();
+    if(!content){
+        proxy.$message.warning('无法获取帖子内容，将仅使用标题生成回复')
+    }
+    
+    // 调试日志
+    proxy.$tools.log('[BBS QuickReply - 正在调用AI接口]');
+    proxy.$tools.log('帖子标题:', title);
+    proxy.$tools.log('帖子正文内容:', content);
+    proxy.$tools.log('当前论坛平台:', currentPlatform.value);
+    
+    await proxy.$api.getAIReply(title, content).then((res) => {
         currentReply.value = res;
         enterReply()
     }).catch(err=>{

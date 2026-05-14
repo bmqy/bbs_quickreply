@@ -11,6 +11,7 @@ const systemRoleCustom = ref('');
 const useSystemRoleCustom = ref(false);
 const promptCustom = ref('');
 const usePromptCustom = ref(false);
+const contentLengthLimit = ref(500);
 
 // Gemini配置
 const geminiApiKey = ref('');
@@ -75,6 +76,7 @@ onBeforeMount(()=>{
     useSystemRoleCustom.value = proxy.$storage.getUserInfo('useSystemRoleCustom') || false;
     promptCustom.value = proxy.$storage.getUserInfo('promptCustom') || '';
     usePromptCustom.value = proxy.$storage.getUserInfo('usePromptCustom') || false;
+    contentLengthLimit.value = proxy.$storage.getUserInfo('contentLengthLimit') || 500;
     
     // 加载各AI平台配置
     geminiApiKey.value = proxy.$storage.getUserInfo('geminiApiKey') || '';
@@ -189,6 +191,17 @@ function onUsePromptCustomChange(e) {
     proxy.$storage.setUserInfo('promptCustom', promptCustom.value);
     emit('updateAI');
 }
+
+// 内容长度限制
+function onContentLengthLimitChange(e) {
+    if(contentLengthLimit.value < 100 || contentLengthLimit.value > 10000) {
+        proxy.$message.error('内容长度限制应在 100-10000 字之间');
+        contentLengthLimit.value = 500;
+        return;
+    }
+    proxy.$storage.setUserInfo('contentLengthLimit', contentLengthLimit.value);
+    emit('updateAI');
+}
 </script>
 
 <template>
@@ -233,6 +246,13 @@ function onUsePromptCustomChange(e) {
                             </el-form-item>
                             <el-form-item label="启用">
                                 <el-switch v-model="usePromptCustom" @change="onUsePromptCustomChange" />
+                            </el-form-item>
+                            
+                            <el-form-item label="内容长度限制">
+                                <el-tooltip content="设置从帖子中提取的内容字数，默认 500 字。范围 100-10000" placement="top">
+                                    <el-input-number v-model="contentLengthLimit" @change="onContentLengthLimitChange" :min="100" :max="10000" :step="100" />
+                                </el-tooltip>
+                                <span style="margin-left: 8px; font-size: 12px; color: #909399;">字</span>
                             </el-form-item>
                         </el-form>
                     </div>

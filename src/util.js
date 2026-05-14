@@ -567,7 +567,9 @@ export default {
                 return GM_info['script']['version'];
             },
             systemRole: '你是一个互联网高手，常年混迹于各大论坛，对所有内容都感兴趣，并且热衷于回复每一篇帖子，回复风格：简短、睿智、一语中的，又不失俏皮诙谐',
-            prompt: '请根据帖子标题：{{title}}，进行回帖。务必直接给出回帖内容，不要包含其他无关内容',
+            prompt: '请根据帖子标题：{{title}}和帖子内容：{{content}}，进行回帖。务必直接给出回帖内容，不要包含其他无关内容',
+            contentLengthLimit: 500,
+            debug: false,
             isNew: function(timestamp){
                 if(!timestamp) return false;
                 let number = 3600 * 24 * 7;
@@ -591,6 +593,11 @@ export default {
 
                 var decoder = new TextDecoder();
                 return decoder.decode(byteArray);
+            },
+            log: function(...args) {
+                if (app.config.globalProperties.$app.debug) {
+                    console.log(...args);
+                }
             }
         }
     }

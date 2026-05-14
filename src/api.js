@@ -83,7 +83,7 @@ export default {
                 return await http('/downloadAll', params);
             },
             // 获取AI回复
-            getAIReply: function(title) {
+            getAIReply: function(title, content) {
                 return new Promise((resolve, reject) => {
                     let proxy = app.config.globalProperties;
                     let useAI = proxy.$storage.getUserInfo('useAI') || '';
@@ -103,6 +103,14 @@ export default {
                         prompt = promptCustom;
                     }
                     prompt = prompt.replace('{{title}}', title);
+                    prompt = prompt.replace('{{content}}', content || '内容获取失败');
+                    
+                    // 调试日志
+                    proxy.$tools.log('[BBS QuickReply - API参数]');
+                    proxy.$tools.log('选择的AI:', useAI);
+                    proxy.$tools.log('传入的标题:', title);
+                    proxy.$tools.log('传入的正文内容:', content || '(没有正文仅使用标题)');
+                    proxy.$tools.log('最终执行的Prompt:', prompt);
                     if(useAI == 'gemini'){
                         let geminiModel = proxy.$storage.getUserInfo('geminiModel') || 'gemini-2.0-flash';
                         let geminiApiKey = proxy.$storage.getUserInfo('geminiApiKey') || '';
@@ -136,6 +144,7 @@ export default {
                             data: `${JSON.stringify(data)}`,
                             responseType: 'json',
                             onload: function (xhr) {
+                                proxy.$tools.log('[BBS QuickReply - Gemini响应]', xhr.status, xhr.response);
                                 let {status, response} = xhr;
                                 let {candidates, error} = response;
                                 if(status !== 200){
@@ -184,6 +193,7 @@ export default {
                             data: `${JSON.stringify(data)}`,
                             responseType: 'json',
                             onload: function (xhr) {
+                                proxy.$tools.log('[BBS QuickReply - 通义千问响应]', xhr.status, xhr.response);
                                 let {status, response} = xhr;
                                 let {choices, error} = response;
                                 if(status !== 200){
@@ -233,6 +243,7 @@ export default {
                             data: `${JSON.stringify(data)}`,
                             responseType: 'json',
                             onload: function (xhr) {
+                                proxy.$tools.log('[BBS QuickReply - Kimi响应]', xhr.status, xhr.response);
                                 let {status, response} = xhr;
                                 let {choices, error} = response;
                                 if(status !== 200){
@@ -287,6 +298,7 @@ export default {
                             data: `${JSON.stringify(data)}`,
                             responseType: 'json',
                             onload: function (xhr) {
+                                console.log('[BBS QuickReply - ChatGPT响应]', xhr.status, xhr.response);
                                 let {status, response} = xhr;
                                 let {choices, error} = response;
                                 if(status !== 200){
@@ -341,6 +353,7 @@ export default {
                             data: `${JSON.stringify(data)}`,
                             responseType: 'json',
                             onload: function (xhr) {
+                                console.log('[BBS QuickReply - DeepSeek响应]', xhr.status, xhr.response);
                                 let {status, response} = xhr;
                                 let {choices, error} = response;
                                 if(status !== 200){
@@ -395,6 +408,7 @@ export default {
                             data: `${JSON.stringify(data)}`,
                             responseType: 'json',
                             onload: function (xhr) {
+                                console.log('[BBS QuickReply - Grok响应]', xhr.status, xhr.response);
                                 let {status, response} = xhr;
                                 let {choices, error} = response;
                                 if(status !== 200){
