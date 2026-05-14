@@ -24,3 +24,5 @@ dist-ssr
 
 # 优化相关文件
 optimization-todo.md
+AGENTS.md
+.github/agents
