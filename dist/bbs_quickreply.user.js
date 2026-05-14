@@ -50,7 +50,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-53adb71e]{width:100%}.box-card[data-v-53adb71e]{border:none}.box-card .el-card__header[data-v-53adb71e]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-53adb71e]{padding:0}.tab-content[data-v-53adb71e]{padding:20px}.form-tips[data-v-53adb71e]{margin-bottom:20px}.required-star[data-v-53adb71e]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-53adb71e]{padding:15px 10px}.form-tips[data-v-53adb71e]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-5ecfd11e]{position:relative}.quickReplyBox .el-form[data-v-5ecfd11e]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-5ecfd11e]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-5ecfd11e]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-5ecfd11e]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-5ecfd11e],.el-form-item--small.el-form-item[data-v-5ecfd11e]{margin-bottom:10px}.el-select[data-v-5ecfd11e]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-877c5d68]{width:100%}.header-left[data-v-877c5d68]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-877c5d68]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-877c5d68]{margin-bottom:0}}.header-right[data-v-877c5d68]{width:100%}.header-right .button-group[data-v-877c5d68]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-877c5d68]{justify-content:flex-end}}.login-container[data-v-877c5d68]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-877c5d68]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-877c5d68]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-877c5d68]{padding:20px}.settings-header[data-v-877c5d68]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-877c5d68]{min-height:300px}.my-replies-card .card-title[data-v-877c5d68]{font-weight:700}.list-left[data-v-877c5d68]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-877c5d68]{margin-right:5px;color:#909399}.list-title[data-v-877c5d68]{flex:1;font-weight:400}.list-right[data-v-877c5d68]{min-width:70px}.list-right .el-badge.item[data-v-877c5d68]{margin-right:30px}.list li[data-v-877c5d68]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-877c5d68]:hover{background-color:#f5f5f5}.tips[data-v-877c5d68]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-877c5d68]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-877c5d68]{padding:10px 20px}.box-card .el-card__header span[data-v-877c5d68]{font-size:14px}.clearfix[data-v-877c5d68]:before,.clearfix[data-v-877c5d68]:after{display:table;content:""}.clearfix[data-v-877c5d68]:after{clear:both}.el-pagination[data-v-877c5d68]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
+(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-53adb71e]{width:100%}.box-card[data-v-53adb71e]{border:none}.box-card .el-card__header[data-v-53adb71e]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-53adb71e]{padding:0}.tab-content[data-v-53adb71e]{padding:20px}.form-tips[data-v-53adb71e]{margin-bottom:20px}.required-star[data-v-53adb71e]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-53adb71e]{padding:15px 10px}.form-tips[data-v-53adb71e]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-68251d6c]{position:relative}.quickReplyBox .el-form[data-v-68251d6c]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-68251d6c]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-68251d6c]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-68251d6c]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-68251d6c],.el-form-item--small.el-form-item[data-v-68251d6c]{margin-bottom:10px}.el-select[data-v-68251d6c]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-877c5d68]{width:100%}.header-left[data-v-877c5d68]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-877c5d68]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-877c5d68]{margin-bottom:0}}.header-right[data-v-877c5d68]{width:100%}.header-right .button-group[data-v-877c5d68]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-877c5d68]{justify-content:flex-end}}.login-container[data-v-877c5d68]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-877c5d68]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-877c5d68]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-877c5d68]{padding:20px}.settings-header[data-v-877c5d68]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-877c5d68]{min-height:300px}.my-replies-card .card-title[data-v-877c5d68]{font-weight:700}.list-left[data-v-877c5d68]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-877c5d68]{margin-right:5px;color:#909399}.list-title[data-v-877c5d68]{flex:1;font-weight:400}.list-right[data-v-877c5d68]{min-width:70px}.list-right .el-badge.item[data-v-877c5d68]{margin-right:30px}.list li[data-v-877c5d68]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-877c5d68]:hover{background-color:#f5f5f5}.tips[data-v-877c5d68]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-877c5d68]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-877c5d68]{padding:10px 20px}.box-card .el-card__header span[data-v-877c5d68]{font-size:14px}.clearfix[data-v-877c5d68]:before,.clearfix[data-v-877c5d68]:after{display:table;content:""}.clearfix[data-v-877c5d68]:after{clear:both}.el-pagination[data-v-877c5d68]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
 
 (function (ElementPlusIconsVue, ElementPlus, vue) {
   'use strict';
@@ -1318,11 +1318,11 @@
             }
             prompt = prompt.replace("{{title}}", title);
             prompt = prompt.replace("{{content}}", content || "内容获取失败");
-            console.log("[BBS QuickReply - API参数]");
-            console.log("选择的AI:", useAI);
-            console.log("传入的标题:", title);
-            console.log("传入的正文内容:", content || "(没有正文仅使用标题)");
-            console.log("最终执行的Prompt:", prompt);
+            proxy.$tools.log("[BBS QuickReply - API参数]");
+            proxy.$tools.log("选择的AI:", useAI);
+            proxy.$tools.log("传入的标题:", title);
+            proxy.$tools.log("传入的正文内容:", content || "(没有正文仅使用标题)");
+            proxy.$tools.log("最终执行的Prompt:", prompt);
             if (useAI == "gemini") {
               let geminiModel = proxy.$storage.getUserInfo("geminiModel") || "gemini-2.0-flash";
               let geminiApiKey = proxy.$storage.getUserInfo("geminiApiKey") || "";
@@ -1356,7 +1356,7 @@
                 data: `${JSON.stringify(data)}`,
                 responseType: "json",
                 onload: function(xhr) {
-                  console.log("[BBS QuickReply - Gemini响应]", xhr.status, xhr.response);
+                  proxy.$tools.log("[BBS QuickReply - Gemini响应]", xhr.status, xhr.response);
                   let { status, response } = xhr;
                   let { candidates, error } = response;
                   if (status !== 200) {
@@ -1405,7 +1405,7 @@
                 data: `${JSON.stringify(data)}`,
                 responseType: "json",
                 onload: function(xhr) {
-                  console.log("[BBS QuickReply - 通义千问响应]", xhr.status, xhr.response);
+                  proxy.$tools.log("[BBS QuickReply - 通义千问响应]", xhr.status, xhr.response);
                   let { status, response } = xhr;
                   let { choices, error } = response;
                   if (status !== 200) {
@@ -1455,7 +1455,7 @@
                 data: `${JSON.stringify(data)}`,
                 responseType: "json",
                 onload: function(xhr) {
-                  console.log("[BBS QuickReply - Kimi响应]", xhr.status, xhr.response);
+                  proxy.$tools.log("[BBS QuickReply - Kimi响应]", xhr.status, xhr.response);
                   let { status, response } = xhr;
                   let { choices, error } = response;
                   if (status !== 200) {
@@ -1688,6 +1688,7 @@
         useAI.value = proxy.$storage.getUserInfo("useAI") || "";
         updateConstVar();
         updateAIModel();
+        proxy.$app.debug = proxy.$storage.getUserInfo("debug") || false;
         proxy.$on("dataRestored", handleDataRestored);
       });
       function handleDataRestored(data) {
@@ -1844,10 +1845,10 @@
         if (!content) {
           proxy.$message.warning("无法获取帖子内容，将仅使用标题生成回复");
         }
-        console.log("[BBS QuickReply - 正在调用AI接口]");
-        console.log("帖子标题:", title2);
-        console.log("帖子正文内容:", content);
-        console.log("当前论坛平台:", currentPlatform.value);
+        proxy.$tools.log("[BBS QuickReply - 正在调用AI接口]");
+        proxy.$tools.log("帖子标题:", title2);
+        proxy.$tools.log("帖子正文内容:", content);
+        proxy.$tools.log("当前论坛平台:", currentPlatform.value);
         await proxy.$api.getAIReply(title2, content).then((res) => {
           currentReply.value = res;
           enterReply();
@@ -2010,13 +2011,125 @@
 - 登录账号（登录后可打开脚本菜单同步你的回帖，在任何设备上恢复并使用）；
 - AI及更多功能，请点击设置图标开启或关闭；`;
       });
+      function getReplyContent(replyElement) {
+        let content = "";
+        if (currentPlatform.value == "discuz") {
+          let $postMessage = replyElement.querySelector('[id^="postmessage_"]');
+          if (!$postMessage) {
+            $postMessage = replyElement.querySelector(".t_fswillem");
+          }
+          if ($postMessage) {
+            content = $postMessage.innerText;
+          }
+        } else if (currentPlatform.value == "discourse") {
+          let $cooked = replyElement.querySelector(".cooked");
+          if ($cooked) {
+            content = $cooked.innerText;
+          }
+        } else if (currentPlatform.value == "nodeseek") {
+          let $postContent = replyElement.querySelector(".post-content");
+          if ($postContent) {
+            content = $postContent.innerText;
+          }
+        } else if (currentPlatform.value == "v2ex") {
+          let $replyBody = replyElement.querySelector(".reply_content");
+          if (!$replyBody) {
+            $replyBody = replyElement.querySelector(".cell");
+          }
+          if ($replyBody) {
+            content = $replyBody.innerText;
+          }
+        }
+        return content.trim();
+      }
+      async function addToMyList(replyContent) {
+        if (!replyContent) {
+          proxy.$message.error("无法获取回复内容");
+          return;
+        }
+        if (list.value.includes(replyContent)) {
+          proxy.$message.warning("该回复已在列表中");
+          return;
+        }
+        list.value.push(replyContent);
+        proxy.$storage.set(list.value);
+        proxy.$message.success("已添加到我的回复列表");
+        proxy.$tools.log("[BBS QuickReply - 添加回复到列表]", replyContent);
+      }
+      async function addToMyListAndShare(replyContent) {
+        if (!replyContent) {
+          proxy.$message.error("无法获取回复内容");
+          return;
+        }
+        if (!list.value.includes(replyContent)) {
+          list.value.push(replyContent);
+          proxy.$storage.set(list.value);
+        }
+        try {
+          const res = await proxy.$api.replyInsert(replyContent);
+          proxy.$message.success("已添加到我的回复并分享成功");
+          proxy.$tools.log("[BBS QuickReply - 添加并分享回复]", replyContent, res);
+        } catch (err) {
+          proxy.$message.error("分享失败: " + (err.message || err));
+          proxy.$tools.log("[BBS QuickReply - 分享失败]", err);
+        }
+      }
+      function injectQuickAddButtons() {
+        if (currentPlatform.value == "discuz") {
+          const $replies = document.querySelectorAll('#postlist > div[id^="post_"]');
+          $replies.forEach((replyElement) => {
+            if (replyElement.querySelector(".quickAddBtnGroup")) {
+              return;
+            }
+            let $postMessage = replyElement.querySelector('[id^="postmessage_"]');
+            if (!$postMessage) {
+              $postMessage = replyElement.querySelector(".t_fswillem");
+            }
+            if ($postMessage) {
+              const replyContent = getReplyContent(replyElement);
+              const $btnGroup = document.createElement("div");
+              $btnGroup.className = "quickAddBtnGroup";
+              $btnGroup.style.cssText = "margin-top: 8px; display: none; gap: 8px;";
+              const $addBtn = document.createElement("button");
+              $addBtn.textContent = "➕ 添加到我的";
+              $addBtn.title = "BBS QuickReply - 添加到我的回复";
+              $addBtn.className = "btn btn-sm btn-info quickAddBtn";
+              $addBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;";
+              $addBtn.onclick = () => addToMyList(replyContent);
+              const $addShareBtn = document.createElement("button");
+              $addShareBtn.textContent = "⭐ 添加到我的并分享";
+              $addShareBtn.title = "BBS QuickReply - 添加到我的回复并分享给网友";
+              $addShareBtn.className = "btn btn-sm btn-success quickAddShareBtn";
+              $addShareBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;";
+              $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
+              $btnGroup.appendChild($addBtn);
+              $btnGroup.appendChild($addShareBtn);
+              $postMessage.appendChild($btnGroup);
+              replyElement.addEventListener("mouseenter", () => {
+                $btnGroup.style.display = "flex";
+              });
+              replyElement.addEventListener("mouseleave", () => {
+                $btnGroup.style.display = "none";
+              });
+            }
+          });
+        }
+      }
       vue.onMounted(() => {
         checkEditor();
         postReplyMutationObserver();
+        injectQuickAddButtons();
         enterReply();
         fastreBindClick();
         replyfastBindClick();
         flbcBindClick();
+        const observer = new MutationObserver(() => {
+          injectQuickAddButtons();
+        });
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
       });
       vue.watch(fwin_replyLoaded, (n) => {
         if (n) {
@@ -2171,7 +2284,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-5ecfd11e"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-68251d6c"]]);
   const _hoisted_1$1 = { class: "margin-left" };
   const _hoisted_2$1 = { class: "margin-left" };
   const _hoisted_3$1 = { class: "form-tip" };
@@ -4314,6 +4427,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         systemRole: "你是一个互联网高手，常年混迹于各大论坛，对所有内容都感兴趣，并且热衷于回复每一篇帖子，回复风格：简短、睿智、一语中的，又不失俏皮诙谐",
         prompt: "请根据帖子标题：{{title}}和帖子内容：{{content}}，进行回帖。务必直接给出回帖内容，不要包含其他无关内容",
         contentLengthLimit: 500,
+        debug: false,
         isNew: function(timestamp) {
           if (!timestamp)
             return false;
@@ -4335,6 +4449,11 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
           }
           var decoder = new TextDecoder();
           return decoder.decode(byteArray);
+        },
+        log: function(...args) {
+          if (app2.config.globalProperties.$app.debug) {
+            console.log(...args);
+          }
         }
       };
     }
