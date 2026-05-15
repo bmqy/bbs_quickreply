@@ -365,7 +365,7 @@ function enterReply() {
 };
 // NodeSeek：设置markdown-it编辑器内容
 function enterMarkdownItReply() {
-    unsafeWindow.editor && unsafeWindow.editor.setMarkdown && unsafeWindow.editor.setMarkdown(currentReply.value)
+    unsafeWindow.codemirrorInstance && unsafeWindow.codemirrorInstance.setValue && unsafeWindow.codemirrorInstance.setValue(currentReply.value)
     if(submitNow.value && !useAI.value && currentReply.value){
         document.querySelector('.md-editor button.submit').click()
     }

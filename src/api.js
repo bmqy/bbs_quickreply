@@ -427,6 +427,74 @@ export default {
                                 reject(xhr.response);
                             }
                         });
+                    } else if(useAI == 'ollama'){
+                        let ollamaDomain = proxy.$storage.getUserInfo('ollamaDomain') || 'localhost:11434';
+                        let ollamaModel = proxy.$storage.getUserInfo('ollamaModel') || 'llama2';
+                        let ollamaApiKey = proxy.$storage.getUserInfo('ollamaApiKey') || '';
+                        if(!ollamaDomain){
+                            reject('无效地址');
+                        };
+                        // 判断是否为本地地址，使用相应的协议
+                        let isLocal = /^(localhost|127\.|192\.168\.|10\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[01]\.)/.test(ollamaDomain);
+                        let protocol = isLocal ? 'http' : 'https';
+                        let url = `${protocol}://${ollamaDomain}/api/chat`
+                        let data = {
+                            "model": `${ollamaModel}`,
+                            "messages": [
+                                {
+                                    role: "system",
+                                    content: systemRole
+                                },
+                                {
+                                    "role": "user",
+                                    "content": prompt
+                                }
+                            ],
+                            "stream": false
+                        }
+                        let headers = {
+                            "Content-Type": "application/json; charset=utf-8",
+                            "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`,
+                        }
+                        if(ollamaApiKey){
+                            headers['Authorization'] = `Bearer ${ollamaApiKey}`;
+                        }
+                        GM_xmlhttpRequest({
+                            method: 'POST',
+                            url: url,
+                            headers: headers,
+                            data: `${JSON.stringify(data)}`,
+                            responseType: 'json',
+                            onload: function (xhr) {
+                                proxy.$tools.log('[BBS QuickReply - Ollama响应]', xhr.status, xhr.response);
+                                let {status, response} = xhr;
+                                if(status !== 200){
+                                    let errorMsg = '请求失败';
+                                    try {
+                                        let res = typeof response === 'string' ? JSON.parse(response) : response;
+                                        let { error } = res;
+                                        errorMsg = typeof error === 'string' ? error : (error.message || JSON.stringify(error));
+                                    } catch(e) {
+                                        errorMsg = response;
+                                    }
+                                    reject(errorMsg);
+                                } else {
+                                    let {message, error} = response;
+                                    if(error){
+                                        // error 可能是字符串或对象
+                                        let errorMsg = typeof error === 'string' ? error : (error.message || JSON.stringify(error));
+                                        reject(errorMsg);
+                                    } else if(message && message.content) {
+                                        resolve(message.content)
+                                    } else {
+                                        reject('无法解析响应内容');
+                                    }
+                                }
+                            },
+                            onerror: function(xhr){
+                                reject(xhr.response);
+                            }
+                        });
                     } else {
                         reject('暂未配置AI');
                     }

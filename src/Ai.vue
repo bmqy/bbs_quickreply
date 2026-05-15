@@ -1,5 +1,5 @@
 <script setup name="quickReplySetAI">
-import { computed, getCurrentInstance, onMounted, onUnmounted, ref } from 'vue';
+import { computed, getCurrentInstance, onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
 
 const {proxy} = getCurrentInstance();
 // AI基础配置
@@ -40,6 +40,11 @@ const grokDomain = ref('');
 const grokApiKey = ref('');
 const grokModel = ref('grok-3-mini-beta');
 
+// Ollama配置
+const ollamaDomain = ref('');
+const ollamaApiKey = ref('');
+const ollamaModel = ref('llama2');
+
 const emit = defineEmits(['updateAI']);
 
 // 可选的AI列表
@@ -51,6 +56,7 @@ const aiOptions = computed(() => {
         { value: 'chatgpt', label: `ChatGPT (${chatgptModel.value})`, disabled: !chatgptApiKey.value },
         { value: 'deepseek', label: `DeepSeek (${deepseekModel.value})`, disabled: !deepseekApiKey.value },
         { value: 'grok', label: `Grok (${grokModel.value})`, disabled: !grokApiKey.value },
+        { value: 'ollama', label: `Ollama (${ollamaModel.value})`, disabled: !ollamaDomain.value },
     ];
 });
 
@@ -99,6 +105,10 @@ onBeforeMount(()=>{
     grokDomain.value = proxy.$storage.getUserInfo('grokDomain') || '';
     grokApiKey.value = proxy.$storage.getUserInfo('grokApiKey') || '';
     grokModel.value = proxy.$storage.getUserInfo('grokModel') || 'grok-3-mini-beta';
+    
+    ollamaDomain.value = proxy.$storage.getUserInfo('ollamaDomain') || '';
+    ollamaApiKey.value = proxy.$storage.getUserInfo('ollamaApiKey') || '';
+    ollamaModel.value = proxy.$storage.getUserInfo('ollamaModel') || 'llama2';
 });
 
 // 更新当前使用的AI模型
@@ -123,6 +133,7 @@ function isAIConfigValid(aiType) {
         case 'chatgpt': return !!chatgptApiKey.value;
         case 'deepseek': return !!deepseekApiKey.value;
         case 'grok': return !!grokApiKey.value;
+        case 'ollama': return !!ollamaDomain.value;
         default: return false;
     }
 }
@@ -448,6 +459,41 @@ function onContentLengthLimitChange(e) {
                                     <el-input v-model="grokModel" @change="onModelChange($event, 'grok')" placeholder="grok-3-mini-beta" />
                                 </el-tooltip>
                                 <el-link type="primary" :underline="false" href="https://docs.x.ai/docs/models" target="_blank" style="font-size: 12px;">可用模型</el-link>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+                </el-tab-pane>
+                
+                <!-- Ollama Tab -->
+                <el-tab-pane label="Ollama" name="ollama">
+                    <div class="tab-content">
+                        <div class="form-tips">
+                            <el-alert
+                                type="info"
+                                :closable="false"
+                                show-icon
+                            >
+                                <p style="margin: 0;">带 <span class="required-star">*</span> 标记的字段为必填项</p>
+                            </el-alert>
+                        </div>
+                        <el-form :label-width="useMobileLayout ? 'auto' : '120'" 
+                               :label-position="useMobileLayout ? 'top' : 'left'"
+                               size="small">
+                            <el-form-item label="API Domain">
+                                <el-tooltip content="Ollama API 地址，example: localhost:11434 或 ollama.example.com" placement="top">
+                                    <el-input v-model="ollamaDomain" @change="onDomainChange($event, 'ollama')" placeholder="localhost:11434" />
+                                </el-tooltip>
+                            </el-form-item>
+                            <el-form-item label="API Key">
+                                <el-tooltip content="可选，如果 Ollama 服务器设置了认证则需要填写" placement="top">
+                                    <el-input v-model="ollamaApiKey" @change="onApiKeyChange($event, 'ollama')" />
+                                </el-tooltip>
+                            </el-form-item>
+                            <el-form-item label="模型选择" required>
+                                <el-tooltip content="默认使用：llama2，根据本地已下载模型填写" placement="top">
+                                    <el-input v-model="ollamaModel" @change="onModelChange($event, 'ollama')" placeholder="llama2" />
+                                </el-tooltip>
+                                <el-link type="primary" :underline="false" href="https://ollama.com/library" target="_blank" style="font-size: 12px;">可用模型</el-link>
                             </el-form-item>
                         </el-form>
                     </div>
