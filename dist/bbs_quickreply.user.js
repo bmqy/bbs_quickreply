@@ -50,7 +50,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-53adb71e]{width:100%}.box-card[data-v-53adb71e]{border:none}.box-card .el-card__header[data-v-53adb71e]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-53adb71e]{padding:0}.tab-content[data-v-53adb71e]{padding:20px}.form-tips[data-v-53adb71e]{margin-bottom:20px}.required-star[data-v-53adb71e]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-53adb71e]{padding:15px 10px}.form-tips[data-v-53adb71e]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-68251d6c]{position:relative}.quickReplyBox .el-form[data-v-68251d6c]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-68251d6c]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-68251d6c]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-68251d6c]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-68251d6c],.el-form-item--small.el-form-item[data-v-68251d6c]{margin-bottom:10px}.el-select[data-v-68251d6c]{width:300px}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-877c5d68]{width:100%}.header-left[data-v-877c5d68]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-877c5d68]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-877c5d68]{margin-bottom:0}}.header-right[data-v-877c5d68]{width:100%}.header-right .button-group[data-v-877c5d68]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-877c5d68]{justify-content:flex-end}}.login-container[data-v-877c5d68]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-877c5d68]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-877c5d68]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-877c5d68]{padding:20px}.settings-header[data-v-877c5d68]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-877c5d68]{min-height:300px}.my-replies-card .card-title[data-v-877c5d68]{font-weight:700}.list-left[data-v-877c5d68]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-877c5d68]{margin-right:5px;color:#909399}.list-title[data-v-877c5d68]{flex:1;font-weight:400}.list-right[data-v-877c5d68]{min-width:70px}.list-right .el-badge.item[data-v-877c5d68]{margin-right:30px}.list li[data-v-877c5d68]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-877c5d68]:hover{background-color:#f5f5f5}.tips[data-v-877c5d68]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-877c5d68]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-877c5d68]{padding:10px 20px}.box-card .el-card__header span[data-v-877c5d68]{font-size:14px}.clearfix[data-v-877c5d68]:before,.clearfix[data-v-877c5d68]:after{display:table;content:""}.clearfix[data-v-877c5d68]:after{clear:both}.el-pagination[data-v-877c5d68]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
+(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-f5a3c933]{width:100%}.box-card[data-v-f5a3c933]{border:none}.box-card .el-card__header[data-v-f5a3c933]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-f5a3c933]{padding:0}.tab-content[data-v-f5a3c933]{padding:20px}.form-tips[data-v-f5a3c933]{margin-bottom:20px}.required-star[data-v-f5a3c933]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-f5a3c933]{padding:15px 10px}.form-tips[data-v-f5a3c933]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-8d9aa2f4]{position:relative}.quickReplyBox .el-form[data-v-8d9aa2f4]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-8d9aa2f4]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-8d9aa2f4]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-8d9aa2f4]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-8d9aa2f4],.el-form-item--small.el-form-item[data-v-8d9aa2f4]{margin-bottom:10px}.el-select[data-v-8d9aa2f4]{width:300px}.quickAddBtnGroup{gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}.quickAddBtnGroup button{padding:6px 14px!important;font-size:12px!important;cursor:pointer!important;border:none!important;border-radius:3px!important;line-height:1.5!important;white-space:nowrap!important;transition:all .2s ease!important;display:inline-flex!important;align-items:center!important;gap:4px!important;font-weight:500!important}.quickAddBtn{background-color:#409eff!important;color:#fff!important}.quickAddBtn:hover{background-color:#66b1ff!important;color:#fff!important;opacity:.95!important}.quickAddShareBtn{background-color:#67c23a!important;color:#fff!important}.quickAddShareBtn:hover{background-color:#85ce61!important;color:#fff!important;opacity:.95!important}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-877c5d68]{width:100%}.header-left[data-v-877c5d68]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-877c5d68]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-877c5d68]{margin-bottom:0}}.header-right[data-v-877c5d68]{width:100%}.header-right .button-group[data-v-877c5d68]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-877c5d68]{justify-content:flex-end}}.login-container[data-v-877c5d68]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-877c5d68]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-877c5d68]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-877c5d68]{padding:20px}.settings-header[data-v-877c5d68]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-877c5d68]{min-height:300px}.my-replies-card .card-title[data-v-877c5d68]{font-weight:700}.list-left[data-v-877c5d68]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-877c5d68]{margin-right:5px;color:#909399}.list-title[data-v-877c5d68]{flex:1;font-weight:400}.list-right[data-v-877c5d68]{min-width:70px}.list-right .el-badge.item[data-v-877c5d68]{margin-right:30px}.list li[data-v-877c5d68]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-877c5d68]:hover{background-color:#f5f5f5}.tips[data-v-877c5d68]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-877c5d68]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-877c5d68]{padding:10px 20px}.box-card .el-card__header span[data-v-877c5d68]{font-size:14px}.clearfix[data-v-877c5d68]:before,.clearfix[data-v-877c5d68]:after{display:table;content:""}.clearfix[data-v-877c5d68]:after{clear:both}.el-pagination[data-v-877c5d68]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
 
 (function (ElementPlusIconsVue, ElementPlus, vue) {
   'use strict';
@@ -283,6 +283,8 @@
   const _hoisted_13$1 = { class: "form-tips" };
   const _hoisted_14$1 = { class: "tab-content" };
   const _hoisted_15$1 = { class: "form-tips" };
+  const _hoisted_16$1 = { class: "tab-content" };
+  const _hoisted_17$1 = { class: "form-tips" };
   const _sfc_main$3 = {
     __name: "Ai",
     emits: ["updateAI"],
@@ -310,6 +312,9 @@
       const grokDomain = vue.ref("");
       const grokApiKey = vue.ref("");
       const grokModel = vue.ref("grok-3-mini-beta");
+      const ollamaDomain = vue.ref("");
+      const ollamaApiKey = vue.ref("");
+      const ollamaModel = vue.ref("llama2");
       const emit = __emit;
       const aiOptions = vue.computed(() => {
         return [
@@ -318,7 +323,8 @@
           { value: "kimi", label: `Kimi (${kimiModel.value})`, disabled: !kimiApiKey.value },
           { value: "chatgpt", label: `ChatGPT (${chatgptModel.value})`, disabled: !chatgptApiKey.value },
           { value: "deepseek", label: `DeepSeek (${deepseekModel.value})`, disabled: !deepseekApiKey.value },
-          { value: "grok", label: `Grok (${grokModel.value})`, disabled: !grokApiKey.value }
+          { value: "grok", label: `Grok (${grokModel.value})`, disabled: !grokApiKey.value },
+          { value: "ollama", label: `Ollama (${ollamaModel.value})`, disabled: !ollamaDomain.value }
         ];
       });
       const useMobileLayout = vue.ref(false);
@@ -354,6 +360,9 @@
         grokDomain.value = proxy.$storage.getUserInfo("grokDomain") || "";
         grokApiKey.value = proxy.$storage.getUserInfo("grokApiKey") || "";
         grokModel.value = proxy.$storage.getUserInfo("grokModel") || "grok-3-mini-beta";
+        ollamaDomain.value = proxy.$storage.getUserInfo("ollamaDomain") || "";
+        ollamaApiKey.value = proxy.$storage.getUserInfo("ollamaApiKey") || "";
+        ollamaModel.value = proxy.$storage.getUserInfo("ollamaModel") || "llama2";
       });
       function onCurrentAIChange(value) {
         if (value && !isAIConfigValid(value)) {
@@ -378,6 +387,8 @@
             return !!deepseekApiKey.value;
           case "grok":
             return !!grokApiKey.value;
+          case "ollama":
+            return !!ollamaDomain.value;
           default:
             return false;
         }
@@ -463,7 +474,7 @@
             default: vue.withCtx(() => [
               vue.createVNode(_component_el_tabs, {
                 modelValue: activeTab.value,
-                "onUpdate:modelValue": _cache[36] || (_cache[36] = ($event) => activeTab.value = $event),
+                "onUpdate:modelValue": _cache[42] || (_cache[42] = ($event) => activeTab.value = $event),
                 type: "border-card"
               }, {
                 default: vue.withCtx(() => [
@@ -593,7 +604,7 @@
                                   ]),
                                   _: 1
                                 }),
-                                _cache[37] || (_cache[37] = vue.createElementVNode("span", { style: { "margin-left": "8px", "font-size": "12px", "color": "#909399" } }, "字", -1))
+                                _cache[43] || (_cache[43] = vue.createElementVNode("span", { style: { "margin-left": "8px", "font-size": "12px", "color": "#909399" } }, "字", -1))
                               ]),
                               _: 1
                             })
@@ -616,7 +627,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[38] || (_cache[38] = [
+                            default: vue.withCtx(() => _cache[44] || (_cache[44] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -679,7 +690,7 @@
                                   target: "_blank",
                                   style: { "font-size": "12px" }
                                 }, {
-                                  default: vue.withCtx(() => _cache[39] || (_cache[39] = [
+                                  default: vue.withCtx(() => _cache[45] || (_cache[45] = [
                                     vue.createTextVNode("可用模型")
                                   ])),
                                   _: 1
@@ -706,7 +717,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[40] || (_cache[40] = [
+                            default: vue.withCtx(() => _cache[46] || (_cache[46] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -769,7 +780,7 @@
                                   target: "_blank",
                                   style: { "font-size": "12px" }
                                 }, {
-                                  default: vue.withCtx(() => _cache[41] || (_cache[41] = [
+                                  default: vue.withCtx(() => _cache[47] || (_cache[47] = [
                                     vue.createTextVNode("可用模型")
                                   ])),
                                   _: 1
@@ -796,7 +807,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[42] || (_cache[42] = [
+                            default: vue.withCtx(() => _cache[48] || (_cache[48] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -859,7 +870,7 @@
                                   target: "_blank",
                                   style: { "font-size": "12px" }
                                 }, {
-                                  default: vue.withCtx(() => _cache[43] || (_cache[43] = [
+                                  default: vue.withCtx(() => _cache[49] || (_cache[49] = [
                                     vue.createTextVNode("可用模型")
                                   ])),
                                   _: 1
@@ -886,7 +897,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[44] || (_cache[44] = [
+                            default: vue.withCtx(() => _cache[50] || (_cache[50] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -967,7 +978,7 @@
                                   target: "_blank",
                                   style: { "font-size": "12px" }
                                 }, {
-                                  default: vue.withCtx(() => _cache[45] || (_cache[45] = [
+                                  default: vue.withCtx(() => _cache[51] || (_cache[51] = [
                                     vue.createTextVNode("可用模型")
                                   ])),
                                   _: 1
@@ -994,7 +1005,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[46] || (_cache[46] = [
+                            default: vue.withCtx(() => _cache[52] || (_cache[52] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -1075,7 +1086,7 @@
                                   target: "_blank",
                                   style: { "font-size": "12px" }
                                 }, {
-                                  default: vue.withCtx(() => _cache[47] || (_cache[47] = [
+                                  default: vue.withCtx(() => _cache[53] || (_cache[53] = [
                                     vue.createTextVNode("可用模型")
                                   ])),
                                   _: 1
@@ -1102,7 +1113,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[48] || (_cache[48] = [
+                            default: vue.withCtx(() => _cache[54] || (_cache[54] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -1183,7 +1194,113 @@
                                   target: "_blank",
                                   style: { "font-size": "12px" }
                                 }, {
-                                  default: vue.withCtx(() => _cache[49] || (_cache[49] = [
+                                  default: vue.withCtx(() => _cache[55] || (_cache[55] = [
+                                    vue.createTextVNode("可用模型")
+                                  ])),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            })
+                          ]),
+                          _: 1
+                        }, 8, ["label-width", "label-position"])
+                      ])
+                    ]),
+                    _: 1
+                  }),
+                  vue.createVNode(_component_el_tab_pane, {
+                    label: "Ollama",
+                    name: "ollama"
+                  }, {
+                    default: vue.withCtx(() => [
+                      vue.createElementVNode("div", _hoisted_16$1, [
+                        vue.createElementVNode("div", _hoisted_17$1, [
+                          vue.createVNode(_component_el_alert, {
+                            type: "info",
+                            closable: false,
+                            "show-icon": ""
+                          }, {
+                            default: vue.withCtx(() => _cache[56] || (_cache[56] = [
+                              vue.createElementVNode("p", { style: { "margin": "0" } }, [
+                                vue.createTextVNode("带 "),
+                                vue.createElementVNode("span", { class: "required-star" }, "*"),
+                                vue.createTextVNode(" 标记的字段为必填项")
+                              ], -1)
+                            ])),
+                            _: 1
+                          })
+                        ]),
+                        vue.createVNode(_component_el_form, {
+                          "label-width": useMobileLayout.value ? "auto" : "120",
+                          "label-position": useMobileLayout.value ? "top" : "left",
+                          size: "small"
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createVNode(_component_el_form_item, { label: "API Domain" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "Ollama API 地址，example: localhost:11434 或 ollama.example.com",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: ollamaDomain.value,
+                                      "onUpdate:modelValue": _cache[36] || (_cache[36] = ($event) => ollamaDomain.value = $event),
+                                      onChange: _cache[37] || (_cache[37] = ($event) => onDomainChange($event, "ollama")),
+                                      placeholder: "localhost:11434"
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, { label: "API Key" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "可选，如果 Ollama 服务器设置了认证则需要填写",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: ollamaApiKey.value,
+                                      "onUpdate:modelValue": _cache[38] || (_cache[38] = ($event) => ollamaApiKey.value = $event),
+                                      onChange: _cache[39] || (_cache[39] = ($event) => onApiKeyChange($event, "ollama"))
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
+                            vue.createVNode(_component_el_form_item, {
+                              label: "模型选择",
+                              required: ""
+                            }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "默认使用：llama2，根据本地已下载模型填写",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_input, {
+                                      modelValue: ollamaModel.value,
+                                      "onUpdate:modelValue": _cache[40] || (_cache[40] = ($event) => ollamaModel.value = $event),
+                                      onChange: _cache[41] || (_cache[41] = ($event) => onModelChange($event, "ollama")),
+                                      placeholder: "llama2"
+                                    }, null, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                }),
+                                vue.createVNode(_component_el_link, {
+                                  type: "primary",
+                                  underline: false,
+                                  href: "https://ollama.com/library",
+                                  target: "_blank",
+                                  style: { "font-size": "12px" }
+                                }, {
+                                  default: vue.withCtx(() => _cache[57] || (_cache[57] = [
                                     vue.createTextVNode("可用模型")
                                   ])),
                                   _: 1
@@ -1208,7 +1325,7 @@
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-53adb71e"]]);
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-f5a3c933"]]);
   var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
   var _GM_info = /* @__PURE__ */ (() => typeof GM_info != "undefined" ? GM_info : void 0)();
   var _GM_listValues = /* @__PURE__ */ (() => typeof GM_listValues != "undefined" ? GM_listValues : void 0)();
@@ -1639,6 +1756,72 @@
                   reject(xhr.response);
                 }
               });
+            } else if (useAI == "ollama") {
+              let ollamaDomain = proxy.$storage.getUserInfo("ollamaDomain") || "localhost:11434";
+              let ollamaModel = proxy.$storage.getUserInfo("ollamaModel") || "llama2";
+              let ollamaApiKey = proxy.$storage.getUserInfo("ollamaApiKey") || "";
+              if (!ollamaDomain) {
+                reject("无效地址");
+              }
+              let isLocal = /^(localhost|127\.|192\.168\.|10\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[01]\.)/.test(ollamaDomain);
+              let protocol = isLocal ? "http" : "https";
+              let url = `${protocol}://${ollamaDomain}/api/chat`;
+              let data = {
+                "model": `${ollamaModel}`,
+                "messages": [
+                  {
+                    role: "system",
+                    content: systemRole
+                  },
+                  {
+                    "role": "user",
+                    "content": prompt
+                  }
+                ],
+                "stream": false
+              };
+              let headers = {
+                "Content-Type": "application/json; charset=utf-8",
+                "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36`
+              };
+              if (ollamaApiKey) {
+                headers["Authorization"] = `Bearer ${ollamaApiKey}`;
+              }
+              _GM_xmlhttpRequest({
+                method: "POST",
+                url,
+                headers,
+                data: `${JSON.stringify(data)}`,
+                responseType: "json",
+                onload: function(xhr) {
+                  proxy.$tools.log("[BBS QuickReply - Ollama响应]", xhr.status, xhr.response);
+                  let { status, response } = xhr;
+                  if (status !== 200) {
+                    let errorMsg = "请求失败";
+                    try {
+                      let res = typeof response === "string" ? JSON.parse(response) : response;
+                      let { error } = res;
+                      errorMsg = typeof error === "string" ? error : error.message || JSON.stringify(error);
+                    } catch (e) {
+                      errorMsg = response;
+                    }
+                    reject(errorMsg);
+                  } else {
+                    let { message, error } = response;
+                    if (error) {
+                      let errorMsg = typeof error === "string" ? error : error.message || JSON.stringify(error);
+                      reject(errorMsg);
+                    } else if (message && message.content) {
+                      resolve(message.content);
+                    } else {
+                      reject("无法解析响应内容");
+                    }
+                  }
+                },
+                onerror: function(xhr) {
+                  reject(xhr.response);
+                }
+              });
             } else {
               reject("暂未配置AI");
             }
@@ -1951,7 +2134,7 @@
         }
       }
       function enterMarkdownItReply() {
-        _unsafeWindow.editor && _unsafeWindow.editor.setMarkdown && _unsafeWindow.editor.setMarkdown(currentReply.value);
+        _unsafeWindow.codemirrorInstance && _unsafeWindow.codemirrorInstance.setValue && _unsafeWindow.codemirrorInstance.setValue(currentReply.value);
         if (submitNow.value && !useAI.value && currentReply.value) {
           document.querySelector(".md-editor button.submit").click();
         }
@@ -2089,7 +2272,7 @@
               const replyContent = getReplyContent(replyElement);
               const $btnGroup = document.createElement("div");
               $btnGroup.className = "quickAddBtnGroup";
-              $btnGroup.style.cssText = "margin-top: 8px; display: none; gap: 8px;";
+              $btnGroup.style.cssText = "margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;";
               const $addBtn = document.createElement("button");
               $addBtn.textContent = "➕ 添加到我的";
               $addBtn.title = "BBS QuickReply - 添加到我的回复";
@@ -2105,6 +2288,41 @@
               $btnGroup.appendChild($addBtn);
               $btnGroup.appendChild($addShareBtn);
               $postMessage.appendChild($btnGroup);
+              replyElement.addEventListener("mouseenter", () => {
+                $btnGroup.style.display = "flex";
+              });
+              replyElement.addEventListener("mouseleave", () => {
+                $btnGroup.style.display = "none";
+              });
+            }
+          });
+        } else if (currentPlatform.value == "nodeseek") {
+          const $replies = document.querySelectorAll("li.content-item");
+          $replies.forEach((replyElement) => {
+            if (replyElement.querySelector(".quickAddBtnGroup")) {
+              return;
+            }
+            const $postContent = replyElement.querySelector(".post-content");
+            if ($postContent) {
+              const replyContent = getReplyContent(replyElement);
+              const $btnGroup = document.createElement("div");
+              $btnGroup.className = "quickAddBtnGroup";
+              $btnGroup.style.cssText = "margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;";
+              const $addBtn = document.createElement("button");
+              $addBtn.textContent = "➕ 添加到我的";
+              $addBtn.title = "BBS QuickReply - 添加到我的回复";
+              $addBtn.className = "btn btn-sm btn-info quickAddBtn";
+              $addBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;";
+              $addBtn.onclick = () => addToMyList(replyContent);
+              const $addShareBtn = document.createElement("button");
+              $addShareBtn.textContent = "⭐ 添加到我的并分享";
+              $addShareBtn.title = "BBS QuickReply - 添加到我的回复并分享给网友";
+              $addShareBtn.className = "btn btn-sm btn-success quickAddShareBtn";
+              $addShareBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;";
+              $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
+              $btnGroup.appendChild($addBtn);
+              $btnGroup.appendChild($addShareBtn);
+              $postContent.appendChild($btnGroup);
               replyElement.addEventListener("mouseenter", () => {
                 $btnGroup.style.display = "flex";
               });
@@ -2284,7 +2502,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-68251d6c"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-8d9aa2f4"]]);
   const _hoisted_1$1 = { class: "margin-left" };
   const _hoisted_2$1 = { class: "margin-left" };
   const _hoisted_3$1 = { class: "form-tip" };

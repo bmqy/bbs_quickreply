@@ -536,7 +536,7 @@ function injectQuickAddButtons() {
                 // 创建按钮容器
                 const $btnGroup = document.createElement('div');
                 $btnGroup.className = 'quickAddBtnGroup';
-                $btnGroup.style.cssText = 'margin-top: 8px; display: none; gap: 8px;';
+                $btnGroup.style.cssText = 'margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;';
                 
                 // 添加到我的按钮
                 const $addBtn = document.createElement('button');
@@ -559,6 +559,56 @@ function injectQuickAddButtons() {
                 
                 // 将按钮插入到回复内容下方
                 $postMessage.appendChild($btnGroup);
+                
+                // 添加 hover 事件：显示/隐藏按钮
+                replyElement.addEventListener('mouseenter', () => {
+                    $btnGroup.style.display = 'flex';
+                });
+                replyElement.addEventListener('mouseleave', () => {
+                    $btnGroup.style.display = 'none';
+                });
+            }
+        });
+    } else if(currentPlatform.value == 'nodeseek'){
+        // NodeSeek 平台
+        const $replies = document.querySelectorAll('li.content-item');
+        $replies.forEach((replyElement) => {
+            // 检查是否已经注入过按钮
+            if(replyElement.querySelector('.quickAddBtnGroup')) {
+                return;
+            }
+            
+            // 找到回复内容容器
+            const $postContent = replyElement.querySelector('.post-content');
+            if($postContent) {
+                const replyContent = getReplyContent(replyElement);
+                
+                // 创建按钮容器
+                const $btnGroup = document.createElement('div');
+                $btnGroup.className = 'quickAddBtnGroup';
+                $btnGroup.style.cssText = 'margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;';
+                
+                // 添加到我的按钮
+                const $addBtn = document.createElement('button');
+                $addBtn.textContent = '➕ 添加到我的';
+                $addBtn.title = 'BBS QuickReply - 添加到我的回复';
+                $addBtn.className = 'btn btn-sm btn-info quickAddBtn';
+                $addBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;';
+                $addBtn.onclick = () => addToMyList(replyContent);
+                
+                // 添加到我的并分享按钮
+                const $addShareBtn = document.createElement('button');
+                $addShareBtn.textContent = '⭐ 添加到我的并分享';
+                $addShareBtn.title = 'BBS QuickReply - 添加到我的回复并分享给网友';
+                $addShareBtn.className = 'btn btn-sm btn-success quickAddShareBtn';
+                $addShareBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;';
+                $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
+                
+                $btnGroup.appendChild($addBtn);
+                $btnGroup.appendChild($addShareBtn);
+                
+                // 将按钮插入到回复内容下方
+                $postContent.appendChild($btnGroup);
                 
                 // 添加 hover 事件：显示/隐藏按钮
                 replyElement.addEventListener('mouseenter', () => {
@@ -760,5 +810,50 @@ watch(fwin_replyLoaded, (n)=>{
 
 .el-select {
     width: 300px;
+}
+
+/* 快速添加按钮样式 */
+:global(.quickAddBtnGroup) {
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+:global(.quickAddBtnGroup button) {
+    padding: 6px 14px !important;
+    font-size: 12px !important;
+    cursor: pointer !important;
+    border: none !important;
+    border-radius: 3px !important;
+    line-height: 1.5 !important;
+    white-space: nowrap !important;
+    transition: all 0.2s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-weight: 500 !important;
+}
+
+:global(.quickAddBtn) {
+    background-color: #409EFF !important;
+    color: white !important;
+}
+
+:global(.quickAddBtn:hover) {
+    background-color: #66B1FF !important;
+    color: white !important;
+    opacity: 0.95 !important;
+}
+
+:global(.quickAddShareBtn) {
+    background-color: #67C23A !important;
+    color: white !important;
+}
+
+:global(.quickAddShareBtn:hover) {
+    background-color: #85CE61 !important;
+    color: white !important;
+    opacity: 0.95 !important;
 }
 </style>
