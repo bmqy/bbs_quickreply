@@ -107,6 +107,7 @@ function checkPlatform() {
             }
         }
     }
+    proxy.$tools.log(`[BBS QuickReply] 检测到论坛平台: ${currentPlatform.value}`);
 };
 // 获取APP自定义回复
 async function getList() {
@@ -515,6 +516,8 @@ async function addToMyListAndShare(replyContent) {
 
 // 为回复帖注入快捷按钮
 function injectQuickAddButtons() {
+    proxy.$tools.log(`[BBS QuickReply - injectQuickAddButtons] 当前平台: ${currentPlatform.value}`);
+    
     if(currentPlatform.value == 'discuz'){
         // Discuz 平台
         const $replies = document.querySelectorAll('#postlist > div[id^="post_"]');
@@ -617,6 +620,66 @@ function injectQuickAddButtons() {
                 replyElement.addEventListener('mouseleave', () => {
                     $btnGroup.style.display = 'none';
                 });
+            }
+        });
+    } else if(currentPlatform.value == 'v2ex'){
+        // V2EX 平台
+        const $replies = document.querySelectorAll('div.cell[id^="r_"]');
+        proxy.$tools.log(`[V2EX] 找到 ${$replies.length} 条回复`);
+        
+        $replies.forEach((replyElement, index) => {
+            // 检查是否已经注入过按钮
+            if(replyElement.querySelector('.quickAddBtnGroup')) {
+                return;
+            }
+            
+            // 找到回复内容容器 - 尝试多个选择器
+            let $replyContent = replyElement.querySelector('.reply_content');
+            if (!$replyContent) {
+                $replyContent = replyElement.querySelector('[class*="reply"]');
+            }
+            if (!$replyContent) {
+                $replyContent = replyElement.querySelector('.cell');
+            }
+            
+            if($replyContent) {
+                const replyContent = getReplyContent(replyElement);
+                
+                // 创建按钮容器
+                const $btnGroup = document.createElement('div');
+                $btnGroup.className = 'quickAddBtnGroup';
+                $btnGroup.style.cssText = 'margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;';
+                
+                // 添加到我的按钮
+                const $addBtn = document.createElement('button');
+                $addBtn.textContent = '➕ 添加到我的';
+                $addBtn.title = 'BBS QuickReply - 添加到我的回复';
+                $addBtn.className = 'btn btn-sm btn-info quickAddBtn';
+                $addBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px; font-weight: normal;';
+                $addBtn.onclick = () => addToMyList(replyContent);
+                
+                // 添加到我的并分享按钮
+                const $addShareBtn = document.createElement('button');
+                $addShareBtn.textContent = '⭐ 添加到我的并分享';
+                $addShareBtn.title = 'BBS QuickReply - 添加到我的回复并分享给网友';
+                $addShareBtn.className = 'btn btn-sm btn-success quickAddShareBtn';
+                $addShareBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px; font-weight: normal;';
+                $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
+                
+                $btnGroup.appendChild($addBtn);
+                $btnGroup.appendChild($addShareBtn);
+                
+                // 将按钮插入到回复内容下方
+                $replyContent.appendChild($btnGroup);
+                
+                // 添加 hover 事件：显示/隐藏按钮
+                replyElement.addEventListener('mouseenter', () => {
+                    $btnGroup.style.display = 'flex';
+                });
+                replyElement.addEventListener('mouseleave', () => {
+                    $btnGroup.style.display = 'none';
+                });
+                
             }
         });
     }
