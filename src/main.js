@@ -30,16 +30,29 @@ app.use(Api);
 
 app.mount(
     (()=>{
+        const safeInsertBefore = (parent, node, beforeNode = null, logName = '') => {
+            if (!parent || !node) {
+                return false;
+            }
+            try {
+                parent.insertBefore(node, beforeNode || null);
+                return true;
+            } catch (err) {
+                console.warn(`[BBS QuickReply] 挂载失败: ${logName}`, err);
+                return false;
+            }
+        };
+
         // discuz
         const $fastposteditor = document.querySelector('#fastposteditor');
         const $postbox = document.querySelector('#postbox');
         const $appRoot = document.createElement('div');
         if ($fastposteditor) {
-            $fastposteditor.insertBefore($appRoot, $fastposteditor.childNodes[0]);
+            safeInsertBefore($fastposteditor, $appRoot, $fastposteditor.childNodes[0], '#fastposteditor');
         }
         if ($postbox) {
             $appRoot.style.paddingTop = '15px';
-            $postbox.insertBefore($appRoot, $postbox.childNodes[4]);
+            safeInsertBefore($postbox, $appRoot, $postbox.childNodes[4], '#postbox');
         }
         // nodeseek
         const $editorBody = document.querySelector('.comment-container');
@@ -51,20 +64,20 @@ app.mount(
         const $replyControl = document.querySelector('#reply-control');
         if ($replyControl) {
             $appRoot.style.padding = '15px 15px 0';
-            $replyControl.insertBefore($appRoot, $replyControl.childNodes[2]);
+            safeInsertBefore($replyControl, $appRoot, $replyControl.childNodes[2], '#reply-control');
         }
         // v2ex.com
         const $replyBox = document.querySelector('#reply-box');
         if ($replyBox) {
             $appRoot.style.padding = '15px 15px 0';
-            $replyBox.insertBefore($appRoot, $replyBox.childNodes[2]);
+            safeInsertBefore($replyBox, $appRoot, $replyBox.childNodes[2], '#reply-box');
         }
         // Flarum
         const $composerBox = document.querySelector('#composer');
         if ($composerBox) {
             const $composerInner = $composerBox.querySelector('.Composer');
             $appRoot.style.padding = '15px 15px 0';
-            $composerInner.insertBefore($appRoot, $composerInner.childNodes[2]);
+            safeInsertBefore($composerInner, $appRoot, $composerInner && $composerInner.childNodes[2], '#composer .Composer');
         }
         return $appRoot;
     })()

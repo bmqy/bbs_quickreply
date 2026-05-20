@@ -467,6 +467,18 @@ function getReplyContent(replyElement) {
         if($replyBody) {
             content = $replyBody.innerText;
         }
+    } else if(currentPlatform.value == 'flarum'){
+        // Flarum: 从帖子正文容器中提取内容
+        let $postBody = replyElement.querySelector('.Post-body');
+        if(!$postBody) {
+            $postBody = replyElement.querySelector('.Post-body-content');
+        }
+        if(!$postBody) {
+            $postBody = replyElement.querySelector('.CommentPost-content');
+        }
+        if($postBody) {
+            content = $postBody.innerText;
+        }
     }
     
     return content.trim();
@@ -517,6 +529,18 @@ async function addToMyListAndShare(replyContent) {
 // 为回复帖注入快捷按钮
 function injectQuickAddButtons() {
     proxy.$tools.log(`[BBS QuickReply - injectQuickAddButtons] 当前平台: ${currentPlatform.value}`);
+    
+    // 诊断：检查当前 DOM 中是否存在我们要找的元素
+    if(currentPlatform.value == 'flarum') {
+        const allArticles = document.querySelectorAll('article');
+        const allPostBodies = document.querySelectorAll('.Post-body');
+        proxy.$tools.log(`[Flarum 诊断] 当前页面中有 ${allArticles.length} 个 article, ${allPostBodies.length} 个 .Post-body`);
+        
+        // 输出前 3 个 article 的内容，用于调试
+        for(let i = 0; i < Math.min(3, allArticles.length); i++) {
+            proxy.$tools.log(`[Flarum 诊断] article ${i}:`, allArticles[i].className, allArticles[i].innerHTML.substring(0, 100));
+        }
+    }
     
     if(currentPlatform.value == 'discuz'){
         // Discuz 平台
@@ -624,9 +648,13 @@ function injectQuickAddButtons() {
         });
     } else if(currentPlatform.value == 'discourse'){
         // Discourse 平台（含 LinuxDo）
-        // 过滤主帖：带 topic-owner 的 topic-post 为主帖，仅保留回帖
-        const $replies = document.querySelectorAll('#topic .topic-post:not(.topic-owner), .topic-post:not(.topic-owner)');
+        // 过滤主帖：data-post-number="1" 为主帖，仅保留回帖
+        const $replies = document.querySelectorAll('#topic .topic-post:not([data-post-number="1"]), .topic-post:not([data-post-number="1"])');
         $replies.forEach((replyElement) => {
+            if(replyElement.getAttribute('data-post-number') === '1') {
+                return;
+            }
+
             // 检查是否已经注入过按钮
             if(replyElement.querySelector('.quickAddBtnGroup')) {
                 return;
@@ -737,6 +765,69 @@ function injectQuickAddButtons() {
                 
             }
         });
+    } else if(currentPlatform.value == 'flarum'){
+        // Flarum 平台 - 直接遍历所有 .Post-body，跳过主帖（第一个）
+        const $postBodies = document.querySelectorAll('.Post-body');
+        proxy.$tools.log(`[Flarum] 找到 ${$postBodies.length} 条帖子`);
+
+        $postBodies.forEach((postBodyElement, index) => {
+            // 跳过主帖（index === 0），只在回帖上注入按钮
+            if(index === 0) {
+                return;
+            }
+            
+            // 找到最近的 article 或容器
+            let replyElement = postBodyElement.closest('article');
+            if(!replyElement) {
+                replyElement = postBodyElement.closest('div[class*="Post"]');
+            }
+            
+            if(!replyElement) {
+                return;
+            }
+            
+            // 检查是否已经注入过按钮
+            if(replyElement.querySelector('.quickAddBtnGroup')) {
+                return;
+            }
+
+            const replyContent = getReplyContent(replyElement);
+
+            // 创建按钮容器
+            const $btnGroup = document.createElement('div');
+            $btnGroup.className = 'quickAddBtnGroup';
+            $btnGroup.style.cssText = 'margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;';
+
+            // 添加到我的按钮
+            const $addBtn = document.createElement('button');
+            $addBtn.textContent = '➕ 添加到我的';
+            $addBtn.title = 'BBS QuickReply - 添加到我的回复';
+            $addBtn.className = 'btn btn-sm btn-info quickAddBtn';
+            $addBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;';
+            $addBtn.onclick = () => addToMyList(replyContent);
+
+            // 添加到我的并分享按钮
+            const $addShareBtn = document.createElement('button');
+            $addShareBtn.textContent = '⭐ 添加到我的并分享';
+            $addShareBtn.title = 'BBS QuickReply - 添加到我的回复并分享给网友';
+            $addShareBtn.className = 'btn btn-sm btn-success quickAddShareBtn';
+            $addShareBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;';
+            $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
+
+            $btnGroup.appendChild($addBtn);
+            $btnGroup.appendChild($addShareBtn);
+
+            // 将按钮插入到回复内容下方
+            postBodyElement.appendChild($btnGroup);
+
+            // 添加 hover 事件：显示/隐藏按钮
+            replyElement.addEventListener('mouseenter', () => {
+                $btnGroup.style.display = 'flex';
+            });
+            replyElement.addEventListener('mouseleave', () => {
+                $btnGroup.style.display = 'none';
+            });
+        });
     }
     // 可以为其他平台添加支持
 }
@@ -761,11 +852,19 @@ onMounted(()=> {
     });
 });
 watch(fwin_replyLoaded, (n)=>{
+    // 该挂载逻辑仅适用于 Discuz，其他论坛不应尝试操作 Discuz 容器
+    if (currentPlatform.value !== 'discuz') {
+        return;
+    }
     // 监听楼层回复面板显示状态
     if (n) {
         let $floatlayout_reply = document.querySelector(
             '#floatlayout_reply'
         );
+        if(!$floatlayout_reply){
+            proxy.$tools.log('[BBS QuickReply] 未找到 #floatlayout_reply，跳过挂载');
+            return;
+        }
         $floatlayout_reply.insertBefore(
             proxy.$el,
             $floatlayout_reply.childNodes[0]
@@ -775,6 +874,10 @@ watch(fwin_replyLoaded, (n)=>{
         let $fastposteditor = document.querySelector(
             '#fastposteditor'
         );
+        if(!$fastposteditor){
+            proxy.$tools.log('[BBS QuickReply] 未找到 #fastposteditor，跳过挂载');
+            return;
+        }
         $fastposteditor.insertBefore(
             proxy.$el,
             $fastposteditor.childNodes[0]
