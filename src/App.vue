@@ -622,6 +622,61 @@ function injectQuickAddButtons() {
                 });
             }
         });
+    } else if(currentPlatform.value == 'discourse'){
+        // Discourse 平台（含 LinuxDo）
+        // 过滤主帖：带 topic-owner 的 topic-post 为主帖，仅保留回帖
+        const $replies = document.querySelectorAll('#topic .topic-post:not(.topic-owner), .topic-post:not(.topic-owner)');
+        $replies.forEach((replyElement) => {
+            // 检查是否已经注入过按钮
+            if(replyElement.querySelector('.quickAddBtnGroup')) {
+                return;
+            }
+
+            // 找到回复内容容器
+            let $postContent = replyElement.querySelector('.topic-body .cooked');
+            if(!$postContent) {
+                $postContent = replyElement.querySelector('.cooked');
+            }
+
+            if($postContent) {
+                const replyContent = getReplyContent(replyElement);
+
+                // 创建按钮容器
+                const $btnGroup = document.createElement('div');
+                $btnGroup.className = 'quickAddBtnGroup';
+                $btnGroup.style.cssText = 'margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;';
+
+                // 添加到我的按钮
+                const $addBtn = document.createElement('button');
+                $addBtn.textContent = '➕ 添加到我的';
+                $addBtn.title = 'BBS QuickReply - 添加到我的回复';
+                $addBtn.className = 'btn btn-sm btn-info quickAddBtn';
+                $addBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;';
+                $addBtn.onclick = () => addToMyList(replyContent);
+
+                // 添加到我的并分享按钮
+                const $addShareBtn = document.createElement('button');
+                $addShareBtn.textContent = '⭐ 添加到我的并分享';
+                $addShareBtn.title = 'BBS QuickReply - 添加到我的回复并分享给网友';
+                $addShareBtn.className = 'btn btn-sm btn-success quickAddShareBtn';
+                $addShareBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;';
+                $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
+
+                $btnGroup.appendChild($addBtn);
+                $btnGroup.appendChild($addShareBtn);
+
+                // 将按钮插入到回复内容下方
+                $postContent.appendChild($btnGroup);
+
+                // 添加 hover 事件：显示/隐藏按钮
+                replyElement.addEventListener('mouseenter', () => {
+                    $btnGroup.style.display = 'flex';
+                });
+                replyElement.addEventListener('mouseleave', () => {
+                    $btnGroup.style.display = 'none';
+                });
+            }
+        });
     } else if(currentPlatform.value == 'v2ex'){
         // V2EX 平台
         const $replies = document.querySelectorAll('div.cell[id^="r_"]');
