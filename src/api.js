@@ -102,6 +102,11 @@ export default {
                     if(usePromptCustom && promptCustom){
                         prompt = promptCustom;
                     }
+                    // 根据提交数据类型决定是否包含内容
+                    let submitDataType = proxy.$storage.getUserInfo('submitDataType') || 'titleAndContent';
+                    if(submitDataType === 'titleOnly'){
+                        content = '';
+                    }
                     prompt = prompt.replace('{{title}}', title);
                     prompt = prompt.replace('{{content}}', content || '内容获取失败');
                     

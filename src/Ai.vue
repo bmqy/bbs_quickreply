@@ -12,6 +12,7 @@ const useSystemRoleCustom = ref(false);
 const promptCustom = ref('');
 const usePromptCustom = ref(false);
 const contentLengthLimit = ref(500);
+const submitDataType = ref('titleOnly');
 
 // Gemini配置
 const geminiApiKey = ref('');
@@ -83,6 +84,7 @@ onBeforeMount(()=>{
     promptCustom.value = proxy.$storage.getUserInfo('promptCustom') || '';
     usePromptCustom.value = proxy.$storage.getUserInfo('usePromptCustom') || false;
     contentLengthLimit.value = proxy.$storage.getUserInfo('contentLengthLimit') || 500;
+    submitDataType.value = proxy.$storage.getUserInfo('submitDataType') || 'titleOnly';
     
     // 加载各AI平台配置
     geminiApiKey.value = proxy.$storage.getUserInfo('geminiApiKey') || '';
@@ -213,6 +215,12 @@ function onContentLengthLimitChange(e) {
     proxy.$storage.setUserInfo('contentLengthLimit', contentLengthLimit.value);
     emit('updateAI');
 }
+
+// 提交数据类型变更
+function onSubmitDataTypeChange(value) {
+    proxy.$storage.setUserInfo('submitDataType', value);
+    emit('updateAI');
+}
 </script>
 
 <template>
@@ -225,6 +233,15 @@ function onContentLengthLimitChange(e) {
                         <el-form :label-width="useMobileLayout ? 'auto' : '120'" 
                                :label-position="useMobileLayout ? 'top' : 'left'" 
                                size="small">
+                            <el-form-item label="回帖依据">
+                                <el-tooltip content="选择生成回帖时所依据的数据类型" placement="top">
+                                    <el-radio-group v-model="submitDataType" @change="onSubmitDataTypeChange" size="small">
+                                        <el-radio value="titleOnly">仅标题</el-radio>
+                                        <el-radio value="titleAndContent">标题和内容</el-radio>
+                                    </el-radio-group>
+                                </el-tooltip>
+                            </el-form-item>
+                            
                             <el-form-item label="选择AI">
                                 <el-select v-model="currentAI" placeholder="选择AI" @change="onCurrentAIChange" :style="useMobileLayout ? 'width: 100%' : 'width: 220px'">
                                     <el-option value="" label="请选择"></el-option>
