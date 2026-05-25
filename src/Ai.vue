@@ -242,6 +242,13 @@ function onSubmitDataTypeChange(value) {
                                 </el-tooltip>
                             </el-form-item>
                             
+                            <el-form-item label="内容长度限制">
+                                <el-tooltip content="设置从帖子中提取的内容字数，默认 500 字。范围 100-10000" placement="top">
+                                    <el-input-number v-model="contentLengthLimit" @change="onContentLengthLimitChange" :min="100" :max="10000" :step="100" />
+                                </el-tooltip>
+                                <span style="margin-left: 8px; font-size: 12px; color: #909399;">字</span>
+                            </el-form-item>
+                            
                             <el-form-item label="选择AI">
                                 <el-select v-model="currentAI" placeholder="选择AI" @change="onCurrentAIChange" :style="useMobileLayout ? 'width: 100%' : 'width: 220px'">
                                     <el-option value="" label="请选择"></el-option>
@@ -274,13 +281,6 @@ function onSubmitDataTypeChange(value) {
                             </el-form-item>
                             <el-form-item label="启用">
                                 <el-switch v-model="usePromptCustom" @change="onUsePromptCustomChange" />
-                            </el-form-item>
-                            
-                            <el-form-item label="内容长度限制">
-                                <el-tooltip content="设置从帖子中提取的内容字数，默认 500 字。范围 100-10000" placement="top">
-                                    <el-input-number v-model="contentLengthLimit" @change="onContentLengthLimitChange" :min="100" :max="10000" :step="100" />
-                                </el-tooltip>
-                                <span style="margin-left: 8px; font-size: 12px; color: #909399;">字</span>
                             </el-form-item>
                         </el-form>
                     </div>
