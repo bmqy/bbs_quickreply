@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         server:论坛快捷回帖
+// @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      4.0.3
+// @version      4.1.0
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -50,7 +50,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-f5a3c933]{width:100%}.box-card[data-v-f5a3c933]{border:none}.box-card .el-card__header[data-v-f5a3c933]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-f5a3c933]{padding:0}.tab-content[data-v-f5a3c933]{padding:20px}.form-tips[data-v-f5a3c933]{margin-bottom:20px}.required-star[data-v-f5a3c933]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-f5a3c933]{padding:15px 10px}.form-tips[data-v-f5a3c933]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-39c496c2]{position:relative}.quickReplyBox .el-form[data-v-39c496c2]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-39c496c2]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-39c496c2]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-39c496c2]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-39c496c2],.el-form-item--small.el-form-item[data-v-39c496c2]{margin-bottom:10px}.el-select[data-v-39c496c2]{width:300px}.quickAddBtnGroup{gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}.quickAddBtnGroup button{padding:6px 14px!important;font-size:12px!important;cursor:pointer!important;border:none!important;border-radius:3px!important;line-height:1.5!important;white-space:nowrap!important;transition:all .2s ease!important;display:inline-flex!important;align-items:center!important;gap:4px!important;font-weight:500!important}.quickAddBtn{background-color:#409eff!important;color:#fff!important}.quickAddBtn:hover{background-color:#66b1ff!important;color:#fff!important;opacity:.95!important}.quickAddShareBtn{background-color:#67c23a!important;color:#fff!important}.quickAddShareBtn:hover{background-color:#85ce61!important;color:#fff!important;opacity:.95!important}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-877c5d68]{width:100%}.header-left[data-v-877c5d68]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-877c5d68]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-877c5d68]{margin-bottom:0}}.header-right[data-v-877c5d68]{width:100%}.header-right .button-group[data-v-877c5d68]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-877c5d68]{justify-content:flex-end}}.login-container[data-v-877c5d68]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-877c5d68]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-877c5d68]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-877c5d68]{padding:20px}.settings-header[data-v-877c5d68]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-877c5d68]{min-height:300px}.my-replies-card .card-title[data-v-877c5d68]{font-weight:700}.list-left[data-v-877c5d68]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-877c5d68]{margin-right:5px;color:#909399}.list-title[data-v-877c5d68]{flex:1;font-weight:400}.list-right[data-v-877c5d68]{min-width:70px}.list-right .el-badge.item[data-v-877c5d68]{margin-right:30px}.list li[data-v-877c5d68]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-877c5d68]:hover{background-color:#f5f5f5}.tips[data-v-877c5d68]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-877c5d68]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-877c5d68]{padding:10px 20px}.box-card .el-card__header span[data-v-877c5d68]{font-size:14px}.clearfix[data-v-877c5d68]:before,.clearfix[data-v-877c5d68]:after{display:table;content:""}.clearfix[data-v-877c5d68]:after{clear:both}.el-pagination[data-v-877c5d68]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
+(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-f74e69eb]{width:100%}.box-card[data-v-f74e69eb]{border:none}.box-card .el-card__header[data-v-f74e69eb]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-f74e69eb]{padding:0}.tab-content[data-v-f74e69eb]{padding:20px}.form-tips[data-v-f74e69eb]{margin-bottom:20px}.required-star[data-v-f74e69eb]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-f74e69eb]{padding:15px 10px}.form-tips[data-v-f74e69eb]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-f3f3a23c]{position:relative}.quickReplyBox .el-form[data-v-f3f3a23c]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-f3f3a23c]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-f3f3a23c]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-f3f3a23c]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-f3f3a23c],.el-form-item--small.el-form-item[data-v-f3f3a23c]{margin-bottom:10px}.el-select[data-v-f3f3a23c]{width:300px}.quickAddBtnGroup{gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}.quickAddBtnGroup button{padding:6px 14px!important;font-size:12px!important;cursor:pointer!important;border:none!important;border-radius:3px!important;line-height:1.5!important;white-space:nowrap!important;transition:all .2s ease!important;display:inline-flex!important;align-items:center!important;gap:4px!important;font-weight:500!important}.quickAddBtn{background-color:#409eff!important;color:#fff!important}.quickAddBtn:hover{background-color:#66b1ff!important;color:#fff!important;opacity:.95!important}.quickAddShareBtn{background-color:#67c23a!important;color:#fff!important}.quickAddShareBtn:hover{background-color:#85ce61!important;color:#fff!important;opacity:.95!important}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-a4326af6]{width:100%}.header-left[data-v-a4326af6]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-a4326af6]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-a4326af6]{margin-bottom:0}}.header-right[data-v-a4326af6]{width:100%}.header-right .button-group[data-v-a4326af6]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-a4326af6]{justify-content:flex-end}}.login-container[data-v-a4326af6]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-a4326af6]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-a4326af6]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-a4326af6]{padding:20px}.settings-header[data-v-a4326af6]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-a4326af6]{min-height:300px}.my-replies-card .card-title[data-v-a4326af6]{font-weight:700}.list-left[data-v-a4326af6]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-a4326af6]{margin-right:5px;color:#909399}.list-title[data-v-a4326af6]{flex:1;font-weight:400}.list-right[data-v-a4326af6]{min-width:70px}.list-right .el-badge.item[data-v-a4326af6]{margin-right:30px}.list li[data-v-a4326af6]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-a4326af6]:hover{background-color:#f5f5f5}.tips[data-v-a4326af6]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-a4326af6]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-a4326af6]{padding:10px 20px}.box-card .el-card__header span[data-v-a4326af6]{font-size:14px}.clearfix[data-v-a4326af6]:before,.clearfix[data-v-a4326af6]:after{display:table;content:""}.clearfix[data-v-a4326af6]:after{clear:both}.el-pagination[data-v-a4326af6]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
 
 (function (ElementPlusIconsVue, ElementPlus, vue) {
   'use strict';
@@ -297,6 +297,7 @@
       const promptCustom = vue.ref("");
       const usePromptCustom = vue.ref(false);
       const contentLengthLimit = vue.ref(500);
+      const submitDataType = vue.ref("titleOnly");
       const geminiApiKey = vue.ref("");
       const geminiModel = vue.ref("gemini-2.0-flash");
       const qianwenApiKey = vue.ref("");
@@ -345,6 +346,7 @@
         promptCustom.value = proxy.$storage.getUserInfo("promptCustom") || "";
         usePromptCustom.value = proxy.$storage.getUserInfo("usePromptCustom") || false;
         contentLengthLimit.value = proxy.$storage.getUserInfo("contentLengthLimit") || 500;
+        submitDataType.value = proxy.$storage.getUserInfo("submitDataType") || "titleOnly";
         geminiApiKey.value = proxy.$storage.getUserInfo("geminiApiKey") || "";
         geminiModel.value = proxy.$storage.getUserInfo("geminiModel") || "gemini-2.0-flash";
         qianwenApiKey.value = proxy.$storage.getUserInfo("qianwenApiKey") || "";
@@ -451,12 +453,18 @@
         proxy.$storage.setUserInfo("contentLengthLimit", contentLengthLimit.value);
         emit("updateAI");
       }
+      function onSubmitDataTypeChange(value) {
+        proxy.$storage.setUserInfo("submitDataType", value);
+        emit("updateAI");
+      }
       return (_ctx, _cache) => {
+        const _component_el_radio = vue.resolveComponent("el-radio");
+        const _component_el_radio_group = vue.resolveComponent("el-radio-group");
+        const _component_el_tooltip = vue.resolveComponent("el-tooltip");
+        const _component_el_form_item = vue.resolveComponent("el-form-item");
         const _component_el_option = vue.resolveComponent("el-option");
         const _component_el_select = vue.resolveComponent("el-select");
-        const _component_el_form_item = vue.resolveComponent("el-form-item");
         const _component_el_input = vue.resolveComponent("el-input");
-        const _component_el_tooltip = vue.resolveComponent("el-tooltip");
         const _component_el_switch = vue.resolveComponent("el-switch");
         const _component_el_input_number = vue.resolveComponent("el-input-number");
         const _component_el_form = vue.resolveComponent("el-form");
@@ -474,7 +482,7 @@
             default: vue.withCtx(() => [
               vue.createVNode(_component_el_tabs, {
                 modelValue: activeTab.value,
-                "onUpdate:modelValue": _cache[42] || (_cache[42] = ($event) => activeTab.value = $event),
+                "onUpdate:modelValue": _cache[43] || (_cache[43] = ($event) => activeTab.value = $event),
                 type: "border-card"
               }, {
                 default: vue.withCtx(() => [
@@ -490,11 +498,46 @@
                           size: "small"
                         }, {
                           default: vue.withCtx(() => [
+                            vue.createVNode(_component_el_form_item, { label: "回帖依据" }, {
+                              default: vue.withCtx(() => [
+                                vue.createVNode(_component_el_tooltip, {
+                                  content: "选择生成回帖时所依据的数据类型",
+                                  placement: "top"
+                                }, {
+                                  default: vue.withCtx(() => [
+                                    vue.createVNode(_component_el_radio_group, {
+                                      modelValue: submitDataType.value,
+                                      "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => submitDataType.value = $event),
+                                      onChange: onSubmitDataTypeChange,
+                                      size: "small"
+                                    }, {
+                                      default: vue.withCtx(() => [
+                                        vue.createVNode(_component_el_radio, { value: "titleOnly" }, {
+                                          default: vue.withCtx(() => _cache[44] || (_cache[44] = [
+                                            vue.createTextVNode("仅标题")
+                                          ])),
+                                          _: 1
+                                        }),
+                                        vue.createVNode(_component_el_radio, { value: "titleAndContent" }, {
+                                          default: vue.withCtx(() => _cache[45] || (_cache[45] = [
+                                            vue.createTextVNode("标题和内容")
+                                          ])),
+                                          _: 1
+                                        })
+                                      ]),
+                                      _: 1
+                                    }, 8, ["modelValue"])
+                                  ]),
+                                  _: 1
+                                })
+                              ]),
+                              _: 1
+                            }),
                             vue.createVNode(_component_el_form_item, { label: "选择AI" }, {
                               default: vue.withCtx(() => [
                                 vue.createVNode(_component_el_select, {
                                   modelValue: currentAI.value,
-                                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => currentAI.value = $event),
+                                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => currentAI.value = $event),
                                   placeholder: "选择AI",
                                   onChange: onCurrentAIChange,
                                   style: vue.normalizeStyle(useMobileLayout.value ? "width: 100%" : "width: 220px")
@@ -536,7 +579,7 @@
                                     vue.createVNode(_component_el_input, {
                                       type: "textarea",
                                       modelValue: systemRoleCustom.value,
-                                      "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => systemRoleCustom.value = $event),
+                                      "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => systemRoleCustom.value = $event),
                                       onChange: onSystemRoleCustomChange,
                                       placeholder: `默认：${vue.unref(proxy).$app.systemRole}`
                                     }, null, 8, ["modelValue", "placeholder"])
@@ -550,7 +593,7 @@
                               default: vue.withCtx(() => [
                                 vue.createVNode(_component_el_switch, {
                                   modelValue: useSystemRoleCustom.value,
-                                  "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => useSystemRoleCustom.value = $event),
+                                  "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => useSystemRoleCustom.value = $event),
                                   onChange: onUseSystemRoleCustomChange
                                 }, null, 8, ["modelValue"])
                               ]),
@@ -566,7 +609,7 @@
                                     vue.createVNode(_component_el_input, {
                                       type: "textarea",
                                       modelValue: promptCustom.value,
-                                      "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => promptCustom.value = $event),
+                                      "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => promptCustom.value = $event),
                                       onChange: onPromptCustomChange,
                                       placeholder: `默认：${vue.unref(proxy).$app.prompt}`
                                     }, null, 8, ["modelValue", "placeholder"])
@@ -580,7 +623,7 @@
                               default: vue.withCtx(() => [
                                 vue.createVNode(_component_el_switch, {
                                   modelValue: usePromptCustom.value,
-                                  "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => usePromptCustom.value = $event),
+                                  "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => usePromptCustom.value = $event),
                                   onChange: onUsePromptCustomChange
                                 }, null, 8, ["modelValue"])
                               ]),
@@ -595,7 +638,7 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input_number, {
                                       modelValue: contentLengthLimit.value,
-                                      "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => contentLengthLimit.value = $event),
+                                      "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => contentLengthLimit.value = $event),
                                       onChange: onContentLengthLimitChange,
                                       min: 100,
                                       max: 1e4,
@@ -604,7 +647,7 @@
                                   ]),
                                   _: 1
                                 }),
-                                _cache[43] || (_cache[43] = vue.createElementVNode("span", { style: { "margin-left": "8px", "font-size": "12px", "color": "#909399" } }, "字", -1))
+                                _cache[46] || (_cache[46] = vue.createElementVNode("span", { style: { "margin-left": "8px", "font-size": "12px", "color": "#909399" } }, "字", -1))
                               ]),
                               _: 1
                             })
@@ -627,7 +670,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[44] || (_cache[44] = [
+                            default: vue.withCtx(() => _cache[47] || (_cache[47] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -655,8 +698,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: geminiApiKey.value,
-                                      "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => geminiApiKey.value = $event),
-                                      onChange: _cache[7] || (_cache[7] = ($event) => onApiKeyChange($event, "gemini"))
+                                      "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => geminiApiKey.value = $event),
+                                      onChange: _cache[8] || (_cache[8] = ($event) => onApiKeyChange($event, "gemini"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -676,8 +719,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: geminiModel.value,
-                                      "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => geminiModel.value = $event),
-                                      onChange: _cache[9] || (_cache[9] = ($event) => onModelChange($event, "gemini")),
+                                      "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => geminiModel.value = $event),
+                                      onChange: _cache[10] || (_cache[10] = ($event) => onModelChange($event, "gemini")),
                                       placeholder: "gemini-2.0-flash"
                                     }, null, 8, ["modelValue"])
                                   ]),
@@ -690,7 +733,7 @@
                                   target: "_blank",
                                   style: { "font-size": "12px" }
                                 }, {
-                                  default: vue.withCtx(() => _cache[45] || (_cache[45] = [
+                                  default: vue.withCtx(() => _cache[48] || (_cache[48] = [
                                     vue.createTextVNode("可用模型")
                                   ])),
                                   _: 1
@@ -717,7 +760,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[46] || (_cache[46] = [
+                            default: vue.withCtx(() => _cache[49] || (_cache[49] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -745,8 +788,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: qianwenApiKey.value,
-                                      "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => qianwenApiKey.value = $event),
-                                      onChange: _cache[11] || (_cache[11] = ($event) => onApiKeyChange($event, "qianwen"))
+                                      "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => qianwenApiKey.value = $event),
+                                      onChange: _cache[12] || (_cache[12] = ($event) => onApiKeyChange($event, "qianwen"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -766,8 +809,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: qianwenModel.value,
-                                      "onUpdate:modelValue": _cache[12] || (_cache[12] = ($event) => qianwenModel.value = $event),
-                                      onChange: _cache[13] || (_cache[13] = ($event) => onModelChange($event, "qianwen")),
+                                      "onUpdate:modelValue": _cache[13] || (_cache[13] = ($event) => qianwenModel.value = $event),
+                                      onChange: _cache[14] || (_cache[14] = ($event) => onModelChange($event, "qianwen")),
                                       placeholder: "qwen-turbo"
                                     }, null, 8, ["modelValue"])
                                   ]),
@@ -780,7 +823,7 @@
                                   target: "_blank",
                                   style: { "font-size": "12px" }
                                 }, {
-                                  default: vue.withCtx(() => _cache[47] || (_cache[47] = [
+                                  default: vue.withCtx(() => _cache[50] || (_cache[50] = [
                                     vue.createTextVNode("可用模型")
                                   ])),
                                   _: 1
@@ -807,7 +850,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[48] || (_cache[48] = [
+                            default: vue.withCtx(() => _cache[51] || (_cache[51] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -835,8 +878,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: kimiApiKey.value,
-                                      "onUpdate:modelValue": _cache[14] || (_cache[14] = ($event) => kimiApiKey.value = $event),
-                                      onChange: _cache[15] || (_cache[15] = ($event) => onApiKeyChange($event, "kimi"))
+                                      "onUpdate:modelValue": _cache[15] || (_cache[15] = ($event) => kimiApiKey.value = $event),
+                                      onChange: _cache[16] || (_cache[16] = ($event) => onApiKeyChange($event, "kimi"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -856,8 +899,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: kimiModel.value,
-                                      "onUpdate:modelValue": _cache[16] || (_cache[16] = ($event) => kimiModel.value = $event),
-                                      onChange: _cache[17] || (_cache[17] = ($event) => onModelChange($event, "kimi")),
+                                      "onUpdate:modelValue": _cache[17] || (_cache[17] = ($event) => kimiModel.value = $event),
+                                      onChange: _cache[18] || (_cache[18] = ($event) => onModelChange($event, "kimi")),
                                       placeholder: "moonshot-v1-8k"
                                     }, null, 8, ["modelValue"])
                                   ]),
@@ -870,7 +913,7 @@
                                   target: "_blank",
                                   style: { "font-size": "12px" }
                                 }, {
-                                  default: vue.withCtx(() => _cache[49] || (_cache[49] = [
+                                  default: vue.withCtx(() => _cache[52] || (_cache[52] = [
                                     vue.createTextVNode("可用模型")
                                   ])),
                                   _: 1
@@ -897,7 +940,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[50] || (_cache[50] = [
+                            default: vue.withCtx(() => _cache[53] || (_cache[53] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -922,8 +965,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: chatgptDomain.value,
-                                      "onUpdate:modelValue": _cache[18] || (_cache[18] = ($event) => chatgptDomain.value = $event),
-                                      onChange: _cache[19] || (_cache[19] = ($event) => onDomainChange($event, "chatgpt"))
+                                      "onUpdate:modelValue": _cache[19] || (_cache[19] = ($event) => chatgptDomain.value = $event),
+                                      onChange: _cache[20] || (_cache[20] = ($event) => onDomainChange($event, "chatgpt"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -943,8 +986,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: chatgptApiKey.value,
-                                      "onUpdate:modelValue": _cache[20] || (_cache[20] = ($event) => chatgptApiKey.value = $event),
-                                      onChange: _cache[21] || (_cache[21] = ($event) => onApiKeyChange($event, "chatgpt"))
+                                      "onUpdate:modelValue": _cache[21] || (_cache[21] = ($event) => chatgptApiKey.value = $event),
+                                      onChange: _cache[22] || (_cache[22] = ($event) => onApiKeyChange($event, "chatgpt"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -964,8 +1007,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: chatgptModel.value,
-                                      "onUpdate:modelValue": _cache[22] || (_cache[22] = ($event) => chatgptModel.value = $event),
-                                      onChange: _cache[23] || (_cache[23] = ($event) => onModelChange($event, "chatgpt")),
+                                      "onUpdate:modelValue": _cache[23] || (_cache[23] = ($event) => chatgptModel.value = $event),
+                                      onChange: _cache[24] || (_cache[24] = ($event) => onModelChange($event, "chatgpt")),
                                       placeholder: "gpt-3.5-turbo"
                                     }, null, 8, ["modelValue"])
                                   ]),
@@ -978,7 +1021,7 @@
                                   target: "_blank",
                                   style: { "font-size": "12px" }
                                 }, {
-                                  default: vue.withCtx(() => _cache[51] || (_cache[51] = [
+                                  default: vue.withCtx(() => _cache[54] || (_cache[54] = [
                                     vue.createTextVNode("可用模型")
                                   ])),
                                   _: 1
@@ -1005,7 +1048,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[52] || (_cache[52] = [
+                            default: vue.withCtx(() => _cache[55] || (_cache[55] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -1030,8 +1073,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: deepseekDomain.value,
-                                      "onUpdate:modelValue": _cache[24] || (_cache[24] = ($event) => deepseekDomain.value = $event),
-                                      onChange: _cache[25] || (_cache[25] = ($event) => onDomainChange($event, "deepseek"))
+                                      "onUpdate:modelValue": _cache[25] || (_cache[25] = ($event) => deepseekDomain.value = $event),
+                                      onChange: _cache[26] || (_cache[26] = ($event) => onDomainChange($event, "deepseek"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -1051,8 +1094,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: deepseekApiKey.value,
-                                      "onUpdate:modelValue": _cache[26] || (_cache[26] = ($event) => deepseekApiKey.value = $event),
-                                      onChange: _cache[27] || (_cache[27] = ($event) => onApiKeyChange($event, "deepseek"))
+                                      "onUpdate:modelValue": _cache[27] || (_cache[27] = ($event) => deepseekApiKey.value = $event),
+                                      onChange: _cache[28] || (_cache[28] = ($event) => onApiKeyChange($event, "deepseek"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -1072,8 +1115,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: deepseekModel.value,
-                                      "onUpdate:modelValue": _cache[28] || (_cache[28] = ($event) => deepseekModel.value = $event),
-                                      onChange: _cache[29] || (_cache[29] = ($event) => onModelChange($event, "deepseek")),
+                                      "onUpdate:modelValue": _cache[29] || (_cache[29] = ($event) => deepseekModel.value = $event),
+                                      onChange: _cache[30] || (_cache[30] = ($event) => onModelChange($event, "deepseek")),
                                       placeholder: "deepseek-chat"
                                     }, null, 8, ["modelValue"])
                                   ]),
@@ -1086,7 +1129,7 @@
                                   target: "_blank",
                                   style: { "font-size": "12px" }
                                 }, {
-                                  default: vue.withCtx(() => _cache[53] || (_cache[53] = [
+                                  default: vue.withCtx(() => _cache[56] || (_cache[56] = [
                                     vue.createTextVNode("可用模型")
                                   ])),
                                   _: 1
@@ -1113,7 +1156,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[54] || (_cache[54] = [
+                            default: vue.withCtx(() => _cache[57] || (_cache[57] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -1138,8 +1181,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: grokDomain.value,
-                                      "onUpdate:modelValue": _cache[30] || (_cache[30] = ($event) => grokDomain.value = $event),
-                                      onChange: _cache[31] || (_cache[31] = ($event) => onDomainChange($event, "grok"))
+                                      "onUpdate:modelValue": _cache[31] || (_cache[31] = ($event) => grokDomain.value = $event),
+                                      onChange: _cache[32] || (_cache[32] = ($event) => onDomainChange($event, "grok"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -1159,8 +1202,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: grokApiKey.value,
-                                      "onUpdate:modelValue": _cache[32] || (_cache[32] = ($event) => grokApiKey.value = $event),
-                                      onChange: _cache[33] || (_cache[33] = ($event) => onApiKeyChange($event, "grok"))
+                                      "onUpdate:modelValue": _cache[33] || (_cache[33] = ($event) => grokApiKey.value = $event),
+                                      onChange: _cache[34] || (_cache[34] = ($event) => onApiKeyChange($event, "grok"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -1180,8 +1223,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: grokModel.value,
-                                      "onUpdate:modelValue": _cache[34] || (_cache[34] = ($event) => grokModel.value = $event),
-                                      onChange: _cache[35] || (_cache[35] = ($event) => onModelChange($event, "grok")),
+                                      "onUpdate:modelValue": _cache[35] || (_cache[35] = ($event) => grokModel.value = $event),
+                                      onChange: _cache[36] || (_cache[36] = ($event) => onModelChange($event, "grok")),
                                       placeholder: "grok-3-mini-beta"
                                     }, null, 8, ["modelValue"])
                                   ]),
@@ -1194,7 +1237,7 @@
                                   target: "_blank",
                                   style: { "font-size": "12px" }
                                 }, {
-                                  default: vue.withCtx(() => _cache[55] || (_cache[55] = [
+                                  default: vue.withCtx(() => _cache[58] || (_cache[58] = [
                                     vue.createTextVNode("可用模型")
                                   ])),
                                   _: 1
@@ -1221,7 +1264,7 @@
                             closable: false,
                             "show-icon": ""
                           }, {
-                            default: vue.withCtx(() => _cache[56] || (_cache[56] = [
+                            default: vue.withCtx(() => _cache[59] || (_cache[59] = [
                               vue.createElementVNode("p", { style: { "margin": "0" } }, [
                                 vue.createTextVNode("带 "),
                                 vue.createElementVNode("span", { class: "required-star" }, "*"),
@@ -1246,8 +1289,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: ollamaDomain.value,
-                                      "onUpdate:modelValue": _cache[36] || (_cache[36] = ($event) => ollamaDomain.value = $event),
-                                      onChange: _cache[37] || (_cache[37] = ($event) => onDomainChange($event, "ollama")),
+                                      "onUpdate:modelValue": _cache[37] || (_cache[37] = ($event) => ollamaDomain.value = $event),
+                                      onChange: _cache[38] || (_cache[38] = ($event) => onDomainChange($event, "ollama")),
                                       placeholder: "localhost:11434"
                                     }, null, 8, ["modelValue"])
                                   ]),
@@ -1265,8 +1308,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: ollamaApiKey.value,
-                                      "onUpdate:modelValue": _cache[38] || (_cache[38] = ($event) => ollamaApiKey.value = $event),
-                                      onChange: _cache[39] || (_cache[39] = ($event) => onApiKeyChange($event, "ollama"))
+                                      "onUpdate:modelValue": _cache[39] || (_cache[39] = ($event) => ollamaApiKey.value = $event),
+                                      onChange: _cache[40] || (_cache[40] = ($event) => onApiKeyChange($event, "ollama"))
                                     }, null, 8, ["modelValue"])
                                   ]),
                                   _: 1
@@ -1286,8 +1329,8 @@
                                   default: vue.withCtx(() => [
                                     vue.createVNode(_component_el_input, {
                                       modelValue: ollamaModel.value,
-                                      "onUpdate:modelValue": _cache[40] || (_cache[40] = ($event) => ollamaModel.value = $event),
-                                      onChange: _cache[41] || (_cache[41] = ($event) => onModelChange($event, "ollama")),
+                                      "onUpdate:modelValue": _cache[41] || (_cache[41] = ($event) => ollamaModel.value = $event),
+                                      onChange: _cache[42] || (_cache[42] = ($event) => onModelChange($event, "ollama")),
                                       placeholder: "llama2"
                                     }, null, 8, ["modelValue"])
                                   ]),
@@ -1300,7 +1343,7 @@
                                   target: "_blank",
                                   style: { "font-size": "12px" }
                                 }, {
-                                  default: vue.withCtx(() => _cache[57] || (_cache[57] = [
+                                  default: vue.withCtx(() => _cache[60] || (_cache[60] = [
                                     vue.createTextVNode("可用模型")
                                   ])),
                                   _: 1
@@ -1325,7 +1368,7 @@
       };
     }
   };
-  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-f5a3c933"]]);
+  const AI = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-f74e69eb"]]);
   var _GM_getValue = /* @__PURE__ */ (() => typeof GM_getValue != "undefined" ? GM_getValue : void 0)();
   var _GM_info = /* @__PURE__ */ (() => typeof GM_info != "undefined" ? GM_info : void 0)();
   var _GM_listValues = /* @__PURE__ */ (() => typeof GM_listValues != "undefined" ? GM_listValues : void 0)();
@@ -1432,6 +1475,10 @@
             let usePromptCustom = proxy.$storage.getUserInfo("usePromptCustom") || false;
             if (usePromptCustom && promptCustom) {
               prompt = promptCustom;
+            }
+            let submitDataType = proxy.$storage.getUserInfo("submitDataType") || "titleAndContent";
+            if (submitDataType === "titleOnly") {
+              content = "";
             }
             prompt = prompt.replace("{{title}}", title);
             prompt = prompt.replace("{{content}}", content || "内容获取失败");
@@ -2223,6 +2270,17 @@
           if ($replyBody) {
             content = $replyBody.innerText;
           }
+        } else if (currentPlatform.value == "flarum") {
+          let $postBody = replyElement.querySelector(".Post-body");
+          if (!$postBody) {
+            $postBody = replyElement.querySelector(".Post-body-content");
+          }
+          if (!$postBody) {
+            $postBody = replyElement.querySelector(".CommentPost-content");
+          }
+          if ($postBody) {
+            content = $postBody.innerText;
+          }
         }
         return content.trim();
       }
@@ -2260,6 +2318,14 @@
       }
       function injectQuickAddButtons() {
         proxy.$tools.log(`[BBS QuickReply - injectQuickAddButtons] 当前平台: ${currentPlatform.value}`);
+        if (currentPlatform.value == "flarum") {
+          const allArticles = document.querySelectorAll("article");
+          const allPostBodies = document.querySelectorAll(".Post-body");
+          proxy.$tools.log(`[Flarum 诊断] 当前页面中有 ${allArticles.length} 个 article, ${allPostBodies.length} 个 .Post-body`);
+          for (let i = 0; i < Math.min(3, allArticles.length); i++) {
+            proxy.$tools.log(`[Flarum 诊断] article ${i}:`, allArticles[i].className, allArticles[i].innerHTML.substring(0, 100));
+          }
+        }
         if (currentPlatform.value == "discuz") {
           const $replies = document.querySelectorAll('#postlist > div[id^="post_"]');
           $replies.forEach((replyElement) => {
@@ -2333,6 +2399,47 @@
               });
             }
           });
+        } else if (currentPlatform.value == "discourse") {
+          const $replies = document.querySelectorAll('#topic .topic-post:not([data-post-number="1"]), .topic-post:not([data-post-number="1"])');
+          $replies.forEach((replyElement) => {
+            if (replyElement.getAttribute("data-post-number") === "1") {
+              return;
+            }
+            if (replyElement.querySelector(".quickAddBtnGroup")) {
+              return;
+            }
+            let $postContent = replyElement.querySelector(".topic-body .cooked");
+            if (!$postContent) {
+              $postContent = replyElement.querySelector(".cooked");
+            }
+            if ($postContent) {
+              const replyContent = getReplyContent(replyElement);
+              const $btnGroup = document.createElement("div");
+              $btnGroup.className = "quickAddBtnGroup";
+              $btnGroup.style.cssText = "margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;";
+              const $addBtn = document.createElement("button");
+              $addBtn.textContent = "➕ 添加到我的";
+              $addBtn.title = "BBS QuickReply - 添加到我的回复";
+              $addBtn.className = "btn btn-sm btn-info quickAddBtn";
+              $addBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;";
+              $addBtn.onclick = () => addToMyList(replyContent);
+              const $addShareBtn = document.createElement("button");
+              $addShareBtn.textContent = "⭐ 添加到我的并分享";
+              $addShareBtn.title = "BBS QuickReply - 添加到我的回复并分享给网友";
+              $addShareBtn.className = "btn btn-sm btn-success quickAddShareBtn";
+              $addShareBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;";
+              $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
+              $btnGroup.appendChild($addBtn);
+              $btnGroup.appendChild($addShareBtn);
+              $postContent.appendChild($btnGroup);
+              replyElement.addEventListener("mouseenter", () => {
+                $btnGroup.style.display = "flex";
+              });
+              replyElement.addEventListener("mouseleave", () => {
+                $btnGroup.style.display = "none";
+              });
+            }
+          });
         } else if (currentPlatform.value == "v2ex") {
           const $replies = document.querySelectorAll('div.cell[id^="r_"]');
           proxy.$tools.log(`[V2EX] 找到 ${$replies.length} 条回复`);
@@ -2375,6 +2482,49 @@
               });
             }
           });
+        } else if (currentPlatform.value == "flarum") {
+          const $postBodies = document.querySelectorAll(".Post-body");
+          proxy.$tools.log(`[Flarum] 找到 ${$postBodies.length} 条帖子`);
+          $postBodies.forEach((postBodyElement, index) => {
+            if (index === 0) {
+              return;
+            }
+            let replyElement = postBodyElement.closest("article");
+            if (!replyElement) {
+              replyElement = postBodyElement.closest('div[class*="Post"]');
+            }
+            if (!replyElement) {
+              return;
+            }
+            if (replyElement.querySelector(".quickAddBtnGroup")) {
+              return;
+            }
+            const replyContent = getReplyContent(replyElement);
+            const $btnGroup = document.createElement("div");
+            $btnGroup.className = "quickAddBtnGroup";
+            $btnGroup.style.cssText = "margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;";
+            const $addBtn = document.createElement("button");
+            $addBtn.textContent = "➕ 添加到我的";
+            $addBtn.title = "BBS QuickReply - 添加到我的回复";
+            $addBtn.className = "btn btn-sm btn-info quickAddBtn";
+            $addBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;";
+            $addBtn.onclick = () => addToMyList(replyContent);
+            const $addShareBtn = document.createElement("button");
+            $addShareBtn.textContent = "⭐ 添加到我的并分享";
+            $addShareBtn.title = "BBS QuickReply - 添加到我的回复并分享给网友";
+            $addShareBtn.className = "btn btn-sm btn-success quickAddShareBtn";
+            $addShareBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;";
+            $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
+            $btnGroup.appendChild($addBtn);
+            $btnGroup.appendChild($addShareBtn);
+            postBodyElement.appendChild($btnGroup);
+            replyElement.addEventListener("mouseenter", () => {
+              $btnGroup.style.display = "flex";
+            });
+            replyElement.addEventListener("mouseleave", () => {
+              $btnGroup.style.display = "none";
+            });
+          });
         }
       }
       vue.onMounted(() => {
@@ -2394,10 +2544,17 @@
         });
       });
       vue.watch(fwin_replyLoaded, (n) => {
+        if (currentPlatform.value !== "discuz") {
+          return;
+        }
         if (n) {
           let $floatlayout_reply = document.querySelector(
             "#floatlayout_reply"
           );
+          if (!$floatlayout_reply) {
+            proxy.$tools.log("[BBS QuickReply] 未找到 #floatlayout_reply，跳过挂载");
+            return;
+          }
           $floatlayout_reply.insertBefore(
             proxy.$el,
             $floatlayout_reply.childNodes[0]
@@ -2407,6 +2564,10 @@
           let $fastposteditor = document.querySelector(
             "#fastposteditor"
           );
+          if (!$fastposteditor) {
+            proxy.$tools.log("[BBS QuickReply] 未找到 #fastposteditor，跳过挂载");
+            return;
+          }
           $fastposteditor.insertBefore(
             proxy.$el,
             $fastposteditor.childNodes[0]
@@ -2546,7 +2707,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-39c496c2"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-f3f3a23c"]]);
   const _hoisted_1$1 = { class: "margin-left" };
   const _hoisted_2$1 = { class: "margin-left" };
   const _hoisted_3$1 = { class: "form-tip" };
@@ -4204,7 +4365,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-877c5d68"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-a4326af6"]]);
   const Util = {
     install: (app2, options) => {
       const eventBus = {
@@ -4735,15 +4896,27 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
   app.use(Api);
   app.mount(
     (() => {
+      const safeInsertBefore = (parent, node, beforeNode = null, logName = "") => {
+        if (!parent || !node) {
+          return false;
+        }
+        try {
+          parent.insertBefore(node, beforeNode || null);
+          return true;
+        } catch (err) {
+          console.warn(`[BBS QuickReply] 挂载失败: ${logName}`, err);
+          return false;
+        }
+      };
       const $fastposteditor = document.querySelector("#fastposteditor");
       const $postbox = document.querySelector("#postbox");
       const $appRoot = document.createElement("div");
       if ($fastposteditor) {
-        $fastposteditor.insertBefore($appRoot, $fastposteditor.childNodes[0]);
+        safeInsertBefore($fastposteditor, $appRoot, $fastposteditor.childNodes[0], "#fastposteditor");
       }
       if ($postbox) {
         $appRoot.style.paddingTop = "15px";
-        $postbox.insertBefore($appRoot, $postbox.childNodes[4]);
+        safeInsertBefore($postbox, $appRoot, $postbox.childNodes[4], "#postbox");
       }
       const $editorBody = document.querySelector(".comment-container");
       if ($editorBody) {
@@ -4753,18 +4926,18 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       const $replyControl = document.querySelector("#reply-control");
       if ($replyControl) {
         $appRoot.style.padding = "15px 15px 0";
-        $replyControl.insertBefore($appRoot, $replyControl.childNodes[2]);
+        safeInsertBefore($replyControl, $appRoot, $replyControl.childNodes[2], "#reply-control");
       }
       const $replyBox = document.querySelector("#reply-box");
       if ($replyBox) {
         $appRoot.style.padding = "15px 15px 0";
-        $replyBox.insertBefore($appRoot, $replyBox.childNodes[2]);
+        safeInsertBefore($replyBox, $appRoot, $replyBox.childNodes[2], "#reply-box");
       }
       const $composerBox = document.querySelector("#composer");
       if ($composerBox) {
         const $composerInner = $composerBox.querySelector(".Composer");
         $appRoot.style.padding = "15px 15px 0";
-        $composerInner.insertBefore($appRoot, $composerInner.childNodes[2]);
+        safeInsertBefore($composerInner, $appRoot, $composerInner && $composerInner.childNodes[2], "#composer .Composer");
       }
       return $appRoot;
     })()
