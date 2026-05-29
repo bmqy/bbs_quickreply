@@ -61,10 +61,30 @@ app.mount(
             $editorBody.appendChild($appRoot);
         }
         // Discourse
+        const mountToReplyControl = ($rc) => {
+            $appRoot.style.padding = '15px 15px 0';
+            safeInsertBefore($rc, $appRoot, $rc.childNodes[2], '#reply-control');
+            const repositionObserver = new MutationObserver(() => {
+                const $popupContainer = $rc.querySelector('.composer-popup-container');
+                if ($popupContainer && $popupContainer.nextSibling !== $appRoot) {
+                    repositionObserver.disconnect();
+                    $popupContainer.parentNode.insertBefore($appRoot, $popupContainer.nextSibling);
+                }
+            });
+            repositionObserver.observe($rc, { childList: true });
+        };
         const $replyControl = document.querySelector('#reply-control');
         if ($replyControl) {
-            $appRoot.style.padding = '15px 15px 0';
-            safeInsertBefore($replyControl, $appRoot, $replyControl.childNodes[2], '#reply-control');
+            mountToReplyControl($replyControl);
+        } else {
+            const discourseObserver = new MutationObserver(() => {
+                const $rc = document.querySelector('#reply-control');
+                if ($rc) {
+                    discourseObserver.disconnect();
+                    mountToReplyControl($rc);
+                }
+            });
+            discourseObserver.observe(document.body, { childList: true, subtree: true });
         }
         // v2ex.com
         const $replyBox = document.querySelector('#reply-box');
