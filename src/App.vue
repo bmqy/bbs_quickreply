@@ -508,6 +508,21 @@ async function addToMyListAndShare(replyContent) {
         proxy.$message.error('无法获取回复内容');
         return;
     }
+
+    try {
+        await proxy.$confirm(
+            '确认后会将该回复添加到我的回复列表，并分享给网友，是否继续？',
+            '添加并分享确认',
+            {
+                confirmButtonText: '确认分享',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }
+        );
+    } catch (err) {
+        proxy.$tools.log('[BBS QuickReply - 取消添加并分享回复]', replyContent);
+        return;
+    }
     
     // 先添加到本地列表
     if(!list.value.includes(replyContent)) {
