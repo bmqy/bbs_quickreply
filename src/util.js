@@ -53,7 +53,7 @@ export default {
             },
             setUserInfo(key, value){
                 let fullKey = `${this.userStorageKey}.${key}`;
-                GM_setValue(fullKey, value || '');
+                GM_setValue(fullKey, typeof value === 'boolean' ? value : (value || ''));
             },
             getUserInfo(key){
                 let fullKey = `${this.userStorageKey}.${key}`;

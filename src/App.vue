@@ -6,6 +6,8 @@ const currentReply = ref('');
 const currentPlatform = ref('discuz');
 const fwin_replyLoaded = ref(false);
 const submitNow = ref(false);
+const enableQuickAddToMyList = ref(true);
+const enableQuickAddAndShare = ref(true);
 const hasEditor = ref(false);
 const lastClickElement = ref(false);
 const setShow = ref(false);
@@ -26,10 +28,25 @@ const constVar = ref({
     url: '',
     base64: false,
 });
+
+function getQuickAddSetting(key) {
+    const fullKey = `${proxy.$storage.userStorageKey}.${key}`;
+    const userData = proxy.$storage.getAll();
+    if (!Object.prototype.hasOwnProperty.call(userData, fullKey)) {
+        return true;
+    }
+    return userData[fullKey] === true || userData[fullKey] === 'true' || userData[fullKey] === 1;
+}
+
+function normalizeQuickAddSetting(value) {
+    return value === true || value === 'true' || value === 1;
+}
+
 onBeforeMount(()=>{
     checkPlatform();
     getList();
     submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
+    loadQuickAddSettings();
     useAI.value = proxy.$storage.getUserInfo('useAI') || '';
     updateConstVar();
     updateAIModel();
@@ -56,6 +73,8 @@ function handleDataRestored(data) {
         // 更新用户设置
         const userStorageKey = proxy.$storage.userStorageKey;
         const submitNowKey = `${userStorageKey}.submitNow`;
+        const enableQuickAddToMyListKey = `${userStorageKey}.enableQuickAddToMyList`;
+        const enableQuickAddAndShareKey = `${userStorageKey}.enableQuickAddAndShare`;
         const useAIKey = `${userStorageKey}.useAI`;
         const constVarKey = `${userStorageKey}.constVar`;
         
@@ -64,6 +83,17 @@ function handleDataRestored(data) {
             submitNow.value = data[submitNowKey] || false;
             console.log('已更新提交设置', submitNow.value);
         }
+
+        // 更新快捷添加按钮设置
+        if (data[enableQuickAddToMyListKey] !== undefined) {
+            enableQuickAddToMyList.value = normalizeQuickAddSetting(data[enableQuickAddToMyListKey]);
+            console.log('已更新添加到我的回复列表快捷按钮设置', enableQuickAddToMyList.value);
+        }
+        if (data[enableQuickAddAndShareKey] !== undefined) {
+            enableQuickAddAndShare.value = normalizeQuickAddSetting(data[enableQuickAddAndShareKey]);
+            console.log('已更新添加到我的并分享快捷按钮设置', enableQuickAddAndShare.value);
+        }
+        refreshQuickAddButtons();
         
         // 更新AI模型设置
         if (data[useAIKey] !== undefined) {
@@ -153,6 +183,17 @@ function updateMyList(data) {
     let myListStorage = data || [];
     list.value = myListStorage;
 };
+
+function loadQuickAddSettings() {
+    enableQuickAddToMyList.value = getQuickAddSetting('enableQuickAddToMyList');
+    enableQuickAddAndShare.value = getQuickAddSetting('enableQuickAddAndShare');
+}
+
+function refreshQuickAddButtons() {
+    loadQuickAddSettings();
+    document.querySelectorAll('.quickAddBtnGroup').forEach((element) => element.remove());
+    injectQuickAddButtons();
+}
 // 获取帖子内容
 function getPostContent() {
     let content = '';
@@ -541,6 +582,39 @@ async function addToMyListAndShare(replyContent) {
     }
 }
 
+// 按用户设置创建快捷按钮组
+function createQuickAddButtonGroup(replyContent) {
+    if (!enableQuickAddToMyList.value && !enableQuickAddAndShare.value) {
+        return null;
+    }
+
+    const $btnGroup = document.createElement('div');
+    $btnGroup.className = 'quickAddBtnGroup';
+    $btnGroup.style.cssText = 'margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;';
+
+    if (enableQuickAddToMyList.value) {
+        const $addBtn = document.createElement('button');
+        $addBtn.textContent = '➕ 添加到我的';
+        $addBtn.title = 'BBS QuickReply - 添加到我的回复';
+        $addBtn.className = 'btn btn-sm btn-info quickAddBtn';
+        $addBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px; font-weight: normal;';
+        $addBtn.onclick = () => addToMyList(replyContent);
+        $btnGroup.appendChild($addBtn);
+    }
+
+    if (enableQuickAddAndShare.value) {
+        const $addShareBtn = document.createElement('button');
+        $addShareBtn.textContent = '⭐ 添加到我的并分享';
+        $addShareBtn.title = 'BBS QuickReply - 添加到我的回复并分享给网友';
+        $addShareBtn.className = 'btn btn-sm btn-success quickAddShareBtn';
+        $addShareBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px; font-weight: normal;';
+        $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
+        $btnGroup.appendChild($addShareBtn);
+    }
+
+    return $btnGroup;
+}
+
 // 为回复帖注入快捷按钮
 function injectQuickAddButtons() {
     proxy.$tools.log(`[BBS QuickReply - injectQuickAddButtons] 当前平台: ${currentPlatform.value}`);
@@ -574,30 +648,10 @@ function injectQuickAddButtons() {
             
             if($postMessage) {
                 const replyContent = getReplyContent(replyElement);
-                
-                // 创建按钮容器
-                const $btnGroup = document.createElement('div');
-                $btnGroup.className = 'quickAddBtnGroup';
-                $btnGroup.style.cssText = 'margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;';
-                
-                // 添加到我的按钮
-                const $addBtn = document.createElement('button');
-                $addBtn.textContent = '➕ 添加到我的';
-                $addBtn.title = 'BBS QuickReply - 添加到我的回复';
-                $addBtn.className = 'btn btn-sm btn-info quickAddBtn';
-                $addBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;';
-                $addBtn.onclick = () => addToMyList(replyContent);
-                
-                // 添加到我的并分享按钮
-                const $addShareBtn = document.createElement('button');
-                $addShareBtn.textContent = '⭐ 添加到我的并分享';
-                $addShareBtn.title = 'BBS QuickReply - 添加到我的回复并分享给网友';
-                $addShareBtn.className = 'btn btn-sm btn-success quickAddShareBtn';
-                $addShareBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;';
-                $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
-                
-                $btnGroup.appendChild($addBtn);
-                $btnGroup.appendChild($addShareBtn);
+                const $btnGroup = createQuickAddButtonGroup(replyContent);
+                if (!$btnGroup) {
+                    return;
+                }
                 
                 // 将按钮插入到回复内容下方
                 $postMessage.appendChild($btnGroup);
@@ -624,30 +678,10 @@ function injectQuickAddButtons() {
             const $postContent = replyElement.querySelector('.post-content');
             if($postContent) {
                 const replyContent = getReplyContent(replyElement);
-                
-                // 创建按钮容器
-                const $btnGroup = document.createElement('div');
-                $btnGroup.className = 'quickAddBtnGroup';
-                $btnGroup.style.cssText = 'margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;';
-                
-                // 添加到我的按钮
-                const $addBtn = document.createElement('button');
-                $addBtn.textContent = '➕ 添加到我的';
-                $addBtn.title = 'BBS QuickReply - 添加到我的回复';
-                $addBtn.className = 'btn btn-sm btn-info quickAddBtn';
-                $addBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;';
-                $addBtn.onclick = () => addToMyList(replyContent);
-                
-                // 添加到我的并分享按钮
-                const $addShareBtn = document.createElement('button');
-                $addShareBtn.textContent = '⭐ 添加到我的并分享';
-                $addShareBtn.title = 'BBS QuickReply - 添加到我的回复并分享给网友';
-                $addShareBtn.className = 'btn btn-sm btn-success quickAddShareBtn';
-                $addShareBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;';
-                $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
-                
-                $btnGroup.appendChild($addBtn);
-                $btnGroup.appendChild($addShareBtn);
+                const $btnGroup = createQuickAddButtonGroup(replyContent);
+                if (!$btnGroup) {
+                    return;
+                }
                 
                 // 将按钮插入到回复内容下方
                 $postContent.appendChild($btnGroup);
@@ -683,30 +717,10 @@ function injectQuickAddButtons() {
 
             if($postContent) {
                 const replyContent = getReplyContent(replyElement);
-
-                // 创建按钮容器
-                const $btnGroup = document.createElement('div');
-                $btnGroup.className = 'quickAddBtnGroup';
-                $btnGroup.style.cssText = 'margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;';
-
-                // 添加到我的按钮
-                const $addBtn = document.createElement('button');
-                $addBtn.textContent = '➕ 添加到我的';
-                $addBtn.title = 'BBS QuickReply - 添加到我的回复';
-                $addBtn.className = 'btn btn-sm btn-info quickAddBtn';
-                $addBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;';
-                $addBtn.onclick = () => addToMyList(replyContent);
-
-                // 添加到我的并分享按钮
-                const $addShareBtn = document.createElement('button');
-                $addShareBtn.textContent = '⭐ 添加到我的并分享';
-                $addShareBtn.title = 'BBS QuickReply - 添加到我的回复并分享给网友';
-                $addShareBtn.className = 'btn btn-sm btn-success quickAddShareBtn';
-                $addShareBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;';
-                $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
-
-                $btnGroup.appendChild($addBtn);
-                $btnGroup.appendChild($addShareBtn);
+                const $btnGroup = createQuickAddButtonGroup(replyContent);
+                if (!$btnGroup) {
+                    return;
+                }
 
                 // 将按钮插入到回复内容下方
                 $postContent.appendChild($btnGroup);
@@ -742,30 +756,10 @@ function injectQuickAddButtons() {
             
             if($replyContent) {
                 const replyContent = getReplyContent(replyElement);
-                
-                // 创建按钮容器
-                const $btnGroup = document.createElement('div');
-                $btnGroup.className = 'quickAddBtnGroup';
-                $btnGroup.style.cssText = 'margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;';
-                
-                // 添加到我的按钮
-                const $addBtn = document.createElement('button');
-                $addBtn.textContent = '➕ 添加到我的';
-                $addBtn.title = 'BBS QuickReply - 添加到我的回复';
-                $addBtn.className = 'btn btn-sm btn-info quickAddBtn';
-                $addBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px; font-weight: normal;';
-                $addBtn.onclick = () => addToMyList(replyContent);
-                
-                // 添加到我的并分享按钮
-                const $addShareBtn = document.createElement('button');
-                $addShareBtn.textContent = '⭐ 添加到我的并分享';
-                $addShareBtn.title = 'BBS QuickReply - 添加到我的回复并分享给网友';
-                $addShareBtn.className = 'btn btn-sm btn-success quickAddShareBtn';
-                $addShareBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px; font-weight: normal;';
-                $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
-                
-                $btnGroup.appendChild($addBtn);
-                $btnGroup.appendChild($addShareBtn);
+                const $btnGroup = createQuickAddButtonGroup(replyContent);
+                if (!$btnGroup) {
+                    return;
+                }
                 
                 // 将按钮插入到回复内容下方
                 $replyContent.appendChild($btnGroup);
@@ -807,30 +801,10 @@ function injectQuickAddButtons() {
             }
 
             const replyContent = getReplyContent(replyElement);
-
-            // 创建按钮容器
-            const $btnGroup = document.createElement('div');
-            $btnGroup.className = 'quickAddBtnGroup';
-            $btnGroup.style.cssText = 'margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;';
-
-            // 添加到我的按钮
-            const $addBtn = document.createElement('button');
-            $addBtn.textContent = '➕ 添加到我的';
-            $addBtn.title = 'BBS QuickReply - 添加到我的回复';
-            $addBtn.className = 'btn btn-sm btn-info quickAddBtn';
-            $addBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;';
-            $addBtn.onclick = () => addToMyList(replyContent);
-
-            // 添加到我的并分享按钮
-            const $addShareBtn = document.createElement('button');
-            $addShareBtn.textContent = '⭐ 添加到我的并分享';
-            $addShareBtn.title = 'BBS QuickReply - 添加到我的回复并分享给网友';
-            $addShareBtn.className = 'btn btn-sm btn-success quickAddShareBtn';
-            $addShareBtn.style.cssText = 'padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;';
-            $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
-
-            $btnGroup.appendChild($addBtn);
-            $btnGroup.appendChild($addShareBtn);
+            const $btnGroup = createQuickAddButtonGroup(replyContent);
+            if (!$btnGroup) {
+                return;
+            }
 
             // 将按钮插入到回复内容下方
             postBodyElement.appendChild($btnGroup);
@@ -956,7 +930,7 @@ watch(fwin_replyLoaded, (n)=>{
 			append-to-body
 		>
             <template #default>
-                <app-set ref="setPanel" @updateMyList="updateMyList" @updateConstVar="updateConstVar" @updateAIModel="updateAIModel" />
+                <app-set ref="setPanel" @updateMyList="updateMyList" @updateConstVar="updateConstVar" @updateAIModel="updateAIModel" @updateQuickAddSettings="refreshQuickAddButtons" />
             </template>
 
             <template #footer>

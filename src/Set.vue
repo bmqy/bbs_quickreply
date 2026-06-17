@@ -10,6 +10,8 @@ const isLogin = ref(false);
 const realtimeSync = ref(false);
 const realtimeBackup = ref(false);
 const submitNow = ref(false);
+const enableQuickAddToMyList = ref(true);
+const enableQuickAddAndShare = ref(true);
 const showLogin = ref(false);
 const showOptionsSettings = ref(false);
 const showConstSettings = ref(false);
@@ -31,13 +33,29 @@ const constVar = ref({
     url: '',
     base64: false,
 });
-const emit = defineEmits(['updateMyList', 'updateConstVar', 'updateAIModel']);
+const emit = defineEmits(['updateMyList', 'updateConstVar', 'updateAIModel', 'updateQuickAddSettings']);
+
+function getQuickAddSetting(key) {
+    const fullKey = `${proxy.$storage.userStorageKey}.${key}`;
+    const userData = proxy.$storage.getAll();
+    if (!Object.prototype.hasOwnProperty.call(userData, fullKey)) {
+        return true;
+    }
+    return userData[fullKey] === true || userData[fullKey] === 'true' || userData[fullKey] === 1;
+}
+
+function normalizeQuickAddSetting(value) {
+    return value === true || value === 'true' || value === 1;
+}
+
 onBeforeMount(()=>{
     const userId = proxy.$storage.getUserInfo('userId');
     isLogin.value = !!userId;
     realtimeSync.value = proxy.$storage.getUserInfo('realtimeSync') || false;
     realtimeBackup.value = proxy.$storage.getUserInfo('realtimeBackup') || false;
     submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
+    enableQuickAddToMyList.value = getQuickAddSetting('enableQuickAddToMyList');
+    enableQuickAddAndShare.value = getQuickAddSetting('enableQuickAddAndShare');
     constVar.value = proxy.$storage.getUserInfo('constVar') || constVar.value;
     
     // WebDAV 配置仅在登录界面中管理,这里不再需要加载
@@ -79,6 +97,14 @@ function handleDataRestored(data) {
                 } else if (settingKey === 'submitNow') {
                     submitNow.value = data[key] || false;
                     console.log('已更新立即提交设置:', submitNow.value);
+                } else if (settingKey === 'enableQuickAddToMyList') {
+                    enableQuickAddToMyList.value = normalizeQuickAddSetting(data[key]);
+                    emit('updateQuickAddSettings');
+                    console.log('已更新添加到我的回复列表快捷按钮设置:', enableQuickAddToMyList.value);
+                } else if (settingKey === 'enableQuickAddAndShare') {
+                    enableQuickAddAndShare.value = normalizeQuickAddSetting(data[key]);
+                    emit('updateQuickAddSettings');
+                    console.log('已更新添加到我的并分享快捷按钮设置:', enableQuickAddAndShare.value);
                 } else if (settingKey === 'constVar') {
                     constVar.value = data[key] || constVar.value;
                     emit('updateConstVar');
@@ -296,6 +322,20 @@ function onSubmitNowChange(e){
     realtimeBackup.value && uploadAll();
 }
 
+function onEnableQuickAddToMyListChange(e){
+    enableQuickAddToMyList.value = e;
+    proxy.$storage.setUserInfo('enableQuickAddToMyList', e);
+    emit('updateQuickAddSettings');
+    realtimeBackup.value && uploadAll();
+}
+
+function onEnableQuickAddAndShareChange(e){
+    enableQuickAddAndShare.value = e;
+    proxy.$storage.setUserInfo('enableQuickAddAndShare', e);
+    emit('updateQuickAddSettings');
+    realtimeBackup.value && uploadAll();
+}
+
 function updateAI() {
     emit('updateAIModel');
     realtimeBackup.value && uploadAll();
@@ -406,11 +446,14 @@ function restoreFromClipboard() {
                     realtimeSync.value = proxy.$storage.getUserInfo('realtimeSync') || false;
                     realtimeBackup.value = proxy.$storage.getUserInfo('realtimeBackup') || false;
                     submitNow.value = proxy.$storage.getUserInfo('submitNow') || false;
+                    enableQuickAddToMyList.value = getQuickAddSetting('enableQuickAddToMyList');
+                    enableQuickAddAndShare.value = getQuickAddSetting('enableQuickAddAndShare');
                     constVar.value = proxy.$storage.getUserInfo('constVar') || constVar.value;
                     
                     // 发送更新事件
                     emit('updateConstVar');
                     emit('updateAIModel');
+                    emit('updateQuickAddSettings');
                     
                     proxy.$message.success('数据恢复成功');
                 }).catch(() => {
@@ -517,6 +560,12 @@ function restoreFromClipboard() {
                     </div>
                     <div>
                         <el-checkbox v-model="submitNow" label="立即提交，选择快捷回帖内容后立即提交回帖" size="small" :checked="submitNow" @change="onSubmitNowChange" />
+                    </div>
+                    <div>
+                        <el-checkbox v-model="enableQuickAddToMyList" label="启用添加到我的回复列表的快捷按钮" size="small" :checked="enableQuickAddToMyList" @change="onEnableQuickAddToMyListChange" />
+                    </div>
+                    <div>
+                        <el-checkbox v-model="enableQuickAddAndShare" label="启用添加到我的并分享的快捷按钮" size="small" :checked="enableQuickAddAndShare" @change="onEnableQuickAddAndShareChange" />
                     </div>
                 
                     <el-space direction="vertical" alignment="flex-start" style="margin-top: 18px;">
