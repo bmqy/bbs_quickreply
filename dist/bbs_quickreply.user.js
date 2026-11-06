@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         论坛快捷回帖
 // @namespace    bmqy.net
-// @version      4.1.3
+// @version      4.1.4
 // @author       bmqy
 // @description  使用自定义内容或本扩展预定义的回帖内容，快捷回复支持的论坛的发帖！
 // @license      ISC
@@ -50,7 +50,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
-(a=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=a,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-99b287bf]{width:100%}.box-card[data-v-99b287bf]{border:none}.box-card .el-card__header[data-v-99b287bf]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-99b287bf]{padding:0}.tab-content[data-v-99b287bf]{padding:20px}.form-tips[data-v-99b287bf]{margin-bottom:20px}.required-star[data-v-99b287bf]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-99b287bf]{padding:15px 10px}.form-tips[data-v-99b287bf]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-943514cd]{position:relative}.quickReplyBox .el-form[data-v-943514cd]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-943514cd]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-943514cd]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-943514cd]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-943514cd],.el-form-item--small.el-form-item[data-v-943514cd]{margin-bottom:10px}.el-select[data-v-943514cd]{width:300px}.quickAddBtnGroup{gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}.quickAddBtnGroup button{padding:6px 14px!important;font-size:12px!important;cursor:pointer!important;border:none!important;border-radius:3px!important;line-height:1.5!important;white-space:nowrap!important;transition:all .2s ease!important;display:inline-flex!important;align-items:center!important;gap:4px!important;font-weight:500!important}.quickAddBtn{background-color:#409eff!important;color:#fff!important}.quickAddBtn:hover{background-color:#66b1ff!important;color:#fff!important;opacity:.95!important}.quickAddShareBtn{background-color:#67c23a!important;color:#fff!important}.quickAddShareBtn:hover{background-color:#85ce61!important;color:#fff!important;opacity:.95!important}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-a4326af6]{width:100%}.header-left[data-v-a4326af6]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-a4326af6]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-a4326af6]{margin-bottom:0}}.header-right[data-v-a4326af6]{width:100%}.header-right .button-group[data-v-a4326af6]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-a4326af6]{justify-content:flex-end}}.login-container[data-v-a4326af6]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-a4326af6]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-a4326af6]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-a4326af6]{padding:20px}.settings-header[data-v-a4326af6]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-a4326af6]{min-height:300px}.my-replies-card .card-title[data-v-a4326af6]{font-weight:700}.list-left[data-v-a4326af6]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-a4326af6]{margin-right:5px;color:#909399}.list-title[data-v-a4326af6]{flex:1;font-weight:400}.list-right[data-v-a4326af6]{min-width:70px}.list-right .el-badge.item[data-v-a4326af6]{margin-right:30px}.list li[data-v-a4326af6]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-a4326af6]:hover{background-color:#f5f5f5}.tips[data-v-a4326af6]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-a4326af6]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-a4326af6]{padding:10px 20px}.box-card .el-card__header span[data-v-a4326af6]{font-size:14px}.clearfix[data-v-a4326af6]:before,.clearfix[data-v-a4326af6]:after{display:table;content:""}.clearfix[data-v-a4326af6]:after{clear:both}.el-pagination[data-v-a4326af6]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
+(e=>{const t=document.createElement("style");t.dataset.source="vite-plugin-monkey",t.textContent=e,document.head.append(t)})(' @charset "UTF-8";.setAIBox[data-v-99b287bf]{width:100%}.box-card[data-v-99b287bf]{border:none}.box-card .el-card__header[data-v-99b287bf]{padding:0;margin:0;border:none}.box-card .el-card__body[data-v-99b287bf]{padding:0}.tab-content[data-v-99b287bf]{padding:20px}.form-tips[data-v-99b287bf]{margin-bottom:20px}.required-star[data-v-99b287bf]{color:#f56c6c;font-weight:700}.setAIBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setAIBox .el-tabs__content{padding:0}.setAIBox .el-tabs--border-card{border:none;box-shadow:none}.setAIBox .el-tabs--border-card>.el-tabs__header{background-color:#f5f7fa;border:1px solid #e4e7ed;border-bottom:none;margin:0}.setAIBox .el-tabs--border-card>.el-tabs__content{border:1px solid #e4e7ed;border-top:none}.setAIBox .el-form--label-top .el-form-item__label{padding:0 0 8px}@media (max-width: 768px){.tab-content[data-v-99b287bf]{padding:15px 10px}.form-tips[data-v-99b287bf]{margin-bottom:15px}.setAIBox .el-tabs__item{padding:0 10px!important}.setAIBox .el-form-item{margin-bottom:18px}.setAIBox .el-input__wrapper{width:100%}.setAIBox .el-form-item__label{line-height:1.5;margin-bottom:4px;font-weight:500}.setAIBox .el-form-item__content{width:100%}}.quickReplyBox[data-v-027dc4fe]{position:relative}.quickReplyBox .el-form[data-v-027dc4fe]{text-align:left}.quickReplyBox .reply-form-inline .el-form-item[data-v-027dc4fe]{margin-bottom:15px}.el-dialog__footer a{text-decoration:none}.el-tabs__nav-next,.el-tabs__nav-prev{height:44px;display:flex;justify-content:center;align-items:center}.el-dialog{display:flex;flex-direction:column;margin:0!important;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-height:calc(100% - 30px);max-width:1300px}.el-dialog__header{margin-right:0!important}.el-dialog__body{flex:1;overflow:auto;padding:0}.quickReplyBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}#reply-control.open{height:calc(var(--composer-height) + 65px)!important}#reply-control .reply-area{height:calc(100% - 91px)!important}.app-dialog-foot[data-v-027dc4fe]{color:#909399;font-size:14px}.quickReplyBoxTitle[data-v-027dc4fe]{margin-right:10px;font-weight:700;color:red}.el-form-item--mini.el-form-item[data-v-027dc4fe],.el-form-item--small.el-form-item[data-v-027dc4fe]{margin-bottom:10px}.el-select[data-v-027dc4fe]{width:300px}.quickAddBtnGroup{gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}.quickAddBtnGroup button{padding:6px 14px!important;font-size:12px!important;cursor:pointer!important;border:none!important;border-radius:3px!important;line-height:1.5!important;white-space:nowrap!important;transition:all .2s ease!important;display:inline-flex!important;align-items:center!important;gap:4px!important;font-weight:500!important}.quickAddBtn{background-color:#409eff!important;color:#fff!important}.quickAddBtn:hover{background-color:#66b1ff!important;color:#fff!important;opacity:.95!important}.quickAddShareBtn{background-color:#67c23a!important;color:#fff!important}.quickAddShareBtn:hover{background-color:#85ce61!important;color:#fff!important;opacity:.95!important}.margin-left{margin-left:15px}.login-tabs{margin-bottom:20px}.form-tip{margin-top:5px}.el-dialog__footer{background-color:#fff}.card-header[data-v-a7c82856]{width:100%}.header-left[data-v-a7c82856]{display:flex;align-items:center;margin-bottom:10px}.header-left .login-type[data-v-a7c82856]{margin-left:10px;font-size:14px;color:#409eff}@media (min-width: 768px){.header-left[data-v-a7c82856]{margin-bottom:0}}.header-right[data-v-a7c82856]{width:100%}.header-right .button-group[data-v-a7c82856]{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}@media (min-width: 768px){.header-right .button-group[data-v-a7c82856]{justify-content:flex-end}}.login-container[data-v-a7c82856]{padding:20px;background-color:#f9f9f9;border-radius:5px;margin-bottom:20px}.login-container .login-header[data-v-a7c82856]{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ebeef5}.login-container .login-header h3[data-v-a7c82856]{margin:0;font-size:18px;color:#303133}.settings-container[data-v-a7c82856]{padding:20px}.settings-header[data-v-a7c82856]{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.my-replies-card[data-v-a7c82856]{min-height:300px}.my-replies-card .card-title[data-v-a7c82856]{font-weight:700}.list-left[data-v-a7c82856]{padding-right:15px;display:flex;flex:1;align-items:stretch;justify-content:start}.list-number[data-v-a7c82856]{margin-right:5px;color:#909399}.list-title[data-v-a7c82856]{flex:1;font-weight:400}.list-right[data-v-a7c82856]{min-width:70px}.list-right .el-badge.item[data-v-a7c82856]{margin-right:30px}.list li[data-v-a7c82856]{margin-bottom:5px;padding-bottom:5px;font-size:13px;line-height:30px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #ebeef5}.list li[data-v-a7c82856]:hover{background-color:#f5f5f5}.tips[data-v-a7c82856]{margin-left:50px;text-align:left;font-size:12px}.addReplyBox[data-v-a7c82856]{margin-top:15px;padding-top:10px;border-top:1px dashed #ccc}.box-card .el-card__header[data-v-a7c82856]{padding:10px 20px}.box-card .el-card__header span[data-v-a7c82856]{font-size:14px}.clearfix[data-v-a7c82856]:before,.clearfix[data-v-a7c82856]:after{display:table;content:""}.clearfix[data-v-a7c82856]:after{clear:both}.el-pagination[data-v-a7c82856]{padding:15px 5px 0}.setBox .el-input__inner{margin-bottom:0;background-color:transparent;border:0;outline:none}.setBox .el-checkbox{white-space:wrap}.text-info{color:#909399!important;font-size:13px}.el-button.is-text{padding:0;color:#409eff;background:transparent;border-color:transparent}.el-button.is-text:hover{color:#66b1ff;background-color:transparent;border-color:transparent}.el-button.is-text.is-disabled{color:#c0c4cc}.el-tag--info.el-tag--light{color:#909399;background-color:#f4f4f5;border-color:#e9e9eb}.el-form-item__label{font-weight:400}.el-button--small{padding:5px 11px;font-size:12px}.el-dialog{border-radius:4px;overflow:hidden}.el-card__body{padding:20px}.el-input__inner{line-height:normal}@media (max-width: 767px){.el-button{margin-bottom:5px;margin-right:3px}.el-button--small{padding:4px 8px;font-size:12px}.el-button-group .el-button{margin-right:0}.el-card__header{padding:10px}.el-dialog{width:90%!important;max-width:100%}.el-dialog__body{padding:15px 10px}.el-form-item{margin-bottom:15px}.el-form-item__label{padding-bottom:5px}.el-dropdown-menu{min-width:100px}.el-input__inner{height:36px}.el-tabs__item{padding:0 12px}.el-pagination{justify-content:center;padding:15px 0}.el-pagination .el-pager{margin:0 5px}.el-pagination .btn-prev,.el-pagination .btn-next{min-width:24px}}@media (max-width: 480px){.el-pagination{padding:10px 0}.el-pagination button{min-width:24px!important;margin:0 2px!important}.el-pagination .el-pager li{min-width:24px!important;margin:0 2px!important;font-size:12px}}.el-dropdown-menu{min-width:100px}.el-dropdown-menu__item{display:flex;align-items:center;line-height:1.5;padding:8px 16px}.el-dropdown-menu__item .el-icon{margin-right:8px}@media (max-width: 480px){.el-dropdown-menu{min-width:90px}.el-dropdown-menu__item{padding:6px 10px;font-size:13px}}.el-icon-upload:before{content:"\uE602";font-family:element-icons!important}.el-icon-download:before{content:"\uE606";font-family:element-icons!important}.header-right .button-group{display:flex;gap:8px!important}.header-right .button-group .el-dropdown{margin-right:0}.header-button{margin:0!important}.button-group>*{margin:0!important} ');
 
 (function (ElementPlusIconsVue, ElementPlus, vue) {
   'use strict';
@@ -1891,6 +1891,8 @@
       const currentPlatform = vue.ref("discuz");
       const fwin_replyLoaded = vue.ref(false);
       const submitNow = vue.ref(false);
+      const enableQuickAddToMyList = vue.ref(true);
+      const enableQuickAddAndShare = vue.ref(true);
       const hasEditor = vue.ref(false);
       const lastClickElement = vue.ref(false);
       const setShow = vue.ref(false);
@@ -1911,10 +1913,22 @@
         url: "",
         base64: false
       });
+      function getQuickAddSetting(key) {
+        const fullKey = `${proxy.$storage.userStorageKey}.${key}`;
+        const userData = proxy.$storage.getAll();
+        if (!Object.prototype.hasOwnProperty.call(userData, fullKey)) {
+          return true;
+        }
+        return userData[fullKey] === true || userData[fullKey] === "true" || userData[fullKey] === 1;
+      }
+      function normalizeQuickAddSetting(value) {
+        return value === true || value === "true" || value === 1;
+      }
       vue.onBeforeMount(() => {
         checkPlatform();
         getList();
         submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
+        loadQuickAddSettings();
         useAI.value = proxy.$storage.getUserInfo("useAI") || "";
         updateConstVar();
         updateAIModel();
@@ -1930,12 +1944,23 @@
           }
           const userStorageKey = proxy.$storage.userStorageKey;
           const submitNowKey = `${userStorageKey}.submitNow`;
+          const enableQuickAddToMyListKey = `${userStorageKey}.enableQuickAddToMyList`;
+          const enableQuickAddAndShareKey = `${userStorageKey}.enableQuickAddAndShare`;
           const useAIKey = `${userStorageKey}.useAI`;
           const constVarKey = `${userStorageKey}.constVar`;
           if (data[submitNowKey] !== void 0) {
             submitNow.value = data[submitNowKey] || false;
             console.log("已更新提交设置", submitNow.value);
           }
+          if (data[enableQuickAddToMyListKey] !== void 0) {
+            enableQuickAddToMyList.value = normalizeQuickAddSetting(data[enableQuickAddToMyListKey]);
+            console.log("已更新添加到我的回复列表快捷按钮设置", enableQuickAddToMyList.value);
+          }
+          if (data[enableQuickAddAndShareKey] !== void 0) {
+            enableQuickAddAndShare.value = normalizeQuickAddSetting(data[enableQuickAddAndShareKey]);
+            console.log("已更新添加到我的并分享快捷按钮设置", enableQuickAddAndShare.value);
+          }
+          refreshQuickAddButtons();
           if (data[useAIKey] !== void 0) {
             useAI.value = data[useAIKey] || "";
             updateAIModel();
@@ -2005,6 +2030,15 @@
       function updateMyList(data) {
         let myListStorage = data || [];
         list.value = myListStorage;
+      }
+      function loadQuickAddSettings() {
+        enableQuickAddToMyList.value = getQuickAddSetting("enableQuickAddToMyList");
+        enableQuickAddAndShare.value = getQuickAddSetting("enableQuickAddAndShare");
+      }
+      function refreshQuickAddButtons() {
+        loadQuickAddSettings();
+        document.querySelectorAll(".quickAddBtnGroup").forEach((element) => element.remove());
+        injectQuickAddButtons();
       }
       function getPostContent() {
         let content = "";
@@ -2330,6 +2364,33 @@
           proxy.$tools.log("[BBS QuickReply - 分享失败]", err);
         }
       }
+      function createQuickAddButtonGroup(replyContent) {
+        if (!enableQuickAddToMyList.value && !enableQuickAddAndShare.value) {
+          return null;
+        }
+        const $btnGroup = document.createElement("div");
+        $btnGroup.className = "quickAddBtnGroup";
+        $btnGroup.style.cssText = "margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;";
+        if (enableQuickAddToMyList.value) {
+          const $addBtn = document.createElement("button");
+          $addBtn.textContent = "➕ 添加到我的";
+          $addBtn.title = "BBS QuickReply - 添加到我的回复";
+          $addBtn.className = "btn btn-sm btn-info quickAddBtn";
+          $addBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px; font-weight: normal;";
+          $addBtn.onclick = () => addToMyList(replyContent);
+          $btnGroup.appendChild($addBtn);
+        }
+        if (enableQuickAddAndShare.value) {
+          const $addShareBtn = document.createElement("button");
+          $addShareBtn.textContent = "⭐ 添加到我的并分享";
+          $addShareBtn.title = "BBS QuickReply - 添加到我的回复并分享给网友";
+          $addShareBtn.className = "btn btn-sm btn-success quickAddShareBtn";
+          $addShareBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px; font-weight: normal;";
+          $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
+          $btnGroup.appendChild($addShareBtn);
+        }
+        return $btnGroup;
+      }
       function injectQuickAddButtons() {
         proxy.$tools.log(`[BBS QuickReply - injectQuickAddButtons] 当前平台: ${currentPlatform.value}`);
         if (currentPlatform.value == "flarum") {
@@ -2352,23 +2413,10 @@
             }
             if ($postMessage) {
               const replyContent = getReplyContent(replyElement);
-              const $btnGroup = document.createElement("div");
-              $btnGroup.className = "quickAddBtnGroup";
-              $btnGroup.style.cssText = "margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;";
-              const $addBtn = document.createElement("button");
-              $addBtn.textContent = "➕ 添加到我的";
-              $addBtn.title = "BBS QuickReply - 添加到我的回复";
-              $addBtn.className = "btn btn-sm btn-info quickAddBtn";
-              $addBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;";
-              $addBtn.onclick = () => addToMyList(replyContent);
-              const $addShareBtn = document.createElement("button");
-              $addShareBtn.textContent = "⭐ 添加到我的并分享";
-              $addShareBtn.title = "BBS QuickReply - 添加到我的回复并分享给网友";
-              $addShareBtn.className = "btn btn-sm btn-success quickAddShareBtn";
-              $addShareBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;";
-              $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
-              $btnGroup.appendChild($addBtn);
-              $btnGroup.appendChild($addShareBtn);
+              const $btnGroup = createQuickAddButtonGroup(replyContent);
+              if (!$btnGroup) {
+                return;
+              }
               $postMessage.appendChild($btnGroup);
               replyElement.addEventListener("mouseenter", () => {
                 $btnGroup.style.display = "flex";
@@ -2387,23 +2435,10 @@
             const $postContent = replyElement.querySelector(".post-content");
             if ($postContent) {
               const replyContent = getReplyContent(replyElement);
-              const $btnGroup = document.createElement("div");
-              $btnGroup.className = "quickAddBtnGroup";
-              $btnGroup.style.cssText = "margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;";
-              const $addBtn = document.createElement("button");
-              $addBtn.textContent = "➕ 添加到我的";
-              $addBtn.title = "BBS QuickReply - 添加到我的回复";
-              $addBtn.className = "btn btn-sm btn-info quickAddBtn";
-              $addBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;";
-              $addBtn.onclick = () => addToMyList(replyContent);
-              const $addShareBtn = document.createElement("button");
-              $addShareBtn.textContent = "⭐ 添加到我的并分享";
-              $addShareBtn.title = "BBS QuickReply - 添加到我的回复并分享给网友";
-              $addShareBtn.className = "btn btn-sm btn-success quickAddShareBtn";
-              $addShareBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;";
-              $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
-              $btnGroup.appendChild($addBtn);
-              $btnGroup.appendChild($addShareBtn);
+              const $btnGroup = createQuickAddButtonGroup(replyContent);
+              if (!$btnGroup) {
+                return;
+              }
               $postContent.appendChild($btnGroup);
               replyElement.addEventListener("mouseenter", () => {
                 $btnGroup.style.display = "flex";
@@ -2428,23 +2463,10 @@
             }
             if ($postContent) {
               const replyContent = getReplyContent(replyElement);
-              const $btnGroup = document.createElement("div");
-              $btnGroup.className = "quickAddBtnGroup";
-              $btnGroup.style.cssText = "margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;";
-              const $addBtn = document.createElement("button");
-              $addBtn.textContent = "➕ 添加到我的";
-              $addBtn.title = "BBS QuickReply - 添加到我的回复";
-              $addBtn.className = "btn btn-sm btn-info quickAddBtn";
-              $addBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;";
-              $addBtn.onclick = () => addToMyList(replyContent);
-              const $addShareBtn = document.createElement("button");
-              $addShareBtn.textContent = "⭐ 添加到我的并分享";
-              $addShareBtn.title = "BBS QuickReply - 添加到我的回复并分享给网友";
-              $addShareBtn.className = "btn btn-sm btn-success quickAddShareBtn";
-              $addShareBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;";
-              $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
-              $btnGroup.appendChild($addBtn);
-              $btnGroup.appendChild($addShareBtn);
+              const $btnGroup = createQuickAddButtonGroup(replyContent);
+              if (!$btnGroup) {
+                return;
+              }
               $postContent.appendChild($btnGroup);
               replyElement.addEventListener("mouseenter", () => {
                 $btnGroup.style.display = "flex";
@@ -2470,23 +2492,10 @@
             }
             if ($replyContent) {
               const replyContent = getReplyContent(replyElement);
-              const $btnGroup = document.createElement("div");
-              $btnGroup.className = "quickAddBtnGroup";
-              $btnGroup.style.cssText = "margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;";
-              const $addBtn = document.createElement("button");
-              $addBtn.textContent = "➕ 添加到我的";
-              $addBtn.title = "BBS QuickReply - 添加到我的回复";
-              $addBtn.className = "btn btn-sm btn-info quickAddBtn";
-              $addBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px; font-weight: normal;";
-              $addBtn.onclick = () => addToMyList(replyContent);
-              const $addShareBtn = document.createElement("button");
-              $addShareBtn.textContent = "⭐ 添加到我的并分享";
-              $addShareBtn.title = "BBS QuickReply - 添加到我的回复并分享给网友";
-              $addShareBtn.className = "btn btn-sm btn-success quickAddShareBtn";
-              $addShareBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px; font-weight: normal;";
-              $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
-              $btnGroup.appendChild($addBtn);
-              $btnGroup.appendChild($addShareBtn);
+              const $btnGroup = createQuickAddButtonGroup(replyContent);
+              if (!$btnGroup) {
+                return;
+              }
               $replyContent.appendChild($btnGroup);
               replyElement.addEventListener("mouseenter", () => {
                 $btnGroup.style.display = "flex";
@@ -2514,23 +2523,10 @@
               return;
             }
             const replyContent = getReplyContent(replyElement);
-            const $btnGroup = document.createElement("div");
-            $btnGroup.className = "quickAddBtnGroup";
-            $btnGroup.style.cssText = "margin-top: 8px; display: none !important; gap: 8px; flex-wrap: wrap;";
-            const $addBtn = document.createElement("button");
-            $addBtn.textContent = "➕ 添加到我的";
-            $addBtn.title = "BBS QuickReply - 添加到我的回复";
-            $addBtn.className = "btn btn-sm btn-info quickAddBtn";
-            $addBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #409EFF; color: white; border: none; border-radius: 3px;";
-            $addBtn.onclick = () => addToMyList(replyContent);
-            const $addShareBtn = document.createElement("button");
-            $addShareBtn.textContent = "⭐ 添加到我的并分享";
-            $addShareBtn.title = "BBS QuickReply - 添加到我的回复并分享给网友";
-            $addShareBtn.className = "btn btn-sm btn-success quickAddShareBtn";
-            $addShareBtn.style.cssText = "padding: 4px 12px; font-size: 12px; cursor: pointer; background-color: #67C23A; color: white; border: none; border-radius: 3px;";
-            $addShareBtn.onclick = () => addToMyListAndShare(replyContent);
-            $btnGroup.appendChild($addBtn);
-            $btnGroup.appendChild($addShareBtn);
+            const $btnGroup = createQuickAddButtonGroup(replyContent);
+            if (!$btnGroup) {
+              return;
+            }
             postBodyElement.appendChild($btnGroup);
             replyElement.addEventListener("mouseenter", () => {
               $btnGroup.style.display = "flex";
@@ -2681,7 +2677,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                 ref: "setPanel",
                 onUpdateMyList: updateMyList,
                 onUpdateConstVar: updateConstVar,
-                onUpdateAIModel: updateAIModel
+                onUpdateAIModel: updateAIModel,
+                onUpdateQuickAddSettings: refreshQuickAddButtons
               }, null, 512)
             ]),
             footer: vue.withCtx(() => [
@@ -2721,7 +2718,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-943514cd"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-027dc4fe"]]);
   const _hoisted_1$1 = { class: "margin-left" };
   const _hoisted_2$1 = { class: "margin-left" };
   const _hoisted_3$1 = { class: "form-tip" };
@@ -3319,7 +3316,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
   const _hoisted_27 = { class: "addReplyBox" };
   const _sfc_main = {
     __name: "Set",
-    emits: ["updateMyList", "updateConstVar", "updateAIModel"],
+    emits: ["updateMyList", "updateConstVar", "updateAIModel", "updateQuickAddSettings"],
     setup(__props, { emit: __emit }) {
       const { proxy } = vue.getCurrentInstance();
       const myList = vue.ref([]);
@@ -3330,6 +3327,8 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       const realtimeSync = vue.ref(false);
       const realtimeBackup = vue.ref(false);
       const submitNow = vue.ref(false);
+      const enableQuickAddToMyList = vue.ref(true);
+      const enableQuickAddAndShare = vue.ref(true);
       const showLogin = vue.ref(false);
       const showOptionsSettings = vue.ref(false);
       const showConstSettings = vue.ref(false);
@@ -3352,12 +3351,25 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         base64: false
       });
       const emit = __emit;
+      function getQuickAddSetting(key) {
+        const fullKey = `${proxy.$storage.userStorageKey}.${key}`;
+        const userData = proxy.$storage.getAll();
+        if (!Object.prototype.hasOwnProperty.call(userData, fullKey)) {
+          return true;
+        }
+        return userData[fullKey] === true || userData[fullKey] === "true" || userData[fullKey] === 1;
+      }
+      function normalizeQuickAddSetting(value) {
+        return value === true || value === "true" || value === 1;
+      }
       vue.onBeforeMount(() => {
         const userId = proxy.$storage.getUserInfo("userId");
         isLogin.value = !!userId;
         realtimeSync.value = proxy.$storage.getUserInfo("realtimeSync") || false;
         realtimeBackup.value = proxy.$storage.getUserInfo("realtimeBackup") || false;
         submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
+        enableQuickAddToMyList.value = getQuickAddSetting("enableQuickAddToMyList");
+        enableQuickAddAndShare.value = getQuickAddSetting("enableQuickAddAndShare");
         constVar.value = proxy.$storage.getUserInfo("constVar") || constVar.value;
         getMyList();
         getSystemList();
@@ -3384,6 +3396,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               } else if (settingKey === "submitNow") {
                 submitNow.value = data[key] || false;
                 console.log("已更新立即提交设置:", submitNow.value);
+              } else if (settingKey === "enableQuickAddToMyList") {
+                enableQuickAddToMyList.value = normalizeQuickAddSetting(data[key]);
+                emit("updateQuickAddSettings");
+                console.log("已更新添加到我的回复列表快捷按钮设置:", enableQuickAddToMyList.value);
+              } else if (settingKey === "enableQuickAddAndShare") {
+                enableQuickAddAndShare.value = normalizeQuickAddSetting(data[key]);
+                emit("updateQuickAddSettings");
+                console.log("已更新添加到我的并分享快捷按钮设置:", enableQuickAddAndShare.value);
               } else if (settingKey === "constVar") {
                 constVar.value = data[key] || constVar.value;
                 emit("updateConstVar");
@@ -3559,6 +3579,18 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         proxy.$storage.setUserInfo("submitNow", e);
         realtimeBackup.value && uploadAll();
       }
+      function onEnableQuickAddToMyListChange(e) {
+        enableQuickAddToMyList.value = e;
+        proxy.$storage.setUserInfo("enableQuickAddToMyList", e);
+        emit("updateQuickAddSettings");
+        realtimeBackup.value && uploadAll();
+      }
+      function onEnableQuickAddAndShareChange(e) {
+        enableQuickAddAndShare.value = e;
+        proxy.$storage.setUserInfo("enableQuickAddAndShare", e);
+        emit("updateQuickAddSettings");
+        realtimeBackup.value && uploadAll();
+      }
       function updateAI() {
         emit("updateAIModel");
         realtimeBackup.value && uploadAll();
@@ -3644,9 +3676,12 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                 realtimeSync.value = proxy.$storage.getUserInfo("realtimeSync") || false;
                 realtimeBackup.value = proxy.$storage.getUserInfo("realtimeBackup") || false;
                 submitNow.value = proxy.$storage.getUserInfo("submitNow") || false;
+                enableQuickAddToMyList.value = getQuickAddSetting("enableQuickAddToMyList");
+                enableQuickAddAndShare.value = getQuickAddSetting("enableQuickAddAndShare");
                 constVar.value = proxy.$storage.getUserInfo("constVar") || constVar.value;
                 emit("updateConstVar");
                 emit("updateAIModel");
+                emit("updateQuickAddSettings");
                 proxy.$message.success("数据恢复成功");
               }).catch(() => {
                 proxy.$message.info("已取消恢复操作");
@@ -3719,7 +3754,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                             size: "small",
                             onClick: _cache[0] || (_cache[0] = ($event) => showLogin.value = true)
                           }, {
-                            default: vue.withCtx(() => _cache[10] || (_cache[10] = [
+                            default: vue.withCtx(() => _cache[12] || (_cache[12] = [
                               vue.createTextVNode("登录")
                             ])),
                             _: 1
@@ -3729,7 +3764,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                             size: "small",
                             onClick: logout
                           }, {
-                            default: vue.withCtx(() => _cache[11] || (_cache[11] = [
+                            default: vue.withCtx(() => _cache[13] || (_cache[13] = [
                               vue.createTextVNode("注销")
                             ])),
                             _: 1
@@ -3772,7 +3807,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                               icon: "Upload",
                                               onClick: uploadAll
                                             }, {
-                                              default: vue.withCtx(() => _cache[13] || (_cache[13] = [
+                                              default: vue.withCtx(() => _cache[15] || (_cache[15] = [
                                                 vue.createTextVNode(" 全量备份 ")
                                               ])),
                                               _: 1
@@ -3781,7 +3816,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                               icon: "Download",
                                               onClick: downloadAll
                                             }, {
-                                              default: vue.withCtx(() => _cache[14] || (_cache[14] = [
+                                              default: vue.withCtx(() => _cache[16] || (_cache[16] = [
                                                 vue.createTextVNode(" 全量恢复 ")
                                               ])),
                                               _: 1
@@ -3791,7 +3826,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                               icon: "CopyDocument",
                                               onClick: backupToClipboard
                                             }, {
-                                              default: vue.withCtx(() => _cache[15] || (_cache[15] = [
+                                              default: vue.withCtx(() => _cache[17] || (_cache[17] = [
                                                 vue.createTextVNode(" 备份到剪贴板 ")
                                               ])),
                                               _: 1
@@ -3800,7 +3835,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                               icon: "DocumentCopy",
                                               onClick: restoreFromClipboard
                                             }, {
-                                              default: vue.withCtx(() => _cache[16] || (_cache[16] = [
+                                              default: vue.withCtx(() => _cache[18] || (_cache[18] = [
                                                 vue.createTextVNode(" 从剪贴板恢复 ")
                                               ])),
                                               _: 1
@@ -3815,7 +3850,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                           size: "small"
                                         }, {
                                           default: vue.withCtx(() => [
-                                            _cache[12] || (_cache[12] = vue.createTextVNode(" 全量同步 ")),
+                                            _cache[14] || (_cache[14] = vue.createTextVNode(" 全量同步 ")),
                                             vue.createVNode(_component_el_icon, { class: "el-icon--right" }, {
                                               default: vue.withCtx(() => [
                                                 vue.createVNode(_component_ArrowDown)
@@ -3836,7 +3871,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                       class: "header-button",
                                       onClick: openOptionsSettings
                                     }, {
-                                      default: vue.withCtx(() => _cache[17] || (_cache[17] = [
+                                      default: vue.withCtx(() => _cache[19] || (_cache[19] = [
                                         vue.createTextVNode("选项")
                                       ])),
                                       _: 1
@@ -3849,7 +3884,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                       class: "header-button",
                                       onClick: openConstSettings
                                     }, {
-                                      default: vue.withCtx(() => _cache[18] || (_cache[18] = [
+                                      default: vue.withCtx(() => _cache[20] || (_cache[20] = [
                                         vue.createTextVNode("常量")
                                       ])),
                                       _: 1
@@ -3862,7 +3897,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                       class: "header-button",
                                       onClick: openAISettings
                                     }, {
-                                      default: vue.withCtx(() => _cache[19] || (_cache[19] = [
+                                      default: vue.withCtx(() => _cache[21] || (_cache[21] = [
                                         vue.createTextVNode("AI")
                                       ])),
                                       _: 1
@@ -3886,14 +3921,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
             default: vue.withCtx(() => [
               showLogin.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_8, [
                 vue.createElementVNode("div", _hoisted_9, [
-                  _cache[21] || (_cache[21] = vue.createElementVNode("h3", null, "账号登录", -1)),
+                  _cache[23] || (_cache[23] = vue.createElementVNode("h3", null, "账号登录", -1)),
                   vue.createVNode(_component_el_button, {
                     type: "primary",
                     text: "",
                     icon: "Back",
                     onClick: closeLogin
                   }, {
-                    default: vue.withCtx(() => _cache[20] || (_cache[20] = [
+                    default: vue.withCtx(() => _cache[22] || (_cache[22] = [
                       vue.createTextVNode("返回")
                     ])),
                     _: 1
@@ -3906,14 +3941,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               ])) : vue.createCommentVNode("", true),
               showOptionsSettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_10, [
                 vue.createElementVNode("div", _hoisted_11, [
-                  _cache[23] || (_cache[23] = vue.createElementVNode("h3", null, "选项设置", -1)),
+                  _cache[25] || (_cache[25] = vue.createElementVNode("h3", null, "选项设置", -1)),
                   vue.createVNode(_component_el_button, {
                     type: "primary",
                     text: "",
                     icon: "Back",
                     onClick: closeOptionsSettings
                   }, {
-                    default: vue.withCtx(() => _cache[22] || (_cache[22] = [
+                    default: vue.withCtx(() => _cache[24] || (_cache[24] = [
                       vue.createTextVNode("返回")
                     ])),
                     _: 1
@@ -3954,6 +3989,26 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                         onChange: onSubmitNowChange
                       }, null, 8, ["modelValue", "checked"])
                     ]),
+                    vue.createElementVNode("div", null, [
+                      vue.createVNode(_component_el_checkbox, {
+                        modelValue: enableQuickAddToMyList.value,
+                        "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => enableQuickAddToMyList.value = $event),
+                        label: "启用添加到我的回复列表的快捷按钮",
+                        size: "small",
+                        checked: enableQuickAddToMyList.value,
+                        onChange: onEnableQuickAddToMyListChange
+                      }, null, 8, ["modelValue", "checked"])
+                    ]),
+                    vue.createElementVNode("div", null, [
+                      vue.createVNode(_component_el_checkbox, {
+                        modelValue: enableQuickAddAndShare.value,
+                        "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => enableQuickAddAndShare.value = $event),
+                        label: "启用添加到我的并分享的快捷按钮",
+                        size: "small",
+                        checked: enableQuickAddAndShare.value,
+                        onChange: onEnableQuickAddAndShareChange
+                      }, null, 8, ["modelValue", "checked"])
+                    ]),
                     vue.createVNode(_component_el_space, {
                       direction: "vertical",
                       alignment: "flex-start",
@@ -3965,7 +4020,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                             type: "primary",
                             class: "text-info"
                           }, {
-                            default: vue.withCtx(() => _cache[24] || (_cache[24] = [
+                            default: vue.withCtx(() => _cache[26] || (_cache[26] = [
                               vue.createTextVNode("* AI和常量只存在本地，不参与同步")
                             ])),
                             _: 1
@@ -3976,7 +4031,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                             type: "primary",
                             class: "text-info"
                           }, {
-                            default: vue.withCtx(() => _cache[25] || (_cache[25] = [
+                            default: vue.withCtx(() => _cache[27] || (_cache[27] = [
                               vue.createTextVNode("* 如需备份所有配置请使用操全量同步操作中的全量备份、全量恢复功能")
                             ])),
                             _: 1
@@ -3987,7 +4042,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                             type: "primary",
                             class: "text-info"
                           }, {
-                            default: vue.withCtx(() => _cache[26] || (_cache[26] = [
+                            default: vue.withCtx(() => _cache[28] || (_cache[28] = [
                               vue.createTextVNode("* 全量备份仅为方便多设备同步配置，使用base64存储，请知悉")
                             ])),
                             _: 1
@@ -4002,14 +4057,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               ])) : vue.createCommentVNode("", true),
               showConstSettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_15, [
                 vue.createElementVNode("div", _hoisted_16, [
-                  _cache[28] || (_cache[28] = vue.createElementVNode("h3", null, "常量设置", -1)),
+                  _cache[30] || (_cache[30] = vue.createElementVNode("h3", null, "常量设置", -1)),
                   vue.createVNode(_component_el_button, {
                     type: "primary",
                     text: "",
                     icon: "Back",
                     onClick: closeConstSettings
                   }, {
-                    default: vue.withCtx(() => _cache[27] || (_cache[27] = [
+                    default: vue.withCtx(() => _cache[29] || (_cache[29] = [
                       vue.createTextVNode("返回")
                     ])),
                     _: 1
@@ -4025,7 +4080,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                       default: vue.withCtx(() => [
                         vue.createVNode(_component_el_input, {
                           modelValue: constVar.value.email,
-                          "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => constVar.value.email = $event),
+                          "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => constVar.value.email = $event),
                           onChange: constVarChange
                         }, null, 8, ["modelValue"])
                       ]),
@@ -4035,7 +4090,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                       default: vue.withCtx(() => [
                         vue.createVNode(_component_el_input, {
                           modelValue: constVar.value.qq,
-                          "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => constVar.value.qq = $event),
+                          "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => constVar.value.qq = $event),
                           onChange: constVarChange
                         }, null, 8, ["modelValue"])
                       ]),
@@ -4045,7 +4100,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                       default: vue.withCtx(() => [
                         vue.createVNode(_component_el_input, {
                           modelValue: constVar.value.wechat,
-                          "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => constVar.value.wechat = $event),
+                          "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => constVar.value.wechat = $event),
                           onChange: constVarChange
                         }, null, 8, ["modelValue"])
                       ]),
@@ -4055,7 +4110,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                       default: vue.withCtx(() => [
                         vue.createVNode(_component_el_input, {
                           modelValue: constVar.value.url,
-                          "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => constVar.value.url = $event),
+                          "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => constVar.value.url = $event),
                           onChange: constVarChange
                         }, null, 8, ["modelValue"])
                       ]),
@@ -4065,7 +4120,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                       default: vue.withCtx(() => [
                         vue.createVNode(_component_el_switch, {
                           modelValue: constVar.value.base64,
-                          "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => constVar.value.base64 = $event),
+                          "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => constVar.value.base64 = $event),
                           onChange: constVarChange
                         }, null, 8, ["modelValue"])
                       ]),
@@ -4084,7 +4139,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                         type: "primary",
                         class: "text-info"
                       }, {
-                        default: vue.withCtx(() => _cache[29] || (_cache[29] = [
+                        default: vue.withCtx(() => _cache[31] || (_cache[31] = [
                           vue.createTextVNode("* 可在快捷回帖中使用以上常量：{email}、{qq}、{wechat}、{url}，例：我的邮箱是{email}，我的QQ是{qq}；")
                         ])),
                         _: 1
@@ -4095,7 +4150,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                         type: "primary",
                         class: "text-info"
                       }, {
-                        default: vue.withCtx(() => _cache[30] || (_cache[30] = [
+                        default: vue.withCtx(() => _cache[32] || (_cache[32] = [
                           vue.createTextVNode("* 开启加密后，只在回帖时显示base64加密后的常量；")
                         ])),
                         _: 1
@@ -4107,14 +4162,14 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
               ])) : vue.createCommentVNode("", true),
               showAISettings.value ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_17, [
                 vue.createElementVNode("div", _hoisted_18, [
-                  _cache[32] || (_cache[32] = vue.createElementVNode("h3", null, "AI设置", -1)),
+                  _cache[34] || (_cache[34] = vue.createElementVNode("h3", null, "AI设置", -1)),
                   vue.createVNode(_component_el_button, {
                     type: "primary",
                     text: "",
                     icon: "Back",
                     onClick: closeAISettings
                   }, {
-                    default: vue.withCtx(() => _cache[31] || (_cache[31] = [
+                    default: vue.withCtx(() => _cache[33] || (_cache[33] = [
                       vue.createTextVNode("返回")
                     ])),
                     _: 1
@@ -4139,7 +4194,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                           class: "my-replies-card",
                           shadow: "never"
                         }, {
-                          header: vue.withCtx(() => _cache[33] || (_cache[33] = [
+                          header: vue.withCtx(() => _cache[35] || (_cache[35] = [
                             vue.createElementVNode("div", { class: "card-title" }, "我在用的", -1)
                           ])),
                           default: vue.withCtx(() => [
@@ -4189,7 +4244,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                     ])
                                   ]);
                                 }), 128))
-                              ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_25, _cache[34] || (_cache[34] = [
+                              ])) : (vue.openBlock(), vue.createElementBlock("div", _hoisted_25, _cache[36] || (_cache[36] = [
                                 vue.createElementVNode("p", null, "未设置快速回帖内容!", -1)
                               ])))
                             ])
@@ -4212,7 +4267,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                           shadow: "never",
                           "body-style": { padding: "0 20px 20px" }
                         }, {
-                          header: vue.withCtx(() => _cache[35] || (_cache[35] = [
+                          header: vue.withCtx(() => _cache[37] || (_cache[37] = [
                             vue.createElementVNode("span", null, "网友分享的", -1)
                           ])),
                           default: vue.withCtx(() => [
@@ -4251,7 +4306,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                                             round: "",
                                             style: { "transform": "scale(0.7)" }
                                           }, {
-                                            default: vue.withCtx(() => _cache[36] || (_cache[36] = [
+                                            default: vue.withCtx(() => _cache[38] || (_cache[38] = [
                                               vue.createTextVNode(" NEW ")
                                             ])),
                                             _: 1
@@ -4354,7 +4409,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
                   vue.createVNode(_component_el_input, {
                     placeholder: "请输入新的回复内容",
                     modelValue: newReply.value,
-                    "onUpdate:modelValue": _cache[9] || (_cache[9] = ($event) => newReply.value = $event),
+                    "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => newReply.value = $event),
                     autosize: { minRows: 1, maxRows: 3 },
                     maxlength: "100",
                     "show-word-limit": true,
@@ -4379,7 +4434,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
       };
     }
   };
-  const Set = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-a4326af6"]]);
+  const Set = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-a7c82856"]]);
   const Util = {
     install: (app2, options) => {
       const eventBus = {
@@ -4430,7 +4485,7 @@ Tips：使用AI就像开盲盒，请准备好是否接受结果再提交`
         },
         setUserInfo(key, value) {
           let fullKey = `${this.userStorageKey}.${key}`;
-          _GM_setValue(fullKey, value || "");
+          _GM_setValue(fullKey, typeof value === "boolean" ? value : value || "");
         },
         getUserInfo(key) {
           let fullKey = `${this.userStorageKey}.${key}`;
