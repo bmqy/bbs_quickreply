@@ -122,6 +122,8 @@ function checkPlatform() {
         currentPlatform.value = 'nodeseek';
     } else if(location.host.indexOf('v2ex') > -1){
         currentPlatform.value = 'v2ex';
+    } else if(location.host.indexOf('sb.sb') > -1){
+        currentPlatform.value = 'sbsb';
     } else {
         let $generator = document.head.querySelector("meta[name=generator]");
         if($generator){
@@ -235,6 +237,15 @@ function getPostContent() {
         if($topicContent) {
             content = $topicContent.innerText;
         }
+    } else if(currentPlatform.value == 'sbsb'){
+        // sb.sb: 获取主帖正文
+        let $postContent = document.querySelector('.topic-opening > .post-entry > .post-main .post-content');
+        if(!$postContent) {
+            $postContent = document.querySelector('.post-entry .post-content');
+        }
+        if($postContent) {
+            content = $postContent.innerText;
+        }
     }
     
     // 清理内容：移除多余空白和换行
@@ -266,6 +277,10 @@ async function getAIReply(){
         title = document.querySelector('h1>a.post-title-link').innerText
     } else if(currentPlatform.value == 'v2ex'){
         title = document.querySelector('#Main .header>h1').innerText
+    } else if(currentPlatform.value == 'sbsb'){
+        const $title = document.querySelector('.post-content-title a')
+            || document.querySelector('.post-content-title');
+        title = $title ? $title.innerText : '';
     }
     if(!title){
         proxy.$message.error('无法获取帖子标题，请检查脚本是否支持此论坛')
@@ -401,6 +416,8 @@ function enterReply() {
         enterReplyContentReply();
     } else if(currentPlatform.value == 'flarum') {
         enterFlarumTextEditorReply();
+    } else if(currentPlatform.value == 'sbsb') {
+        enterSbReply();
     }  else {
         enterFastPostReply();
     }
@@ -444,6 +461,45 @@ function enterFlarumTextEditorReply() {
     }
     if(submitNow.value && !useAI.value && currentReply.value){
         document.querySelector('.item-submit button.Button').click();
+        currentReply.value = '';
+    }
+};
+// sb.sb：设置烧饼论坛回复编辑器内容
+function enterSbReply() {
+    if(!currentReply.value) {
+        return;
+    }
+    const $panel = document.querySelector('#reply.reply-panel')
+        || document.querySelector('.reply-inline .reply-panel')
+        || document.querySelector('.reply-panel');
+    const $textarea = ($panel && $panel.querySelector('textarea[name=body], textarea[name=content], textarea[data-composer-lite]'))
+        || document.querySelector('textarea[name=body], textarea[name=content], textarea[data-composer-lite]');
+    if(!$textarea) {
+        return;
+    }
+
+    // 站点会用 EasyMDE 接管编辑器，优先走站点自带的 composer 接口
+    const pageWindow = typeof unsafeWindow === 'undefined' ? window : unsafeWindow;
+    const composer = pageWindow.bbs1Composer;
+    if(composer && typeof composer.set === 'function') {
+        composer.set($textarea, currentReply.value);
+    } else {
+        $textarea.value = currentReply.value;
+        $textarea.dispatchEvent(new Event('input', { bubbles: true }));
+        $textarea.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    if(submitNow.value && !useAI.value && currentReply.value){
+        const $form = $textarea.closest('form');
+        // 站点提交按钮未声明 type 属性，需按 DOM 属性判断
+        const $submit = $form
+            ? [...$form.querySelectorAll('button, input[type=submit]')].find(($btn) => $btn.type === 'submit')
+            : null;
+        if($submit) {
+            $submit.click();
+        } else if($form && $form.requestSubmit) {
+            $form.requestSubmit();
+        }
         currentReply.value = '';
     }
 };
@@ -519,6 +575,15 @@ function getReplyContent(replyElement) {
         }
         if($postBody) {
             content = $postBody.innerText;
+        }
+    } else if(currentPlatform.value == 'sbsb'){
+        // sb.sb: 从回帖中提取内容
+        let $postContent = replyElement.querySelector('.post-main .post-content');
+        if(!$postContent) {
+            $postContent = replyElement.querySelector('.post-content');
+        }
+        if($postContent) {
+            content = $postContent.innerText;
         }
     }
     
@@ -810,6 +875,37 @@ function injectQuickAddButtons() {
             postBodyElement.appendChild($btnGroup);
 
             // 添加 hover 事件：显示/隐藏按钮
+            replyElement.addEventListener('mouseenter', () => {
+                $btnGroup.style.display = 'flex';
+            });
+            replyElement.addEventListener('mouseleave', () => {
+                $btnGroup.style.display = 'none';
+            });
+        });
+    } else if(currentPlatform.value == 'sbsb'){
+        // sb.sb 烧饼论坛：只处理带 data-reply-no 的回帖，跳过主帖
+        const $replies = document.querySelectorAll('.post-list .post-item[data-reply-no]');
+        proxy.$tools.log(`[sb.sb] 找到 ${$replies.length} 条回复`);
+
+        $replies.forEach((replyElement) => {
+            if(replyElement.querySelector('.quickAddBtnGroup')) {
+                return;
+            }
+
+            const $postContent = replyElement.querySelector('.post-main .post-content')
+                || replyElement.querySelector('.post-content');
+            if(!$postContent) {
+                return;
+            }
+
+            const replyContent = getReplyContent(replyElement);
+            const $btnGroup = createQuickAddButtonGroup(replyContent);
+            if (!$btnGroup) {
+                return;
+            }
+
+            $postContent.appendChild($btnGroup);
+
             replyElement.addEventListener('mouseenter', () => {
                 $btnGroup.style.display = 'flex';
             });

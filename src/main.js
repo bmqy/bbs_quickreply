@@ -99,6 +99,68 @@ app.mount(
             $appRoot.style.padding = '15px 15px 0';
             safeInsertBefore($composerInner, $appRoot, $composerInner && $composerInner.childNodes[2], '#composer .Composer');
         }
+        // sb.sb 烧饼论坛
+        const pickSbReplyPanel = () => {
+            return document.querySelector('#reply.reply-panel')
+                || document.querySelector('.reply-inline .reply-panel')
+                || document.querySelector('.reply-panel');
+        };
+        const injectSbSpacingStyle = () => {
+            if (document.getElementById('quickReplySbSpacing')) {
+                return;
+            }
+            const $style = document.createElement('style');
+            $style.id = 'quickReplySbSpacing';
+            // 收紧快捷回帖工具栏与站点编辑器工具栏之间的间距
+            $style.textContent = `
+                .quickReplyBoxSb .el-form,
+                .quickReplyBoxSb .el-form-item {
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }
+                .reply-panel > .quickReplyBoxSb + form {
+                    padding-top: 6px !important;
+                }
+            `;
+            document.head.appendChild($style);
+        };
+        const mountToSbReplyPanel = ($panel) => {
+            if (!$panel || $panel.querySelector('.reply-login-box')) {
+                return false;
+            }
+            const $head = $panel.querySelector('.reply-panel-head');
+            $appRoot.classList.add('quickReplyBoxSb');
+            $appRoot.style.padding = '10px 16px 0';
+            injectSbSpacingStyle();
+            return safeInsertBefore($panel, $appRoot, $head ? $head.nextSibling : $panel.firstChild, '.reply-panel');
+        };
+        if (location.host.indexOf('sb.sb') > -1) {
+            let mountedPanel = null;
+            let scheduled = false;
+            const tryMountSb = () => {
+                if (mountedPanel && mountedPanel.contains($appRoot)) {
+                    return;
+                }
+                const $panel = pickSbReplyPanel();
+                if (!$panel) {
+                    return;
+                }
+                if (mountToSbReplyPanel($panel)) {
+                    mountedPanel = $panel;
+                }
+            };
+            tryMountSb();
+            new MutationObserver(() => {
+                if (scheduled) {
+                    return;
+                }
+                scheduled = true;
+                requestAnimationFrame(() => {
+                    scheduled = false;
+                    tryMountSb();
+                });
+            }).observe(document.body, { childList: true, subtree: true });
+        }
         return $appRoot;
     })()
 );

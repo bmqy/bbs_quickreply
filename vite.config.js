@@ -36,6 +36,7 @@ export default defineConfig(({ mode }) => ({
             '*://www.v2ex.com/t/*',
             '*://discuss.flarum.org/*',
             '*://www.nodeloc.com/*',
+            '*://sb.sb/t/*',
         ],
         connect: [
             'quickreply.bmqy.net',

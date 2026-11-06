@@ -27,6 +27,7 @@
 ### 其它
 - [x] [NodeSeek](https://www.nodeseek.com/)
 - [x] [v2ex](https://www.v2ex.com/)
+- [x] [烧饼论坛](https://sb.sb/)，[（邀请链接）](https://sb.sb/invite/ppffzi9x/)
 
 ## 支持AI
 - [x] Gemini
@@ -56,6 +57,9 @@
 - [x] WebDAV（推荐）
 
 ## 更新日志
+
+v4.1.5 更新：
+- [新增] 支持`烧饼论坛`；
 
 v4.1.4 更新：
 - [优化] `选项`页面增加`快捷添加回复`和`快捷添加回复并分享`按钮的开关；
